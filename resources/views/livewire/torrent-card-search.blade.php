@@ -9,337 +9,129 @@
                 margin-bottom: 0;
             }
         </style>
-        <div x-data="{ open: false }" class="container box" id="torrent-list-search"
-             style="margin-bottom: 0; padding: 10px 100px; border-radius: 5px;">
-            <div class="mt-5">
-                <div class="row">
-                    <div class="form-group col-xs-9">
-                        <input wire:model="name" type="search" class="form-control" placeholder="Name"/>
-                    </div>
-                    <div class="form-group col-xs-3">
-                        <button class="btn btn-md btn-primary" @click="open = ! open"
-                                x-text="open ? '{{ __('common.search-hide') }}' : '{{ __('common.search-advanced') }}'"></button>
+        <div x-data="{ open: false }" class="container" id="torrent-list-search"
+             style="margin-bottom: 0; padding: 10px 250px; border-radius: 5px;">
+                <div class="search-article">
+                    <div class="search-center">
+                        <input wire:model.debounce.500ms="name" type="search" class="form-control" placeholder="Ime"/>
                     </div>
                 </div>
-                <div x-show="open" id="torrent-advanced-search">
-                    <div class="row">
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-description">
-                            <label for="description" class="label label-default">{{ __('torrent.description') }}</label>
-                            <input wire:model="description" type="text" class="form-control" placeholder="Description">
-                        </div>
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-mediainfo">
-                            <label for="mediainfo" class="label label-default">{{ __('torrent.media-info') }}</label>
-                            <input wire:model="mediainfo" type="text" class="form-control" placeholder="Mediainfo">
-                        </div>
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-keywords">
-                            <label for="keywords" class="label label-default">{{ __('torrent.keywords') }}</label>
-                            <input wire:model="keywords" type="text" class="form-control" placeholder="Keywords">
-                        </div>
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-uploader">
-                            <label for="uploader" class="label label-default">{{ __('torrent.uploader') }}</label>
-                            <input wire:model="uploader" type="text" class="form-control" placeholder="Uploader">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-tmdb">
-                            <label for="tmdbId" class="label label-default">TMDb</label>
-                            <input wire:model="tmdbId" type="text" class="form-control" placeholder="TMDb ID">
-                        </div>
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-imdb">
-                            <label for="imdbId" class="label label-default">IMDb</label>
-                            <input wire:model="imdbId" type="text" class="form-control" placeholder="IMDb ID">
-                        </div>
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-tvdb">
-                            <label for="tvdbId" class="label label-default">TVDb</label>
-                            <input wire:model="tvdbId" type="text" class="form-control" placeholder="TVDb ID">
-                        </div>
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-mal">
-                            <label for="malId" class="label label-default">MAL</label>
-                            <input wire:model="malId" type="text" class="form-control" placeholder="MAL ID">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-startYear">
-                            <label for="startYear" class="label label-default">{{ __('torrent.start-year') }}</label>
-                            <input wire:model="startYear" type="text" class="form-control" placeholder="Start Year">
-                        </div>
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-endYear">
-                            <label for="endYear" class="label label-default">{{ __('torrent.end-year') }}</label>
-                            <input wire:model="endYear" type="text" class="form-control" placeholder="End Year">
-                        </div>
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-playlist">
-                            <label for="playlist" class="label label-default">Playlist</label>
-                            <input wire:model="playlistId" type="text" class="form-control" placeholder="Playlist ID">
-                        </div>
-                        <div class="form-group col-sm-3 col-xs-6 adv-search-collection">
-                            <label for="collection" class="label label-default">Collection</label>
-                            <input wire:model="collectionId" type="text" class="form-control"
-                                   placeholder="Collection ID">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6 col-xs-12 adv-search-region">
-                            @php $regions = cache()->remember('regions', 3_600, fn () => App\Models\Region::all()->sortBy('position')) @endphp
-                            <label for="region" class="label label-default">Region</label>
-                            <div id="regions" wire:ignore></div>
-                        </div>
-                        <div class="form-group col-sm-6 col-xs-12 adv-search-distributor">
-                            @php $distributors = cache()->remember('distributors', 3_600, fn () => App\Models\Distributor::all()->sortBy('position')) @endphp
-                            <label for="distributor" class="label label-default">Distributor</label>
-                            <div id="distributors" wire:ignore></div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-categories">
-                            <label for="categories" class="label label-default">{{ __('common.category') }}</label>
-                            @php $categories = cache()->remember('categories', 3_600, fn () => App\Models\Category::all()->sortBy('position')) @endphp
-                            @foreach ($categories as $category)
-                                <span class="badge-user">
-									<label class="inline">
-										<input type="checkbox" wire:model="categories" value="{{ $category->id }}"> {{ $category->name }}
-									</label>
-								</span>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-types">
-                            <label for="types" class="label label-default">{{ __('common.type') }}</label>
-                            @php $types = cache()->remember('types', 3_600, fn () => App\Models\Type::all()->sortBy('position')) @endphp
-                            @foreach ($types as $type)
-                                <span class="badge-user">
-									<label class="inline">
-										<input type="checkbox" wire:model="types" value="{{ $type->id }}"> {{ $type->name }}
-									</label>
-								</span>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-resolutions">
-                            <label for="resolutions" class="label label-default">{{ __('common.resolution') }}</label>
-                            @php $resolutions = cache()->remember('resolutions', 3_600, fn () => App\Models\Resolution::all()->sortBy('position')) @endphp
-                            @foreach ($resolutions as $resolution)
-                                <span class="badge-user">
-									<label class="inline">
-										<input type="checkbox" wire:model="resolutions" value="{{ $resolution->id }}"> {{ $resolution->name }}
-									</label>
-								</span>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-genres">
-                            <label for="genres" class="label label-default">{{ __('common.genre') }}</label>
-                            @foreach (App\Models\Genre::all()->sortBy('name') as $genre)
-                                <span class="badge-user">
-									<label class="inline">
-										<input type="checkbox" wire:model="genres" value="{{ $genre->id }}"> {{ $genre->name }}
-									</label>
-								</span>
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-buffs">
-                            <label for="buffs" class="label label-default">Buff</label>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model.prefetch="free0" type="checkbox" value="0">
-									0% Freeleech
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model.prefetch="free25" type="checkbox" value="25">
-									25% Freeleech
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model.prefetch="free50" type="checkbox" value="50">
-									50% Freeleech
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model.prefetch="free75" type="checkbox" value="75">
-									75% Freeleech
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model.prefetch="free100" type="checkbox" value="100">
-									100% Freeleech
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="doubleup" type="checkbox" value="1">
-									Double Upload
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="featured" type="checkbox" value="1">
-									Featured
-								</label>
-							</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-tags">
-                            <label for="tags" class="label label-default">Tags</label>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="stream" type="checkbox" value="1">
-									Stream Optimized
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="sd" type="checkbox" value="1">
-									SD Content
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="highspeed" type="checkbox" value="1">
-									Highspeed
-								</label>
-							</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-extra">
-                            <label for="extra" class="label label-default">{{ __('common.extra') }}</label>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="internal" type="checkbox" value="1">
-									Internal
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="personalRelease" type="checkbox" value="1">
-									Personal Release
-								</label>
-							</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-misc">
-                            <label for="misc" class="label label-default">Misc</label>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="bookmarked" type="checkbox" value="1">
-									Bookmarked
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="wished" type="checkbox" value="1">
-									Wished
-								</label>
-							</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-health">
-                            <label for="health" class="label label-default">{{ __('torrent.health') }}</label>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="alive" type="checkbox" value="1">
-									{{ __('torrent.alive') }}
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="dying" type="checkbox" value="1">
-									{{ __('torrent.dying-torrent') }}
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="dead" type="checkbox" value="1">
-									{{ __('torrent.dead-torrent') }}
-								</label>
-							</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-history">
-                            <label for="history" class="label label-default">{{ __('torrent.history') }}</label>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="notDownloaded" type="checkbox" value="1">
-									Not Downloaded
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="downloaded" type="checkbox" value="1">
-									Downloaded
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="seeding" type="checkbox" value="1">
-									Seeding
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="leeching" type="checkbox" value="1">
-									Leeching
-								</label>
-							</span>
-                            <span class="badge-user">
-								<label class="inline">
-									<input wire:model="incomplete" type="checkbox" value="1">
-									Incomplete
-								</label>
-							</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col-sm-12 col-xs-6 adv-search-quantity">
-                            <label for="quantity" class="label label-default">{{ __('common.quantity') }}</label>
-                            <span>
-								<label class="inline">
-								<select wire:model="perPage" class="form-control">
-									<option value="25">24</option>
-									<option value="50">48</option>
-									<option value="100">72</option>
-								</select>
-								</label>
-							</span>
-                        </div>
-                    </div>
+                <div class="search-cat">
+                    <button class="button-search-cast-tab" @click="open = ! open"
+                            x-text="open ? '{{ __('common.search-hide') }}' : '{{ __('common.search-advanced') }}'"></button>
                 </div>
 
-            </div>
+                <!-- PODROBNO ISKANJE -->
+
+                <div class="search-cast-tab">
+                <select wire:model="perPage" class="form-control page-search">
+			        <option value="25">25</option>
+				    <option value="50">50</option>
+				    <option value="100">100</option>
+			    </select>
+
+
+                <!-- faza 1 -->
+                    <div x-show="open" class="category" id="torrent-advanced-search">
+                        <table>
+                            <tbody>
+                                <tr>
+                                <!-- Category -->
+                                    <td valign="top" class="category-td">
+                                        <fieldset style="border-right:0px;border-left:0px;border-bottom:0px;margin-right:5px;padding-top:10px;width:183px;">
+                                            <legend>
+                                                <label for="categories">{{ __('common.category') }}</label>
+                                            </legend>
+                                            <div class="margin-left:2px;">
+                                                @php $categories = cache()->remember('categories', 3_600, fn () => App\Models\Category::all()->whereBetween('id', [1, 12])->sortBy('position')) @endphp
+                                                @foreach ($categories as $category)
+                                                <div class="kategorija">
+                                                    <input type="checkbox" wire:model.prefetch="categories" value="{{ $category->id }}"> {{ $category->name }}
+								                </div>
+                                                @endforeach
+                                            </div>
+                                        </fieldset>
+                                    </td>
+                                    <!-- Category -->
+
+                                    <!-- Type -->
+                                    <td valign="top" class="category-td">
+                                        <fieldset style="border-right:0px;border-left:0px;border-bottom:0px;margin-right:5px;padding-top:10px;width:183px;">
+                                            <legend style>
+                                                <label for="types">{{ __('common.type') }}</label>
+                                            </legend>
+                                            <div class="margin-left:2px;">
+                                                @php $types = cache()->remember('types', 3_600, fn () => App\Models\Type::all()->sortBy('position')) @endphp
+                                                @foreach ($types as $type)
+                                                <div class="kategorija">
+                                                    <input type="checkbox" wire:model.prefetch="types" value="{{ $type->id }}"> {{ $type->name }}
+								                </div>
+                                                @endforeach
+                                            </div>
+                                        </fieldset>
+                                    </td>
+                                    <!-- Type -->
+
+                                    <!-- Resolution -->
+                                    <td valign="top" class="category-td">
+                                        <fieldset style="border-right:0px;border-left:0px;border-bottom:0px;margin-right:5px;padding-top:10px;width:183px;">
+                                            <legend style>
+                                                <label for="resolutions">{{ __('common.resolution') }}</label>
+                                            </legend>
+                                            <div class="margin-left:2px;">
+                                                @php $resolutions = cache()->remember('resolutions', 3_600, fn () => App\Models\Resolution::all()->sortBy('position')) @endphp
+                                                @foreach ($resolutions as $resolution)
+                                                <div class="kategorija">
+                                                    <input type="checkbox" wire:model.prefetch="resolutions" value="{{ $resolution->id }}"> {{ $resolution->name }}
+								                </div>
+                                                @endforeach
+                                            </div>
+                                        </fieldset>
+                                    </td>
+                                    <!-- Resolution -->
+
+                                    <!-- Genre -->
+                                    <td valign="top" class="category-td">
+                                        <fieldset style="border-right:0px;border-left:0px;border-bottom:0px;margin-right:5px;padding-top:10px;width:183px;">
+                                            <legend style>
+                                                <label for="genres">{{ __('common.genre') }}</label>
+                                            </legend>
+                                            <div class="margin-left:2px;">
+                                                @foreach (App\Models\Genre::all()->sortBy('name') as $genre)
+                                                <div class="kategorija">
+                                                    <input type="checkbox" wire:model.prefetch="genres" value="{{ $genre->id }}"> {{ $genre->name }}
+								                </div>
+                                                @endforeach
+                                            </div>
+                                        </fieldset>
+                                    </td>
+                                    <!-- Genre -->
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                <!-- faza 1 -->
+                </div>
+                <!-- PODROBNO ISKANJE -->
         </div>
+        <!-- x-data -->
     </div>
+    <!-- container-fluid -->
     <br>
     <div class="text-center">
         {{ $torrents->links() }}
     </div>
     <br>
     <div class="table-responsive block">
-        <span class="badge-user torrent-listings-stats" style="float: right;">
-            <strong>Total:</strong> {{ number_format($torrentsStat->total) }} |
-            <strong>Alive:</strong> {{ number_format($torrentsStat->alive) }} |
-            <strong>Dead:</strong> {{ number_format($torrentsStat->dead) }}
-        </span>
+			<span class="torrent-listings-stats" style="float: right; color:#ffffff;">
+				<strong>Št.:</strong> {{ number_format($torrentsStat->total) }} |
+				<strong>Živi:</strong> {{ number_format($torrentsStat->alive) }} |
+				<strong>Mrtvi:</strong> {{ number_format($torrentsStat->dead) }}
+			</span>
         <div class="dropdown torrent-listings-action-bar">
-            <a class="dropdown btn btn-xs btn-success" data-toggle="dropdown" href="#" aria-expanded="true">
+@if (auth()->user()->group->can_upload)
+            <a class="dropdown btn btn-success" data-toggle="dropdown" href="#" aria-expanded="true">
                 {{ __('common.publish') }} {{ __('torrent.torrent') }}
                 <i class="fas fa-caret-circle-right"></i>
             </a>
@@ -354,18 +146,26 @@
                     </li>
                 @endforeach
             </ul>
-            <a href="{{ route('torrents') }}" class="btn btn-xs btn-primary">
+@endif
+			<a href="{{ route('categories.index') }}" class="btn btn-primary">
+			    <i class="{{ config('other.font-awesome') }} fa-file"></i> {{ __('torrent.categories') }}
+		    </a>
+            <a href="{{ route('torrents') }}" class="btn btn-primary">
                 <i class="{{ config('other.font-awesome') }} fa-list"></i> {{ __('torrent.list') }}
             </a>
-            <a href="{{ route('cards') }}" class="btn btn-xs btn-primary">
+            <a href="{{ route('cards') }}" class="btn btn-primary">
                 <i class="{{ config('other.font-awesome') }} fa-image"></i> {{ __('torrent.cards') }}
             </a>
-            <a href="#" class="btn btn-xs btn-primary">
+@if (auth()->user()->group->is_admin)
+            <a href="#" class="btn btn-primary">
                 <i class="{{ config('other.font-awesome') }} fa-clone"></i> {{ __('torrent.groupings') }}
             </a>
-            <a href="{{ route('rss.index') }}" class="btn btn-xs btn-warning">
+@endif
+@if (auth()->user()->group->is_admin)
+            <a href="{{ route('rss.index') }}" class="btn btn-warning">
                 <i class="{{ config('other.font-awesome') }} fa-rss"></i> {{ __('rss.rss') }} {{ __('rss.feeds') }}
             </a>
+@endif
         </div>
         <table class="table table-condensed table-striped table-bordered" id="torrent-list-table">
             <thead>
