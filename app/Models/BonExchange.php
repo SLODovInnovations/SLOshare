@@ -1,0 +1,89 @@
+<?php
+
+namespace App\Models;
+
+use App\Traits\Auditable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class BonExchange extends Model
+{
+    use HasFactory;
+    use Auditable;
+
+    /**
+     * The Database Table Used By The Model.
+     *
+     * @var string
+     */
+    protected $table = 'bon_exchange';
+
+    /**
+     * Indicates If The Model Should Be Timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * The Attributes That Should Be Casted To Native Types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'upload'             => 'boolean',
+        'download'           => 'boolean',
+        'personal_freeleech' => 'boolean',
+        'invite'             => 'boolean',
+    ];
+
+    /**
+     * @method getDownloadOptions
+     */
+    public function getDownloadOptions(): \Illuminate\Database\Eloquent\Collection
+    {
+        return self::where('download', '=', true)
+            ->oldest('value')
+            ->get();
+    }
+
+    /**
+     * @method getUploadOptions
+     */
+    public function getUploadOptions(): \Illuminate\Database\Eloquent\Collection
+    {
+        return self::where('upload', '=', true)
+            ->oldest('value')
+            ->get();
+    }
+
+    /**
+     * @method getPersonalFreeleechOption
+     */
+    public function getPersonalFreeleechOption(): \Illuminate\Database\Eloquent\Collection
+    {
+        return self::where('personal_freeleech', '=', true)
+            ->oldest('value')
+            ->get();
+    }
+
+    /**
+     * @method getInviteOption
+     */
+    public function getInviteOption(): \Illuminate\Database\Eloquent\Collection
+    {
+        return self::where('invite', '=', true)
+            ->oldest('value')
+            ->get();
+    }
+
+    /**
+     * @method getItemCost
+     */
+    public function getItemCost(int $id): int
+    {
+        return self::where('id', '=', $id)
+            ->get()
+            ->toArray()[0]['cost'];
+    }
+}
