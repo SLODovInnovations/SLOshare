@@ -98,7 +98,7 @@ class AnnounceController extends Controller
             /**
              * Check Download Slots.
              */
-            if (\config('announce.slots_system.enabled')) {
+            if (\config('announce.slots_system.enabled') ==true) {
                 $this->checkDownloadSlots($user);
             }
 

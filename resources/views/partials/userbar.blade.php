@@ -23,33 +23,25 @@
             <li>
                 <span class="text-bold">
                     <i class="{{ config('other.font-awesome') }} fa-arrow-up text-green"></i>
-                    {{ __('common.upload') }} : {{ auth()
-                        ->user()
-                        ->getUploaded() }}
+                    {{ __('common.upload') }} : {{ auth()->user()->getUploaded() }}
                 </span>
             </li> |
             <li>
                 <span class="text-bold">
                     <i class="{{ config('other.font-awesome') }} fa-arrow-down text-red"></i>
-                    {{ __('common.download') }} : {{ auth()
-                        ->user()
-                        ->getDownloaded() }}
+                    {{ __('common.download') }} : {{ auth()->user()->getDownloaded() }}
                 </span>
             </li> |
             <li>
                 <span class="text-bold">
                     <i class="{{ config('other.font-awesome') }} fa-sync-alt text-blue"></i>
-                    {{ __('common.ratio') }} : {{ auth()
-                        ->user()
-                        ->getRatioString() }}
+                    {{ __('common.ratio') }} : {{ auth()->user()->getRatioString() }}
                 </span>
             </li> |
             <li>
                 <span class="text-bold">
                     <i class="{{ config('other.font-awesome') }} fa-exchange text-orange"></i>
-                    {{ __('common.buffer') }} : {{ auth()
-                        ->user()
-                        ->untilRatio(config('other.ratio')) }}
+                    {{ __('common.buffer') }} : {{ auth()->user()->untilRatio(config('other.ratio')) }}
                 </span>
             </li> |
 @if (auth()->user()->group->can_upload)
@@ -60,9 +52,7 @@
                        title="{{ __('torrent.my-active-torrents') }}">
                         <span class="text-blue"> {{ __('torrent.seeding') }}:</span>
                     </a>
-                    {{ auth()
-                        ->user()
-                        ->getSeeding() }}
+                    {{ auth()->user()->getSeeding() }}
                 </span>
             </li> |
             <li>
@@ -72,20 +62,25 @@
                        title="{{ __('torrent.my-active-torrents') }}">
                         <span class="text-blue"> {{ __('torrent.leeching') }}:</span>
                     </a>
-                    {{ auth()
-                        ->user()
-                        ->getLeeching() }}
+                    {{ auth()->user()->getLeeching() }}
                 </span>
             </li> |
+            <li>
+                <span class="badge-user text-bold">
+                    <i class="{{ config('other.font-awesome') }} fa-wifi text-blue"></i>
+                    <span> DL Slots:</span>
+                    @if (\config('announce.slots_system.enabled') == true)
+                        {{ auth()->user()->group->download_slots ?? '∞' }}
+                    @endif
+                </span>
+            </li>
 @endif
             <li>
                 <span class="text-bold">
                     <i class="{{ config('other.font-awesome') }} fa-exclamation-circle text-orange"></i>
                         <span class="text-blue"> {{ __('common.warnings') }}:</span>
                     </a>
-                    {{ auth()
-                        ->user()
-                        ->getWarning() }}
+                    {{ auth()->user()->getWarning() }}
                 </span>
             </li>
             <!--<li>
@@ -94,9 +89,7 @@
                     <a href="{{ route('bonus') }}" title="{{ __('user.my-bonus-points') }}">
                         <span class="text-blue"> {{ __('bon.bon') }}:</span>
                     </a>
-                    {{ auth()
-                        ->user()
-                        ->getSeedbonus() }}
+                    {{ auth()->user()->getSeedbonus() }}
                 </span>
             </li>
             <li>
