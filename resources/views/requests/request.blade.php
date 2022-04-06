@@ -54,7 +54,7 @@
                                 <button class="btn btn-warning" data-toggle="modal" data-target="#reset"><i
                                             class="{{ config('other.font-awesome') }} fa-undo">
                                     </i> {{ __('request.reset-request') }}</button>
-                            @endif @if ($user->group->is_modo && $torrentRequest->filled_hash == null))
+                            @endif @if ($user->group->is_modo && $torrentRequest->filled_hash == null)
                                 <a class="btn btn-warning"
                                    href="{{ route('edit_request', ['id' => $torrentRequest->id]) }}" role="button"><i
                                             class="{{ config('other.font-awesome') }} fa-edit"
