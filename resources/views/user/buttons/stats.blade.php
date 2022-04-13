@@ -1,26 +1,26 @@
 <div class="button-holder">
     <div class="button-left-large">
-        <a href="{{ route('users.show', ['username' => $user->username]) }}" class="btn btn-sm btn-primary">
+        <a href="{{ route('users.show', ['username' => $user->username]) }}" class="btn btn-primary">
             {{ __('user.profile') }}
         </a>
         @if(!$user->group || !$user->group->is_immune)
-            <a href="{{ route('user_unsatisfieds', ['username' => $user->username]) }}" class="btn btn-sm btn-primary">
+            <a href="{{ route('user_unsatisfieds', ['username' => $user->username]) }}" class="btn btn-primary">
                 <i class="{{ config('other.font-awesome') }} fa-exclamation"></i> {{ __('user.unsatisfieds') }}
             </a>
         @endif
-        <a href="{{ route('user_torrents', ['username' => $user->username]) }}" class="btn btn-sm btn-primary">
+        <a href="{{ route('user_torrents', ['username' => $user->username]) }}" class="btn btn-primary">
             {{ __('user.torrents') }}
         </a>
-        <a href="{{ route('user_active', ['username' => $user->username]) }}" class="btn btn-sm btn-primary">
+        <a href="{{ route('user_active', ['username' => $user->username]) }}" class="btn btn-primary">
             {{ __('user.active') }}
         </a>
-        <a href="{{ route('user_uploads', ['username' => $user->username]) }}" class="btn btn-sm btn-primary">
+        <a href="{{ route('user_uploads', ['username' => $user->username]) }}" class="btn btn-primary">
             {{ __('user.uploads') }}
         </a>
-        <a href="{{ route('user_downloads', ['username' => $user->username]) }}" class="btn btn-sm btn-primary">
+        <a href="{{ route('user_downloads', ['username' => $user->username]) }}" class="btnbtn-primary">
             {{ __('user.downloads') }}
         </a>
-        <a href="{{ route('user_seeds', ['username' => $user->username]) }}" class="btn btn-sm btn-primary">
+        <a href="{{ route('user_seeds', ['username' => $user->username]) }}" class="btn btn-primary">
             {{ __('user.seeds') }}
         </a>
         <form role="form" method="POST" action="{{ route('flush_own_ghost_peers', ['username' => $user->username]) }}"
@@ -33,7 +33,7 @@
         @if(auth()->user()->id == $user->id)
             @if(!$route || $route != 'profile')
                 <a href="{{ route('download_history_torrents', ['username' => $user->username]) }}" role="button"
-                   class="btn btn-sm btn-labeled btn-success">
+                   class="btn btn-labeled btn-success">
                     <span class='btn-label'>
                         <i class='{{ config('other.font-awesome') }} fa-download'></i> {{ __('torrent.download-all') }}
                     </span>
