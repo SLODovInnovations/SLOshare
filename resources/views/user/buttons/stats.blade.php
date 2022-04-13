@@ -17,7 +17,7 @@
         <a href="{{ route('user_uploads', ['username' => $user->username]) }}" class="btn btn-primary">
             {{ __('user.uploads') }}
         </a>
-        <a href="{{ route('user_downloads', ['username' => $user->username]) }}" class="btnbtn-primary">
+        <a href="{{ route('user_downloads', ['username' => $user->username]) }}" class="btn btn-primary">
             {{ __('user.downloads') }}
         </a>
         <a href="{{ route('user_seeds', ['username' => $user->username]) }}" class="btn btn-primary">
