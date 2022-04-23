@@ -10,6 +10,4 @@ class Notification extends Model
 {
     use HasFactory;
     use Auditable;
-
-    //
 }

@@ -710,17 +710,16 @@ class TorrentController extends Controller
         if (! $user && $rsskey) {
             $user = User::where('rsskey', '=', $rsskey)->firstOrFail();
         }
-
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
-
+        $hasHistory = $user->history()->where([['info_hash', '=', $torrent->info_hash], ['seeder', '=', 1]])->count();
         // User's ratio is too low
-        if ($user->getRatio() < \config('other.ratio')) {
+        if ($user->getRatio() < \config('other.ratio') && ! ($torrent->user_id === $user->id || $hasHistory)) {
             return \to_route('torrent', ['id' => $torrent->id])
                 ->withErrors('Vaše razmerje je nizko za prenos!');
         }
 
         // User's download rights are revoked
-        if ($user->can_download == 0 && $torrent->user_id != $user->id) {
+        if ($user->can_download == 0 && ! ($torrent->user_id === $user->id || $hasHistory)) {
             return \to_route('torrent', ['id' => $torrent->id])
                 ->withErrors('Vaše pravice za prenos so bile preklicane!');
         }
