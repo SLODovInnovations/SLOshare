@@ -5,6 +5,7 @@
         @include('blocks.news')
         @include('blocks.poll')
         @include('blocks.recommended')
+        @include('blocks.ad_right')
 
         <!--@include('blocks.featured')-->
         @include('blocks.torrents_torrents')
