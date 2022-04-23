@@ -1,10 +1,12 @@
 @if (auth()->user()->group->is_admin)
 @if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
-    <div class="col-md-10 col-sm-10 col-md-offset-1">
-        <div class="clearfix visible-sm-block"></div>
-        <div class="panel panel-chat shoutbox">
+        <div class="panel panel-danger">
             <div class="panel-heading">
-                <h4><i class="{{ config('other.font-awesome') }} fa-chart-pie"></i> {{ __('poll.poll') }}</h4>
+                <h4 class="text-center">
+                    <div class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" style="color:#ffffff;">
+                        <i class="{{ config('other.font-awesome') }} fa-chart-pie"></i> {{ __('poll.poll') }}
+                    </div>
+                </h4>
             </div>
             <div class="panel-body">
                 <h3 class="poll-title">{{ $poll->title }}</h3>

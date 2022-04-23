@@ -1,5 +1,5 @@
+<div class="col-md-5 col-sm-5 col-md-bl-1 col-slo">
 @foreach ($articles as $article)
-    <div class="col-md-10 col-sm-10 col-md-offset-1">
         @if ($article->newNews)
             <div class="panel panel-danger">
                 <div class="panel-heading">
@@ -66,5 +66,4 @@
                             </div>
                         </div>
                     </div>
-            </div>
 @endforeach
