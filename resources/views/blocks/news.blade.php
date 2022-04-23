@@ -1,4 +1,4 @@
-<div class="col-md-3-slo col-sm-3-slo col-md-bl-1 col-slo">
+<div class="col-md-3 col-sm-3-slo col-md-bl-1 col-slo">
 @foreach ($articles as $article)
         @if ($article->newNews)
             <div class="panel panel-danger">
