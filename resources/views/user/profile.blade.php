@@ -408,6 +408,7 @@
                                     </td>
                                 </tr>
                                 @endif
+                                @endif
                                 @if (auth()->user()->isAllowed($user,'profile','show_profile_torrent_extra'))
                                 <tr>
                                     <td>{{ __('user.torrents') }}</td>
