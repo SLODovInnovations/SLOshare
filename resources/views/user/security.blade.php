@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ $user->username }} - Security - {{ __('common.members') }} - {{ config('other.title') }}</title>
+    <title>{{ $user->username }} - Security - {{ __('common.members') }}</title>
 @endsection
 
 @section('breadcrumb')
@@ -26,13 +26,15 @@
             @include('user.buttons.settings')
             <div class="container-fluid p-0 some-padding">
                 <ul class="nav nav-tabs" role="tablist" id="basetabs">
-                    <li class="active"><a href="#password" data-toggle="tab">Password</a></li>
-                    <li><a href="#email" data-toggle="tab">Email</a></li>
+                    <li class="active"><a href="#password" data-toggle="tab">Geslo</a></li>
+                    <li><a href="#email" data-toggle="tab">E-Mail</a></li>
+                    @if (auth()->user()->group->is_admin)
                     <li><a href="#pid" data-toggle="tab">Pass Key (PID)</a></li>
                     <li><a href="#rid" data-toggle="tab">RSS Key (RID)</a></li>
                     <li><a href="#api" data-toggle="tab">API Token</a></li>
                     @if (config('auth.TwoStepEnabled') == true)
                         <li><a href="#twostep" data-toggle="tab">Two Step Auth</a></li>
+                    @endif
                     @endif
                 </ul>
                 <div class="tab-content">
@@ -47,25 +49,25 @@
                                 <div class="help-block">{{ __('user.change-password-help') }}.</div>
                                 <hr>
                                 <div class="form-group">
-                                    <label for="current_password">Current Password</label>
+                                    <label for="current_password">Trenutno geslo</label>
                                     <label>
                                         <input type="password" name="current_password" class="form-control"
-                                               placeholder="Current Password">
+                                               placeholder="Trenutno geslo">
                                     </label>
-                                    <label for="new_password">New Password</label>
+                                    <label for="new_password">Novo geslo</label>
                                     <label>
                                         <input type="password" name="new_password" class="form-control"
-                                               placeholder="New Password">
+                                               placeholder="Novo geslo">
                                     </label>
-                                    <label for="new_password">Repeat Password</label>
+                                    <label for="new_password">Ponovi geslo</label>
                                     <label>
                                         <input type="password" name="new_password_confirmation" class="form-control"
-                                               placeholder="New Password, again">
+                                               placeholder="Ponovi geslo, again">
                                     </label>
                                 </div>
                             </div>
                             <div class="well text-center">
-                                <button type="submit" class="btn btn-primary">Change Password</button>
+                                <button type="submit" class="btn btn-primary">Spremeni Geslo</button>
                             </div>
                         </form>
                     </div>
@@ -78,15 +80,15 @@
                                 <h3>{{ __('user.change-email') }}.</h3>
                                 <div class="help-block">{{ __('user.change-email-help') }}.</div>
                                 <hr>
-                                <label for="current_email">Current Email</label>
+                                <label for="current_email">Trenutni E-Mail</label>
                                 <p class="text-primary">{{ $user->email }}</p>
-                                <label for="email">New Email</label>
+                                <label for="email">Novi E-Mail</label>
                                 <label>
-                                    <input class="form-control" placeholder="New Email" name="email" type="email">
+                                    <input class="form-control" placeholder="Novi E-Mail" name="email" type="email">
                                 </label>
                             </div>
                             <div class="well text-center">
-                                <button type="submit" class="btn btn-primary">Change Email</button>
+                                <button type="submit" class="btn btn-primary">Spremeni E-Mail</button>
                             </div>
                         </form>
                     </div>

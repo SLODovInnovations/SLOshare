@@ -356,4 +356,27 @@ return [
     'warnings'                             => 'Warnings',
     'warning-log'                          => 'Warning Log',
     'wishlist'                             => 'Wishlist',
+
+    /*
+    |--------------------------------------------------------------------------
+    | SLOshare
+    |--------------------------------------------------------------------------
+    */
+    'report-user'                          => 'Report Users',
+    'close'                                => 'Close',
+    'noteuser'                             => 'Note User',
+    'save'                                 => 'Save',
+    'ban-user'                             => 'BAN',
+    'unban-user'                           => 'Cancel User BAN',
+    'unban-reason'                         => 'Reason for the cancellation of the BAN',
+    'new-group'                            => 'New Group',
+    'delete-user'                          => 'Delete User',
+    'watch-user'                           => 'Watch User',
+    'unwatch'                              => 'Unwatch',
+    'uploaded'                             => 'Uploaded',
+    'reason'                               => 'Reason',
+    'warn-user'                            => 'Warn User',
+    'description'                          => 'Description',
+    'send'                                 => 'Send',
+
 ];

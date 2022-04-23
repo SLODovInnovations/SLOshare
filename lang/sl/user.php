@@ -372,6 +372,7 @@ return [
     'new-group'                            => 'Nova skupina',
     'delete-user'                          => 'Izbriši uporabnika',
     'watch-user'                           => 'Opazovanje uporabnika',
+    'unwatch'                              => 'Odjava',
     'uploaded'                             => 'Uploaded',
     'reason'                               => 'Razlog',
     'warn-user'                            => 'Opozorilo Uporabnika',

@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ $user->username }} - Privacy - {{ __('common.members') }} - {{ config('other.title') }}</title>
+    <title>{{ $user->username }} - Privacy - {{ __('common.members') }}</title>
 @endsection
 
 @section('breadcrumb')

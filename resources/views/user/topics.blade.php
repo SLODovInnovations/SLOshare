@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ $user->username }} {{ __('user.topics') }} - {{ config('other.title') }}</title>
+    <title>{{ $user->username }} {{ __('user.topics') }}</title>
 @endsection
 
 @section('breadcrumb')

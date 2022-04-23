@@ -1,8 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ $user->username }} - {{ __('user.notification') }} - {{ __('common.members') }} - {{ config('other.title') }}
-    </title>
+    <title>{{ $user->username }} - {{ __('user.notification') }} - {{ __('common.members') }}</title>
 @endsection
 
 @section('breadcrumb')

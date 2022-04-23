@@ -34,20 +34,18 @@
                     <span class="badge-extra text-red text-bold"> {{ $download->torrent->leechers }}</span>
                 </td>
                 <td>
-                        <span class="badge-extra text-orange text-bold"> {{ $download->torrent->times_completed }}
+                    <span class="badge-extra text-orange text-bold"> {{ $download->torrent->times_completed }}
                             {{ __('common.times') }}</span>
                 </td>
                 <td>{{ $download->completed_at && $download->completed_at != null ? $download->completed_at->diffForHumans() : 'N/A' }}
                 </td>
                 @if ($download->seedtime < config('hitrun.seedtime'))
                     <td>
-                            <span
-                                    class="badge-extra text-red">{{ App\Helpers\StringHelper::timeElapsed($download->seedtime) }}</span>
+                        <span class="badge-extra text-red">{{ App\Helpers\StringHelper::timeElapsed($download->seedtime) }}</span>
                     </td>
                 @else
                     <td>
-                                <span
-                                        class="badge-extra text-green">{{ App\Helpers\StringHelper::timeElapsed($download->seedtime) }}</span>
+                        <span class="badge-extra text-green">{{ App\Helpers\StringHelper::timeElapsed($download->seedtime) }}</span>
                     </td>
                 @endif
                 <td>

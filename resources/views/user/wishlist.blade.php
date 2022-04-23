@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ $user->username }} {{ __('user.wishlist') }} - {{ config('other.title') }}</title>
+    <title>{{ $user->username }} {{ __('user.wishlist') }}</title>
 @endsection
 
 @section('breadcrumb')

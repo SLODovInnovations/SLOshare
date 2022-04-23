@@ -21,8 +21,7 @@
                     </a>
                 </td>
                 <td>
-                        <span
-                                class="badge-extra text-purple text-bold">{{ $p->agent ?: __('common.unknown') }}</span>
+                    <span class="badge-extra text-purple text-bold">{{ $p->agent ?: __('common.unknown') }}</span>
                 </td>
                 <td>
                     <span class="badge-extra text-blue text-bold"> {{ $p->torrent->getSize() }}</span>
@@ -34,16 +33,15 @@
                     <span class="badge-extra text-red text-bold"> {{ $p->torrent->leechers }}</span>
                 </td>
                 <td>
-                        <span class="badge-extra text-green text-bold">
+                    <span class="badge-extra text-green text-bold">
                             {{ App\Helpers\StringHelper::formatBytes($p->uploaded, 2) }}</span>
                 </td>
                 <td>
-                        <span class="badge-extra text-red text-bold">
+                    <span class="badge-extra text-red text-bold">
                             {{ App\Helpers\StringHelper::formatBytes($p->downloaded, 2) }}</span>
                 </td>
                 <td>
-                        <span
-                                class="badge-extra text-orange text-bold">{{ \App\Helpers\StringHelper::formatBytes($p->left, 2) }}</span>
+                    <span class="badge-extra text-orange text-bold">{{ \App\Helpers\StringHelper::formatBytes($p->left, 2) }}</span>
                 </td>
                 @if ($p->seeder == 0)
                     <td>

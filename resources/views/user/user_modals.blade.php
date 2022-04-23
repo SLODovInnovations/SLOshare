@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="{{ __('user.close') }}">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -47,7 +47,7 @@
         <div class="modal-content">
             <div class="modal-header mx-auto">
                 <div class="text-center">
-                    <p style="font-size: 27px;">Note User: {{ $user->username }}</p>
+                    <p style="font-size: 27px;">{{ __('user.noteuser') }}: {{ $user->username }}</p>
                 </div>
             </div>
             <div class="modal-body">
@@ -56,7 +56,7 @@
                           action="{{ route('staff.notes.store', ['username' => $user->username]) }}">
                         @csrf
                         <div class="form-group">
-                            <label for="report_reason">Note</label>
+                            <label for="report_reason">{{ __('user.note') }}</label>
                         </div>
                         <div class="form-group">
                             <label>
@@ -64,13 +64,13 @@
                             </label>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-warning" type="submit" value="Save">
+                            <input class="btn btn-warning" type="submit" value="{{ __('user.save') }}">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="{{ __('user.close') }}">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -83,7 +83,7 @@
         <div class="modal-content">
             <div class="modal-header mx-auto">
                 <div class="text-center">
-                    <p style="font-size: 27px;">Warn User: {{ $user->username }}</p>
+                    <p style="font-size: 27px;">{{ __('user.warn-user') }}: {{ $user->username }}</p>
                 </div>
             </div>
             <div class="modal-body">
@@ -92,7 +92,7 @@
                           action="{{ route('user_warn', ['username' => $user->username]) }}">
                         @csrf
                         <div class="form-group">
-                            <label for="warn_reason">Reason</label>
+                            <label for="warn_reason">{{ __('user.reason') }}</label>
                         </div>
                         <div class="form-group">
                             <label>
@@ -100,13 +100,13 @@
                             </label>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-warning" type="submit" value="Save">
+                            <input class="btn btn-warning" type="submit" value="{{ __('user.save') }}">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="{{ __('user.close') }}">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -119,7 +119,7 @@
         <div class="modal-content">
             <div class="modal-header mx-auto">
                 <div class="text-center">
-                    <p style="font-size: 27px;">Ban User: {{ $user->username }}</p>
+                    <p style="font-size: 27px;">{{ __('user.ban-user') }}: {{ $user->username }}</p>
                 </div>
             </div>
             <div class="modal-body">
@@ -128,7 +128,7 @@
                           action="{{ route('staff.bans.store', ['username' => $user->username]) }}">
                         @csrf
                         <div class="form-group">
-                            <label for="report_reason">Reason</label>
+                            <label for="report_reason">{{ __('user.reason') }}</label>
                         </div>
                         <div class="form-group">
                             <label for="ban_reason"></label>
@@ -136,13 +136,13 @@
                                       id="ban_reason"></textarea>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-danger" type="submit" value="Ban">
+                            <input class="btn btn-danger" type="submit" value="{{ __('user.ban-user') }}">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="{{ __('user.close') }}">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -155,7 +155,7 @@
         <div class="modal-content">
             <div class="modal-header mx-auto">
                 <div class="text-center">
-                    <p style="font-size: 27px;">Unban User: {{ $user->username }}</p>
+                    <p style="font-size: 27px;">{{ __('user.unban-user') }}: {{ $user->username }}</p>
                 </div>
             </div>
             <div class="modal-body">
@@ -164,7 +164,7 @@
                           action="{{ route('staff.bans.update', ['username' => $user->username]) }}">
                         @csrf
                         <div class="form-group">
-                            <label for="report_reason">UnBan Reason</label>
+                            <label for="report_reason">{{ __('user.unban-reason') }}</label>
                         </div>
                         <div class="form-group">
                             <label for="unban_reason"></label>
@@ -172,12 +172,12 @@
                                       id="unban_reason"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="report_reason">New Group</label>
+                            <label for="report_reason">{{ __('user.new-group') }}</label>
                         </div>
                         <div class="form-group">
                             <label>
                                 <select name="group_id" class="form-control">
-                                    <option value="{{ $user->group->id }}">{{ $user->group->name }} (Default)</option>
+                                    <option value="{{ $user->group->id }}">{{ $user->group->name }} (Privzeta)</option>
                                     @foreach ($groups as $g)
                                         <option value="{{ $g->id }}">{{ $g->name }}</option>
                                     @endforeach
@@ -185,13 +185,13 @@
                             </label>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-primary" type="submit" value="Unban">
+                            <input class="btn btn-primary" type="submit" value="{{ __('user.unban-user') }}">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="{{ __('user.close') }}">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -204,7 +204,7 @@
         <div class="modal-content">
             <div class="modal-header mx-auto">
                 <div class="text-center">
-                    <p style="font-size: 27px;">Report User: {{ $user->username }}</p>
+                    <p style="font-size: 27px;">{{ __('user.report-user') }}: {{ $user->username }}</p>
                 </div>
             </div>
             <div class="modal-body">
@@ -213,20 +213,20 @@
                           action="{{ route('report_user', ['username' => $user->username]) }}">
                         @csrf
                         <div class="form-group">
-                            <label for="report_reason">Reason</label>
+                            <label for="report_reason">{{ __('user.reason') }}</label>
                         </div>
                         <div class="form-group">
                             <label for="message"></label>
                             <textarea class="form-control" rows="5" name="message" cols="50" id="message"></textarea>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-danger" type="submit" value="Report">
+                            <input class="btn btn-danger" type="submit" value="{{ __('user.send') }}">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="{{ __('user.close') }}">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -239,7 +239,7 @@
         <div class="modal-content">
             <div class="modal-header mx-auto">
                 <div class="text-center">
-                    <p style="font-size: 27px;">Delete User: {{ $user->username }}</p>
+                    <p style="font-size: 27px;">{{ __('user.delete-user') }}: {{ $user->username }}</p>
                 </div>
             </div>
             <div class="modal-body">
@@ -256,7 +256,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="{{ __('user.close') }}">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -269,7 +269,7 @@
         <div class="modal-content">
             <div class="modal-header mx-auto">
                 <div class="text-center">
-                    <p style="font-size: 27px;">Watch User: {{ $user->username }}</p>
+                    <p style="font-size: 27px;">{{ __('user.watch-user') }}: {{ $user->username }}</p>
                 </div>
             </div>
             <div class="modal-body">
@@ -278,20 +278,20 @@
                           action="{{ route('staff.watchlist.store', ['id' => $user->id]) }}">
                         @csrf
                         <div class="form-group">
-                            <label for="report_reason">Reason</label>
+                            <label for="report_reason">{{ __('user.reason') }}</label>
                         </div>
                         <div class="form-group">
                             <label for="message"></label>
                             <textarea class="form-control" rows="5" name="message" cols="50" id="message"></textarea>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-danger" type="submit" value="Submit">
+                            <input class="btn btn-danger" type="submit" value="{{ __('user.send') }}">
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close ml-auto" data-dismiss="modal" aria-label="{{ __('user.close') }}">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
