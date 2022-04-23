@@ -1,5 +1,5 @@
 @if (auth()->user()->group->is_admin)
-<div class="col-md-5 col-sm-5 col-md-br-1 col-slo">
+<div class="col-md-5-slo col-sm-5-slo col-slo">
     <div class="panel-slo">
 
     <!-- Buttons -->
