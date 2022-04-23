@@ -19,7 +19,7 @@
                         <thead>
                             <tr>
                                 <th>{{ __('torrent.category') }}</th>
-                                <th>{{ __('torrent.type')/{{ __('torrent.resolution') }}</th>
+                                <th>{{ __('torrent.type') }}/{{ __('torrent.resolution') }}</th>
                                 <th class="torrents-filename">{{ __('torrent.name') }}</th>
                                 <th>{{ __('torrent.size') }}</th>
                                 <th>{{ __('torrent.short-seeds') }}</th>
