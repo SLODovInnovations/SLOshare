@@ -285,7 +285,7 @@
                     </table>
             </div>
 
-<div class="tab-pane fade active in" id="recommended-sloshare">
+            <div class="tab-pane fade" id="recommended-video">
                 <td class="table-responsive">
                     <table class="table table-condensed table-striped table-bordered">
                         <thead>

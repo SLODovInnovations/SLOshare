@@ -2,16 +2,16 @@
     <div class="text-center form-inline"
          @focusout="if (!lock) { $wire.set('movie', ''); $wire.set('series', ''); $wire.set('person', ''); }">
         <div class="form-group" style="position: relative; vertical-align: top;">
-            <input wire:model.debounce.250ms="movie" type="text" class="form-control" placeholder="Movie"
+            <input wire:model.debounce.250ms="movie" type="text" class="form-control" placeholder="Video"
                    autocomplete="off" style="width: 150px;"
                    @focusin="$wire.set('series', ''); $wire.set('person', '');">
         </div>
         <div class="form-group" style="position: relative; vertical-align: top;">
-            <input wire:model.debounce.250ms="series" type="text" class="form-control" placeholder="Series"
+            <input wire:model.debounce.250ms="series" type="text" class="form-control" placeholder="TV Serije"
                    autocomplete="off" style="width: 150px;" @focusin="$wire.set('movie', ''); $wire.set('person', '');">
         </div>
         <div class="form-group" style="position: relative; vertical-align: top;">
-            <input wire:model.debounce.250ms="person" type="text" class="form-control" placeholder="Person"
+            <input wire:model.debounce.250ms="person" type="text" class="form-control" placeholder="Igralci"
                    autocomplete="off" style="width: 150px;" @focusin="$wire.set('movie', ''); $wire.set('series', '');">
         </div>
     </div>
@@ -72,13 +72,13 @@
                     </div>
                 @endif
             @empty
-                <div class="px-3 py-3">No results found</div>
+                <div class="px-3 py-3">Rezultati niso bili najdeni</div>
             @endforelse
         </div>
     @elseif( $movie || $series || $person)
         <div style="width: 100%; min-height: 60px; margin: 0; padding: 3px; display: block; background-color: #2b2b2b;"
              @mouseenter="lock = true;" @mouseleave="lock = false">
-            <div class="px-3 my-3">Keep typing to get results</div>
+            <div class="px-3 my-3">Nadaljujte z vnašanje, da bi dobili rezultate</div>
         </div>
     @endif
 </div>
