@@ -18,7 +18,7 @@
                 @include('partials.side_nav')
                 <section id="main-content">
                     @include('partials.userbar')
-                    @include('partials.breadcrumb')
+                    <!--@include('partials.breadcrumb')-->
                     @include('cookie-consent::index')
                     @include('partials.alerts')
                     @if (Session::has('achievement'))

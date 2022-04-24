@@ -65,15 +65,17 @@
                     {{ auth()->user()->getLeeching() }}
                 </span>
             </li> |
+@endif
+@if (auth()->user()->group->is_admin)
             <li>
-                <span class="badge-user text-bold">
+                <span class="text-bold">
                     <i class="{{ config('other.font-awesome') }} fa-wifi text-blue"></i>
                     <span> DL Slots:</span>
                     @if (\config('announce.slots_system.enabled') == true)
                         {{ auth()->user()->group->download_slots ?? '∞' }}
                     @endif
                 </span>
-            </li>
+            </li> |
 @endif
             <li>
                 <span class="text-bold">
