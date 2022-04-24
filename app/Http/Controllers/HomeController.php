@@ -108,6 +108,14 @@ class HomeController extends Controller
             ->take(5)
             ->get());
 
+        $videorecommended = \cache()->remember('videorecommended_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type'])
+            ->withCount(['thanks', 'comments'])
+            ->where('category_id', '=', 1)
+            ->where('sticky', '=', 1)
+            ->latest()
+            ->take(5)
+            ->get());
+
         $seeded = \cache()->remember('seeded_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type'])
             ->withCount(['thanks', 'comments'])
             ->latest('seeders')
@@ -193,6 +201,7 @@ class HomeController extends Controller
             'cartoons'           => $cartoons,
             'newsloshare'        => $newsloshare,
             'slorecommended'     => $slorecommended,
+            'videorecommended'   => $videorecommended,
             'seeded'             => $seeded,
             'dying'              => $dying,
             'leeched'            => $leeched,
