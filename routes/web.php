@@ -169,7 +169,7 @@ Route::group(['middleware' => 'language'], function () {
             Route::get('/instruction', [App\Http\Controllers\PageController::class, 'instructions'])->name('instructions');
             Route::get('/legal', [App\Http\Controllers\PageController::class, 'legals'])->name('legals');
             Route::get('/conditionsofuse', [App\Http\Controllers\PageController::class, 'conditionsofuses'])->name('conditionsofuses');
-            Route::get('/donation', [App\Http\Controllers\PageController::class, 'donations'])->name('donations');
+            Route::get('/donationslo', [App\Http\Controllers\PageController::class, 'donationsslo'])->name('donationsslo');
             Route::get('/{id}', [App\Http\Controllers\PageController::class, 'show'])->where('id', '[0-9]+')->name('pages.show');
         });
 

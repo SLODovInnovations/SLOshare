@@ -122,8 +122,8 @@ class PageController extends Controller
     /**
      * Show About Donacije.
      */
-    public function donations(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    public function donationsslo(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.donation');
+        return \view('page.donationslo');
     }
 }
