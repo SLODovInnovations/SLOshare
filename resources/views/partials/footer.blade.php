@@ -55,7 +55,7 @@
             <h2 class="l-footer-section-title">{{ __('common.sloshare') }}</h2>
             <ul>
             @if (auth()->user()->group->is_admin)
-                <li><a href="{{ route('donationsslo') }}">{{ __('common.donations') }}</a></li>
+                <li><a href="{{ route('donationslos') }}">{{ __('common.donations') }}</a></li>
                 <li><a href="">{{ __('common.shop-sloshare') }}</a></li>
                 <li><a href="">{{ __('common.radio-sloshare') }}</a></li>
             @endif
