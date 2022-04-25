@@ -122,7 +122,7 @@ class PageController extends Controller
     /**
      * Show About Donacije.
      */
-    public function donationsslo(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    public function donationslos(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         return \view('page.donationslo');
     }
