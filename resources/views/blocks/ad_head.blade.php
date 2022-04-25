@@ -1,5 +1,6 @@
     <div class="col-md-10 col-sm-10 col-md-offset-1">
         <div class="panel-slo">
+@section('javascripts')
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5654650999587494"
      crossorigin="anonymous"></script>
 <!-- head -->
@@ -10,5 +11,6 @@
 <script>
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+@endsection
         </div>
     </div>

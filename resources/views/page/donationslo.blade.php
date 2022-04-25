@@ -27,10 +27,9 @@
                 </div>
             </div>
             <div class="row black-list">
-                <h2>}</h2>
+                <h2></h2>
                     <div class="col-xs-6 col-sm-4 col-md-3">
                         <div class="text-center black-item">
-                            <h4>{{ $client }}</h4>
                             <span></span>
                             <i class="fal fa-ban text-red black-icon"></i>
                         </div>
