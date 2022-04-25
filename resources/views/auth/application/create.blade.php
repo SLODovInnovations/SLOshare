@@ -24,8 +24,8 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}" crossorigin="anonymous">
 </head>
 
-@php $bg = rand(1, 3); $bgchange = $bg.".jpg" @endphp
-<body style="background: url('/img/login/pomlad/{{ $bgchange }}');background-position-x: 50%;background-position-y: center;background-size: cover;background-attachment: fixed;">
+@php $bg = rand(1, 38); $bgchange = $bg.".jpg" @endphp
+<body style="background: url('/img/login/background/{{ $bgchange }}');background-position-x: 50%;background-position-y: center;background-size: cover;background-attachment: fixed;">
 
 @if ($errors->any())
     <div id="ERROR_COPY" style="display: none;">

@@ -22,8 +22,8 @@
     <link rel="stylesheet" href="{{ mix('css/main/login.css') }}" crossorigin="anonymous">
 </head>
 
-@php $bg = rand(1, 3); $bgchange = $bg.".jpg" @endphp
-<body style="background: url('/img/login/pomlad/{{ $bgchange }}');background-position-x: 50%;background-position-y: center;background-size: cover;background-attachment: fixed;">
+@php $bg = rand(1, 38); $bgchange = $bg.".jpg" @endphp
+<body style="background: url('/img/login/background/{{ $bgchange }}');background-position-x: 50%;background-position-y: center;background-size: cover;background-attachment: fixed;">
 
 <!-- Dont Not Change! For Jackett Support -->
 <div class="Jackett" style="display:none;">{{ config('sloshare.powered-by') }}</div>
