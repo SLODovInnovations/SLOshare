@@ -19,7 +19,6 @@
                 <section id="main-content">
                     @include('partials.userbar')
                     <!--@include('partials.breadcrumb')-->
-                    @include('blocks.ad_head')
                     @include('cookie-consent::index')
                     @include('partials.alerts')
                     @if (Session::has('achievement'))

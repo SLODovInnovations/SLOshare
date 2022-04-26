@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
+        @include('blocks.ad_head')
         @include('blocks.news')
         @include('blocks.poll')
         @include('blocks.recommended')
