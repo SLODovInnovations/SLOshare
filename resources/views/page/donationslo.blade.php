@@ -10,7 +10,7 @@
 
 @section('breadcrumb')
     <li>
-        <a href="{{ route('donationsslo') }}" itemprop="url" class="l-breadcrumb-item-link">
+        <a href="{{ route('donationslos') }}" itemprop="url" class="l-breadcrumb-item-link">
             <span itemprop="title" class="l-breadcrumb-item-link-title">{{ config('other.title') }}
                 {{ __('common.donations') }}</span>
         </a>
