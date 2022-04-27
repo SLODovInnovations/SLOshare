@@ -30,7 +30,7 @@
                 <h2></h2>
                     <div class="col-xs-6 col-sm-4 col-md-3">
                         <div class="text-center black-item">
-                            <h4>{{ $client }}</h4>
+                            <h4></h4>
                             <span>
                             <form action="https://www.paypal.com/donate" method="post" target="_top">
                             <input type="hidden" name="hosted_button_id" value="9VSKWN3QQJCQU" />
@@ -38,7 +38,7 @@
                             <img alt="" border="0" src="https://www.paypal.com/en_SI/i/scr/pixel.gif" width="1" height="1" />
                             </form>
                             </span>
-                            <i class="fal fa-ban text-red black-icon"></i>
+                            <i class="fal fa-eur text-red black-icon"></i>
                         </div>
                     </div>
             </div>
