@@ -37,7 +37,10 @@
                                         @endif
                                     </a>
 
-                                    <h1 class="text-bold" style="display: inline ;">{{ $article->title }}</h1>
+                                    <h1 class="text-bold" style="display: inline ;">
+                                        @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->title),
+                                        21))...
+                                    </h1>
 
                                     <p class="text-muted">
                                         <em>{{ __('articles.published-at') }}

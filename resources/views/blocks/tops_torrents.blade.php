@@ -73,7 +73,7 @@
 					<a href="{{ route('categories.show', ['id' => $seed->category->id]) }}" class="release-info-quality quality-sloshare">{{ $seed->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $seed->id]) }}"title="{{ $seed->name }}" class="release-info-title sloshare-title">{{ $seed->name }}</a>
+					<a href="{{ route('torrent', ['id' => $seed->id]) }}"title="{{ $seed->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($seed->name), 45))...</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $seed->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $seed->comments_count }}</span></div>
 
@@ -88,7 +88,7 @@
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $seed->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('torrent', ['id' => $seed->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $seed->getSize() }}</a>
+						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $seed->getSize() }}</a>
 						<div style="float: right;">
 							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $seed->seeders }}</span>
 							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $seed->leechers }}</span>
@@ -168,7 +168,7 @@
     					<a href="{{ route('categories.show', ['id' => $leech->category->id]) }}" class="release-info-quality quality-sloshare">{{ $leech->category->name }}</a>
                         @endif
 
-    					<a href="{{ route('torrent', ['id' => $leech->id]) }}"title="{{ $leech->name }}" class="release-info-title sloshare-title">{{ $leech->name }}</a>
+    					<a href="{{ route('torrent', ['id' => $leech->id]) }}"title="{{ $leech->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($leech->name), 45))...</a>
     					<div class="release-info-container">
     						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $leech->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $leech->comments_count }}</span></div>
 
@@ -183,7 +183,7 @@
     						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $leech->user->username }}</div>
     					</div>
     					<div class="release-info-rating">
-    						<a class="release-info-rating-likes download-link" href="{{ route('torrent', ['id' => $leech->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $leech->getSize() }}</a>
+    						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $leech->getSize() }}</a>
     						<div style="float: right;">
     							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $leech->seeders }}</span>
     							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $leech->leechers }}</span>
