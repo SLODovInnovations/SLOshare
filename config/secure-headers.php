@@ -473,6 +473,7 @@ return [
             'https://'.parse_url(env('APP_URL'), PHP_URL_HOST).':8443/socket.io/',
             'wss://'.parse_url(env('APP_URL'), PHP_URL_HOST).':8443/socket.io/',
             'https://api.themoviedb.org/',
+            'https://pagead2.googlesyndication.com/',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/default-src
@@ -492,17 +493,19 @@ return [
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors
         'frame-ancestors' => [
-            'self' => true,
+            //'self' => true,
+            'https://www.paypal.com',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-src
         'frame-src' => [
-            //
+            'https://googleads.g.doubleclick.net/',
+            'https://tpc.googlesyndication.com/',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/img-src
         'img-src' => [
-            //
+            'https://pagead2.googlesyndication.com/',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/manifest-src
@@ -580,7 +583,12 @@ return [
             'report-sample' => false,
 
             'allow' => [
-
+				'https://pagead2.googlesyndication.com/',
+				'https://partner.googleadservices.com/',
+				'https://tpc.googlesyndication.com/',
+				'https://www.googletagservices.com/',
+				'https://adservice.google.com/',
+				'https://adservice.google.si/',
             ],
 
             'schemes' => [
