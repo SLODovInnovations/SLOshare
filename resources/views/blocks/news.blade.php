@@ -39,7 +39,7 @@
 
                                     <h1 class="text-bold" style="display: inline ;">
                                         @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->title),
-                                        21))...
+                                        21))
                                     </h1>
 
                                     <p class="text-muted">
@@ -49,7 +49,7 @@
 
                                     <p style="margin-top: 20px;">
                                         @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->content),
-                                        150))...
+                                        150))
                                     </p>
 
                                     <a href="{{ route('articles.show', ['id' => $article->id]) }}"
