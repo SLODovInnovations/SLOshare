@@ -113,7 +113,7 @@
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $newslo->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $newslo->getSize() }}</a>
+						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $newslo->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $newslo->getSize() }}</a>
 						<div style="float: right;">
 							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $newslo->seeders }}</span>
 							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $newslo->leechers }}</span>
@@ -190,7 +190,7 @@
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $videos->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $videos->getSize() }}</a>
+						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $videos->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $videos->getSize() }}</a>
 						<div style="float: right;">
 							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $videos->seeders }}</span>
 							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $videos->leechers }}</span>
@@ -267,7 +267,7 @@
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $tv->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $tv->getSize() }}</a>
+						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $tv->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $tv->getSize() }}</a>
 						<div style="float: right;">
 							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $tv->seeders }}</span>
 							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $tv->leechers }}</span>
@@ -333,7 +333,7 @@
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $games->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $games->getSize() }}</a>
+						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $games->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $games->getSize() }}</a>
 						<div style="float: right;">
 							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $games->seeders }}</span>
 							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $games->leechers }}</span>
@@ -388,7 +388,7 @@
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $application->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $application->getSize() }}</a>
+						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $application->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $application->getSize() }}</a>
 						<div style="float: right;">
 							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $application->seeders }}</span>
 							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $application->leechers }}</span>
@@ -456,7 +456,7 @@
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $cartoon->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $cartoon->getSize() }}</a>
+						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $cartoon->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $cartoon->getSize() }}</a>
 						<div style="float: right;">
 							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $cartoon->seeders }}</span>
 							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $cartoon->leechers }}</span>
@@ -521,7 +521,7 @@
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $x->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $x->getSize() }}</a>
+						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $x->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $x->getSize() }}</a>
 						<div style="float: right;">
 							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $x->seeders }}</span>
 							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $x->leechers }}</span>
