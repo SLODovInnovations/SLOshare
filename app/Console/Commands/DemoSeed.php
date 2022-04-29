@@ -46,7 +46,7 @@ class DemoSeed extends Command
 
             $uid = User::factory()->create([
                 'chatroom_id'    => 1,
-                'group_id'       => random_int(1, 20),
+                'group_id'       => random_int(1, 13),
                 'chat_status_id' => 1,
                 'image'          => null,
                 'custom_css'     => null,

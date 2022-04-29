@@ -2,11 +2,11 @@
 @foreach ($articles as $article)
             <div class="panel panel-danger">
                 <div class="nav nav-tabs-user">
-                    <h4 class="text-center">
-                        <a href="{{ route('articles.show', ['id' => $article->id]) }}">
+                    <a href="{{ route('articles.show', ['id' => $article->id]) }}">
+                        <h4 class="news-title">
                             @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->title), 21))
-                        </a>
-                    </h4>
+                        </h4>
+                    </a>
                 </div>
                 <div aria-expanded="{{ ($article->newNews ? 'true' : 'false') }}" id="collapse4"
                     class="panel-collapse collapse {{ ($article->newNews ? 'in' : '') }}"
