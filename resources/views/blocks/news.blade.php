@@ -8,7 +8,9 @@
                         </a>
                     </h4>
                 </div>
-                <div class="panel-collapse collapse">
+                <div aria-expanded="{{ ($article->newNews ? 'true' : 'false') }}" id="collapse4"
+                    class="panel-collapse collapse {{ ($article->newNews ? 'in' : '') }}"
+                    style="{{ ($article->newNews ? '' : 'height: 0;') }}">
                     <div class="panel-body no-padding">
                         <p class="text-muted">
                             <em>{{ __('articles.published-at') }}
@@ -46,4 +48,5 @@
                             </div>
                         </div>
                     </div>
+                </div>
 @endforeach
