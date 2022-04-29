@@ -1,6 +1,5 @@
 @if (auth()->user()->group->is_admin)
 @if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
-<div class="col-md-3 col-sm-3-slo col-md-bl-1 col-slo">
         <div class="panel panel-danger">
             <div class="panel-heading">
                 <h4 class="text-center">
