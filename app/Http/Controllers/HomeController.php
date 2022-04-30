@@ -13,6 +13,13 @@ use App\Models\Post;
 use App\Models\Topic;
 use App\Models\Torrent;
 use App\Models\User;
+//SLOshare
+use App\Models\Category;
+use App\Models\History;
+use App\Models\Language;
+use App\Models\Peer;
+use App\Models\TorrentRequest;
+//SLOshare
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -180,6 +187,11 @@ class HomeController extends Controller
             ->take(10)
             ->get());
 
+//SLOshare
+        // Total Members Count (All Groups)
+        $allUser = \cache()->remember('all_user', $this->carbon, fn () => User::withTrashed()->get());
+//SLOshare
+
         $freeleechTokens = FreeleechToken::where('user_id', $user->id)->get();
         $bookmarks = Bookmark::where('user_id', $user->id)->get();
 
@@ -211,6 +223,9 @@ class HomeController extends Controller
             'past_uploaders'     => $pastUploaders,
             'freeleech_tokens'   => $freeleechTokens,
             'bookmarks'          => $bookmarks,
+            //SLOshare
+            'all_user'          => $allUser,
+            //SLOshare
         ]);
     }
 }
