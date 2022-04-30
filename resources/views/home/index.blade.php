@@ -11,7 +11,7 @@
 
         @include('blocks.video')
         @include('blocks.poll')
-        @include('blocks.statistics')
+        @include('blocks.ststs')
 
         @include('blocks.torrents_torrents')
         @include('blocks.ad_center')

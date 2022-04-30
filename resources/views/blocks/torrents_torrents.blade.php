@@ -98,7 +98,7 @@
 					<a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $newslo->id]) }}"title="{{ $newslo->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($newslo->name), 45))</a>
+					<a href="{{ route('torrent', ['id' => $newslo->id]) }}"title="{{ $newslo->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($newslo->name), 35))</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $newslo->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $newslo->comments_count }}</span></div>
 
@@ -175,7 +175,7 @@
 					<a href="{{ route('categories.show', ['id' => $videos->category->id]) }}" class="release-info-quality quality-sloshare">{{ $videos->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $videos->id]) }}"title="{{ $videos->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($videos->name), 45))</a>
+					<a href="{{ route('torrent', ['id' => $videos->id]) }}"title="{{ $videos->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($videos->name), 35))</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $videos->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $videos->comments_count }}</span></div>
 
@@ -186,7 +186,7 @@
                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                         @endif
 
-						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $videos->created_at->getTimestamp()) }} | {{ date('H:m:s', $videos->created_at->getTimestamp()) }}</div>
+						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $videos->created_at->getTimestamp()) }} | {{ date('H:m', $videos->created_at->getTimestamp()) }}</div>
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $videos->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
@@ -252,7 +252,7 @@
 					<a href="{{ route('categories.show', ['id' => $tv->category->id]) }}" class="release-info-quality quality-sloshare">{{ $tv->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $tv->id]) }}"title="{{ $tv->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($tv->name), 45))</a>
+					<a href="{{ route('torrent', ['id' => $tv->id]) }}"title="{{ $tv->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($tv->name), 35))</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $tv->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $tv->comments_count }}</span></div>
 
@@ -263,7 +263,7 @@
                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                         @endif
 
-						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $tv->created_at->getTimestamp()) }} | {{ date('H:m:s', $tv->created_at->getTimestamp()) }}</div>
+						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $tv->created_at->getTimestamp()) }} | {{ date('H:m', $tv->created_at->getTimestamp()) }}</div>
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $tv->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
@@ -318,7 +318,7 @@
 					<a href="{{ route('categories.show', ['id' => $games->category->id]) }}" class="release-info-quality quality-sloshare">{{ $games->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $games->id]) }}"title="{{ $games->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($games->name), 45))</a>
+					<a href="{{ route('torrent', ['id' => $games->id]) }}"title="{{ $games->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($games->name), 35))</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $games->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $games->comments_count }}</span></div>
 
@@ -329,7 +329,7 @@
                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                         @endif
 
-						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $games->created_at->getTimestamp()) }} | {{ date('H:m:s', $games->created_at->getTimestamp()) }}</div>
+						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $games->created_at->getTimestamp()) }} | {{ date('H:m', $games->created_at->getTimestamp()) }}</div>
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $games->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
@@ -380,11 +380,11 @@
 					<a href="{{ route('categories.show', ['id' => $application->category->id]) }}" class="release-info-quality quality-sloshare">{{ $application->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $application->id]) }}"title="{{ $application->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($application->name), 45))</a>
+					<a href="{{ route('torrent', ['id' => $application->id]) }}"title="{{ $application->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($application->name), 35))</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $application->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $application->comments_count }}</span></div>
 
-						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $application->created_at->getTimestamp()) }} | {{ date('H:m:s', $application->created_at->getTimestamp()) }}</div>
+						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $application->created_at->getTimestamp()) }} | {{ date('H:m', $application->created_at->getTimestamp()) }}</div>
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $application->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
@@ -448,11 +448,11 @@
 					<a href="{{ route('categories.show', ['id' => $cartoon->category->id]) }}" class="release-info-quality quality-sloshare">{{ $cartoon->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $cartoon->id]) }}"title="{{ $cartoon->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($cartoon->name), 45))</a>
+					<a href="{{ route('torrent', ['id' => $cartoon->id]) }}"title="{{ $cartoon->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($cartoon->name), 35))</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $cartoon->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $cartoon->comments_count }}</span></div>
 
-						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $cartoon->created_at->getTimestamp()) }} | {{ date('H:m:s', $cartoon->created_at->getTimestamp()) }}</div>
+						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $cartoon->created_at->getTimestamp()) }} | {{ date('H:m', $cartoon->created_at->getTimestamp()) }}</div>
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $cartoon->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
@@ -506,7 +506,7 @@
 					<a href="{{ route('categories.show', ['id' => $x->category->id]) }}" class="release-info-quality quality-sloshare">{{ $x->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $x->id]) }}"title="{{ $x->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($x->name), 45))</a>
+					<a href="{{ route('torrent', ['id' => $x->id]) }}"title="{{ $x->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($x->name), 35))</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $x->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $x->comments_count }}</span></div>
 
@@ -517,7 +517,7 @@
                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                         @endif
 
-						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $x->created_at->getTimestamp()) }} | {{ date('H:m:s', $x->created_at->getTimestamp()) }}</div>
+						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $x->created_at->getTimestamp()) }} | {{ date('H:m', $x->created_at->getTimestamp()) }}</div>
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $x->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
