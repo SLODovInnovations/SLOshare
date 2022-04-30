@@ -19,7 +19,7 @@
     <div class="tab-pane fade active in" id="seeders">
         <div class="clearfix visible-sm-block"></div>
         <div class="panel panel-chat shoutbox">
-            <div id="myCarousel" class="keen-slider">
+            <div id="myCarousel" class="keen-slider-slo">
 
 
 
@@ -73,7 +73,7 @@
 					<a href="{{ route('categories.show', ['id' => $seed->category->id]) }}" class="release-info-quality quality-sloshare">{{ $seed->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $seed->id]) }}"title="{{ $seed->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($seed->name), 45))</a>
+					<a href="{{ route('torrent', ['id' => $seed->id]) }}"title="{{ $seed->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($seed->name), 30))...</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $seed->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $seed->comments_count }}</span></div>
 
@@ -84,7 +84,7 @@
                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                         @endif
 
-						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $seed->created_at->getTimestamp()) }} | {{ date('H:m:s', $seed->created_at->getTimestamp()) }}</div>
+						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $seed->created_at->getTimestamp()) }} | {{ date('H:m', $seed->created_at->getTimestamp()) }}</div>
 						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $seed->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
@@ -114,7 +114,7 @@
         <div class="tab-pane fade" id="leechers">
             <div class="clearfix visible-sm-block"></div>
             <div class="panel panel-chat shoutbox">
-                <div id="myCarousel" class="keen-slider">
+                <div id="myCarousel" class="keen-slider-slo">
 
 
 
@@ -168,7 +168,7 @@
     					<a href="{{ route('categories.show', ['id' => $leech->category->id]) }}" class="release-info-quality quality-sloshare">{{ $leech->category->name }}</a>
                         @endif
 
-    					<a href="{{ route('torrent', ['id' => $leech->id]) }}"title="{{ $leech->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($leech->name), 45))</a>
+    					<a href="{{ route('torrent', ['id' => $leech->id]) }}"title="{{ $leech->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($leech->name), 30))...</a>
     					<div class="release-info-container">
     						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $leech->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $leech->comments_count }}</span></div>
 
@@ -179,7 +179,7 @@
                             <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                             @endif
 
-    						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $leech->created_at->getTimestamp()) }} | {{ date('H:m:s', $leech->created_at->getTimestamp()) }}</div>
+    						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $leech->created_at->getTimestamp()) }} | {{ date('H:m', $leech->created_at->getTimestamp()) }}</div>
     						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $leech->user->username }}</div>
     					</div>
     					<div class="release-info-rating">
