@@ -38,7 +38,7 @@ class HomeController extends Controller
         $user = $request->user();
 
         // Latest Articles/News Block
-        $articles = \cache()->remember('latest_article', $expiresAt, fn () => Article::latest()->take(1)->get());
+        $articles = \cache()->remember('latest_article', $expiresAt, fn () => Article::latest()->take(5)->get());
         foreach ($articles as $article) {
             $article->newNews = ($user->updated_at->subDays(3)->getTimestamp() < $article->created_at->getTimestamp()) ? 1 : 0;
         }

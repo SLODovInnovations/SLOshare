@@ -1449,8 +1449,22 @@ select.form-control.page-search {
 
 /* ================ TORRENTS SEARCH ================= */
 /* =================== NEWS HOME ==================== */
-.news-title {
+.newtitle {
     margin-left: 15px;
     margin-right: 15px;
+}
+.newbody {
+    padding: 0px 0px 0px 7px;
+}
+.newbodyimg {
+    width: 245px;
+    height: 165px;
+    float: left;
+}
+.newbodytext {
+    float: left;
+    width: 190px;
+    padding: 10px 0px 0px 10px;
+    line-height: 16px
 }
 /* =================== NEWS HOME ==================== */
