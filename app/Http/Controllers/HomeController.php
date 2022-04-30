@@ -30,7 +30,18 @@ use Illuminate\Support\Facades\DB;
  */
 class HomeController extends Controller
 {
+//SLOshare
     public \Carbon\Carbon $carbon;
+
+    /**
+     * StatsController Constructor.
+     */
+    public function __construct()
+    {
+        $this->carbon = Carbon::now()->addMinutes(10);
+    }
+//SLOshare
+
     /**
      * Display Home Page.
      *
