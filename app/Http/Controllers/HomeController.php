@@ -30,18 +30,6 @@ use Illuminate\Support\Facades\DB;
  */
 class HomeController extends Controller
 {
-//SLOshare
-    public \Carbon\Carbon $carbon;
-
-    /**
-     * StatsController Constructor.
-     */
-    public function __construct()
-    {
-        $this->carbon = Carbon::now()->addMinutes(10);
-    }
-//SLOshare
-
     /**
      * Display Home Page.
      *
@@ -202,7 +190,54 @@ class HomeController extends Controller
         $freeleechTokens = FreeleechToken::where('user_id', $user->id)->get();
         $bookmarks = Bookmark::where('user_id', $user->id)->get();
 
+        return \view('home.index', [
+            'user'               => $user,
+            'personal_freeleech' => $personalFreeleech,
+            'users'              => $users,
+            'groups'             => $groups,
+            'articles'           => $articles,
+            'newest'             => $newest,
+            'video'              => $video,
+            'xxx'                => $xxx,
+            'tvserie'            => $tvserie,
+            'game'               => $game,
+            'applications'       => $applications,
+            'cartoons'           => $cartoons,
+            'newsloshare'        => $newsloshare,
+            'slorecommended'     => $slorecommended,
+            'videorecommended'   => $videorecommended,
+            'seeded'             => $seeded,
+            'dying'              => $dying,
+            'leeched'            => $leeched,
+            'dead'               => $dead,
+            'topics'             => $topics,
+            'posts'              => $posts,
+            'featured'           => $featured,
+            'poll'               => $poll,
+            'uploaders'          => $uploaders,
+            'past_uploaders'     => $pastUploaders,
+            'freeleech_tokens'   => $freeleechTokens,
+            'bookmarks'          => $bookmarks,
+        ]);
+    }
 //SLOshare
+    public \Carbon\Carbon $carbon;
+
+    /**
+     * StatsController Constructor.
+     */
+    public function __construct()
+    {
+        $this->carbon = Carbon::now()->addMinutes(10);
+    }
+
+    /**
+     * Show Extra-Stats Index.
+     *
+     * @throws \Exception
+     */
+    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
         // Total Members Count (All Groups)
         $allUser = \cache()->remember('all_user', $this->carbon, fn () => User::withTrashed()->count());
 
@@ -278,37 +313,8 @@ class HomeController extends Controller
 
         //Total Up/Down Traffic with perks
         $creditedUpDown = $creditedUpload + $creditedDownload;
-//SLOshare
 
-        return \view('home.index', [
-            'user'               => $user,
-            'personal_freeleech' => $personalFreeleech,
-            'users'              => $users,
-            'groups'             => $groups,
-            'articles'           => $articles,
-            'newest'             => $newest,
-            'video'              => $video,
-            'xxx'                => $xxx,
-            'tvserie'            => $tvserie,
-            'game'               => $game,
-            'applications'       => $applications,
-            'cartoons'           => $cartoons,
-            'newsloshare'        => $newsloshare,
-            'slorecommended'     => $slorecommended,
-            'videorecommended'   => $videorecommended,
-            'seeded'             => $seeded,
-            'dying'              => $dying,
-            'leeched'            => $leeched,
-            'dead'               => $dead,
-            'topics'             => $topics,
-            'posts'              => $posts,
-            'featured'           => $featured,
-            'poll'               => $poll,
-            'uploaders'          => $uploaders,
-            'past_uploaders'     => $pastUploaders,
-            'freeleech_tokens'   => $freeleechTokens,
-            'bookmarks'          => $bookmarks,
-//SLOshare
+        return \view('stats.index', [
             'all_user'          => $allUser,
             'active_user'       => $activeUser,
             'disabled_user'     => $disabledUser,
@@ -328,7 +334,230 @@ class HomeController extends Controller
             'credited_upload'   => $creditedUpload,
             'credited_download' => $creditedDownload,
             'credited_up_down'  => $creditedUpDown,
-//SLOshare
         ]);
     }
+
+    /**
+     * Show Extra-Stats Users.
+     *
+     * @throws \Exception
+     */
+    public function uploaded(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        $bannedGroup = \cache()->rememberForever('banned_group', fn () => Group::where('slug', '=', 'banned')->pluck('id'));
+        $validatingGroup = \cache()->rememberForever('validating_group', fn () => Group::where('slug', '=', 'validating')->pluck('id'));
+        $disabledGroup = \cache()->rememberForever('disabled_group', fn () => Group::where('slug', '=', 'disabled')->pluck('id'));
+        $prunedGroup = \cache()->rememberForever('pruned_group', fn () => Group::where('slug', '=', 'pruned')->pluck('id'));
+
+        // Fetch Top Uploaders
+        $uploaded = User::latest('uploaded')->whereIntegerNotInRaw('group_id', [$validatingGroup[0], $bannedGroup[0], $disabledGroup[0], $prunedGroup[0]])->take(100)->get();
+
+        return \view('stats.users.uploaded', ['uploaded' => $uploaded]);
+    }
+
+    /**
+     * Show Extra-Stats Users.
+     *
+     * @throws \Exception
+     */
+    public function downloaded(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        $bannedGroup = \cache()->rememberForever('banned_group', fn () => Group::where('slug', '=', 'banned')->pluck('id'));
+        $validatingGroup = \cache()->rememberForever('validating_group', fn () => Group::where('slug', '=', 'validating')->pluck('id'));
+        $disabledGroup = \cache()->rememberForever('disabled_group', fn () => Group::where('slug', '=', 'disabled')->pluck('id'));
+        $prunedGroup = \cache()->rememberForever('pruned_group', fn () => Group::where('slug', '=', 'pruned')->pluck('id'));
+
+        // Fetch Top Downloaders
+        $downloaded = User::latest('downloaded')->whereIntegerNotInRaw('group_id', [$validatingGroup[0], $bannedGroup[0], $disabledGroup[0], $prunedGroup[0]])->take(100)->get();
+
+        return \view('stats.users.downloaded', ['downloaded' => $downloaded]);
+    }
+
+    /**
+     * Show Extra-Stats Users.
+     */
+    public function seeders(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Seeders
+        $seeders = Peer::with('user')->select(DB::raw('user_id, count(distinct torrent_id) as value'))->where('seeder', '=', 1)->groupBy('user_id')->latest('value')->take(100)->get();
+
+        return \view('stats.users.seeders', ['seeders' => $seeders]);
+    }
+
+    /**
+     * Show Extra-Stats Users.
+     */
+    public function leechers(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Leechers
+        $leechers = Peer::with('user')->select(DB::raw('user_id, count(*) as value'))->where('seeder', '=', 0)->groupBy('user_id')->latest('value')->take(100)->get();
+
+        return \view('stats.users.leechers', ['leechers' => $leechers]);
+    }
+
+    /**
+     * Show Extra-Stats Users.
+     */
+    public function uploaders(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Uploaders
+        $uploaders = Torrent::with('user')->select(DB::raw('user_id, count(*) as value'))->groupBy('user_id')->latest('value')->take(100)->get();
+
+        return \view('stats.users.uploaders', ['uploaders' => $uploaders]);
+    }
+
+    /**
+     * Show Extra-Stats Users.
+     *
+     * @throws \Exception
+     */
+    public function bankers(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        $bannedGroup = \cache()->rememberForever('banned_group', fn () => Group::where('slug', '=', 'banned')->pluck('id'));
+        $validatingGroup = \cache()->rememberForever('validating_group', fn () => Group::where('slug', '=', 'validating')->pluck('id'));
+        $disabledGroup = \cache()->rememberForever('disabled_group', fn () => Group::where('slug', '=', 'disabled')->pluck('id'));
+        $prunedGroup = \cache()->rememberForever('pruned_group', fn () => Group::where('slug', '=', 'pruned')->pluck('id'));
+
+        // Fetch Top Bankers
+        $bankers = User::latest('seedbonus')->whereIntegerNotInRaw('group_id', [$validatingGroup[0], $bannedGroup[0], $disabledGroup[0], $prunedGroup[0]])->take(100)->get();
+
+        return \view('stats.users.bankers', ['bankers' => $bankers]);
+    }
+
+    /**
+     * Show Extra-Stats Users.
+     */
+    public function seedtime(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Total Seedtime
+        $seedtime = User::with('history')->select(DB::raw('user_id, count(*) as value'))->groupBy('user_id')->latest('value')->take(100)->sum('seedtime');
+
+        return \view('stats.users.seedtime', ['seedtime' => $seedtime]);
+    }
+
+    /**
+     * Show Extra-Stats Users.
+     */
+    public function seedsize(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Total Seedsize Users
+        $seedsize = User::with(['peers', 'torrents'])->select(DB::raw('user_id, count(*) as value'))->groupBy('user_id')->latest('value')->take(100)->sum('size');
+
+        return \view('stats.users.seedsize', ['seedsize' => $seedsize]);
+    }
+
+    /**
+     * Show Extra-Stats Torrents.
+     */
+    public function seeded(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Seeded
+        $seeded = Torrent::latest('seeders')->take(100)->get();
+
+        return \view('stats.torrents.seeded', ['seeded' => $seeded]);
+    }
+
+    /**
+     * Show Extra-Stats Torrents.
+     */
+    public function leeched(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Leeched
+        $leeched = Torrent::latest('leechers')->take(100)->get();
+
+        return \view('stats.torrents.leeched', ['leeched' => $leeched]);
+    }
+
+    /**
+     * Show Extra-Stats Torrents.
+     */
+    public function completed(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Completed
+        $completed = Torrent::latest('times_completed')->take(100)->get();
+
+        return \view('stats.torrents.completed', ['completed' => $completed]);
+    }
+
+    /**
+     * Show Extra-Stats Torrents.
+     */
+    public function dying(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Dying
+        $dying = Torrent::where('seeders', '=', 1)->where('times_completed', '>=', '1')->latest('leechers')->take(100)->get();
+
+        return \view('stats.torrents.dying', ['dying' => $dying]);
+    }
+
+    /**
+     * Show Extra-Stats Torrents.
+     */
+    public function dead(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Dead
+        $dead = Torrent::where('seeders', '=', 0)->latest('leechers')->take(100)->get();
+
+        return \view('stats.torrents.dead', ['dead' => $dead]);
+    }
+
+    /**
+     * Show Extra-Stats Torrent Requests.
+     */
+    public function bountied(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Top Bountied
+        $bountied = TorrentRequest::latest('bounty')->take(100)->get();
+
+        return \view('stats.requests.bountied', ['bountied' => $bountied]);
+    }
+
+    /**
+     * Show Extra-Stats Groups.
+     */
+    public function groups(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Groups User Counts
+        $groups = Group::oldest('position')->get();
+
+        return \view('stats.groups.groups', ['groups' => $groups]);
+    }
+
+    /**
+     * Show Extra-Stats Groups.
+     */
+    public function group(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch Users In Group
+        $group = Group::findOrFail($id);
+        $users = User::withTrashed()->where('group_id', '=', $group->id)->latest()->paginate(100);
+
+        return \view('stats.groups.group', ['users' => $users, 'group' => $group]);
+    }
+
+    /**
+     * Show Extra-Stats Languages.
+     */
+    public function languages(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        // Fetch All Languages
+        $languages = Language::allowed();
+
+        return \view('stats.languages.languages', ['languages' => $languages]);
+    }
+
+    /**
+     * Show Extra-Stats Clients.
+     */
+    public function clients(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        $clients = [];
+
+        if (\cache()->has('stats:clients')) {
+            $clients = \cache()->get('stats:clients');
+        }
+
+        return \view('stats.clients.clients', ['clients' => $clients]);
+    }
+//SLOshare
 }
