@@ -1,4 +1,4 @@
-<div class="col-md-10 col-sm-10 col-md-offset-1">
+<div class="col-md-6-slo col-sm-6 col-md-br-1">
 
                         <!-- Buttons -->
                         <ul class="nav nav-tabs-user mb-5-user" role="tablist">
