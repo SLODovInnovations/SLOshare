@@ -1,4 +1,4 @@
-<div class="col-md-3 col-sm-3-slo col-md-bl-1">
+<div class="col-md-3 col-sm-3-slo col-md-bl-1 col-slo-news">
 @foreach ($articles as $article)
             <div class="panel panel-danger">
                 <div class="nav nav-tabs-user">
@@ -47,5 +47,6 @@
                     </div>
                     <!--Footer-->
                 </div>
-</div>
+            </div>
 @endforeach
+</div>
