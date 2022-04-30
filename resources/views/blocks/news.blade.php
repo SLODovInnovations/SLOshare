@@ -20,8 +20,7 @@
                         <!--Body-->
                         <div class="newbody">
                             <div class="newbodyimg">
-                                <a href="{{ route('articles.show', ['id' => $article->id]) }}"
-                                    style=" float: right; margin-right: 10px;">
+                                <a href="{{ route('articles.show', ['id' => $article->id]) }}">
                                 @if ( ! is_null($article->image))
                                     <img src="{{ url('files/img/' . $article->image) }}"
                                         alt="{{ $article->title }}">
