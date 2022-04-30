@@ -1,5 +1,6 @@
 @if (auth()->user()->group->is_admin)
 @if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
+    <div class="col-md-1 col-sm-1-slo col-md-br-1 col-slo-poll">
         <div class="panel panel-danger">
             <div class="panel-heading">
                 <h4 class="text-center">
@@ -57,4 +58,3 @@
         </div>
 @endif
 @endif
-    </div>

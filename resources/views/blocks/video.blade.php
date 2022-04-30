@@ -1,4 +1,4 @@
-    <div class="col-md-6 col-sm-6 col-md-br-1 col-slo-ad">
+    <div class="col-md-5 col-sm-5-slo col-slo-video">
         <div class="panel-slo">
 
         </div>
