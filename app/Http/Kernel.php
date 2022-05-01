@@ -44,7 +44,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\UpdateLastAction::class,
         ],
         'api' => [
-            'throttle:60,1',
+            'throttle:30,1',
             'bindings',
         ],
     ];

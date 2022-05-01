@@ -53,7 +53,7 @@ mix.options({
      *
      * Note: The order of this array will matter, no different then linking these assets manually in the html
      */
-    .babel(['resources/js/sloshare/hoe.js', 'resources/js/sloshare/tmdb.js', 'resources/js/sloshare/parser.js', 'resources/js/sloshare/helper.js', 'resources/js/sloshare/custom.js'], 'public/js/sloshare.js')
+    .babel(['resources/js/sloshare/tmdb.js', 'resources/js/sloshare/parser.js', 'resources/js/sloshare/helper.js', 'resources/js/sloshare/custom.js'], 'public/js/sloshare.js')
 
     /*
      * Copy assets

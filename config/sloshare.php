@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'powered-by' => 'SLOshare.eu v1.1.8',
+    'powered-by' => 'SLOshare.eu v1.2.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'version' => 'v1.1.8',
+    'version' => 'v1.2.0',
 
     /*
     |--------------------------------------------------------------------------
@@ -54,4 +54,17 @@ return [
 
     // Global Rate Limit for Comments - X Per Minute
     'comment-rate-limit' => env('COMMENTS_PER_MINUTE', 2),
+
+    /*
+    |--------------------------------------------------------------------------
+    | External Chat Platform
+    |--------------------------------------------------------------------------
+    |
+    | Settings to configure an external chat platform
+    |
+    */
+
+    'chat-link-name' => 'Discord',
+    'chat-link-icon' => 'fab fa-discord',
+    'chat-link-url'  => '',
 ];
