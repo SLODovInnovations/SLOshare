@@ -1,8 +1,7 @@
 <nav class="top-nav" x-data="{ expanded: false }" x-bind:class="expanded && 'mobile'">
     <div class="top-nav__left">
         <a class="top-nav__branding" href="{{ route('home.index') }}">
-            <i class="fal fa-tv-retro"></i>
-            <span class="top-nav__site-logo"><img src="{{ url('/logo-top_nav.png') }}"></span>
+            <span class="top-nav__site-logo"><img src="{{ url('/logo-footer.png') }}"></span>
         </a>
         <livewire:quick-search-dropdown />
     </div>
