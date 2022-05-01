@@ -253,24 +253,24 @@
                     {{ auth()->user()->untilRatio(config('other.ratio')) }}
                 </a>
             </li>
-            <li class="ratio-bar__points" title="{{ __('user.my-bonus-points') }}">
+            <!--<li class="ratio-bar__points" title="{{ __('user.my-bonus-points') }}">
                 <a href="{{ route('bonus') }}">
                     <i class="{{ config('other.font-awesome') }} fa-coins" ></i>
                     {{ auth()->user()->getSeedbonus() }}
                 </a>
-            </li>
+            </li>-->
             <li class="ratio-bar__ratio" title="{{ __('common.ratio') }}">
                 <a href="{{ route('user_torrents', ['username' => auth()->user()->username]) }}">
                     <i class="{{ config('other.font-awesome') }} fa-sync-alt"></i>
                     {{ auth()->user()->getRatioString() }}
                 </a>
             </li>
-            <li class="ratio-bar__tokens" title="{{ __('user.my-fl-tokens') }}">
+            <!--<li class="ratio-bar__tokens" title="{{ __('user.my-fl-tokens') }}">
                 <a href="{{ route('users.show', ['username' => auth()->user()->username]) }}">
                     <i class="{{ config('other.font-awesome') }} fa-star"></i>
                     {{ auth()->user()->fl_tokens }}
                 </a>
-            </li>
+            </li>-->
         </ul>
         <a class="top-nav__username--highresolution" href="{{ route('users.show', ['username' => auth()->user()->username]) }}">
             <span class="text-bold" style="color:{{ auth()->user()->group->color }}; background-image:{{ auth()->user()->group->effect }};">
