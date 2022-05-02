@@ -1,4 +1,3 @@
-@if (auth()->user()->group->is_admin)
 <div class="col-md-5 col-sm-5-slo col-slo">
     <div class="panel-slo">
 
@@ -539,4 +538,3 @@
         </div>
     </div>
 </div>
-@endif
