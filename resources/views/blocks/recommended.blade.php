@@ -13,7 +13,7 @@
                     <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ __('sloshare.home-movie-title') }}
                 </a>
             </li>
-            <li class="">
+            <!--<li class="">
                 <a href="#recommended-tvseries" role="tab" data-toggle="tab" aria-expanded="true">
                     <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ __('sloshare.home-tvseries-title') }}
                 </a>
@@ -27,7 +27,7 @@
                 <a href="#recommended-games" role="tab" data-toggle="tab" aria-expanded="true">
                     <i class="{{ config('other.font-awesome') }} fa-gamepad"></i> {{ __('sloshare.home-game-title') }}
                 </a>
-            </li>
+            </li>-->
         </ul>
     <!-- Buttons -->
 
@@ -48,38 +48,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($slorecommended as $recommended)
+                            @foreach ($slorecommended as $slorecommendeds)
 
                             @php $meta = null; @endphp
-                            @if ($recommended->category->tv_meta)
-                                @if ($recommended->tmdb || $recommended->tmdb != 0)
-                            	    @php $meta = App\Models\Tv::where('id', '=', $recommended->tmdb)->first(); @endphp
+                            @if ($slorecommendeds->category->tv_meta)
+                                @if ($slorecommendeds->tmdb || $slorecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\Tv::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
-                            @if ($recommended->category->movie_meta)
-                                @if ($recommended->tmdb || $recommended->tmdb != 0)
-                            	    @php $meta = App\Models\Movie::where('id', '=', $recommended->tmdb)->first(); @endphp
+                            @if ($slorecommendeds->category->movie_meta)
+                                @if ($recommended->tmdb || $slorecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\Movie::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
-                            @if ($recommended->category->game_meta)
-                                @if ($recommended->igdb || $recommended->igdb != 0)
-                            	    @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($recommended->igdb); @endphp
+                            @if ($slorecommendeds->category->game_meta)
+                                @if ($slorecommendeds->igdb || $slorecommendeds->igdb != 0)
+                            	    @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($slorecommendeds->igdb); @endphp
                                 @endif
                             @endif
 
                             <tr>
 							    <td class="torrent-listings-poster" style="width: 1%;">
 									<div class="torrent-poster pull-left">
-										@if ($recommended->tmdb != 0 && $recommended->tmdb != null)
+										@if ($slorecommendeds->tmdb != 0 && $slorecommendeds->tmdb != null)
 											<img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/poster/poster-torrent-1.png' }}"
 											     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 										@else
-										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$recommended->id.'.jpg'))
-                                                <img src="{{ url('files/img/torrent-cover_' . $recommended->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$slorecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $slorecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@endif
 										@endif
 
-										@if ($recommended->category->game_meta)
+										@if ($slorecommendeds->category->game_meta)
 											<img style="height: 80px;" src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/poster-torrent-1.png' }}"
 											     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 										@endif
@@ -88,30 +88,30 @@
                                     <div class="text-center" style="padding-top: 5px;">
                                         <span class="label label-success" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.type') }}">
-                                            {{ $recommended->type->name }}
+                                            {{ $slorecommendeds->type->name }}
                                          </span>
                                     </div>
                                     <div class="text-center" style="padding-top: 8px;">
                                         <span class="label label-success" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.resolution') }}">
-                                            {{ $recommended->resolution->name ?? 'No Res' }}
+                                            {{ $slorecommendeds->resolution->name ?? 'No Res' }}
                                         </span>
                                     </div>
                                 </td>
 
                                 <td>
-                                    <a class="text-bold" href="{{ route('torrent', ['id' => $recommended->id]) }}">
-                                        {{ $recommended->name }}
+                                    <a class="text-bold" href="{{ route('torrent', ['id' => $slorecommendeds->id]) }}">
+                                        {{ $slorecommendeds->name }}
                                     </a>
                                     @if (config('torrent.download_check_page') == 1)
-                                    <a href="{{ route('download_check', ['id' => $recommended->id]) }}">
+                                    <a href="{{ route('download_check', ['id' => $slorecommendeds->id]) }}">
                                         <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
                                         </button>
                                     </a>
                                     @else
-                                    <a href="{{ route('download', ['id' => $recommended->id]) }}">
+                                    <a href="{{ route('download', ['id' => $slorecommendeds->id]) }}">
                                         <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
@@ -120,27 +120,27 @@
                                     @endif
 
                                     <span data-toggle="tooltip" data-original-title="{{ __('torrent.bookmark') }}"
-                                        custom="newTorrentBookmark{{ $recommended->id }}" id="newTorrentBookmark{{ $recommended->id }}"
-                                        torrent="{{ $recommended->id }}"
-                                        state="{{ $bookmarks->where('torrent_id', $recommended->id)->count() ? 1 : 0 }}"
+                                        custom="newTorrentBookmark{{ $slorecommendeds->id }}" id="newTorrentBookmark{{ $slorecommendeds->id }}"
+                                        torrent="{{ $slorecommendeds->id }}"
+                                        state="{{ $bookmarks->where('torrent_id', $slorecommendeds->id)->count() ? 1 : 0 }}"
                                         class="torrentBookmark">
                                     </span>
 
                                     <br>
-								    @if ($recommended->anon === 0)
+								    @if ($slorecommendeds->anon === 0)
 								    <span class="torrent-listings-uploader">
-									    <i class="{{ config('other.font-awesome') }} {{ $recommended->user->group->icon }}"></i>
-                                        <a href="{{ route('users.show', ['username' => $recommended->user->username]) }}">
-                                            {{ $recommended->user->username }}
+									    <i class="{{ config('other.font-awesome') }} {{ $slorecommendeds->user->group->icon }}"></i>
+                                        <a href="{{ route('users.show', ['username' => $slorecommendeds->user->username]) }}">
+                                            {{ $slorecommendeds->user->username }}
                                         </a>
                                     </span> |
 								    @else
 								    <span class="torrent-listings-uploader">
 									    <i class="{{ config('other.font-awesome') }} fa-ghost"></i>
 									    {{ strtoupper(trans('common.anonymous')) }}
-								    @if ($user->group->is_modo || $recommended->user->username === $user->username)
-									    <a href="{{ route('users.show', ['username' => $recommended->user->username]) }}">
-                                            ({{ $recommended->user->username }})
+								    @if ($user->group->is_modo || $slorecommendeds->user->username === $user->username)
+									    <a href="{{ route('users.show', ['username' => $slorecommendeds->user->username]) }}">
+                                            ({{ $slorecommendeds->user->username }})
                                         </a>
 								    @endif
                                     </span> |
@@ -148,15 +148,15 @@
 
                                     <span class="text-pink">
                                         <i class="{{ config('other.font-awesome') }} fa-heart" data-toggle="tooltip"></i>
-                                            {{ $recommended->thanks_count }}
+                                            {{ $slorecommendeds->thanks_count }}
                                     </span> |
 
                                     <span class="text-green">
                                         <i class="{{ config('other.font-awesome') }} fa-comment" data-toggle="tooltip"></i>
-                                            {{ $recommended->comments_count }}
+                                            {{ $slorecommendeds->comments_count }}
                                     </span>
 
-                                    @if ($recommended->internal == 1)
+                                    @if ($slorecommendeds->internal == 1)
                                     | <span class='text-bold'>
                                         <i class='{{ config('other.font-awesome') }} fa-magic' data-toggle='tooltip'
                                             title='' data-original-title='SLOshare' style="color: #baaf92;"></i>
@@ -164,7 +164,7 @@
                                     </span>
                                     @endif
 
-                                    @if ($recommended->stream == 1)
+                                    @if ($slorecommendeds->stream == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-play text-red'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('
@@ -172,14 +172,14 @@
                                     </span>
                                     @endif
 
-                                    @if ($recommended->featured == 0)
-                                        @if ($recommended->doubleup == 1)
+                                    @if ($slorecommendeds->featured == 0)
+                                        @if ($slorecommendeds->doubleup == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-gem text-green'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.double-upload') }}'></i>
                                         </span>
                                         @endif
-                                        @if ($recommended->free == 1 || config('other.freeleech') == 1)
+                                        @if ($slorecommendeds->free == 1 || config('other.freeleech') == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-star text-gold'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.freeleech') }}'></i>
@@ -194,14 +194,14 @@
                                         </span>
                                     @endif
 
-                                    @if ($freeleech_tokens->where('torrent_id', $recommended->id)->count())
+                                    @if ($freeleech_tokens->where('torrent_id', $slorecommendeds->id)->count())
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-star text-bold'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.freeleech-token') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($recommended->featured == 1)
+                                    @if ($slorecommendeds->featured == 1)
                                         | <span class='text-bold'
                                             style='background-image:url(/img/sparkels.gif);'>
                                             <i class='{{ config('other.font-awesome') }} fa-certificate text-pink'
@@ -230,35 +230,35 @@
                                         </span>
                                     @endif
 
-                                    @if ($recommended->leechers >= 5)
+                                    @if ($slorecommendeds->leechers >= 5)
                                         <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-fire text-orange'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('common.hot') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($recommended->sticky == 1)
+                                    @if ($slorecommendeds->sticky == 1)
                                         <span class='text-bold'>
                                             | <i class='{{ config('other.font-awesome') }} fa-thumbtack text-black'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.sticky') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($user->updated_at->getTimestamp() < $recommended->created_at->getTimestamp())
+                                    @if ($user->updated_at->getTimestamp() < $slorecommendeds->created_at->getTimestamp())
                                         |  <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-magic text-green'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('common.new') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($recommended->highspeed == 1)
+                                    @if ($slorecommendeds->highspeed == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-tachometer text-red'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('common.high-speeds') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($recommended->sd == 1)
+                                    @if ($slorecommendeds->sd == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-ticket text-orange'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.sd-content') }}'></i>
@@ -267,16 +267,16 @@
                                     </td>
 
                                     <td>
-                                        <span>{{ $recommended->getSize() }}</span>
+                                        <span>{{ $slorecommendeds->getSize() }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $recommended->seeders }}</span>
+                                        <span>{{ $slorecommendeds->seeders }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $recommended->leechers }}</span>
+                                        <span>{{ $slorecommendeds->leechers }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $recommended->times_completed }}</span>
+                                        <span>{{ $slorecommendeds->times_completed }}</span>
                                     </td>
                                 </tr>
                             @endforeach
@@ -299,70 +299,60 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($slorecommended as $recommended)
+                            @foreach ($videorecommended as $videorecommendeds)
 
                             @php $meta = null; @endphp
-                            @if ($recommended->category->tv_meta)
-                                @if ($recommended->tmdb || $recommended->tmdb != 0)
-                            	    @php $meta = App\Models\Tv::where('id', '=', $recommended->tmdb)->first(); @endphp
+                            @if ($videorecommendeds->category->tv_meta)
+                                @if ($videorecommendeds->tmdb || $videorecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\Tv::where('id', '=', $videorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
-                            @if ($recommended->category->movie_meta)
-                                @if ($recommended->tmdb || $recommended->tmdb != 0)
-                            	    @php $meta = App\Models\Movie::where('id', '=', $recommended->tmdb)->first(); @endphp
-                                @endif
-                            @endif
-                            @if ($recommended->category->game_meta)
-                                @if ($recommended->igdb || $recommended->igdb != 0)
-                            	    @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($recommended->igdb); @endphp
+                            @if ($videorecommendeds->category->movie_meta)
+                                @if ($videorecommendeds->tmdb || $videorecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\Movie::where('id', '=', $videorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
 
                             <tr>
 							    <td class="torrent-listings-poster" style="width: 1%;">
 									<div class="torrent-poster pull-left">
-										@if ($recommended->tmdb != 0 && $recommended->tmdb != null)
+										@if ($videorecommendeds->tmdb != 0 && $videorecommendeds->tmdb != null)
 											<img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/poster/poster-torrent-1.png' }}"
 											     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 										@else
-										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$recommended->id.'.jpg'))
-                                                <img src="{{ url('files/img/torrent-cover_' . $recommended->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$videorecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $videorecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@endif
-										@endif
-
-										@if ($recommended->category->game_meta)
-											<img style="height: 80px;" src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/poster-torrent-1.png' }}"
-											     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 										@endif
                                 </td>
                                 <td style="width: 1%;">
                                     <div class="text-center" style="padding-top: 5px;">
                                         <span class="label label-success" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.type') }}">
-                                            {{ $recommended->type->name }}
+                                            {{ $videorecommendeds->type->name }}
                                          </span>
                                     </div>
                                     <div class="text-center" style="padding-top: 8px;">
                                         <span class="label label-success" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.resolution') }}">
-                                            {{ $recommended->resolution->name ?? 'No Res' }}
+                                            {{ $videorecommendeds->resolution->name ?? 'No Res' }}
                                         </span>
                                     </div>
                                 </td>
 
                                 <td>
-                                    <a class="text-bold" href="{{ route('torrent', ['id' => $recommended->id]) }}">
-                                        {{ $recommended->name }}
+                                    <a class="text-bold" href="{{ route('torrent', ['id' => $videorecommendeds->id]) }}">
+                                        {{ $videorecommendeds->name }}
                                     </a>
                                     @if (config('torrent.download_check_page') == 1)
-                                    <a href="{{ route('download_check', ['id' => $recommended->id]) }}">
+                                    <a href="{{ route('download_check', ['id' => $videorecommendeds->id]) }}">
                                         <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
                                         </button>
                                     </a>
                                     @else
-                                    <a href="{{ route('download', ['id' => $recommended->id]) }}">
+                                    <a href="{{ route('download', ['id' => $videorecommendeds->id]) }}">
                                         <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
@@ -371,27 +361,27 @@
                                     @endif
 
                                     <span data-toggle="tooltip" data-original-title="{{ __('torrent.bookmark') }}"
-                                        custom="newTorrentBookmark{{ $recommended->id }}" id="newTorrentBookmark{{ $recommended->id }}"
-                                        torrent="{{ $recommended->id }}"
-                                        state="{{ $bookmarks->where('torrent_id', $recommended->id)->count() ? 1 : 0 }}"
+                                        custom="newTorrentBookmark{{ $videorecommendeds->id }}" id="newTorrentBookmark{{ $videorecommendeds->id }}"
+                                        torrent="{{ $videorecommendeds->id }}"
+                                        state="{{ $bookmarks->where('torrent_id', $videorecommendeds->id)->count() ? 1 : 0 }}"
                                         class="torrentBookmark">
                                     </span>
 
                                     <br>
-								    @if ($recommended->anon === 0)
+								    @if ($videorecommendeds->anon === 0)
 								    <span class="torrent-listings-uploader">
-									    <i class="{{ config('other.font-awesome') }} {{ $recommended->user->group->icon }}"></i>
-                                        <a href="{{ route('users.show', ['username' => $recommended->user->username]) }}">
-                                            {{ $recommended->user->username }}
+									    <i class="{{ config('other.font-awesome') }} {{ $videorecommendeds->user->group->icon }}"></i>
+                                        <a href="{{ route('users.show', ['username' => $videorecommendeds->user->username]) }}">
+                                            {{ $videorecommendeds->user->username }}
                                         </a>
                                     </span> |
 								    @else
 								    <span class="torrent-listings-uploader">
 									    <i class="{{ config('other.font-awesome') }} fa-ghost"></i>
 									    {{ strtoupper(trans('common.anonymous')) }}
-								    @if ($user->group->is_modo || $recommended->user->username === $user->username)
-									    <a href="{{ route('users.show', ['username' => $recommended->user->username]) }}">
-                                            ({{ $recommended->user->username }})
+								    @if ($user->group->is_modo || $videorecommendeds->user->username === $user->username)
+									    <a href="{{ route('users.show', ['username' => $videorecommendeds->user->username]) }}">
+                                            ({{ $videorecommendeds->user->username }})
                                         </a>
 								    @endif
                                     </span> |
@@ -399,15 +389,15 @@
 
                                     <span class="text-pink">
                                         <i class="{{ config('other.font-awesome') }} fa-heart" data-toggle="tooltip"></i>
-                                            {{ $recommended->thanks_count }}
+                                            {{ $videorecommendeds->thanks_count }}
                                     </span> |
 
                                     <span class="text-green">
                                         <i class="{{ config('other.font-awesome') }} fa-comment" data-toggle="tooltip"></i>
-                                            {{ $recommended->comments_count }}
+                                            {{ $videorecommendeds->comments_count }}
                                     </span>
 
-                                    @if ($recommended->internal == 1)
+                                    @if ($videorecommendeds->internal == 1)
                                     | <span class='text-bold'>
                                         <i class='{{ config('other.font-awesome') }} fa-magic' data-toggle='tooltip'
                                             title='' data-original-title='SLOshare' style="color: #baaf92;"></i>
@@ -415,7 +405,7 @@
                                     </span>
                                     @endif
 
-                                    @if ($recommended->stream == 1)
+                                    @if ($videorecommendeds->stream == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-play text-red'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('
@@ -423,14 +413,14 @@
                                     </span>
                                     @endif
 
-                                    @if ($recommended->featured == 0)
-                                        @if ($recommended->doubleup == 1)
+                                    @if ($videorecommendeds->featured == 0)
+                                        @if ($videorecommendeds->doubleup == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-gem text-green'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.double-upload') }}'></i>
                                         </span>
                                         @endif
-                                        @if ($recommended->free == 1 || config('other.freeleech') == 1)
+                                        @if ($videorecommendeds->free == 1 || config('other.freeleech') == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-star text-gold'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.freeleech') }}'></i>
@@ -445,14 +435,14 @@
                                         </span>
                                     @endif
 
-                                    @if ($freeleech_tokens->where('torrent_id', $recommended->id)->count())
+                                    @if ($freeleech_tokens->where('torrent_id', $videorecommendeds->id)->count())
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-star text-bold'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.freeleech-token') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($recommended->featured == 1)
+                                    @if ($videorecommendeds->featured == 1)
                                         | <span class='text-bold'
                                             style='background-image:url(/img/sparkels.gif);'>
                                             <i class='{{ config('other.font-awesome') }} fa-certificate text-pink'
@@ -481,35 +471,35 @@
                                         </span>
                                     @endif
 
-                                    @if ($recommended->leechers >= 5)
+                                    @if ($videorecommendeds->leechers >= 5)
                                         <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-fire text-orange'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('common.hot') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($recommended->sticky == 1)
+                                    @if ($videorecommendeds->sticky == 1)
                                         <span class='text-bold'>
                                             | <i class='{{ config('other.font-awesome') }} fa-thumbtack text-black'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.sticky') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($user->updated_at->getTimestamp() < $recommended->created_at->getTimestamp())
+                                    @if ($user->updated_at->getTimestamp() < $videorecommendeds->created_at->getTimestamp())
                                         |  <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-magic text-green'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('common.new') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($recommended->highspeed == 1)
+                                    @if ($videorecommendeds->highspeed == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-tachometer text-red'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('common.high-speeds') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($recommended->sd == 1)
+                                    @if ($videorecommendeds->sd == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-ticket text-orange'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.sd-content') }}'></i>
@@ -518,16 +508,16 @@
                                     </td>
 
                                     <td>
-                                        <span>{{ $recommended->getSize() }}</span>
+                                        <span>{{ $videorecommendeds->getSize() }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $recommended->seeders }}</span>
+                                        <span>{{ $videorecommendeds->seeders }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $recommended->leechers }}</span>
+                                        <span>{{ $videorecommendeds->leechers }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $recommended->times_completed }}</span>
+                                        <span>{{ $videorecommendeds->times_completed }}</span>
                                     </td>
                                 </tr>
                             @endforeach
