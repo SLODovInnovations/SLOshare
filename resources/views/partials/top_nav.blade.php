@@ -1,11 +1,11 @@
-<nav class="top-nav" x-data="{ expanded: false }">
+<nav class="top-nav" x-data="{ expanded: false }" x-bind:class="expanded && 'mobile'">
     <div class="top-nav__left">
         <a class="top-nav__branding" href="{{ route('home.index') }}">
             <span class="top-nav__site-logo"><img src="{{ url('/logo-footer.png') }}" style="height: 40px;"></span>
         </a>
         <livewire:quick-search-dropdown />
     </div>
-    <ul class="top-nav__main-menus">
+    <ul class="top-nav__main-menus" x-bind:class="expanded && 'mobile'">
         <li class="top-nav--left__list-item top-nav__dropdown">
             <a class="top-nav__dropdown--nontouch"  href="{{ route('torrents') }}">
                 <div class="top-nav--left__container">
@@ -207,8 +207,8 @@
             </ul>
         </li>
     </ul>
-    <div class="top-nav__right">
-        <ul class="top-nav__stats">
+    <div class="top-nav__right" x-bind:class="expanded && 'mobile'">
+        <ul class="top-nav__stats" x-bind:class="expanded && 'mobile'">
             <li class="top-nav__stats-up" title="{{ __('common.upload') }}">
                 <i class="{{ config('other.font-awesome') }} fa-arrow-up text-green"></i>
                 {{ auth()->user()->getUploaded() }}
@@ -222,7 +222,7 @@
                 {{ auth()->user()->getRatioString() }}
             </li>
         </ul>
-        <ul class="top-nav__ratio-bar">
+        <ul class="top-nav__ratio-bar" x-bind:class="expanded && 'mobile'">
             <li class="ratio-bar__uploaded" title="{{ __('common.upload') }}">
                 <a href="{{ route('user_uploads', ['username' => auth()->user()->username]) }}">
                     <i class="{{ config('other.font-awesome') }} fa-arrow-up"></i>
@@ -282,7 +282,7 @@
                 @endif
             </span>
         </a>
-        <ul class="top-nav__icon-bar">
+        <ul class="top-nav__icon-bar" x-bind:class="expanded && 'mobile'">
             @if (auth()->user()->group->is_modo)
                 <li>
                     <a class="top-nav--right__icon-link" href="{{ route('staff.dashboard.index') }}" title="{{ __('staff.staff-dashboard') }}">

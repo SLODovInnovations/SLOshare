@@ -15,6 +15,7 @@
 /* ********** Default Theme Style************* */
 body {
     position: relative;
+    min-width: 1185px;
 }
 
 #hoeapp-wrapper a:focus {
@@ -1018,7 +1019,7 @@ body[theme-bg='bg9'] {
 
 // Prevents left sidenav from expanding on every page load in compact mode
 
-@media screen and (max-width: 767px) {
+/*@media screen and (max-width: 767px) {
     #hoeapp-wrapper:not([hoe-device-type='phone']) #hoeapp-container {
         visibility: hidden;
     }
@@ -1034,4 +1035,4 @@ body[theme-bg='bg9'] {
     body[hoe-navigation-type='vertical-compact'] #hoeapp-container:not(.hoe-minimized-lpanel) {
         visibility: hidden;
     }
-}
+}*/
