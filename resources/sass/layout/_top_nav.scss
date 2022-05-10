@@ -22,17 +22,17 @@
     gap: 36px;
     padding: 12px 12px 12px 6px;
 
-/*    @media screen and (max-width: 1280px) {
+    @media screen and (max-width: 1280px) {
         gap: 16px;
-    }*/
+    }
 
-/*    @media screen and (max-width: 767px) {
+    @media screen and (max-width: 767px) {
         & .top-nav__site-logo,
         & .top-nav__branding i {
             font-size: 22px;
             line-height: 22px;
         }
-    }*/
+    }
 }
 
 .top-nav__right {
@@ -46,9 +46,9 @@
         flex-direction: column;
     }
 
-    /*@media screen and (max-width: 1280px) {
+    @media screen and (max-width: 1280px) {
         gap: 16px;
-    }*/
+    }
 }
 
 /* Branding
@@ -108,18 +108,18 @@
         }
     }
 
-    /*@media screen and (max-width: 1280px) {
+    @media screen and (max-width: 1280px) {
         margin: auto 16px;
-    }*/
+    }
 
-    /*@media screen and (max-width: 767px) {
+    @media screen and (max-width: 767px) {
         display: none;
         margin: auto 0;
 
         &.mobile {
             display: flex;
         }
-    }*/
+    }
 }
 
 /* Dropdowns
@@ -137,17 +137,17 @@
     text-decoration: none;
 }
 
-/*@media (hover: none) {
+@media (hover: none) {
     .top-nav__dropdown--nontouch {
         display: none !important;
     }
-}*/
+}
 
-/*@media (hover: hover) {
+@media (hover: hover) {
     .top-nav__dropdown--touch {
         display: none !important;
     }
-}*/
+}
 
 .top-nav__dropdown > a > .top-nav--left__container {
     display: grid;
@@ -279,25 +279,25 @@
     padding: 0;
     margin: 0;
 
-    /*@media screen and (min-width: 767px) and (max-width: 1280px) {
+    @media screen and (min-width: 767px) and (max-width: 1280px) {
         display: none;
-    }*/
+    }
 
-    /*@media screen and (min-width: 1800px) {
+    @media screen and (min-width: 1800px) {
         grid-template-rows: auto;
         grid-template-columns: repeat(8, auto);
         font-size: 12px;
         margin: 0 40px;
-    }*/
+    }
 
-    /*@media screen and (max-width: 767px) {
+    @media screen and (max-width: 767px) {
         font-size: 12px;
         display: none;
 
         &.mobile {
             display: grid;
         }
-    }*/
+    }
 }
 
 .top-nav__ratio-bar,
@@ -350,9 +350,9 @@
     margin: 0;
     padding: 0;
 
-    /*@media screen and (max-width: 767px) {
+    @media screen and (max-width: 767px) {
         display: none;
-    }*/
+    }
 
     &.mobile {
         display: flex;
@@ -436,9 +436,9 @@
     margin: 0;
     padding: 0;
 
-    /*@media screen and (min-width: 1023px) and (max-width: 1280px) {
+    @media screen and (min-width: 1023px) and (max-width: 1280px) {
         display: grid;
-    }*/
+    }
 }
 
 .top-nav__stats-up {
@@ -466,13 +466,13 @@
     border: none;
     color: #999;
 
-    /*@media screen and (min-width: 767px) {
+    @media screen and (min-width: 767px) {
         display: none;
 
         &.mobile {
             display: inline-block;
         }
-    }*/
+    }
 }
 
 /* Username and rank
@@ -493,7 +493,7 @@
         white-space: nowrap;
     }
 
-    /*@media screen and (min-width: 1900px) {
+    @media screen and (min-width: 1900px) {
         display: flex;
-    }*/
+    }
 }

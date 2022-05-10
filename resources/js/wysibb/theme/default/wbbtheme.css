@@ -805,7 +805,7 @@ html {
 }
 
 /* DESKTOP AND TAVBLETS STYLES */
-/*@media (min-width: 992px) {
+@media (min-width: 992px) {
     /* TOOLBAR */
     .wysibb .wysibb-text {
         padding: 5px;
@@ -900,4 +900,4 @@ html {
         height: 5px;
         cursor: ns-resize;
     }
-}*/
+}

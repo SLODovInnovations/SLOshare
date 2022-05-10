@@ -1018,20 +1018,20 @@ body[theme-bg='bg9'] {
 
 // Prevents left sidenav from expanding on every page load in compact mode
 
-/*@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) {
     #hoeapp-wrapper:not([hoe-device-type='phone']) #hoeapp-container {
         visibility: hidden;
     }
-}*/
+}
 
-/*@media only screen and (min-width: 768px) and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
     #hoeapp-wrapper:not([hoe-device-type='tablet']) #hoeapp-container {
         visibility: hidden;
     }
-}*/
+}
 
-/*@media only screen and (min-width: 1025px) {
+@media only screen and (min-width: 1025px) {
     body[hoe-navigation-type='vertical-compact'] #hoeapp-container:not(.hoe-minimized-lpanel) {
         visibility: hidden;
     }
-}*/
+}

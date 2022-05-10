@@ -3669,9 +3669,9 @@ button.close {
     .modal-sm {
         width: 300px;
     }
-}*/
+}
 
-/*@media (min-width: 992px) {
+@media (min-width: 992px) {
     .modal-lg {
         width: 900px;
     }
@@ -4021,9 +4021,9 @@ blockquote small {
     .visible-xs-inline-block {
         display: inline-block !important;
     }
-}*/
+}
 
-/*@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 991px) {
     .visible-sm {
         display: block !important;
     }
@@ -4046,9 +4046,9 @@ blockquote small {
     .visible-sm-inline-block {
         display: inline-block !important;
     }
-}*/
+}
 
-/*@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1199px) {
     .visible-md {
         display: block !important;
     }
@@ -4071,9 +4071,9 @@ blockquote small {
     .visible-md-inline-block {
         display: inline-block !important;
     }
-}*/
+}
 
-/*@media (min-width: 1200px) {
+@media (min-width: 1200px) {
     .visible-lg {
         display: block !important;
     }
@@ -4099,21 +4099,21 @@ blockquote small {
     .hidden-lg {
         display: none !important;
     }
-}*/
+}
 
-/*@media (max-width: 767px) {
+@media (max-width: 767px) {
     .hidden-xs {
         display: none !important;
     }
-}*/
+}
 
-/*@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 991px) {
     .hidden-sm {
         display: none !important;
     }
-}*/
+}
 
-/*@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1199px) {
     .hidden-md {
         display: none !important;
     }
@@ -4163,14 +4163,14 @@ blockquote small {
     display: none !important;
 }
 
-/*@media print {
+@media print {
     .visible-print-inline-block {
         display: inline-block !important;
     }
     .hidden-print {
         display: none !important;
     }
-}*/
+}
 
 .h1,
 h1 {
@@ -4587,32 +4587,32 @@ pre {
     white-space: -o-pre-wrap;
 }
 
-/*@media (min-width: 768px) {
+@media (min-width: 768px) {
     .container {
         width: auto;
     }
-}*/
+}
 
-/*@media (min-width: 992px) {
+@media (min-width: 992px) {
     .container {
         width: auto;
     }
-}*/
+}
 
-/*@media (min-width: 1200px) {
+@media (min-width: 1200px) {
     .container {
         width: auto;
     }
-}*/
+}
 
-/*@media (min-width: 1330px) {
+@media (min-width: 1330px) {
     .container {
         width: 1300px;
     }
     .fatten-me {
         max-width: 1300px !important;
     }
-}*/
+}
 
 .btn-group-xxs > .btn,
 .btn-xxs {
@@ -4929,11 +4929,11 @@ a.torrent-filename:visited {
     opacity: 1;
 }
 
-/*@media (max-width: 480px) {
+@media (max-width: 480px) {
     .overlay-container .text p:not(.mobile-visible) {
         display: none;
     }
-}*/
+}
 
 .checked,
 .checked i,
@@ -4941,7 +4941,7 @@ a.torrent-filename:visited {
     display: inline-block;
 }
 
-/*@media (min-width: 480px) and (max-width: 1199px) {
+@media (min-width: 480px) and (max-width: 1199px) {
     .overlay-container:not(.overlay-visible) .overlay-top ~ .overlay-bottom {
         padding-top: 5px;
         padding-bottom: 5px;
@@ -4952,7 +4952,7 @@ a.torrent-filename:visited {
     .owl-item .overlay-container:hover .overlay-bottom {
         height: 29%;
     }
-}*/
+}
 
 .movie-list {
     margin-bottom: 20px;
@@ -5376,15 +5376,15 @@ a.sort {
     margin: 10px !important;
 }
 
-/*@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1280px) {
     .fatten-me {
         margin-left: 20px !important;
     }
     .table-me {
         margin-left: 0 !important;
     }
-}*/
-/*@media screen and (max-width: 768px) {
+}
+@media screen and (max-width: 768px) {
     .fatten-me {
         margin-left: 0 !important;
         margin-bottom: 5px !important;
@@ -5410,7 +5410,7 @@ a.sort {
     .table-me {
         margin-left: 0 !important;
     }
-}*/
+}
 
 .space-top {
     padding-top: 20px;
@@ -5957,11 +5957,11 @@ a.view-torrent:visited {
     width: 1%;
 }
 
-/*@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .members-table tbody tr td.user-image {
         display: none;
     }
-}*/
+}
 
 .members-table tbody tr td.user-image img {
     width: 100%;
@@ -5980,11 +5980,11 @@ a.view-torrent:visited {
     white-space: nowrap;
 }
 
-/*@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .members-table tbody tr td.action-links {
         width: 25%;
     }
-}*/
+}
 
 .members-table tbody tr td.action-links a {
     display: block;
@@ -6017,12 +6017,12 @@ a.view-torrent:visited {
     margin-top: 5px;
 }
 
-/*@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .members-table-actions {
         text-align: center;
         margin-bottom: 20px;
     }
-}*/
+}
 
 .members-table-actions .selected-items,
 .members-table-actions .selected-actions {
@@ -6052,11 +6052,11 @@ a.view-torrent:visited {
     vertical-align: middle;
 }
 
-/*@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .member-form-add-header .user-img {
         margin-top: 20px;
     }
-}*/
+}
 
 .member-form-add-header .user-name {
     padding-left: 20px;
@@ -6117,25 +6117,25 @@ a.view-torrent:visited {
     padding-left: 0;
 }
 
-/*@media only screen and (min-width: 768px) and (max-width: 1199px) {
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
     .movie-heading-box {
         padding-top: 253px;
     }
-}*/
+}
 
-/*@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (min-width: 768px) and (max-width: 991px) {
     .movie-heading-box {
         padding-top: 257px;
     }
-}*/
+}
 
-/*@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
     .movie-heading-box {
         padding-top: 0;
         padding-left: 15px;
         padding-bottom: 15px;
     }
-}*/
+}
 
 body.movie .movie-heading,
 body.movie .movie-poster,
@@ -6359,30 +6359,30 @@ body.tvshow .movie-poster {
     line-height: 1;
 }
 
-/*@media only screen and (min-width: 768px) and (max-width: 1199px) {
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
     .movie-actions-stat {
         padding-left: 20px;
     }
-}*/
+}
 
-/*@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
     .movie-actions-stat {
         padding-left: 0;
         text-align: center;
     }
-}*/
+}
 
 .movie-actions-stat div {
     margin-top: 5px;
 }
 
-/*@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
     .movie-actions-stat div {
         display: inline-block;
         margin-right: 30px;
         margin-top: 10px;
     }
-}*/
+}
 
 .movie-actions-stat div span {
     color: #aaa;
@@ -6553,8 +6553,8 @@ body.tvshow .movie-poster {
     padding-right: 15px;
 }
 
-/*@media only screen and (max-width: 767px) {
-}*/
+@media only screen and (max-width: 767px) {
+}
 
 .episode-actions .button-watch.has .more,
 .movie-actions-additional .button-watch.has .more,
@@ -6608,11 +6608,11 @@ body.tvshow .movie-poster {
     margin-top: 20px;
 }
 
-/*@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
     .episode-screenshot-widget {
         margin: -10px -15px 0;
     }
-}*/
+}
 
 .episode-screenshot-widget img {
     width: 100%;
@@ -7038,7 +7038,7 @@ select.icon-right i {
     text-align: right;
 }
 
-/*@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1440px) {
     .width-25 {
         width: 100%;
         display: block;
@@ -7047,7 +7047,7 @@ select.icon-right i {
         width: 100%;
         display: block;
     }
-}*/
+}
 
 .promotional {
     padding: 35px 0 65px;
@@ -7326,16 +7326,16 @@ select.icon-right i {
     color: #5677fc;
 }
 
-/*@media screen and (max-width: 1110px) {
+@media screen and (max-width: 1110px) {
     .main-info-holder {
         width: 100%;
         position: absolute;
         left: 0;
         bottom: 0;
     }
-}*/
+}
 
-/*@media screen and (min-width: 1110px) {
+@media screen and (min-width: 1110px) {
     .main-info-holder {
         width: 1110px;
         position: absolute;
@@ -7343,7 +7343,7 @@ select.icon-right i {
         margin-left: -500px;
         bottom: 0;
     }
-}*/
+}
 
 .main-info-holder .main-info {
     display: block;
@@ -7354,11 +7354,11 @@ select.icon-right i {
     text-align: left;
 }
 
-/*@media screen and (max-width: 1110px) {
+@media screen and (max-width: 1110px) {
     .main-info-holder .main-info {
         padding-left: 255px;
     }
-}*/
+}
 
 .main-info-holder .main-info * {
     color: #fff;
@@ -8644,11 +8644,11 @@ section.tall_categories div.category.fanres {
     background-size: cover;
 }
 
-/*@media only screen and (min-resolution: 2dppx) {
+@media only screen and (min-resolution: 2dppx) {
     section.tall_categories div.category.fanres {
         background-image: url('/img/fanres.png');
     }
-}*/
+}
 
 section.tall_categories div.category.tv {
     background-image: url('/img/tv.png');
@@ -8657,11 +8657,11 @@ section.tall_categories div.category.tv {
     background-size: cover;
 }
 
-/*@media only screen and (min-resolution: 2dppx) {
+@media only screen and (min-resolution: 2dppx) {
     section.tall_categories div.category.tv {
         background-image: url('/img/tv.png');
     }
-}*/
+}
 
 section.tall_categories div.category.trailer {
     background-image: url('/img/trailer.png');
@@ -8670,11 +8670,11 @@ section.tall_categories div.category.trailer {
     background-size: cover;
 }
 
-/*@media only screen and (min-resolution: 2dppx) {
+@media only screen and (min-resolution: 2dppx) {
     section.tall_categories div.category.trailer {
         background-image: url('/img/trailer.png');
     }
-}*/
+}
 
 section.tall_categories div.category.movie {
     background-image: url('/img/movie.png');
@@ -8683,11 +8683,11 @@ section.tall_categories div.category.movie {
     background-size: cover;
 }
 
-/*@media only screen and (min-resolution: 2dppx) {
+@media only screen and (min-resolution: 2dppx) {
     section.tall_categories div.category.movie {
         background-image: url('/img/movie.png');
     }
-}*/
+}
 
 section.tall_categories div.category.anime {
     background-image: url('/img/anime.png');
@@ -8696,11 +8696,11 @@ section.tall_categories div.category.anime {
     background-size: cover;
 }
 
-/*@media only screen and (min-resolution: 2dppx) {
+@media only screen and (min-resolution: 2dppx) {
     section.tall_categories div.category.anime {
         background-image: url('/img/anime.png');
     }
-}*/
+}
 
 section.tall_categories div.category p {
     width: 100%;
@@ -8859,11 +8859,11 @@ section.tall_categories div.category.anime span {
     height: auto !important;
 }
 
-/*@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
     .card.is-torrent {
         margin-top: 30px;
     }
-}*/
+}
 
 .card.is-torrent .card_head {
     align-items: center;
@@ -9158,7 +9158,7 @@ img.joypixels {
     }
 }
 
-/*@media only screen and (max-width: 613px) {
+@media only screen and (max-width: 613px) {
     .form-torrent-search .form-group {
         margin-left: 0;
         width: 100%;
@@ -9285,7 +9285,7 @@ img.joypixels {
     #facetedSearch table thead tr th {
         float: left;
     }
-}*/
+}
 
 // Recomendations
 
