@@ -527,7 +527,7 @@ input[type='email']::placeholder {
 .text-center {
     text-align: center;
 }
-@media (max-width: 240px) {
+/*@media (max-width: 240px) {
     #rc-imageselect,
     .g-recaptcha {
         transform: scale(0.77);
@@ -535,8 +535,8 @@ input[type='email']::placeholder {
         transform-origin: 0 0;
         -webkit-transform-origin: 0 0;
     }
-}
-@media (min-width: 241px) and (max-width: 480px) {
+}*/
+/*@media (min-width: 241px) and (max-width: 480px) {
     #rc-imageselect,
     .g-recaptcha {
         transform: scale(0.83);
@@ -544,7 +544,7 @@ input[type='email']::placeholder {
         transform-origin: 0 0;
         -webkit-transform-origin: 0 0;
     }
-}
+}*/
 
 // Google ReCaptcha
 .g-recaptcha {
