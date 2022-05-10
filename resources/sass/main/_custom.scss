@@ -225,7 +225,7 @@ th {
     padding: 0;
 }
 
-/*@media print {
+@media print {
     blockquote,
     img,
     pre,
@@ -295,7 +295,7 @@ th {
     .table-bordered th {
         border: 1px solid #ddd !important;
     }
-}*/
+}
 
 .btn,
 .btn-danger.active,
@@ -331,7 +331,7 @@ label {
 
 .img-thumbnail,
 body {
-    background-color: #ffffff;
+    background-color: #cfcfcf;
 }
 
 *,
@@ -518,11 +518,11 @@ label {
     font-weight: 700;
 }
 
-/*@media (min-width: 768px) {
+@media (min-width: 768px) {
     .lead {
         font-size: 25.5px;
     }
-}*/
+}
 
 .small,
 small {
@@ -747,7 +747,7 @@ dd {
     clear: both;
 }
 
-/*@media (min-width: 990px) {
+@media (min-width: 990px) {
     .dl-horizontal dt {
         float: left;
         width: 160px;
@@ -760,7 +760,7 @@ dd {
     .dl-horizontal dd {
         margin-left: 180px;
     }
-}*/
+}
 
 abbr[data-original-title],
 abbr[title] {
@@ -783,6 +783,10 @@ blockquote small {
 
 pre {
     color: #333;
+}
+
+legend {
+    color: #fff;
 }
 
 blockquote .small:before,
@@ -1096,7 +1100,7 @@ table th[class*='col-'] {
     min-height: 0.01%;
 }
 
-/*@media screen and (max-width: 767px) {
+@media screen and (max-width: 767px) {
     .table-responsive {
         width: 100%;
         margin-bottom: 18px;
@@ -1140,11 +1144,26 @@ table th[class*='col-'] {
     .table-responsive > .table-bordered > tfoot > tr:last-child > th {
         border-bottom: 0;
     }
-}*/
+}
+
+fieldset,
+legend {
+    padding: 0;
+    border: 0;
+}
 
 fieldset {
     margin: 0;
     min-width: 0;
+}
+
+legend {
+    display: block;
+    width: 100%;
+    margin-bottom: 24px;
+    font-size: 25.5px;
+    line-height: inherit;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 label {
@@ -1253,7 +1272,7 @@ textarea.form-control {
     height: auto;
 }
 
-/*@media screen and (-webkit-min-device-pixel-ratio: 0) {
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
     input[type='date'].form-control,
     input[type='time'].form-control,
     input[type='datetime-local'].form-control,
@@ -1304,7 +1323,7 @@ textarea.form-control {
     input[type='month'].input-lg {
         line-height: 64px;
     }
-}*/
+}
 
 .form-group {
     margin-bottom: 15px;
@@ -1572,7 +1591,7 @@ textarea.input-lg {
     margin-bottom: 10px;
 }
 
-/*@media (min-width: 768px) {
+@media (min-width: 768px) {
     .form-inline .form-control-static,
     .form-inline .form-group {
         display: inline-block;
@@ -1620,7 +1639,7 @@ textarea.input-lg {
         margin-bottom: 0;
         padding-top: 9px;
     }
-}*/
+}
 
 .form-horizontal .checkbox,
 .form-horizontal .checkbox-inline,
@@ -1647,7 +1666,7 @@ textarea.input-lg {
     display: table;
 }
 
-/*@media (min-width: 768px) {
+@media (min-width: 768px) {
     .form-horizontal .form-group-lg .control-label {
         padding-top: 17px;
         font-size: 22px;
@@ -1656,7 +1675,7 @@ textarea.input-lg {
         padding-top: 9px;
         font-size: 14px;
     }
-}*/
+}
 
 .dropdown-menu .divider {
     height: 1px;
@@ -1749,7 +1768,7 @@ textarea.input-lg {
     margin-bottom: 2px;
 }
 
-/*@media (min-width: 990px) {
+@media (min-width: 990px) {
     .navbar-right .dropdown-menu {
         right: 0;
         left: auto;
@@ -1758,7 +1777,7 @@ textarea.input-lg {
         left: 0;
         right: auto;
     }
-}*/
+}
 
 .btn-group,
 .btn-group-vertical {
@@ -2434,7 +2453,7 @@ a.badge:hover {
     max-width: 100%;
 }
 
-/*@media screen and (min-width: 768px) {
+@media screen and (min-width: 768px) {
     .jumbotron {
         padding-top: 48px;
         padding-bottom: 48px;
@@ -2448,7 +2467,7 @@ a.badge:hover {
     .jumbotron h1 {
         font-size: 77px;
     }
-}*/
+}
 
 .thumbnail {
     padding: 4px;
@@ -3658,7 +3677,7 @@ button.close {
     overflow: scroll;
 }
 
-/*@media (min-width: 768px) {
+@media (min-width: 768px) {
     .modal-dialog {
         width: 600px;
         margin: 0 auto;
@@ -3675,7 +3694,7 @@ button.close {
     .modal-lg {
         width: 900px;
     }
-}*/
+}
 
 .tooltip {
     position: absolute;
@@ -3998,7 +4017,7 @@ blockquote small {
     position: fixed;
 }
 
-/*@media (max-width: 767px) {
+@media (max-width: 767px) {
     .visible-xs {
         display: block !important;
     }
@@ -4117,13 +4136,13 @@ blockquote small {
     .hidden-md {
         display: none !important;
     }
-}*/
+}
 
 .visible-print {
     display: none !important;
 }
 
-/*@media print {
+@media print {
     .visible-print {
         display: block !important;
     }
@@ -4137,27 +4156,27 @@ blockquote small {
     th.visible-print {
         display: table-cell !important;
     }
-}*/
+}
 
 .visible-print-block {
     display: none !important;
 }
 
-/*@media print {
+@media print {
     .visible-print-block {
         display: block !important;
     }
-}*/
+}
 
 .visible-print-inline {
     display: none !important;
 }
 
-/*@media print {
+@media print {
     .visible-print-inline {
         display: inline !important;
     }
-}*/
+}
 
 .visible-print-inline-block {
     display: none !important;
@@ -4393,7 +4412,7 @@ blockquote small {
 
 .jumbotron,
 .panel {
-    background-color: #ffffff;
+    background-color: #efefef;
 }
 
 .progress-sm {
@@ -5618,15 +5637,6 @@ a.sort {
 .container.box {
     display: block;
     margin-bottom: 50px;
-    padding: 15px;
-    border-radius: 15px;
-    border: 1px solid #fff;
-    background-color: #efefef;
-    box-shadow: 0 5px 5px rgba(93, 93, 93, 0.83);
-}
-
-.container.torrent {
-    display: block;
     padding: 15px;
     border-radius: 15px;
     border: 1px solid #fff;
@@ -7463,7 +7473,6 @@ select.icon-right i {
     hyphens: auto;
 }
 
-.container.torrent,
 .container.box {
     margin-right: auto;
     margin-left: auto;
@@ -8999,7 +9008,7 @@ section.tall_categories div.category.anime span {
     background-size: cover;
     color: #ffffff;
     width: 100%;
-    /*text-align: center;*/
+    text-align: center;
     min-height: 450px;
     margin-top: 25px;
 }
