@@ -1,4 +1,4 @@
-<nav class="top-nav" x-data="{ expanded: false }" x-bind:class="expanded && 'mobile'">
+<nav class="top-nav">
     <div class="top-nav__left">
         <a class="top-nav__branding" href="{{ route('home.index') }}">
             <span class="top-nav__site-logo"><img src="{{ url('/logo-footer.png') }}" style="height: 40px;"></span>
