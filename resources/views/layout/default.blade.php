@@ -6,7 +6,7 @@
 <body>
 <header>
     @include('partials.top_nav')
-    <!--@include('partials.breadcrumb')-->
+    @include('partials.breadcrumb')
     @include('cookie-consent::index')
     @include('partials.alerts')
     @if (Session::has('achievement'))

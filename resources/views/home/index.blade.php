@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="content-wrapper">
         @include('blocks.ad_head')
         @include('blocks.news')
         @include('blocks.recommended')

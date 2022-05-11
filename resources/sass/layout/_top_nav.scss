@@ -10,6 +10,7 @@
     top: 0;
     left: 0;
     z-index: 10;
+    border-bottom: 10px solid var(--color-magenta) !important;
 
     &.mobile {
         grid-template: 'left toggle' 'menus menus' 'right right' auto / 1fr auto;
