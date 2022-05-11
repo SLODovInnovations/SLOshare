@@ -278,6 +278,7 @@
                                         @else
                                             <img src="/img/SLOshare/meta_no_image_holder.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                         @endif
+                                    @endif
                                 </div>
 
                         <td class="torrent-listings-format" style="width: 5%; text-align: center;">

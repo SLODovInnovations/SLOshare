@@ -58,7 +58,7 @@
 		        - Profil naj ne vsebuje vsebine usmerjene proti portalu. Če vam kaj ni všeč odkorakajte.<br>
 		        - Info naj ne vsebuje direktnih groženj in kletvic namenjenih dotičnim osebam (pravnim ali fizičnim).<br>
 		        - Prepovedano je ustvarjati dvojni profil. Vsak dvojni profil bo izbrisan.<br>
-		        - Prepovedana uporaba besede "<span style="color: #FF0000; font-weight: bold;">sloshare</span>" v imenu profila. Vsi profili, ki bodo vsebovali "<span style="color: #FF0000; font-weight: bold;">sloshare</span>" bodo <span style="color: #FF0000; font-weight: bold;">BLOKIRANA</span>.<br>
+		        - Prepovedana uporaba besede "<span style="color: #FF0000; font-weight: bold;">sloshare</span>" v imenu profila. Vsi profili, ki bodo vsebovali "<span style="color: #FF0000; font-weight: bold;">sloshare</span>" bodo <span style="color: #FF0000; font-weight: bold;">BLOKIRANI</span>.<br>
 		        <br>
 		        <span style="font-weight: bold;">
 		            <span style="color: #1877f2;">
