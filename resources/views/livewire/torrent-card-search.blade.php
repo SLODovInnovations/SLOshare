@@ -153,9 +153,6 @@
             <a href="{{ route('torrents') }}" class="btn btn-primary">
                 <i class="{{ config('other.font-awesome') }} fa-list"></i> {{ __('torrent.list') }}
             </a>
-            <a href="{{ route('cards') }}" class="btn btn-primary">
-                <i class="{{ config('other.font-awesome') }} fa-image"></i> {{ __('torrent.cards') }}
-            </a>
 @if (auth()->user()->group->is_admin)
             <a href="#" class="btn btn-primary">
                 <i class="{{ config('other.font-awesome') }} fa-clone"></i> {{ __('torrent.groupings') }}
@@ -219,10 +216,16 @@
                     </div>
                     <div class="card_body">
                         <div class="body_poster">
-                            @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
-                                <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : 'https://via.placeholder.com/200x300' }}"
+                             @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
+                                <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
                                      class="show-poster" alt="{{ __('torrent.poster') }}">
-                            @endif
+                             @else
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                @else
+                                    <img src="/img/SLOshare/movie_no_image_holder_200x300.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                @endif
+                             @endif
 
                             @if ($torrent->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                                 <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{ $meta->cover['image_id'] }}.jpg"
