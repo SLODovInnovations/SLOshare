@@ -242,6 +242,9 @@
                                        required>
                             </label>
                         </div>
+                    @else
+                        <input type="hidden" name="igdb" value="0">
+                    @endif
 
                     <div class="form-group">
                         <label for="name">{{ __('torrent.keywords') }} (<i>{{ __('torrent.keywords-example') }}</i>)</label>
