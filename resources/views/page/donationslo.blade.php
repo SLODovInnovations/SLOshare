@@ -31,8 +31,8 @@
                         <div class="text-center black-item">
                             <h4>5€</h4>
                             <form action="https://www.paypal.com/donate" method="post" target="_top">
-                            <input type="hidden" name="hosted_button_id" value="9VSKWN3QQJCQU" />
-                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                            <input type="hidden" name="hosted_button_id" value="9VSKWN3QQJCQU" target="_black" />
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Donacija 5€" />
                             </form>
                             <i class="fal fa-euro-sign text-green black-icon"></i>
                         </div>
@@ -42,8 +42,8 @@
                         <div class="text-center black-item">
                             <h4>10€</h4>
                             <form action="https://www.paypal.com/donate" method="post" target="_top">
-                            <input type="hidden" name="hosted_button_id" value="RP96883WS92ZJ" />
-                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                            <input type="hidden" name="hosted_button_id" value="RP96883WS92ZJ" target="_black" />
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Donacija 10€" />
                             </form>
                             <i class="fal fa-euro-sign text-green black-icon"></i>
                         </div>
@@ -53,8 +53,8 @@
                         <div class="text-center black-item">
                             <h4>15€</h4>
                             <form action="https://www.paypal.com/donate" method="post" target="_top">
-                            <input type="hidden" name="hosted_button_id" value="VTBES36PDSMWJ" />
-                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                            <input type="hidden" name="hosted_button_id" value="VTBES36PDSMWJ" target="_black" />
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Donacija 15€" />
                             </form>
                             <i class="fal fa-euro-sign text-green black-icon"></i>
                         </div>
@@ -64,8 +64,8 @@
                         <div class="text-center black-item">
                             <h4>20€</h4>
                             <form action="https://www.paypal.com/donate" method="post" target="_top">
-                            <input type="hidden" name="hosted_button_id" value="9ZSEYX2SXHQPC" />
-                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+                            <input type="hidden" name="hosted_button_id" value="9ZSEYX2SXHQPC" target="_black" />
+                            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Donacija 20€" />
                             </form>
                             <i class="fal fa-euro-sign text-green black-icon"></i>
                         </div>
