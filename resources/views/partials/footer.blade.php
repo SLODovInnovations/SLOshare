@@ -78,6 +78,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <span class="text-bold">
+                        <div class="text-center" style="color: #ff0000;font-size: 30px;">
+                        ⚠️ Vsebina katera je na SLOshare.eu se ne sme prenalagati na druge trackerje ⚠️
+                        </div>
                         <p>Poganja ga SLOshare.eu  ©2021 - {{ date('Y') }}</p>
                         <p>Čas nalaganja {{ round(microtime(true) - LARAVEL_START, 3) }} s </p>
                     </span>

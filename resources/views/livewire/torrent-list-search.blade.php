@@ -267,7 +267,7 @@
 
                                     @if ($torrent->category->music_meta)
                                         @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
-                                            <img src="{{ 'files/img/torrent-cover_' . $torrent->id . '.jpg' : '/img/SLOshare/games_no_image_poster.jpg'  }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                            <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                         @endif
                                     @endif
                                 </div>

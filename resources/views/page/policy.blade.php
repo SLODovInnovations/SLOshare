@@ -36,7 +36,7 @@
 		        </font>
 		        <br>
 		        <br>
-		        - VSE torrente je potrebno sejati vsaj 72ur oziroma 3dni.<br>
+		        - VSE torrente je potrebno sejati vsaj <span style="color: #FF0000; font-weight: bold;">72ur</span> oziroma <span style="color: #FF0000; font-weight: bold;">3dni</span>.<br>
 		        - Preden začnete uporabljati stran si preberite &nbsp;<a href="https://www.sloshare.eu/pages/faq" target="_blank">FAQ</a>, pravilnik, pravni pouk in ostale vodiče.<br>
 		        - Upoštevajte želje in opozorila osebje SLOshare.eu.<br>
 		        - Za storjen hit&amp;run (potegni&amp;pobegni) prejmete opozorilo ali blokado prenosa (za večkratno početje dobite ban).<br>
@@ -58,6 +58,7 @@
 		        - Profil naj ne vsebuje vsebine usmerjene proti portalu. Če vam kaj ni všeč odkorakajte.<br>
 		        - Info naj ne vsebuje direktnih groženj in kletvic namenjenih dotičnim osebam (pravnim ali fizičnim).<br>
 		        - Prepovedano je ustvarjati dvojni profil. Vsak dvojni profil bo izbrisan.<br>
+		        - Prepovedana uporaba besede "<span style="color: #FF0000; font-weight: bold;">sloshare</span>" v imenu profila.<br>
 		        <br>
 		        <span style="font-weight: bold;">
 		            <span style="color: #1877f2;">
@@ -137,6 +138,11 @@
 		        <br>
 		        Za vse dodatne informacije in pomoč si oglejte&nbsp;<a href="https://www.sloshare.eu/pages/faq" target="_blank">https://www.sloshare.eu/pages/faq</a><br>
 		        Ob ne upoštevanju zgoraj naštetih pravil, vam bomo prepovedali vstop na stran za določen ali nedoločen čas!
+		        <br>
+		        <br>
+		        <span class="text-center" style="color: #ff0000;font-size: 30px;">
+                ⚠️ Vsebina katera je na SLOshare.eu se ne sme prenalagati na druge trackerje ⚠️
+                </span>
              </article>
          </div>
      </div>
