@@ -1,9 +1,9 @@
 @component('mail::message')
     # {{ __('email.disabled-header') }}!
-    Vaš račun je označen kot neaktiven in vnešen v skupino invalidov. Da bi obdržali svoj račun, morate
-    se rijaviti znotraj {{ config('pruning.soft_delete') }} prejema te E-Mail. Če tega ne storite, bo vaš račun
+    Vaš račun je označen kot neaktiven in je uvrščen v skupino onemogočenih. Da bi obdržali svoj račun, se morate
+    prijaviti znotraj {{ config('pruning.soft_delete') }} prejema te E-Mail. Če tega ne storite, bo vaš račun
     trajno onemogočen {{ config('other.title') }}! Da bi se temu izognili v prihodnosti, se prijavite vsaj enkrat
-    {{ config('pruning.last_login') }} dnevno.
+    vsakih {{ config('pruning.last_login') }} dni.
     <p>Lep pozdrav,</p>
     <p>Ekipa {{ config('other.title') }}</p>
     <br>
