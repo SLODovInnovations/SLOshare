@@ -331,7 +331,7 @@ label {
 
 .img-thumbnail,
 body {
-    background-color: #cfcfcf;
+    background-color: #ffffff;
 }
 
 *,
@@ -785,10 +785,6 @@ pre {
     color: #333;
 }
 
-legend {
-    color: #fff;
-}
-
 blockquote .small:before,
 blockquote footer:before,
 blockquote small:before {
@@ -1146,24 +1142,9 @@ table th[class*='col-'] {
     }
 }
 
-fieldset,
-legend {
-    padding: 0;
-    border: 0;
-}
-
 fieldset {
     margin: 0;
     min-width: 0;
-}
-
-legend {
-    display: block;
-    width: 100%;
-    margin-bottom: 24px;
-    font-size: 25.5px;
-    line-height: inherit;
-    border-bottom: 1px solid #e5e5e5;
 }
 
 label {
@@ -4412,7 +4393,7 @@ blockquote small {
 
 .jumbotron,
 .panel {
-    background-color: #efefef;
+    background-color: #ffffff;
 }
 
 .progress-sm {
@@ -5637,6 +5618,15 @@ a.sort {
 .container.box {
     display: block;
     margin-bottom: 50px;
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid #fff;
+    background-color: #efefef;
+    box-shadow: 0 5px 5px rgba(93, 93, 93, 0.83);
+}
+
+.container.torrent {
+    display: block;
     padding: 15px;
     border-radius: 15px;
     border: 1px solid #fff;
@@ -7473,6 +7463,7 @@ select.icon-right i {
     hyphens: auto;
 }
 
+.container.torrent,
 .container.box {
     margin-right: auto;
     margin-left: auto;
@@ -9008,7 +8999,7 @@ section.tall_categories div.category.anime span {
     background-size: cover;
     color: #ffffff;
     width: 100%;
-    text-align: center;
+    /*text-align: center;*/
     min-height: 450px;
     margin-top: 25px;
 }

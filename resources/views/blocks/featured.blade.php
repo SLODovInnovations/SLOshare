@@ -32,7 +32,6 @@
                 </div>
                 @php $meta = null @endphp
                 @foreach ($featured as $key => $feature)
-                    @if ($feature->torrent->isApproved())
                     @if ($feature->torrent->category->tv_meta)
                         @if ($feature->torrent->tmdb || $feature->torrent->tmdb != 0)
                             @php $meta = App\Models\Tv::with('genres', 'networks', 'seasons')->where('id', '=', $feature->torrent->tmdb)->first() @endphp
@@ -133,7 +132,6 @@
                             </div>
                         </div>
                     </div>
-                    @endif
                 @endforeach
                 <a class="left carousel-control">
                     <span class="glyphicon glyphicon-chevron-left"></span>
