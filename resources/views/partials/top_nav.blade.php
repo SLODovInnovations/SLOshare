@@ -1,4 +1,5 @@
 <nav class="top-nav">
+<div class="container-fluid">
     <div class="top-nav__left">
         <a class="top-nav__branding" href="{{ route('home.index') }}">
             <span class="top-nav__site-logo"><img src="{{ url('/logo-footer.png') }}" style="height: 40px;"></span>
@@ -428,4 +429,5 @@
         x-bind:class="expanded ? 'fa-times mobile' : 'fa-bars'"
         x-on:click="expanded = !expanded"
     ></button>
+</div>
 </nav>
