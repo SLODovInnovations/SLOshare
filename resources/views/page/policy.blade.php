@@ -36,13 +36,13 @@
 		        </font>
 		        <br>
 		        <br>
-		        - VSE torrente je potrebno sejati vsaj <span style="color: #FF0000; font-weight: bold;">72ur</span> oziroma <span style="color: #FF0000; font-weight: bold;">3dni</span>.<br>
+		        - VSE torrente je potrebno sejati vsaj <span style="color: #FF0000; font-weight: bold;">72 ur</span> oziroma <span style="color: #FF0000; font-weight: bold;">3 dni</span>.<br>
 		        - Preden začnete uporabljati stran si preberite &nbsp;<a href="https://www.sloshare.eu/pages/faq" target="_blank">FAQ</a>, pravilnik, pravni pouk in ostale vodiče.<br>
 		        - Upoštevajte želje in opozorila osebje SLOshare.eu.<br>
 		        - Za storjen hit&amp;run (potegni&amp;pobegni) prejmete opozorilo ali blokado prenosa (za večkratno početje dobite ban).<br>
 		        - Ne opozarjajte drugih uporabnikov naj si popravijo razmerje.<br>
 		        - Ne opozarjajte nalagalcev o napakah pri torrentu, za to bo poskrbelo ekipa SLOshare.eu (za večje napake pišite osebje SLOshare.eu).<br>
-		        - Nalaganje torrentov z zakonsko sporno vsebino (otroska pornografija, zoofilija) je striktno <span style="color: #FF0000;">PREPOVEDANO</span>!<br>
+		        - Nalaganje torrentov z zakonsko sporno vsebino (otroska pornografija, zoofilija) je striktno <span style="color: #FF0000; font-weight: bold;">PREPOVEDANO</span>!<br>
 		        - Če mislite da ste po krivem kaznovani obvestite osebje SLOshare.eu.<br>
 		        - Uporabnik lahko dobi opozorilo za določen ali nedoločen čas. Večkratno kršenje pravil sledi odstranitev iz trackerja.<br>
 		        - Vsak uporabnik je dolžan pravila redno prebirati, saj se pogosto spreminjajo.<br>
@@ -75,7 +75,7 @@
 		        - Ne pišite dvojnih komentarjev (uporabite opcijo UREDI).<br>
 		        - Ne ponavljajte komentarja pred vašim.<br>
 		        - Kakršnokoli oglaševanje je prepovedano razen. Če se o tem posvetujete z osebjem SLOshare.eu.<br>
-		        - Ne pišite z VELIKIMI črkami, ker se to razume kot <span style="color: #FF0000;">KRIČANJE</span>.<br>
+		        - Ne pišite z VELIKIMI črkami, ker se to razume kot <span style="color: #FF0000; font-weight: bold;">KRIČANJE</span>.<br>
 		        - Preden odprete novo temo se prepričajte o tem ali je že odprta.<br>
 		        - Ne pišite komentarjov kateri se ne tičejo teme oziroma ne spadajo v temo.<br>
 		        <br>
@@ -98,8 +98,8 @@
 		        </span>
 		        <br>
 		        <br>
-		        - Ko torrent prenesete, ga sejete VSAJ 72ur oziroma 3dni ali pa več. Potek za vsak TORRENT lahko spremljate na svojem profilu.<br>
-		        - Za storjen hit&amp;run (potegni &amp; pobegni) prejmete opozorilo/prepoved prenosa (za večkratno početje dobite BLOKADO računa).<br>
+		        - Ko torrent prenesete, ga sejete VSAJ <span style="color: #FF0000; font-weight: bold;">72 ur</span> oziroma <span style="color: #FF0000; font-weight: bold;">3 dni</span> ali pa več. Potek za vsak TORRENT lahko spremljate na svojem profilu.<br>
+		        - Za storjen hit&amp;run (potegni &amp; pobegni) prejmete opozorilo/prepoved prenosa (za večkratno početje dobite <span style="color: #FF0000; font-weight: bold;">BLOKADO</span> računa).<br>
 		        - Uporabniki s slabim razmerjem bodo s časom odstranjeni.<br>
 		        - Prepovedano je delno prenašati TORRENT. V primeru ugotovljene kršitve se bo dodelila kazen.<br>
 		        <span style="font-weight: bold;">V primeru da že imate prepoved prenosa, lahko ponovno prenesete TORRENTE, pri katerih je bila ugotovoljena kršitev in jih odsejete do razmerja 1.0.</span><br>
@@ -140,7 +140,7 @@
 		        Ob ne upoštevanju zgoraj naštetih pravil, vam bomo prepovedali vstop na stran za določen ali nedoločen čas!
 		        <br>
 		        <br>
-		        <span class="text-center" style="color: #ff0000;font-size: 30px;">
+		        <span style="color: #ff0000; font-size: 30px; text-align: cente;">
                 ⚠️ Vsebina katera je na SLOshare.eu se ne sme prenalagati na druge trackerje ⚠️
                 </span>
              </article>
