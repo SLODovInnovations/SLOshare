@@ -150,9 +150,6 @@
 			<a href="{{ route('categories.index') }}" class="btn btn-primary">
 			    <i class="{{ config('other.font-awesome') }} fa-file"></i> {{ __('torrent.categories') }}
 		    </a>
-            <a href="{{ route('torrents') }}" class="btn btn-primary">
-                <i class="{{ config('other.font-awesome') }} fa-list"></i> {{ __('torrent.list') }}
-            </a>
             <a href="{{ route('cards') }}" class="btn btn-primary">
                 <i class="{{ config('other.font-awesome') }} fa-image"></i> {{ __('torrent.cards') }}
             </a>
@@ -266,6 +263,12 @@
                                         <img style="height: 80px;"
                                              src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_poster.jpg' }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+
+                                    @if ($torrent->category->music_meta)
+                                        @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                            <img src="{{ 'files/img/torrent-cover_' . $torrent->id . '.jpg' : '/img/SLOshare/games_no_image_poster.jpg'  }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                        @endif
                                     @endif
                                 </div>
 

@@ -66,5 +66,5 @@ return [
 
     'chat-link-name' => 'Discord',
     'chat-link-icon' => 'fab fa-discord',
-    'chat-link-url'  => 'https://discord.com/channels/916002048011534447/973964582857105418',
+    'chat-link-url'  => '',
 ];
