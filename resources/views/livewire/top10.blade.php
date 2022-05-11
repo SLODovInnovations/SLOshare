@@ -31,18 +31,18 @@
                     <td class="torrent-listings-poster" style="width: 1%;">
                          <div class="torrent-poster pull-left">
                                 @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
-                                    <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : 'https://via.placeholder.com/90x135' }}"
+                                    <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
                                          class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
 
                                 @if ($torrent->category->game_meta)
                                     <img style="height: 80px;"
-                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : 'https://via.placeholder.com/90x135' }}"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
                                          class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
 
                                 @if ($torrent->category->music_meta)
-                                    <img src="https://via.placeholder.com/90x135" class="torrent-poster-img-small"
+                                    <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
                                          alt="{{ __('torrent.poster') }}">
                                 @endif
 
@@ -51,7 +51,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="https://via.placeholder.com/400x600"
+                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -287,7 +287,7 @@
                     <td class="torrent-listings-download" style="vertical-align: middle;">
                         @if (config('torrent.download_check_page') == 1)
                             <a href="{{ route('download_check', ['id' => $torrent->id]) }}">
-                                <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
+                                <button class="btn btn-primary" type="button" data-toggle="tooltip"
                                         data-original-title="{{ __('common.download') }}">
                                     <i class="{{ config('other.font-awesome') }} fa-download"></i>
                                 </button>
