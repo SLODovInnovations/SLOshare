@@ -5,13 +5,13 @@
         @include('blocks.ad_head')
         @include('blocks.news')
         @include('blocks.recommended')
-        @include('blocks.ad_right')
+        @include('blocks.stats')
+        @include('blocks.poll')
 
         <!--@include('blocks.featured')-->
 
         @include('blocks.video')
-        @include('blocks.poll')
-        @include('blocks.stats')
+        @include('blocks.ad_right')
 
         @include('blocks.torrents_torrents')
         @include('blocks.ad_center')
