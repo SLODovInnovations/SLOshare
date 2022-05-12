@@ -237,11 +237,11 @@
                             @endif
 
                             @if ($torrent->category->music_meta)
-                                <img src="https://via.placeholder.com/200x300" class="show-poster"
-                                     data-name='<i style="color: #a5a5a5;">N/A</i>'
-                                     data-image='<img src="https://via.placeholder.com/200x300"
-									     alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
-                                     class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                @else
+                                    <img src="/img/SLOshare/music_no_image_holder_200x300.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                @endif
                             @endif
 
                             @if ($torrent->category->no_meta)
@@ -249,10 +249,7 @@
                                     <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                          class="show-poster" alt="{{ __('torrent.poster') }}">
                                 @else
-                                    <img src="https://via.placeholder.com/200x300" class="show-poster"
-                                         data-name='<i style="color: #a5a5a5;">N/A</i>'
-                                         data-image='<img src="https://via.placeholder.com/200x300" alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
-                                         class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
+                                    <img src="/img/SLOshare/meta_no_image_holder_400x600.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
                             @endif
                         </div>
