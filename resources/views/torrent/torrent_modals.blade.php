@@ -322,14 +322,14 @@
                     @csrf
                     <input id="torrent_id" name="torrent_id" type="hidden" value="{{ $torrent->id }}">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('common.close') }}">
                             <span aria-hidden="true">×</span>
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">Add Torrent To Playlist</h4>
+                        <h4 class="modal-title" id="myModalLabel">Dodaj torrent na seznam predvajanja</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="playlist_id">Your Playlists</label>
+                            <label for="playlist_id">Seznami predvajanja</label>
                             <label>
                                 <select name="playlist_id" class="form-control">
                                     @foreach ($playlists as $playlist)
@@ -339,11 +339,11 @@
                             </label>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-success" type="submit" value="Save">
+                            <input class="btn btn-success" type="submit" value="{{ __('common.save') }}">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">Close</button>
+                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">{{ __('common.close') }}</button>
                     </div>
                 </form>
             </div>
@@ -358,33 +358,33 @@
                 <form action="{{ route('torrent_doubleup', ['id' => $torrent->id]) }}" method="POST">
                 @csrf
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Zapri">
                             <span aria-hidden="true">×</span>
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">Double Upload Buff</h4>
+                        <h4 class="modal-title" id="myModalLabel">Dvojni Upload Buff</h4>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="du_until">Buff Time</label>
                             <label>
                                 <select name="du_until" class="form-control">
-                                    <option value="">No Limit</option>
-                                    <option value="1">1 Day</option>
-                                    <option value="2">2 Days</option>
-                                    <option value="3">3 Days</option>
-                                    <option value="4">4 Days</option>
-                                    <option value="5">5 Days</option>
-                                    <option value="6">6 Days</option>
-                                    <option value="7">7 Days</option>
+                                    <option value="">Brez Limita</option>
+                                    <option value="1">1 Dan</option>
+                                    <option value="2">2 Dni</option>
+                                    <option value="3">3 Dni</option>
+                                    <option value="4">4 Dni</option>
+                                    <option value="5">5 Dni</option>
+                                    <option value="6">6 Dni</option>
+                                    <option value="7">7 Dni</option>
                                 </select>
                             </label>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-success" type="submit" value="Save">
+                            <input class="btn btn-success" type="submit" value="{{ __('common.save') }}">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">Close</button>
+                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">{{ __('common.close') }}</button>
                     </div>
                 </form>
             </div>
@@ -399,7 +399,7 @@
                 <form action="{{ route('torrent_fl', ['id' => $torrent->id]) }}" method="POST">
                     @csrf
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="{{ __('common.close') }}">
                             <span aria-hidden="true">×</span>
                         </button>
                         <h4 class="modal-title" id="myModalLabel">Freeleech Buff</h4>
@@ -424,23 +424,23 @@
                             <label for="fl_until">Buff Time</label>
                             <label>
                                 <select name="fl_until" class="form-control">
-                                    <option value="">No Limit</option>
-                                    <option value="1">1 Day</option>
-                                    <option value="2">2 Days</option>
-                                    <option value="3">3 Days</option>
-                                    <option value="4">4 Days</option>
-                                    <option value="5">5 Days</option>
-                                    <option value="6">6 Days</option>
-                                    <option value="7">7 Days</option>
+                                    <option value="">Brez Limita</option>
+                                    <option value="1">1 Dan</option>
+                                    <option value="2">2 Dni</option>
+                                    <option value="3">3 Dni</option>
+                                    <option value="4">4 Dni</option>
+                                    <option value="5">5 Dni</option>
+                                    <option value="6">6 Dni</option>
+                                    <option value="7">7 Dni</option>
                                 </select>
                             </label>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-success" type="submit" value="Save">
+                            <input class="btn btn-success" type="submit" value="{{ __('common.save') }}">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">Close</button>
+                        <button class="btn btn-sm btn-primary" type="button" data-dismiss="modal">{{ __('common.close') }}</button>
                     </div>
                 </form>
             </div>
