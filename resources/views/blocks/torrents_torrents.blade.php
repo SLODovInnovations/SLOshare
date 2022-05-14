@@ -89,10 +89,9 @@
             @else
             style="background-image: url('/img/poster/poster-torrent-1.png');">
             @endif
-            @endif
 
 			@if ($newslo->category->music_meta)
-           @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
                 style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
 			@endif
             @endif
