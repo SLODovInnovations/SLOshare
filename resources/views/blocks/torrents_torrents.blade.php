@@ -54,7 +54,7 @@
                 @php $meta = null @endphp
                 @if ($newslo->category->tv_meta)
                     @if ($newslo->tmdb || $newslo->tmdb != 0)
-                        @php $meta = cache()->remember('tvmeta:'.$torrent->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Tv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                        @php $meta = cache()->remember('tvmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Tv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
                     @endif
                 @endif
                 @if ($newslo->category->movie_meta)
@@ -74,7 +74,7 @@
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
             @endif
 
-            @if ($torrent->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
+            @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                 style="background-image: url('https://images.igdb.com/igdb/image/upload/t_cover_big/{{ $meta->cover['image_id'] }}.jpg')
                     class="show-poster"
                     data-name='<i style="color: #a5a5a5;">{{ $meta->name ?? 'N/A' }}</i>'

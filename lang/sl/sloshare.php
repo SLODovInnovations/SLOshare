@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'home-newsloshare-title'    => 'NOVO PRI SLOshare.eu',
+    'home-newsloshare-title'    => 'NOVO NA SLOshare.eu',
     'home-movie-title'          => 'FILMI',
     'home-xxx-title'            => 'XXX (Nad 18 let)',
     'home-game-title'           => 'IGRE',
