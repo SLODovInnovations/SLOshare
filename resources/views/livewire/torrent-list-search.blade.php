@@ -251,13 +251,13 @@
 
                                 <div class="torrent-poster pull-left">
                                     @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
-                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/mediahub_no_image_90x135.jpg' }}"
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
                                              class="torrent-poster-img-small" loading="lazy" alt="{{ __('torrent.poster') }}">
                                     @endif
 
                                     @if ($torrent->category->game_meta)
                                         <img style="height: 80px;"
-                                             src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_poster.jpg' }}"
+                                             src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
 
@@ -265,7 +265,7 @@
                                         @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
                                             <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                         @else
-                                            <img src="/img/SLOshare/music_no_image_poster.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                            <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                         @endif
                                     @endif
 
@@ -273,7 +273,7 @@
                                         @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
                                             <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                         @else
-                                            <img src="/img/SLOshare/meta_no_image_holder.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                            <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                         @endif
                                     @endif
                                 </div>

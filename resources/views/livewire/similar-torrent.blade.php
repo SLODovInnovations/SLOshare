@@ -365,14 +365,14 @@
           window.addEventListener('swal:confirm', event => {
             const { value: text } = Swal.fire({
               input: 'textarea',
-              inputLabel: 'Delete Reason',
-              inputPlaceholder: 'Type your reason here...',
+              inputLabel: 'Izbriši razlog',
+              inputPlaceholder: 'Vnesite svoj razlog tukaj...',
               inputAttributes: {
-                'aria-label': 'Type your reason here'
+                'aria-label': 'Vnesite svoj razlog tukaj'
               },
               inputValidator: (value) => {
                 if (!value) {
-                  return 'You need to write something!'
+                  return 'Potrebno je napisati razlog!'
                 }
               },
               title: event.detail.message,
@@ -381,7 +381,7 @@
               showCancelButton: true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes, delete it!',
+              confirmButtonText: 'Da, izbriši!',
             }).then((result) => {
               if (result.isConfirmed) {
               @this.set('reason', result.value);

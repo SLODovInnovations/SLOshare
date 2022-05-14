@@ -3,7 +3,7 @@
         <thead>
         <tr>
             <th class="text-center dark-th" colspan="12">
-                <span style="font-size: 16px;">Top 10 (Day)</span>
+                <span style="font-size: 16px;">Top 10 (Dan)</span>
             </th>
         </tr>
         </thead>
@@ -374,7 +374,7 @@
         <thead>
         <tr>
             <th class="text-center dark-th" colspan="12">
-                <span style="font-size: 16px;">Top 10 (Week)</span>
+                <span style="font-size: 16px;">Top 10 (Teden)</span>
             </th>
         </tr>
         </thead>
@@ -747,7 +747,7 @@
         <thead>
         <tr>
             <th class="text-center dark-th" colspan="12">
-                <span style="font-size: 16px;">Top 10 (Month)</span>
+                <span style="font-size: 16px;">Top 10 (Mesec)</span>
             </th>
         </tr>
         </thead>
@@ -1120,7 +1120,7 @@
         <thead>
         <tr>
             <th class="text-center dark-th" colspan="12">
-                <span style="font-size: 16px;">Top 10 (Year)</span>
+                <span style="font-size: 16px;">Top 10 (Leto)</span>
             </th>
         </tr>
         </thead>
@@ -1493,7 +1493,7 @@
         <thead>
         <tr>
             <th class="text-center dark-th" colspan="12">
-                <span style="font-size: 16px;">Top 10 (All Time)</span>
+                <span style="font-size: 16px;">Top 10 (Vez Čas)</span>
             </th>
         </tr>
         </thead>

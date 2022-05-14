@@ -50,39 +50,46 @@
 
 
 
-@foreach ($newsloshare as $newslo)
-
-					@php $meta = null; @endphp
-					@if ($newslo->category->tv_meta)
-						@if ($newslo->tmdb || $newslo->tmdb != 0)
-							@php $meta = App\Models\Tv::where('id', '=', $newslo->tmdb)->first(); @endphp
-						@endif
-					@endif
-					@if ($newslo->category->movie_meta)
-						@if ($newslo->tmdb || $newslo->tmdb != 0)
-							@php $meta = App\Models\Movie::where('id', '=', $newslo->tmdb)->first(); @endphp
-						@endif
-					@endif
-					@if ($newslo->category->game_meta)
-						@if ($newslo->igdb || $newslo->igdb != 0)
-							@php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($newslo->igdb); @endphp
-						@endif
-					@endif
+            @foreach($newsloshare as $newslo)
+                @php $meta = null @endphp
+                @if ($newslo->category->tv_meta)
+                    @if ($newslo->tmdb || $newslo->tmdb != 0)
+                        @php $meta = cache()->remember('tvmeta:'.$torrent->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Tv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @endif
+                @endif
+                @if ($newslo->category->movie_meta)
+                    @if ($newslo->tmdb || $newslo->tmdb != 0)
+                        @php $meta = cache()->remember('moviemeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Movie::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @endif
+                @endif
+                @if ($newslo->category->game_meta)
+                    @if ($newslo->igdb || $newslo->igdb != 0)
+                        @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($newslo->igdb) @endphp
+                    @endif
+                @endif
 
 			<div class="gallery-item"
-			@if ($newslo->tmdb != 0 && $newslo->tmdb != null)
-			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/poster-torrent-1.png'; }}');">
-            @else
+			@if ($newslo->category->movie_meta || $newslo->category->tv_meta)
+			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+			        class="show-poster" alt="{{ __('torrent.poster') }}>
+            @endif
+
+            @if ($torrent->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
+                style="background-image: url('https://images.igdb.com/igdb/image/upload/t_cover_big/{{ $meta->cover['image_id'] }}.jpg')
+                    class="show-poster"
+                    data-name='<i style="color: #a5a5a5;">{{ $meta->name ?? 'N/A' }}</i>'
+                    data-image='<img src="https://images.igdb.com/igdb/image/upload/t_original/{{ $meta->cover['image_id'] }}.jpg"
+					    alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
+                    class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
+            @endif
+
+
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
             style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
             @else
             style="background-image: url('/img/poster/poster-torrent-1.png');">
             @endif
             @endif
-
-			@if ($newslo->category->game_meta)
-			    style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/poster-torrent-1.png' }}');">
-			@endif
 
 			@if ($newslo->category->music_meta)
            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))

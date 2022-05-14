@@ -216,16 +216,10 @@
                     </div>
                     <div class="card_body">
                         <div class="body_poster">
-                             @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
-                                <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
+                            @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
+                                <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/mediahub_no_image_200x300.jpg' }}"
                                      class="show-poster" alt="{{ __('torrent.poster') }}">
-                             @else
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
-                                    <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                                @else
-                                    <img src="/img/SLOshare/movie_no_image_holder_200x300.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                                @endif
-                             @endif
+                            @endif
 
                             @if ($torrent->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                                 <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{ $meta->cover['image_id'] }}.jpg"
@@ -237,11 +231,11 @@
                             @endif
 
                             @if ($torrent->category->music_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
-                                    <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                                @else
-                                    <img src="/img/SLOshare/music_no_image_holder_200x300.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                                @endif
+                                <img src="/img/SLOshare/music_no_image_holder_200x300.jpg" class="show-poster"
+                                     data-name='<i style="color: #a5a5a5;">N/A</i>'
+                                     data-image='<img src="/img/SLOshare/music_no_image_holder_200x300.jpg"
+									     alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
+                                     class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
                             @endif
 
                             @if ($torrent->category->no_meta)
@@ -249,7 +243,7 @@
                                     <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                          class="show-poster" alt="{{ __('torrent.poster') }}">
                                 @else
-                                    <img src="/img/SLOshare/meta_no_image_holder_400x600.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    <img src="/img/SLOshare/meta_no_image_holder_200x300.jpg" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
                             @endif
                         </div>
