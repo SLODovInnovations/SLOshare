@@ -12,7 +12,6 @@ return new class() extends Migration {
     {
         Schema::table('categories', function (Blueprint $table) {
             $table->boolean('cartoons_meta')->default(0)->after('meta');
-            $table->dropColumn('meta');
         });
     }
 };
