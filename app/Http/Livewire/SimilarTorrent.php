@@ -153,7 +153,7 @@ class SimilarTorrent extends Component
                         $titles[] = $title->name.' ('.substr($title->first_air_date, 0, 4).')';
                         break;
                     case 'cartoons':
-                        $title = Tv::find($torrent->tmdb);
+                        $title = Cartoons::find($torrent->tmdb);
                         $titles[] = $title->name.' ('.substr($title->first_air_date, 0, 4).')';
                         break;
                     default:
