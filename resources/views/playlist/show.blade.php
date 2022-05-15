@@ -94,10 +94,6 @@
                         @if ($t->torrent->tmdb || $t->torrent->tmdb != 0)
                             @php $meta = App\Models\Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $t->torrent->tmdb)->first() @endphp
                         @endif
-                    @if ($t->torrent->category->cartoons_meta)
-                        @if ($t->torrent->tmdb || $t->torrent->tmdb != 0)
-                            @php $meta = App\Models\Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $t->torrent->tmdb)->first() @endphp
-                        @endif
                     @endif
                     <div class="col-md-6">
                         <div class="card is-torrent">
@@ -157,7 +153,7 @@
                             </div>
                             <div class="card_body">
                                 <div class="body_poster">
-                                    @if ($t->torrent->category->movie_meta || $t->torrent->category->tv_meta || $t->torrent->category->cartoons_meta)
+                                    @if ($t->torrent->category->movie_meta || $t->torrent->category->tv_meta)
                                         <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : 'https://via.placeholder.com/160x240' }}"
                                              class="show-poster" alt="{{ __('torrent.poster') }}">
                                     @endif
@@ -175,7 +171,7 @@
                                 <div class="body_description">
                                     <h3 class="description_title">
                                         <a href="{{ route('torrent', ['id' => $t->torrent->id]) }}">{{ $t->torrent->name }}
-                                            @if($t->torrent->category->movie_meta || ($t->torrent->category->tv_meta || ($t->torrent->category->cartoons_meta && isset($t->torrent->meta) && $meta->releaseYear)))
+                                            @if($t->torrent->category->movie_meta || ($t->torrent->category->tv_meta && isset($t->torrent->meta) && $meta->releaseYear))
                                                 <span class="text-bold text-pink"> {{ $meta->releaseYear ?? '' }}</span>
                                             @endif
                                             @if($t->torrent->category->game_meta && isset($meta) && $meta->first_release_date)
@@ -184,11 +180,6 @@
                                         </a>
                                     </h3>
                                     @if ($t->torrent->category->movie_meta && isset($meta) && $meta->genres)
-                                        @foreach ($meta->genres as $genre)
-                                            <span class="genre-label">{{ $genre->name }}</span>
-                                        @endforeach
-                                    @endif
-                                    @if ($t->torrent->category->cartoons_meta && isset($meta) && $meta->genres)
                                         @foreach ($meta->genres as $genre)
                                             <span class="genre-label">{{ $genre->name }}</span>
                                         @endforeach
@@ -204,7 +195,7 @@
                                         @endforeach
                                     @endif
                                     <p class="description_plot">
-                                        @if($t->torrent->category->movie_meta || ($t->torrent->category->tv_meta || ($t->torrent->category->cartoons_meta && $meta && $meta->plot)))
+                                        @if($t->torrent->category->movie_meta || ($t->torrent->category->tv_meta && $meta && $meta->plot))
                                             {{ $meta->overview ?? '' }}
                                         @endif
                                     </p>

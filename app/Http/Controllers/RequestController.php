@@ -9,7 +9,6 @@ namespace App\Http\Controllers;
 use App\Models\BonTransactions;
 use App\Models\Category;
 use App\Models\Movie;
-use App\Models\Cartoons;
 use App\Models\Resolution;
 use App\Models\Torrent;
 use App\Models\TorrentRequest;
@@ -68,10 +67,6 @@ class RequestController extends Controller
         }
 
         if ($torrentRequest->category->movie_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
-        }
-
-        if ($torrentRequest->category->cartoons_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
             $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
         }
 
@@ -167,10 +162,6 @@ class RequestController extends Controller
         }
 
         if ($torrentRequest->category->movie_meta !== 0 && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $tmdbScraper->movie($torrentRequest->tmdb);
-        }
-
-        if ($torrentRequest->category->cartoons_meta !== 0 && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
             $tmdbScraper->movie($torrentRequest->tmdb);
         }
 
@@ -285,10 +276,6 @@ class RequestController extends Controller
         }
 
         if ($torrentRequest->category->movie_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $tmdbScraper->movie($torrentRequest->tmdb);
-        }
-
-        if ($torrentRequest->category->cartoons_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
             $tmdbScraper->movie($torrentRequest->tmdb);
         }
 
