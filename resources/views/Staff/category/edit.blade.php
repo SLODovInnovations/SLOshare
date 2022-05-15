@@ -74,6 +74,18 @@
             <br>
             <br>
 
+            <label for="cartoons_meta" class="control-label">Movie Meta Data?</label>
+            <div class="radio-inline">
+                <label><input type="radio" name="cartoons_meta" @if ($category->cartoons_meta) checked @endif
+                    value="1">{{ __('common.yes') }}</label>
+            </div>
+            <div class="radio-inline">
+                <label><input type="radio" name="cartoons_meta" @if (!$category->cartoons_meta) checked @endif
+                    value="0">{{ __('common.no') }}</label>
+            </div>
+            <br>
+            <br>
+
             <label for="tv_meta" class="control-label">TV Meta Data?</label>
             <div class="radio-inline">
                 <label><input type="radio" name="tv_meta" @if ($category->tv_meta) checked @endif

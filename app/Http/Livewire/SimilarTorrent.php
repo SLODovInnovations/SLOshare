@@ -7,6 +7,7 @@ use App\Models\FeaturedTorrent;
 use App\Models\Graveyard;
 use App\Models\History;
 use App\Models\Movie;
+use App\Models\Cartoons;
 use App\Models\Peer;
 use App\Models\PersonalFreeleech;
 use App\Models\PlaylistTorrent;
@@ -79,6 +80,12 @@ class SimilarTorrent extends Component
             });
         }
 
+        if ($category->cartoons_meta == true) {
+            $query = $query->whereHas('category', function ($q) {
+                $q->where('cartoons_meta', '=', true);
+            });
+        }
+
         $query = $query->where('tmdb', '=', $this->tmdbId);
         $query = $query->orderBy($this->sortField, $this->sortDirection);
 
@@ -133,7 +140,8 @@ class SimilarTorrent extends Component
                     $meta = 'tv';
                 } elseif ($cat->movie_meta === 1) {
                     $meta = 'movie';
-                }
+                } elseif ($cat->cartoons_meta === 1) {
+                    $meta = 'cartoons';
 
                 switch ($meta) {
                     case 'movie':
@@ -141,6 +149,10 @@ class SimilarTorrent extends Component
                         $titles[] = $title->title.' ('.substr($title->release_date, 0, 4).')';
                         break;
                     case 'tv':
+                        $title = Tv::find($torrent->tmdb);
+                        $titles[] = $title->name.' ('.substr($title->first_air_date, 0, 4).')';
+                        break;
+                    case 'cartoons':
                         $title = Tv::find($torrent->tmdb);
                         $titles[] = $title->name.' ('.substr($title->first_air_date, 0, 4).')';
                         break;

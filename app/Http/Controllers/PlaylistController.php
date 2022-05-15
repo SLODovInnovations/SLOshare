@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Bencode;
 use App\Models\Movie;
+use App\Models\Cartoons;
 use App\Models\Playlist;
 use App\Models\PlaylistTorrent;
 use App\Models\Torrent;
@@ -123,6 +124,10 @@ class PlaylistController extends Controller
             }
 
             if ($torrent->category->movie_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
+                $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrent->tmdb)->first();
+            }
+
+            if ($torrent->category->cartoons_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
                 $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrent->tmdb)->first();
             }
         }

@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Movie;
+use App\Models\Cartoons;
 use App\Models\Torrent;
 use App\Models\Tv;
 use Illuminate\Console\Command;
@@ -64,6 +65,17 @@ class FetchReleaseYears extends Command
             }
 
             if ($torrent->category->movie_meta && $torrent->tmdb && $torrent->tmdb != 0) {
+                $meta = Movie::where('id', '=', $torrent->tmdb)->first();
+                if (isset($meta->release_date) && \substr($meta->release_date, 0, 4) > '1900') {
+                    $torrent->release_year = \substr($meta->release_date, 0, 4);
+                    $torrent->save();
+                    $this->info(\sprintf('(%s) Leto izdaje pridobljeno za Torrent %s ', $torrent->category->name, $torrent->name));
+                } else {
+                    $this->warn(\sprintf('(%s) Za Torrent ni bilo najdenega leta izdaje %s %s/torrents/%s', $torrent->category->name, $torrent->name, $appurl, $torrent->id));
+                }
+            }
+
+            if ($torrent->category->cartoons_meta && $torrent->tmdb && $torrent->tmdb != 0) {
                 $meta = Movie::where('id', '=', $torrent->tmdb)->first();
                 if (isset($meta->release_date) && \substr($meta->release_date, 0, 4) > '1900') {
                     $torrent->release_year = \substr($meta->release_date, 0, 4);
