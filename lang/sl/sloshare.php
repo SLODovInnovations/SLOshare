@@ -24,6 +24,6 @@ return [
     'seeders'                   => 'Sejalcev',
     'leechers'                  => 'Odjemalcev',
     'subtitles'                 => 'Podnapisi:',
-
+    'postal-bi'                 => 'Postal bi...',
     'success'                   => 'Vaše sporočilo je bilo uspešno poslano',
 ];

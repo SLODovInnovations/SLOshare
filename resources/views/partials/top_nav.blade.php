@@ -218,6 +218,14 @@
                     </a>
                 </li>
                 @endif
+                @if (auth()->user()->group->is_admin)
+                <li>
+                    <a href="{{ route('') }}">
+                        <i class="{{ config('other.font-awesome') }} fa-handshake-o"></i>
+                        {{ __('sloshare.postal-bi') }}
+                    </a>
+                </li>
+                @endif
             </ul>
         </li>
     </ul>
