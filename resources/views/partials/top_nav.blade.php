@@ -220,7 +220,7 @@
                 @endif
                 @if (auth()->user()->group->is_admin)
                 <li>
-                    <a href="{{ route('') }}">
+                    <a href="#">
                         <i class="{{ config('other.font-awesome') }} fa-handshake-o"></i>
                         {{ __('sloshare.postal-bi') }}
                     </a>
