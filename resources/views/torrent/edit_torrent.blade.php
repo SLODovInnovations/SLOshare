@@ -13,7 +13,8 @@
     <div class="container">
         <div class="col-md-10">
             <h2>{{ __('common.edit') }}: {{ $torrent->name }}</h2>
-            <div class="block">
+            @php $data = App\Models\Category::where('id', '=', !empty($category_id) ? $category_id : old('category_id'))->first();@endphp
+            <div class="block" x-data="{ meta: '{{ $data->movie_meta ? 'movie' : ($data->tv_meta ? 'tv' : ($data->game_meta ? 'game' : ($data->no_meta ? 'no' : ''))) }}'}">
                 <form role="form" method="POST" action="{{ route('edit', ['id' => $torrent->id]) }}"
                       enctype="multipart/form-data">
                     @csrf
@@ -29,6 +30,57 @@
                             <input class="upload-form-file" type="file" accept=".jpg, .jpeg, .png"
                                    name="torrent-banner">
                         </div>
+<!-- NOVO -->
+                    <div class="form-group">
+                        <label for="category_id">{{ __('torrent.category') }}</label>
+                        <label>
+                            <select name="category_id" id="autocat" class="form-control" required x-on:change="meta = $el.options[$el.selectedIndex].getAttribute('data-meta')">
+                                <option value="{{ $torrent->category->id }}" selected="selected">{{ $torrent->category->name }}
+                                    ({{ __('torrent.current') }})
+                                </option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                            data-meta="{{ $category->movie_meta ? 'movie' : ($category->tv_meta ? 'tv' : ($category->game_meta ? 'game' : ($category->no_meta ? 'no' : ''))) }}"
+                                            @if ($category_id==$category->id) selected="selected"@endif>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="type_id">{{ __('torrent.type') }}</label>
+                        <label>
+                            <select name="type_id" id="autotype" class="form-control" required>
+                                <option value="{{ $torrent->type->id }}" selected="selected">{{ $torrent->type->name }}
+                                </option>
+                                @foreach ($types as $type)
+                                    <option value="{{ $type->id }}"
+                                            @if (old('type_id')==$type->id) selected="selected"@endif>
+                                        {{ $type->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
+                    @php $data = App\Models\Category::where('id', '=', !empty($category_id) ? $category_id : old('category_id'))->first();@endphp
+                    <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
+                        <label for="resolution_ids">{{ __('torrent.resolution') }}</label>
+                        <label>
+                            <select name="resolution_id" id="autores" class="form-control">
+                                <option value="{{ $torrent->resolution->id }}" selected="selected">{{ $torrent->resolution->name }}
+                                </option>
+                                @foreach ($resolutions as $resolution)
+                                    <option value="{{ $resolution->id }}"
+                                            @if (old('resolution_id')==$resolution->id) selected="selected" @endif>
+                                        {{ $resolution->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
+<!-- NOVO -->
 
                     @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                         <div class="form-group">
@@ -98,20 +150,6 @@
                     @else
                         <input type="hidden" name="igdb" value="0">
                     @endif
-
-                    <div class="form-group">
-                        <label for="category_id">{{ __('torrent.category') }}</label>
-                        <label>
-                            <select name="category_id" class="form-control">
-                                <option value="{{ $torrent->category->id }}" selected>{{ $torrent->category->name }}
-                                    ({{ __('torrent.current') }})
-                                </option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
-                        </label>
-                    </div>
 
                     <div class="form-group">
                         <label for="type">{{ __('torrent.type') }}</label>
@@ -313,6 +351,7 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection
 
 @section('javascripts')

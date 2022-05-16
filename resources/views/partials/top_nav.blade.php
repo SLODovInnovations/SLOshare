@@ -22,7 +22,7 @@
                 <li>
                     <a href="{{ route('categories.show', ['13']) }}">
                         <i class="{{ config('other.font-awesome') }} fa-heart"></i>
-                        {{ __('torrent.torrents') }}
+                        {{ __('torrent.xxx-18') }}
                     </a>
                 </li>
                 <li>
@@ -221,7 +221,7 @@
                 @if (auth()->user()->group->is_admin)
                 <li>
                     <a href="#">
-                        <i class="{{ config('other.font-awesome') }} fa-handshake-o"></i>
+                        <i class="{{ config('other.font-awesome') }} fa-handshake"></i>
                         {{ __('sloshare.postal-bi') }}
                     </a>
                 </li>
