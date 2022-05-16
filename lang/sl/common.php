@@ -248,4 +248,6 @@ return [
     'admin'                => 'Admin',
     'autogroup'            => 'Autogroup',
     'add_new_group'        => 'Dodaj novo skupino',
+    'upload-torrents'      => 'Naloži',
+    'sloshare'             => 'SLOshare.eu',
 ];

@@ -27,8 +27,8 @@
         <div class="block">
             <p class="lead">{{ __('torrent.history') }} {{ __('common.for') }}
                 <a href="{{ route('torrent', ['id' => $torrent->id]) }}">{{ $torrent->name }}</a>
-                <span class="badge-extra pull-right">Total Up: {{ App\Helpers\StringHelper::formatBytes($history->sum('actual_uploaded'), 2) }}</span>
-                <span class="badge-extra pull-right">Total Down: {{ App\Helpers\StringHelper::formatBytes($history->sum('actual_downloaded'), 2) }}</span>
+                <span class="badge-extra pull-right">Skupaj UL: {{ App\Helpers\StringHelper::formatBytes($history->sum('actual_uploaded'), 2) }}</span>
+                <span class="badge-extra pull-right">Skupaj DL: {{ App\Helpers\StringHelper::formatBytes($history->sum('actual_downloaded'), 2) }}</span>
             </p>
             <div class="table-responsive">
                 <table class="table table-condensed table-striped table-bordered">

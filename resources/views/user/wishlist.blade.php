@@ -107,7 +107,7 @@
                                 <div class="col-md-12 text-center">
                                     <h1 class="text-blue"><i
                                                 class="{{ config('other.font-awesome') }} fa-frown text-blue"></i>
-                                        No Wishes</h1>
+                                        Seznam želja je prazen</h1>
                                 </div>
                             </div>
                         @endif

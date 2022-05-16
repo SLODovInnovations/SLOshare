@@ -5,14 +5,9 @@
         </a>
         <livewire:quick-search-dropdown />
     </div>
-    <ul class="top-nav__main-menus" x-bind:class="expanded && 'mobile'">
+    <ul class="top-nav__main-menus">
         <li class="top-nav--left__list-item top-nav__dropdown">
             <a class="top-nav__dropdown--nontouch"  href="{{ route('torrents') }}">
-                <div class="top-nav--left__container">
-                    {{ __('torrent.torrents') }}
-                </div>
-            </a>
-            <a class="top-nav__dropdown--touch" tabindex="0">
                 <div class="top-nav--left__container">
                     {{ __('torrent.torrents') }}
                 </div>
@@ -25,15 +20,35 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('upload_form', ['category_id' => 1]) }}">
-                        <i class="{{ config('other.font-awesome') }} fa-upload"></i>
-                        {{ __('common.upload') }}
+                    <a href="{{ route('categories.show', ['13']) }}">
+                        <i class="{{ config('other.font-awesome') }} fa-heart"></i>
+                        {{ __('torrent.torrents') }}
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('categories.show', ['3']) }}">
+                        <i class="{{ config('other.font-awesome') }} fa-baby-carriage"></i>
+                        {{ __('torrent.for-the-youngest') }}
+                    </a>
+                </li>
+                @if (auth()->user()->group->can_upload)
+                <li>
+                    <a href="{{ route('upload_form', ['category_id' => 1]) }}">
+                        <i class="{{ config('other.font-awesome') }} fa-upload"></i>
+                        {{ __('common.upload-torrents') }}
+                    </a>
+                </li>
+                @endif
                 <li>
                     <a href="{{ route('requests.index') }}">
                         <i class="{{ config('other.font-awesome') }} fa-hands-helping"></i>
                         {{ __('request.requests') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('subtitles.index') }}">
+                        <i class="{{ config('other.font-awesome') }} fa-closed-captioning"></i>
+                        {{ __('common.subtitles') }}
                     </a>
                 </li>
                 <li>
@@ -47,12 +62,7 @@
         <li class="top-nav--left__list-item top-nav__dropdown">
             <a class="top-nav__dropdown--nontouch"  href="{{ route('forums.index') }}">
                 <div class="top-nav--left__container">
-                    {{ __('common.community') }}
-                </div>
-            </a>
-            <a class="top-nav__dropdown--touch" tabindex="0">
-                <div class="top-nav--left__container">
-                    {{ __('common.community') }}
+                    {{ __('common.sloshare') }}
                 </div>
             </a>
             <ul>
@@ -62,35 +72,39 @@
                         {{ __('forum.forums') }}
                     </a>
                 </li>
+                @if (auth()->user()->group->is_admin)
                 <li>
                     <a  href="{{ route('playlists.index') }}">
                         <i class="{{ config('other.font-awesome') }} fa-list-ol"></i>
                         {{ __('playlist.playlists') }}
                     </a>
                 </li>
+                @endif
                 <li>
                     <a  href="{{ route('polls') }}">
                         <i class="{{ config('other.font-awesome') }} fa-chart-pie"></i>
                         {{ __('poll.polls') }}
                     </a>
                 </li>
+                @if (auth()->user()->group->is_admin)
                 <li>
                     <a  href="{{ route('stats') }}">
                         <i class="{{ config('other.font-awesome') }} fa-chart-bar"></i>
                         {{ __('common.extra-stats') }}
                     </a>
                 </li>
+                @endif
                 <li>
                     <a  href="{{ route('articles.index') }}">
                         <i class="{{ config('other.font-awesome') }} fa-newspaper"></i>
                         {{ __('common.news') }}
                     </a>
                 </li>
-                @if (!empty(config('unit3d.chat-link-url')))
+                @if (!empty(config('sloshare.chat-link-url')))
                     <li>
-                        <a  href="{{ config('unit3d.chat-link-url') }}">
-                            <i class="{{ config('unit3d.chat-link-icon') }}"></i>
-                            {{ config('unit3d.chat-link-name') ?: __('common.chat') }}
+                        <a  href="{{ config('sloshare.chat-link-url') }}">
+                            <i class="{{ config('sloshare.chat-link-icon') }}"></i>
+                            {{ config('sloshare.chat-link-name') ?: __('common.chat') }}
                         </a>
                     </li>
                 @endif
@@ -170,40 +184,40 @@
         <li class="top-nav__dropdown">
             <a tabindex="0">
                 <div class="top-nav--left__container">
-                    Other
+                    Podpora
                 </div>
             </a>
             <ul>
-                <li>
-                    <a href="{{ route('subtitles.index') }}">
-                        <i class="{{ config('other.font-awesome') }} fa-closed-captioning"></i>
-                        {{ __('common.subtitles') }}
-                    </a>
-                </li>
+                @if (auth()->user()->group->is_modo)
                 <li>
                     <a href="{{ route('graveyard.index') }}">
                         <i class="{{ config('other.font-awesome') }} fa-skull"></i>
                         {{ __('graveyard.graveyard') }}
                     </a>
                 </li>
+                @endif
                 <li>
                     <a href="{{ route('top10.index') }}">
                         <i class="{{ config('other.font-awesome') }} fa-trophy-alt"></i>
-                        Top 10
+                        Lestvica Top 10
                     </a>
                 </li>
+                @if (auth()->user()->group->is_admin)
                 <li>
                     <a href="{{ route('missing.index') }}">
                         <i class="{{ config('other.font-awesome') }} fa-ballot-check"></i>
-                        Missing
+                        Manjkajoče vsebine
                     </a>
                 </li>
+                @endif
+                @if (auth()->user()->group->is_admin)
                 <li>
                     <a href="{{ route('internal') }}">
                         <i class="{{ config('other.font-awesome') }} fa-star-shooting"></i>
                         {{ __('common.internal') }}
                     </a>
                 </li>
+                @endif
             </ul>
         </li>
     </ul>

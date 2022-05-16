@@ -259,4 +259,6 @@ return [
     'select-resolution'        => '-- Izberite Resolucijo --',
     'select-distributor'       => '-- Izberite Distributerja --',
     'select-region'            => '-- Izberite Regijo --',
+    'xxx-18'                   => 'xxx (NAD 18 LET)',
+    'for-the-youngest'         => 'Za najmlajše',
 ];

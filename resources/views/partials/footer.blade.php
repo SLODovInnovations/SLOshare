@@ -27,7 +27,9 @@
                 <li><a href="{{ route('forums.index') }}">{{ __('forum.forum') }}</a></li>
                 @if (auth()->user()->group->is_admin)
                 <li><a href="">{{ __('common.chat') }}</a></li>
+                @endif
                 <li><a href="{{ route('users') }}">{{ __('common.user-list') }}</a></li>
+                @if (auth()->user()->group->is_admin)
                 <li><a href="">{{ __('common.topladder') }}</a></li>
                 @endif
                 <li><a href="{{ route('articles.index') }}">{{ __('common.news') }}</a></li>
@@ -54,8 +56,8 @@
         <div class="col-md-2 l-footer-section">
             <h2 class="l-footer-section-title">{{ __('common.sloshare') }}</h2>
             <ul>
-            @if (auth()->user()->group->is_admin)
                 <li><a href="{{ route('donationslos') }}">{{ __('common.donations') }}</a></li>
+            @if (auth()->user()->group->is_admin)
                 <li><a href="">{{ __('common.shop-sloshare') }}</a></li>
                 <li><a href="">{{ __('common.radio-sloshare') }}</a></li>
             @endif

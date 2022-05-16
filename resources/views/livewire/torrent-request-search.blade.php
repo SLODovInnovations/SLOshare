@@ -149,9 +149,9 @@
         <br>
         <div class="table-responsive block">
 			<span class="badge-user" style="float: right;">
-				<strong>{{ __('request.requests') }}:</strong> {{ number_format($torrentRequestStat->total) }} |
-				<strong>{{ __('request.filled') }}:</strong> {{ number_format($torrentRequestStat->filled) }} |
-				<strong>{{ __('request.unfilled') }}:</strong> {{ number_format($torrentRequestStat->unfilled) }}
+				<strong>{{ __('request.requests-slo') }}:</strong> {{ number_format($torrentRequestStat->total) }} |
+				<strong>{{ __('request.filled-slo') }}:</strong> {{ number_format($torrentRequestStat->filled) }} |
+				<strong>{{ __('request.unfilled-slo') }}:</strong> {{ number_format($torrentRequestStat->unfilled) }}
 				<!--<strong>{{ __('request.total-bounty') }}:</strong> {{ number_format($torrentRequestBountyStat->total) }} {{ __('bon.bon') }} |-->
 				<!--<strong>{{ __('request.bounty-claimed') }}:</strong> {{ number_format($torrentRequestBountyStat->claimed) }} {{ __('bon.bon') }} |-->
 				<!--<strong>{{ __('request.bounty-unclaimed') }}:</strong> {{ number_format($torrentRequestBountyStat->unclaimed) }} {{ __('bon.bon') }}-->

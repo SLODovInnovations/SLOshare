@@ -1,13 +1,13 @@
 @extends('layout.default')
 
 @section('title')
-    <title>Top 10</title>
+    <title>Lestvica Top 10</title>
 @endsection
 
 @section('breadcrumb')
     <li>
         <a href="{{ route('top10.index') }}" itemprop="url" class="l-breadcrumb-item-link">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">Top 10</span>
+            <span itemprop="title" class="l-breadcrumb-item-link-title">Lestvica Top 10</span>
         </a>
     </li>
 @endsection

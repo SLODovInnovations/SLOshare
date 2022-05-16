@@ -264,7 +264,7 @@ return [
     'reset-passkey-help'                   => 'Po ponastavitvi PID-a boste morali ponovno prenesti / ponovno naložiti vse svoje aktivne torrente',
     'reset-rss'                            => 'Ponastavi ključ RSS (RID)',
     'reset-rss-help'                       => 'Po ponastavitvi RID-a boste morali ponovno naložiti vse aktivne vire RSS',
-    'resurrections'                        => 'Vstajenje',
+    'resurrections'                        => 'Oživitev',
     'restore'                              => 'Obnovi',
     'satisfied-immune'		               => 'Zadovoljen / Imun',
     'search'                               => 'Hitro iskanje po uporabniškem imenu',
