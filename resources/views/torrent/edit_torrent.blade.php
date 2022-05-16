@@ -13,8 +13,7 @@
     <div class="container">
         <div class="col-md-10">
             <h2>{{ __('common.edit') }}: {{ $torrent->name }}</h2>
-            @php $data = App\Models\Category::where('id', '=', !empty($category_id) ? $category_id : old('category_id'))->first();@endphp
-            <div class="block" x-data="{ meta: '{{ $data->movie_meta ? 'movie' : ($data->tv_meta ? 'tv' : ($data->game_meta ? 'game' : ($data->no_meta ? 'no' : ''))) }}'}">
+            <div class="block">
                 <form role="form" method="POST" action="{{ route('edit', ['id' => $torrent->id]) }}"
                       enctype="multipart/form-data">
                     @csrf
@@ -30,63 +29,10 @@
                             <input class="upload-form-file" type="file" accept=".jpg, .jpeg, .png"
                                    name="torrent-banner">
                         </div>
-<!-- NOVO -->
-                    <div class="form-group">
-                        <label for="category_id">{{ __('torrent.category') }}</label>
-                        <label>
-                            <select name="category_id" id="autocat" class="form-control" required x-on:change="meta = $el.options[$el.selectedIndex].getAttribute('data-meta')">
-                                <option value="{{ $torrent->category->id }}" selected="selected">{{ $torrent->category->name }}
-                                    ({{ __('torrent.current') }})
-                                </option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                            data-meta="{{ $category->movie_meta ? 'movie' : ($category->tv_meta ? 'tv' : ($category->game_meta ? 'game' : ($category->no_meta ? 'no' : ''))) }}"
-                                            @if ($category_id==$category->id) selected="selected"@endif>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="type_id">{{ __('torrent.type') }}</label>
-                        <label>
-                            <select name="type_id" id="autotype" class="form-control" required>
-                                <option value="{{ $torrent->type->id }}" selected="selected">{{ $torrent->type->name }}
-                                </option>
-                                @foreach ($types as $type)
-                                    <option value="{{ $type->id }}"
-                                            @if (old('type_id')==$type->id) selected="selected"@endif>
-                                        {{ $type->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </label>
-                    </div>
-                    @php $data = App\Models\Category::where('id', '=', !empty($category_id) ? $category_id : old('category_id'))->first();@endphp
-                    <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
-                        <label for="resolution_ids">{{ __('torrent.resolution') }}</label>
-                        <label>
-                            <select name="resolution_id" id="autores" class="form-control">
-                                <option value="{{ $torrent->resolution->id }}" selected="selected">{{ $torrent->resolution->name }}
-                                </option>
-                                @foreach ($resolutions as $resolution)
-                                    <option value="{{ $resolution->id }}"
-                                            @if (old('resolution_id')==$resolution->id) selected="selected" @endif>
-                                        {{ $resolution->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </label>
-                    </div>
-<!-- NOVO -->
 
                     @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                         <div class="form-group">
                             <label for="name">TMDB ID <b>({{ __('common.required') }})</b></label>
-                            <br>
-                            <label for="name">URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank"><b>https://www.themoviedb.org/</b></a></label>
                             <label>
                                 <input type="number" name="tmdb" value="{{ $torrent->tmdb }}" class="form-control"
                                        required>
@@ -99,8 +45,6 @@
                     @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                         <div class="form-group">
                             <label for="name">IMDB ID <b>({{ __('torrent.optional') }})</b></label>
-                            <br>
-                            <label for="name">URL za IMDB ID: <a href="https://www.imdb.com/" target="_blank"><b>https://www.imdb.com/</b></a></label>
                             <label>
                                 <input type="number" name="imdb" value="{{ $torrent->imdb }}" class="form-control"
                                        required>
@@ -113,8 +57,6 @@
                     @if ($torrent->category->tv_meta)
                         <div class="form-group">
                             <label for="name">TVDB ID <b>({{ __('torrent.optional') }})</b></label>
-                            <br>
-                            <label for="name">URL za TVDB ID: <a href="https://www.thetvdb.com/" target="_blank"><b>https://www.thetvdb.com/</b></a></label>
                             <label>
                                 <input type="number" name="tvdb" value="{{ $torrent->tvdb }}" class="form-control"
                                        required>
@@ -122,7 +64,6 @@
                         </div>
                     @else
                         <input type="hidden" name="tvdb" value="0">
-                        <input type="hidden" name="mal" value="0">
                     @endif
 
                     @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
@@ -140,8 +81,6 @@
                     @if ($torrent->category->game_meta)
                         <div class="form-group">
                             <label for="name">IGDB ID <b>{{ __('request.required') }} For Games)</b></label>
-                            <br>
-                            <label for="name">URL za IGDB ID: <a href="https://www.igdb.com/discover" target="_blank"><b>https://www.igdb.com/discover</b></a></label>
                             <label>
                                 <input type="number" name="igdb" value="{{ $torrent->igdb }}" class="form-control"
                                        required>
@@ -150,6 +89,20 @@
                     @else
                         <input type="hidden" name="igdb" value="0">
                     @endif
+
+                    <div class="form-group">
+                        <label for="category_id">{{ __('torrent.category') }}</label>
+                        <label>
+                            <select name="category_id" class="form-control">
+                                <option value="{{ $torrent->category->id }}" selected>{{ $torrent->category->name }}
+                                    ({{ __('torrent.current') }})
+                                </option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
 
                     <div class="form-group">
                         <label for="type">{{ __('torrent.type') }}</label>
@@ -189,7 +142,7 @@
 
                     @if ($torrent->category->tv_meta)
                         <div class="form-group">
-                            <label for="season_number">{{ __('torrent.season-number') }} <b>({{ __('common.required') }} za
+                            <label for="season_number">{{ __('torrent.season-number') }} <b>({{ __('common.required') }} For
                                     TV)</b></label>
                             <input type="number" name="season_number" id="season_number" class="form-control"
                                    value="{{ $torrent->season_number }}" required>
@@ -198,8 +151,8 @@
 
                     @if ($torrent->category->tv_meta)
                         <div class="form-group">
-                            <label for="episode_number">{{ __('torrent.episode-number') }} <b>({{ __('common.required') }} za
-                                    TV. Uporabite "0" za sezonske pakete.)</b></label>
+                            <label for="episode_number">{{ __('torrent.episode-number') }} <b>({{ __('common.required') }} For
+                                    TV. Use "0" For Season Packs.)</b></label>
                             <input type="number" name="episode_number" id="episode_number" class="form-control"
                                    value="{{ $torrent->episode_number }}" required>
                         </div>
@@ -233,14 +186,15 @@
                             <label>
                                 <select name="region_id" class="form-control">
                                     @if (! $torrent->region)
-                                        <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-region') }}
+                                        <option hidden="" disabled="disabled" selected="selected" value="">--Select
+                                            Region--
                                         </option>)
                                     @else
                                         <option value="{{ $torrent->region->id }}" selected>{{ $torrent->region->name }}
                                             ({{ __('torrent.current') }})
                                         </option>
                                     @endif
-                                    <option value="">Brez regije</option>
+                                    <option value="">No Region</option>
                                     @foreach ($regions as $region)
                                         <option value="{{ $region->id }}">{{ $region->name }}</option>
                                     @endforeach
@@ -252,27 +206,27 @@
                     <div class="form-group">
                         <label for="description">{{ __('common.description') }}</label>
                         <label for="upload-form-description"></label>
-                        <textarea id="upload-form-description" name="description" cols="30" rows="10"
+                        <textarea id="editor" name="description" cols="30" rows="10"
                                   class="form-control">{{ $torrent->description }}</textarea>
                     </div>
 
-                    <!--<div class="form-group">
+                    <div class="form-group">
                         <label for="description">{{ __('torrent.media-info') }}</label>
                         <label>
                             <textarea name="mediainfo" cols="30" rows="10"
                                       class="form-control">{{ $torrent->mediainfo }}</textarea>
                         </label>
-                    </div>-->
+                    </div>
 
-                    <!--<div class="form-group">
+                    <div class="form-group">
                         <label for="description">BDInfo (Quick Summary)</label>
                         <label>
                             <textarea name="bdinfo" cols="30" rows="10"
                                       class="form-control">{{ $torrent->bdinfo }}</textarea>
                         </label>
-                    </div>-->
+                    </div>
 
-                    @if (auth()->user()->group->is_admin)
+                    @if (auth()->user()->group->is_modo || auth()->user()->id === $torrent->user_id)
                         <label for="hidden" class="control-label">{{ __('common.anonymous') }}?</label>
                         <div class="radio-inline">
                             <label><input type="radio" name="anonymous" @if ($torrent->anon == 1) checked
@@ -287,7 +241,6 @@
                     @else
                         <input type="hidden" name="anonymous" value={{ $torrent->anon }}>
                     @endif
-                    @if (auth()->user()->group->is_admin)
                     <label for="hidden" class="control-label">{{ __('torrent.stream-optimized') }}?</label>
                     <div class="radio-inline">
                         <label><input type="radio" name="stream" @if ($torrent->stream == 1) checked
@@ -310,11 +263,7 @@
                     </div>
                     <br>
                     <br>
-                    @else
-                        <input type="hidden" name="stream" value={{ $torrent->stream }}>
-                        <input type="hidden" name="sd" value={{ $torrent->sd }}>
-                    @endif
-                    @if (auth()->user()->group->is_admin || auth()->user()->group->is_internal)
+                    @if (auth()->user()->group->is_modo || auth()->user()->group->is_internal)
                         <label for="internal" class="control-label">Internal?</label>
                         <div class="radio-inline">
                             <label><input type="radio" name="internal" @if ($torrent->internal == 1) checked
@@ -329,7 +278,7 @@
                     @else
                         <input type="hidden" name="internal" value="0">
                     @endif
-                    @if (auth()->user()->group->is_admin)
+                    @if (auth()->user()->group->is_modo || auth()->user()->id === $torrent->user_id)
                         <label for="personal" class="control-label">Personal Release?</label>
                         <div class="radio-inline">
                             <label><input type="radio" name="personal_release"
@@ -351,14 +300,4 @@
             </div>
         </div>
     </div>
-    @endif
-@endsection
-
-@section('javascripts')
-    <script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce('script') }}">
-      $(document).ready(function () {
-        $('#upload-form-description').wysibb({})
-      })
-
-    </script>
 @endsection
