@@ -261,4 +261,5 @@ return [
     'select-region'            => '-- Izberite Regijo --',
     'xxx-18'                   => 'xxx (NAD 18 LET)',
     'for-the-youngest'         => 'Za najmlajše',
+    'edit-torrent'             => 'Uredi Torrent',
 ];

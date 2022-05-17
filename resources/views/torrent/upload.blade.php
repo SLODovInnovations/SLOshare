@@ -381,7 +381,7 @@
                             {{ __('common.preview') }}
                         </button>
                         <button type="submit" name="post" value="true" id="post" class="btn btn-success">
-                            {{ __('common.button') }}
+                            {{ __('torrent.button') }}
                         </button>
                     </div>
                     <br>

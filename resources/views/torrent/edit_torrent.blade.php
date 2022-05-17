@@ -32,7 +32,9 @@
 
                     @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                         <div class="form-group">
-                            <label for="name">TMDB ID <b>({{ __('common.required') }})</b></label>
+                            <label for="name">TMDB ID <b>({{ __('request.required') }})</b></label>
+                            <br>
+                            <label for="name">URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank"><b>https://www.themoviedb.org/</b></a></label>
                             <label>
                                 <input type="number" name="tmdb" value="{{ $torrent->tmdb }}" class="form-control"
                                        required>
@@ -45,6 +47,8 @@
                     @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                         <div class="form-group">
                             <label for="name">IMDB ID <b>({{ __('torrent.optional') }})</b></label>
+                            <br>
+                            <label for="name">URL za IMDB ID: <a href="https://www.imdb.com/" target="_blank"><b>https://www.imdb.com/</b></a></label>
                             <label>
                                 <input type="number" name="imdb" value="{{ $torrent->imdb }}" class="form-control"
                                        required>
@@ -57,6 +61,8 @@
                     @if ($torrent->category->tv_meta)
                         <div class="form-group">
                             <label for="name">TVDB ID <b>({{ __('torrent.optional') }})</b></label>
+                            <br>
+                            <label for="name">URL za TVDB ID: <a href="https://www.thetvdb.com/" target="_blank"><b>https://www.thetvdb.com/</b></a></label>
                             <label>
                                 <input type="number" name="tvdb" value="{{ $torrent->tvdb }}" class="form-control"
                                        required>
@@ -69,6 +75,8 @@
                     @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                         <div class="form-group">
                             <label for="name">MAL ID <b>({{ __('request.required') }} For Anime)</b></label>
+                            <br>
+                            <label for="name">URL za MAL ID: <a href="https://myanimelist.net/" target="_blank"><b>https://myanimelist.net/</b></a></label>
                             <label>
                                 <input type="number" name="mal" value="{{ $torrent->mal }}" class="form-control"
                                        required>
@@ -81,6 +89,8 @@
                     @if ($torrent->category->game_meta)
                         <div class="form-group">
                             <label for="name">IGDB ID <b>{{ __('request.required') }} For Games)</b></label>
+                            <br>
+                            <label for="name">URL za IGDB ID: <a href="https://www.igdb.com/discover" target="_blank"><b>https://www.igdb.com/discover</b></a></label>
                             <label>
                                 <input type="number" name="igdb" value="{{ $torrent->igdb }}" class="form-control"
                                        required>
@@ -142,7 +152,7 @@
 
                     @if ($torrent->category->tv_meta)
                         <div class="form-group">
-                            <label for="season_number">{{ __('torrent.season-number') }} <b>({{ __('common.required') }} For
+                            <label for="season_number">{{ __('torrent.season-number') }} <b>({{ __('request.required') }} za
                                     TV)</b></label>
                             <input type="number" name="season_number" id="season_number" class="form-control"
                                    value="{{ $torrent->season_number }}" required>
@@ -151,8 +161,8 @@
 
                     @if ($torrent->category->tv_meta)
                         <div class="form-group">
-                            <label for="episode_number">{{ __('torrent.episode-number') }} <b>({{ __('common.required') }} For
-                                    TV. Use "0" For Season Packs.)</b></label>
+                            <label for="episode_number">{{ __('torrent.episode-number') }} <b>({{ __('request.required') }}za
+                                    TV. Uporabite "0" za sezonske pakete.)</b></label>
                             <input type="number" name="episode_number" id="episode_number" class="form-control"
                                    value="{{ $torrent->episode_number }}" required>
                         </div>
@@ -210,92 +220,126 @@
                                   class="form-control">{{ $torrent->description }}</textarea>
                     </div>
 
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="description">{{ __('torrent.media-info') }}</label>
                         <label>
                             <textarea name="mediainfo" cols="30" rows="10"
                                       class="form-control">{{ $torrent->mediainfo }}</textarea>
                         </label>
-                    </div>
+                    </div>-->
 
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="description">BDInfo (Quick Summary)</label>
                         <label>
                             <textarea name="bdinfo" cols="30" rows="10"
                                       class="form-control">{{ $torrent->bdinfo }}</textarea>
                         </label>
-                    </div>
+                    </div>-->
 
-                    @if (auth()->user()->group->is_modo || auth()->user()->id === $torrent->user_id)
-                        <label for="hidden" class="control-label">{{ __('common.anonymous') }}?</label>
-                        <div class="radio-inline">
-                            <label><input type="radio" name="anonymous" @if ($torrent->anon == 1) checked
-                                          @endif value="1">{{ __('common.yes') }}</label>
+@if (auth()->user()->group->is_admin)
+                    <label for="anonymous" class="control-label">{{ __('common.anonymous') }}?</label>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="anonymous"
+                                      value="1"{{ old('anonymous') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="anonymous"
+                                      value="0"{{ !old('anonymous') ? ' checked' : '' }}>{{ __('common.no') }}</label>
+                    </div>
+@else
+                        <input type="hidden" name="anonymous" value="0">
+@endif
+@if (auth()->user()->group->is_admin)
+                        <br x-show="meta == 'movie' || meta == 'tv'">
+
+                        <label for="stream" class="control-label" x-show="meta == 'movie' || meta == 'tv'">{{ __('torrent.stream-optimized') }}?</label>
+                        <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
+                            <label><input type="radio" name="stream" id="stream"
+                                          value="(meta == 'movie' || meta == 'tv') ? '1' : '0'"{{ old('stream') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
                         </div>
-                        <div class="radio-inline">
-                            <label><input type="radio" name="anonymous" @if ($torrent->anon == 0) checked
-                                          @endif value="0">{{ __('common.no') }}</label>
+                        <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
+                            <label><input type="radio" name="stream" id="stream"
+                                          value="0"{{ !old('stream') ? ' checked' : '' }}>{{ __('common.no') }}</label>
                         </div>
+
+                        <br x-show="meta == 'movie' || meta == 'tv'">
+
+                        <label for="sd" class="control-label" x-show="meta == 'movie' || meta == 'tv'">{{ __('torrent.sd-content') }}?</label>
+                        <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
+                            <label><input type="radio" name="sd"
+                                          x-bind:value="(meta == 'movie' || meta == 'tv') ? '1' : '0'"{{ old('sd') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
+                        </div>
+                        <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
+                            <label><input type="radio" name="sd"
+                                          value="0"{{ !old('sd') ? ' checked' : '' }}>{{ __('common.no') }}</label>
+                        </div>
+
                         <br>
-                        <br>
-                    @else
-                        <input type="hidden" name="anonymous" value={{ $torrent->anon }}>
-                    @endif
-                    <label for="hidden" class="control-label">{{ __('torrent.stream-optimized') }}?</label>
-                    <div class="radio-inline">
-                        <label><input type="radio" name="stream" @if ($torrent->stream == 1) checked
-                                      @endif value="1">{{ __('common.yes') }}</label>
-                    </div>
-                    <div class="radio-inline">
-                        <label><input type="radio" name="stream" @if ($torrent->stream == 0) checked
-                                      @endif value="0">{{ __('common.no') }}</label>
-                    </div>
-                    <br>
-                    <br>
-                    <label for="hidden" class="control-label">{{ __('torrent.sd-content') }}?</label>
-                    <div class="radio-inline">
-                        <label><input type="radio" name="sd" @if ($torrent->sd == 1) checked
-                                      @endif value="1">{{ __('common.yes') }}</label>
-                    </div>
-                    <div class="radio-inline">
-                        <label><input type="radio" name="sd" @if ($torrent->sd == 0) checked
-                                      @endif value="0">{{ __('common.no') }}</label>
-                    </div>
-                    <br>
-                    <br>
-                    @if (auth()->user()->group->is_modo || auth()->user()->group->is_internal)
-                        <label for="internal" class="control-label">Internal?</label>
+@endif
+
+                    @if (auth()->user()->group->is_admin || auth()->user()->group->is_internal)
+                        <label for="internal" class="control-label">{{ __('torrent.internal') }}?</label>
                         <div class="radio-inline">
-                            <label><input type="radio" name="internal" @if ($torrent->internal == 1) checked
-                                          @endif value="1">{{ __('common.yes') }}</label>
+                            <label><input type="radio" name="internal"
+                                          value="1"{{ old('internal') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
                         </div>
                         <div class="radio-inline">
-                            <label><input type="radio" name="internal" @if ($torrent->internal == 0) checked
-                                          @endif value="0">{{ __('common.no') }}</label>
+                            <label><input type="radio" name="internal"
+                                          value="0"{{ !old('internal') ? ' checked' : '' }}>{{ __('common.no') }}</label>
                         </div>
-                        <br>
+
                         <br>
                     @else
                         <input type="hidden" name="internal" value="0">
-                    @endif
-                    @if (auth()->user()->group->is_modo || auth()->user()->id === $torrent->user_id)
-                        <label for="personal" class="control-label">Personal Release?</label>
+                    @endi
+
+@if (auth()->user()->group->is_admin)
+                    <label for="personal_release" class="control-label">Personal Release?</label>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="personal_release"
+                                      value="1"{{ old('personal_release') ? ' checked' : '' }}>{{ __('common.yes') }}
+                        </label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="personal_release"
+                                      value="0"{{ !old('personal_release') ? ' checked' : '' }}>{{ __('common.no') }}
+                        </label>
+                    </div>
+                    <br>
+@else
+                        <input type="hidden" name="personal_release" value="0">
+@endif
+
+                    @if (auth()->user()->group->is_freeleech)
+                        <label for="freeleech" class="control-label">{{ __('torrent.freeleech') }}?</label>
                         <div class="radio-inline">
-                            <label><input type="radio" name="personal_release"
-                                          @if ($torrent->personal_release == 1) checked
-                                          @endif value="1">{{ __('common.yes') }}</label>
+                            <label><input type="radio" name="free"
+                                          value="100"{{ old('free') ? ' checked' : '' }}>100%</label>
                         </div>
                         <div class="radio-inline">
-                            <label><input type="radio" name="personal_release"
-                                          @if ($torrent->personal_release == 0) checked
-                                          @endif value="0">{{ __('common.no') }}</label>
+                            <label><input type="radio" name="free"
+                                          value="75"{{ old('free') ? ' checked' : '' }}>75%</label>
+                        </div>
+                        <div class="radio-inline">
+                            <label><input type="radio" name="free"
+                                          value="50"{{ old('free') ? ' checked' : '' }}>50%</label>
+                        </div>
+                        <div class="radio-inline">
+                            <label><input type="radio" name="free"
+                                          value="25"{{ old('free') ? ' checked' : '' }}>25%</label>
+                        </div>
+                        <div class="radio-inline">
+                            <label><input type="radio" name="free"
+                                          value="0"{{ !old('free') ? ' checked' : '' }}>{{ __('common.no') }}</label>
                         </div>
                     @else
-                        <input type="hidden" name="personal_release" value="0">
+                        <input type="hidden" name="free" value="0">
                     @endif
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">{{ __('common.submit') }}</button>
+                    </div>
                     <br>
-                    <br>
-                    <button type="submit" class="btn btn-primary">{{ __('common.submit') }}</button>
                 </form>
             </div>
         </div>
