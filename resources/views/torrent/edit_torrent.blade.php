@@ -29,65 +29,6 @@
                                    name="torrent-banner">
                         </div>
 
-                        <div class="form-group"  x-show="meta == 'movie' || meta == 'tv'">
-                            <label for="name">TMDB ID <b>({{ __('request.required') }})</b></label>
-                            <br>
-                            <label for="name">URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank"><b>https://www.themoviedb.org/</b></a></label>
-                            <label>
-                                <input type="text" name="apimatch" id="apimatch" class="form-control" value="" disabled>
-                                <input type="number" name="tmdb" id="autotmdb" class="form-control"
-                                       x-bind:value="(meta == 'movie' || meta == 'tv') ? '{{ !empty($tmdb) ? $tmdb : old('tmdb') }}' : '0'" required>
-                            </label>
-                        </div>
-
-                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
-                            <label for="name">IMDB ID <b>({{ __('torrent.optional') }})</b></label>
-                            <br>
-                            <label for="name">URL za IMDB ID: <a href="https://www.imdb.com/" target="_blank"><b>https://www.imdb.com/</b></a></label>
-                            <label>
-                                @php $imdb_val = 0;
-                                if (!empty($imdb)) {
-                                    $imdb_val = $imdb;
-                                }
-                                if (!empty(old('imdb'))) {
-                                    $imdb_val = old('imdb');
-                                } @endphp
-                                <input type="number" name="imdb" id="autoimdb" class="form-control"
-                                       x-bind:value="(meta == 'movie' || meta == 'tv') ? '{{ $imdb_val }}' : '0'">
-                            </label>
-                        </div>
-
-                        <div class="form-group" x-show="meta == 'tv'">
-                            <label for="name">TVDB ID ({{ __('torrent.optional') }})</label>
-                            <br>
-                            <label for="name">URL za TVDB ID: <a href="https://www.thetvdb.com/" target="_blank"><b>https://www.thetvdb.com/</b></a></label>
-                            <label>
-                                <input type="number" name="tvdb" id="autotvdb"
-                                       x-bind:value="meta == 'tv' ? '{{ old('tvdb') ?? '0' }}' : '0'"
-                                       class="form-control" required>
-                            </label>
-                        </div>
-
-                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
-                            <label for="name">MAL ID ({{ __('torrent.required-anime') }})</label>
-                            <br>
-                            <label for="name">URL za MAL ID: <a href="https://myanimelist.net/" target="_blank"><b>https://myanimelist.net/</b></a></label>
-                            <label>
-                                <input type="number" name="mal" x-bind:value="(meta == 'movie' || meta == 'tv') ? '{{ old('mal') ?? '0' }}' : '0'" class="form-control"
-                                       required>
-                            </label>
-                        </div>
-
-                        <div class="form-group" x-show="meta == 'game'">
-                            <label for="name">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
-                            <br>
-                            <label for="name">URL za IGDB ID: <a href="https://www.igdb.com/discover" target="_blank"><b>https://www.igdb.com/discover</b></a></label>
-                            <label>
-                                <input type="number" name="igdb" x-bind:value="meta == 'game' ? '{{ old('igdb') ?? '0' }}' : '0'" class="form-control"
-                                       required>
-                            </label>
-                        </div>
-
                     <div class="form-group">
                         <label for="category_id">{{ __('torrent.category') }}</label>
                         <label>
@@ -137,6 +78,65 @@
                             </label>
                         </div>
                     @endif
+
+                        <div class="form-group"  x-show="meta == 'movie' || meta == 'tv'">
+                            <label for="name">TMDB ID <b>({{ __('request.required') }})</b></label>
+                            <br>
+                            <label for="name">URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank"><b>https://www.themoviedb.org/</b></a></label>
+                            <label>
+                                <input type="text" name="apimatch" id="apimatch" class="form-control" value="" disabled>
+                                <input type="number" name="tmdb" id="autotmdb" class="form-control"
+                                       x-bind:value="{{ $torrent->tmdb }}" required>
+                            </label>
+                        </div>
+
+                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
+                            <label for="name">IMDB ID <b>({{ __('torrent.optional') }})</b></label>
+                            <br>
+                            <label for="name">URL za IMDB ID: <a href="https://www.imdb.com/" target="_blank"><b>https://www.imdb.com/</b></a></label>
+                            <label>
+                                @php $imdb_val = 0;
+                                if (!empty($imdb)) {
+                                    $imdb_val = $imdb;
+                                }
+                                if (!empty(old('imdb'))) {
+                                    $imdb_val = old('imdb');
+                                } @endphp
+                                <input type="number" name="imdb" id="autoimdb" class="form-control"
+                                       x-bind:value="{{ $torrent->imdb }}">
+                            </label>
+                        </div>
+
+                        <div class="form-group" x-show="meta == 'tv'">
+                            <label for="name">TVDB ID ({{ __('torrent.optional') }})</label>
+                            <br>
+                            <label for="name">URL za TVDB ID: <a href="https://www.thetvdb.com/" target="_blank"><b>https://www.thetvdb.com/</b></a></label>
+                            <label>
+                                <input type="number" name="tvdb" id="autotvdb"
+                                       x-bind:value="{{ $torrent->tvdb }}"
+                                       class="form-control" required>
+                            </label>
+                        </div>
+
+                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
+                            <label for="name">MAL ID ({{ __('torrent.required-anime') }})</label>
+                            <br>
+                            <label for="name">URL za MAL ID: <a href="https://myanimelist.net/" target="_blank"><b>https://myanimelist.net/</b></a></label>
+                            <label>
+                                <input type="number" name="mal" x-bind:value="{{ $torrent->mal }}" class="form-control"
+                                       required>
+                            </label>
+                        </div>
+
+                        <div class="form-group" x-show="meta == 'game'">
+                            <label for="name">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
+                            <br>
+                            <label for="name">URL za IGDB ID: <a href="https://www.igdb.com/discover" target="_blank"><b>https://www.igdb.com/discover</b></a></label>
+                            <label>
+                                <input type="number" name="igdb" x-bind:value="{{ $torrent->igdb }}" class="form-control"
+                                       required>
+                            </label>
+                        </div>
 
                     @if ($torrent->category->tv_meta)
                         <div class="form-group">
