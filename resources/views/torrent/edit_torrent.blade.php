@@ -32,12 +32,15 @@
                     <div class="form-group">
                         <label for="category_id">{{ __('torrent.category') }}</label>
                         <label>
-                            <select name="category_id" id="autocat" class="form-control">
+                            <select name="category_id" id="autocat" class="form-control" x-on:change="meta = $el.options[$el.selectedIndex].getAttribute('data-meta')">
                                 <option value="{{ $torrent->category->id }}" selected>{{ $torrent->category->name }}
                                     ({{ __('torrent.current') }})
                                 </option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}"
+                                            data-meta="{{ $category->movie_meta ? 'movie' : ($category->tv_meta ? 'tv' : ($category->game_meta ? 'game' : ($category->no_meta ? 'no' : ''))) }}"
+                                            @if ($category_id==$category->id) selected="selected"@endif>
+                                    {{ $category->name }}</option>
                                 @endforeach
                             </select>
                         </label>
@@ -51,7 +54,9 @@
                                     ({{ __('torrent.current') }})
                                 </option>
                                 @foreach ($types as $type)
-                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                                    <option value="{{ $type->id }}">
+                                        @if (old('type_id')==$type->id) selected="selected"@endif>
+                                    {{ $type->name }}</option>
                                 @endforeach
                             </select>
                         </label>
