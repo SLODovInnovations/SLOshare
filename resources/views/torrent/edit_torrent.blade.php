@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label for="category_id">{{ __('torrent.category') }}</label>
                         <label>
-                            <select name="category_id" class="form-control">
+                            <select name="category_id" id="autocat" class="form-control">
                                 <option value="{{ $torrent->category->id }}" selected>{{ $torrent->category->name }}
                                     ({{ __('torrent.current') }})
                                 </option>
@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <label for="type">{{ __('torrent.type') }}</label>
                         <label>
-                            <select name="type_id" class="form-control">
+                            <select name="type_id" id="autotype" class="form-control">
                                 <option value="{{ $torrent->type->id }}" selected>{{ $torrent->type->name }}
                                     ({{ __('torrent.current') }})
                                 </option>
@@ -57,11 +57,11 @@
                         </label>
                     </div>
 
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
-                        <div class="form-group">
-                            <label for="resolution_id">{{ __('torrent.resolution') }}</label>
+                    @php $data = App\Models\Category::where('id', '=', !empty($category_id) ? $category_id : old('category_id'))->first();@endphp
+                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
+                            <label for="resolution_ids">{{ __('torrent.resolution') }}</label>
                             <label>
-                                <select name="resolution_id" class="form-control">
+                                <select name="resolution_id" id="autores" class="form-control">
                                     @if (! $torrent->resolution)
                                         <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-resolution') }}
                                         </option>)
@@ -84,9 +84,8 @@
                             <br>
                             <label for="name">URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank"><b>https://www.themoviedb.org/</b></a></label>
                             <label>
-                                <input type="text" name="apimatch" id="apimatch" class="form-control" value="" disabled>
                                 <input type="number" name="tmdb" id="autotmdb" class="form-control"
-                                       x-bind:value="{{ $torrent->tmdb }}" required>
+                                       value="{{ $torrent->tmdb }}" required>
                             </label>
                         </div>
 
@@ -103,7 +102,7 @@
                                     $imdb_val = old('imdb');
                                 } @endphp
                                 <input type="number" name="imdb" id="autoimdb" class="form-control"
-                                       x-bind:value="{{ $torrent->imdb }}">
+                                       value="{{ $torrent->imdb }}">
                             </label>
                         </div>
 
@@ -113,7 +112,7 @@
                             <label for="name">URL za TVDB ID: <a href="https://www.thetvdb.com/" target="_blank"><b>https://www.thetvdb.com/</b></a></label>
                             <label>
                                 <input type="number" name="tvdb" id="autotvdb"
-                                       x-bind:value="{{ $torrent->tvdb }}"
+                                       value="{{ $torrent->tvdb }}"
                                        class="form-control" required>
                             </label>
                         </div>
@@ -123,7 +122,7 @@
                             <br>
                             <label for="name">URL za MAL ID: <a href="https://myanimelist.net/" target="_blank"><b>https://myanimelist.net/</b></a></label>
                             <label>
-                                <input type="number" name="mal" x-bind:value="{{ $torrent->mal }}" class="form-control"
+                                <input type="number" name="mal" value="{{ $torrent->mal }}" class="form-control"
                                        required>
                             </label>
                         </div>
@@ -133,7 +132,7 @@
                             <br>
                             <label for="name">URL za IGDB ID: <a href="https://www.igdb.com/discover" target="_blank"><b>https://www.igdb.com/discover</b></a></label>
                             <label>
-                                <input type="number" name="igdb" x-bind:value="{{ $torrent->igdb }}" class="form-control"
+                                <input type="number" name="igdb" value="{{ $torrent->igdb }}" class="form-control"
                                        required>
                             </label>
                         </div>
