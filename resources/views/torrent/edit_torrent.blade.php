@@ -1,5 +1,9 @@
 @extends('layout.default')
 
+@section('title')
+    <title>{{ __('torrent.edit') }}</title>
+@endsection
+
 @section('breadcrumb')
     <li>
         <a href="{{ route('edit_form', ['id' => $torrent->id]) }}" itemprop="url" class="l-breadcrumb-item-link">
@@ -10,7 +14,8 @@
 @endsection
 
 @section('content')
-        <div class="container">
+        @php $data = App\Models\Category::where('id', '=', !empty($category_id) ? $category_id : old('category_id'))->first();@endphp
+        <div class="upload col-md-12" x-data="{ meta: '{{ $data->movie_meta ? 'movie' : ($data->tv_meta ? 'tv' : ($data->game_meta ? 'game' : ($data->no_meta ? 'no' : ''))) }}'}">
             <h2>{{ __('common.edit') }}: {{ $torrent->name }}</h2>
             <div class="block">
                 <form role="form" method="POST" action="{{ route('edit', ['id' => $torrent->id]) }}"
@@ -82,7 +87,6 @@
                                 </select>
                             </label>
                         </div>
-                    @endif
 
                         <div class="form-group"  x-show="meta == 'movie' || meta == 'tv'">
                             <label for="name">TMDB ID <b>({{ __('request.required') }})</b></label>
