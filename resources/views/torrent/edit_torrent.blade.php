@@ -132,7 +132,6 @@
                         </label>
                     </div>
 
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                         <div class="form-group">
                             <label for="resolution_id">{{ __('torrent.resolution') }}</label>
                             <label>
@@ -153,25 +152,20 @@
                                 </select>
                             </label>
                         </div>
-                    @endif
 
-                    @if ($torrent->category->tv_meta)
                         <div class="form-group">
                             <label for="season_number">{{ __('torrent.season-number') }} <b>({{ __('request.required') }} za
                                     TV)</b></label>
                             <input type="number" name="season_number" id="season_number" class="form-control"
                                    value="{{ $torrent->season_number }}" required>
                         </div>
-                    @endif
 
-                    @if ($torrent->category->tv_meta)
                         <div class="form-group">
                             <label for="episode_number">{{ __('torrent.episode-number') }} <b>({{ __('request.required') }}za
                                     TV. Uporabite "0" za sezonske pakete.)</b></label>
                             <input type="number" name="episode_number" id="episode_number" class="form-control"
                                    value="{{ $torrent->episode_number }}" required>
                         </div>
-                    @endif
 
                     @if($torrent->type->name === 'Celotni Disk')
                         <div class="form-group">
