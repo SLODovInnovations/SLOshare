@@ -4,7 +4,7 @@
                 <div class="nav nav-tabs-user">
                     <a href="{{ route('articles.show', ['id' => $article->id]) }}">
                         <h4 class="newtitle">
-                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->title), 12))...
+                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->title), 9))...
                         </h4>
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                             </a>
                         </div>
                         <div class="newbodytext">
-                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->content), 200))...
+                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->content), 200))
                         </div>
                     </div>
                     <!--Body-->

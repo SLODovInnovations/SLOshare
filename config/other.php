@@ -72,10 +72,10 @@ return [
     | Freelech State
     |--------------------------------------------------------------------------
     |
-    | Global Freeleech
+    | Global Freeleech false/true
     |
     */
-    'freeleech' => true,
+    'freeleech' => false,
 
     'freeleech_until' => '01.12.2021 1:00 UTC',
 
@@ -98,7 +98,7 @@ return [
     |
     */
 
-    'ratio' => 0.0,
+    'ratio' => 1.0,
 
     /*
     |--------------------------------------------------------------------------
@@ -128,8 +128,8 @@ return [
     | This will be the upload and download given to new members. (In Bytes!)
     | Default: 50GiB Upload and 1GiB Download
     */
-    'default_upload'   => '0',
-    'default_download' => '0',
+    'default_upload'   => '1',
+    'default_download' => '1',
 
     /*
     |--------------------------------------------------------------------------

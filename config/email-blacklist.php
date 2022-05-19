@@ -36,5 +36,5 @@ return [
     'source'      => 'https://cdn.jsdelivr.net/gh/andreis/disposable-email-domains@master/domains.json',
     'cache-key'   => 'email.domains.blacklist',
     'auto-update' => true,
-    'append'      => null,
+    'append'      => "10minutesemail.net|yandex.ru|simplelogin.co",
 ];
