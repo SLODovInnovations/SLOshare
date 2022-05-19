@@ -40,7 +40,7 @@
             Vsaka donacija je POPOLNOMA PROSTOVOLJNA. Nobenega od uporabnikov nikakor ne silimo k doniranju.
             <br>
             <br>
-            Če želite donirati, lahko to storite preko: <span style="font-weight: bold;">PayPala, Debetno ali Kreditno kartico</span>.
+            Če želite donirati, lahko to storite preko: <span style="font-weight: bold;">PayPala, debetno ali kreditno kartico</span>.
             <br>
             <br>
             <span style="color: #FF0000; font-weight: bold;">
