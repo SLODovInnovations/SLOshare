@@ -43,10 +43,14 @@
             Če želite donirati lahko donirate preko PayPala, Debetno ali Kreditno kartico.
             <br>
             <br>
+            <span style="color: #FF0000; font-weight: bold;">
             DODATNO OBVESTILO: Donacija vas ne opraviči pri neupoštevanju pravil in ne izključuje kazni prepoved uporabe portala!
+            </span>
             <br>
             <br>
             Po opravljeni donaciji nam sporočite uporabniško ime na <a href="mailto:donacije@sloshare.eu">donacije@sloshare.eu</a>
+            <br>
+            Za ostale informacije nam pišite na <a href="mailto:info@sloshare.eu">info@sloshare.eu</a>
         </article>
             <div class="row black-list">
                     <div class="col-xs-6 col-sm-4 col-md-3">
