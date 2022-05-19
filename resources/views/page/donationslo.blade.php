@@ -30,6 +30,10 @@
                     <div class="col-xs-6 col-sm-4 col-md-3">
                         <div class="text-center black-item">
                             <h4>5€</h4>
+                            <p>
+                            - VIP
+                            - 1000 GB UL
+                            </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
                             <input type="hidden" name="hosted_button_id" value="9VSKWN3QQJCQU" />
                             <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Donacija 5€" />
@@ -41,6 +45,9 @@
                     <div class="col-xs-6 col-sm-4 col-md-3">
                         <div class="text-center black-item">
                             <h4>10€</h4>
+                            - VIP
+                            - 2000 GB UL
+                            </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
                             <input type="hidden" name="hosted_button_id" value="RP96883WS92ZJ" />
                             <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Donacija 10€" />
@@ -52,6 +59,9 @@
                     <div class="col-xs-6 col-sm-4 col-md-3">
                         <div class="text-center black-item">
                             <h4>15€</h4>
+                            - VIP
+                            - 5000 GB UL
+                            </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
                             <input type="hidden" name="hosted_button_id" value="VTBES36PDSMWJ" />
                             <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Donacija 15€" />
@@ -63,6 +73,9 @@
                     <div class="col-xs-6 col-sm-4 col-md-3">
                         <div class="text-center black-item">
                             <h4>20€</h4>
+                            - VIP
+                            - 1 TB UL
+                            </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
                             <input type="hidden" name="hosted_button_id" value="9ZSEYX2SXHQPC" />
                             <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="Donacija 20€" />
