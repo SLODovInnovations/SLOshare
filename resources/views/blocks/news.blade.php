@@ -4,11 +4,16 @@
                 <div class="nav nav-tabs-user">
                     <a href="{{ route('articles.show', ['id' => $article->id]) }}">
                         <h4 class="newtitle">
-                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->title), 12))
+                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->title), 12))...
                         </h4>
                     </a>
                 </div>
                 <div class="panel-body no-padding">
+                    <p class="text-muted">
+                        <em>{{ __('articles.published-at') }}
+                            {{ date('d.m.Y', $article->created_at->getTimestamp()) }} | {{ date('H:m:s', $article->created_at->getTimestamp()) }}
+                        </em>
+                    </p>
                     <!--Body-->
                     <div class="newbody">
                         <div class="newbodyimg">
@@ -39,11 +44,6 @@
                         </div>
                         @endif
                     <!-- SLOshare -->
-                    <p class="text-muted">
-                        <em>{{ __('articles.published-at') }}
-                            {{ date('d.m.Y', $article->created_at->getTimestamp()) }} | {{ date('H:m:s', $article->created_at->getTimestamp()) }}
-                        </em>
-                    </p>
                     </div>
                     <!--Footer-->
                 </div>
