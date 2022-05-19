@@ -34,7 +34,7 @@
             <br>
             <br>
             Zato smo zelo veseli vsakega prostovoljnega prispevka s strani uporabnikov našega in vašega portala. SLOshare
-            je v celoti ne profiten, vse fukcije portala so v celoti brezplačne.
+            je v celoti neprofiten, vse fukcije portala so v celoti brezplačne.
             <br>
             <br>
             Vsaka donacija je POPOLNOMA PROSTOVOLJNA. Nobenega od uporabnikov nikakor ne silimo k doniranju.
