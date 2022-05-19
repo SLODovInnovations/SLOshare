@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('torrent.edit') }}</title>
+    <title>{{ __('common.edit-torrent') }}</title>
 @endsection
 
 @section('breadcrumb')
@@ -22,7 +22,7 @@
                       enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="title">{{ __('torrent.title') }}</label>
+                        <label for="title">{{ __('torrent.name-torrent') }}</label>
                         <label>
                             <input type="text" class="form-control" name="name" value="{{ $torrent->name }}" required>
                         </label>
@@ -308,6 +308,8 @@
 @else
                         <input type="hidden" name="personal_release" value="0">
 @endif
+
+                    <br>
 
                     @if (auth()->user()->group->is_freeleech)
                         <label for="freeleech" class="control-label">{{ __('torrent.freeleech') }}?</label>
