@@ -28,7 +28,7 @@
         </div>
         <article class="page-content">
             Portal SLOshare.eu je v celoti plod dela ekipe SLOshare, ki se bori za pravice do prostega pretoka informaci v SLOVENIJI
-            in v osnovi deluje popolnoma neprofitno, če prav SLOshare marsikateremu članu predstavlja 8 URNI delovnik.
+            in v osnovi deluje popolnoma neprofitno, če prav SLOshare marsikateremu članu predstavlja 8-urni delovnik.
             Primarni cilj projekta je spodbujanje in nagrajevanje P2P skupnosti.Ekipa SLOshare se zelo trudi da naredi
             stran moderno in bolj prijazno uporabnikom. Vsa ekipa SLOshare se trudi in vam ponuja številjne stare in nove informacije.
             <br>
@@ -40,7 +40,7 @@
             Vsaka donacija je POPOLNOMA PROSTOVOLJNA. Nobenega od uporabnikov nikakor ne silimo k doniranju.
             <br>
             <br>
-            Če želite donirati lahko donirate preko PayPala, Debetno ali Kreditno kartico.
+            Če želite donirati, lahko to storite preko: <span style="font-weight: bold;">PayPala, Debetno ali Kreditno kartico</span>.
             <br>
             <br>
             <span style="color: #FF0000; font-weight: bold;">
