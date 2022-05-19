@@ -54,6 +54,7 @@
                             <h4>5€</h4>
                             <p>
                             - VIP
+                            <br>
                             - 1000 GB UL
                             </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
@@ -68,6 +69,7 @@
                         <div class="text-center black-item">
                             <h4>10€</h4>
                             - VIP
+                            <br>
                             - 2000 GB UL
                             </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
@@ -82,6 +84,7 @@
                         <div class="text-center black-item">
                             <h4>15€</h4>
                             - VIP
+                            <br>
                             - 5000 GB UL
                             </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
@@ -96,6 +99,7 @@
                         <div class="text-center black-item">
                             <h4>20€</h4>
                             - VIP
+                            <br>
                             - 1 TB UL
                             </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
