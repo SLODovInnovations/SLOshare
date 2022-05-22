@@ -36,7 +36,7 @@
     <br>
     <br>
     <p>
-    3. Kaj so številjke zgoraj desno ob navigaciskem meniju? Kaj je ratio?
+    3. Kaj so številke zgoraj desno ob navigaciskem meniju? Kaj je ratio?
     </p>
     <br>
     <p>
