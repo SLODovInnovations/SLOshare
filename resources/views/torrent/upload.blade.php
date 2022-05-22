@@ -297,10 +297,14 @@
                             <label><input type="radio" name="stream" id="stream"
                                           value="(meta == 'movie' || meta == 'tv') ? '1' : '0'"{{ old('stream') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
                         </div>
+@else
                         <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
                             <label><input type="radio" name="stream" id="stream"
                                           value="0"{{ !old('stream') ? ' checked' : '' }}>{{ __('common.no') }}</label>
                         </div>
+@endif
+
+@if (auth()->user()->group->is_admin)
 
                         <br x-show="meta == 'movie' || meta == 'tv'">
 
@@ -309,13 +313,13 @@
                             <label><input type="radio" name="sd"
                                           x-bind:value="(meta == 'movie' || meta == 'tv') ? '1' : '0'"{{ old('sd') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
                         </div>
+@else
                         <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
                             <label><input type="radio" name="sd"
                                           value="0"{{ !old('sd') ? ' checked' : '' }}>{{ __('common.no') }}</label>
                         </div>
-
-                        <br>
 @endif
+                        <br>
 
                     @if (auth()->user()->group->is_admin || auth()->user()->group->is_internal)
                         <label for="internal" class="control-label">{{ __('torrent.internal') }}?</label>
