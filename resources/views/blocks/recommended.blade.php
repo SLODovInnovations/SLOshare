@@ -57,7 +57,7 @@
                                 @endif
                             @endif
                             @if ($slorecommendeds->category->movie_meta)
-                                @if ($recommended->tmdb || $slorecommendeds->tmdb != 0)
+                                @if ($slorecommendeds->tmdb || $slorecommendeds->tmdb != 0)
                             	    @php $meta = App\Models\Movie::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
