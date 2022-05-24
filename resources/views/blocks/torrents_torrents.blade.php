@@ -104,8 +104,8 @@
 					<a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $newslo->id]) }}"title="{{ $newslo->name }}" class="release-info-title sloshare-title">{{ preg_replace('#\[[^\]]+\]#', '', Str::limit(htmlspecialchars_decode($newslo->name)), 30) }}</a>
-					<div class="release-info-container">{{ preg_replace('#\[[^\]]+\]#', '', Str::limit(htmlspecialchars_decode($p->content)), 75) }}
+					<a href="{{ route('torrent', ['id' => $newslo->id]) }}"title="{{ $newslo->name }}" class="release-info-title sloshare-title">{{ preg_replace('#\[[^\]]+\]#', '', Str::limit(htmlspecialchars_decode($newslo->name)), 30) }}...</a>
+					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $newslo->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $newslo->comments_count }}</span></div>
 
 						@if ($newslo->category->game_meta)
