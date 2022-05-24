@@ -73,7 +73,7 @@
 					<a href="{{ route('categories.show', ['id' => $seed->category->id]) }}" class="release-info-quality quality-sloshare">{{ $seed->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $seed->id]) }}"title="{{ $seed->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($seed->name), 30))...</a>
+					<a href="{{ route('torrent', ['id' => $seed->id]) }}"title="{{ $seed->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($seed->name, 50))</a>
 					<div class="release-info-container">
 						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $seed->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $seed->comments_count }}</span></div>
 
@@ -168,7 +168,7 @@
     					<a href="{{ route('categories.show', ['id' => $leech->category->id]) }}" class="release-info-quality quality-sloshare">{{ $leech->category->name }}</a>
                         @endif
 
-    					<a href="{{ route('torrent', ['id' => $leech->id]) }}"title="{{ $leech->name }}" class="release-info-title sloshare-title">@joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($leech->name), 30))...</a>
+    					<a href="{{ route('torrent', ['id' => $leech->id]) }}"title="{{ $leech->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($leech->name, 50))</a>
     					<div class="release-info-container">
     						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $leech->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $leech->comments_count }}</span></div>
 
