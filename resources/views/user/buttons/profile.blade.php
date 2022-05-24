@@ -1,6 +1,7 @@
 <div class="button-holder">
     <div class="button-left">
-        @if(auth()->user()->id == $user->id)
+<!--@if(auth()->user()->id == $user->id)-->
+@if (auth()->user()->group->is_admin)
             @if((!auth()->user()->hidden || auth()->user()->hidden == 0))
                 <form role="form" method="POST" action="{{ route('user_hidden', ['username' => $user->username]) }}"
                       style="display: inline-block;">
