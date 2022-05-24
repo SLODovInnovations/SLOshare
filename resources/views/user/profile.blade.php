@@ -409,30 +409,6 @@
                                 </tr>
                                 @endif
                                 @endif
-                                @if (auth()->user()->isAllowed($user,'profile','show_profile_torrent_extra'))
-                                <tr>
-                                    <td>{{ __('user.torrents') }}</td>
-                                    <td>
-                                        <ul class="list-inline mb-0">
-                                        <li>
-                                            <span><strong>{{ __('common.fl_tokens') }}:</strong>
-                                            <span class="text-green text-bold">{{ $user->fl_tokens }}</span>
-                                            </span> |
-                                        </li>
-                                        <li>
-                                            <span><strong>{{ __('user.thanks-received') }}:</strong>
-                                            <span class="text-pink text-bold">{{ $user->thanksReceived()->count() }}</span>
-                                            </span> |
-                                        </li>
-                                        <li>
-                                            <span><strong>{{ __('user.thanks-given') }}:</strong>
-                                            <span class="text-pink text-bold"> {{ $user->thanksGiven()->count() }}</span>
-                                            </span>
-                                        </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                                @endif
                                 @if (auth()->user()->isAllowed($user,'profile','show_profile_comment_extra'))
                                 <tr>
                                     <td>{{ __('user.comments') }}</td>
