@@ -1,5 +1,8 @@
 <div class="movie-wrapper">
+@if ($torrent->tmdb != 0 && $torrent->tmdb != null)
     <div class="movie-overlay"></div>
+@else
+@endif
     <div class="movie-poster">
         <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
             <img src="{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg'; }}"
