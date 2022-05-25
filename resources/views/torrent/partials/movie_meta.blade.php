@@ -6,6 +6,7 @@
                  class="img-responsive" id="meta-poster">
         </a>
     </div>
+@if ($torrent->tmdb != 0 && $torrent->tmdb != null)
     <div class="meta-info">
         <div class="tags">
             {{ $torrent->category->name }}
@@ -164,4 +165,13 @@
             </div>
         </div>
     </div>
+@else
+    <div class="meta-info">
+        {{-- General Info Block --}}
+        @include('torrent.partials.no_meta_general')
+        <div class="torrent-buttons">
+            @include('torrent.partials.buttons')
+        </div>
+    </div>
+@endif
 </div>
