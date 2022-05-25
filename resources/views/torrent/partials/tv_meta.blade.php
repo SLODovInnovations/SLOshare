@@ -2,10 +2,12 @@
     <div class="movie-overlay"></div>
     <div class="movie-poster">
         <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
-            <img src="{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_poster.jpg'; }}"
+            <img src="{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg'; }}"
                  class="img-responsive" id="meta-poster">
         </a>
     </div>
+
+@if ($torrent->tmdb != 0 && $torrent->tmdb != null)
     <div class="meta-info">
         <div class="tags">
             {{ $torrent->category->name }}
@@ -185,4 +187,13 @@
             </div>
         </div>
     </div>
+@else
+    <div class="meta-info">
+        {{-- General Info Block --}}
+        @include('torrent.partials.no_meta_general')
+        <div class="torrent-buttons">
+            @include('torrent.partials.buttons')
+        </div>
+    </div>
+@endif
 </div>

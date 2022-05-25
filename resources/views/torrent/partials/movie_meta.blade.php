@@ -6,6 +6,8 @@
                  class="img-responsive" id="meta-poster">
         </a>
     </div>
+
+@if ($torrent->tmdb != 0 && $torrent->tmdb != null)
     <div class="meta-info">
         <div class="tags">
             {{ $torrent->category->name }}
@@ -27,7 +29,6 @@
             @endif
         </div>
 
-@if ($torrent->tmdb != 0 && $torrent->tmdb != null)
         <div class="movie-backdrop"
              style="background-image: url('{{ ($meta && $meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : '/img/SLOshare/movie_no_image_banner.jpg' }}');"></div>
 
@@ -164,14 +165,14 @@
                 @endif
             </div>
         </div>
-@else
-        <div class="meta-info">
-            {{-- General Info Block --}}
-            @include('torrent.partials.no_meta_general')
-            <div class="torrent-buttons">
-                @include('torrent.partials.buttons')
-            </div>
-        </div>
-@endif
     </div>
+@else
+    <div class="meta-info">
+        {{-- General Info Block --}}
+        @include('torrent.partials.no_meta_general')
+        <div class="torrent-buttons">
+            @include('torrent.partials.buttons')
+        </div>
+    </div>
+@endif
 </div>
