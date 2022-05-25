@@ -20,6 +20,9 @@
     <link rel="shortcut icon" href="{{ url('/favicon.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ url('/favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ mix('css/main/login.css') }}" crossorigin="anonymous">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5654650999587494"
+        crossorigin="anonymous"></script>
 </head>
 
 @php $bg = rand(1, 38); $bgchange = $bg.".jpg" @endphp
