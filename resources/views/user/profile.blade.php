@@ -233,9 +233,9 @@
                         <!--Description-->
                         <div class="tab-pane fade active in" id="description">
                             <div style="background:#262626; min-height:70px; padding:10px 15px 10px 15px;">
-                            @if (auth()->user()->isAllowed($user,'profile','show_profile_title'))
+                            <!--@if (auth()->user()->isAllowed($user,'profile','show_profile_title'))
                                 {{ __('user.title') }}
-                            @endif
+                            @endif-->
                             @if (auth()->user()->isAllowed($user,'profile','show_profile_about'))
                             <br>
                                 @joypixels($user->getAboutHtml())
