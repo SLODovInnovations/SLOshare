@@ -74,7 +74,7 @@
                         <i class="{{ config('other.font-awesome') }} fa-fw fa-star text-gold"></i> {{ __('torrent.freeleech') }}
                     </span>
                     <div class="numup" style="padding-top:5px;">
-                        @if ($torrent->free == '1' || config('other.freeleech') == '1')
+                        @if ($torrent->free == '1' || $torrent->free >= '90' || $torrent->free < '90' && $torrent->free >= '30' || $torrent->free < '30' && $torrent->free != '0' || config('other.freeleech') == '1')
                         JE
                         @else
                         NI
