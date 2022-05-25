@@ -571,7 +571,7 @@
                                 <tr>
                                     <td> {{ __('user.last-login') }}</td>
                                     <td>@if ($user->last_login != null){{ $user->last_login->toDayDateTimeString() }}
-                                        ({{ $user->last_login->diffForHumans() }})@else @endif</td>
+                                        ({{ $user->last_login->diffForHumans() }})@else N/A @endif</td>
                                 </tr>
                                 <tr>
                                     <td> {{ __('user.can-upload') }}</td>
