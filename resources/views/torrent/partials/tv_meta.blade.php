@@ -3,12 +3,19 @@
     <div class="movie-overlay"></div>
 @else
 @endif
+@if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+    <div class="movie-poster">
+        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="img-responsive" id="meta-poster">
+    </div>
+@else
     <div class="movie-poster">
         <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
             <img src="{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg'; }}"
                  class="img-responsive" id="meta-poster">
         </a>
     </div>
+@endif
+
 
 @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
     <div class="meta-info">
