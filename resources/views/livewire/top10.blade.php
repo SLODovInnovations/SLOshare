@@ -1493,7 +1493,7 @@
         <thead>
         <tr>
             <th class="text-center dark-th" colspan="12">
-                <span style="font-size: 16px;">Top 10 (Vez Čas)</span>
+                <span style="font-size: 16px;">Top 10 (Ves Čas)</span>
             </th>
         </tr>
         </thead>
