@@ -1,10 +1,17 @@
 <div class="movie-wrapper">
     <div class="movie-overlay"></div>
+
+@if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+    <div class="movie-poster">
+        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="img-responsive" id="meta-poster">
+    </div>
+@else
     <div class="movie-poster">
         <img style="height: 516px !important;"
-             src="{{ (isset($meta) && $meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_original/'.$meta->cover['image_id'].'.jpg' : '/img/SLOshare/games_no_image_poster.jpg' }}"
+             src="{{ (isset($meta) && $meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_original/'.$meta->cover['image_id'].'.jpg' : '/img/SLOshare/games_no_image_400x600.jpg' }}"
              class="img-responsive" id="meta-poster">
     </div>
+@endif
     <div class="meta-info">
         <div class="tags">
             {{ $torrent->category->name }}

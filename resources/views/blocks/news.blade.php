@@ -26,8 +26,7 @@
                             </a>
                         </div>
                         <div class="newbodytext">
-                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->content),
-                            150))...
+                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->content, 120)))
                         </div>
                     </div>
                     <!--Body-->
