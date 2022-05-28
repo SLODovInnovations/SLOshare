@@ -82,7 +82,7 @@
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
             style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
             @else
-            style="background-image: url('/img/poster/poster-torrent-1.png');">
+            style="background-image: url('/img/poster/meta_no_image_holder_400x600.jpg');">
             @endif
 
 			@if ($newslo->category->music_meta)
@@ -429,12 +429,12 @@
 
 			<div class="gallery-item"
 			@if ($cartoon->tmdb != 0 && $cartoon->tmdb != null)
-			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/poster-torrent-1.png'; }}');">
+			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/movie_no_image_holder_400x600.jpg'; }}');">
             @else
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoon->id.'.jpg'))
             style="background-image: url('{{ url('files/img/torrent-cover_' . $cartoon->id . '.jpg') }}');">
             @else
-            style="background-image: url('/img/poster/poster-torrent-1.png');">
+            style="background-image: url('/img/poster/movie_no_image_holder_400x600.jpg');">
             @endif
             @endif
 
