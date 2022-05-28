@@ -118,7 +118,7 @@
                         <input type="hidden" name="igdb" value="0">
                     @endif
 
-                    <div class="form-group">
+                    <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
                         <label for="type">{{ __('torrent.type') }}</label>
                         <label>
                             <select name="type_id" class="form-control">
@@ -132,7 +132,7 @@
                         </label>
                     </div>
 
-                        <div class="form-group">
+                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
                             <label for="resolution_id">{{ __('torrent.resolution') }}</label>
                             <label>
                                 <select name="resolution_id" class="form-control">
@@ -153,14 +153,14 @@
                             </label>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" x-show="meta == 'tv'">
                             <label for="season_number">{{ __('torrent.season-number') }} <b>({{ __('request.required') }} za
                                     TV)</b></label>
                             <input type="number" name="season_number" id="season_number" class="form-control"
                                    value="{{ $torrent->season_number }}" required>
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group" x-show="meta == 'tv'">
                             <label for="episode_number">{{ __('torrent.episode-number') }} <b>({{ __('request.required') }}za
                                     TV. Uporabite "0" za sezonske pakete.)</b></label>
                             <input type="number" name="episode_number" id="episode_number" class="form-control"
