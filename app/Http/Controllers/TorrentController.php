@@ -560,7 +560,7 @@ class TorrentController extends Controller
         $torrent->personal_release = $request->input('personal_release');
         $torrent->moderated_at = Carbon::now();
         $torrent->moderated_by = 1; //System ID
-        $torrent->free = $user->group->is_modo || $user->group->is_internal ? $request->input('free') : 0;
+        $torrent->free = $user->group->is_modo || $user->group->is_internal || $user->id === $torrent->user_id ? $request->input('free') : 0;
 
         $resolutionRule = 'nullable|exists:resolutions,id';
         if ($category->movie_meta || $category->tv_meta) {
