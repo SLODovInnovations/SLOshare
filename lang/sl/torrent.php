@@ -209,7 +209,7 @@ return [
     'torrent-tips-desc'        => 'To se bo odštelo od vaših razpoložljivih bonus točk',
     'torrents'                 => 'Torrenti',
     'torrents-matched'         => 'Torrenti se ujemajo',
-    'trailer'                  => 'Ogled priklopnika',
+    'trailer'                  => 'Ogled trailerja',
     'type'                     => 'Vrsta',
     'types'                    => 'Vrste',
     'unbookmark'               => 'Unbookmark',
