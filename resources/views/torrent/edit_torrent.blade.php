@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('common.edit-torrent') }}</title>
+    <title>{{ __('torrent.edit-torrent') }}</title>
 @endsection
 
 @section('breadcrumb')
@@ -337,7 +337,6 @@
                             <label><input type="radio" name="free"
                                           @if ($torrent->free == 0) checked
                                           @endif value="0">{{ __('common.no') }}</label>
-                                          value="0"{{ !old('free') ? ' checked' : '' }}>{{ __('common.no') }}</label>
                         </div>
                     @else
                         <input type="hidden" name="free" value="0">
