@@ -33,7 +33,7 @@
             <div class="movie-overlay"></div>
 
             <div class="movie-poster">
-                <img src="{{ $collection->poster ? tmdb_image('poster_big', $collection->poster) : '/img/SLOshare/movie_no_image_poster.jpg' }}"
+                <img src="{{ $collection->poster ? tmdb_image('poster_big', $collection->poster) : '/img/SLOshare/meta_no_image_holder_400x600.jpg' }}"
                      class="img-responsive" id="meta-poster">
             </div>
 

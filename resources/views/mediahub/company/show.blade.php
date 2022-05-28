@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="card_body">
                                     <div class="body_poster">
-                                        <img src="{{ isset($show->poster) ? tmdb_image('poster_mid', $show->poster) : '/img/SLOshare/movie_no_image_search.jpg' }}"
+                                        <img src="{{ isset($show->poster) ? tmdb_image('poster_mid', $show->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
                                              class="show-poster">
                                     </div>
                                     <div class="body_description">
@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="card_body">
                                     <div class="body_poster">
-                                        <img src="{{ isset($movie->poster) ? tmdb_image('poster_mid', $movie->poster) : '/img/SLOshare/movie_no_image_search.jpg' }}"
+                                        <img src="{{ isset($movie->poster) ? tmdb_image('poster_mid', $movie->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
                                              class="show-poster">
                                     </div>
                                     <div class="body_description">
