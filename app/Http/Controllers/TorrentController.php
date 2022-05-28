@@ -264,7 +264,7 @@ class TorrentController extends Controller
         $torrent->sd = $request->input('sd');
         $torrent->internal = $request->input('internal');
         $torrent->personal_release = $request->input('personal_release');
-        $torrent->free = $request->input('free') : 0;
+        $torrent->free = $user->group->is_modo || $user->group->is_internal || $user->id === $torrent->user_id ? $request->input('free') : 0;
 
         $category = Category::findOrFail($request->input('category_id'));
 
