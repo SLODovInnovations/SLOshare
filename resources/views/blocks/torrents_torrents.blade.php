@@ -75,14 +75,9 @@
             @endif
 
             @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
-                style="background-image: url('https://images.igdb.com/igdb/image/upload/t_cover_big/{{ $meta->cover['image_id'] }}.jpg')
-                    class="show-poster"
-                    data-name='<i style="color: #a5a5a5;">{{ $meta->name ?? 'N/A' }}</i>'
-                    data-image='<img src="https://images.igdb.com/igdb/image/upload/t_original/{{ $meta->cover['image_id'] }}.jpg"
-					    alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
-                    class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
+                style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}');')
+                    class="show-poster"  alt="{{ __('torrent.poster') }}>
             @endif
-
 
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
             style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
@@ -164,12 +159,12 @@
 
 			<div class="gallery-item"
 			@if ($videos->tmdb != 0 && $videos->tmdb != null)
-			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/poster-torrent-1.png'; }}');">
+			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/movie_no_image_holder_400x600.jpg'; }}');">
             @else
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$videos->id.'.jpg'))
             style="background-image: url('{{ url('files/img/torrent-cover_' . $videos->id . '.jpg') }}');">
             @else
-            style="background-image: url('/img/poster/poster-torrent-1.png');">
+            style="background-image: url('/img/poster/movie_no_image_holder_400x600.jpg');">
             @endif
             @endif
 
@@ -241,12 +236,12 @@
 
 			<div class="gallery-item"
 			@if ($tv->tmdb != 0 && $tv->tmdb != null)
-			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/poster-torrent-1.png'; }}');">
+			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/movie_no_image_holder_400x600.jpg'; }}');">
             @else
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$tv->id.'.jpg'))
             style="background-image: url('{{ url('files/img/torrent-cover_' . $tv->id . '.jpg') }}');">
             @else
-            style="background-image: url('/img/poster/poster-torrent-1.png');">
+            style="background-image: url('/img/poster/movie_no_image_holder_400x600.jpg');">
             @endif
             @endif
 
@@ -315,7 +310,7 @@
 						@endif
 					@endif
 
-			<div class="gallery-item" style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/poster-torrent-1.png' }}');">
+			<div class="gallery-item" style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}');">
 				<div class="release-info">
 
 				    @if ($games->free == '1' || config('other.freeleech') == '1')
@@ -375,7 +370,7 @@
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$application->id.'.jpg'))
             style="background-image: url('{{ url('files/img/torrent-cover_' . $application->id . '.jpg') }}');">
             @else
-            style="background-image: url('/img/poster/poster-torrent-1.png');">
+            style="background-image: url('/img/poster/meta_no_image_holder_400x600.jpg');">
             @endif
             @endif
 				<div class="release-info">
