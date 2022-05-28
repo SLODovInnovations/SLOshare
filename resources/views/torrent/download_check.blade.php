@@ -112,9 +112,13 @@
                     <a href="{{ route('download', ['id' => $torrent->id]) }}" role="button"
                        class="btn btn-labeled btn-primary">
                             <span class='btn-label'><i
-                                        class='{{ config('other.font-awesome') }} fa-download'></i></span>{{ __('common.download') }}
+                                        class='{{ config('other.font-awesome') }} fa-download'></i></span>{{ __('torrent.download-torrents') }}
                     </a>
                 @endif
+                    <a href="{{ route('torrent', ['id' => $torrent->id]) }}" role="button"
+                       class="btn btn-labeled btn-primary">
+                        {{ __('torrent.view-torrent') }}
+                    </a>
             </div>
         </div>
     </div>

@@ -276,7 +276,7 @@
                     </div>
                     <br>
 @else
-                        <input type="hidden" name="radio" value="0">
+                        <input type="hidden" name="sd" value="0">
 @endif
 
 @if (auth()->user()->group->is_admin || auth()->user()->group->is_internal)
@@ -315,22 +315,28 @@
                         <label for="freeleech" class="control-label">{{ __('torrent.freeleech') }}?</label>
                         <div class="radio-inline">
                             <label><input type="radio" name="free"
-                                          value="100"{{ old('free') ? ' checked' : '' }}>100%</label>
+                                          @if ($torrent->free == 100) checked
+                                          @endif value="100">100%</label>
                         </div>
                         <div class="radio-inline">
                             <label><input type="radio" name="free"
-                                          value="75"{{ old('free') ? ' checked' : '' }}>75%</label>
+                                          @if ($torrent->free == 75) checked
+                                          @endif value="75">75%</label>
                         </div>
                         <div class="radio-inline">
                             <label><input type="radio" name="free"
-                                          value="50"{{ old('free') ? ' checked' : '' }}>50%</label>
+                                          @if ($torrent->free == 50) checked
+                                          @endif value="50">50%</label>
                         </div>
                         <div class="radio-inline">
                             <label><input type="radio" name="free"
-                                          value="25"{{ old('free') ? ' checked' : '' }}>25%</label>
+                                          @if ($torrent->free == 25) checked
+                                          @endif value="25">25%</label>
                         </div>
                         <div class="radio-inline">
                             <label><input type="radio" name="free"
+                                          @if ($torrent->free == 0) checked
+                                          @endif value="0">{{ __('common.no') }}</label>
                                           value="0"{{ !old('free') ? ' checked' : '' }}>{{ __('common.no') }}</label>
                         </div>
                     @else

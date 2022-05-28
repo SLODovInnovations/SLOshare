@@ -262,4 +262,5 @@ return [
     'xxx-18'                   => 'XXX (NAD 18 LET)',
     'for-the-youngest'         => 'Za najmlajše',
     'edit-torrent'             => 'Uredi Torrent',
+    'view-torrent'             => 'Preveri Torrent',
 ];
