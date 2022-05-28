@@ -241,7 +241,7 @@ return [
     'announce-url-desc3'       => 'IGBD je potreben za vse naložene Torrente! Uporablja se za PLAKATE/OZADJA in DODATNE INFORMACIJE',
     'button'                   => 'Naloži Torrent',
     'download-torrent'         => 'Prenesi',
-    'download-torrents'        => 'Prenosi Torrent',
+    'download-torrents'        => 'Prenesi Torrent',
     'download'                 => 'Prenosi',
     'name-torrent'             => 'Ime Torrenta',
     'report'                   => 'Prijave',
@@ -262,5 +262,5 @@ return [
     'xxx-18'                   => 'XXX (NAD 18 LET)',
     'for-the-youngest'         => 'Za najmlajše',
     'edit-torrent'             => 'Uredi Torrent',
-    'view-torrent'             => 'Preveri Torrent',
+    'view-torrent'             => 'Pojdi na Torrent',
 ];
