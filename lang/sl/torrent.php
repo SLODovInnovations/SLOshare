@@ -223,7 +223,7 @@ return [
     'use-fl-token'             => 'Uporabite brezplačen žeton',
     'video'                    => 'Video',
     'view-more'                => 'Poglej več',
-    'view-trailer'             => 'Ogled priklopnika',
+    'view-trailer'             => 'Ogled trailerja',
     'votes'                    => 'Glasov',
     'year-range'               => 'Letni razpon',
 
