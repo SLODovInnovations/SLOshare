@@ -125,14 +125,14 @@
 			</div>
 @endforeach
 
-                <a class="left carousel-control">
+                <!--<a class="left carousel-control">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                     <span class="sr-only">{{ __("common.previous") }}</span>
                 </a>
                 <a class="right carousel-control">
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     <span class="sr-only">{{ __("common.next") }}</span>
-                </a>
+                </a>-->
             </div>
         </div>
     </div>
