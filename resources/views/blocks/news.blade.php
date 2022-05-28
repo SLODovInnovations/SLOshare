@@ -31,20 +31,20 @@
                     </div>
                     <!--Body-->
                     <!--Footer-->
-                    <div class="newfooter">
+                    <!--<div class="newfooter">
                         <a href="{{ route('articles.show', ['id' => $article->id]) }}" class="btn btn-success">
                             {{ __('articles.read-more') }}
-                        </a>
+                        </a>-->
                     <!-- SLOshare -->
-                        @if (auth()->user()->group->is_admin)
+                        <!--@if (auth()->user()->group->is_admin)
                         <div class="pull-right">
                             <a href="{{ route('articles.index') }}" class="btn btn-primary">
                                 {{ __('common.view-all') }}
                             </a>
                         </div>
-                        @endif
+                        @endif-->
                     <!-- SLOshare -->
-                    </div>
+                    <!--</div>-->
                     <!--Footer-->
                 </div>
             </div>
