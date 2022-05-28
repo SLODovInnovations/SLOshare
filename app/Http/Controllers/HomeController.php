@@ -123,12 +123,14 @@ class HomeController extends Controller
 
         $seeded = \cache()->remember('seeded_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type'])
             ->withCount(['thanks', 'comments'])
+            ->where('seeders', '>=', 1)
             ->latest('seeders')
             ->take(9)
             ->get());
 
         $leeched = \cache()->remember('leeched_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type'])
             ->withCount(['thanks', 'comments'])
+            ->where('leechers', '>=', 1)
             ->latest('leechers')
             ->take(9)
             ->get());
