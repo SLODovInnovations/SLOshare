@@ -327,7 +327,7 @@ return [
     'unfollow'                             => 'Nehaj slediti',
     'unlocked'                             => 'Odklenjeno',
     'unlocked-achievements'                => 'Odklenjeni dosežki',
-    'unsatisfieds'                         => 'Nezadovoljni',
+    'unsatisfieds'                         => 'Neodsejano',
     'upload-bon'                           => 'Nalaganje dodano iz trgovine BON',
     'upload-recorded'                      => 'Posnet prenos',
     'upload-true'                          => 'Pravi prenos',
