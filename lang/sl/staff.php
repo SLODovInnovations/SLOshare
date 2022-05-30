@@ -17,7 +17,7 @@ return [
     'config-manager'          => 'Upravitelj konfig',
     'dashboard'               => 'Nadzorna plošča',
     'failed-login-log'        => 'Dnevnik prijave ni uspel',
-    'flush-ghost-peers'       => 'Flush Ghost Peers',
+    'flush-ghost-peers'       => 'Osveževanje Sejalcev',
     'forums'                  => 'Forumi',
     'frontend'                => 'Frontend',
     'general-tools'           => 'Splošna orodja',

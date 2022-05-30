@@ -135,7 +135,7 @@
                 <form role="form" method="POST" action="{{ route('staff.flush.peers') }}" style="padding: 10px 15px;">
                     @csrf
                     <i class="{{ config('other.font-awesome') }} fa-ghost"></i>
-                    <button type="submit" class="btn btn-xs btn-info" style="margin-bottom: 5px;">
+                    <button type="submit" class="btn btn-info" style="margin-bottom: 5px;">
                         {{ __('staff.flush-ghost-peers') }}
                     </button>
                 </form>

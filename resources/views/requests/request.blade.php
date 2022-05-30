@@ -79,10 +79,6 @@
                     @include('torrent.partials.game_meta', ['torrent' => $torrentRequest])
                 @endif
 
-                @if ($torrentRequest->category->no_meta)
-                    @include('torrent.partials.no_meta', ['torrent' => $torrentRequest])
-                @endif
-
                 <div class="table-responsive mt-20">
                     <table class="table table-condensed table-bordered table-striped">
                         <tbody>

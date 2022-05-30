@@ -26,7 +26,7 @@
         <form role="form" method="POST" action="{{ route('flush_own_ghost_peers', ['username' => $user->username]) }}"
               style="display: inline-block;">
             @csrf
-            <button type="submit" class="btn btn-sm btn-danger">
+            <button type="submit" class="btn btn-danger">
                 {{ __('staff.flush-ghost-peers') }}
             </button>
         </form>
@@ -43,11 +43,11 @@
     </div>
     <div class="button-right-small">
         @if(auth()->user()->id == $user->id)
-            <a href="{{ route('user_settings', ['username' => $user->username]) }}" class="btn btn-sm btn-danger">
+            <a href="{{ route('user_settings', ['username' => $user->username]) }}" class="btn btn-danger">
                 {{ __('user.settings') }}
             </a>
             <a href="{{ route('user_edit_profile_form', ['username' => $user->username]) }}">
-                <button class="btn btn-sm btn-danger">{{ __('user.edit-profile') }}</button>
+                <button class="btn btn-danger">{{ __('user.edit-profile') }}</button>
             </a>
         @endif
     </div>

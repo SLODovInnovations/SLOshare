@@ -121,7 +121,7 @@
                 @endif
 
                 <br>
-                @if ($torrent->keywords)
+                <!--@if ($torrent->keywords)
                     @foreach ($torrent->keywords as $keyword)
                         <span class="badge-user text-bold text-green">
                             <a href="{{ route('torrents') }}?keywords={{ $keyword->name }}">
@@ -129,7 +129,7 @@
                             </a>
                         </span>
                     @endforeach
-                @endif
+                @endif-->
             </div>
 
             <div class="movie-details">
