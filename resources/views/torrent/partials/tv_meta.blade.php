@@ -141,7 +141,7 @@
                     @endforeach
                 @endif
 
-                <br>
+                <!--<br>
                 @if ($torrent->keywords)
                     @foreach ($torrent->keywords as $keyword)
                         <span class="badge-user text-bold text-green">
@@ -150,7 +150,7 @@
                             </a>
                         </span>
                     @endforeach
-                @endif
+                @endif-->
             </div>
 
             <div class="movie-details">
