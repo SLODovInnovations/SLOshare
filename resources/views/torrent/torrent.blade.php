@@ -53,7 +53,7 @@
 
             {{-- No Meta Block --}}
             @if ($torrent->category->no_meta)
-                @include('torrent.partials.no_meta')
+                @include('torrent.partials.no_meta_slo')
             @endif
 
 @if ($torrent->tmdb != 0 && $torrent->tmdb != null || isset($meta) && $meta->url && $torrent->igdb !== 0 && $torrent->igdb !== null)
