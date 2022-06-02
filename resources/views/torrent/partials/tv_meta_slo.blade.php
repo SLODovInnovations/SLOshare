@@ -55,7 +55,7 @@
         </div>
 
         <div class="movie-backdrop"
-             style="background-image: url('{{ ($meta && $meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : '/img/SLOshare/movie_no_image_banner.j' }}');"></div>
+             style="background-image: url('{{ ($meta && $meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : '/img/SLOshare/movie_no_image_banner.jpg' }}');"></div>
 
         <div class="movie-top">
             <h1 class="movie-heading" style="margin-bottom: 0;">

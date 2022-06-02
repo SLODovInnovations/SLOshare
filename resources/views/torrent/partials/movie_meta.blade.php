@@ -2,7 +2,7 @@
     <div class="movie-overlay"></div>
     <div class="movie-poster">
         <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
-            <img src="{{ ($meta && $meta->poster) ? tmdb_image('poster_big', $meta->poster) : 'https://via.placeholder.com/400x600' }}"
+            <img src="{{ ($meta && $meta->poster) ? tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
                  class="img-responsive" id="meta-poster">
         </a>
     </div>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="movie-backdrop"
-             style="background-image: url('{{ ($meta && $meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : 'https://via.placeholder.com/960x540' }}');"></div>
+             style="background-image: url('{{ ($meta && $meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : '/img/SLOshare/movie_no_image_banner.jpg' }}');"></div>
 
         <div class="movie-top">
             <h1 class="movie-heading" style="margin-bottom: 0;">
@@ -154,7 +154,7 @@
                         <div class="cast-item" style="max-width: 80px;">
                             <a href="{{ route('mediahub.persons.show', ['id' => $cast->id]) }}" class="badge-user">
                                 <img class="img-responsive"
-                                     src="{{ $cast->still ? tmdb_image('cast_face', $cast->still) : 'https://via.placeholder.com/138x175' }}"
+                                     src="{{ $cast->still ? tmdb_image('cast_face', $cast->still) : '/img/SLOshare/video_no_image_cast.jpg' }}"
                                      alt="{{ $cast->name }}">
                                 <div class="cast-name">{{ $cast->name }}</div>
                             </a>
