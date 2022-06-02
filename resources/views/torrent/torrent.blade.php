@@ -33,12 +33,12 @@
         <div class="meta-wrapper box container" id="meta-info">
             {{-- Movie Meta Block --}}
             @if ($torrent->category->movie_meta)
-                @include('torrent.partials.movie_meta')
+                @include('torrent.partials.movie_meta_slo')
             @endif
 
             {{-- TV Meta Block --}}
             @if ($torrent->category->tv_meta)
-                @include('torrent.partials.tv_meta')
+                @include('torrent.partials.tv_meta_slo')
             @endif
 
             {{-- Game Meta Block --}}

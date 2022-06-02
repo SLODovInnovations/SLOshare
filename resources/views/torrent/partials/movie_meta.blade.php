@@ -1,31 +1,11 @@
 <div class="movie-wrapper">
-@if ($torrent->tmdb != 0 && $torrent->tmdb != null)
     <div class="movie-overlay"></div>
-@else
-@endif
-
-@if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
-    <div class="movie-poster">
-        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="img-responsive" id="meta-poster">
-    </div>
-@else
     <div class="movie-poster">
         <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
-            <img src="{{ ($meta && $meta->poster) ? tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+            <img src="{{ ($meta && $meta->poster) ? tmdb_image('poster_big', $meta->poster) : 'https://via.placeholder.com/400x600' }}"
                  class="img-responsive" id="meta-poster">
         </a>
     </div>
-@endif
-
-@if ($torrent->tmdb != 0 && $torrent->tmdb != null || isset($meta) && $meta->url && $torrent->igdb !== 0 && $torrent->igdb !== null)
-    <div class="meta-info">
-        {{-- General Info Block --}}
-        @include('torrent.partials.no_meta_general')
-        <div class="torrent-buttons">
-            @include('torrent.partials.buttons')
-        </div>
-    </div>
-@else
     <div class="meta-info">
         <div class="tags">
             {{ $torrent->category->name }}
@@ -48,13 +28,13 @@
         </div>
 
         <div class="movie-backdrop"
-             style="background-image: url('{{ ($meta && $meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : '/img/SLOshare/movie_no_image_banner.jpg' }}');"></div>
+             style="background-image: url('{{ ($meta && $meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : 'https://via.placeholder.com/960x540' }}');"></div>
 
         <div class="movie-top">
             <h1 class="movie-heading" style="margin-bottom: 0;">
                 <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
                     <span class="text-bright text-bold"
-                          style="font-size: 28px;">{{ $meta->title ?? 'Meta ni bila najdena' }}</span>
+                          style="font-size: 28px;">{{ $meta->title ?? 'No Meta Found' }}</span>
                 </a>
                 @if(isset($meta->release_date))
                     <span style="font-size: 28px;"> ({{ substr($meta->release_date, 0, 4) ?? '' }})</span>
@@ -71,7 +51,7 @@
                 @if(isset($meta->crew))
                     @if(!empty($directors = $meta->crew()->where('known_for_department' ,'=', 'Directing')->take(1)->get()))
                         <span class="badge-user text-bold text-purple">
-                        <i class="{{ config('other.font-awesome') }} fa-camera-movie"></i> Opis:
+                        <i class="{{ config('other.font-awesome') }} fa-camera-movie"></i> Directors:
                         @foreach($directors as $director)
                                 <a href="{{ route('mediahub.persons.show', ['id' => $director->id]) }}"
                                    style="display: inline-block;">
@@ -95,7 +75,7 @@
 
                 @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
                     <span class="badge-user text-bold">
-                    <a href="https://www.themoviedb.org/movie/{{ $torrent->tmdb }}" title="Filmska zbirka podatkov"
+                    <a href="https://www.themoviedb.org/movie/{{ $torrent->tmdb }}" title="The Movie Database"
                        target="_blank">
                         <i class="{{ config('other.font-awesome') }} fa-film"></i> TMDB: {{ $torrent->tmdb }}
                     </a>
@@ -128,7 +108,7 @@
                     @endforeach
                 @endif
 
-                <!--<br>
+                <br>
                 @if ($torrent->keywords)
                     @foreach ($torrent->keywords as $keyword)
                         <span class="badge-user text-bold text-green">
@@ -137,14 +117,14 @@
                             </a>
                         </span>
                     @endforeach
-                @endif-->
+                @endif
             </div>
 
             <div class="movie-details">
                 @if(isset($meta) && !empty(trim($meta->homepage)))
                     <span class="badge-user text-bold">
                     <a href="{{ $meta->homepage }}" title="Homepage" rel="noopener noreferrer" target="_blank">
-                        <i class="{{ config('other.font-awesome') }} fa-external-link-alt"></i> Domača stran
+                        <i class="{{ config('other.font-awesome') }} fa-external-link-alt"></i> Homepage
                     </a>
                 </span>
                 @endif
@@ -174,7 +154,7 @@
                         <div class="cast-item" style="max-width: 80px;">
                             <a href="{{ route('mediahub.persons.show', ['id' => $cast->id]) }}" class="badge-user">
                                 <img class="img-responsive"
-                                     src="{{ $cast->still ? tmdb_image('cast_face', $cast->still) : '/img/SLOshare/video_no_image_cast.jpg' }}"
+                                     src="{{ $cast->still ? tmdb_image('cast_face', $cast->still) : 'https://via.placeholder.com/138x175' }}"
                                      alt="{{ $cast->name }}">
                                 <div class="cast-name">{{ $cast->name }}</div>
                             </a>
@@ -184,5 +164,4 @@
             </div>
         </div>
     </div>
-@endif
 </div>
