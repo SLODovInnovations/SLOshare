@@ -42,7 +42,7 @@
         </div>
 
         <div class="movie-backdrop"
-             style="background-image: url('{{ ($meta && $meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : 'https://via.placeholder.com/960x540' }}');"></div>
+             style="background-image: url('{{ ($meta && $meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : '/img/SLOshare/movie_no_image_banner.jpg' }}');"></div>
 
         <div class="movie-top">
             <h1 class="movie-heading" style="margin-bottom: 0;">
@@ -175,7 +175,7 @@
                         <div class="cast-item" style="max-width: 80px;">
                             <a href="{{ route('mediahub.persons.show', ['id' => $cast->id]) }}" class="badge-user">
                                 <img class="img-responsive"
-                                     src="{{ $cast->still ? tmdb_image('cast_face', $cast->still) : 'https://via.placeholder.com/138x175' }}"
+                                     src="{{ $cast->still ? tmdb_image('cast_face', $cast->still) : '/img/SLOshare/video_no_image_cast.jpg' }}"
                                      alt="{{ $cast->name }}">
                                 <div class="cast-name">{{ $cast->name }}</div>
                             </a>
