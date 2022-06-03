@@ -29,9 +29,9 @@
                     </div>
 
                         <div class="form-group">
-                            <label for="torrent-banner">{{ __('torrent.banner') }}</label>
+                            <label for="torrent-cover">{{ __('torrent.banner') }}</label>
                             <input class="upload-form-file" type="file" accept=".jpg, .jpeg, .png"
-                                   name="torrent-banner">
+                                   name="torrent-cover">
                         </div>
 
                     <div class="form-group">

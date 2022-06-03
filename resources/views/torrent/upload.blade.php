@@ -72,8 +72,8 @@
 
                         <div class="col-sm-6 col-lg-6">
                             <div class="form-group">
-                                <label for="torrent-banner">{{ __('torrent.banner') }}</label>
-                                <input class="upload-form-file" type="file" accept=".jpg, .jpeg" name="torrent-banner">
+                                <label for="torrent-cover">{{ __('torrent.banner') }}</label>
+                                <input class="upload-form-file" type="file" accept=".jpg, .jpeg" name="torrent-cover">
                             </div>
                         </div>
 

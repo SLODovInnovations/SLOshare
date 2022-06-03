@@ -4,7 +4,7 @@
             <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}" class="img-responsive"
                  id="meta-poster">
         @else
-            <img src="/img/SLOshare/movie_no_image_poster.jpg" class="img-responsive" id="meta-poster">
+            <img src="/img/SLOshare/meta_no_image_holder_400x600.jpg" class="img-responsive" id="meta-poster">
         @endif
     </div>
     <div class="meta-info">
