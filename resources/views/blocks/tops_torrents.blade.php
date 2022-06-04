@@ -68,7 +68,7 @@
             @endif
 				<div class="release-info">
 
-				    @if ($seed->free == '1' || config('other.freeleech') == '1')
+				    @if ($seed->free == '1' || $seed->free >= '90' || $seed->free < '90' && $seed->free >= '30' || $seed->free < '30' && $seed->free != '0' || config('other.freeleech') == '1')
 					<a href="{{ route('categories.show', ['id' => $seed->category->id]) }}" class="release-info-quality quality-sloshare">{{ $seed->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					@else
 					<a href="{{ route('categories.show', ['id' => $seed->category->id]) }}" class="release-info-quality quality-sloshare">{{ $seed->category->name }}</a>
@@ -164,7 +164,7 @@
             @endif
     				<div class="release-info">
 
-    				    @if ($leech->free == '1' || config('other.freeleech') == '1')
+				        @if ($leech->free == '1' || $leech->free >= '90' || $leech->free < '90' && $leech->free >= '30' || $leech->free < '30' && $leech->free != '0' || config('other.freeleech') == '1')
     					<a href="{{ route('categories.show', ['id' => $leech->category->id]) }}" class="release-info-quality quality-sloshare">{{ $leech->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
     					@else
     					<a href="{{ route('categories.show', ['id' => $leech->category->id]) }}" class="release-info-quality quality-sloshare">{{ $leech->category->name }}</a>

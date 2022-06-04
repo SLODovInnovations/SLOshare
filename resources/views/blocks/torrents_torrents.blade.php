@@ -93,7 +93,7 @@
 
 				<div class="release-info">
 
-				    @if ($newslo->free == '1' || config('other.freeleech') == '1')
+				    @if ($newslo->free == '1' || $newslo->free >= '90' || $newslo->free < '90' && $newslo->free >= '30' || $newslo->free < '30' && $newslo->free != '0' || config('other.freeleech') == '1')
 					<a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					@else
 					<a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }}</a>
@@ -170,7 +170,7 @@
 
 				<div class="release-info">
 
-				    @if ($videos->free == '1' || config('other.freeleech') == '1')
+				    @if ($videos->free == '1' || $videos->free >= '90' || $videos->free < '90' && $videos->free >= '30' || $videos->free < '30' && $videos->free != '0' || config('other.freeleech') == '1')
 					<a href="{{ route('categories.show', ['id' => $videos->category->id]) }}" class="release-info-quality quality-sloshare">{{ $videos->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					@else
 					<a href="{{ route('categories.show', ['id' => $videos->category->id]) }}" class="release-info-quality quality-sloshare">{{ $videos->category->name }}</a>
@@ -247,7 +247,7 @@
 
 				<div class="release-info">
 
-				    @if ($tv->free == '1' || config('other.freeleech') == '1')
+				    @if ($tv->free == '1' || $tv->free >= '90' || $tv->free < '90' && $tv->free >= '30' || $tv->free < '30' && $tv->free != '0' || config('other.freeleech') == '1')
 					<a href="{{ route('categories.show', ['id' => $tv->category->id]) }}" class="release-info-quality quality-sloshare">{{ $tv->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					@else
 					<a href="{{ route('categories.show', ['id' => $tv->category->id]) }}" class="release-info-quality quality-sloshare">{{ $tv->category->name }}</a>
@@ -313,7 +313,7 @@
 			<div class="gallery-item" style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}');">
 				<div class="release-info">
 
-				    @if ($games->free == '1' || config('other.freeleech') == '1')
+				    @if ($games->free == '1' || $games->free >= '90' || $games->free < '90' && $games->free >= '30' || $games->free < '30' && $games->free != '0' || config('other.freeleech') == '1')
 					<a href="{{ route('categories.show', ['id' => $games->category->id]) }}" class="release-info-quality quality-sloshare">{{ $games->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					@else
 					<a href="{{ route('categories.show', ['id' => $games->category->id]) }}" class="release-info-quality quality-sloshare">{{ $games->category->name }}</a>
@@ -375,7 +375,7 @@
             @endif
 				<div class="release-info">
 
-				    @if ($application->free == '1' || config('other.freeleech') == '1')
+				    @if ($application->free == '1' || $application->free >= '90' || $application->free < '90' && $application->free >= '30' || $application->free < '30' && $application->free != '0' || config('other.freeleech') == '1')
 					<a href="{{ route('categories.show', ['id' => $application->category->id]) }}" class="release-info-quality quality-sloshare">{{ $application->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					@else
 					<a href="{{ route('categories.show', ['id' => $application->category->id]) }}" class="release-info-quality quality-sloshare">{{ $application->category->name }}</a>
@@ -443,7 +443,7 @@
 
 				<div class="release-info">
 
-				    @if ($cartoon->free == '1' || config('other.freeleech') == '1')
+				    @if ($cartoon->free == '1' || $cartoon->free >= '90' || $cartoon->free < '90' && $cartoon->free >= '30' || $cartoon->free < '30' && $cartoon->free != '0' || config('other.freeleech') == '1')
 					<a href="{{ route('categories.show', ['id' => $cartoon->category->id]) }}" class="release-info-quality quality-sloshare">{{ $cartoon->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					@else
 					<a href="{{ route('categories.show', ['id' => $cartoon->category->id]) }}" class="release-info-quality quality-sloshare">{{ $cartoon->category->name }}</a>
@@ -500,10 +500,9 @@
             @endif
             @endif
 				<div class="release-info">
-
-				    @if ($x->free == '1' || config('other.freeleech') == '1')
+                    @if ($x->free == '1' || $x->free >= '90' || $x->free < '90' && $x->free >= '30' || $x->free < '30' && $x->free != '0' || config('other.freeleech') == '1')
 					<a href="{{ route('categories.show', ['id' => $x->category->id]) }}" class="release-info-quality quality-sloshare">{{ $x->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
-					@else
+                    @else
 					<a href="{{ route('categories.show', ['id' => $x->category->id]) }}" class="release-info-quality quality-sloshare">{{ $x->category->name }}</a>
                     @endif
 

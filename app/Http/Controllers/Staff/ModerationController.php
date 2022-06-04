@@ -96,8 +96,8 @@ class ModerationController extends Controller
         $privateMessage = new PrivateMessage();
         $privateMessage->sender_id = $user->id;
         $privateMessage->receiver_id = $torrent->user_id;
-        $privateMessage->subject = \sprintf('Vaš naložen Torrent, %s ,je bil preložen z strani %s', $torrent->name, $user->username);
-        $privateMessage->message = \sprintf('Greetings,
+        $privateMessage->subject = \sprintf('Vaš naložen Torrent, %s, je bil preložen z strani %s', $torrent->name, $user->username);
+        $privateMessage->message = \sprintf('Lep pozdrav,
 
  Vaš naložen Torrent, %s ,je bil preložen. Spodaj si oglejte sporočilo Osebja SLOshare.eu.
 
@@ -130,7 +130,7 @@ class ModerationController extends Controller
         $privateMessage = new PrivateMessage();
         $privateMessage->sender_id = $user->id;
         $privateMessage->receiver_id = $torrent->user_id;
-        $privateMessage->subject = \sprintf('Vaš naloženi Torrent, %s ,je bil zavrnjen z strani %s', $torrent->name, $user->username);
+        $privateMessage->subject = \sprintf('Vaš naloženi Torrent, %s, je bil zavrnjen z strani %s', $torrent->name, $user->username);
         $privateMessage->message = \sprintf('Lep pozdrav,
 
  Vaš naloženi Torrent %s je bil zavrnjen. Spodaj si oglejte sporočilo Osebja SLOshare.eu.

@@ -364,10 +364,10 @@ class TorrentController extends Controller
                     $pmuser = new PrivateMessage();
                     $pmuser->sender_id = 1;
                     $pmuser->receiver_id = $pm->user_id;
-                    $pmuser->subject = \sprintf('Torrent je izbrisan! - %s', $torrent->name);
-                    $pmuser->message = \sprintf('[b]OPOZORILO:[/b] Torrent %s je bil odstranjen z našega spletnega mesta. Naš sistem kaže, da ste bili na omenjenem hudourniku bodisi nalagalec, sejalec ali leecher. Želeli smo vas samo obvestiti, da ga lahko varno odstranite iz svoje stranke.
+                    $pmuser->subject = \sprintf('Torrent je bil izbrisan! - %s', $torrent->name);
+                    $pmuser->message = \sprintf('[b]OPOZORILO:[/b] Torrent %s je bil izbrisan iz našega portala. Na omenjenem torrentu ste bili bodisi nalagalec, sejalec ali leecher. Želeli smo vas samo obvestiti, da ga lahko varno odstranite iz vašega clienta.
                                         [b]Razlog za odstranitev:[/b] %s
-                                        [color=red][b]TO JE AVTOMATIZOVANO SISTEMSKO SPOROČILO, PROSIMO, NE ODGOVARAJTE![/b][/color]', $torrent->name, $request->message);
+                                        [color=red][b]TO JE AVTOMATIZIRANO SISTEMSKO SPOROČILO, PROSIMO, NE ODGOVARAJTE![/b][/color]', $torrent->name, $request->message);
                     $pmuser->save();
                 }
 
