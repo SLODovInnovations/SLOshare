@@ -87,17 +87,17 @@
                         <input type="hidden" name="tvdb" value="0">
                     @endif
 
-                    <!--@if ($torrentRequest->category->movie_meta || $torrentRequest->category->tv_meta)
-                        <div class="form-group">
+                    @if ($torrentRequest->category->movie_meta || $torrentRequest->category->tv_meta)
+                        <!--<div class="form-group">
                             <label for="name">MAL ID <b>({{ __('request.required') }} For Anime)</b></label>
                             <label>
                                 <input type="number" name="mal" value="{{ $torrentRequest->mal }}" class="form-control"
                                        required>
                             </label>
-                        </div>
+                        </div>-->
                     @else
                         <input type="hidden" name="mal" value="0">
-                    @endif-->
+                    @endif
 
                     @if ($torrentRequest->category->game_meta)
                         <div class="form-group">
