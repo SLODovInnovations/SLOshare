@@ -1156,7 +1156,7 @@
     </div>
 </div>
 
-<script nonce="{{ HDVinnie\SecureHeaders\SecureHeaders::nonce('script') }}">
+<script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce('script') }}">
   document.addEventListener('livewire:load', function () {
     let myOptions = [
             @foreach($regions as $region)
@@ -1170,8 +1170,8 @@
       options: myOptions,
       multiple: true,
       search: true,
-      placeholder: "{{__('Select Regions')}}",
-      noOptionsText: "{{__('No results found')}}",
+      placeholder: "{{__('Izberite Regije')}}",
+      noOptionsText: "{{__('Ni zadetkov')}}",
     })
 
     let regions = document.querySelector('#regions')
@@ -1192,8 +1192,8 @@
       options: myOptions2,
       multiple: true,
       search: true,
-      placeholder: "{{__('Select Distributor')}}",
-      noOptionsText: "{{__('No results found')}}",
+      placeholder: "{{__('Izberite Distributorje')}}",
+      noOptionsText: "{{__('Ni zadetkov')}}",
     })
 
     let distributors = document.querySelector('#distributors')

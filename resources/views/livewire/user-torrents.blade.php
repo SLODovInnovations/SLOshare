@@ -449,7 +449,7 @@
             </div>
         </div>
     </div>
-    <script nonce="{{ HDVinnie\SecureHeaders\SecureHeaders::nonce('script') }}">
+    <script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce('script') }}">
         function ternaryCheckbox() {
             return {
                 updateTernaryCheckboxProperties(el, state) {
