@@ -100,9 +100,7 @@ class BBCodeConverter
                 $buffer = '';
 
                 $list = \preg_replace('#\s*$|^\s*#mu', '', $matches['items']);
-                if (\is_null($list)) {
-                    throw new \RuntimeException('Besedilo ima napačno oblikovane sezname BBCode');
-                }
+                \throw_if(\is_null($list), new \RuntimeException('Besedilo ima napačno oblikovane sezname BBCode'));
 
                 $items = \preg_split('#\[\*\]#u', $list);
 

@@ -1,19 +1,23 @@
 @extends('layout.default')
 
-@section('breadcrumb')
-    <li class="active">
-        <a href="{{ route('inbox') }}">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">
-                {{ __('pm.inbox') }}
-            </span>
+@section('breadcrumbs')
+    <li class="breadcrumbV2">
+        <a href="{{ route('inbox') }}" class="breadcrumb__link">
+            {{ __('pm.messages') }}
         </a>
     </li>
+    <li class="breadcrumb--active">
+        {{ __('pm.inbox') }}
+    </li>
+@endsection
+
+@section('nav-tabs')
+    @include('partials.pmmenu')
 @endsection
 
 @section('content')
     <div class="container">
         <div class="row">
-            @include('partials.pmmenu')
             <div class="col-md-10">
                 <div class="block">
                     <div class="row">

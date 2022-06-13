@@ -4,16 +4,46 @@
     <title>{{ __('torrent.uploads') }}</title>
 @endsection
 
-@section('breadcrumb')
-    <li>
-        <a href="{{ route('torrents') }}" itemprop="url" class="l-breadcrumb-item-link">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">{{ __('torrent.torrents') }}</span>
+@section('breadcrumbs')
+    <li class="breadcrumbV2">
+        <a href="{{ route('torrents') }}" class="breadcrumb__link">
+            {{ __('torrent.torrents') }}
         </a>
     </li>
-    <li>
-        <a href="{{ route('upload_form', ['category_id' => $category_id]) }}" itemprop="url"
-           class="l-breadcrumb-item-link">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">{{ __('common.upload') }}</span>
+    <li class="breadcrumb--active">
+        {{ __('common.upload') }}
+    </li>
+@endsection
+
+@section('nav-tabs')
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('torrents') }}">
+            List
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('cards') }}">
+            Cards
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="#">
+            Grouped
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('top10.index') }}">
+            Top 10
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('rss.index') }}">
+            {{ __('rss.rss') }}
+        </a>
+    </li>
+    <li class="nav-tab--active">
+        <a class="nav-tab--active__link" href="{{ route('upload_form', ['category_id' => 1]) }}">
+            {{ __('common.upload') }}
         </a>
     </li>
 @endsection
@@ -51,8 +81,10 @@
                 </p>
             </div>
 
-            @php $data = App\Models\Category::where('id', '=', !empty($category_id) ? $category_id : old('category_id'))->first();@endphp
-            <div class="upload col-md-12" x-data="{ meta: '{{ $data->movie_meta ? 'movie' : ($data->tv_meta ? 'tv' : ($data->game_meta ? 'game' : ($data->no_meta ? 'no' : ''))) }}'}">
+            <div class="upload col-md-12"
+                 x-data="{
+                 cat: {{(int)$category_id}},
+                 cats: JSON.parse(atob('{!! base64_encode(json_encode($categories)) !!}'))}">
                 <h2 class="upload-title">{{ __('torrent.torrent') }}</h2>
                 <form name="upload" class="upload-form" id="upload-form" method="POST" action="{{ route('upload') }}"
                       enctype="multipart/form-data">
@@ -61,7 +93,7 @@
                         <div class="form-group">
                             <label for="torrent">Torrent {{ __('torrent.file') }}</label>
                             <input class="upload-form-file" type="file" accept=".torrent" name="torrent" id="torrent"
-                                    required>
+                               required @change="uploadExtension.hook(); cat = $refs.catId.value">
                         </div>
                     </div>
 
@@ -71,7 +103,7 @@
                     </div>-->
 
                         <div class="col-sm-6 col-lg-6">
-                            <div class="form-group">
+                            <div class="form-group" x-show="cats[cat].type === 'no'">
                                 <label for="torrent-cover">{{ __('torrent.banner') }}</label>
                                 <input class="upload-form-file" type="file" accept=".jpg, .jpeg" name="torrent-cover">
                             </div>
@@ -87,14 +119,12 @@
                     <div class="form-group">
                         <label for="category_id">{{ __('torrent.category') }}</label>
                         <label>
-                            <select name="category_id" id="autocat" class="form-control" required x-on:change="meta = $el.options[$el.selectedIndex].getAttribute('data-meta')">
-                                <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-category') }}
+                            <select x-ref="catId" name="category_id" id="autocat" class="form-control" required x-model="cat" @change="cats[cat].type = cats[$event.target.value].type;">
+                                <option hidden="" disabled="disabled" value="">{{ __('torrent.select-category') }}
                                 </option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                            data-meta="{{ $category->movie_meta ? 'movie' : ($category->tv_meta ? 'tv' : ($category->game_meta ? 'game' : ($category->no_meta ? 'no' : ''))) }}"
-                                            @if ($category_id==$category->id) selected="selected"@endif>
-                                        {{ $category->name }}
+                                @foreach ($categories as $id => $category)
+                                    <option value="{{ $id }}">
+                                        {{ $category['name'] }}
                                     </option>
                                 @endforeach
                             </select>
@@ -117,131 +147,130 @@
                         </label>
                     </div>
 
-                        @php $data = App\Models\Category::where('id', '=', !empty($category_id) ? $category_id : old('category_id'))->first();@endphp
-                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
-                            <label for="resolution_ids">{{ __('torrent.resolution') }}</label>
-                            <label>
-                                <select name="resolution_id" id="autores" class="form-control">
-                                    <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-resolution') }}
+                    <div class="form-group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label for="resolution_ids">{{ __('torrent.resolution') }}</label>
+                        <label>
+                            <select name="resolution_id" id="autores" class="form-control">
+                                <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-resolution') }}
+                                </option>
+                                @foreach ($resolutions as $resolution)
+                                    <option value="{{ $resolution->id }}"
+                                            @if (old('resolution_id')==$resolution->id) selected="selected" @endif>
+                                        {{ $resolution->name }}
                                     </option>
-                                    @foreach ($resolutions as $resolution)
-                                        <option value="{{ $resolution->id }}"
-                                                @if (old('resolution_id')==$resolution->id) selected="selected" @endif>
-                                            {{ $resolution->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </label>
-                        </div>
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
 
-                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
-                            <label for="distributor_id">{{ __('torrent.distributor') }} (Samo za celoten disk)</label>
-                            <label>
-                                <select name="distributor_id" id="autodis" class="form-control">
-                                    <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-distributor') }}
+                    <div class="form-group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label for="distributor_id">{{ __('torrent.distributor') }} (Samo za celoten disk)</label>
+                        <label>
+                            <select name="distributor_id" id="autodis" class="form-control">
+                                <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-distributor') }}
+                                </option>
+                                @foreach ($distributors as $distributor)
+                                    <option value="{{ $distributor->id }}"
+                                            @if (old('distributor_id')==$distributor->id) selected="selected" @endif>
+                                        {{ $distributor->name }}
                                     </option>
-                                    @foreach ($distributors as $distributor)
-                                        <option value="{{ $distributor->id }}"
-                                                @if (old('distributor_id')==$distributor->id) selected="selected" @endif>
-                                            {{ $distributor->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </label>
-                        </div>
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
 
-                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
-                            <label for="region_id">{{ __('torrent.region') }} (Samo za celoten disk)</label>
-                            <label>
-                                <select name="region_id" id="autoreg" class="form-control">
-                                    <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-region') }}
+                    <div class="form-group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label for="region_id">{{ __('torrent.region') }} (Samo za celoten disk)</label>
+                        <label>
+                            <select name="region_id" id="autoreg" class="form-control">
+                                <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-region') }}
+                                </option>
+                                @foreach ($regions as $region)
+                                    <option value="{{ $region->id }}"
+                                            @if (old('region_id')==$region->id) selected="selected" @endif>
+                                        {{ $region->name }}
                                     </option>
-                                    @foreach ($regions as $region)
-                                        <option value="{{ $region->id }}"
-                                                @if (old('region_id')==$region->id) selected="selected" @endif>
-                                            {{ $region->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </label>
-                        </div>
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
 
-                        <div class="form-group" x-show="meta == 'tv'">
-                            <label for="season_number">{{ __('torrent.season-number') }} <b>({{ __('request.required') }} za
-                                    TV)</b></label>
-                            <label>
-                                <input type="number" name="season_number" id="season_number" class="form-control"
-                                       value="{{ old('season_number') ?? '0' }}" required>
-                            </label>
-                        </div>
+                    <div class="form-group" x-show="cats[cat].type === 'tv'">
+                        <label for="season_number">{{ __('torrent.season-number') }} <b>({{ __('request.required') }} za
+                                TV)</b></label>
+                        <label>
+                            <input type="number" name="season_number" id="season_number" class="form-control"
+                                    value="{{ old('season_number') ?? '0' }}" required>
+                        </label>
+                    </div>
 
-                        <div class="form-group" x-show="meta == 'tv'">
-                            <label for="episode_number">{{ __('torrent.episode-number') }} <b>({{ __('request.required') }}za
-                                    TV. Uporabite "0" za sezonske pakete.)</b></label>
-                            <label>
-                                <input type="number" name="episode_number" id="episode_number" class="form-control"
-                                       value="{{ old('episode_number') ?? '0' }}" required>
-                            </label>
-                        </div>
+                    <div class="form-group" x-show="cats[cat].type === 'tv'">
+                        <label for="episode_number">{{ __('torrent.episode-number') }} <b>({{ __('request.required') }} za
+                                TV. Uporabite "0" za sezonske pakete.)</b></label>
+                        <label>
+                            <input type="number" name="episode_number" id="episode_number" class="form-control"
+                                    value="{{ old('episode_number') ?? '0' }}" required>
+                        </label>
+                    </div>
 
-                        <div class="form-group"  x-show="meta == 'movie' || meta == 'tv'">
-                            <label for="name">TMDB ID <b>({{ __('request.required') }})</b></label>
-                            <br>
-                            <label for="name">URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank"><b>https://www.themoviedb.org/</b></a></label>
-                            <label>
-                                <input type="text" name="apimatch" id="apimatch" class="form-control" value="" disabled>
-                                <input type="number" name="tmdb" id="autotmdb" class="form-control"
-                                       x-bind:value="(meta == 'movie' || meta == 'tv') ? '{{ !empty($tmdb) ? $tmdb : old('tmdb') }}' : '0'" required>
-                            </label>
-                        </div>
+                    <div class="form-group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label for="name">TMDB ID <b>({{ __('request.required') }})</b></label>
+                        <br>
+                        <label for="name">URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank"><b>https://www.themoviedb.org/</b></a></label>
+                        <label>
+                            <input type="text" name="apimatch" id="apimatch" class="form-control" value="" disabled>
+                            <input type="number" name="tmdb" id="autotmdb" class="form-control"
+                                    x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '{{ !empty($tmdb) ? $tmdb : old('tmdb') }}' : '0'" required>
+                        </label>
+                    </div>
 
-                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
-                            <label for="name">IMDB ID <b>({{ __('torrent.optional') }})</b></label>
-                            <br>
-                            <label for="name">URL za IMDB ID: <a href="https://www.imdb.com/" target="_blank"><b>https://www.imdb.com/</b></a></label>
-                            <label>
-                                @php $imdb_val = 0;
-                                if (!empty($imdb)) {
-                                    $imdb_val = $imdb;
-                                }
-                                if (!empty(old('imdb'))) {
-                                    $imdb_val = old('imdb');
-                                } @endphp
-                                <input type="number" name="imdb" id="autoimdb" class="form-control"
-                                       x-bind:value="(meta == 'movie' || meta == 'tv') ? '{{ $imdb_val }}' : '0'">
-                            </label>
-                        </div>
+                    <div class="form-group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label for="name">IMDB ID <b>({{ __('torrent.optional') }})</b></label>
+                        <br>
+                        <label for="name">URL za IMDB ID: <a href="https://www.imdb.com/" target="_blank"><b>https://www.imdb.com/</b></a></label>
+                        <label>
+                            @php $imdb_val = 0;
+                            if (!empty($imdb)) {
+                                $imdb_val = $imdb;
+                            }
+                            if (!empty(old('imdb'))) {
+                                $imdb_val = old('imdb');
+                            } @endphp
+                            <input type="number" name="imdb" id="autoimdb" class="form-control"
+                                x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '{{ $imdb_val }}' : '0'">
+                        </label>
+                    </div>
 
-                        <div class="form-group" x-show="meta == 'tv'">
-                            <label for="name">TVDB ID ({{ __('torrent.optional') }})</label>
-                            <br>
-                            <label for="name">URL za TVDB ID: <a href="https://www.thetvdb.com/" target="_blank"><b>https://www.thetvdb.com/</b></a></label>
-                            <label>
-                                <input type="number" name="tvdb" id="autotvdb"
-                                       x-bind:value="meta == 'tv' ? '{{ old('tvdb') ?? '0' }}' : '0'"
-                                       class="form-control" required>
-                            </label>
-                        </div>
+                    <div class="form-group" x-show="cats[cat].type === 'tv'">
+                        <label for="name">TVDB ID ({{ __('torrent.optional') }})</label>
+                        <br>
+                        <label for="name">URL za TVDB ID: <a href="https://www.thetvdb.com/" target="_blank"><b>https://www.thetvdb.com/</b></a></label>
+                        <label>
+                            <input type="number" name="tvdb" id="autotvdb"
+                                    :value="cats[cat].type === 'tv' ? '{{ old('tvdb') ?? '0' }}' : '0'"
+                                    class="form-control" required>
+                        </label>
+                    </div>
 
-                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
-                            <label for="name">MAL ID ({{ __('torrent.required-anime') }})</label>
-                            <br>
-                            <label for="name">URL za MAL ID: <a href="https://myanimelist.net/" target="_blank"><b>https://myanimelist.net/</b></a></label>
-                            <label>
-                                <input type="number" name="mal" x-bind:value="(meta == 'movie' || meta == 'tv') ? '{{ old('mal') ?? '0' }}' : '0'" class="form-control"
-                                       required>
-                            </label>
-                        </div>
+                    <div class="form-group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label for="name">MAL ID ({{ __('torrent.required-anime') }})</label>
+                        <br>
+                        <label for="name">URL za MAL ID: <a href="https://myanimelist.net/" target="_blank"><b>https://myanimelist.net/</b></a></label>
+                        <label>
+                            <input type="number" name="mal" x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '{{ old('mal') ?? '0' }}' : '0'" class="form-control"
+                                    required>
+                        </label>
+                    </div>
 
-                        <div class="form-group" x-show="meta == 'game'">
-                            <label for="name">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
-                            <br>
-                            <label for="name">URL za IGDB ID: <a href="https://www.igdb.com/discover" target="_blank"><b>https://www.igdb.com/discover</b></a></label>
-                            <label>
-                                <input type="number" name="igdb" x-bind:value="meta == 'game' ? '{{ old('igdb') ?? '0' }}' : '0'" class="form-control"
-                                       required>
-                            </label>
-                        </div>
+                    <div class="form-group" x-show="cats[cat].type === 'game'">
+                        <label for="name">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
+                        <br>
+                        <label for="name">URL za IGDB ID: <a href="https://www.igdb.com/discover" target="_blank"><b>https://www.igdb.com/discover</b></a></label>
+                        <label>
+                            <input type="number" name="igdb" x-bind:value="cats[cat].type === 'game' ? '{{ old('igdb') ?? '0' }}' : '0'" class="form-control"
+                                    required>
+                        </label>
+                    </div>
 
                     <div class="form-group">
                         <label for="name">{{ __('torrent.keywords') }} (<i>{{ __('torrent.keywords-example') }}</i>)</label>
@@ -259,7 +288,7 @@
                     </div>
 
 
-                    <!--    <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
+                    <!--    <div class="form-group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
                             <label for="mediainfo">{{ __('torrent.media-info-parser') }}</label>
                             <label for="upload-form-description"></label>
                             <textarea id="upload-form-description" name="mediainfo" cols="30" rows="10"
@@ -267,7 +296,7 @@
                                       placeholder="{{ __('torrent.media-info-paste') }}">{{ old('mediainfo') }}</textarea>
                         </div>-->
 
-                    <!--    <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
+                    <!--    <div class="form-group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
                             <label for="bdinfo">BDInfo (Quick Summary)</label>
                             <label for="upload-form-description"></label>
                             <textarea id="upload-form-description" name="bdinfo" cols="30" rows="10"
@@ -286,42 +315,42 @@
                                       value="0"{{ !old('anonymous') ? ' checked' : '' }}>{{ __('common.no') }}</label>
                     </div>
 @else
-                        <input type="hidden" name="anonymous" value="0">
+                    <input type="hidden" name="anonymous" value="0">
 @endif
 
 @if (auth()->user()->group->is_admin)
-                        <br x-show="meta == 'movie' || meta == 'tv'">
+                    <br x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
 
-                        <label for="stream" class="control-label" x-show="meta == 'movie' || meta == 'tv'">{{ __('torrent.stream-optimized') }}?</label>
-                        <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
-                            <label><input type="radio" name="stream" id="stream"
-                                          value="(meta == 'movie' || meta == 'tv') ? '1' : '0'"{{ old('stream') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
-                        </div>
-                        <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
-                            <label><input type="radio" name="stream" id="stream"
-                                          value="0"{{ !old('stream') ? ' checked' : '' }}>{{ __('common.no') }}</label>
-                        </div>
+                    <label for="stream" class="control-label" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">{{ __('torrent.stream-optimized') }}?</label>
+                    <div class="radio-inline" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label><input type="radio" name="stream" id="stream"
+                                        value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '1' : '0'"{{ old('stream') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
+                    </div>
+                    <div class="radio-inline" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label><input type="radio" name="stream" id="stream"
+                                        value="0"{{ !old('stream') ? ' checked' : '' }}>{{ __('common.no') }}</label>
+                    </div>
 @else
-                        <input type="hidden" name="stream" value="0">
+                    <input type="hidden" name="stream" value="0">
 @endif
 
 @if (auth()->user()->group->is_admin)
 
-                        <br x-show="meta == 'movie' || meta == 'tv'">
+                    <br x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
 
-                        <label for="sd" class="control-label" x-show="meta == 'movie' || meta == 'tv'">{{ __('torrent.sd-content') }}?</label>
-                        <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
-                            <label><input type="radio" name="sd"
-                                          x-bind:value="(meta == 'movie' || meta == 'tv') ? '1' : '0'"{{ old('sd') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
-                        </div>
-                        <div class="radio-inline" x-show="meta == 'movie' || meta == 'tv'">
-                            <label><input type="radio" name="sd"
-                                          value="0"{{ !old('sd') ? ' checked' : '' }}>{{ __('common.no') }}</label>
-                        </div>
+                    <label for="sd" class="control-label" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">{{ __('torrent.sd-content') }}?</label>
+                    <div class="radio-inline" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label><input type="radio" name="sd"
+                                        x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '1' : '0'"{{ old('sd') ? ' checked' : '' }}>{{ __('common.yes') }}</label>
+                    </div>
+                    <div class="radio-inline" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                        <label><input type="radio" name="sd"
+                                        value="0"{{ !old('sd') ? ' checked' : '' }}>{{ __('common.no') }}</label>
+                    </div>
 @else
-                        <input type="hidden" name="sd" value="0">
+                    <input type="hidden" name="sd" value="0">
 @endif
-                        <br>
+                    <br>
 
                     @if (auth()->user()->group->is_admin || auth()->user()->group->is_internal)
                         <label for="internal" class="control-label">{{ __('torrent.internal') }}?</label>

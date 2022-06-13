@@ -47,6 +47,10 @@ class Kernel extends HttpKernel
             'throttle:30,1',
             'bindings',
         ],
+        'announce' => [
+            'throttle:announce',
+            'bindings',
+        ],
     ];
 
     /**
@@ -69,7 +73,7 @@ class Kernel extends HttpKernel
         'language'      => \App\Http\Middleware\SetLanguage::class,
         'modo'          => \App\Http\Middleware\CheckForModo::class,
         'sysop'         => \App\Http\Middleware\CheckForOwner::class,
-        'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'throttle'      => \Illuminate\Routing\Middleware\ThrottleRequestsWithRedis::class,
         'twostep'       => \App\Http\Middleware\TwoStepAuth::class,
         'signed'        => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'verified'      => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,

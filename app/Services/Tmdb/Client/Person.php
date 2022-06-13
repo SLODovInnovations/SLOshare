@@ -23,7 +23,7 @@ class Person
                 ],
                 'query' => [
                     'api_key'            => \config('api-keys.tmdb'),
-                    'language'           => \config('app.locale'),
+                    'language'           => \config('app.meta_locale'),
                     'append_to_response' => 'images,credits',
                 ],
             ]

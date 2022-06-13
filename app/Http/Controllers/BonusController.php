@@ -13,8 +13,8 @@ use App\Notifications\NewBon;
 use App\Notifications\NewPostTip;
 use App\Notifications\NewUploadTip;
 use App\Repositories\ChatRepository;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -91,6 +91,7 @@ class BonusController extends Controller
         $invite = $BonExchange->getInviteOption();
 
         return \view('bonus.store', [
+            'user'              => $user,
             'userbon'           => $userbon,
             'activefl'          => $activefl,
             'bontransactions'   => $bontransactions,
@@ -106,9 +107,11 @@ class BonusController extends Controller
      */
     public function gift(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $userbon = $request->user()->getSeedbonus();
+        $user = $request->user();
+        $userbon = $user->getSeedbonus();
 
         return \view('bonus.gift', [
+            'user'              => $user,
             'userbon'           => $userbon,
         ]);
     }
@@ -118,7 +121,8 @@ class BonusController extends Controller
      */
     public function bonus(Request $request, string $username = ''): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $userbon = $request->user()->getSeedbonus();
+        $user = $request->user();
+        $userbon = $user->getSeedbonus();
 
         //Dying Torrent
         $dying = $this->getDyingCount($request);
@@ -157,6 +161,7 @@ class BonusController extends Controller
         $second = $minute / 60;
 
         return \view('bonus.index', [
+            'user'              => $user,
             'userbon'           => $userbon,
             'dying'             => $dying,
             'legendary'         => $legendary,
