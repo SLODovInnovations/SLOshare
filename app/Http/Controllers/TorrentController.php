@@ -104,7 +104,7 @@ class TorrentController extends Controller
                 'videos'   => ['video_id', 'name'],
                 'involved_companies.company',
                 'involved_companies.company.logo',
-                'platforms',])
+                'platforms', ])
                 ->find($torrent->igdb);
             $link = collect($meta->videos)->take(1)->pluck('video_id');
             $trailer = isset($link[0]) ? 'https://www.youtube.com/embed/'.$link[0] : '/img/no-video.png';
@@ -191,7 +191,6 @@ class TorrentController extends Controller
         $torrent->sd = $request->input('sd');
         $torrent->internal = $request->input('internal');
         $torrent->personal_release = $request->input('personal_release');
-        $torrent->free = $user->group->is_modo || $user->group->is_internal || $user->id === $torrent->user_id ? $request->input('free') : 0;
 
         $category = Category::findOrFail($request->input('category_id'));
 
@@ -229,7 +228,6 @@ class TorrentController extends Controller
             'anon'           => 'required',
             'stream'         => 'required',
             'sd'             => 'required',
-            'free'           => 'sometimes|between:0,100',
         ]);
 
         if ($v->fails()) {
@@ -382,43 +380,6 @@ class TorrentController extends Controller
     }
 
     /**
-     * Torrent Upload Form.
-     */
-    public function create(Request $request, int $categoryId = 0, string $title = '', string $imdb = '0', string $tmdb = '0'): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        $user = $request->user();
-        $categories = [];
-        foreach (Category::all()->sortBy('position') as $cat) {
-            $temp = [
-                'name' => $cat->name,
-                'slug' => $cat->slug,
-            ];
-            $temp['type'] = match (1) {
-                $cat->movie_meta => 'movie',
-                $cat->tv_meta    => 'tv',
-                $cat->game_meta  => 'game',
-                $cat->music_meta => 'music',
-                $cat->no_meta    => 'no',
-                default          => 'no',
-            };
-            $categories[(int) $cat->id] = $temp;
-        }
-
-        return \view('torrent.upload', [
-            'categories'   => $categories,
-            'types'        => Type::all()->sortBy('position'),
-            'resolutions'  => Resolution::all()->sortBy('position'),
-            'regions'      => Region::all()->sortBy('position'),
-            'distributors' => Distributor::all()->sortBy('position'),
-            'user'         => $user,
-            'category_id'  => $categoryId,
-            'title'        => $title,
-            'imdb'         => \str_replace('tt', '', $imdb),
-            'tmdb'         => $tmdb,
-        ]);
-    }
-
-    /**
      * Preview torrent description.
      */
     public function preview(Request $request): \Illuminate\Http\JsonResponse
@@ -518,7 +479,7 @@ class TorrentController extends Controller
         $torrent->personal_release = $request->input('personal_release');
         $torrent->moderated_at = Carbon::now();
         $torrent->moderated_by = 1; //System ID
-        $torrent->free = $user->group->is_modo || $user->group->is_internal || $user->id === $torrent->user_id ? $request->input('free') : 0;
+        $torrent->free = $user->group->is_modo || $user->group->is_internal ? $request->input('free') : 0;
 
         $resolutionRule = 'nullable|exists:resolutions,id';
         if ($category->movie_meta || $category->tv_meta) {
