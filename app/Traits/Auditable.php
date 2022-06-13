@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 trait Auditable
@@ -61,9 +61,7 @@ trait Auditable
         switch ($action) {
             case 'create':
                 // Expect new data to be filled
-                if (empty($new)) {
-                    throw new \ArgumentCountError('Ukrep `create` pričakuje nove podatke.');
-                }
+                \throw_if(empty($new), new \ArgumentCountError('Ukrep `create` pričakuje nove podatke.'));
 
                 // Process
                 foreach ($new as $key => $value) {
@@ -90,9 +88,7 @@ trait Auditable
                 break;
             case 'delete':
                 // Expect new data to be filled
-                if (empty($old)) {
-                    throw new \ArgumentCountError('Dejanje `delete` pričakuje nove podatke.');
-                }
+                \throw_if(empty($old), new \ArgumentCountError('Dejanje `delete` pričakuje nove podatke.'));
 
                 // Process
                 foreach ($old as $key => $value) {

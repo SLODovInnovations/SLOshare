@@ -20,9 +20,9 @@ use App\Models\Language;
 use App\Models\Peer;
 use App\Models\TorrentRequest;
 //SLOshare
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 /**

@@ -129,41 +129,66 @@
 				<strong>Živi:</strong> {{ number_format($torrentsStat->alive) }} |
 				<strong>Mrtvi:</strong> {{ number_format($torrentsStat->dead) }}
 			</span>
-        <div class="dropdown torrent-listings-action-bar">
-@if (auth()->user()->group->can_upload)
-            <a class="dropdown btn btn-success" data-toggle="dropdown" href="#" aria-expanded="true">
-                {{ __('common.publish') }} {{ __('torrent.torrent') }}
-                <i class="fas fa-caret-circle-right"></i>
-            </a>
-            <ul class="dropdown-menu">
-                @foreach($categories as $category)
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" target="_blank"
-                           href="{{ route('upload_form', ['category_id' => $category->id]) }}">
-                            <span class="menu-text">{{ $category->name }}</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-@endif
-			<a href="{{ route('categories.index') }}" class="btn btn-primary">
-			    <i class="{{ config('other.font-awesome') }} fa-file"></i> {{ __('torrent.categories') }}
-		    </a>
-            <a href="{{ route('torrents') }}" class="btn btn-primary">
-                <i class="{{ config('other.font-awesome') }} fa-list"></i> {{ __('torrent.list') }}
-            </a>
-@if (auth()->user()->group->is_admin)
-            <a href="#" class="btn btn-primary">
-                <i class="{{ config('other.font-awesome') }} fa-clone"></i> {{ __('torrent.groupings') }}
-            </a>
-@endif
-@if (auth()->user()->group->is_admin)
-            <a href="{{ route('rss.index') }}" class="btn btn-warning">
-                <i class="{{ config('other.font-awesome') }} fa-rss"></i> {{ __('rss.rss') }} {{ __('rss.feeds') }}
-            </a>
-@endif
-        </div>
+        <table class="table table-condensed table-striped table-bordered" id="torrent-list-table">
+            <thead>
+            <tr>
+                <th class="torrent-listings-poster"></th>
+                <th class="torrent-listings-format"></th>
+                <th class="torrents-filename torrent-listings-overview">
+                    <div sortable wire:click="sortBy('name')" :direction="$sortField === 'name' ? $sortDirection : null"
+                         role="button">
+                        {{ __('common.name') }}
+                        @include('livewire.includes._sort-icon', ['field' => 'name'])
+                    </div>
+                </th>
+                <th class="torrent-listings-download">
+                    <div>
+                        <i class="{{ config('other.font-awesome') }} fa-download"></i>
+                    </div>
+                </th>
+                <th class="torrent-listings-tmdb">
+                    <div>
+                        <i class="{{ config('other.font-awesome') }} fa-id-badge"></i>
+                    </div>
+                </th>
+                <th class="torrent-listings-size">
+                    <div sortable wire:click="sortBy('size')" :direction="$sortField === 'size' ? $sortDirection : null"
+                         role="button">
+                        <i class="{{ config('other.font-awesome') }} fa-database"></i>
+                        @include('livewire.includes._sort-icon', ['field' => 'size'])
+                    </div>
+                </th>
+                <th class="torrent-listings-seeders">
+                    <div sortable wire:click="sortBy('seeders')"
+                         :direction="$sortField === 'seeders' ? $sortDirection : null" role="button">
+                        <i class="{{ config('other.font-awesome') }} fa-arrow-alt-circle-up"></i>
+                        @include('livewire.includes._sort-icon', ['field' => 'seeders'])
+                    </div>
+                </th>
+                <th class="torrent-listings-leechers">
+                    <div sortable wire:click="sortBy('leechers')"
+                         :direction="$sortField === 'leechers' ? $sortDirection : null" role="button">
+                        <i class="{{ config('other.font-awesome') }} fa-arrow-alt-circle-down"></i>
+                        @include('livewire.includes._sort-icon', ['field' => 'leechers'])
+                    </div>
+                </th>
+                <th class="torrent-listings-completed">
+                    <div sortable wire:click="sortBy('times_completed')"
+                         :direction="$sortField === 'times_completed' ? $sortDirection : null" role="button">
+                        <i class="{{ config('other.font-awesome') }} fa-check-circle"></i>
+                        @include('livewire.includes._sort-icon', ['field' => 'times_completed'])
+                    </div>
+                </th>
+                <th class="torrent-listings-age">
+                    <div sortable wire:click="sortBy('created_at')"
+                         :direction="$sortField === 'created_at' ? $sortDirection : null" role="button">
+                        {{ __('common.created_at') }}
+                        @include('livewire.includes._sort-icon', ['field' => 'created_at'])
+                    </div>
+                </th>
+            </tr>
+            </thead>
+        </table>
         @foreach($torrents as $torrent)
             @php $meta = null @endphp
             @if ($torrent->category->tv_meta)

@@ -567,7 +567,6 @@ mark {
     text-transform: lowercase;
 }
 
-.breadcrumb,
 .dropdown-header,
 .initialism,
 .text-uppercase {
@@ -2047,24 +2046,6 @@ textarea.input-lg {
 .input-group-btn:last-child > .btn-group {
     z-index: 2;
     margin-left: -1px;
-}
-
-.breadcrumb {
-    padding: 8px 15px;
-    margin-bottom: 24px;
-    margin-top: 58px;
-    list-style: none;
-    background-color: #f5f5f5;
-}
-
-.breadcrumb > li + li:before {
-    content: '/ ';
-    padding: 0 5px;
-    color: #999;
-}
-
-.breadcrumb > .active {
-    color: #333;
 }
 
 .pagination {
@@ -3988,7 +3969,6 @@ pre {
 }
 
 .alert,
-.breadcrumb,
 .list-group,
 .nav-pills,
 .navbar,
@@ -4346,12 +4326,6 @@ blockquote small {
 .nav-tabs .caret {
     border-top-color: #696969;
     border-bottom-color: #696969;
-}
-
-.breadcrumb {
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    font-size: 14px;
 }
 
 .list-group {

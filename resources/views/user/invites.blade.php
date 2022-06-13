@@ -1,30 +1,27 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ $sysop->username }} - {{ __('user.invites') }}</title>
+    <title>{{ $user->username }} - {{ __('user.invites') }}</title>
 @endsection
 
-@section('breadcrumb')
-    <li>
-        <a href="{{ route('users.show', ['username' => $sysop->username]) }}" itemprop="url"
-           class="l-breadcrumb-item-link">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">{{ $sysop->username }}</span>
+@section('breadcrumbs')
+    <li class="breadcrumbV2">
+        <a href="{{ route('users.show', ['username' => $user->username]) }}" class="breadcrumb__link">
+            {{ $user->username }}
         </a>
     </li>
-    <li>
-        <a href="{{ route('invites.index', ['username' => $sysop->username]) }}" itemprop="url"
-           class="l-breadcrumb-item-link">
-            <span itemprop="title"
-                  class="l-breadcrumb-item-link-title">{{ $sysop->username }} {{ __('user.invites') }}</span>
-        </a>
+    <li class="breadcrumb--active">
+        {{ __('user.invites') }}
     </li>
+@endsection
+
+@section('nav-tabs')
+    @include('user.buttons.user')
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="block">
-            @php $user = $sysop @endphp
-            @include('user.buttons.invite')
             <div class="some-padding">
                 <div class="row">
                     <div class="col-sm-12">

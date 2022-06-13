@@ -21,7 +21,6 @@
 @endsection
 
 @section('content')
-
     <div class="container-fluid">
         <div class="block">
             @include('user.buttons.stats')

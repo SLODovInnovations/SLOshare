@@ -129,41 +129,6 @@
 				<strong>Živi:</strong> {{ number_format($torrentsStat->alive) }} |
 				<strong>Mrtvi:</strong> {{ number_format($torrentsStat->dead) }}
 			</span>
-        <div class="dropdown torrent-listings-action-bar">
-@if (auth()->user()->group->can_upload)
-            <a class="dropdown btn btn-success" data-toggle="dropdown" href="#" aria-expanded="true">
-                {{ __('common.publish') }} {{ __('torrent.torrent') }}
-                <i class="fas fa-caret-circle-right"></i>
-            </a>
-            <ul class="dropdown-menu">
-                @foreach($categories as $category)
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" target="_blank"
-                           href="{{ route('upload_form', ['category_id' => $category->id]) }}">
-                            <span class="menu-text">{{ $category->name }}</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-@endif
-			<a href="{{ route('categories.index') }}" class="btn btn-primary">
-			    <i class="{{ config('other.font-awesome') }} fa-file"></i> {{ __('torrent.categories') }}
-		    </a>
-            <a href="{{ route('cards') }}" class="btn btn-primary">
-                <i class="{{ config('other.font-awesome') }} fa-image"></i> {{ __('torrent.cards') }}
-            </a>
-@if (auth()->user()->group->is_admin)
-            <a href="#" class="btn btn-primary">
-                <i class="{{ config('other.font-awesome') }} fa-clone"></i> {{ __('torrent.groupings') }}
-            </a>
-@endif
-@if (auth()->user()->group->is_admin)
-            <a href="{{ route('rss.index') }}" class="btn btn-warning">
-                <i class="{{ config('other.font-awesome') }} fa-rss"></i> {{ __('rss.rss') }} {{ __('rss.feeds') }}
-            </a>
-@endif
-        </div>
         <table class="table table-condensed table-striped table-bordered" id="torrent-list-table">
             <thead>
             <tr>
@@ -401,7 +366,7 @@
                                     @if ($torrent->du_until !== null)
                                          | <span class='text-bold torrent-listings-double-upload'>
                                             <i class='{{ config('other.font-awesome') }} fa-clock' data-toggle='tooltip'
-                                               data-original-title='{{ Carbon\Carbon::now()->diffForHumans($torrent->du_until) }} Double Upload expires.'></i>
+                                               title='{{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->du_until) }} Double Upload expires.'></i>
                                         </span>
                                     @endif
                                 @endif
@@ -455,7 +420,7 @@
                                     @if ($torrent->fl_until !== null)
                                          | <span class='text-bold torrent-listings-freeleech'>
                                             <i class='{{ config('other.font-awesome') }} fa-clock' data-toggle='tooltip'
-                                               data-original-title='{{ Carbon\Carbon::now()->diffForHumans($torrent->fl_until) }} Freeleech expires.'></i>
+                                               title='{{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }} Freeleech expires.'></i>
                                         </span>
                                     @endif
                             @endif
@@ -549,7 +514,7 @@
 								</span>
                             @endif
 
-                            @if ($torrent->bumped_at != $torrent->created_at && $torrent->bumped_at < Carbon\Carbon::now()->addDay(2))
+                            @if ($torrent->bumped_at != $torrent->created_at && $torrent->bumped_at < Illuminate\Support\Carbon::now()->addDay(2))
                                  | <span class='text-bold torrent-listings-bumped'>
                                     <i class='{{ config('other.font-awesome') }} fa-level-up-alt text-red'
                                        data-toggle='tooltip'

@@ -66,7 +66,7 @@ class StringHelper
             $result *= -1;
         }
 
-        return $result.' '.$suffix;
+        return $result."\u{a0}".$suffix;
     }
 
     /**

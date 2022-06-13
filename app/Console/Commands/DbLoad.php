@@ -49,8 +49,6 @@ class DbLoad extends Command
 
         \exec($cmd, $output, $return);
 
-        if ($return !== 0) {
-            throw new \RuntimeException(\sprintf('Baze podatkov ni bilo mogoče naložiti iz datoteke %s', $input));
-        }
+        \throw_if($return !== 0, new \RuntimeException(\sprintf('Baze podatkov ni bilo mogoče naložiti iz datoteke %s', $input)));
     }
 }

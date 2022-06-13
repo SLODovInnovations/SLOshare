@@ -4,12 +4,10 @@
 	<title>Manjkajoči mediji</title>
 @endsection
 
-@section('breadcrumb')
-	<li>
-		<a href="{{ route('missing.index') }}" itemprop="url" class="l-breadcrumb-item-link">
-			<span itemprop="title" class="l-breadcrumb-item-link-title">Manjkajoči mediji</span>
-		</a>
-	</li>
+@section('breadcrumbs')
+    <li class="breadcrumb--active">
+        Missing Media
+    </li>
 @endsection
 
 @section('content')

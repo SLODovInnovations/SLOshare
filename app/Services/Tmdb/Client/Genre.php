@@ -23,7 +23,7 @@ class Genre
                 ],
                 'query' => [
                     'api_key'  => \config('api-keys.tmdb'),
-                    'language' => \config('app.locale'),
+                    'language' => \config('app.meta_locale'),
                 ],
             ]
         );

@@ -4,9 +4,9 @@
 # {{ $greeting }}
 @else
 @if ($level === 'error')
-# @lang('Opala!')
+# {{ __('Opala!') }}
 @else
-# @lang('Pozdravljeni!')
+# {{ __('Pozdravljeni!') }}
 @endif
 @endif
 
@@ -43,20 +43,20 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-@lang('Pozdravljeni'),<br>
+{{ __('Pozdravljeni') }},<br>
 {{ config('app.name') }}
 @endif
 
 {{-- Subcopy --}}
 @isset($actionText)
 @slot('subcopy')
-@lang(
+{{ __(
     "Če imate težave s klikom \":actionText\" na gumb, kopirajte in prilepite spodnji URL".
     'into your web browser:',
     [
         'actionText' => $actionText,
     ]
-) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
+) }} <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 @endslot
 @endisset
 @endcomponent

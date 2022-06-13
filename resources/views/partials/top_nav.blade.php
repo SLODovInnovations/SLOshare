@@ -52,6 +52,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('rss.index') }}">
+                        <i class="{{ config('other.font-awesome') }} fa-rss"></i>
+                        {{ __('rss.rss') }}
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('mediahub.index') }}">
                         <i class="{{ config('other.font-awesome') }} fa-database"></i>
                         MediaHub
@@ -252,7 +258,7 @@
                 </a>
             </li>
             <li class="ratio-bar__downloaded" title="{{ __('common.download') }}">
-                <a href="{{ route('user_downloads', ['username' => auth()->user()->username]) }}">
+                <a href="{{ route('user_torrents', ['username' => auth()->user()->username]) }}">
                     <i class="{{ config('other.font-awesome') }} fa-arrow-down"></i>
                     {{ auth()->user()->getDownloaded() }}
                 </a>
@@ -264,7 +270,7 @@
                 </a>
             </li>
             <li class="ratio-bar__leeching" title="{{ __('torrent.leeching') }}">
-                <a href="{{ route('user_unsatisfieds', ['username' => auth()->user()->username]) }}">
+                <a href="{{ route('user_torrents', ['username' => auth()->user()->username]) }}">
                     <i class="{{ config('other.font-awesome') }} fa-download"></i>
                     {{ auth()->user()->getLeeching() }}
                 </a>
@@ -421,7 +427,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('torrents') }}?bookmarked=1">
+                        <a href="{{ route('torrents', ['bookmarked' => 1]) }}">
                             <i class="{{ config('other.font-awesome') }} fa-bookmark"></i>
                             {{ __('user.my-bookmarks') }}
                         </a>

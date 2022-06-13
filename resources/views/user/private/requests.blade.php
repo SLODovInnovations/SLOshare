@@ -4,27 +4,24 @@
     <title>{{ $user->username }} {{ __('user.requested') }}</title>
 @endsection
 
-@section('breadcrumb')
-    <li>
-        <a href="{{ route('users.show', ['username' => $user->username]) }}" itemprop="url"
-           class="l-breadcrumb-item-link">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">{{ $user->username }}</span>
+@section('breadcrumbs')
+    <li class="breadcrumbV2">
+        <a href="{{ route('users.show', ['username' => $user->username]) }}" class="breadcrumb__link">
+            {{ $user->username }}
         </a>
     </li>
-    <li>
-        <a href="{{ route('user_requested', ['username' => $user->username]) }}" itemprop="url"
-           class="l-breadcrumb-item-link">
-            <span itemprop="title"
-                  class="l-breadcrumb-item-link-title">{{ $user->username }} {{ __('user.requested') }}</span>
-        </a>
+    <li class="breadcrumb--active">
+        {{ __('request.requests') }}
     </li>
 @endsection
 
-@section('content')
+@section('nav-tabs')
+    @include('user.buttons.user')
+@endsection
 
+@section('content')
     <div class="container-fluid">
         <div class="block">
-            @include('user.buttons.other')
             <hr class="some-padding">
             <div class="container well search mt-5">
                 <div class="form-horizontal form-condensed form-torrent-search form-bordered">
