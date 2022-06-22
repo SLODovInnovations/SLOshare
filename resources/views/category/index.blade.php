@@ -4,10 +4,48 @@
     <title>{{ __('torrent.categories') }} - {{ config('other.title') }}</title>
 @endsection
 
-@section('breadcrumb')
-    <li>
-        <a href="{{ route('categories.index') }}" itemprop="url" class="l-breadcrumb-item-link">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">{{ __('torrent.categories') }}</span>
+@section('breadcrumbs')
+    <li class="breadcrumbV2">
+        <a href="{{ route('categories.index') }}" class="breadcrumb__link">
+            {{ __('torrent.categories') }}
+        </a>
+    </li>
+@endsection
+
+@section('nav-tabs')
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('torrents') }}">
+            Seznam
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('cards') }}">
+            Kartice
+        </a>
+    </li>
+    <li class="nav-tab--active">
+        <a class="nav-tab__link" href="{{ route('categories') }}">
+            Kategorije
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('grouped') }}">
+            Skupine
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab--active__link" href="{{ route('top10.index') }}">
+            Top 10
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('rss.index') }}">
+            {{ __('rss.rss') }}
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('upload_form', ['category_id' => 1]) }}">
+            {{ __('common.upload') }}
         </a>
     </li>
 @endsection

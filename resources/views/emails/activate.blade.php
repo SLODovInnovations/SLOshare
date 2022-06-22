@@ -1,10 +1,7 @@
 @component('mail::message')
-    # {{ __('email.register-header') }} {{ config('other.title') }} !
-    **{{ __('email.register-code') }}**
-    @component('mail::button', ['url' => route('activate', $code), 'color' => 'blue'])
-        {{ __('email.activate-account') }}
-    @endcomponent
-    <p>{{ __('email.register-footer') }}</p>
+# {{ __('email.register-header') }} {{ config('other.title') }} !
+**{{ __('email.register-code') }}**
+@component('mail::button', ['url' => route('activate', $code), 'color' => 'blue'])
     <br>
     <p>
     Dobrodošli v največjem slovenskem omrežju za prosto izmenjavo informacij! V pozdravnem sporočilu nekaj kratkih navodil,
@@ -62,7 +59,6 @@
     pričakujejo od vas. Naprošamo vas, da si preberete še naš Pravilnik, Pravni pouk in FAQ.
     </p>
     <br>
-    <p style="word-wrap: break-word; overflow-wrap: break-word; word-break: break-word;">{{ route('activate', $code) }}</p>
     <br>
     <p>
     Delimo, povejmo naprej in se skupaj družimo in zabavajmo :)
@@ -73,10 +69,13 @@
     </p>
     <br>
     <br>
-    <br>
     <p>Lep pozdrav,</p>
     <p>Ekipa {{ config('other.title') }}</p>
     <br>
     <p>Na voljo smo Vam tudi po E-Mail naslovu v primeru težave ali predlogov.</p>
     <p>E-Mail: <a href="mailto:info@sloshare.eu">info@sloshare.eu</a>
+{{ __('email.activate-account') }}
+@endcomponent
+<p>{{ __('email.register-footer') }}</p>
+<p style="word-wrap: break-word; overflow-wrap: break-word; word-break: break-word;">{{ route('activate', $code) }}</p>
 @endcomponent

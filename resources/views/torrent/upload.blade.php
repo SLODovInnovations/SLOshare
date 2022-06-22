@@ -18,31 +18,36 @@
 @section('nav-tabs')
     <li class="nav-tabV2">
         <a class="nav-tab__link" href="{{ route('torrents') }}">
-            List
+            Seznam
         </a>
     </li>
     <li class="nav-tabV2">
         <a class="nav-tab__link" href="{{ route('cards') }}">
-            Cards
+            Kartice
         </a>
     </li>
     <li class="nav-tabV2">
-        <a class="nav-tab__link" href="#">
-            Grouped
+        <a class="nav-tab__link" href="{{ route('categories') }}">
+            Kategorije
         </a>
     </li>
     <li class="nav-tabV2">
-        <a class="nav-tab__link" href="{{ route('top10.index') }}">
+        <a class="nav-tab__link" href="{{ route('grouped') }}">
+            Skupine
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab--active__link" href="{{ route('top10.index') }}">
             Top 10
         </a>
     </li>
-    <li class="nav-tabV2">
+    <li class="nav-tab--active">
         <a class="nav-tab__link" href="{{ route('rss.index') }}">
             {{ __('rss.rss') }}
         </a>
     </li>
     <li class="nav-tab--active">
-        <a class="nav-tab--active__link" href="{{ route('upload_form', ['category_id' => 1]) }}">
+        <a class="nav-tab__link" href="{{ route('upload_form', ['category_id' => 1]) }}">
             {{ __('common.upload') }}
         </a>
     </li>

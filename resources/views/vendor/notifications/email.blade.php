@@ -51,8 +51,8 @@
 @isset($actionText)
 @slot('subcopy')
 {{ __(
-    "Če imate težave s klikom \":actionText\" na gumb, kopirajte in prilepite spodnji URL".
-    'into your web browser:',
+    "Če imate težave s klikom \":actionText\" na gumb, kopirajte in prilepite spodnji URL.",
+    "v spletni brskalnik:",
     [
         'actionText' => $actionText,
     ]
