@@ -294,7 +294,7 @@
                             </a>
                         @else
                             <a href="{{ route('download', ['id' => $torrent->id]) }}">
-                                <button class="btn btn-primary" type="button" data-toggle="tooltip"
+                                <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                         data-original-title="{{ __('common.download') }}">
                                     <i class="{{ config('other.font-awesome') }} fa-download"></i>
                                 </button>
@@ -302,13 +302,15 @@
                         @endif
                         @if (config('torrent.magnet') == 1)
                             <a href="magnet:?dn={{ $torrent->name }}&xt=urn:btih:{{ $torrent->info_hash }}&as={{ route('torrent.download.rsskey', ['id' => $torrent->id, 'rsskey' => $user->rsskey ]) }}&tr={{ route('announce', ['passkey' => $user->passkey]) }}&xl={{ $torrent->size }}">
-                                <button class="btn btn-primary" type="button" data-toggle="tooltip"
+                                <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                         data-original-title="{{ __('common.magnet') }}">
                                     <i class="{{ config('other.font-awesome') }} fa-magnet"></i>
                                 </button>
                             </a>
                         @endif
+                        <div>
                             @livewire('small-bookmark-button', ['torrent' => $torrent->id], key($torrent->id))
+                        </div>
                     </td>
                     <td class="torrent-listings-tmdb" style="vertical-align: middle;">
                         @if ($torrent->category->game_meta)
