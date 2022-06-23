@@ -6,7 +6,7 @@
 
 @section('breadcrumbs')
     <li class="breadcrumbV2">
-        <a class="breadcrumb__link" href="{{ route('categories.index') }}">
+        <a class="breadcrumb__link" href="{{ route('category.index') }}">
             {{ __('torrent.categories') }
         </a>
     </li>
@@ -24,7 +24,7 @@
         </a>
     </li>
     <li class="nav-tab--active">
-        <a class="nav-tab__link" href="{{ route('categories.index') }}">
+        <a class="nav-tab__link" href="{{ route('category.index') }}">
             Kategorije
         </a>
     </li>
