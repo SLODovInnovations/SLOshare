@@ -274,9 +274,7 @@ Route::group(['middleware' => 'language'], function () {
             Route::post('/{id}/tip_uploader', [App\Http\Controllers\BonusController::class, 'tipUploader'])->name('tip_uploader');
             Route::get('/similar/{category_id}.{tmdb}', [App\Http\Controllers\SimilarTorrentController::class, 'show'])->name('torrents.similar');
         });
-post('/{id}/r
-post('/{id}/t
-get('/similar
+
         Route::group(['prefix' => 'torrent'], function () {
             Route::post('/{id}/torrent_fl', [App\Http\Controllers\TorrentBuffController::class, 'grantFL'])->name('torrent_fl');
             Route::post('/{id}/torrent_doubleup', [App\Http\Controllers\TorrentBuffController::class, 'grantDoubleUp'])->name('torrent_doubleup');
