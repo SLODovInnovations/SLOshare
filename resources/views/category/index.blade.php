@@ -7,7 +7,7 @@
 @section('breadcrumbs')
     <li class="breadcrumbV2">
         <a class="breadcrumb__link" href="{{ route('categories.index') }}">
-            {{ __('torrent.categories') }
+            {{ __('torrent.categories') }}
         </a>
     </li>
 @endsection
