@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>Top 10</title>
+    <title>Lestvica Top 10</title>
 @endsection
 
 @section('breadcrumbs')
@@ -31,7 +31,7 @@
             Skupine
         </a>
     </li>
-    <li class="nav-tabV2--active">
+    <li class="nav-tab--active">
         <a class="nav-tab--active__link" href="{{ route('top10.index') }}">
             Top 10
         </a>
