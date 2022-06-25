@@ -23,9 +23,9 @@
                 <div class="block" id="vue">
                     <div class="panel-body">
                         <h2 class="text-bold text-center text-green">
-                            <i class="{{ config('other.font-awesome') }} fa-terminal"></i> Codebase
+                            <i class="{{ config('other.font-awesome') }} fa-terminal"></i> Kodna baza
                         </h2>
-                        <h3 class="text-bold text-center">Currently Running {{ config('sloshare.codebase') }}
+                        <h3 class="text-bold text-center">Trenutno se izvaja {{ config('sloshare.codebase') }}
                             {{ config('sloshare.version') }}</h3>
                         <version></version>
                     </div>
@@ -43,20 +43,20 @@
                                 {{ config('app.url') }}
                             </h3>
                             <div class="text-center" style="padding-top: 15px;">
-                                <span class="text-red">Issued By: {{ (!is_string($certificate)) ? $certificate->getIssuer() : "No Certificate Info Found" }}</span>
+                                <span class="text-red">Issued By: {{ (!is_string($certificate)) ? $certificate->getIssuer() : "Podatki o potrdilu niso najdeni" }}</span>
                                 <br>
-                                <span class="text-red">Expires: {{ (!is_string($certificate)) ? $certificate->expirationDate()->diffForHumans() : "No Certificate Info Found" }}</span>
+                                <span class="text-red">Expires: {{ (!is_string($certificate)) ? $certificate->expirationDate()->diffForHumans() : "Podatki o potrdilu niso najdeni" }}</span>
                             </div>
                         @else
                             <h2 class="text-bold text-center text-red">
                                 <i class=" {{ config('other.font-awesome') }} fa-unlock"></i> SSL Cert
                             </h2>
                             <h3 class="text-bold text-center">
-                                {{ config('app.url') }} -- <span class="text-muted">Connection Not Secure</span>
+                                {{ config('app.url') }} -- <span class="text-muted">Povezava ni varna</span>
                             </h3>
                             <div style="padding-top: 15px;">
-                                <span class="text-red text-left">Issued By: N/A</span>
-                                <span class="text-red" style="float: right;">Expires: N/A</span>
+                                <span class="text-red text-left">Izdal: N/A</span>
+                                <span class="text-red" style="float: right;">Poteče: N/A</span>
                             </div>
                         @endif
                     </div>
@@ -67,7 +67,7 @@
                 <div class="block" style=" margin-top: 30px;">
                     <div class="panel-heading">
                         <h1 class="text-center">
-                            <u>Statistics</u>
+                            <u>Statistika</u>
                         </h1>
                     </div>
                     <div class="panel-body">
@@ -75,19 +75,19 @@
                         <div class="row black-list">
                             <div class="col-xs-6 col-sm-4 col-md-4">
                                 <div class="text-center black-item">
-                                    <h1 style=" color: #ffffff;">Torrents</h1>
-                                    <span class="badge-user">Total: {{ $torrents->total }}</span>
+                                    <h1 style=" color: #ffffff;">Torrenti</h1>
+                                    <span class="badge-user">Skupno: {{ $torrents->total }}</span>
                                     <br>
-                                    <span class="badge-user">Pending: {{ $torrents->pending }}</span>
-                                    <span class="badge-user">Rejected: {{ $torrents->rejected }}</span>
+                                    <span class="badge-user">Do: {{ $torrents->pending }}</span>
+                                    <span class="badge-user">Zavrnjeni: {{ $torrents->rejected }}</span>
                                     <i class="fal fa-magnet black-icon text-green"></i>
                                 </div>
                             </div>
 
                             <div class="col-xs-6 col-sm-4 col-md-4">
                                 <div class="text-center black-item">
-                                    <h1 style=" color: #ffffff;">Peers</h1>
-                                    <span class="badge-user">Total: {{ $peers->total }}</span>
+                                    <h1 style=" color: #ffffff;">Vrstniki</h1>
+                                    <span class="badge-user">Skupno: {{ $peers->total }}</span>
                                     <br>
                                     <span class="badge-user">Seeders: {{ $peers->seeders }}</span>
                                     <span class="badge-user">Leechers: {{ $peers->leechers }}</span>
@@ -97,10 +97,10 @@
 
                             <div class="col-xs-6 col-sm-4 col-md-4">
                                 <div class="text-center black-item">
-                                    <h1 style=" color: #ffffff;">Users</h1>
-                                    <span class="badge-user">Total: {{ $users->total }}</span>
+                                    <h1 style=" color: #ffffff;">Uporabniki</h1>
+                                    <span class="badge-user">Skupaj: {{ $users->total }}</span>
                                     <br>
-                                    <span class="badge-user">Validating: {{ $users->validating }}</span>
+                                    <span class="badge-user">Čaka na potrditev: {{ $users->validating }}</span>
                                     <span class="badge-user">Banned: {{ $users->banned }}</span>
                                     <i class="fal fa-users black-icon text-green"></i>
                                 </div>
@@ -115,7 +115,7 @@
                 <div class="block" style=" margin-top: 30px;">
                     <div class="panel-heading">
                         <h1 class="text-center">
-                            <u>Server Information</u>
+                            <u>Informacije o strežniku</u>
                         </h1>
                     </div>
                     <div class="panel-body">
@@ -124,7 +124,7 @@
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="text-center black-item">
                                     <h1 style=" color: #ffffff;">OS</h1>
-                                    <span class="badge-user">Currently Running</span>
+                                    <span class="badge-user">Trenutno se izvaja</span>
                                     <br>
                                     <span class="badge-user">{{ $basic['os'] }}</span>
                                     <i class="fal fa-desktop black-icon text-green"></i>
@@ -134,7 +134,7 @@
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="text-center black-item">
                                     <h1 style=" color: #ffffff;">PHP</h1>
-                                    <span class="badge-user">Currently Running</span>
+                                    <span class="badge-user">Trenutno se izvaja</span>
                                     <br>
                                     <span class="badge-user">php{{ $basic['php'] }}</span>
                                     <i class="fal fa-terminal black-icon text-green"></i>
@@ -143,8 +143,8 @@
 
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="text-center black-item">
-                                    <h1 style=" color: #ffffff;">DATABASE</h1>
-                                    <span class="badge-user">Currently Running</span>
+                                    <h1 style=" color: #ffffff;">BAZA PODATKOV</h1>
+                                    <span class="badge-user">Trenutno se izvaja</span>
                                     <br>
                                     <span class="badge-user">{{ $basic['database'] }}</span>
                                     <i class="fal fa-database black-icon text-green"></i>
@@ -154,7 +154,7 @@
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                 <div class="text-center black-item">
                                     <h1 style=" color: #ffffff;">LARAVEL</h1>
-                                    <span class="badge-user">Currently Running</span>
+                                    <span class="badge-user">Trenutno se izvaja</span>
                                     <br>
                                     <span class="badge-user">Ver. {{ $basic['laravel'] }}</span>
                                     <i class="fal fa-code-merge black-icon text-green"></i>
@@ -166,10 +166,10 @@
                             <div class="col-xs-6 col-sm-4 col-md-4">
                                 <div class="text-center black-item">
                                     <h1 style=" color: #ffffff;">RAM</h1>
-                                    <span class="badge-user">Total: {{ $ram['total'] }}</span>
+                                    <span class="badge-user">Skupno: {{ $ram['total'] }}</span>
                                     <br>
-                                    <span class="badge-user">Free: {{ $ram['free'] }}</span>
-                                    <span class="badge-user">Used: {{ $ram['used'] }}</span>
+                                    <span class="badge-user">Prosto: {{ $ram['free'] }}</span>
+                                    <span class="badge-user">Uporabljeno: {{ $ram['used'] }}</span>
                                     <i class="fal fa-memory black-icon text-green"></i>
                                 </div>
                             </div>
@@ -177,10 +177,10 @@
                             <div class="col-xs-6 col-sm-4 col-md-4">
                                 <div class="text-center black-item">
                                     <h1 style=" color: #ffffff;">DISK</h1>
-                                    <span class="badge-user">Total: {{ $disk['total'] }}</span>
+                                    <span class="badge-user">Skupno: {{ $disk['total'] }}</span>
                                     <br>
-                                    <span class="badge-user">Free: {{ $disk['free'] }}</span>
-                                    <span class="badge-user">Used: {{ $disk['used'] }}</span>
+                                    <span class="badge-user">Prosto: {{ $disk['free'] }}</span>
+                                    <span class="badge-user">Uporabljeno: {{ $disk['used'] }}</span>
                                     <i class="fal fa-hdd black-icon text-green"></i>
                                 </div>
                             </div>
@@ -188,9 +188,9 @@
                             <div class="col-xs-6 col-sm-4 col-md-4">
                                 <div class="text-center black-item">
                                     <h1 style=" color: #ffffff;">LOAD</h1>
-                                    <span class="badge-user">Average: {{ $avg }}</span>
+                                    <span class="badge-user">Povprečen: {{ $avg }}</span>
                                     <br>
-                                    <span class="badge-user">Estimated</span>
+                                    <span class="badge-user">Ocenjeno</span>
                                     <i class="fal fa-balance-scale-right black-icon text-green"></i>
                                 </div>
                             </div>
@@ -204,7 +204,7 @@
                 <div class="block" style=" margin-top: 30px;">
                     <div class="panel-heading">
                         <h1 class="text-center">
-                            <u>Directory Permissions</u>
+                            <u>Dovoljenja imenika</u>
                         </h1>
                     </div>
                     <div class="panel-body">
@@ -212,9 +212,9 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th width="80%">Directory</th>
-                                <th>Current</th>
-                                <th>Recommended</th>
+                                <th width="80%">Direktorij</th>
+                                <th>CurrentSedanji</th>
+                                <th>Priporočljivo</th>
                             </tr>
                             </thead>
                             <tbody>
