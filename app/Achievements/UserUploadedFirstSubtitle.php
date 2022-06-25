@@ -17,13 +17,13 @@ class UserUploadedFirstSubtitle extends Achievement
     public $description = 'Čestitamo! Naložili ste svoj prvi podnapis!';
 
     /*
-    * A small description for the award
-    */
+     * A small description for the award
+     */
     //public $award = "1000 Bonus Points";
 
     /*
-    * Triggers whenever an Achiever unlocks this achievement
-    */
+     * Triggers whenever an Achiever unlocks this achievement
+     */
     /*public function whenUnlocked($progress)
     {
         $achiever = $progress->achiever;
