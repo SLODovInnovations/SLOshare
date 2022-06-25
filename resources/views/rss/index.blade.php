@@ -33,12 +33,12 @@
         </a>
     </li>
     <li class="nav-tabV2">
-        <a class="nav-tab--active__link" href="{{ route('top10.index') }}">
+        <a class="nav-tab__link" href="{{ route('top10.index') }}">
             Top 10
         </a>
     </li>
     <li class="nav-tab--active">
-        <a class="nav-tab__link" href="{{ route('rss.index') }}">
+        <a class="nav-tab--active__link" href="{{ route('rss.index') }}">
             {{ __('rss.rss') }}
         </a>
     </li>
