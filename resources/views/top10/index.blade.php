@@ -13,20 +13,25 @@
 @section('nav-tabs')
     <li class="nav-tabV2">
         <a class="nav-tab__link" href="{{ route('torrents') }}">
-            List
+            Seznam
         </a>
     </li>
     <li class="nav-tabV2">
         <a class="nav-tab__link" href="{{ route('cards') }}">
-            Cards
+            Kartice
+        </a>
+    </li>
+    <li class="nav-tabV2">
+        <a class="nav-tab__link" href="{{ route('categories.index') }}">
+            Kategorije
         </a>
     </li>
     <li class="nav-tabV2">
         <a class="nav-tab__link" href="{{ route('grouped') }}">
-            Grouped
+            Skupine
         </a>
     </li>
-    <li class="nav-tabV2--active">
+    <li class="nav-tab--active">
         <a class="nav-tab--active__link" href="{{ route('top10.index') }}">
             Top 10
         </a>

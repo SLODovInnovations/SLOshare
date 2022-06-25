@@ -52,7 +52,7 @@
 @slot('subcopy')
 {{ __(
     "Če imate težave s klikom \":actionText\" na gumb, kopirajte in prilepite spodnji URL".
-    'into your web browser:',
+    'v spletni brskalnik:',
     [
         'actionText' => $actionText,
     ]
