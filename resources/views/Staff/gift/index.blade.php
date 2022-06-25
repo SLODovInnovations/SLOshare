@@ -31,7 +31,7 @@
                 </label>
             </div>
 
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label for="name">{{ __('bon.bon') }}</label>
                 <label>
                     <input type="number" class="form-control" name="seedbonus" value="0">
@@ -49,6 +49,13 @@
                 <label for="name">{{ __('torrent.freeleech-token') }}</label>
                 <label>
                     <input type="number" class="form-control" name="fl_tokens" value="0">
+                </label>
+            </div>-->
+
+            <div class="form-group">
+                <label for="name">{{ __('torrent.uploaded') }}  (Bytes)</label>
+                <label>
+                    <input type="number" class="form-control" name="uploaded" value="0">
                 </label>
             </div>
 
