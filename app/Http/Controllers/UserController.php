@@ -99,11 +99,11 @@ class UserController extends Controller
             'bonupload'    => $bonupload,
             'man_upload'   => $manUpload,
 
-            'requested'    => $requested,
-            'filled'       => $filled,
-            'invitedBy'    => $invitedBy,
-            'peers'        => $peers,
-            'achievements' => $achievements,
+            'requested'     => $requested,
+            'filled'        => $filled,
+            'invitedBy'     => $invitedBy,
+            'peers'         => $peers,
+            'achievements'  => $achievements,
         ]);
     }
 

@@ -17,7 +17,7 @@ class UserUploaded1000Subtitles extends Achievement
     public $description = 'Naložili ste 1000 podnapisov!';
 
     /*
-    * The amount of "points" this user need to obtain in order to complete this achievement
-    */
+     * The amount of "points" this user need to obtain in order to complete this achievement
+     */
     public $points = 1_000;
 }
