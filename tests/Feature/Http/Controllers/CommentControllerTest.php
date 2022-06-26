@@ -43,7 +43,7 @@ class CommentControllerTest extends TestCase
         ]);
 
         $response->assertRedirect(route('articles.show', $article->id))
-            ->assertSessionHas('success', 'Your Comment Has Been Added!');
+            ->assertSessionHas('success', \trans('comment.added'));
     }
 
     /**
@@ -67,7 +67,7 @@ class CommentControllerTest extends TestCase
         $response = $this->actingAs($user)->delete(route('comment_delete', ['comment_id' => $comment->id]));
 
         $response->assertRedirect(route('home.index'))
-            ->assertSessionHas('success', 'Comment Has Been Deleted.');
+            ->assertSessionHas('success', \trans('comment.deleted'));
     }
 
     /**
@@ -91,7 +91,7 @@ class CommentControllerTest extends TestCase
         ]);
 
         $response->assertRedirect()
-            ->assertSessionHas('success', 'Comment Has Been Edited.');
+            ->assertSessionHas('success', \trans('comment.edited'));
     }
 
     /**
@@ -120,7 +120,7 @@ class CommentControllerTest extends TestCase
         $response->assertRedirect(route('playlists.show', [
             'id'   => $playlist->id,
             'hash' => '#comments',
-        ]))->assertSessionHas('success', 'Your Comment Has Been Added!');
+        ]))->assertSessionHas('success', \trans('comment.added'));
     }
 
     /**
@@ -145,7 +145,7 @@ class CommentControllerTest extends TestCase
         $response = $this->actingAs($user)->post(route('comment_thanks', ['id' => $torrent->id]));
 
         $response->assertRedirect(route('torrent', ['id' => $torrent->id]))
-            ->assertSessionHas('success', 'Your Comment Has Been Added!');
+            ->assertSessionHas('success', \trans('comment.added'));
     }
 
     /**
@@ -172,7 +172,7 @@ class CommentControllerTest extends TestCase
         ]);
 
         $response->assertRedirect(route('request', ['id' => $torrentRequest->id, 'hash' => '#comments']))
-            ->assertSessionHas('success', 'Your Comment Has Been Added!');
+            ->assertSessionHas('success', \trans('comment.added'));
     }
 
     /**
@@ -200,6 +200,6 @@ class CommentControllerTest extends TestCase
         ]);
 
         $response->assertRedirect(route('torrent', ['id' => $torrent->id, 'hash' => '#comments']))
-            ->assertSessionHas('success', 'Your Comment Has Been Added!');
+            ->assertSessionHas('success', \trans('comment.added'));
     }
 }
