@@ -14,7 +14,7 @@ body:
     attributes:
       label: SLOshare Version
       description: SLOshare version your using?
-      placeholder: 1.1.5
+      placeholder: 1.3.0
     validations:
       required: true
   - type: input
@@ -71,7 +71,7 @@ body:
     id: supporter
     attributes:
       label: Are you a SLOshare sponsor?
-      description: GitHub sponsors get priority review, fixing and responses. Are you not? [Become one!](https://github.com/sponsors/HDVinnie)
+      description: GitHub sponsors get priority review, fixing and responses. Are you not? [Become one!](https://github.com/sponsors/SLOYakuza)
       options:
         - Yes, with my username
         - No, don't give priority to this

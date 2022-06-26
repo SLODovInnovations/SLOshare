@@ -7,21 +7,20 @@
 @section('meta')
     <meta name="description" content="{{ $category->name }}">
 @endsection
-
-@section('breadcrumb')
-    <li>
-        <a href="{{ route('torrents') }}" itemprop="url" class="l-breadcrumb-item-link">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">{{ __('torrent.torrents') }}</span>
+@section('breadcrumbs')
+    <li class="breadcrumbV2">
+        <a class="breadcrumb__link" href="{{ route('torrents') }}">
+            {{ __('torrent.torrents') }}
         </a>
     </li>
-    <li>
-        <a href="{{ route('categories.index') }}" itemprop="url" class="l-breadcrumb-item-link">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">{{ __('torrent.categories') }}</span>
+    <li class="breadcrumbV2">
+        <a class="breadcrumb__link" href="{{ route('categories.index') }}">
+            {{ __('torrent.categories') }}
         </a>
     </li>
-    <li>
-        <a href="{{ route('categories.show', ['id' => $category->id]) }}" itemprop="url" class="l-breadcrumb-item-link">
-            <span itemprop="title" class="l-breadcrumb-item-link-title">{{ $category->name }}</span>
+    <li class="breadcrumbV2">
+        <a class="breadcrumb__link" href="{{ route('categories.show', ['id' => $category->id]) }}">
+            {{ $category->name }}
         </a>
     </li>
 @endsection
