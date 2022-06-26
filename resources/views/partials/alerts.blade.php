@@ -1,4 +1,4 @@
-<!--@if (config('other.freeleech') == true || config('other.invite-only') == false || config('other.doubleup') == true)
+@if (config('other.freeleech') == true || config('other.invite-only') == false || config('other.doubleup') == true)
     <div class="alert alert-info" x-data="timer()" x-init="start()">
         <div class="text-center">
             <span>
@@ -19,4 +19,4 @@
             </div>
         </div>
     </div>
-@endif-->
+@endif
