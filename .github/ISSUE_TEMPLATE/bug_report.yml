@@ -14,7 +14,7 @@ body:
     attributes:
       label: SLOshare Version
       description: SLOshare version your using?
-      placeholder: 1.3.0
+      placeholder: 1.1.5
     validations:
       required: true
   - type: input
