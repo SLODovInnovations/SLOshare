@@ -146,7 +146,7 @@ class TorrentControllerTest extends TestCase
         $response->assertOk()
             ->assertJson([
                 'success' => true,
-                'message' => 'Torrent je bil uspešno naložen.',
+                'message' => 'Torrent uploaded successfully.',
             ]);
     }
 }
