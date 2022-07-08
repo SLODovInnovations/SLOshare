@@ -11,7 +11,7 @@
         </a>
     </li>
     <li class="breadcrumb--active">
-        {{ __('common.upload') }}
+        {{ __('torrent.uploads') }}
     </li>
 @endsection
 
@@ -441,7 +441,7 @@
                     @endif
                     <p class="form__group">
                         <button type="submit" class="form__button form__button--filled" name="post" value="true" id="post" class="btn btn-success">
-                            {{ __('common.submit') }}
+                            {{ __('torrent.button') }}
                         </button>
                     </p>
                     <br>
