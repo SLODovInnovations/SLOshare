@@ -24,9 +24,9 @@
 >
     <p class="bbcode-input__tabs">
         <input class="bbcode-input__tab-input" type="radio" id="bbcode-preview-disabled" name="isPreviewEnabled" value="0" wire:model="isPreviewEnabled" />
-        <label class="bbcode-input__tab-label" for="bbcode-preview-disabled">Write</label>
+        <label class="bbcode-input__tab-label" for="bbcode-preview-disabled">{{ __('torrent.description') }}</label>
         <input class="bbcode-input__tab-input" type="radio" id="bbcode-preview-enabled" name="isPreviewEnabled" value="1" wire:model="isPreviewEnabled" />
-        <label class="bbcode-input__tab-label" for="bbcode-preview-enabled">{{ __('common.preview') }}</label>
+        <label class="bbcode-input__tab-label" for="bbcode-preview-enabled">{{ __('torrent.upload-description') }}</label>
     </p>
     <p class="bbcode-input__icon-bar-toggle">
         <button type="button" class="form__button form__button--text" x-on:click="showButtons = ! showButtons">BBCode</button>
