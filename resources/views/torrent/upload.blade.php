@@ -91,12 +91,12 @@
                             @change="uploadExtension.hook(); cat = $refs.catId.value"
                         >
                     </p>
-                    <p class="form__group">
+                    <!--<p class="form__group">
                         <label for="nfo" class="form__label">
                             NFO {{ __('torrent.file') }} ({{ __('torrent.optional') }})
                         </label>
                         <input id="nfo" class="upload-form-file form__file" type="file" accept=".nfo" name="nfo">
-                    </p>
+                    </p>-->
                     <p class="form__group" x-show="cats[cat].type === 'no'">
                         <label for="torrent-cover" class="form__label">
                             Cover {{ __('torrent.file') }} ({{ __('torrent.optional') }})
@@ -337,7 +337,7 @@
                         </label>
                     </p>
                     @livewire('bbcode-input', ['name' => 'description', 'label' => __('common.description') ])
-                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
                         <textarea
                             id="upload-form-mediainfo"
                             name="mediainfo"
@@ -347,8 +347,8 @@
                         <label class="form__label form__label--floating" for="upload-form-mediainfo">
                             {{ __('torrent.media-info-parser') }}
                         </label>
-                    </p>
-                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                    </p>-->
+                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
                         <textarea
                             id="upload-form-bdinfo"
                             name="bdinfo"
@@ -358,7 +358,7 @@
                         <label class="form__label form__label--floating" for="upload-form-bdinfo">
                             BDInfo (Quick Summary)
                         </label>
-                    </p>
+                    </p>-->
                     <p class="form__group">
                         <input type="hidden" name="anonymous" value="0">
                         <input
