@@ -34,7 +34,7 @@ use App\Models\Type;
 use App\Models\Warning;
 use App\Repositories\ChatRepository;
 use App\Services\Tmdb\TMDBScraper;
-use hdvinnie\LaravelJoyPixels\LaravelJoyPixels;
+use sloyakuza\LaravelJoyPixels\LaravelJoyPixels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;

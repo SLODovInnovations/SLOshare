@@ -59,11 +59,11 @@ class TorrentController extends BaseController
         $user = $request->user();
         $requestFile = $request->file('torrent');
         if (! $request->hasFile('torrent')) {
-            return $this->sendError('Validation Error.', 'You Must Provide A Torrent File For Upload!');
+            return $this->sendError('Napaka pri preverjanju.', 'Za nalaganje morate zagotoviti torrent datoteko!');
         }
 
         if ($requestFile->getError() !== 0 || $requestFile->getClientOriginalExtension() !== 'torrent') {
-            return $this->sendError('Validation Error.', 'You Must Provide A Valid Torrent File For Upload!');
+            return $this->sendError('Napaka pri preverjanju.', 'Za nalaganje morate zagotoviti veljavno torrent datoteko!');
         }
 
         // Deplace and decode the torrent temporarily
@@ -73,12 +73,12 @@ class TorrentController extends BaseController
         try {
             $meta = Bencode::get_meta($decodedTorrent);
         } catch (\Exception) {
-            return $this->sendError('Validation Error.', 'You Must Provide A Valid Torrent File For Upload!');
+            return $this->sendError('Napaka pri preverjanju.', 'Za nalaganje morate zagotoviti veljavno torrent datoteko!');
         }
 
         foreach (TorrentTools::getFilenameArray($decodedTorrent) as $name) {
             if (! TorrentTools::isValidFilename($name)) {
-                return $this->sendError('Validation Error.', 'Invalid Filenames In Torrent Files!');
+                return $this->sendError('Napaka pri preverjanju.', 'Neveljavna imena datotek v torrent datotekah!');
             }
         }
 
@@ -194,7 +194,7 @@ class TorrentController extends BaseController
                 Storage::disk('torrents')->delete($fileName);
             }
 
-            return $this->sendError('Validation Error.', $v->errors());
+            return $this->sendError('Napaka pri preverjanju.', $v->errors());
         }
 
         // Save The Torrent
@@ -250,34 +250,34 @@ class TorrentController extends BaseController
             // Announce To Shoutbox
             if ($anon == 0) {
                 $this->chatRepository->systemMessage(
-                    \sprintf('User [url=%s/users/', $appurl).$username.']'.$username.\sprintf('[/url] has uploaded a new '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], grab it now! :slight_smile:'
+                    \sprintf('Uporabnik [url=%s/users/', $appurl).$username.']'.$username.\sprintf('[/url] je naložil novo '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
                 );
             } else {
                 $this->chatRepository->systemMessage(
-                    \sprintf('An anonymous user has uploaded a new '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], grab it now! :slight_smile:'
+                    \sprintf('Anonimni uporabnik je naložil novo '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
                 );
             }
 
             if ($anon == 1 && $featured == 1) {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Ladies and Gents, [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] has been added to the Featured Torrents Slider by an anonymous user! Grab It While You Can! :fire:'
+                    \sprintf('Dame in Gospodje, [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] je anonimni uporabnik dodal na drsnik za predstavljene torrente! Prenesi ga zdaj! :fire:'
                 );
             } elseif ($anon == 0 && $featured == 1) {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Ladies and Gents, [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.\sprintf('[/url] has been added to the Featured Torrents Slider by [url=%s/users/', $appurl).$username.']'.$username.'[/url]! Grab It While You Can! :fire:'
+                    \sprintf('Dame in Gospodje, [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.\sprintf('[/url] je na drsnik za predstavljene torrente dodal [url=%s/users/', $appurl).$username.']'.$username.'[/url]! Prenesi ga zdaj! :fire:'
                 );
             }
 
             if ($free >= 1 && $featured == 0) {
                 if ($torrent->fl_until === null) {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Ladies and Gents, [url=%s/torrents/',
-                            $appurl).$torrent->id.']'.$torrent->name.'[/url] has been granted '.$free.'% FreeLeech! Grab It While You Can! :fire:'
+                        \sprintf('Dame in Gospodje, [url=%s/torrents/',
+                            $appurl).$torrent->id.']'.$torrent->name.'[/url] je bilo odobreno '.$free.'% Freeleech! Prenesi ga zdajn! :fire:'
                     );
                 } else {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Ladies and Gents, [url=%s/torrents/',
-                            $appurl).$torrent->id.']'.$torrent->name.'[/url] has been granted '.$free.'% FreeLeech for '.$request->input('fl_until').' days. :stopwatch:'
+                        \sprintf('Dame in Gospodje, [url=%s/torrents/',
+                            $appurl).$torrent->id.']'.$torrent->name.'[/url] je bila odobrena '.$free.'% Freeleech za '.$request->input('fl_until').' dni. :stopwatch:'
                     );
                 }
             }
@@ -285,13 +285,13 @@ class TorrentController extends BaseController
             if ($doubleup == 1 && $featured == 0) {
                 if ($torrent->du_until === null) {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Ladies and Gents, [url=%s/torrents/',
-                            $appurl).$torrent->id.']'.$torrent->name.'[/url] has been granted Double Upload! Grab It While You Can! :fire:'
+                        \sprintf('Dame in Gospodj, [url=%s/torrents/',
+                            $appurl).$torrent->id.']'.$torrent->name.'[/url] je bil odobren dvojni prenos! Prenesi, dokler lahko! :fire:'
                     );
                 } else {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Ladies and Gents, [url=%s/torrents/',
-                            $appurl).$torrent->id.']'.$torrent->name.'[/url] has been granted Double Upload for '.$request->input('du_until').' days. :stopwatch:'
+                        \sprintf('Dame in Gospodj, [url=%s/torrents/',
+                            $appurl).$torrent->id.']'.$torrent->name.'[/url] je bila odobrena dvojna nalaganja za '.$request->input('du_until').' dni. :stopwatch:'
                     );
                 }
             }
@@ -299,7 +299,7 @@ class TorrentController extends BaseController
             TorrentHelper::approveHelper($torrent->id);
         }
 
-        return $this->sendResponse(\route('torrent.download.rsskey', ['id' => $torrent->id, 'rsskey' => \auth('api')->user()->rsskey]), 'Torrent uploaded successfully.');
+        return $this->sendResponse(\route('torrent.download.rsskey', ['id' => $torrent->id, 'rsskey' => \auth('api')->user()->rsskey]), 'Torrent je bil uspešno naložen.');
     }
 
     /**
@@ -325,7 +325,7 @@ class TorrentController extends BaseController
             && \strlen($field) > 2
             && $field[0] === '/'
             && $field[-1] === '/'
-            && @\preg_match($field, 'Validate regex') !== false;
+            && @\preg_match($field, 'Preverjanje veljavnosti regexa') !== false;
 
         $torrents = Torrent::with(['user:id,username,group_id', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
@@ -368,6 +368,6 @@ class TorrentController extends BaseController
             return new TorrentsResource($torrents);
         }
 
-        return $this->sendResponse('404', 'No Torrents Found');
+        return $this->sendResponse('404', 'Torrentov ni bilo mogoče najti');
     }
 }
