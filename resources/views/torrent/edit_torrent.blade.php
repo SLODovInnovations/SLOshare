@@ -125,6 +125,13 @@
                         <input type="hidden" name="igdb" value="0">
                     @endif
 
+                    <div class="form-group">
+                        <label for="name">{{ __('torrent.keywords') }} (<i>{{ __('torrent.keywords-example') }}</i>)</label>
+                        <label>
+                            <input type="text" name="keywords" value="{{ $keywords->implode(', ') }}" class="form-control">
+                        </label>
+                    </div>
+
                     <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
                         <label for="type">{{ __('torrent.type') }}</label>
                         <label>
@@ -298,7 +305,7 @@
                         </div>
                         <br>
 @else
-                        <input type="hidden" name="internal" value="0">
+                        <input type="hidden" name="internal" value="{{ $torrent->internal }}">
 @endif
 @if (auth()->user()->group->is_admin)
                         <label for="personal" class="control-label">Personal Release?</label>
@@ -313,7 +320,7 @@
                                           @endif value="0">{{ __('common.no') }}</label>
                         </div>
 @else
-                        <input type="hidden" name="personal_release" value="0">
+                        <input type="hidden" name="personal_release" value="{{ $torrent->personal_release }}">
 @endif
 
                     <br>
