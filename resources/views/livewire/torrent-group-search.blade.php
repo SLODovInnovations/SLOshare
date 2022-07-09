@@ -960,7 +960,7 @@
                         @switch ($media->meta)
                             @case('movie')
                             @if(!empty($directors = (new App\Services\Tmdb\Client\Movie($media->tmdb))->get_crew()))
-                                <span class="torrent-search-grouped__directors-by">avtor</span>
+                                <span class="torrent-search-grouped__directors-by">Avtor</span>
                                 @foreach(collect($directors)->where('job', 'Director') as $director)
                                     <a href="{{ route('mediahub.persons.show', ['id' => $director['id']]) }}"
                                        class="torrent-search--grouped__director"
@@ -975,7 +975,7 @@
                             @break
                             @case('tv')
                             @if(!empty($creators = (new App\Services\Tmdb\Client\TV($media->tmdb))->get_creator()))
-                                <span class="torrent-search-grouped__directors-by">avtor</span>
+                                <span class="torrent-search-grouped__directors-by">Avtor</span>
                                 @foreach($creators as $creator)
                                     <a href="{{ route('mediahub.persons.show', ['id' => $creator['id']]) }}"
                                        class="torrent-search--grouped__director"
