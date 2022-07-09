@@ -44,7 +44,8 @@
         <div class="container">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
-
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
 
             @foreach($newsloshare as $newslo)
                 @php $meta = null @endphp
@@ -64,10 +65,6 @@
                     @endif
                 @endif
 
-
-                <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <div class="row">
                             <div class="col-xs-6 col-sm-3">
                                 <div class="tcb-product-item">
 
@@ -133,11 +130,11 @@
 
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
 
 @endforeach
+
+                    </div>
+                </div>
 
                 <!-- Controls -->
                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
