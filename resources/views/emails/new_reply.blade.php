@@ -9,6 +9,7 @@
 
 
 Lep pozdrav,
+
 Ekipa {{ config('other.title') }}
 
 

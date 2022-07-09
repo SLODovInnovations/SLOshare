@@ -4,6 +4,7 @@ Vaš račun je bil trajno odstranjen iz uporabe na {{ config('other.title') }} z
 
 
 Lep pozdrav,
+
 Ekipa {{ config('other.title') }}
 
 

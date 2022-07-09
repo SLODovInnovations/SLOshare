@@ -348,23 +348,6 @@
     </div>
     <br>
     <div class="torrent-search--grouped__results block">
-        <div class="dropdown torrent-listings-action-bar">
-            <a class="dropdown btn btn-xs btn-success" data-toggle="dropdown" href="#" aria-expanded="true">
-                {{ __('common.publish') }} {{ __('torrent.torrent') }}
-                <i class="fas fa-caret-circle-right"></i>
-            </a>
-            <ul class="dropdown-menu">
-                @foreach($categories as $category)
-                    <li role="presentation">
-                        <a role="menuitem" tabindex="-1" target="_blank"
-                           href="{{ route('upload_form', ['category_id' => $category->id]) }}">
-                            <span class="menu-text">{{ $category->name }}</span>
-                            <span class="selected"></span>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </div>
 
         <style>
             /* Sorting row */
@@ -929,7 +912,6 @@
             @endphp
             <article class="torrent-search--grouped__result">
                 <header class="torrent-search--grouped__header" >
-                    @if ($user->show_poster == 1)
                         <a
                                 @switch($media->meta)
                                 @case('movie')
@@ -942,25 +924,24 @@
                                     @switch($media->meta)
                                     @case ('movie')
                                     @case ('tv')
-                                    src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : 'https://via.placeholder.com/90x135' }}"
+                                    src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
                                     @break
                                     @case ('game')
-                                    src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : 'https://via.placeholder.com/90x135' }}"
+                                    src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
                                     @break
                                     @case ('no')
                                     @if(file_exists(public_path().'/files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg'))
                                     src="{{ url('files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg') }}"
                                     @else
-                                    src="https://via.placeholder.com/90x135"
+                                    src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
                                     @endif
                                     @break
                                     @default
-                                    src="https://via.placeholder.com/90x135"
+                                    src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
                                     @endswitch
                                     alt="{{ __('torrent.poster') }}"
                             >
                         </a>
-                    @endif
                     <h2 class="torrent-search--grouped__title-name">
                         <a
                                 href="{{ route('torrents.similar', ['category_id' => $media->torrents->first()->category_id, 'tmdb' => $media->tmdb]) }}"
@@ -979,7 +960,7 @@
                         @switch ($media->meta)
                             @case('movie')
                             @if(!empty($directors = (new App\Services\Tmdb\Client\Movie($media->tmdb))->get_crew()))
-                                <span class="torrent-search-grouped__directors-by">by</span>
+                                <span class="torrent-search-grouped__directors-by">avtor</span>
                                 @foreach(collect($directors)->where('job', 'Director') as $director)
                                     <a href="{{ route('mediahub.persons.show', ['id' => $director['id']]) }}"
                                        class="torrent-search--grouped__director"
@@ -994,7 +975,7 @@
                             @break
                             @case('tv')
                             @if(!empty($creators = (new App\Services\Tmdb\Client\TV($media->tmdb))->get_creator()))
-                                <span class="torrent-search-grouped__directors-by">by</span>
+                                <span class="torrent-search-grouped__directors-by">avtor</span>
                                 @foreach($creators as $creator)
                                     <a href="{{ route('mediahub.persons.show', ['id' => $creator['id']]) }}"
                                        class="torrent-search--grouped__director"

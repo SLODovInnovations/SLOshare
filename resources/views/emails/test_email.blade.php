@@ -4,6 +4,7 @@ Vaša testna E-Mail je bila uspešno dostavljena! Izgleda, da so vaše config po
 
 
 Lep pozdrav,
+
 Ekipa {{ config('other.title') }}
 
 

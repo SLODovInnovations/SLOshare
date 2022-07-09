@@ -57,6 +57,7 @@ Vaš SLOshare.
 
 
 Lep pozdrav,
+
 Ekipa {{ config('other.title') }}
 
 
