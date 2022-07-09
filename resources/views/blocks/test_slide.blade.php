@@ -41,6 +41,23 @@
                         <!-- Buttons -->
 
     <div class="tab-pane fade active in" id="new-sloshare">
+            @foreach($newsloshare as $newslo)
+                @php $meta = null @endphp
+                @if ($newslo->category->tv_meta)
+                    @if ($newslo->tmdb || $newslo->tmdb != 0)
+                        @php $meta = cache()->remember('tvmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Tv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @endif
+                @endif
+                @if ($newslo->category->movie_meta)
+                    @if ($newslo->tmdb || $newslo->tmdb != 0)
+                        @php $meta = cache()->remember('moviemeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Movie::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @endif
+                @endif
+                @if ($newslo->category->game_meta)
+                    @if ($newslo->igdb || $newslo->igdb != 0)
+                        @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($newslo->igdb) @endphp
+                    @endif
+                @endif
         <div class="container">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
@@ -49,9 +66,28 @@
                         <div class="row">
                             <div class="col-xs-6 col-sm-3">
                                 <div class="tcb-product-item">
-                                    <div class="tcb-product-photo">
-                                        <a href="#"><img src="https://i.imgur.com/Z7eqMnj.jpg" class="img-responsive" alt="a" /></a>
-                                    </div>
+			<div class="gallery-item"
+			@if ($newslo->category->movie_meta || $newslo->category->tv_meta)
+			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+			        class="show-poster" alt="{{ __('torrent.poster') }}>
+            @endif
+
+            @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
+                style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}');')
+                    class="show-poster"  alt="{{ __('torrent.poster') }}>
+            @endif
+
+            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+            style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
+            @else
+            style="background-image: url('/img/poster/meta_no_image_holder_400x600.jpg');">
+            @endif
+
+			@if ($newslo->category->music_meta)
+            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
+			@endif
+            @endif
                                     <div class="tcb-product-info">
                                         <div class="tcb-product-title">
                                             <h4><a href="#">Olympus Photo Camera </a></h4></div>
@@ -286,6 +322,7 @@
                         </div>
                     </div>
                 </div>
+@endforeach
                 <!-- Controls -->
                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
