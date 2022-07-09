@@ -50,20 +50,17 @@ pričakujejo od vas. Naprošamo vas, da si preberete še naš Pravilnik, Pravni 
 Delimo, povejmo naprej in se skupaj družimo in zabavajmo :)
 
 
-Vaš SLOshare.
-
-@component('mail::button', ['url' => route('activate', $code), 'color' => 'blue'])
-{{ __('email.activate-account') }}
-@endcomponent
-
-Lep pozdrav,
-<br>
-Ekipa {{ config('other.title') }}
+Vaša ekipa {{ config('other.title') }}.
 
 
 Na voljo smo Vam tudi po E-Mail naslovu v primeru težave ali predlogov.
 <br>
 E-Mail: <a href="mailto:info@sloshare.eu">info@sloshare.eu</a>
+
+
+@component('mail::button', ['url' => route('activate', $code), 'color' => 'blue'])
+{{ __('email.activate-account') }}
+@endcomponent
 
 <p>{{ __('email.register-footer') }}</p>
 <p style="word-wrap: break-word; overflow-wrap: break-word; word-break: break-word;">{{ route('activate', $code) }}</p>
