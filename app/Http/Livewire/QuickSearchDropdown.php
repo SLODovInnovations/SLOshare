@@ -9,7 +9,7 @@ use Livewire\Component;
 
 class QuickSearchDropdown extends Component
 {
-    public string $quicksearchRadio = 'movies';
+    public string $quicksearchRadio = 'filmi';
 
     public string $quicksearchText = '';
 
@@ -17,21 +17,21 @@ class QuickSearchDropdown extends Component
     {
         $search = '%'.str_replace(' ', '%', $this->quicksearchText).'%';
         $search_results = match ($this->quicksearchRadio) {
-            'movies' => Movie::query()
+            'filmi' => Movie::query()
                 ->select(['id', 'poster', 'title', 'release_date'])
                 ->selectRaw("concat(title, ' ', release_date) as title_and_year")
                 ->having('title_and_year', 'LIKE', $search)
                 ->oldest('title')
                 ->take(10)
                 ->get(),
-            'series' => Tv::query()
+            'serije' => Tv::query()
                 ->select(['id', 'poster', 'name', 'first_air_date'])
                 ->selectRaw("concat(name, ' ', first_air_date) as title_and_year")
                 ->having('title_and_year', 'LIKE', $search)
                 ->oldest('name')
                 ->take(10)
                 ->get(),
-            'persons' => Person::query()
+            'igralci' => Person::query()
                 ->select(['id', 'still', 'name'])
                 ->whereNotNull('still')
                 ->where('name', 'LIKE', $search)
