@@ -99,16 +99,16 @@
                     </p>-->
                     <p class="form__group" x-show="cats[cat].type === 'no'">
                         <label for="torrent-cover" class="form__label">
-                            Cover {{ __('torrent.file') }} ({{ __('torrent.optional') }})
+                            {{ __('torrent.banner') }} {{ __('torrent.file') }} ({{ __('torrent.optional') }})
                         </label>
                         <input id="torrent-cover" class="upload-form-file form__file" type="file" accept=".jpg, .jpeg" name="torrent-cover">
                     </p>
-                    <p class="form__group" x-show="cats[cat].type === 'no'">
+                    <!--<p class="form__group" x-show="cats[cat].type === 'no'">
                         <label for="torrent-banner" class="form__label">
                             Banner {{ __('torrent.file') }} ({{ __('torrent.optional') }})
                         </label>
                         <input id="torrent-banner" class="upload-form-file form__file" type="file" accept=".jpg, .jpeg" name="torrent-banner">
-                    </p>
+                    </p>-->
                     <p class="form__group">
                         <input
                             type="text"
@@ -195,7 +195,7 @@
                                 @endforeach
                             </select>
                             <label class="form__label form__label--floating" for="autodis">
-                                {{ __('torrent.distributor') }} (Only For Full Disc)
+                                {{ __('torrent.distributor') }} (Samo za celoten disk)
                             </label>
                         </p>
                         <p class="form__group">
@@ -215,7 +215,7 @@
                                 @endforeach
                             </select>
                             <label class="form__label form__label--floating" for="autoreg">
-                                {{ __('torrent.region') }} (Only For Full Disc)
+                                {{ __('torrent.region') }} (Samo za celoten disk)
                             </label>
                         </p>
                     </div>
@@ -247,7 +247,7 @@
                                 x-bind:required="cats[cat].type === 'tv'"
                             >
                             <label class="form__label form__label--floating" for="episode_number">
-                                {{ __('torrent.episode-number') }} (Use "0" For Season Packs.)
+                                {{ __('torrent.episode-number') }} (Uporabite "0" za sezonske pakete)
                             </label>
                         </p>
                     </div>
@@ -459,15 +459,15 @@
                 {{ __('common.info') }}
             </h2>
             <div class="panel__body">
-                <p>{{ __('torrent.announce-url') }}:
+                <!--<p>{{ __('torrent.announce-url') }}:
                     <a href="{{ route('announce', ['passkey' => $user->passkey]) }}">
                         {{ route('announce', ['passkey' => $user->passkey]) }}
                     </a>
                 </p>
                 <br>
                 <p>{{ __('torrent.announce-url-desc', ['source' => config('torrent.source')]) }}</p>
-                <br>
-                <p class="text-success">{!! __('torrent.announce-url-desc-url', ['url' => config('other.upload-guide_url')]) !!}</p>
+                <br>-->
+                <p class="text-success">{!! __('torrent.announce-url-desc-url', ['url' => route('instructions')]) !!}</p>
             </div>
         </section>
     @endsection
