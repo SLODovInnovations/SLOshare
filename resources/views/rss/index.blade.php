@@ -1,5 +1,9 @@
 @extends('layout.default')
 
+@section('title')
+    <title>{{ __('rss.rss') }}</title>
+@endsection
+
 @section('breadcrumbs')
     <li class="breadcrumbV2">
         <a class="breadcrumb__link" href="{{ route('torrents') }}">

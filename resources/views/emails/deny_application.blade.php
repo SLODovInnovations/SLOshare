@@ -5,6 +5,7 @@ Vaša prošnja je bila zavrnjena iz naslednjega razloga:
 
 
 Lep pozdrav,
+
 Ekipa {{ config('other.title') }}
 
 

@@ -129,6 +129,8 @@
 				<strong>Živi:</strong> {{ number_format($torrentsStat->alive) }} |
 				<strong>Mrtvi:</strong> {{ number_format($torrentsStat->dead) }}
 			</span>
+			<table table class="table table-condensed table-striped table-bordered">
+			</table>
         @foreach($torrents as $torrent)
             @php $meta = null @endphp
             @if ($torrent->category->tv_meta)
@@ -286,6 +288,8 @@
                 {{ __('common.no-result') }}
             </div>
         @endif
+		<table table class="table table-condensed table-striped table-bordered">
+		</table>
         <br>
         <div class="text-center torrent-listings-pagination">
             {{ $torrents->links() }}

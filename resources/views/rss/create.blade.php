@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('rss.create-private-feed') }} - {{ config('other.title') }}</title>
+    <title>{{ __('rss.create-private-feed') }}</title>
 @endsection
 
 @section('breadcrumbs')

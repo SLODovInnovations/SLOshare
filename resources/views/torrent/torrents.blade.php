@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('torrent.torrents') }}</title>
+    <title>Seznam {{ __('torrent.torrents') }}</title>
 @endsection
 
 @section('meta')

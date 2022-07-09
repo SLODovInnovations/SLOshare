@@ -10,7 +10,7 @@
                     type="radio"
                     class="quick-search__radio"
                     name="quicksearchRadio"
-                    value="movies"
+                    value="filmi"
                     wire:model="quicksearchRadio"
                     x-on:click="$nextTick(() => $refs.quickSearch.focus());"
                 />
@@ -24,7 +24,7 @@
                     type="radio"
                     class="quick-search__radio"
                     name="quicksearchRadio"
-                    value="series"
+                    value="serije"
                     wire:model="quicksearchRadio"
                     x-on:click="$nextTick(() => $refs.quickSearch.focus());"
                 />
@@ -38,7 +38,7 @@
                     type="radio"
                     class="quick-search__radio"
                     name="quicksearchRadio"
-                    value="persons"
+                    value="igralci"
                     wire:model="quicksearchRadio"
                     x-on:click="$nextTick(() => $refs.quickSearch.focus());"
                 />
@@ -66,7 +66,7 @@
                         x-on:keydown.up.prevent="quickSearchArrowUp($el)"
                     >
                         @switch ($quicksearchRadio)
-                            @case ("movies")
+                            @case ("filmi")
                                 <a
                                     class="quick-search__result-link"
                                     href="{{ route('torrents.similar', ['category_id' => '1', 'tmdb' => $search_result->id]) }}"
@@ -87,7 +87,7 @@
                                     </h2>
                                 </a>
                             @break
-                            @case ("series")
+                            @case ("serije")
                                 <a
                                     class="quick-search__result-link"
                                     href="{{ route('torrents.similar', ['category_id' => '2', 'tmdb' => $search_result->id]) }}"
@@ -108,7 +108,7 @@
                                     </h2>
                                 </a>
                             @break
-                            @case ("persons")
+                            @case ("igralci")
                                 <a
                                     class="quick-search__result-link"
                                     href="{{ route('mediahub.persons.show', ['id' => $search_result->id]) }}"
