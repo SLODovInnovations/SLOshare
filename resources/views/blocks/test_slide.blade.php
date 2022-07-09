@@ -1,4 +1,46 @@
 <div class="col-md-10 col-sm-10 col-md-offset-1">
+
+                        <!-- Buttons -->
+                        <ul class="nav nav-tabs-user mb-5-user" role="tablist">
+                             <li class="active">
+                                <a href="#new-sloshare" role="tab" data-toggle="tab" aria-expanded="false">
+                                    <img src="{{ url('/icon-torrent.png') }}"> {{ __('sloshare.home-newsloshare-title') }}
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="#video" role="tab" data-toggle="tab" aria-expanded="true">
+                                    <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ __('sloshare.home-movie-title') }}
+                                </a>
+                            </li>
+                             <li class="">
+                                <a href="#tvseries" role="tab" data-toggle="tab" aria-expanded="true">
+                                    <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ __('sloshare.home-tvseries-title') }}
+                                </a>
+                            </li>
+                             <li class="">
+                                <a href="#games" role="tab" data-toggle="tab" aria-expanded="true">
+                                    <i class="{{ config('other.font-awesome') }} fa-gamepad"></i> {{ __('sloshare.home-game-title') }}
+                                </a>
+                            </li>
+                             <li class="">
+                                <a href="#applications" role="tab" data-toggle="tab" aria-expanded="true">
+                                    <i class="{{ config('other.font-awesome') }} fa-compact-disc"></i> {{ __('sloshare.home-applications-title') }}
+                                </a>
+                            </li>
+                             <li class="">
+                                <a href="#cartoons" role="tab" data-toggle="tab" aria-expanded="true">
+                                    <i class="{{ config('other.font-awesome') }} fa-baby"></i> {{ __('sloshare.home-cartoons-title') }}
+                                </a>
+                            </li>
+                             <li class="">
+                                <a href="#xxx" role="tab" data-toggle="tab" aria-expanded="true">
+                                    <i class="{{ config('other.font-awesome') }} fa-heart"></i> {{ __('sloshare.home-xxx-title') }}
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- Buttons -->
+
+    <div class="tab-pane fade active in" id="new-sloshare">
         <div class="container">
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
