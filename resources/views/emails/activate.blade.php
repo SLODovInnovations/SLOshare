@@ -29,12 +29,12 @@ portala. Na portalu sloshare.eu je najpogosteje uporabljen in tudi toplo priporo
 3. Kaj so številke zgoraj desno ob navigaciskem meniju? Kaj je ratio?
 
 
-Da ostane naš portal stabilen in omrežje karseda hiter, deluje na portalu sistem uporabniških razmerij (ratio). Zgoraj lahko
-vidite pri prvi puščici količino vašega prenosa podatkov, pri drgi količino oddanih podatkov, na naslednji vidite koliko
-koliko imate aktivnih torrentov, na predzadnji pa vidite koliko imate trenutnih prenosov, pri zadnji ikoni pa je izračunano
-vaše delilno razmerje. Za obstoj na našem portalu je pomembno, da delite prenešeno vsebino z drugimi uporabniki minmalno
-3 dni in držite razmerje nad 1. Če torej prenesete 1.700GB viliko datoteko, morate tudi najmanj 1.700GB in 3 dni tudi odsejati.
-V kolikor imate razmerje pod 1 dlje časa, boste po 5h opozorilih izključeni iz portala.
+Da ostane naš portal stabilen in omrežje karseda hitro, deluje na portalu sistem uporabniških razmerij (ratio). Zgoraj lahko
+vidite pri prvi puščici količino vašega prenosa podatkov, pri drugi količino oddanih podatkov, na naslednji vidite koliko 
+imate aktivnih torrentov. Na predzadnji pa vidite koliko imate trenutnih prenosov, pri zadnji ikoni pa je izračunano vaše 
+delilno razmerje. Za obstoj na našem portalu je pomembno, da delite prenešeno vsebino z drugimi uporabniki minmalno 3 dni 
+in držite razmerje nad 1. Če torej prenesete 1.700GB viliko datoteko, morate tudi najmanj 1.700GB in 3 dni tudi odsejati.
+V kolikor imate razmerje pod 1 dlje časa, boste po 5ih opozorilih izključeni iz portala.
 
 
 Ko končate vaše prenose torej pustite vaš torrent client še prižgan in datotek ne dajajte na pavzo ali izbrišite, da
