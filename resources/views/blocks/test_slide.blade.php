@@ -1,4 +1,7 @@
-<div class="col-md-10 col-sm-10 col-md-offset-1">
+<div class="mobile-hide">
+    <div class="col-md-10 col-sm-10 col-md-offset-1">
+        <div class="panel panel-chat shoutbox">
+
 
                         <!-- Buttons -->
                         <ul class="nav nav-tabs-user mb-5-user" role="tablist">
@@ -40,70 +43,70 @@
                         </ul>
                         <!-- Buttons -->
 
-    <div class="tab-pane fade active in" id="new-sloshare">
 
+            <div id="myCarousel" class="keen-slider">
+                @php $meta = null @endphp
+            @foreach($newsloshare as $newslo)
+                @php $meta = null @endphp
+                @if ($newslo->category->tv_meta)
+                    @if ($newslo->tmdb || $newslo->tmdb != 0)
+                        @php $meta = cache()->remember('tvmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Tv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @endif
+                @endif
+                @if ($newslo->category->movie_meta)
+                    @if ($newslo->tmdb || $newslo->tmdb != 0)
+                        @php $meta = cache()->remember('moviemeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Movie::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @endif
+                @endif
+                @if ($newslo->category->game_meta)
+                    @if ($newslo->igdb || $newslo->igdb != 0)
+                        @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($newslo->igdb) @endphp
+                    @endif
+                @endif
+                    <div class="keen-slider__slide">
+                        				<div class="release-info">
 
-<div class="slideshow-container">
+                        				    @if ($newslo->free == '1' || $newslo->free >= '90' || $newslo->free < '90' && $newslo->free >= '30' || $newslo->free < '30' && $newslo->free != '0' || config('other.freeleech') == '1')
+                        					<a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+                        					@else
+                        					<a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }}</a>
+                                            @endif
 
-<div class="mySlides fade">
-  <div class="numbertext">1 / 3</div>
-  <img src="https://www.w3schools.com/howto/img_nature_wide.jpg" style="width:100%">
-  <div class="text">Caption Text</div>
-</div>
+                        					<a href="{{ route('torrent', ['id' => $newslo->id]) }}"title="{{ $newslo->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($newslo->name, 50))</a>
+                        					<div class="release-info-container">
+                        						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $newslo->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $newslo->comments_count }}</span></div>
 
-<div class="mySlides fade">
-  <div class="numbertext">2 / 3</div>
-  <img src="img_snow_wide.jpg" style="width:100%">
-  <div class="text">Caption Two</div>
-</div>
+                        						@if ($newslo->category->game_meta)
+                        						<div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
+                        						@endif
+                                                @if ($newslo->tmdb != 0 && $newslo->tmdb != null)
+                                                <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
+                                                @endif
 
-<div class="mySlides fade">
-  <div class="numbertext">3 / 3</div>
-  <img src="img_mountains_wide.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
-</div>
-
-<a class="prev" onclick="plusSlides(-1)">❮</a>
-<a class="next" onclick="plusSlides(1)">❯</a>
-
-</div>
-<br>
-
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span>
-  <span class="dot" onclick="currentSlide(2)"></span>
-  <span class="dot" onclick="currentSlide(3)"></span>
-</div>
-
-<script>
-let slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
-</script>
-
-
+                        						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $newslo->created_at->getTimestamp()) }} | {{ date('H:m', $newslo->created_at->getTimestamp()) }}</div>
+                        						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $newslo->user->username }}</div>
+                        					</div>
+                        					<div class="release-info-rating">
+                        						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $newslo->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $newslo->getSize() }}</a>
+                        						<div style="float: right;">
+                        							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $newslo->seeders }}</span>
+                        							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $newslo->leechers }}</span>
+                        						</div>
+                        					</div>
+                        				</div>
+                        				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
+                        			</div>
+                    @endif
+                @endforeach
+                <a class="left carousel-control">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                    <span class="sr-only">{{ __('common.previous') }}</span>
+                </a>
+                <a class="right carousel-control">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    <span class="sr-only">{{ __('common.next') }}</span>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
