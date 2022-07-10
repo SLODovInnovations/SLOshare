@@ -147,3 +147,10 @@ $(document).ready(function () {
 document.querySelector('emoji-picker').addEventListener('emoji-click', (e) => {
     textFieldEdit.insert(input, e.detail.unicode);
 });*/
+
+$('.autoplay-slo').slick({
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 2000,
+});
