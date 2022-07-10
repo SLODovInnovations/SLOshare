@@ -1,78 +1,94 @@
-.tcb-product-slider {
-  background: #333;
-  background-image: url(https://unsplash.it/1240/530?image=721);
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 100px 0;
-}
-.tcb-product-slider .carousel-control {
-  width: 5%;
-}
-.tcb-product-item a {
-  color: #147196;
-}
-.tcb-product-item a:hover {
-  text-decoration: none;
-}
-.tcb-product-item .tcb-hline {
-  margin: 10px 0;
-  height: 1px;
-  background: #ccc;
-}
-@media all and (max-width: 768px) {
-  .tcb-product-item {
-    margin-bottom: 30px;
-  }
-}
-.tcb-product-photo {
-  text-align: center;
-  height: 180px;
-  background: #fff;
-}
-.tcb-product-photo img {
-  height: 100%;
-  display: inline-block;
-}
-.tcb-product-info {
-  background: #f0f0f0;
-  padding: 15px;
-}
-.tcb-product-title h4 {
-  margin-top: 0;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.tcb-product-rating {
-  color: #acacac;
-}
-.tcb-product-rating .active {
-  color: #FFB500;
-}
-.tcb-product-price {
-  color: firebrick;
-  font-size: 18px;
+* {
+  box-sizing: border-box;
 }
 
-.details {
-    margin: 50px 0; }
- .details h1 {
-      font-size: 32px;
-      text-align: center;
-      margin-bottom: 3px; }
-    .details .back-link {
-      text-align: center; }
-      .details .back-link a {
-        display: inline-block;
-        margin: 20px 0;
-        padding: 15px 30px;
-        background: #333;
-        color: #fff;
-        border-radius: 24px; }
-        .details .back-link a svg {
-          margin-right: 10px;
-          vertical-align: text-top;
-          display: inline-block; }
+/* Position the image container (needed to position the left and right arrows) */
+.container {
+  position: relative;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+
+
+
+
 
 .gallery-item {
     position: relative;

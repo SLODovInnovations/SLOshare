@@ -8,7 +8,7 @@
         @include('blocks.stats')
         @include('blocks.poll')
 
-
+        <!--@include('blocks.featured')-->
 
         @include('blocks.video')
         @include('blocks.ad_right')
@@ -16,7 +16,6 @@
         @include('blocks.torrents_torrents')
         @include('blocks.ad_center')
         @include('blocks.tops_torrents')
-        @include('blocks.featured')
         @include('blocks.test_slide')
         <!--@include('blocks.top_torrents')-->
         <!--@include('blocks.top_uploaders')-->
