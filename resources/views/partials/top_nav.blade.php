@@ -12,6 +12,11 @@
                     {{ __('torrent.torrents') }}
                 </div>
             </a>
+            <a class="top-nav__dropdown--touch" tabindex="0">
+                <div class="top-nav--left__container">
+                    {{ __('torrent.torrents') }}
+                </div>
+            </a>
             <ul>
                 <li>
                     <a href="{{ route('torrents') }}">
@@ -67,6 +72,11 @@
         </li>
         <li class="top-nav--left__list-item top-nav__dropdown">
             <a class="top-nav__dropdown--nontouch"  href="{{ route('forums.index') }}">
+                <div class="top-nav--left__container">
+                    {{ __('common.sloshare') }}
+                </div>
+            </a>
+            <a class="top-nav__dropdown--touch" tabindex="0">
                 <div class="top-nav--left__container">
                     {{ __('common.sloshare') }}
                 </div>
@@ -258,7 +268,7 @@
                 </a>
             </li>
             <li class="ratio-bar__downloaded" title="{{ __('common.download') }}">
-                <a href="{{ route('user_torrents', ['username' => auth()->user()->username]) }}">
+                <a href="{{ route('user_torrents', ['username' => auth()->user()->username, 'downloaded' => 'include']) }}">
                     <i class="{{ config('other.font-awesome') }} fa-arrow-down"></i>
                     {{ auth()->user()->getDownloaded() }}
                 </a>
@@ -270,7 +280,7 @@
                 </a>
             </li>
             <li class="ratio-bar__leeching" title="{{ __('torrent.leeching') }}">
-                <a href="{{ route('user_torrents', ['username' => auth()->user()->username]) }}">
+                <a href="{{ route('user_torrents', ['username' => auth()->user()->username, 'unsatisfied' => 'include']) }}">
                     <i class="{{ config('other.font-awesome') }} fa-download"></i>
                     {{ auth()->user()->getLeeching() }}
                 </a>
@@ -397,7 +407,8 @@
 @endif
                     <!--<li>
                         <a href="{{ route('user_privacy', ['username' => auth()->user()->username]) }}">
-                            <i class="{{ config('other.font-awesome') }} fa-eye"></i> {{ __('user.my-privacy') }}
+                            <i class="{{ config('other.font-awesome') }} fa-eye"></i>
+                            {{ __('user.my-privacy') }}
                         </a>
                     </li>-->
                     <li>
