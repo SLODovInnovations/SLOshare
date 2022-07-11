@@ -118,6 +118,7 @@
                         				</div>
                         				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
                         			</div>
+                        		</div>
                 @endforeach
                 <a class="left carousel-control">
                     <span class="glyphicon glyphicon-chevron-left"></span>
