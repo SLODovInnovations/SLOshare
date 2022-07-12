@@ -152,7 +152,14 @@ document.querySelector('emoji-picker').addEventListener('emoji-click', (e) => {
 // Keen Slider For Featured Torrents
 $(document).ready(function () {
     var slide = new KeenSlider("#SLOCarousel", {
-        slidesPerView: 3,
-        spacing: 15
+        breakpoints:{
+            "(min-width: 400px)": {
+            slides: { perView: 2, spacing: 5 },
+            },
+            "(min-width: 1000px)": {
+            slides: {perView: 3, spacing: 10 },
+            },
+        },
+        slides: { perView: 1 },
     });
 });
