@@ -154,5 +154,5 @@ $(document).ready(function () {
     var slide = new KeenSlider("#SLOCarousel", {
         slidesPerView: 3,
         spacing: 15
-    )};
+    });
 });
