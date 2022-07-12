@@ -80,8 +80,6 @@ $(document).ready(function () {
         var slider = new KeenSlider('#myCarousel', {
             slides: slides.length,
             loop: true,
-            perView: 2,
-            spacing: 15,
             duration: 600,
             dragStart: function () {
                 autoplay(false);
@@ -149,3 +147,12 @@ $(document).ready(function () {
 document.querySelector('emoji-picker').addEventListener('emoji-click', (e) => {
     textFieldEdit.insert(input, e.detail.unicode);
 });*/
+
+
+// Keen Slider For Featured Torrents
+$(document).ready(function () {
+    var slide = new KeenSlider("#SLOCarousel", {
+        slidesPerView: 3,
+        spacing: 15
+    });
+});

@@ -44,7 +44,7 @@
                         <!-- Buttons -->
 
 
-            <div id="myCarousel" class="keen-slider">
+            <div id="SLOCarousel" class="keen-slider">
                 @php $meta = null @endphp
             @foreach($newsloshare as $newslo)
                 @php $meta = null @endphp
@@ -120,14 +120,7 @@
                         			</div>
                         		</div>
                 @endforeach
-                <a class="left carousel-control">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">{{ __('common.previous') }}</span>
-                </a>
-                <a class="right carousel-control">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">{{ __('common.next') }}</span>
-                </a>
+
             </div>
         </div>
     </div>
