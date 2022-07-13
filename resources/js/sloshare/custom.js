@@ -151,15 +151,40 @@ document.querySelector('emoji-picker').addEventListener('emoji-click', (e) => {
 
 // Keen Slider For Featured Torrents
 $(document).ready(function () {
-    var slide = new KeenSlider("#SLOCarousel", {
-        breakpoints:{
-            "(min-width: 400px)": {
-            slides: { perView: 2, spacing: 5 },
-            },
-            "(min-width: 1000px)": {
-            slides: {perView: 3, spacing: 10 },
-            },
+var slider = new KeenSlider(
+        "#SLOCarousel",
+        {
+          loop: true,
         },
-        slides: { perView: 1 },
-    });
+        [
+          (slider) => {
+            let timeout
+            let mouseOver = false
+            function clearNextTimeout() {
+              clearTimeout(timeout)
+            }
+            function nextTimeout() {
+              clearTimeout(timeout)
+              if (mouseOver) return
+              timeout = setTimeout(() => {
+                slider.next()
+              }, 2000)
+            }
+            slider.on("created", () => {
+              slider.container.addEventListener("mouseover", () => {
+                mouseOver = true
+                clearNextTimeout()
+              })
+              slider.container.addEventListener("mouseout", () => {
+                mouseOver = false
+                nextTimeout()
+              })
+              nextTimeout()
+            })
+            slider.on("dragStarted", clearNextTimeout)
+            slider.on("animationEnded", nextTimeout)
+            slider.on("updated", nextTimeout)
+          },
+        ]
+      )
 });
