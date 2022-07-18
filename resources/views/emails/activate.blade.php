@@ -32,8 +32,8 @@ portala. Na portalu sloshare.eu je najpogosteje uporabljen in tudi toplo priporo
 Da ostane naš portal stabilen in omrežje karseda hitro, deluje na portalu sistem uporabniških razmerij (ratio). Zgoraj lahko
 vidite pri prvi puščici količino vašega prenosa podatkov, pri drugi količino oddanih podatkov, na naslednji vidite koliko 
 imate aktivnih torrentov. Na predzadnji pa vidite koliko imate trenutnih prenosov, pri zadnji ikoni pa je izračunano vaše 
-delilno razmerje. Za obstoj na našem portalu je pomembno, da delite prenešeno vsebino z drugimi uporabniki minmalno 3 dni 
-in držite razmerje nad 1. Če torej prenesete 1.700GB viliko datoteko, morate tudi najmanj 1.700GB in 3 dni tudi odsejati.
+delilno razmerje. <span style="color: #FF0000; font-weight: bold;">Za obstoj na našem portalu je pomembno, da delite prenešeno vsebino z drugimi uporabniki minimalno 3 dni 
+in držite razmerje nad 1.</span> Če torej prenesete 1.700GB veliko datoteko, morate tudi najmanj 1.700GB in 3 dni tudi odsejati.
 V kolikor imate razmerje pod 1 dlje časa, boste po 5ih opozorilih izključeni iz portala.
 
 
