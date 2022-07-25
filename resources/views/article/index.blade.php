@@ -33,7 +33,7 @@
                     datetime="{{ $article->created_at }}"
                     title="{{ $article->created_at }}"
                 >
-                    {{ $article->created_at->diffForHumans() }}
+                    {{ date('d.m.Y', $article->created_at->getTimestamp()) }} | {{ date('H:m:s', $article->created_at->getTimestamp()) }}
                 </time>
                 <img
                     class="article-preview__image"

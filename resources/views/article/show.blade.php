@@ -27,7 +27,7 @@
             <h1 class="panel__heading">{{ $article->title }}</h1>
             <div class="panel__actions">
                 <time class="panel__action page__published" datetime="{{ $article->created_at }}">
-                    {{ $article->created_at->toDayDateTimeString() }}
+                    {{ date('d.m.Y', $article->created_at->getTimestamp()) }} | {{ date('H:m:s', $article->created_at->getTimestamp()) }}
                 </time>
             </div>
         </header>
@@ -103,7 +103,7 @@
                                 @endif
                                 <span class="text-muted">
                                     <small>
-                                        <em>{{$comment->created_at->diffForHumans() }}</em>
+                                        <em>{{ date('d.m.Y', $article->created_at->getTimestamp()) }} | {{ date('H:m:s', $article->created_at->getTimestamp()) }}</em>
                                     </small>
                                 </span>
                                 @if ($comment->user_id == auth()->id() || auth()->user()->group->is_modo)
@@ -155,11 +155,15 @@
                 <p class="form__group">
                     <textarea id="editor" name="content" cols="30" rows="5" class="form-control"></textarea>
                 </p>
+                @if (auth()->user()->group->is_modo)
                 <p class="form__group">
                     <input type="hidden" value="0" name="anonymous">
                     <input type="checkbox" id="anon-comment" class="form__checkbox" value="1" name="anonymous">
                     <label for="anon-comment">{{ __('common.anonymous') }} {{ __('common.comment') }}</label>
                 </p>
+                @else
+                    <input type="hidden" value="0" name="anonymous">
+                @endif
                 <p class="form__group">
                     <button type="submit" class="form__button form__button--filled">{{ __('common.submit') }}</button>
                 </p>
