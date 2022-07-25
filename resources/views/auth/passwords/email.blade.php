@@ -43,18 +43,16 @@
         </a>
 
         <div class="fideIn first">
-            <img src="{{ url('/logo.png') }}" id="icon" alt="SLOshare">
+            <img src="{{ url('/logo.png') }}" id="icon" alt="SLOshare"/>
         </div>
 
         <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
             @csrf
             <label for="email"></label><input type="email" id="email" class="fadeIn third" name="email"
                                               placeholder="{{ __('auth.email') }}" required autofocus>
-
             @if (config('captcha.enabled') == true)
                 @hiddencaptcha
             @endif
-
             <button type="submit" class="fadeIn fourth">{{ __('common.submit') }}</button>
         </form>
 
