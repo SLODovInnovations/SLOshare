@@ -51,7 +51,7 @@
 
 
         <div class="fideIn first">
-            <img src="{{ url('/logo.png') }}" id="icon" alt="SLOshare">
+            <img src="{{ url('/logo.png') }}" id="icon" alt="SLOshare"/>
         </div>
         <form role="form" method="POST" action="{{ route('login') }}">
             @csrf

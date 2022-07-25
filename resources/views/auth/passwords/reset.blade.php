@@ -43,7 +43,7 @@
         </a>
 
         <div class="fideIn first">
-            <img src="{{ url('/logo.png') }}" id="icon" alt="SLOshare">
+            <img src="{{ url('/logo.png') }}" id="icon" alt="SLOshare"/>
         </div>
 
         <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
