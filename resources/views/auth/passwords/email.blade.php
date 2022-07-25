@@ -12,7 +12,7 @@
         <meta property="og:site_name" content="{{ config('other.title') }}">
         <meta property="og:type" content="website">
         <meta property="og:image" content="{{ url('/img/og.png') }}">
-        <meta property="og:description" content="{{ config('sloshare.powered-by') }}">
+        <meta property="og:description" content="{{ config('other.meta_description') }}">
         <meta property="og:url" content="{{ url('/') }}">
         <meta property="og:locale" content="{{ config('app.locale') }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
