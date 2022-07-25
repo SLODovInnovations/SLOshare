@@ -113,6 +113,8 @@
                                                 <i class="{{ config('other.font-awesome') }} fa-pencil"></i>
                                             </button>
                                         </a>
+                                @endif
+                                @if ($comment->auth()->user()->group->is_modo)
                                         <form
                                             action="{{ route('comment_delete', ['comment_id' => $comment->id]) }}"
                                             method="POST"

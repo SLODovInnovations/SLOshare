@@ -28,6 +28,7 @@
                     {{ __('user.edit-profile') }}
                 </a>
             </li>
+@if (auth()->user()->group->is_modo)
             @if(auth()->user()->hidden)
                 <form
                     method="POST"
@@ -129,17 +130,19 @@
                 </button>
             </li>
         @endif
+@endif
     </ul>
 </li>
 @if ($isProfileOwner)
     <li class="nav-tab-menu">
         <a
             class="{{ Route::is('user_settings', 'user_security', 'user_privacy', 'user_notification') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
-            href="{{ route('user_settings', ['username' => $user->username]) }}"
+            href="{{ route('user_security', ['username' => $user->username]) }}"
         >
             {{ __('user.settings') }}
         </a>
         <ul class="nav-tab-menu__items">
+@if (auth()->user()->group->is_modo)
             <li class="{{ Route::is('user_settings') ? 'nav-tab--active' : 'nav-tavV2' }}">
                 <a
                     class="{{ Route::is('user_settings') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
@@ -148,6 +151,7 @@
                     {{ __('user.general') }}
                 </a>
             </li>
+@endif
             <li class="{{ Route::is('user_security') ? 'nav-tab--active' : 'nav-tavV2' }}">
                 <a
                     class="{{ Route::is('user_security') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
@@ -164,6 +168,7 @@
                     {{ __('user.privacy') }}
                 </a>
             </li>
+@if (auth()->user()->group->is_modo)
             <li class="{{ Route::is('user_notification') ? 'nav-tab--active' : 'nav-tavV2' }}">
                 <a
                     class="{{ Route::is('user_notification') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
@@ -172,6 +177,7 @@
                     {{ __('user.notification') }}
                 </a>
             </li>
+@endif
         </ul>
     </li>
 @endif
@@ -310,6 +316,7 @@
         </ul>
     </li>
 @endif
+@if (auth()->user()->group->is_modo)
 @if ($isProfileOwner)
     <li class="nav-tab-menu">
         <a
@@ -362,6 +369,7 @@
         </ul>
     </li>
 @endif
+@endif
 @if ($isProfileOwner || $isModo)
     <li class="nav-tab-menu">
         <span class="{{ Route::is('wishes.*', 'seedboxes.*', 'invites.*') ? 'nav-tab--active__link' : 'nav-tab__link' }}">
@@ -377,6 +385,7 @@
                         {{ __('user.wishlist') }}
                     </a>
                 </li>
+@if (auth()->user()->group->is_modo)
                 <li class="{{ Route::is('seedboxes.index') ? 'nav-tab--active' : 'nav-tavV2' }}">
                     <a
                         class="{{ Route::is('seedboxes.index') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
@@ -404,6 +413,7 @@
                     </a>
                 </li>
             @endif
+@endif
         </ul>
     </li>
 @endif
