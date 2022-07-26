@@ -376,6 +376,8 @@
                                     <option value="5">5 Dni</option>
                                     <option value="6">6 Dni</option>
                                     <option value="7">7 Dni</option>
+                                    <option value="14">14 Dni</option>
+                                    <option value="28">28 Dni</option>
                                 </select>
                             </label>
                         </div>
@@ -432,6 +434,8 @@
                                     <option value="5">5 Dni</option>
                                     <option value="6">6 Dni</option>
                                     <option value="7">7 Dni</option>
+                                    <option value="14">14 Dni</option>
+                                    <option value="28">28 Dni</option>
                                 </select>
                             </label>
                         </div>
