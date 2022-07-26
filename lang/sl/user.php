@@ -300,7 +300,7 @@ return [
     'top-seeding-size'                     => 'Najvišja sejanje (velikost)',
     'top-seedtime'                         => 'Vrhunski čas sejanja',
     'top-uploaders-data'                   => 'Najbolj priljubljeni (podatki)',
-    'top-uploaders-count'                  => 'Najpogostejši uporabniki (število)',
+    'top-uploaders-count'                  => 'TOP Nalegalci',
     'topics'                               => 'Teme',
     'topics-started'                       => 'Začete teme foruma',
     'torrent-comments'                     => 'Komentarji v torek',

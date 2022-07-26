@@ -106,15 +106,13 @@
                                         <em>{{ date('d.m.Y', $comment->created_at->getTimestamp()) }} | {{ date('H:m:s', $comment->created_at->getTimestamp()) }}</em>
                                     </small>
                                 </span>
-                                @if ($comment->user_id == auth()->id() || auth()->user()->group->is_modo)
+                                @if (auth()->user()->group->is_modo)
                                     <div class="pull-right" style="display: inline-block;">
                                         <a data-toggle="modal" data-target="#modal-comment-edit-{{ $comment->id }}">
                                             <button class="btn btn-circle btn-info">
                                                 <i class="{{ config('other.font-awesome') }} fa-pencil"></i>
                                             </button>
                                         </a>
-                                @endif
-                                @if (auth()->user()->group->is_admin)
                                         <form
                                             action="{{ route('comment_delete', ['comment_id' => $comment->id]) }}"
                                             method="POST"
