@@ -103,7 +103,7 @@
                                 @endif
                                 <span class="text-muted">
                                     <small>
-                                        <em>{{ date('d.m.Y', $article->created_at->getTimestamp()) }} | {{ date('H:m:s', $article->created_at->getTimestamp()) }}</em>
+                                        <em>{{ date('d.m.Y', $comment->created_at->getTimestamp()) }} | {{ date('H:m:s', $comment->created_at->getTimestamp()) }}</em>
                                     </small>
                                 </span>
                                 @if ($comment->user_id == auth()->id() || auth()->user()->group->is_modo)
