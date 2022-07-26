@@ -156,5 +156,5 @@ var slider = new KeenSlider(
         {
         slidesPerView: 3,
         spacing: 15
-        }
+        })
 });
