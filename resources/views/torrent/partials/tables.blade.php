@@ -104,10 +104,8 @@
                                                         @endif
 
                                                         @if ($torrent->free >= '90')
-                                                            <span class="badge-extra text-bold">
                                                                 <i class="{{ config('other.font-awesome') }} fa-star text-gold" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i> {{ $torrent->free }}% {{ __('common.free') }}
                                                                 @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }}</p> @endif
-                                                            </span>
                                                         @elseif ($torrent->free < '90' && $torrent->free >= '30')
                                                             <style>
                                                                 .star50 {
@@ -124,10 +122,8 @@
                                                                     color: #FFB800;
                                                                 }
                                                             </style>
-                                                            <span class="badge-extra text-bold">
                                                                 <i class="star50 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i>
-                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }}</p> @endif
-                                                            </span>
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->date('d.m.Y', torrent->fl_until->getTimestamp()) }}</p> @endif
                                                         @elseif ($torrent->free < '30' && $torrent->free != '0')
                                                             <style>
                                                                 .star30 {
@@ -144,10 +140,8 @@
                                                                     color: #FFB800;
                                                                 }
                                                             </style>
-                                                            <span class="badge-extra text-bold">
                                                                 <i class="star30 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i>
                                                                 @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }}</p> @endif
-                                                            </span>
                                                         @endif
 
                                                         @if (config('other.freeleech') == '1')
@@ -162,6 +156,8 @@
                                                     @endif
                                                 </td>
                                             </tr>
+                                        @else
+                                        NI
                                         @endif
 
                     </div>
