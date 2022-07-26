@@ -71,26 +71,17 @@
             <div class="col-md-2 page">
                 <div class="infobox">
                     <span class="fondata">
-                        <i class="{{ config('other.font-awesome') }} fa-fw fa-star text-gold"></i> {{ __('torrent.freeleech') }}
+                        {{ __('torrent.freeleech') }}
                     </span>
                     <div class="numup" style="padding-top:5px;">
 
                                         @if ($torrent->featured == '0')
                                             <tr class="success torrent-discounts">
                                                 <td>
-                                                    <strong>{{ __('torrent.discounts') }}</strong>
-                                                </td>
-                                                <td>
                                                     @if ($torrent->doubleup == '1' || $torrent->free > '1' || config('other.freeleech') == '1' || config('other.doubleup') == '1' || $personal_freeleech || $user->group->is_freeleech == '1' || $freeleech_token)
                                                         @if ($freeleech_token)
                                                             <span class="badge-extra text-bold">
                                                                 <i class="{{ config('other.font-awesome') }} fa-coins text-bold"></i> {{ __('common.fl_token') }}
-                                                            </span>
-                                                        @endif
-
-                                                        @if ($user->group->is_freeleech == '1')
-                                                            <span class="badge-extra text-bold">
-                                                                <i class="{{ config('other.font-awesome') }} fa-trophy text-purple"></i> {{ __('common.special') }} {{ __('torrent.freeleech') }}
                                                             </span>
                                                         @endif
 
@@ -114,8 +105,8 @@
 
                                                         @if ($torrent->free >= '90')
                                                             <span class="badge-extra text-bold">
-                                                                <i class="{{ config('other.font-awesome') }} fa-star text-gold"></i> {{ $torrent->free }}% {{ __('common.free') }}
-                                                                @if ($torrent->fl_until !== null) <span>{{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }} Freeleech expires.</span> @endif
+                                                                <i class="{{ config('other.font-awesome') }} fa-star text-gold" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i> {{ $torrent->free }}% {{ __('common.free') }}
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }}</p> @endif
                                                             </span>
                                                         @elseif ($torrent->free < '90' && $torrent->free >= '30')
                                                             <style>
@@ -134,8 +125,8 @@
                                                                 }
                                                             </style>
                                                             <span class="badge-extra text-bold">
-                                                                <i class="star50 {{ config('other.font-awesome') }} fa-star"></i> {{ $torrent->free }}% {{ __('common.free') }}
-                                                                @if ($torrent->fl_until !== null) <span>{{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }} Freeleech expires.</span> @endif
+                                                                <i class="star50 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i>
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }}</p> @endif
                                                             </span>
                                                         @elseif ($torrent->free < '30' && $torrent->free != '0')
                                                             <style>
@@ -154,20 +145,14 @@
                                                                 }
                                                             </style>
                                                             <span class="badge-extra text-bold">
-                                                                <i class="star30 {{ config('other.font-awesome') }} fa-star"></i> {{ $torrent->free }}% {{ __('common.free') }}
-                                                                @if ($torrent->fl_until !== null) <span>{{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }} Freeleech expires.</span> @endif
+                                                                <i class="star30 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i>
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }}</p> @endif
                                                             </span>
                                                         @endif
 
                                                         @if (config('other.freeleech') == '1')
                                                             <span class="badge-extra text-bold">
-                                                                <i class="{{ config('other.font-awesome') }} fa-globe text-blue"></i> {{ __('common.global') }} {{ __('torrent.freeleech') }}
-                                                            </span>
-                                                        @endif
-
-                                                        @if (config('other.doubleup') == '1')
-                                                            <span class="badge-extra text-bold">
-                                                                <i class="{{ config('other.font-awesome') }} fa-globe text-green"></i> {{ __('common.global') }} {{ strtolower(__('torrent.double-upload')) }}
+                                                                <i class="{{ config('other.font-awesome') }} fa-globe text-blue"></i>
                                                             </span>
                                                         @endif
                                                     @else
