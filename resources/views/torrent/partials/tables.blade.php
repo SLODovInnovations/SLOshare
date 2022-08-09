@@ -91,12 +91,6 @@
                                                             </span>
                                                         @endif
 
-                                                        @if ($torrent->doubleup == '1')
-                                                            <span class="badge-extra text-bold">
-                                                                <i class="{{ config('other.font-awesome') }} fa-gem text-green"></i> {{ __('torrent.double-upload') }}
-                                                            </span>
-                                                        @endif
-
                                                         @if ($user->group->is_double_upload == '1')
                                                             <span class="badge-extra text-bold">
                                                                 <i class="{{ config('other.font-awesome') }} fa-trophy text-purple"></i> {{ __('common.special') }} {{ __('torrent.double-upload') }}
@@ -105,7 +99,7 @@
 
                                                         @if ($torrent->free >= '90')
                                                                 <i class="{{ config('other.font-awesome') }} fa-star text-gold" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i> {{ $torrent->free }}% {{ __('common.free') }}
-                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }}</p> @endif
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->createFromTimestamp(strtotime($torrent->fl_until))->format('d-m-Y') }}</p> @endif
                                                         @elseif ($torrent->free < '90' && $torrent->free >= '30')
                                                             <style>
                                                                 .star50 {
@@ -123,7 +117,7 @@
                                                                 }
                                                             </style>
                                                                 <i class="star50 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i>
-                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->date('d.m.Y', torrent->fl_until->getTimestamp()) }}</p> @endif
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->createFromTimestamp(strtotime($torrent->fl_until))->format('d-m-Y') }}</p> @endif
                                                         @elseif ($torrent->free < '30' && $torrent->free != '0')
                                                             <style>
                                                                 .star30 {
@@ -141,7 +135,7 @@
                                                                 }
                                                             </style>
                                                                 <i class="star30 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i>
-                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }}</p> @endif
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->createFromTimestamp(strtotime($torrent->fl_until))->format('d-m-Y') }}</p> @endif
                                                         @endif
 
                                                         @if (config('other.freeleech') == '1')
