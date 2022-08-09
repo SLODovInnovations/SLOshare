@@ -147,11 +147,13 @@
                                                         <span class="text-bold text-danger">
                                                             <i class="{{ config('other.font-awesome') }} fa-frown"></i> {{ __('torrent.no-discounts') }}
                                                         </span>
-                                                    @else
-                                                    NI
                                                     @endif
                                                 </td>
                                             </tr>
+                                        @else
+                                        NI
+                                        @endif
+
                     </div>
                 </div>
             </div>
