@@ -98,8 +98,8 @@
                                                         @endif
 
                                                         @if ($torrent->free >= '90')
-                                                                <i class="{{ config('other.font-awesome') }} fa-star text-gold" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i> {{ $torrent->free }}% {{ __('common.free') }}
-                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->createFromTimestamp(strtotime($torrent->fl_until))->format('d-m-Y') }}</p> @endif
+                                                                <i class="{{ config('other.font-awesome') }} fa-star text-gold" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('torrent.freeleech') }}</p>"></i>
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče {{ Illuminate\Support\Carbon::now()->createFromTimestamp(strtotime($torrent->fl_until))->format('d.m.Y') }}</p> @endif
                                                         @elseif ($torrent->free < '90' && $torrent->free >= '30')
                                                             <style>
                                                                 .star50 {
@@ -116,8 +116,8 @@
                                                                     color: #FFB800;
                                                                 }
                                                             </style>
-                                                                <i class="star50 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i>
-                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->createFromTimestamp(strtotime($torrent->fl_until))->format('d-m-Y') }}</p> @endif
+                                                                <i class="star50 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('torrent.freeleech') }}</p>"></i>
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče {{ Illuminate\Support\Carbon::now()->createFromTimestamp(strtotime($torrent->fl_until))->format('d.m.Y') }}</p> @endif
                                                         @elseif ($torrent->free < '30' && $torrent->free != '0')
                                                             <style>
                                                                 .star30 {
@@ -134,8 +134,8 @@
                                                                     color: #FFB800;
                                                                 }
                                                             </style>
-                                                                <i class="star30 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('common.free') }}</p>"></i>
-                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče čez {{ Illuminate\Support\Carbon::now()->createFromTimestamp(strtotime($torrent->fl_until))->format('d-m-Y') }}</p> @endif
+                                                                <i class="star30 {{ config('other.font-awesome') }} fa-star" data-toggle="tooltip" data-html="true" title="<p>{{ $torrent->free }}% {{ __('torrent.freeleech') }}</p>"></i>
+                                                                @if ($torrent->fl_until !== null) <p style="font-size: 12px;">Poteče {{ Illuminate\Support\Carbon::now()->createFromTimestamp(strtotime($torrent->fl_until))->format('d.m.Y') }}</p> @endif
                                                         @endif
 
                                                         @if (config('other.freeleech') == '1')
@@ -147,13 +147,11 @@
                                                         <span class="text-bold text-danger">
                                                             <i class="{{ config('other.font-awesome') }} fa-frown"></i> {{ __('torrent.no-discounts') }}
                                                         </span>
+                                                    @else
+                                                    NI
                                                     @endif
                                                 </td>
                                             </tr>
-                                        @else
-                                        NI
-                                        @endif
-
                     </div>
                 </div>
             </div>
