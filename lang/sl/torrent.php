@@ -8,7 +8,7 @@ return [
     'alive'                    => 'Živa',
     'announce-url'             => 'URL',
     'announce-url-desc'        => 'Pri ustvarjanju novega torrenta uporabite zgoraj navedeni URL. Če želite uporabiti svoj torrent, ne da bi ga prenesli s spletnega mesta, morate nastaviti zasebno zastavo in vir na :source',
-    'announce-url-desc-url'    => 'Preberite si naš vodič kako naložiti pravilno Torrent, da nebo odstranjen/blokiran:',
+    'announce-url-desc-url'    => 'Preberite si naš vodič kako naložiti pravilno Torrent, da nebo odstranjen/blokiran: <a href=":url">TUKAJ</a>',
     'announce-url-desc2'       => 'TMDB in IMDB sta potrebna za vse naložene Torrente! Uporablja se za PLAKATE/OZADJA in DODATNE INFORMACIJE',
     'approved'                 => 'Odobreno',
     'audio'                    => 'Zvok',
