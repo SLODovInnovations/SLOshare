@@ -43,8 +43,8 @@
                         </ul>
                         <!-- Buttons -->
 
-
-            <div class="scroller">
+        <section class="recommendations" style="max-height: 330px !important;">
+            <div class="scroller" style="padding-bottom: 10px;">
                 @php $meta = null @endphp
             @foreach($newsloshare as $newslo)
                 @php $meta = null @endphp
@@ -122,6 +122,7 @@
                 @endforeach
 
             </div>
+        </section>
         </div>
     </div>
 </div>
