@@ -44,7 +44,7 @@
                         <!-- Buttons -->
 
 
-            <div id="SLOCarousel" class="keen-slider">
+            <div class="scroller">
                 @php $meta = null @endphp
             @foreach($newsloshare as $newslo)
                 @php $meta = null @endphp
@@ -63,7 +63,7 @@
                         @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($newslo->igdb) @endphp
                     @endif
                 @endif
-                    <div class="keen-slider__slide">
+                    <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
 			@if ($newslo->category->movie_meta || $newslo->category->tv_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
