@@ -118,7 +118,7 @@
                             value="{{ $title ?: old('name') }}"
                             required
                         >
-                        <label class="form__label form__label--floating" for="title">{{ __('torrent.title') }}</label>
+                        <label class="form__label form__label--floating" for="title">{{ __('torrent.name-torrent') }}</label>
                     </p>
                     <p class="form__group">
                         <select
@@ -264,6 +264,7 @@
                                 x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '{{ $tmdb ?: old('tmdb') }}' : '0'"
                                 x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv'"
                             >
+                            <label>URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank">https://www.themoviedb.org/</a></label>
                             <label class="form__label form__label--floating" for="autotmdb">TMDB ID</label>
                             <output name="apimatch" id="apimatch" for="torrent"></output>
                         </p>
@@ -279,6 +280,7 @@
                                 x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '{{ $imdb ?: old('imdb') }}' : '0'"
                                 x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv'"
                             >
+                            <label>URL za IMDB ID: <a href="https://www.imdb.com/" target="_blank">https://www.imdb.com/</a></label>
                             <label class="form__label form__label--floating" for="autoimdb">IMDB ID</label>
                         </p>
                         <p class="form__group" x-show="cats[cat].type === 'tv'">
@@ -293,6 +295,7 @@
                                 class="form__text"
                                 x-bind:required="cats[cat].type === 'tv'"
                             >
+                            <label>URL za TVDB ID: <a href="https://www.thetvdb.com/" target="_blank">https://www.thetvdb.com/</a></label>
                             <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
                         </p>
                         <p class="form__group">
@@ -307,6 +310,7 @@
                                 class="form__text"
                                 placeholder=""
                             >
+                            <label>URL za MAL ID: <a href="https://myanimelist.net/" target="_blank">https://myanimelist.net/</a></label>
                             <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
                         </p>
                     </div>
@@ -321,6 +325,7 @@
                             class="form__text"
                             x-bind:required="cats[cat].type === 'game'"
                         >
+                        <label>URL za IGDB ID: <a href="https://www.igdb.com/discover" target="_blank">https://www.igdb.com/discover</a></label>
                         <label class="form__label form__label--floating" for="autoigdb">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
                     </p>
                     <p class="form__group">
