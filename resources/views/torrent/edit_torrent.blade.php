@@ -357,7 +357,7 @@
                     @endif
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary">{{ __('common.submit') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('torrent.edit-torrent') }}</button>
                     </div>
                     <br>
                 </form>
