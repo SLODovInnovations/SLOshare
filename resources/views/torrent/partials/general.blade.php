@@ -1,5 +1,10 @@
 @if ($torrent->tmdb != 0 && $torrent->tmdb != null || isset($meta) && $meta->url && $torrent->igdb !== 0 && $torrent->igdb !== null)
 <div class="panel panel-chat shoutbox torrent-general">
+    <div class="panel-heading">
+        <h4>
+            <i class="{{ config("other.font-awesome") }} fa-info"></i> {{ __('torrent.general') }}
+        </h4>
+    </div>
     <div class="table-responsive">
         <table class="table table-condensed table-bordered table-striped">
             <tbody>
