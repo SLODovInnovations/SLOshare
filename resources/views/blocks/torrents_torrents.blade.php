@@ -1,4 +1,6 @@
-<div class="col-md-10 col-sm-10 col-md-offset-1">
+<div class="mobile-hide">
+    <div class="col-md-10 col-sm-10 col-md-offset-1">
+        <div class="panel panel-chat shoutbox">
 
                         <!-- Buttons -->
                         <ul class="nav nav-tabs-user mb-5-user" role="tablist">
@@ -42,9 +44,8 @@
 <div class="tab-content">
 
     <div class="tab-pane fade active in" id="new-sloshare">
-        <div class="clearfix visible-sm-block"></div>
-        <div class="panel panel-chat shoutbox">
-            <div id="myCarousel" class="keen-slider-slo">
+        <section class="recommendations" style="max-height: 330px !important;">
+            <div class="scroller" style="padding-bottom: 10px;">
 
 
 
@@ -67,7 +68,7 @@
                         @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($newslo->igdb) @endphp
                     @endif
                 @endif
-
+            <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
 			@if ($newslo->category->movie_meta || $newslo->category->tv_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
@@ -123,17 +124,11 @@
 				</div>
 				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
 			</div>
+		</div>
 @endforeach
 
-                <!--<a class="left carousel-control">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">{{ __("common.previous") }}</span>
-                </a>
-                <a class="right carousel-control">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">{{ __("common.next") }}</span>
-                </a>-->
             </div>
+        </section>
         </div>
     </div>
 
