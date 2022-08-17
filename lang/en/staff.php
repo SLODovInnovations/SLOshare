@@ -58,4 +58,22 @@ return [
     'chat-tools'              => 'Chat Tools',
     'flush-chat'              => 'Flush Chatbox',
     'seedboxes'               => 'Registered Seedboxes',
+
+    /*
+    |--------------------------------------------------------------------------
+    | SLOshare
+    |--------------------------------------------------------------------------
+    */
+    'movie-meta'              => 'Movie Meta',
+    'tv-meta'                 => 'TV Meta',
+    'cartoons-meta'           => 'Cartoons Meta',
+    'game-meta'               => 'Game Meta',
+    'music-meta'              => 'Music Meta',
+    'no-meta'                 => 'No Meta',
+    'movie-meta-data'         => 'Movie Meta Data?',
+    'tv-meta-data'            => 'TV Meta Data?',
+    'cartoons-meta-data'      => 'Cartoons Meta Data?',
+    'game-meta-data'          => 'Game Meta Data?',
+    'music-meta-data'         => 'Music Meta Data?',
+    'no-meta-data'            => 'No Meta Data?',
 ];

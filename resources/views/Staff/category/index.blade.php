@@ -28,11 +28,11 @@
                     <th>{{ __('common.name') }}</th>
                     <th>{{ __('common.icon') }}</th>
                     <th>{{ __('common.image') }}</th>
-                    <th>Movie Meta</th>
-                    <th>TV Meta</th>
-                    <th>Game Meta</th>
-                    <th>Music Meta</th>
-                    <th>No Meta</th>
+                    <th>{{ __('staff.movie-meta') }}</th>
+                    <th>{{ __('staff.tv-meta') }}</th>
+                    <th>{{ __('staff.game-meta') }}</th>
+                    <th>{{ __('staff.music-meta') }}</th>
+                    <th>{{ __('staff.no-meta') }}</th>
                     <th>{{ __('common.action') }}</th>
                 </tr>
                 </thead>

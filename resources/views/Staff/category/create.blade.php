@@ -49,12 +49,12 @@
                     {{ __('common.select') }}
                     {{ trans_choice('common.a-an-art',false) }}
                     {{ __('common.image') }}
-                    (If Not Using A FontAwesome Icon)
+                    (Če ne uporabljate ikone FontAwesome)
                 </label>
                 <input type="file" name="image">
             </div>
 
-            <label for="movie_meta" class="control-label">Movie Meta Data?</label>
+            <label for="movie_meta" class="control-label">{{ __('staff.movie-meta-data') }}</label>
             <div class="radio-inline">
                 <label><input type="radio" name="movie_meta" value="1">{{ __('common.yes') }}</label>
             </div>
@@ -64,7 +64,7 @@
             <br>
             <br>
 
-            <label for="tv_meta" class="control-label">TV Meta Data?</label>
+            <label for="tv_meta" class="control-label">{{ __('staff.tv-meta-data') }}</label>
             <div class="radio-inline">
                 <label><input type="radio" name="tv_meta" value="1">{{ __('common.yes') }}</label>
             </div>
@@ -74,7 +74,7 @@
             <br>
             <br>
 
-            <label for="game_meta" class="control-label">Game Meta Data?</label>
+            <label for="game_meta" class="control-label">{{ __('staff.game-meta-data') }}</label>
             <div class="radio-inline">
                 <label><input type="radio" name="game_meta" value="1">{{ __('common.yes') }}</label>
             </div>
@@ -84,7 +84,7 @@
             <br>
             <br>
 
-            <label for="music_meta" class="control-label">Music Meta Data?</label>
+            <label for="music_meta" class="control-label">{{ __('staff.music-meta-data') }}</label>
             <div class="radio-inline">
                 <label><input type="radio" name="music_meta" value="1">{{ __('common.yes') }}</label>
             </div>
@@ -94,7 +94,7 @@
             <br>
             <br>
 
-            <label for="no_meta" class="control-label">No Meta Data?</label>
+            <label for="no_meta" class="control-label">{{ __('staff.no-meta-data') }}</label>
             <div class="radio-inline">
                 <label><input type="radio" name="no_meta" value="1">{{ __('common.yes') }}</label>
             </div>

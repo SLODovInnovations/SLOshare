@@ -59,4 +59,22 @@ return [
     'flush-chat'              => 'Izpraznite klepetalnico',
     'seedboxes'               => 'Registrirane sejalnice',
     'save'                    => 'Shrani',
+
+    /*
+    |--------------------------------------------------------------------------
+    | SLOshare
+    |--------------------------------------------------------------------------
+    */
+    'movie-meta'              => 'Filmi Meta',
+    'tv-meta'                 => 'TV Meta',
+    'cartoons-meta'           => 'Risanke Meta',
+    'game-meta'               => 'Igre Meta',
+    'music-meta'              => 'Glasba Meta',
+    'no-meta'                 => 'Brez Mete',
+    'movie-meta-data'         => 'Filmi Meta Podatki?',
+    'tv-meta-data'            => 'TV Meta Podatki?',
+    'cartoons-meta-data'      => 'Risanke Meta Podatki?',
+    'game-meta-data'          => 'Igre Meta Podatki?',
+    'music-meta-data'         => 'Glasba Meta Podatki?',
+    'no-meta-data'            => 'Brez Meta Podatkov?',
 ];
