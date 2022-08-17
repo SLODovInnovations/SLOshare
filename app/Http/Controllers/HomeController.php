@@ -61,49 +61,49 @@ class HomeController extends Controller
             ->withCount(['thanks', 'comments'])
             ->where('category_id', '=', 1)
             ->latest()
-            ->take(9)
+            ->take(20)
             ->get());
 
         $xxx = \cache()->remember('xxx_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
             ->where('category_id', '=', 13)
             ->latest()
-            ->take(9)
+            ->take(20)
             ->get());
 
         $tvserie = \cache()->remember('tvserie_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
             ->where('category_id', '=', 2)
             ->latest()
-            ->take(9)
+            ->take(20)
             ->get());
 
         $game = \cache()->remember('game_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type'])
             ->withCount(['thanks', 'comments'])
             ->where('category_id', '=', 8)
             ->latest()
-            ->take(9)
+            ->take(20)
             ->get());
 
         $applications = \cache()->remember('applications_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type'])
             ->withCount(['thanks', 'comments'])
             ->where('category_id', '=', 9)
             ->latest()
-            ->take(9)
+            ->take(20)
             ->get());
 
         $cartoons = \cache()->remember('cartoons_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
             ->where('category_id', '=', 3)
             ->latest()
-            ->take(9)
+            ->take(20)
             ->get());
 
         $newsloshare = \cache()->remember('newsloshare_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
             ->whereIn('category_id', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
             ->latest()
-            ->take(9)
+            ->take(20)
             ->get());
 
         $slorecommended = \cache()->remember('slorecommended_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
@@ -125,14 +125,14 @@ class HomeController extends Controller
             ->withCount(['thanks', 'comments'])
             ->where('seeders', '>=', 1)
             ->latest('seeders')
-            ->take(9)
+            ->take(20)
             ->get());
 
         $leeched = \cache()->remember('leeched_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
             ->where('leechers', '>=', 1)
             ->latest('leechers')
-            ->take(9)
+            ->take(20)
             ->get());
 
         $dying = \cache()->remember('dying_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])

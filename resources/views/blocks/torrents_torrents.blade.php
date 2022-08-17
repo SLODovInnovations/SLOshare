@@ -1,6 +1,4 @@
-<div class="mobile-hide">
-    <div class="col-md-10 col-sm-10 col-md-offset-1">
-        <div class="panel panel-chat shoutbox">
+<div class="col-md-10 col-sm-10 col-md-offset-1">
 
                         <!-- Buttons -->
                         <ul class="nav nav-tabs-user mb-5-user" role="tablist">
@@ -130,14 +128,12 @@
             </div>
         </section>
         </div>
-    </div>
 
 
 
     <div class="tab-pane fade" id="video">
-        <div class="clearfix visible-sm-block"></div>
-        <div class="panel panel-chat shoutbox">
-            <div id="myCarousel" class="keen-slider-slo">
+        <section class="recommendations" style="max-height: 330px !important;">
+            <div class="scroller" style="padding-bottom: 10px;">
 
 
 
@@ -151,7 +147,7 @@
 							@php $meta = App\Models\Movie::where('id', '=', $videos->tmdb)->first(); @endphp
 						@endif
 					@endif
-
+            <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
 			@if ($videos->tmdb != 0 && $videos->tmdb != null)
 			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/movie_no_image_holder_400x600.jpg'; }}');">
@@ -195,26 +191,18 @@
 				</div>
 				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
 			</div>
+		</div>
 @endforeach
 
-<!--                <a class="left carousel-control">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">{{ __("common.previous") }}</span>
-                </a>
-                <a class="right carousel-control">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">{{ __("common.next") }}</span>
-                </a>-->
             </div>
+        </section>
         </div>
-    </div>
 
 
 
     <div class="tab-pane fade" id="tvseries">
-        <div class="clearfix visible-sm-block"></div>
-        <div class="panel panel-chat shoutbox">
-            <div id="myCarousel" class="keen-slider-slo">
+        <section class="recommendations" style="max-height: 330px !important;">
+            <div class="scroller" style="padding-bottom: 10px;">
 
 
 
@@ -228,7 +216,7 @@
 							@php $meta = App\Models\Tv::where('id', '=', $tv->tmdb)->first(); @endphp
 						@endif
 					@endif
-
+            <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
 			@if ($tv->tmdb != 0 && $tv->tmdb != null)
 			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/movie_no_image_holder_400x600.jpg'; }}');">
@@ -272,25 +260,17 @@
 				</div>
 				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
 			</div>
+		</div>
 @endforeach
 
-<!--                <a class="left carousel-control">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">{{ __("common.previous") }}</span>
-                </a>
-                <a class="right carousel-control">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">{{ __("common.next") }}</span>
-                </a>-->
             </div>
+        </section>
         </div>
-    </div>
 
 
     <div class="tab-pane fade" id="games">
-       <div class="clearfix visible-sm-block"></div>
-        <div class="panel panel-chat shoutbox">
-            <div id="myCarousel" class="keen-slider-slo">
+        <section class="recommendations" style="max-height: 330px !important;">
+            <div class="scroller" style="padding-bottom: 10px;">
 
 
 
@@ -304,7 +284,7 @@
 							@php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($games->igdb); @endphp
 						@endif
 					@endif
-
+            <div class="item mini backdrop mini_card">
 			<div class="gallery-item" style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}');">
 				<div class="release-info">
 
@@ -338,28 +318,20 @@
 				</div>
 				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
 			</div>
+		</div>
 @endforeach
 
-<!--                <a class="left carousel-control">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">{{ __("common.previous") }}</span>
-                </a>
-                <a class="right carousel-control">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">{{ __("common.next") }}</span>
-                </a>-->
             </div>
+        </section>
         </div>
-    </div>
 
 
     <div class="tab-pane fade" id="applications">
-       <div class="clearfix visible-sm-block"></div>
-        <div class="panel panel-chat shoutbox">
-            <div id="myCarousel" class="keen-slider-slo">
+        <section class="recommendations" style="max-height: 330px !important;">
+            <div class="scroller" style="padding-bottom: 10px;">
 
 @foreach ($applications as $application)
-
+            <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
 			@if ($application->category->no_meta)
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$application->id.'.jpg'))
@@ -393,25 +365,17 @@
 				</div>
 				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
 			</div>
+		</div>
 @endforeach
 
-<!--                <a class="left carousel-control">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">{{ __("common.previous") }}</span>
-                </a>
-                <a class="right carousel-control">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">{{ __("common.next") }}</span>
-                </a>-->
             </div>
+        </section>
         </div>
-    </div>
 
 
     <div class="tab-pane fade" id="cartoons">
-       <div class="clearfix visible-sm-block"></div>
-        <div class="panel panel-chat shoutbox">
-            <div id="myCarousel" class="keen-slider-slo">
+        <section class="recommendations" style="max-height: 330px !important;">
+            <div class="scroller" style="padding-bottom: 10px;">
 
 @foreach ($cartoons as $cartoon)
 
@@ -421,7 +385,7 @@
 							@php $meta = App\Models\Movie::where('id', '=', $cartoon->tmdb)->first(); @endphp
 						@endif
 					@endif
-
+            <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
 			@if ($cartoon->tmdb != 0 && $cartoon->tmdb != null)
 			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/poster/movie_no_image_holder_400x600.jpg'; }}');">
@@ -461,31 +425,24 @@
 				</div>
 				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
 			</div>
+		</div>
 @endforeach
 
-<!--                <a class="left carousel-control">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">{{ __("common.previous") }}</span>
-                </a>
-                <a class="right carousel-control">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">{{ __("common.next") }}</span>
-                </a>-->
             </div>
+        </section>
         </div>
-    </div>
 
 
     <div class="tab-pane fade" id="xxx">
-       <div class="clearfix visible-sm-block"></div>
-        <div class="panel panel-chat shoutbox">
-            <div id="myCarousel" class="keen-slider-slo">
+        <section class="recommendations" style="max-height: 330px !important;">
+            <div class="scroller" style="padding-bottom: 10px;">
 
 
 
 
 
 @foreach ($xxx as $x)
+            <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
 			@if ($application->category->no_meta)
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$x->id.'.jpg'))
@@ -525,18 +482,11 @@
 				</div>
 				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
 			</div>
+		</div>
 @endforeach
 
-<!--                <a class="left carousel-control">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                    <span class="sr-only">{{ __("common.previous") }}</span>
-                </a>
-                <a class="right carousel-control">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                    <span class="sr-only">{{ __("common.next") }}</span>
-                </a>-->
             </div>
+        </section>
         </div>
-    </div>
 </div>
 </div>
