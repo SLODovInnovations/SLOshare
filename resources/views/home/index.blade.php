@@ -16,7 +16,6 @@
         @include('blocks.torrents_torrents')
         @include('blocks.ad_center')
         @include('blocks.tops_torrents')
-        @include('blocks.test_slide')
         <!--@include('blocks.top_torrents')-->
         <!--@include('blocks.top_uploaders')-->
         <!--@include('blocks.latest_topics')-->

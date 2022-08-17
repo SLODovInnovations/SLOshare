@@ -46,7 +46,7 @@ class PageController extends Controller
      */
     public function users(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $users = Group::with('users:id,username,group_id,title')->where('id', '=', 3)->get()->sortByDesc('position');
+        $users = Group::with('users:id,username,group_id,title')->where('id', '=', 5)->get()->sortByDesc('position');
 
         return \view('page.users', ['users' => $users]);
     }
