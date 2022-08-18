@@ -50,14 +50,14 @@
             @endif
 
             @if ($seed->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
-                style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}');')
+                style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
                     class="show-poster"  alt="{{ __('torrent.poster') }}>
             @endif
 
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
             style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');">
             @else
-            style="background-image: url('/img/poster/meta_no_image_holder_400x600.jpg');">
+            style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
             @endif
 
 			@if ($seed->category->music_meta)
@@ -138,14 +138,14 @@
             @endif
 
             @if ($leech->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
-                style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}');')
+                style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
                     class="show-poster"  alt="{{ __('torrent.poster') }}>
             @endif
 
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
             style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');">
             @else
-            style="background-image: url('/img/poster/meta_no_image_holder_400x600.jpg');">
+            style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
             @endif
 
 			@if ($leech->category->music_meta)
