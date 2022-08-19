@@ -79,6 +79,18 @@
             <br>
             <br>
 
+            <label for="cartoons_meta" class="control-label">{{ __('staff.cartoons-meta-data') }}</label>
+            <div class="radio-inline">
+                <label><input type="radio" name="cartoons_meta" @if ($category->cartoons_meta) checked @endif
+                    value="1">{{ __('common.yes') }}</label>
+            </div>
+            <div class="radio-inline">
+                <label><input type="radio" name="cartoons_meta" @if (!$category->cartoons_meta) checked @endif
+                    value="0">{{ __('common.no') }}</label>
+            </div>
+            <br>
+            <br>
+
             <label for="game_meta" class="control-label">{{ __('staff.game-meta-data') }}</label>
             <div class="radio-inline">
                 <label><input type="radio" name="game_meta" @if ($category->game_meta) checked @endif

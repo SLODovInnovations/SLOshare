@@ -69,6 +69,10 @@
                     @include('torrent.partials.movie_meta', ['torrent' => $torrentRequest])
                 @endif
 
+                @if ($torrentRequest->category->cartoons_meta)
+                    @include('torrent.partials.movie_meta', ['torrent' => $torrentRequest])
+                @endif
+
                 @if ($torrentRequest->category->tv_meta)
                     @include('torrent.partials.tv_meta', ['torrent' => $torrentRequest])
                 @endif
@@ -173,7 +177,7 @@
                                                 class="{{ config('other.font-awesome') }} fa-hand-paper">
                                         </i> {{ __('request.claim') }}
                                     </button>
-                                    @if ($torrentRequest->category->movie_meta || $torrentRequest->category->tv_meta)
+                                    @if ($torrentRequest->category->movie_meta || $torrentRequest->category->tv_meta  || $torrentRequest->category->cartoons_meta)
                                         <a href="{{ route('upload_form', ['category_id' => $torrentRequest->category_id, 'title' => $meta->title ?? ' ', 'imdb' => $meta->imdb ?? 0, 'tmdb' => $meta->tmdb ?? 0]) }}"
                                            class="btn btn-xs btn-success"> {{ __('common.upload') }} {{ $meta->title ?? ''}}
                                         </a>
