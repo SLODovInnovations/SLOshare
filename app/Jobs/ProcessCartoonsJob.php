@@ -18,7 +18,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class ProcessMovieJob implements ShouldQueue
+class ProcessCartoonsJob implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
