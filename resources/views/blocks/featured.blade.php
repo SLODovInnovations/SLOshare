@@ -43,13 +43,18 @@
                             @php $meta = App\Models\Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $feature->torrent->tmdb)->first() @endphp
                         @endif
                     @endif
+                    @if ($feature->torrent->category->cartoons_meta)
+                        @if ($feature->torrent->tmdb || $feature->torrent->tmdb != 0)
+                            @php $meta = App\Models\Cartoons::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $feature->torrent->tmdb)->first() @endphp
+                        @endif
+                    @endif
                     @if ($feature->torrent->category->game_meta)
                         @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['artworks' => ['url', 'image_id'], 'genres' => ['name']])->find((int) $feature->torrent->igdb) @endphp
                     @endif
                     <div class="keen-slider__slide">
                         <div class="movie-image">
                             <img class="backdrop" src=
-                            @if ($feature->torrent->category->tv_meta || $feature->torrent->category->movie_meta)
+                            @if ($feature->torrent->category->tv_meta || $feature->torrent->category->movie_meta || $feature->torrent->category->cartoons_meta)
                                     "{{ isset($meta->backdrop) ? tmdb_image('back_small', $meta->backdrop) : 'https://via.placeholder.com/533x300' }}">
                             @elseif ($feature->torrent->category->game_meta && isset($meta) && $meta->artworks)
                                 "https://images.igdb.com/igdb/image/upload/t_screenshot_med/{{ $meta->artworks[0]['image_id'] }}
@@ -71,7 +76,7 @@
                                     <h4 class="movie-info">
                                         @if (isset($meta, $meta->genres) && count($meta->genres) > 0)
                                             @foreach ($meta->genres as $genre)
-                                                @if ($feature->torrent->category->tv_meta || $feature->torrent->category->movie_meta)
+                                                @if ($feature->torrent->category->tv_meta || $feature->torrent->category->movie_meta || $feature->torrent->category->cartoons_meta)
                                                     | {{ $genre->name }}
                                                 @endif
                                                 @if ($feature->torrent->category->game_meta)
@@ -84,7 +89,8 @@
                                 </div>
                                 <div class="movie-desc">
                                     @if ($feature->torrent->category->tv_meta ||
-                                         $feature->torrent->category->movie_meta)
+                                         $feature->torrent->category->movie_meta ||
+                                         $feature->torrent->category->cartoons_meta)
                                         {{ Str::limit(strip_tags($meta->overview ?? ''), 200) }}...
                                     @endif
                                     @if ($feature->torrent->category->game_meta && isset($meta) &&
