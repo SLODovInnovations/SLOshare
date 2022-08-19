@@ -99,7 +99,7 @@ class TorrentController extends Controller
         }
 
         if ($torrent->category->cartoons_meta && $torrent->tmdb && $torrent->tmdb != 0) {
-            $meta = Movie::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
+            $meta = Cartoons::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
             $trailer = ( new \App\Services\Tmdb\Client\Cartoons($torrent->tmdb))->get_trailer();
         }
 
