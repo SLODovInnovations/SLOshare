@@ -280,7 +280,7 @@ class TorrentController extends Controller
         }
 
         if ($torrent->category->cartoons_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
-            $tmdbScraper->movie($torrent->tmdb);
+            $tmdbScraper->cartoons($torrent->tmdb);
         }
 
         return \to_route('torrent', ['id' => $torrent->id])
@@ -584,7 +584,7 @@ class TorrentController extends Controller
         }
 
         if ($torrent->category->cartoons_meta !== 0 && ($torrent->tmdb || $torrent->tmdb != 0)) {
-            $tmdbScraper->movie($torrent->tmdb);
+            $tmdbScraper->cartoons($torrent->tmdb);
         }
 
         // Torrent Keywords System
