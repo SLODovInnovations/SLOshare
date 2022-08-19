@@ -5,6 +5,7 @@ namespace App\Services\Tmdb;
 use App\Jobs\ProcessCollectionJob;
 use App\Jobs\ProcessCompanyJob;
 use App\Jobs\ProcessMovieJob;
+use App\Jobs\ProcessCartoonsJob;
 use App\Jobs\ProcessTvJob;
 use App\Models\Collection;
 use App\Models\Company;
