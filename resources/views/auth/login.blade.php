@@ -21,8 +21,18 @@
     <link rel="icon" href="{{ url('/favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ mix('css/main/login.css') }}" crossorigin="anonymous">
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5654650999587494"
-        crossorigin="anonymous"></script>
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8PXB7XS8X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q8PXB7XS8X');
+</script>
+<!-- Google tag (gtag.js) -->
 </head>
 
 @php $bg = rand(1, 38); $bgchange = $bg.".jpg" @endphp
@@ -100,6 +110,7 @@
         <br>
         E-Mail: <a href="mailto:info@sloshare.eu">info@sloshare.eu</a></p>
     </div>
+    <div style="width: 468px; height: 60px;" data-admanids="f57b6946_8ea1e878"></div>
 </div>
 
 <script src="{{ mix('js/app.js') }}" crossorigin="anonymous"></script>
@@ -133,6 +144,14 @@
 
     </script>
 @endif
+
+<script type="text/javascript">
+  (function() {
+    var _admBC = document.createElement('script'); _admBC.type = 'text/javascript'; _admBC.async = true;
+    _admBC.src = 'https://adserver.adman.si/add/adman.js';
+    var _admBCC = document.getElementsByTagName('script')[0]; _admBCC.parentNode.insertBefore(_admBC, _admBCC);
+  })();
+</script>
 
 </body>
 
