@@ -474,6 +474,7 @@ return [
             'wss://'.parse_url(env('APP_URL'), PHP_URL_HOST).':8443/socket.io/',
             'https://api.themoviedb.org/',
             'https://pagead2.googlesyndication.com/',
+            'https://adserver.adman.si/',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/default-src
@@ -490,6 +491,7 @@ return [
         'form-action' => [
             //'self' => true,
             'https://www.paypal.com',
+            'https://adserver.adman.si/',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/frame-ancestors
@@ -501,11 +503,14 @@ return [
         'frame-src' => [
             'https://googleads.g.doubleclick.net/',
             'https://tpc.googlesyndication.com/',
+            'https://adserver.adman.si/',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/img-src
         'img-src' => [
             'https://pagead2.googlesyndication.com/',
+            'https://adserver.adman.si/',
+            'https://www.google-analytics.com/',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/manifest-src
@@ -589,6 +594,10 @@ return [
 				'https://www.googletagservices.com/',
 				'https://adservice.google.com/',
 				'https://adservice.google.si/',
+				'https://ajax.googleapis.com/',
+				'https://www.googletagmanager.com/',
+				'https://www.google-analytics.com/',
+				'https://adserver.adman.si/',
             ],
 
             'schemes' => [
@@ -627,12 +636,12 @@ return [
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src-attr
         'script-src-attr' => [
-            //
+            'https://adserver.adman.si/',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src-elem
         'script-src-elem' => [
-            //
+            'https://adserver.adman.si/',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src

@@ -81,6 +81,7 @@
             </a>
         </div>
     </div>
+    <div style="width: 468px; height: 60px;" data-admanids="f57b6946_8ea1e878"></div>
 </div>
 
 <script src="{{ mix('js/app.js') }}" crossorigin="anonymous"></script>
@@ -114,6 +115,14 @@
 
     </script>
 @endif
+
+<script type="text/javascript">
+  (function() {
+    var _admBC = document.createElement('script'); _admBC.type = 'text/javascript'; _admBC.async = true;
+    _admBC.src = 'https://adserver.adman.si/add/adman.js';
+    var _admBCC = document.getElementsByTagName('script')[0]; _admBCC.parentNode.insertBefore(_admBC, _admBCC);
+  })();
+</script>
 
 </body>
 

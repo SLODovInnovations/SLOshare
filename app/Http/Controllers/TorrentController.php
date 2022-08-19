@@ -19,6 +19,7 @@ use App\Models\Graveyard;
 use App\Models\History;
 use App\Models\Keyword;
 use App\Models\Movie;
+use App\Models\Cartoons;
 use App\Models\Peer;
 use App\Models\PersonalFreeleech;
 use App\Models\PlaylistTorrent;
@@ -95,6 +96,11 @@ class TorrentController extends Controller
         if ($torrent->category->movie_meta && $torrent->tmdb && $torrent->tmdb != 0) {
             $meta = Movie::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
             $trailer = ( new \App\Services\Tmdb\Client\Movie($torrent->tmdb))->get_trailer();
+        }
+
+        if ($torrent->category->cartoons_meta && $torrent->tmdb && $torrent->tmdb != 0) {
+            $meta = Movie::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
+            $trailer = ( new \App\Services\Tmdb\Client\Cartoons($torrent->tmdb))->get_trailer();
         }
 
         if ($torrent->category->game_meta && ($torrent->igdb || $torrent->igdb != 0)) {
@@ -198,7 +204,7 @@ class TorrentController extends Controller
         $category = Category::findOrFail($request->input('category_id'));
 
         $resolutionRule = 'nullable|exists:resolutions,id';
-        if ($category->movie_meta || $category->tv_meta) {
+        if ($category->movie_meta || $category->tv_meta || $category->cartoons_meta)  {
             $resolutionRule = 'required|exists:resolutions,id';
         }
 
@@ -270,6 +276,10 @@ class TorrentController extends Controller
         }
 
         if ($torrent->category->movie_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
+            $tmdbScraper->movie($torrent->tmdb);
+        }
+
+        if ($torrent->category->cartoons_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
             $tmdbScraper->movie($torrent->tmdb);
         }
 
@@ -367,6 +377,7 @@ class TorrentController extends Controller
             ];
             $temp['type'] = match (1) {
                 $cat->movie_meta => 'movie',
+                $cat->cartoons_meta => 'cartoons',
                 $cat->tv_meta    => 'tv',
                 $cat->game_meta  => 'game',
                 $cat->music_meta => 'music',
@@ -493,7 +504,7 @@ class TorrentController extends Controller
         $torrent->free = $user->group->is_modo || $user->group->is_internal ? $request->input('free') : 0;
 
         $resolutionRule = 'nullable|exists:resolutions,id';
-        if ($category->movie_meta || $category->tv_meta) {
+        if ($category->movie_meta || $category->tv_meta || $category->cartoons_meta) {
             $resolutionRule = 'required|exists:resolutions,id';
         }
 
@@ -569,6 +580,10 @@ class TorrentController extends Controller
         }
 
         if ($torrent->category->movie_meta !== 0 && ($torrent->tmdb || $torrent->tmdb != 0)) {
+            $tmdbScraper->movie($torrent->tmdb);
+        }
+
+        if ($torrent->category->cartoons_meta !== 0 && ($torrent->tmdb || $torrent->tmdb != 0)) {
             $tmdbScraper->movie($torrent->tmdb);
         }
 

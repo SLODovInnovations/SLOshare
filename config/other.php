@@ -44,7 +44,7 @@ return [
     |
     */
 
-    'meta_description' => 'Kot eno največjih europskih zasebnih spletnih skupnosti omogoča enostavno in varno deljenje datotek z ostalimi uporabniki in interaktivno snovanje novih poznanstev. Pridružite se množici preko 500.000 uporabnikov',
+    'meta_description' => 'Kot eno največjih evropskih zasebnih spletnih skupnosti omogoča enostavno in varno deljenje datotek z ostalimi uporabniki in interaktivno snovanje novih poznanstev. Pridružite se množici preko 500.000 uporabnikov',
 
     /*
     |--------------------------------------------------------------------------
