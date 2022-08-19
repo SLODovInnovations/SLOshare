@@ -641,7 +641,8 @@ return [
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src-elem
         'script-src-elem' => [
-            'https://adserver.adman.si/',
+            'https://adserver.adman.si/add/adman.js',
+            'https://www.googletagmanager.com/gtat/js?id=G-Q8PXB7XS8X',
         ],
 
         // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src

@@ -74,6 +74,16 @@
             <br>
             <br>
 
+            <label for="cartoons_meta" class="control-label">{{ __('staff.cartoons-meta-data') }}</label>
+            <div class="radio-inline">
+                <label><input type="radio" name="cartoons_meta" value="1">{{ __('common.yes') }}</label>
+            </div>
+            <div class="radio-inline">
+                <label><input type="radio" name="cartoons_meta" value="0" checked>{{ __('common.no') }}</label>
+            </div>
+            <br>
+            <br>
+
             <label for="game_meta" class="control-label">{{ __('staff.game-meta-data') }}</label>
             <div class="radio-inline">
                 <label><input type="radio" name="game_meta" value="1">{{ __('common.yes') }}</label>

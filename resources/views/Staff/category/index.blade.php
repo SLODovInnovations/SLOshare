@@ -30,6 +30,7 @@
                     <th>{{ __('common.image') }}</th>
                     <th>{{ __('staff.movie-meta') }}</th>
                     <th>{{ __('staff.tv-meta') }}</th>
+                    <th>{{ __('staff.cartoons-meta') }}</th>
                     <th>{{ __('staff.game-meta') }}</th>
                     <th>{{ __('staff.music-meta') }}</th>
                     <th>{{ __('staff.no-meta') }}</th>
@@ -65,6 +66,13 @@
                         </td>
                         <td>
                             @if ($category->tv_meta)
+                                <i class="{{ config('other.font-awesome') }} fa-check text-green"></i>
+                            @else
+                                <i class="{{ config('other.font-awesome') }} fa-times text-red"></i>
+                            @endif
+                        </td>
+                        <td>
+                            @if ($category->cartoons_meta)
                                 <i class="{{ config('other.font-awesome') }} fa-check text-green"></i>
                             @else
                                 <i class="{{ config('other.font-awesome') }} fa-times text-red"></i>
