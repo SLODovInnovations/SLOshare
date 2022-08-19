@@ -9,6 +9,7 @@ use App\Jobs\ProcessTvJob;
 use App\Models\Collection;
 use App\Models\Company;
 use App\Models\Movie;
+use App\Models\Cartoons;
 use App\Models\Tv;
 use DateTime;
 use Illuminate\Contracts\Queue\ShouldQueue;
