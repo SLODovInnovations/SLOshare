@@ -5,7 +5,7 @@
         </div>
         <div class="card_body">
             <div class="body_poster">
-                @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
+                @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
                     <img src="{{ isset($meta->poster) ? tmdb_image('poster_big', $meta->poster) : 'https://via.placeholder.com/600x900' }}"
                          class="show-poster" alt="{{ __('torrent.poster') }}">
                 @endif
@@ -31,10 +31,16 @@
                         @if ($torrent->category->movie_meta)
                             {{ $meta->title ?? 'Unknown' }}
                         @endif
+                        @if ($torrent->category->cartoons_meta)
+                            {{ $meta->title ?? 'Unknown' }}
+                        @endif
                         @if ($torrent->category->tv_meta)
                             {{ $meta->name ?? 'Unknown' }}
                         @endif
                         @if($torrent->category->movie_meta)
+                            <span class="text-bold text-pink"> {{ substr($meta->release_date ?? '', 0, 4) ?? '' }}</span>
+                        @endif
+                        @if($torrent->category->cartoons_meta)
                             <span class="text-bold text-pink"> {{ substr($meta->release_date ?? '', 0, 4) ?? '' }}</span>
                         @endif
                         @if($torrent->category->tv_meta)
@@ -42,7 +48,7 @@
                         @endif
                     </a>
                 </h3>
-                @if (($torrent->category->movie_meta || $torrent->category->tv_meta) && isset($meta->genres))
+                @if (($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta) && isset($meta->genres))
                     @foreach ($meta->genres as $genre)
                         <span class="genre-label">{{ $genre->name }}</span>
                     @endforeach
