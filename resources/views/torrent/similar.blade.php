@@ -28,6 +28,10 @@
                 @include('torrent.partials.movie_meta', ['torrent' => $torrent])
             @endif
 
+            @if ($torrent->category->cartoons_meta)
+                @include('torrent.partials.movie_meta', ['torrent' => $torrent])
+            @endif
+
             @if ($torrent->category->tv_meta)
                 @include('torrent.partials.tv_meta', ['torrent' => $torrent])
             @endif
