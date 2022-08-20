@@ -33,6 +33,11 @@
                 @include('torrent.partials.movie_meta_slo')
             @endif
 
+            {{-- Cartoons Meta Block --}}
+            @if ($torrent->category->cartoons_meta)
+                @include('torrent.partials.movie_meta_slo')
+            @endif
+
             {{-- TV Meta Block --}}
             @if ($torrent->category->tv_meta)
                 @include('torrent.partials.tv_meta_slo')
@@ -95,7 +100,7 @@
             @include('torrent.partials.description')
 
             {{-- Subtitles Block --}}
-            @if($torrent->category->movie_meta || $torrent->category->tv_meta)
+            @if($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
                 @include('torrent.partials.subtitles')
             @endif
 
@@ -103,7 +108,7 @@
             @include('torrent.partials.tipjar')-->
 
             {{-- Extra Meta Block --}}
-            @if($torrent->category->movie_meta || $torrent->category->tv_meta)
+            @if($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
                 @include('torrent.partials.extra_meta')
             @endif
         </div>
