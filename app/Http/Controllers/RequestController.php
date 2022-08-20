@@ -72,7 +72,7 @@ class RequestController extends Controller
         }
 
         if ($torrentRequest->category->cartoons_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
+            $meta = Cartoons::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
         }
 
         if ($torrentRequest->category->game_meta && ($torrentRequest->igdb || $torrentRequest->igdb != 0)) {
@@ -171,7 +171,7 @@ class RequestController extends Controller
         }
 
         if ($torrentRequest->category->cartoons_meta !== 0 && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $tmdbScraper->movie($torrentRequest->tmdb);
+            $tmdbScraper->cartoons($torrentRequest->tmdb);
         }
 
         $torrentRequestBounty = new TorrentRequestBounty();
@@ -289,7 +289,7 @@ class RequestController extends Controller
         }
 
         if ($torrentRequest->category->cartoons_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $tmdbScraper->movie($torrentRequest->tmdb);
+            $tmdbScraper->cartoons($torrentRequest->tmdb);
         }
 
         return \to_route('request', ['id' => $torrentRequest->id])
