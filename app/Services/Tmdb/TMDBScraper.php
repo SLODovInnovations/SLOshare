@@ -121,6 +121,53 @@ class TMDBScraper implements ShouldQueue
         }
     }
 
+   public function cartoons($id = null): void
+    {
+        if ($id == null) {
+            $id = $this->id;
+        }
+
+        $tmdb = new TMDB();
+        $cartoons = (new Client\Cartoons($id))->getData();
+
+        if (\array_key_exists('title', $cartoons)) {
+            $re = '/((?<namesort>.*)(?<seperator>\:|and)(?<remaining>.*)|(?<name>.*))/m';
+            \preg_match($re, (string) $cartoons['title'], $matches);
+
+            $year = (new DateTime($cartoons['release_date']))->format('Y');
+            $titleSort = \addslashes(\str_replace(['The ', 'An ', 'A ', '"'], [''],
+                Str::limit($matches['namesort'] ? $matches['namesort'].' '.$year : $cartoons['title'], 100)));
+
+            $array = [
+                'adult'             => $cartoons['adult'] ?? 0,
+                'backdrop'          => $tmdb->image('backdrop', $cartoons),
+                'budget'            => $cartoons['budget'] ?? null,
+                'homepage'          => $cartoons['homepage'] ?? null,
+                'imdb_id'           => \substr($cartoons['imdb_id'] ?? '', 2),
+                'original_language' => $cartoons['original_language'] ?? null,
+                'original_title'    => $cartoons['original_title'] ?? null,
+                'overview'          => $cartoons['overview'] ?? null,
+                'popularity'        => $cartoons['popularity'] ?? null,
+                'poster'            => $tmdb->image('poster', $cartoons),
+                'release_date'      => $tmdb->ifExists('release_date', $cartoons),
+                'revenue'           => $cartoons['revenue'] ?? null,
+                'runtime'           => $cartoons['runtime'] ?? null,
+                'status'            => $cartoons['status'] ?? null,
+                'tagline'           => $cartoons['tagline'] ?? null,
+                'title'             => Str::limit($cartoons['title'], 200),
+                'title_sort'        => $titleSort,
+                'vote_average'      => $cartoons['vote_average'] ?? null,
+                'vote_count'        => $cartoons['vote_count'] ?? null,
+            ];
+
+            Cartoons::updateOrCreate(['id' => $cartoons['id']], $array);
+
+            ProcessCartoonsJob::dispatch($cartoons, $id);
+
+            //return ['message' => 'Cartoons with id: ' . $id . ' Has been added  to the database, But relations are loaded with the queue'];
+        }
+    }
+
     public function collection($id = null): void
     {
         if ($id == null) {
