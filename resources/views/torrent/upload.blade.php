@@ -159,12 +159,12 @@
                             {{ __('torrent.type') }}
                         </label>
                     </p>
-                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'">
                         <select
                             name="resolution_id"
                             id="autores"
                             class="form__select"
-                            x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv'"
+                            x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'"
                         >
                             <option hidden disabled selected value=""></option>
                             @foreach ($resolutions as $resolution)
@@ -177,7 +177,7 @@
                             {{ __('torrent.resolution') }}
                         </label>
                     </p>
-                    <div class="form__group--horizontal" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                    <div class="form__group--horizontal" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'">
                         <p class="form__group">
                             <select
                                 name="distributor_id"
@@ -251,7 +251,7 @@
                             </label>
                         </p>
                     </div>
-                    <div class="form__group--horizontal" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                    <div class="form__group--horizontal" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'">
                         <p class="form__group">
                             <input type="hidden" name="tmdb" value="0" />
                             <input
@@ -261,8 +261,8 @@
                                 class="form__text"
                                 inputmode="numeric"
                                 pattern="[0-9]*"
-                                x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '{{ $tmdb ?: old('tmdb') }}' : '0'"
-                                x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv'"
+                                x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons') ? '{{ $tmdb ?: old('tmdb') }}' : '0'"
+                                x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'"
                             >
                             <label>URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank">https://www.themoviedb.org/</a></label>
                             <label class="form__label form__label--floating" for="autotmdb">TMDB ID</label>
@@ -277,8 +277,8 @@
                                 class="form__text"
                                 inputmode="numeric"
                                 pattern="[0-9]*"
-                                x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '{{ $imdb ?: old('imdb') }}' : '0'"
-                                x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv'"
+                                x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons') ? '{{ $imdb ?: old('imdb') }}' : '0'"
+                                x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'"
                             >
                             <label>URL za IMDB ID: <a href="https://www.imdb.com/" target="_blank">https://www.imdb.com/</a></label>
                             <label class="form__label form__label--floating" for="autoimdb">IMDB ID</label>
@@ -306,7 +306,7 @@
                                 id="automal"
                                 inputmode="numeric"
                                 pattern="[0-9]*"
-                                x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '{{ old('mal') }}' : '0'"
+                                x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons') ? '{{ old('mal') }}' : '0'"
                                 class="form__text"
                                 placeholder=""
                             >
@@ -342,7 +342,7 @@
                         </label>
                     </p>
                     @livewire('bbcode-input', ['name' => 'description', 'label' => __('common.description') ])
-                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'">
                         <textarea
                             id="upload-form-mediainfo"
                             name="mediainfo"
@@ -353,7 +353,7 @@
                             {{ __('torrent.media-info-parser') }}
                         </label>
                     </p>-->
-                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'">
                         <textarea
                             id="upload-form-bdinfo"
                             name="bdinfo"
@@ -376,26 +376,26 @@
                         >
                         <label for="anonymous">{{ __('common.anonymous') }}?</label>
                     </p>
-                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'">
                         <input type="hidden" name="stream" value="0">
                         <input
                             type="checkbox"
                             class="form__checkbox"
                             id="stream"
                             name="stream"
-                            x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '1' : '0'"
+                            x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons') ? '1' : '0'"
                             @checked(old('stream'))
                         >
                         <label for="stream">{{ __('torrent.stream-optimized') }}?</label>
                     </p>
-                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv'">
+                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'">
                         <input type="hidden" name="sd" value="0">
                         <input
                             type="checkbox"
                             class="form__checkbox"
                             id="sd"
                             name="sd"
-                            x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv') ? '1' : '0'""
+                            x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons') ? '1' : '0'""
                             @checked(old('sd'))
                         >
                         <label for="sd">{{ __('torrent.sd-content') }}?</label>
