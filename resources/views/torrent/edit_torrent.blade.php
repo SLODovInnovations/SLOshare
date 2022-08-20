@@ -132,7 +132,7 @@
                         </label>
                     </div>
 
-                    <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
+                    <div class="form-group" x-show="meta == 'movie' || meta == 'tv' || meta == 'cartoons'">
                         <label for="type">{{ __('torrent.type') }}</label>
                         <label>
                             <select name="type_id" class="form-control">
@@ -146,13 +146,12 @@
                         </label>
                     </div>
 
-                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv'">
+                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv' || meta == 'cartoons'">
                             <label for="resolution_id">{{ __('torrent.resolution') }}</label>
                             <label>
                                 <select name="resolution_id" class="form-control">
                                     @if (! $torrent->resolution)
-                                        <option hidden="" disabled="disabled" selected="selected" value="">--Select
-                                            Resolution--
+                                        <option hidden="" disabled="disabled" selected="selected" value="">{{ __('torrent.select-resolution') }}
                                         </option>)
                                     @else
                                         <option value="{{ $torrent->resolution->id }}"
