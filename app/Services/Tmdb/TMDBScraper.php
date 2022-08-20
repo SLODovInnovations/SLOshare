@@ -140,7 +140,7 @@ class TMDBScraper implements ShouldQueue
 
             $array = [
                 'adult'             => $cartoons['adult'] ?? 0,
-                'backdrop'          => $tmdb->image('backdrop', $movie),
+                'backdrop'          => $tmdb->image('backdrop', $cartoons),
                 'budget'            => $cartoons['budget'] ?? null,
                 'homepage'          => $cartoons['homepage'] ?? null,
                 'imdb_id'           => \substr($cartoons['imdb_id'] ?? '', 2),
