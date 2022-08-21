@@ -15,6 +15,8 @@ return new class() extends Migration {
         Schema::table('recommendations', function (Blueprint $table) {
             $table->foreignId('cartoons_id')->constrained();
             $table->foreignId('recommendation_cartoons_id')->constrained();
+
+            $table->unique(['cartoons_id', 'recommendation_cartoons_id']);
         });
     }
 };
