@@ -17,12 +17,12 @@ class Cartoons extends Model
 
     public function cast(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Cast::class, 'cast_movie', 'cast_id', 'movie_id');
+        return $this->belongsToMany(Cast::class, 'cast_cartoons', 'cast_id', 'cartoons_id');
     }
 
     public function crew(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Crew::class, 'crew_movie', 'person_id', 'movie_id');
+        return $this->belongsToMany(Crew::class, 'crew_cartoons', 'person_id', 'cartoons_id');
     }
 
     public function companies(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -42,7 +42,7 @@ class Cartoons extends Model
 
     public function recommendations(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Recommendation::class, 'movie_id', 'id');
+        return $this->hasMany(Recommendation::class, 'cartoons_id', 'id');
     }
 
     public function torrents(): \Illuminate\Database\Eloquent\Relations\HasMany
