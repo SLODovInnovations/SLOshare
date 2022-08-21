@@ -26,9 +26,9 @@ class ProcessCartoonsJob implements ShouldQueue
     use SerializesModels;
 
     /**
-     * ProcessMovieJob constructor.
+     * ProcessCartoonsJob constructor.
      */
-    public function __construct(public $movie)
+    public function __construct(public $cartoons)
     {
     }
 
@@ -36,13 +36,13 @@ class ProcessCartoonsJob implements ShouldQueue
     {
         $tmdb = new TMDB();
 
-        foreach ($this->movie['genres'] as $genre) {
+        foreach ($this->cartoons['genres'] as $genre) {
             if (isset($genre['name'])) {
-                Genre::updateOrCreate(['id' => $genre['id']], $genre)->movie()->syncWithoutDetaching([$this->movie['id']]);
+                Genre::updateOrCreate(['id' => $genre['id']], $genre)->cartoons()->syncWithoutDetaching([$this->cartoons['id']]);
             }
         }
 
-        foreach ($this->movie['production_companies'] as $productionCompany) {
+        foreach ($this->cartoons['production_companies'] as $productionCompany) {
             $client = new Client\Company($productionCompany['id']);
             $productionCompany = $client->getData();
 
@@ -55,12 +55,12 @@ class ProcessCartoonsJob implements ShouldQueue
                     'name'           => $productionCompany['name'] ?? null,
                     'origin_country' => $productionCompany['origin_country'],
                 ];
-                Company::updateOrCreate(['id' => $productionCompany['id']], $productionCompanyArray)->movie()->syncWithoutDetaching([$this->movie['id']]);
+                Company::updateOrCreate(['id' => $productionCompany['id']], $productionCompanyArray)->cartoons()->syncWithoutDetaching([$this->cartoons['id']]);
             }
         }
 
-        if (isset($this->movie['belongs_to_collection']['id'])) {
-            $client = new Client\Collection($this->movie['belongs_to_collection']['id']);
+        if (isset($this->cartoons['belongs_to_collection']['id'])) {
+            $client = new Client\Collection($this->cartoons['belongs_to_collection']['id']);
             $belongsToCollection = $client->getData();
             if (isset($belongsToCollection['name'])) {
                 $titleSort = \addslashes(\str_replace(['The ', 'An ', 'A ', '"'], [''], $belongsToCollection['name']));
@@ -73,28 +73,28 @@ class ProcessCartoonsJob implements ShouldQueue
                     'poster'    => $tmdb->image('poster', $belongsToCollection),
                     'backdrop'  => $tmdb->image('backdrop', $belongsToCollection),
                 ];
-                Collection::updateOrCreate(['id' => $belongsToCollection['id']], $belongsToCollectionArray)->movie()->syncWithoutDetaching([$this->movie['id']]);
+                Collection::updateOrCreate(['id' => $belongsToCollection['id']], $belongsToCollectionArray)->cartoons()->syncWithoutDetaching([$this->cartoons['id']]);
             }
         }
 
-        if (isset($this->movie['credits']['cast'])) {
-            foreach ($this->movie['credits']['cast'] as $cast) {
-                Cast::updateOrCreate(['id' => $cast['id']], $tmdb->cast_array($cast))->movie()->syncWithoutDetaching([$this->movie['id']]);
-                Person::updateOrCreate(['id' => $cast['id']], $tmdb->person_array($cast))->movie()->syncWithoutDetaching([$this->movie['id']]);
+        if (isset($this->cartoons['credits']['cast'])) {
+            foreach ($this->cartoons['credits']['cast'] as $cast) {
+                Cast::updateOrCreate(['id' => $cast['id']], $tmdb->cast_array($cast))->cartoons()->syncWithoutDetaching([$this->cartoons['id']]);
+                Person::updateOrCreate(['id' => $cast['id']], $tmdb->person_array($cast))->cartoons()->syncWithoutDetaching([$this->cartoons['id']]);
             }
         }
 
-        if (isset($this->movie['credits']['crew'])) {
-            foreach ($this->movie['credits']['crew'] as $crew) {
-                Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))->movie()->syncWithoutDetaching([$this->movie['id']]);
+        if (isset($this->cartoons['credits']['crew'])) {
+            foreach ($this->cartoons['credits']['crew'] as $crew) {
+                Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))->cartoons()->syncWithoutDetaching([$this->cartoons['id']]);
             }
         }
 
-        if (isset($this->movie['recommendations'])) {
-            foreach ($this->movie['recommendations']['results'] as $recommendation) {
+        if (isset($this->cartoons['recommendations'])) {
+            foreach ($this->cartoons['recommendations']['results'] as $recommendation) {
                 if (Cartoons::where('id', '=', $recommendation['id'])->count() !== 0) {
                     Recommendation::updateOrCreate(
-                        ['recommendation_movie_id' => $recommendation['id'], 'movie_id' => $this->movie['id']],
+                        ['recommendation_cartoons_id' => $recommendation['id'], 'cartoons_id' => $this->cartoons['id']],
                         ['title' => $recommendation['title'], 'vote_average' => $recommendation['vote_average'], 'poster' => $tmdb->image('poster', $recommendation), 'release_date' => $recommendation['release_date']]
                     );
                 }
