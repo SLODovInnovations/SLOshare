@@ -11,11 +11,8 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::table('recommendations', function (Blueprint $table) {
-            $table->unsignedBigInteger('cartoons_id')->nullable()->index();
-            $table->foreign('cartoons_id')->references('id')->on('cartoons')->onDelete('cascade'));
-
-            $table->unsignedBigInteger('recommendation_cartoons_id')->nullable()->index();
-            $table->foreign('recommendation_cartoons_id')->references('id')->on('cartoons')->onDelete('cascade');
+            $table->foreignId('cartoons_id')->constrained();
+            $table->foreignId('recommendation_cartoons_id')->constrained();
 
             $table->unique(['cartoons_id', 'recommendation_cartoons_id']);
         });
