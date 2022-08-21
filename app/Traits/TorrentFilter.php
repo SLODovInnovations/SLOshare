@@ -88,7 +88,7 @@ trait TorrentFilter
                 )
                 ->orWhere(fn ($query) => $query
                     ->whereIn('category_id', Category::select('id')->where('cartoons_meta', '=', 1))
-                    ->whereIn('tmdb', DB::table('genre_cartoons')->select('cartoons_id')->whereIn('genre_id', $genres))
+                    ->whereIn('tmdb', DB::table('cartoons_genre')->select('cartoons_id')->whereIn('genre_id', $genres))
                 )
             );
     }
