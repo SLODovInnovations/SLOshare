@@ -30,7 +30,7 @@ class SimilarTorrentController extends Controller
         }
 
         if ($torrent->category->cartoons_meta) {
-            $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $tmdbId)->first();
+            $meta = Cartoons::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $tmdbId)->first();
         }
 
         return \view('torrent.similar', [
