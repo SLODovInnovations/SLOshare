@@ -31,4 +31,9 @@ class Person extends Model
     {
         return $this->belongsToMany(Movie::class, 'person_movie', 'movie_id', 'person_id');
     }
+
+    public function cartoons(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Cartoons::class, 'person_cartoons', 'cartoons_id', 'person_id');
+    }
 }
