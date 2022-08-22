@@ -75,7 +75,7 @@
 
                 @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
                     <span class="badge-user text-bold">
-                    <a href="https://www.themoviedb.org/movie/{{ $torrent->tmdb }}" title="{{ __('torrent.movie-database') }}"
+                    <a href="https://www.themoviedb.org/movie/{{ $torrent->tmdb }}" title="{{ __('torrent.cartoons-database') }}"
                        target="_blank">
                         <i class="{{ config('other.font-awesome') }} fa-film"></i> TMDB: {{ $torrent->tmdb }}
                     </a>
@@ -130,7 +130,7 @@
                 @endif
 
                 <span class="badge-user text-bold text-orange">
-                    {{ __('torrent.status') }} {{ $meta->status ?? 'Unknown' }}
+                    Status: {{ $meta->status ?? 'Unknown' }}
                 </span>
 
                 @if (isset($meta->runtime))

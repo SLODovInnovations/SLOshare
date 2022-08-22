@@ -232,11 +232,11 @@ return [
     | SLOshare
     |--------------------------------------------------------------------------
     */
-    'tmdb'                     => 'TMDB URL',
-    'imdb'                     => 'IMDb URL',
-    'tvdb'                     => 'TVDB URL',
-    'mal'                      => 'MAL URL',
-    'igdb'                     => 'IGDB URL',
+    'tmdb'                     => 'TMDB URL:',
+    'imdb'                     => 'IMDb URL:',
+    'tvdb'                     => 'TVDB URL:',
+    'mal'                      => 'MAL URL:',
+    'igdb'                     => 'IGDB URL:',
     'announce-url-desc-url2'   => 'Imeti težave?',
     'announce-url-desc3'       => 'IGBD je potreben za vse naložene Torrente! Uporablja se za PLAKATE/OZADJA in DODATNE INFORMACIJE',
     'button'                   => 'Naloži Torrent',
@@ -263,4 +263,15 @@ return [
     'for-the-youngest'         => 'Za najmlajše',
     'edit-torrent'             => 'Uredi Torrent',
     'view-torrent'             => 'Pojdi na Torrent',
+    'directors'                => 'Direktorji:',
+    'movie-database'           => 'Filmska zbirka podatkov',
+    'tv-database'              => 'TV zbirka podatkov',
+    'cartoons-database'        => 'Risanke zbirke podatkov',
+    'homepage'                 => 'Domača stran',
+    'status'                   => 'Status:',
+    'sloshare-recommends'      => 'SLOshare Priporoča',
+    'collection-of-movies'     => 'Zbirka Filmov',
+    'collection-of-tv'         => 'Zbirka TV',
+    'collection-of-cartoons'   => 'Zbirka Risank',
+    'playlists'                => 'Seznami predvajanja',
 ];
