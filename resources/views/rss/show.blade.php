@@ -40,7 +40,7 @@
                             @else
                                 {{ __('common.anonymous') }} {{ __('torrent.uploader') }}
                             @endif<br>
-                            @if (($data->category->movie_meta || $data->category->tv_meta || $data->category->cartoons_meta) && $data->imdb != 0)
+                            @if (($data->category->movie_meta || $data->category->tv_meta || $data->category->cartoon_meta) && $data->imdb != 0)
                                 IMDB Link:<a href="https://anon.to?http://www.imdb.com/title/tt{{ $data->imdb }}"
                                              target="_blank">tt{{ $data->imdb }}</a><br>
                             @endif
@@ -50,7 +50,7 @@
                             @elseif ($data->category->tv_meta && $data->tmdb != 0)
                                 TMDB Link: <a href="https://anon.to?https://www.themoviedb.org/tv/{{ $data->tmdb }}"
                                               target="_blank">{{ $data->tmdb }}</a><br>
-                            @elseif ($data->category->cartoons_meta && $data->tmdb != 0)
+                            @elseif ($data->category->cartoon_meta && $data->tmdb != 0)
                                 TMDB Link: <a href="https://anon.to?https://www.themoviedb.org/movie/{{ $data->tmdb }}"
                                               target="_blank">{{ $data->tmdb }}</a><br>
                             @endif

@@ -5,7 +5,7 @@
             @forelse($meta->recommendations as $recommendation)
                 <div class="item mini backdrop mini_card">
                     <div class="image_content">
-                        <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $recommendation->recommendation_movie_id ?? $recommendation->recommendation_tv_id ?? $recommendation->recommendation_cartoons_id]) }}">
+                        <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $recommendation->recommendation_movie_id ?? $recommendation->recommendation_tv_id ?? $recommendation->recommendation_cartoon_id]) }}">
                             <div>
                                 @if(isset($recommendation->poster))
                                     <img class="backdrop"

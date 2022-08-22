@@ -9,7 +9,7 @@ namespace App\Http\Controllers;
 use App\Models\BonTransactions;
 use App\Models\Category;
 use App\Models\Movie;
-use App\Models\Cartoons;
+use App\Models\Cartoon;
 use App\Models\Resolution;
 use App\Models\Torrent;
 use App\Models\TorrentRequest;
@@ -71,8 +71,8 @@ class RequestController extends Controller
             $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
         }
 
-        if ($torrentRequest->category->cartoons_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $meta = Cartoons::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
+        if ($torrentRequest->category->cartoon_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
+            $meta = Cartoon::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
         }
 
         if ($torrentRequest->category->game_meta && ($torrentRequest->igdb || $torrentRequest->igdb != 0)) {
@@ -170,8 +170,8 @@ class RequestController extends Controller
             $tmdbScraper->movie($torrentRequest->tmdb);
         }
 
-        if ($torrentRequest->category->cartoons_meta !== 0 && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $tmdbScraper->cartoons($torrentRequest->tmdb);
+        if ($torrentRequest->category->cartoon_meta !== 0 && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
+            $tmdbScraper->cartoon($torrentRequest->tmdb);
         }
 
         $torrentRequestBounty = new TorrentRequestBounty();
@@ -288,8 +288,8 @@ class RequestController extends Controller
             $tmdbScraper->movie($torrentRequest->tmdb);
         }
 
-        if ($torrentRequest->category->cartoons_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $tmdbScraper->cartoons($torrentRequest->tmdb);
+        if ($torrentRequest->category->cartoon_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
+            $tmdbScraper->cartoon($torrentRequest->tmdb);
         }
 
         return \to_route('request', ['id' => $torrentRequest->id])

@@ -889,8 +889,8 @@
             @php
                 if ($media->category->movie_meta) {
                     $media->meta = 'movie';
-                } elseif ($media->category->cartoons_meta) {
-                    $media->meta = 'cartoons';
+                } elseif ($media->category->cartoon_meta) {
+                    $media->meta = 'cartoon';
                 } elseif ($media->category->tv_meta) {
                     $media->meta = 'tv';
                 } else {
@@ -901,8 +901,8 @@
                 if ($media->category->movie_meta && $media->tmdb && $media->tmdb != 0 && $media->tmdb != '') {
                     $meta = \App\Models\Movie::with(['genres'])->find($media->tmdb);
                 }
-                if ($media->category->cartoons_meta && $media->tmdb && $media->tmdb != 0 && $media->tmdb != '') {
-                    $meta = \App\Models\Cartoons::with(['genres'])->find($media->tmdb);
+                if ($media->category->cartoon_meta && $media->tmdb && $media->tmdb != 0 && $media->tmdb != '') {
+                    $meta = \App\Models\Cartoon::with(['genres'])->find($media->tmdb);
                 }
                 if ($media->category->tv_meta && $media->tmdb && $media->tmdb != 0 && $media->tmdb != '') {
                     $meta = \App\Models\Tv::with(['genres'])->find($media->tmdb);

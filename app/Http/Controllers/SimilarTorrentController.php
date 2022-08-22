@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Movie;
-use App\Models\Cartoons;
+use App\Models\Cartoon;
 use App\Models\Torrent;
 use App\Models\Tv;
 
@@ -29,8 +29,8 @@ class SimilarTorrentController extends Controller
             $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $tmdbId)->first();
         }
 
-        if ($torrent->category->cartoons_meta) {
-            $meta = Cartoons::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $tmdbId)->first();
+        if ($torrent->category->cartoon_meta) {
+            $meta = Cartoon::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $tmdbId)->first();
         }
 
         return \view('torrent.similar', [

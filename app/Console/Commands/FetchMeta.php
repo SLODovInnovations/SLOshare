@@ -42,8 +42,8 @@ class FetchMeta extends Command
                 $this->info('Film je pridobljen');
             }
 
-            if ($torrent->category->cartoons_meta) {
-                $tmdbScraper->cartoons($torrent->tmdb);
+            if ($torrent->category->cartoon_meta) {
+                $tmdbScraper->cartoon($torrent->tmdb);
                 $this->info('Risanka je pridobljen');
             }
         }

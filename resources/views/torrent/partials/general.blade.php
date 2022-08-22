@@ -53,7 +53,7 @@
                 </td>
             </tr>
 
-@if($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
+@if($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
             <tr class="torrent-resolution">
                 <td class="col-sm-3 torrentinfoleft">
                     <strong>{{ __('torrent.resolution') }}:</strong>

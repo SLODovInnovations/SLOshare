@@ -30,8 +30,8 @@ class Collection extends Model
         return $this->belongsToMany(Movie::class);
     }
 
-    public function cartoons(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Cartoons::class);
+        return $this->belongsToMany(Cartoon::class);
     }
 }

@@ -55,7 +55,7 @@
                         </label>
                     </div>
 
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
                         <div class="form-group">
                             <label for="name">TMDB ID <b>({{ __('request.required') }})</b></label>
                             <br>
@@ -69,7 +69,7 @@
                         <input type="hidden" name="tmdb" value="0">
                     @endif
 
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
                         <div class="form-group">
                             <label for="name">IMDB ID <b>({{ __('torrent.optional') }})</b></label>
                             <br>
@@ -97,7 +97,7 @@
                         <input type="hidden" name="tvdb" value="0">
                     @endif
 
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
                         <div class="form-group">
                             <label for="name">MAL ID ({{ __('torrent.required-anime') }})</label>
                             <br>
@@ -132,7 +132,7 @@
                         </label>
                     </div>
 
-                    <div class="form-group" x-show="meta == 'movie' || meta == 'tv' || meta == 'cartoons'">
+                    <div class="form-group" x-show="meta == 'movie' || meta == 'tv' || meta == 'cartoon'">
                         <label for="type">{{ __('torrent.type') }}</label>
                         <label>
                             <select name="type_id" class="form-control">
@@ -146,7 +146,7 @@
                         </label>
                     </div>
 
-                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv' || meta == 'cartoons'">
+                        <div class="form-group" x-show="meta == 'movie' || meta == 'tv' || meta == 'cartoon'">
                             <label for="resolution_id">{{ __('torrent.resolution') }}</label>
                             <label>
                                 <select name="resolution_id" class="form-control">

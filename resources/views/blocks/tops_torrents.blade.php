@@ -37,9 +37,9 @@
 							@php $meta = App\Models\Movie::where('id', '=', $seed->tmdb)->first(); @endphp
 						@endif
 					@endif
-					@if ($seed->category->cartoons_meta)
+					@if ($seed->category->cartoon_meta)
 						@if ($seed->tmdb || $seed->tmdb != 0)
-							@php $meta = App\Models\Cartoons::where('id', '=', $seed->tmdb)->first(); @endphp
+							@php $meta = App\Models\Cartoon::where('id', '=', $seed->tmdb)->first(); @endphp
 						@endif
 					@endif
 					@if ($seed->category->game_meta)
@@ -49,7 +49,7 @@
 					@endif
             <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
-			@if ($seed->category->movie_meta || $seed->category->tv_meta  || $seed->category->cartoons_meta)
+			@if ($seed->category->movie_meta || $seed->category->tv_meta  || $seed->category->cartoon_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
             @endif
@@ -130,9 +130,9 @@
     							@php $meta = App\Models\Movie::where('id', '=', $leech->tmdb)->first(); @endphp
     						@endif
     					@endif
-    					@if ($leech->category->cartoons_meta)
+    					@if ($leech->category->cartoon_meta)
     						@if ($leech->tmdb || $leech->tmdb != 0)
-    							@php $meta = App\Models\Cartoons::where('id', '=', $leech->tmdb)->first(); @endphp
+    							@php $meta = App\Models\Cartoon::where('id', '=', $leech->tmdb)->first(); @endphp
     						@endif
     					@endif
     					@if ($leech->category->game_meta)
@@ -142,7 +142,7 @@
     					@endif
             <div class="item mini backdrop mini_card">
     			<div class="gallery-item"
-			@if ($leech->category->movie_meta || $leech->category->tv_meta || $leech->category->cartoons_meta)
+			@if ($leech->category->movie_meta || $leech->category->tv_meta || $leech->category->cartoon_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
             @endif

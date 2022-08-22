@@ -26,4 +26,13 @@ return [
     'tv-credits'            => 'TV Credits:',
     'view-collection'       => 'View The Collection',
     'wiki-read'             => 'Read Full Bio On Wikipedia:',
+
+    /*
+    |--------------------------------------------------------------------------
+    | SLOshare
+    |--------------------------------------------------------------------------
+    */
+    'cartoons'              => 'Cartoons',
+    'cartoon'               => 'Cartoon',
+    'cartoon-credits'       => 'Cartoon Credits:',
 ];

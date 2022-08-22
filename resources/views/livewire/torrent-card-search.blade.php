@@ -151,11 +151,11 @@
                     @endphp
                 @endif
             @endif
-            @if ($torrent->category->cartoons_meta)
+            @if ($torrent->category->cartoon_meta)
                 @if ($torrent->tmdb || $torrent->tmdb != 0)
                     @php
-                        $meta = cache()->remember('movie.'.$torrent->tmdb, 3_600, function() use ($torrent) {
-                            return App\Models\Cartoons::where('id', '=', $torrent->tmdb)->first();
+                        $meta = cache()->remember('cartoon.'.$torrent->tmdb, 3_600, function() use ($torrent) {
+                            return App\Models\Cartoon::where('id', '=', $torrent->tmdb)->first();
                         })
                     @endphp
                 @endif
@@ -192,7 +192,7 @@
                     </div>
                     <div class="card_body">
                         <div class="body_poster">
-                            @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
+                            @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
                                 <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/mediahub_no_image_200x300.jpg' }}"
                                      class="show-poster" alt="{{ __('torrent.poster') }}">
                             @endif
@@ -229,7 +229,7 @@
                                     {{ $torrent->name }}
                                 </a>
                             </h3>
-                            @if (isset($meta->genres) && ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta))
+                            @if (isset($meta->genres) && ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta))
                                 @foreach ($meta->genres as $genre)
                                     <span class="genre-label">
                                         <a href="{{ route('mediahub.genres.show', ['id' => $genre->id]) }}">
@@ -246,7 +246,7 @@
                                 @endforeach
                             @endif
                             <p class="description_plot">
-                                @if($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
+                                @if($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
                                     {{ $meta->overview ?? '' }}
                                 @endif
 
@@ -279,7 +279,7 @@
                         </div>
                         <span class="badge-user text-bold" style="float: right;">
 								<i class="{{ config('other.font-awesome') }} fa-thumbs-up text-gold"></i>
-								@if($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
+								@if($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
                                 {{ round($meta->vote_average ?? 0) }}/10
                                 ({{ $meta->vote_count ?? 0 }} {{ __('torrent.votes') }})
                             @endif

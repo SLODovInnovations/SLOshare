@@ -236,9 +236,9 @@
                             @php $meta = App\Models\Movie::with('genres')->where('id', '=', $torrent->tmdb)->first() @endphp
                         @endif
                     @endif
-                    @if ($torrent->category->cartoons_meta)
+                    @if ($torrent->category->cartoon_meta)
                         @if ($torrent->tmdb || $torrent->tmdb != 0)
-                            @php $meta = App\Models\Cartoons::with('genres')->where('id', '=', $torrent->tmdb)->first() @endphp
+                            @php $meta = App\Models\Cartoon::with('genres')->where('id', '=', $torrent->tmdb)->first() @endphp
                         @endif
                     @endif
                     <tr>

@@ -10,10 +10,10 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('person_cartoons', function (Blueprint $table) {
-            $table->unsignedInteger('person_id');
-            $table->unsignedInteger('cartoons_id');
-            $table->primary(['person_id', 'cartoons_id']);
+        Schema::create('genre_cartoon', function (Blueprint $table) {
+            $table->unsignedInteger('genre_id');
+            $table->unsignedInteger('cartoon_id');
+            $table->primary(['genre_id', 'cartoon_id']);
         });
     }
 };

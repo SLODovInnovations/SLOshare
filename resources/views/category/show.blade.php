@@ -86,9 +86,9 @@
                                 @php $meta = App\Models\Movie::where('id', '=', $torrent->tmdb)->first(); @endphp
                             @endif
                         @endif
-                        @if ($torrent->category->cartoons_meta)
+                        @if ($torrent->category->cartoon_meta)
                             @if ($torrent->tmdb || $torrent->tmdb != 0)
-                                @php $meta = App\Models\Cartoons::where('id', '=', $torrent->tmdb)->first(); @endphp
+                                @php $meta = App\Models\Cartoon::where('id', '=', $torrent->tmdb)->first(); @endphp
                             @endif
                         @endif
                         @if ($torrent->category->game_meta)
@@ -123,7 +123,7 @@
                                 <td class="torrent-listings-format" style="width: 5%; text-align: center;">
                                     <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}">
                                         <div class="text-center">
-                                            <i class="{{ $torrent->category->icon }} torrent-icon" style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
+                                            <i class="{{ $torrent->category->icon }} torrent-icon" style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
                                         </div>
                                     </a>
                                     <div class="text-center">
@@ -131,7 +131,7 @@
                                     {{ $torrent->type->name }}
                                 </span>
                                     </div>
-                                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
+                                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
                                         <div class="text-center" style="padding-top: 5px;">
                                 <span class="label label-success" style="font-size: 13px">
                                     {{ $torrent->resolution->name ?? 'N/A' }}
@@ -342,7 +342,7 @@
 	                                    <br>
 										<span class="{{ \rating_color(round($meta->rating) ?? 'text-white') }}"><i class="{{ config('other.font-awesome') }} fa-star-half-alt"></i> {{ $meta->rating_count ?? 0 }}/100 </span>
                                     @endif
-                                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoons_meta)
+                                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
 	                                    <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
 											<img src="{{ url('img/tmdb_small.png') }}" alt="igdb_id" style="margin-left: -5px;" width="24px" height="24px"> {{ $torrent->tmdb }}
 	                                    </a>
