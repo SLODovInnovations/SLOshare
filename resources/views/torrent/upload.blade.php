@@ -264,7 +264,7 @@
                                 x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons') ? '{{ $tmdb ?: old('tmdb') }}' : '0'"
                                 x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'"
                             >
-                            <label class="form__label form__label--floating" for="autotmdb">TMDB ID / <a href="https://www.themoviedb.org/" target="_blank">https://www.themoviedb.org/</a></label>
+                            <label class="form__label form__label--floating" for="autotmdb">TMDB ID/label>
                             <output name="apimatch" id="apimatch" for="torrent"></output>
                         </p>
                         <p class="form__group">
@@ -279,7 +279,7 @@
                                 x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons') ? '{{ $imdb ?: old('imdb') }}' : '0'"
                                 x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'"
                             >
-                            <label class="form__label form__label--floating" for="autoimdb">IMDB ID / <a href="https://www.imdb.com/" target="_blank">https://www.imdb.com/</a></label>
+                            <label class="form__label form__label--floating" for="autoimdb">IMDB ID</label>
                         </p>
                         <p class="form__group" x-show="cats[cat].type === 'tv'">
                             <input type="hidden" name="tvdb" value="0" />
@@ -293,7 +293,7 @@
                                 class="form__text"
                                 x-bind:required="cats[cat].type === 'tv'"
                             >
-                            <label class="form__label form__label--floating" for="autotvdb">TVDB ID / <a href="https://www.thetvdb.com/" target="_blank">https://www.thetvdb.com/</a></label>
+                            <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
                         </p>
                         <p class="form__group">
                             <input type="hidden" name="mal" value="0" />
@@ -307,7 +307,7 @@
                                 class="form__text"
                                 placeholder=""
                             >
-                            <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }}) / <a href="https://myanimelist.net/" target="_blank">https://myanimelist.net/</a></label>
+                            <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
                         </p>
                     </div>
                     <p class="form__group" x-show="cats[cat].type === 'game'">
@@ -321,7 +321,7 @@
                             class="form__text"
                             x-bind:required="cats[cat].type === 'game'"
                         >
-                        <label class="form__label form__label--floating" for="autoigdb">IGDB ID <b>({{ __('torrent.required-games') }})</b> / <a href="https://www.igdb.com/discover" target="_blank">https://www.igdb.com/discover</a></label>
+                        <label class="form__label form__label--floating" for="autoigdb">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
                     </p>
                     <p class="form__group">
                         <input
@@ -468,6 +468,12 @@
                 <p>{{ __('torrent.announce-url-desc', ['source' => config('torrent.source')]) }}</p>
                 <br>-->
                 <p class="text-success">{!! __('torrent.announce-url-desc-url', ['url' => route('instructions')]) !!}</p>
+                <br>
+                <p>{{ __('torrent.tmdb') }} <a href="https://www.themoviedb.org/" target="_blank">https://www.themoviedb.org/</a></p>
+                <p>{{ __('torrent.imdb') }} <a href="https://www.imdb.com/" target="_blank">https://www.imdb.com/</a></p>
+                <p>{{ __('torrent.tvdb') }} <a href="https://www.thetvdb.com/" target="_blank">https://www.thetvdb.com/</a></p>
+                <p>{{ __('torrent.mal') }} <a href="https://myanimelist.net/" target="_blank">https://myanimelist.net/</a></p>
+                <p>{{ __('torrent.igdb') }} <a href="https://www.igdb.com/discover" target="_blank">https://www.igdb.com/discover</a></p>
             </div>
         </section>
     @endsection
