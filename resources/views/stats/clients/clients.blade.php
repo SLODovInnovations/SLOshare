@@ -11,21 +11,21 @@
         </a>
     </li>
     <li class="breadcrumb--active">
-        Clients
+        Odjemalci
     </li>
 @endsection
 
 @section('content')
     <div class="container">
         <div class="block">
-            <h2>Clients</h2>
+            <h2>Odjemalci</h2>
             <hr>
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-condensed table-striped table-bordered">
                         <thead>
                         <tr>
-                            <th>Client</th>
+                            <th>Odjemalci</th>
                             <th class="text-right">{{ __('common.users') }}</th>
                         </tr>
                         </thead>
