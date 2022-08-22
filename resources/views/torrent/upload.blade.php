@@ -264,8 +264,7 @@
                                 x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons') ? '{{ $tmdb ?: old('tmdb') }}' : '0'"
                                 x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'"
                             >
-                            <label>URL za TMDB ID: <a href="https://www.themoviedb.org/" target="_blank">https://www.themoviedb.org/</a></label>
-                            <label class="form__label form__label--floating" for="autotmdb">TMDB ID</label>
+                            <label class="form__label form__label--floating" for="autotmdb">TMDB ID / <a href="https://www.themoviedb.org/" target="_blank">https://www.themoviedb.org/</a></label>
                             <output name="apimatch" id="apimatch" for="torrent"></output>
                         </p>
                         <p class="form__group">
@@ -280,8 +279,7 @@
                                 x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons') ? '{{ $imdb ?: old('imdb') }}' : '0'"
                                 x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoons'"
                             >
-                            <label>URL za IMDB ID: <a href="https://www.imdb.com/" target="_blank">https://www.imdb.com/</a></label>
-                            <label class="form__label form__label--floating" for="autoimdb">IMDB ID</label>
+                            <label class="form__label form__label--floating" for="autoimdb">IMDB ID / <a href="https://www.imdb.com/" target="_blank">https://www.imdb.com/</a></label>
                         </p>
                         <p class="form__group" x-show="cats[cat].type === 'tv'">
                             <input type="hidden" name="tvdb" value="0" />
@@ -295,8 +293,7 @@
                                 class="form__text"
                                 x-bind:required="cats[cat].type === 'tv'"
                             >
-                            <label>URL za TVDB ID: <a href="https://www.thetvdb.com/" target="_blank">https://www.thetvdb.com/</a></label>
-                            <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
+                            <label class="form__label form__label--floating" for="autotvdb">TVDB ID / <a href="https://www.thetvdb.com/" target="_blank">https://www.thetvdb.com/</a></label>
                         </p>
                         <p class="form__group">
                             <input type="hidden" name="mal" value="0" />
@@ -310,8 +307,7 @@
                                 class="form__text"
                                 placeholder=""
                             >
-                            <label>URL za MAL ID: <a href="https://myanimelist.net/" target="_blank">https://myanimelist.net/</a></label>
-                            <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
+                            <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }}) / <a href="https://myanimelist.net/" target="_blank">https://myanimelist.net/</a></label>
                         </p>
                     </div>
                     <p class="form__group" x-show="cats[cat].type === 'game'">
@@ -325,8 +321,7 @@
                             class="form__text"
                             x-bind:required="cats[cat].type === 'game'"
                         >
-                        <label>URL za IGDB ID: <a href="https://www.igdb.com/discover" target="_blank">https://www.igdb.com/discover</a></label>
-                        <label class="form__label form__label--floating" for="autoigdb">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
+                        <label class="form__label form__label--floating" for="autoigdb">IGDB ID <b>({{ __('torrent.required-games') }})</b> / <a href="https://www.igdb.com/discover" target="_blank">https://www.igdb.com/discover</a></label>
                     </p>
                     <p class="form__group">
                         <input
