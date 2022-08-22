@@ -35,7 +35,7 @@ return [
     'top-downloaders'         => 'Top Downloaders',
     'top-dying'               => 'Top umiranje',
     'top-leeched'             => 'Najbolj priljubljeni',
-    'top-leechers'            => 'Top Leechers',
+    'top-leechers'            => 'Top Pijavke',
     'top-seeded'              => 'V zgornjem delu',
     'top-seeding'             => 'Top Seeding',
     'top-seeders'             => 'Top sejalnice',

@@ -239,4 +239,13 @@ return [
     'select-resolution'        => '-- Select Resolution --',
     'select-distributor'       => '-- Select Distributor --',
     'select-region'            => '-- Select Region --',
+    'directors'                => 'Directors:',
+    'movie-database'           => 'The Movie Database',
+    'homepage'                 => 'Homepage',
+    'status'                   => 'Status:',
+    'sloshare-recommends'      => 'SLOshare Recommends',
+    'collection-of-movies'     => 'Collection of Movies',
+    'collection-of-tv'         => 'Collection of TV',
+    'collection-of-cartoons'   => 'Collection of Cartoons',
+    'playlists'                => 'Playlists',
 ];
