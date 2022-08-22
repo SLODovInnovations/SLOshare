@@ -8,12 +8,18 @@
                 <a :class="{ 'active': 'recommendations' === tab }"
                    @click.prevent="tab = 'recommendations'; window.location.hash = 'recommendations'" href="#">{{ __('torrent.sloshare-recommends') }}</a>
                 |
+            @if($torrent->category->movie_meta)
                 <a :class="{ 'active': 'movie_collection' === tab }"
                    @click.prevent="tab = 'movie_collection'; window.location.hash = 'movie_collection'" href="#">{{ __('torrent.collection-of-movies') }}</a> |
+            @endif
+            @if($torrent->category->tv_meta)
                 <a :class="{ 'active': 'movie_collection' === tab }"
                    @click.prevent="tab = 'tv_collection'; window.location.hash = 'tv_collection'" href="#">{{ __('torrent.collection-of-tv') }}</a> |
+            @endif
+            @if($torrent->category->cartoons_meta)
                 <a :class="{ 'active': 'cartoons_collection' === tab }"
                    @click.prevent="tab = 'cartoons_collection'; window.location.hash = 'cartoons_collection'" href="#">{{ __('torrent.collection-of-cartoons') }}</a> |
+            @endif
                 <a :class="{ 'active': 'playlists' === tab }"
                    @click.prevent="tab = 'playlists'; window.location.hash = 'playlists'" href="#">{{ __('torrent.playlists') }}</a>
             </nav>
