@@ -7,17 +7,15 @@ use Illuminate\Support\Facades\Schema;
 return new class() extends Migration {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('recommendations', function (Blueprint $table) {
             $table->unsignedBigInteger('cartoons_id')->nullable()->index();
-            $table->foreignId('cartoons_id')->references('id')->on('cartoons')->onDelete('cascade'));
+            $table->foreign('cartoons_id')->references('id')->on('cartoons')->onDelete('cascade');
 
             $table->unsignedBigInteger('recommendation_cartoons_id')->nullable()->index();
-            $table->foreignId('recommendation_cartoons_id')->references('id')->on('cartoons')->onDelete('cascade');
+            $table->foreign('recommendation_cartoons_id')->references('id')->on('cartoons')->onDelete('cascade');
 
             $table->unique(['cartoons_id', 'recommendation_cartoons_id']);
         });
