@@ -66,7 +66,7 @@ class Tv extends Model
     public function collection(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Collection::class)->take(1);
-    }}
+    }
 
     public function recommendations(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
