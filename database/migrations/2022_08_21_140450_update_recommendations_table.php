@@ -14,9 +14,10 @@ return new class() extends Migration {
     {
         Schema::table('recommendations', function (Blueprint $table) {
             $table->unsignedBigInteger('cartoons_id')->nullable()->index();
-            $table->foreign('cartoons_id')->references('id')->on('cartoons')->onDelete('cascade'));
+            $table->foreignId('cartoons_id')->references('id')->on('cartoons')->onDelete('cascade'));
 
             $table->unsignedBigInteger('recommendation_cartoons_id')->nullable()->index();
+            $table->foreignId('recommendation_cartoons_id')->references('id')->on('cartoons')->onDelete('cascade');
 
             $table->unique(['cartoons_id', 'recommendation_cartoons_id']);
         });
