@@ -61,9 +61,9 @@
                         @php $meta = cache()->remember('moviemeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Movie::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
                     @endif
                 @endif
-                @if ($newslo->category->cartoons_meta)
+                @if ($newslo->category->cartoon_meta)
                     @if ($newslo->tmdb || $newslo->tmdb != 0)
-                        @php $meta = cache()->remember('moviemeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Cartoons::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                        @php $meta = cache()->remember('moviemeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Cartoon::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
                     @endif
                 @endif
                 @if ($newslo->category->game_meta)
@@ -73,7 +73,7 @@
                 @endif
             <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
-			@if ($newslo->category->movie_meta || $newslo->category->tv_meta || $newslo->category->cartoons_meta)
+			@if ($newslo->category->movie_meta || $newslo->category->tv_meta || $newslo->category->cartoon_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
             @endif
@@ -385,9 +385,9 @@
 @foreach ($cartoons as $cartoon)
 
 					@php $meta = null; @endphp
-					@if ($cartoon->category->cartoons_meta)
+					@if ($cartoon->category->cartoon_meta)
 						@if ($cartoon->tmdb || $cartoon->tmdb != 0)
-							@php $meta = App\Models\Cartoons::where('id', '=', $cartoon->tmdb)->first(); @endphp
+							@php $meta = App\Models\Cartoon::where('id', '=', $cartoon->tmdb)->first(); @endphp
 						@endif
 					@endif
             <div class="item mini backdrop mini_card">
@@ -470,7 +470,7 @@
 						@if ($x->category->game_meta)
 						<div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
 						@endif
-                        @if ($x->category->movie_meta || $x->category->tv_meta || $x->category->cartoons_meta)
+                        @if ($x->category->movie_meta || $x->category->tv_meta || $x->category->cartoon_meta)
                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                         @endif
 

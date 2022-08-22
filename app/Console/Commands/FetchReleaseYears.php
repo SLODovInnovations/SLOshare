@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Movie;
-use App\Models\Cartoons;
+use App\Models\Cartoon;
 use App\Models\Torrent;
 use App\Models\Tv;
 use Illuminate\Console\Command;
@@ -75,8 +75,8 @@ class FetchReleaseYears extends Command
                 }
             }
 
-            if ($torrent->category->cartoons_meta && $torrent->tmdb && $torrent->tmdb != 0) {
-                $meta = Cartoons::where('id', '=', $torrent->tmdb)->first();
+            if ($torrent->category->cartoon_meta && $torrent->tmdb && $torrent->tmdb != 0) {
+                $meta = Cartoon::where('id', '=', $torrent->tmdb)->first();
                 if (isset($meta->release_date) && \substr($meta->release_date, 0, 4) > '1900') {
                     $torrent->release_year = \substr($meta->release_date, 0, 4);
                     $torrent->save();

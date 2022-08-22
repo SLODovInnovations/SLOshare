@@ -26,4 +26,13 @@ return [
     'tv-credits'            => 'TV Zasluge:',
     'view-collection'       => 'Oglejte si zbirko',
     'wiki-read'             => 'Preberite celotno biografijo na Wikipediji:',
+
+    /*
+    |--------------------------------------------------------------------------
+    | SLOshare
+    |--------------------------------------------------------------------------
+    */
+    'cartoons'              => 'Risanke',
+    'cartoon'               => 'Risanka',
+    'cartoon-credits'       => 'Zasluge Risank:',
 ];

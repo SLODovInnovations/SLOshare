@@ -13,7 +13,7 @@ return new class() extends Migration {
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->boolean('cartoons_meta')->default(0);
+            $table->boolean('cartoon_meta')->default(0);
         });
     }
 };

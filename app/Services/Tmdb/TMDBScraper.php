@@ -5,12 +5,12 @@ namespace App\Services\Tmdb;
 use App\Jobs\ProcessCollectionJob;
 use App\Jobs\ProcessCompanyJob;
 use App\Jobs\ProcessMovieJob;
-use App\Jobs\ProcessCartoonsJob;
+use App\Jobs\ProcessCartoonJob;
 use App\Jobs\ProcessTvJob;
 use App\Models\Collection;
 use App\Models\Company;
 use App\Models\Movie;
-use App\Models\Cartoons;
+use App\Models\Cartoon;
 use App\Models\Tv;
 use DateTime;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -121,50 +121,50 @@ class TMDBScraper implements ShouldQueue
         }
     }
 
-   public function cartoons($id = null): void
+   public function cartoon($id = null): void
     {
         if ($id == null) {
             $id = $this->id;
         }
 
         $tmdb = new TMDB();
-        $cartoons = (new Client\Cartoons($id))->getData();
+        $cartoon = (new Client\Cartoon($id))->getData();
 
-        if (\array_key_exists('title', $cartoons)) {
+        if (\array_key_exists('title', $cartoon)) {
             $re = '/((?<namesort>.*)(?<seperator>\:|and)(?<remaining>.*)|(?<name>.*))/m';
-            \preg_match($re, (string) $cartoons['title'], $matches);
+            \preg_match($re, (string) $cartoon['title'], $matches);
 
-            $year = (new DateTime($cartoons['release_date']))->format('Y');
+            $year = (new DateTime($cartoon['release_date']))->format('Y');
             $titleSort = \addslashes(\str_replace(['The ', 'An ', 'A ', '"'], [''],
-                Str::limit($matches['namesort'] ? $matches['namesort'].' '.$year : $cartoons['title'], 100)));
+                Str::limit($matches['namesort'] ? $matches['namesort'].' '.$year : $cartoon['title'], 100)));
 
             $array = [
-                'adult'             => $cartoons['adult'] ?? 0,
-                'backdrop'          => $tmdb->image('backdrop', $cartoons),
-                'budget'            => $cartoons['budget'] ?? null,
-                'homepage'          => $cartoons['homepage'] ?? null,
-                'imdb_id'           => \substr($cartoons['imdb_id'] ?? '', 2),
-                'original_language' => $cartoons['original_language'] ?? null,
-                'original_title'    => $cartoons['original_title'] ?? null,
-                'overview'          => $cartoons['overview'] ?? null,
-                'popularity'        => $cartoons['popularity'] ?? null,
-                'poster'            => $tmdb->image('poster', $cartoons),
-                'release_date'      => $tmdb->ifExists('release_date', $cartoons),
-                'revenue'           => $cartoons['revenue'] ?? null,
-                'runtime'           => $cartoons['runtime'] ?? null,
-                'status'            => $cartoons['status'] ?? null,
-                'tagline'           => $cartoons['tagline'] ?? null,
-                'title'             => Str::limit($cartoons['title'], 200),
+                'adult'             => $cartoon['adult'] ?? 0,
+                'backdrop'          => $tmdb->image('backdrop', $cartoon),
+                'budget'            => $cartoon['budget'] ?? null,
+                'homepage'          => $cartoon['homepage'] ?? null,
+                'imdb_id'           => \substr($cartoon['imdb_id'] ?? '', 2),
+                'original_language' => $cartoon['original_language'] ?? null,
+                'original_title'    => $cartoon['original_title'] ?? null,
+                'overview'          => $cartoon['overview'] ?? null,
+                'popularity'        => $cartoon['popularity'] ?? null,
+                'poster'            => $tmdb->image('poster', $cartoon),
+                'release_date'      => $tmdb->ifExists('release_date', $cartoon),
+                'revenue'           => $cartoon['revenue'] ?? null,
+                'runtime'           => $cartoon['runtime'] ?? null,
+                'status'            => $cartoon['status'] ?? null,
+                'tagline'           => $cartoon['tagline'] ?? null,
+                'title'             => Str::limit($cartoon['title'], 200),
                 'title_sort'        => $titleSort,
-                'vote_average'      => $cartoons['vote_average'] ?? null,
-                'vote_count'        => $cartoons['vote_count'] ?? null,
+                'vote_average'      => $cartoon['vote_average'] ?? null,
+                'vote_count'        => $cartoon['vote_count'] ?? null,
             ];
 
-            Cartoons::updateOrCreate(['id' => $cartoons['id']], $array);
+            Cartoon::updateOrCreate(['id' => $cartoon['id']], $array);
 
-            ProcessCartoonsJob::dispatch($cartoons, $id);
+            ProcessCartoonJob::dispatch($cartoon, $id);
 
-            //return ['message' => 'Cartoons with id: ' . $id . ' Has been added  to the database, But relations are loaded with the queue'];
+            //return ['message' => 'Cartoon with id: ' . $id . ' Has been added  to the database, But relations are loaded with the queue'];
         }
     }
 

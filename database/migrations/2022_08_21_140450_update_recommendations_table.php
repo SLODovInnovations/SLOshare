@@ -11,13 +11,13 @@ return new class() extends Migration {
     public function up(): void
     {
         Schema::table('recommendations', function (Blueprint $table) {
-            $table->unsignedBigInteger('cartoons_id')->nullable()->index();
-            $table->foreign('cartoons_id')->references('id')->on('cartoons')->onDelete('cascade');
+            $table->unsignedBigInteger('cartoon_id')->nullable()->index();
+            $table->foreign('cartoon_id')->references('id')->on('cartoon')->onDelete('cascade');
 
-            $table->unsignedBigInteger('recommendation_cartoons_id')->nullable()->index();
-            $table->foreign('recommendation_cartoons_id')->references('id')->on('cartoons')->onDelete('cascade');
+            $table->unsignedBigInteger('recommendation_cartoon_id')->nullable()->index();
+            $table->foreign('recommendation_cartoon_id')->references('id')->on('cartoon')->onDelete('cascade');
 
-            $table->unique(['cartoons_id', 'recommendation_cartoons_id']);
+            $table->unique(['cartoon_id', 'recommendation_cartoon_id']);
         });
     }
 };

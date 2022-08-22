@@ -74,12 +74,12 @@
             <br>
             <br>
 
-            <label for="cartoons_meta" class="control-label">{{ __('staff.cartoons-meta-data') }}</label>
+            <label for="cartoon_meta" class="control-label">{{ __('staff.cartoons-meta-data') }}</label>
             <div class="radio-inline">
-                <label><input type="radio" name="cartoons_meta" value="1">{{ __('common.yes') }}</label>
+                <label><input type="radio" name="cartoon_meta" value="1">{{ __('common.yes') }}</label>
             </div>
             <div class="radio-inline">
-                <label><input type="radio" name="cartoons_meta" value="0" checked>{{ __('common.no') }}</label>
+                <label><input type="radio" name="cartoon_meta" value="0" checked>{{ __('common.no') }}</label>
             </div>
             <br>
             <br>

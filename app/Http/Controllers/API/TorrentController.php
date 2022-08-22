@@ -141,7 +141,7 @@ class TorrentController extends BaseController
         }
 
         $resolutionRule = 'nullable|exists:resolutions,id';
-        if ($category->movie_meta || $category->tv_meta || $category->cartoons_meta) {
+        if ($category->movie_meta || $category->tv_meta || $category->cartoon_meta) {
             $resolutionRule = 'required|exists:resolutions,id';
         }
 
@@ -229,7 +229,7 @@ class TorrentController extends BaseController
             $tmdbScraper->movie($torrent->tmdb);
         }
 
-        if ($torrent->category->cartoons_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
+        if ($torrent->category->cartoon_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
             $tmdbScraper->movie($torrent->tmdb);
         }
 

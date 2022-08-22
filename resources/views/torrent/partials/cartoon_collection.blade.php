@@ -1,5 +1,5 @@
 <div class="panel-body" style="padding: 5px;">
-    @if (! empty($meta->collection['0']) && $torrent->category->cartoons_meta)
+    @if (! empty($meta->collection['0']) && $torrent->category->cartoon_meta)
         <div id="collection_waypoint" class="collection">
             <div class="header collection"
                  @php $backdrop = $meta->collection['0']->backdrop @endphp
@@ -9,8 +9,8 @@
                 <section class="collection">
                     <h2>Part of the {{ $meta->collection['0']->name }}</h2>
                     <p class="text-blue">Includes:
-                        @foreach($meta->collection['0']->cartoons as $collection_cartoons)
-                            {{ $collection_cartoons->title }},
+                        @foreach($meta->collection['0']->cartoon as $collection_cartoon)
+                            {{ $collection_cartoon->title }},
                         @endforeach
                     </p>
 

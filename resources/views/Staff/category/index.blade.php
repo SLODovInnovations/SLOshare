@@ -72,7 +72,7 @@
                             @endif
                         </td>
                         <td>
-                            @if ($category->cartoons_meta)
+                            @if ($category->cartoon_meta)
                                 <i class="{{ config('other.font-awesome') }} fa-check text-green"></i>
                             @else
                                 <i class="{{ config('other.font-awesome') }} fa-times text-red"></i>

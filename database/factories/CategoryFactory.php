@@ -24,7 +24,7 @@ class CategoryFactory extends Factory
             'game_meta'   => false,
             'tv_meta'     => false,
             'movie_meta'  => false,
-            'cartoons_meta'  => false,
+            'cartoon_meta'=> false,
             'num_torrent' => $this->faker->randomNumber(),
         ];
     }

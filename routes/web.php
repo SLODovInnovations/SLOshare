@@ -505,6 +505,12 @@ Route::group(['middleware' => 'language'], function () {
 
         // Movie
         Route::get('/movies/{id}', [App\Http\Controllers\MediaHub\MovieController::class, 'show'])->name('mediahub.movies.show');
+
+        // Cartoons
+        Route::get('/cartoons', [App\Http\Controllers\MediaHub\CartoonController::class, 'index'])->name('mediahub.cartoons.index');
+
+        // Cartoon
+        Route::get('/cartoons/{id}', [App\Http\Controllers\MediaHub\CartoonController::class, 'show'])->name('mediahub.cartoons.show');
     });
 
     /*

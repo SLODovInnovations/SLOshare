@@ -32,8 +32,8 @@ class Crew extends Model
         return $this->belongsToMany(Movie::class, 'crew_movie', 'movie_id', 'person_id');
     }
 
-    public function cartoons(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Cartoons::class, 'crew_cartoons', 'cartoons_id', 'person_id');
+        return $this->belongsToMany(Cartoon::class, 'crew_cartoon', 'cartoon_id', 'person_id');
     }
 }

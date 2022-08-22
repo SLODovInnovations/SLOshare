@@ -61,9 +61,9 @@
                             	    @php $meta = App\Models\Movie::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
-                            @if ($slorecommendeds->category->cartoons_meta)
+                            @if ($slorecommendeds->category->cartoon_meta)
                                 @if ($slorecommendeds->tmdb || $slorecommendeds->tmdb != 0)
-                            	    @php $meta = App\Models\Cartoons::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
+                            	    @php $meta = App\Models\Cartoon::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
                             @if ($slorecommendeds->category->game_meta)
@@ -317,9 +317,9 @@
                             	    @php $meta = App\Models\Movie::where('id', '=', $videorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
-                            @if ($videorecommendeds->category->cartoons_meta)
+                            @if ($videorecommendeds->category->cartoon_meta)
                                 @if ($videorecommendeds->tmdb || $videorecommendeds->tmdb != 0)
-                            	    @php $meta = App\Models\Cartoons::where('id', '=', $videorecommendeds->tmdb)->first(); @endphp
+                            	    @php $meta = App\Models\Cartoon::where('id', '=', $videorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
 
