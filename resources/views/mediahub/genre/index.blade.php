@@ -55,6 +55,8 @@
                                 <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ $genre->tv->count() }} {{ __('mediahub.shows') }}
                                 |
                                 <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ $genre->movie->count() }} {{ __('mediahub.movies') }}
+                                |
+                                <i class="{{ config('other.font-awesome') }} fa-baby"></i> {{ $genre->cartoon->count() }} {{ __('mediahub.cartoons') }}
                             </h2>
                         </div>
                     </a>

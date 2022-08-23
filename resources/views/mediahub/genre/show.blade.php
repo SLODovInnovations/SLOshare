@@ -34,7 +34,8 @@
                         {{ $genre->name }}
                     </h1>
                     <h2 class="text-center">{{ $genre->tv_count }} {{ __('mediahub.shows') }}
-                        | {{ $genre->movie_count }} {{ __('mediahub.movies') }}</h2>
+                        | {{ $genre->movie_count }} {{ __('mediahub.movies') }}
+                        | {{ $genre->cartoon_count }} {{ __('mediahub.cartoons') }}</h2>
                     @foreach($shows as $show)
                         <div class="col-md-12">
                             <div class="card is-torrent">
@@ -115,8 +116,50 @@
                             </div>
                         </div>
                     @endforeach
+                    @endforeach
+                    @if ($cartoons->isNotEmpty())
+                        <div class="col-md-12">
+                            <h2 class="text-center">Risanke</h2>
+                        </div>
+                    @endif
+                    @foreach($cartoons as $cartoon)
+                        <div class="col-md-12">
+                            <div class="card is-torrent">
+                                <div class="card_head">
+                                    <span class="badge-user text-bold" style="float:right;">
+                                        <i class="far fa-fw fa-clock text-green"></i> {{ $cartoon->runtime }} mins
+                                    </span>
+                                </div>
+                                <div class="card_body">
+                                    <div class="body_poster">
+                                        <img src="{{ isset($cartoon->poster) ? tmdb_image('poster_mid', $cartoon->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
+                                             class="show-poster">
+                                    </div>
+                                    <div class="body_description">
+                                        <h3 class="description_title">
+                                            <a href="{{ route('mediahub.cartoons.show', ['id' => $cartoon->id]) }}">{{ $cartoon->title }}
+                                                <span class="text-bold text-pink"> {{ substr($cartoon->release_date, 0, 4) }}</span>
+                                            </a>
+                                        </h3>
+                                        @foreach ($cartoon->genres as $genre)
+                                            <span class="genre-label">{{ $genre->name }}</span>
+                                        @endforeach
+                                        <p class="description_plot">
+                                            {{ $cartoon->overview }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card_footer">
+                                    <div style="float: left;">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
                     <div class="text-center">
-                        {{ ($genre->tv_count > 25 && $genre->tv_count > $genre->movie_count) ? $shows->links() : $movies->links() }}
+                        {{ ($genre->tv_count > 25 && $genre->tv_count > $genre->movie_count > $genre->cartoon_count) ? $shows->links() : $movies->links() : $cartoons->links() }}
                     </div>
                 </div>
             </div>
