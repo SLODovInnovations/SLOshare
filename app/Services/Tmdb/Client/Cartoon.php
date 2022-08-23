@@ -2,7 +2,7 @@
 
 namespace App\Services\Tmdb\Client;
 
-class Cartoons
+class Cartoon
 {
     public \GuzzleHttp\Client $client;
 
