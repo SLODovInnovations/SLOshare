@@ -36,6 +36,24 @@ class CollectionSearch extends Component
             ->paginate(25);
     }
 
+    final public function getCollectionsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    {
+        return Collection::withCount('tv')
+            ->with('tv')
+            ->where('name', 'LIKE', '%'.$this->search.'%')
+            ->oldest('name')
+            ->paginate(25);
+    }
+
+    final public function getCollectionsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    {
+        return Collection::withCount('cartoon')
+            ->with('cartoon')
+            ->where('name', 'LIKE', '%'.$this->search.'%')
+            ->oldest('name')
+            ->paginate(25);
+    }
+
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return \view('livewire.collection-search', [
