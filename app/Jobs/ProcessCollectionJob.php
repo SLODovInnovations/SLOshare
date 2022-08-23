@@ -31,6 +31,8 @@ class ProcessCollectionJob implements ShouldQueue
         foreach ($this->collection['parts'] as $parts) {
             $metadata = new TMDBScraper();
             $metadata->movie($parts['id']);
+            $metadata->tv($parts['id']);
+            $metadata->cartoon($parts['id']);
         }
     }
 }
