@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Torrent;
 use App\Models\User;
 use App\Services\Tmdb\Client\Movie;
+use App\Services\Tmdb\Client\Cartoon;
 use App\Services\Tmdb\Client\TV;
 use App\Services\Tmdb\TMDBScraper;
 use Exception;

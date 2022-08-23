@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Company;
+use App\Models\Cartoon;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class CompanySearch extends Component
+class CartoonSearch extends Component
 {
     use WithPagination;
 
@@ -27,18 +27,19 @@ class CompanySearch extends Component
         $this->resetPage();
     }
 
-    final public function getCompaniesProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    final public function getCartoonProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        return Company::withCount('tv', 'movie', 'cartoon')
-            ->where('name', 'LIKE', '%'.$this->search.'%')
-            ->oldest('name')
+        return Cartoon::query()
+            ->with(['companies', 'genres'])
+            ->when($this->search, fn ($query) => $query->where('title', 'LIKE', '%'.$this->search.'%'))
+            ->oldest('title')
             ->paginate(30);
     }
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return \view('livewire.company-search', [
-            'companies' => $this->companies,
+        return \view('livewire.cartoon-search', [
+            'cartoons' => $this->cartoons,
         ]);
     }
 }

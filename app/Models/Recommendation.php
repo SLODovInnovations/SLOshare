@@ -19,4 +19,9 @@ class Recommendation extends Model
     {
         return $this->belongsTo(Tv::class);
     }
+
+    public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Cartoon::class);
+    }
 }

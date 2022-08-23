@@ -230,7 +230,7 @@ class TorrentController extends BaseController
         }
 
         if ($torrent->category->cartoon_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
-            $tmdbScraper->movie($torrent->tmdb);
+            $tmdbScraper->cartoon($torrent->tmdb);
         }
 
         // Torrent Keywords System
