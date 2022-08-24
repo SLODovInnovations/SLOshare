@@ -28,7 +28,7 @@
                                 </a>
                             </li>
                              <li class="">
-                                <a href="#cartoons" role="tab" data-toggle="tab" aria-expanded="true">
+                                <a href="#cartoones" role="tab" data-toggle="tab" aria-expanded="true">
                                     <i class="{{ config('other.font-awesome') }} fa-baby"></i> {{ __('sloshare.home-cartoons-title') }}
                                 </a>
                             </li>
@@ -378,25 +378,25 @@
         </div>
 
 
-    <div class="tab-pane fade" id="cartoons">
+    <div class="tab-pane fade" id="cartoones">
         <section class="recommendations" style="max-height: 330px !important;">
             <div class="scroller" style="padding-bottom: 10px;">
 
-@foreach ($cartoons as $cartoon)
+@foreach ($cartoones as $cartoone)
 
 					@php $meta = null; @endphp
-					@if ($cartoon->category->cartoon_meta)
-						@if ($cartoon->tmdb || $cartoon->tmdb != 0)
-							@php $meta = App\Models\Cartoon::where('id', '=', $cartoon->tmdb)->first(); @endphp
+					@if ($cartoone->category->cartoon_meta)
+						@if ($cartoone->tmdb || $cartoone->tmdb != 0)
+							@php $meta = App\Models\Cartoon::where('id', '=', $cartoone->tmdb)->first(); @endphp
 						@endif
 					@endif
             <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
-			@if ($cartoon->tmdb != 0 && $cartoon->tmdb != null)
+			@if ($cartoone->tmdb != 0 && $cartoone->tmdb != null)
 			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg'; }}');">
             @else
-            @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoon->id.'.jpg'))
-            style="background-image: url('{{ url('files/img/torrent-cover_' . $cartoon->id . '.jpg') }}');">
+            @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoone->id.'.jpg'))
+            style="background-image: url('{{ url('files/img/torrent-cover_' . $cartoone->id . '.jpg') }}');">
             @else
             style="background-image: url('/img/SLOshare/movie_no_image_holder_400x600.jpg');">
             @endif
@@ -407,24 +407,24 @@
 
 				<div class="release-info">
 
-				    @if ($cartoon->free == '1' || $cartoon->free >= '90' || $cartoon->free < '90' && $cartoon->free >= '30' || $cartoon->free < '30' && $cartoon->free != '0' || config('other.freeleech') == '1')
-					<a href="{{ route('categories.show', ['id' => $cartoon->category->id]) }}" class="release-info-quality quality-sloshare">{{ $cartoon->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+				    @if ($cartoone->free == '1' || $cartoone->free >= '90' || $cartoone->free < '90' && $cartoone->free >= '30' || $cartoone->free < '30' && $cartoone->free != '0' || config('other.freeleech') == '1')
+					<a href="{{ route('categories.show', ['id' => $cartoone->category->id]) }}" class="release-info-quality quality-sloshare">{{ $cartoone->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					@else
-					<a href="{{ route('categories.show', ['id' => $cartoon->category->id]) }}" class="release-info-quality quality-sloshare">{{ $cartoon->category->name }}</a>
+					<a href="{{ route('categories.show', ['id' => $cartoone->category->id]) }}" class="release-info-quality quality-sloshare">{{ $cartoone->category->name }}</a>
                     @endif
 
-					<a href="{{ route('torrent', ['id' => $cartoon->id]) }}"title="{{ $cartoon->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($cartoon->name, 50))</a>
+					<a href="{{ route('torrent', ['id' => $cartoone->id]) }}"title="{{ $cartoone->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($cartoone->name, 50))</a>
 					<div class="release-info-container">
-						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $cartoon->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $cartoon->comments_count }}</span></div>
+						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $cartoone->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $cartoone->comments_count }}</span></div>
 
-						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $cartoon->created_at->getTimestamp()) }} | {{ date('H:m', $cartoon->created_at->getTimestamp()) }}</div>
-						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $cartoon->user->username }}</div>
+						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $cartoone->created_at->getTimestamp()) }} | {{ date('H:m', $cartoone->created_at->getTimestamp()) }}</div>
+						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $cartoone->user->username }}</div>
 					</div>
 					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $cartoon->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $cartoon->getSize() }}</a>
+						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $cartoon->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $cartoone->getSize() }}</a>
 						<div style="float: right;">
-							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $cartoon->seeders }}</span>
-							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $cartoon->leechers }}</span>
+							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $cartoone->seeders }}</span>
+							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $cartoone->leechers }}</span>
 						</div>
 					</div>
 				</div>
