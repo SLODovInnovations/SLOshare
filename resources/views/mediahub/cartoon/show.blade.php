@@ -16,7 +16,7 @@
     </li>
     <li class="breadcrumbV2">
         <a href="{{ route('mediahub.cartoon.index') }}" class="breadcrumb__link">
-            {{ __('mediahub.cartoon') }}
+            {{ __('mediahub.cartoons') }}
         </a>
     </li>
     <li class="breadcrumb--active">
