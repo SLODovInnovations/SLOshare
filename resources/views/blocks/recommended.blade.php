@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="#recommended-cartoons" role="tab" data-toggle="tab" aria-expanded="true">
+                <a href="#recommended-cartoones" role="tab" data-toggle="tab" aria-expanded="true">
                     <i class="{{ config('other.font-awesome') }} fa-baby"></i> {{ __('sloshare.home-cartoons-title') }}
                 </a>
             </li>

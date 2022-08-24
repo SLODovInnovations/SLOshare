@@ -210,7 +210,7 @@ class HomeController extends Controller
             'tvserie'            => $tvserie,
             'game'               => $game,
             'applications'       => $applications,
-            'cartoones'           => $cartoones,
+            'cartoones'          => $cartoones,
             'newsloshare'        => $newsloshare,
             'slorecommended'     => $slorecommended,
             'videorecommended'   => $videorecommended,
