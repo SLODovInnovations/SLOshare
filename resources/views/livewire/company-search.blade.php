@@ -18,7 +18,7 @@
                     <span></span>
                     <h2 style="font-size: 14px;"><i
                                 class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ $company->tv_count }}
-                        Shows | {{ $company->movie_count }} Movies</h2>
+                        TV Serije | {{ $company->movie_count }} Filmi | {{ $company->cartoon_count }} Risanke</h2>
                 </div>
             </a>
         @endforeach
