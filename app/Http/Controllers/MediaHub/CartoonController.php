@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class CartoonController extends Controller
 {
     /**
-     * Display All Movies.
+     * Display All Cartoon.
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
