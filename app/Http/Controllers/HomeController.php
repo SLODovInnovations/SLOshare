@@ -92,7 +92,7 @@ class HomeController extends Controller
             ->take(20)
             ->get());
 
-        $cartoons = \cache()->remember('cartoons_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
+        $cartoones = \cache()->remember('cartoones_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
             ->where('category_id', '=', 3)
             ->latest()
@@ -210,7 +210,7 @@ class HomeController extends Controller
             'tvserie'            => $tvserie,
             'game'               => $game,
             'applications'       => $applications,
-            'cartoons'           => $cartoons,
+            'cartoones'           => $cartoones,
             'newsloshare'        => $newsloshare,
             'slorecommended'     => $slorecommended,
             'videorecommended'   => $videorecommended,
