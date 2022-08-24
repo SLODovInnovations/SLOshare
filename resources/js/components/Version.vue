@@ -31,7 +31,7 @@ export default {
                             showCancelButton: true,
                             showConfirmButton: true,
                             confirmButtonText: '<i class="fa fa-github"></i> Prenesi iz GitLaba - SLOshare',
-                            html: `New version <a href="github.com/SLODovInnovations/SLOshare/releases">${response.data.latestversion} </a> je na voljo`,
+                            html: `Nova verzija <a href="github.com/SLODovInnovations/SLOshare/releases">${response.data.latestversion} </a> je na voljo`,
                         }).then((result) => {
                             if (result.value) {
                                 window.location.assign('//github.com/SLODovInnovations/SLOshare/releases');
