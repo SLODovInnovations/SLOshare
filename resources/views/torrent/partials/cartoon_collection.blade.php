@@ -9,8 +9,8 @@
                 <section class="collection">
                     <h2>Part of the {{ $meta->collection['0']->name }}</h2>
                     <p class="text-blue">Includes:
-                        @foreach($meta->collection['0']->cartoon as $collection_cartoon)
-                            {{ $collection_cartoon->title }},
+                        @foreach($meta->collection['0']->cartoon as $cartoon_collection)
+                            {{ $cartoon_collection->title }},
                         @endforeach
                     </p>
 
