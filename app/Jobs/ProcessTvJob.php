@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\Cast;
+use App\Models\Collection;
 use App\Models\Company;
 use App\Models\Crew;
 use App\Models\Episode;
