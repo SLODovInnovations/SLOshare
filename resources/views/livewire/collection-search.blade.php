@@ -21,8 +21,8 @@
                                 {{ $collection_tv->title }},
                             @endforeach
 
-                            @foreach($collection->cartoon as $collection_cartoon)
-                                {{ $collection_cartoon->title }},
+                            @foreach($collection->cartoon as $cartoon_collection)
+                                {{ $cartoon_collection->title }},
                             @endforeach
                         </p>
 
