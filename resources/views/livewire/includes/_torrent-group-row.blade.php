@@ -19,7 +19,7 @@
                     {{ \preg_replace('/^.*( S\d{2,4} | S\d{2,4}(?:E\d{2,4})*? |  S\d{2,4}E\d{2,4}-E\d{2,4} | \d{4}-\d{2}-\d{2} | \d{4}-\d{2} | '.(substr($meta->first_air_date ?? '0', 0, 4) - 1).' | '.substr($meta->first_air_date ?? '0', 0, 4).' | '.(substr($meta->first_air_date ?? '0', 0, 4) + 1).' )/i', '', $torrent->name) }}
                     @break
                     @case('cartoon')
-                    {{ \preg_replace('/^.*( S\d{2,4} | S\d{2,4}(?:E\d{2,4})*? |  S\d{2,4}E\d{2,4}-E\d{2,4} | \d{4}-\d{2}-\d{2} | \d{4}-\d{2} | '.(substr($meta->first_air_date ?? '0', 0, 4) - 1).' | '.substr($meta->first_air_date ?? '0', 0, 4).' | '.(substr($meta->first_air_date ?? '0', 0, 4) + 1).' )/i', '', $torrent->name) }}
+                    {{ \preg_replace('/^.*( '.(substr($meta->release_date ?? '0', 0, 4) - 1).' | '.substr($meta->release_date ?? '0', 0, 4).' | '.(substr($meta->release_date ?? '0', 0, 4) + 1).' )/i', '', $torrent->name) }}
                     @break
                 @endswitch
             </a>
