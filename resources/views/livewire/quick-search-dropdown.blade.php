@@ -38,13 +38,13 @@
                     type="radio"
                     class="quick-search__radio"
                     name="quicksearchRadio"
-                    value="serije"
+                    value="risanke"
                     wire:model="quicksearchRadio"
                     x-on:click="$nextTick(() => $refs.quickSearch.focus());"
                 />
                 <i
                     class="quick-search__radio-icon {{ \config('other.font-awesome') }} fa-baby"
-                    title="{{ __('mediahub.shows') }}"
+                    title="{{ __('mediahub.cartoons') }}"
                 ></i>
             </label>
             <label class="quick-search__radio-label">
