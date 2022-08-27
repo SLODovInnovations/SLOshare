@@ -12,7 +12,7 @@ class Cartoon extends Model
 
     public function genres(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Genre::class);
+        return $this->belongsToMany(Genre::class, 'genre_id', 'cartoon_id');
     }
 
     public function cast(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -37,7 +37,7 @@ class Cartoon extends Model
 
     public function collection(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Collection::class)->take(1);
+        return $this->belongsToMany(Collection::class, 'collection_id', 'cartoon_id')->take(1);
     }
 
     public function recommendations(): \Illuminate\Database\Eloquent\Relations\HasMany
