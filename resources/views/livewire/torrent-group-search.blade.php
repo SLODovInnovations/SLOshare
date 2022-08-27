@@ -920,6 +920,7 @@
                         <a
                                 @switch($media->meta)
                                 @case('movie')
+                                @case('cartoon')
                                 @case('tv')
                                 href="{{ route('torrents.similar', ['category_id' => $media->torrents->first()->category_id, 'tmdb' => $media->tmdb]) }}"
                                 @endswitch
@@ -928,6 +929,7 @@
                             <img
                                     @switch($media->meta)
                                     @case ('movie')
+                                    @case ('cartoon')
                                     @case ('tv')
                                     src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
                                     @break
@@ -955,6 +957,9 @@
                                 @case('movie')
                                 {{ $meta->title }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
                                 @break
+                              @case('cartoon')
+                                {{ $meta->title }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
+                                @break
                                 @case('tv')
                                 {{ $meta->name }} (<time>{{ \substr($meta->first_air_date, 0, 4) ?? '' }}</time>)
                                 @break
@@ -965,6 +970,21 @@
                         @switch ($media->meta)
                             @case('movie')
                             @if(!empty($directors = (new App\Services\Tmdb\Client\Movie($media->tmdb))->get_crew()))
+                                <span class="torrent-search-grouped__directors-by">Avtor</span>
+                                @foreach(collect($directors)->where('job', 'Director') as $director)
+                                    <a href="{{ route('mediahub.persons.show', ['id' => $director['id']]) }}"
+                                       class="torrent-search--grouped__director"
+                                    >
+                                        {{ $director['name'] }}
+                                    </a>
+                                    @if (! $loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            @endif
+                            @break
+                            @case('cartoon')
+                            @if(!empty($directors = (new App\Services\Tmdb\Client\Cartoon($media->tmdb))->get_crew()))
                                 <span class="torrent-search-grouped__directors-by">Avtor</span>
                                 @foreach(collect($directors)->where('job', 'Director') as $director)
                                     <a href="{{ route('mediahub.persons.show', ['id' => $director['id']]) }}"
@@ -1008,6 +1028,7 @@
                     <p class="torrent-search--grouped__plot">
                         @switch (true)
                             @case($media->meta === 'movie')
+                            @case($media->meta === 'cartoon')
                             @case($media->meta === 'tv')
                             {{ $meta->overview }}
                             @break
@@ -1017,6 +1038,28 @@
                 <section>
                     @switch ($media->meta)
                         @case('movie')
+                        <table class="torrent-search--grouped__movie-torrents">
+                            @foreach ($media->torrents->sortBy('type.position')->values()->groupBy('type_id') as $torrentsByType)
+                                <tbody>
+                                @foreach ($torrentsByType->sortBy([['resolution.position', 'asc'], ['internal', 'desc'], ['size', 'desc']]) as $torrent)
+                                    <tr>
+                                        @if ($loop->first)
+                                            <th
+                                                    class="torrent-search--grouped__type"
+                                                    scope="rowgroup"
+                                                    rowspan="{{ $loop->count }}"
+                                            >
+                                                {{ $torrent->type->name }}
+                                            </th>
+                                        @endif
+                                        @include('livewire.includes._torrent-group-row')
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            @endforeach
+                        </table>
+                        @break
+                        @case('cartoon')
                         <table class="torrent-search--grouped__movie-torrents">
                             @foreach ($media->torrents->sortBy('type.position')->values()->groupBy('type_id') as $torrentsByType)
                                 <tbody>
