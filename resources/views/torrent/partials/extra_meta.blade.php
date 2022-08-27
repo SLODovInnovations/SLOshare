@@ -13,7 +13,7 @@
                    @click.prevent="tab = 'movie_collection'; window.location.hash = 'movie_collection'" href="#">{{ __('torrent.collection-of-movies') }}</a> |
             @endif
             @if($torrent->category->tv_meta)
-                <a :class="{ 'active': 'movie_collection' === tab }"
+                <a :class="{ 'active': 'mtv_collection' === tab }"
                    @click.prevent="tab = 'tv_collection'; window.location.hash = 'tv_collection'" href="#">{{ __('torrent.collection-of-tv') }}</a> |
             @endif
             @if($torrent->category->cartoon_meta)
