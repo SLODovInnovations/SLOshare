@@ -49,6 +49,7 @@
                                     In {{ $details->place_of_birth ?? '' }}
                                 </dd>
                                 <br>
+
                                 <dt><i class="fa fa-film text-green"
                                        aria-hidden="true"></i> {{ __('mediahub.movie-credits') }} </dt>
                                 <dd>{{ $credits->movie->count() ?? '0' }}</dd>
@@ -63,6 +64,22 @@
                                             href="{{ route('mediahub.movies.show', ['id' => $credits->movie->last()->id ?? '0']) }}">{{ $credits->movie->last()->title ?? 'N/A' }} </a>
                                 </dd>
                                 <br>
+
+                                <dt><i class="fa fa-film text-green"
+                                       aria-hidden="true"></i> {{ __('mediahub.cartoon-credits') }} </dt>
+                                <dd>{{ $credits->cartoon->count() ?? '0' }}</dd>
+                                <dt><i class="fa fa-step-backward text-green"
+                                       aria-hidden="true"></i> {{ __('mediahub.first-seen') }} </dt>
+                                <dd>In
+                                    <a href="{{ route('mediahub.cartoons.show', ['id' => $credits->cartoon->first()->id ?? '0']) }}">{{ $credits->cartoon->first()->title ?? 'N/A'}}</a>
+                                </dd>
+                                <dt><i class="fa fa-step-forward text-green"
+                                       aria-hidden="true"></i> {{ __('mediahub.latest-project') }} </dt>
+                                <dd>Last in <a
+                                            href="{{ route('mediahub.cartoons.show', ['id' => $credits->cartoon->last()->id ?? '0']) }}">{{ $credits->cartoon->last()->title ?? 'N/A' }} </a>
+                                </dd>
+                                <br>
+
                                 <dt><i class="fa fa-tv-retro text-green"
                                        aria-hidden="true"></i> {{ __('mediahub.tv-credits') }} </dt>
                                 <dd>{{ $credits->tv->count() ?? '0' }}</dd>
@@ -84,6 +101,7 @@
             </div>
         </div>
 
+<!-- Movie -->
         <div class="block">
             <table class="table table-striped clearfix">
                 <tbody>
@@ -130,7 +148,58 @@
                 </tbody>
             </table>
         </div>
+<!-- Movie -->
 
+<!-- Cartoon -->
+        <div class="block">
+            <table class="table table-striped clearfix">
+                <tbody>
+                @if(! empty($credits->cartoon))
+                    @if (count($credits->cartoon) <= 0)
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h1 class="text-blue">
+                                    <i class="{{ config('other.font-awesome') }} fa-frown text-blue"></i>No Data Found!
+                                </h1>
+                            </div>
+                        </div>
+                    @endif
+                    @foreach($credits->cartoon as $cartoon)
+                        <tr>
+                            <td class="col-sm-1">
+                                <img src="{{ isset($cartoon->poster) ? tmdb_image('poster_small', $cartoon->poster) : '/img/SLOshare/mediahub_no_image_90x135.jpg' }}"
+                                     alt="{{ $cartoon->name }}" class="img-responsive">
+                            </td>
+                            <td class="col-sm-5">
+                                <i class="fa fa-film text-purple" aria-hidden="true"></i>
+                                <strong>{{ __('mediahub.cartoon') }}</strong><br>
+                                <i class="fa fa-eye text-green" aria-hidden="true"></i> <a
+                                        href="{{ route('mediahub.cartoons.show', ['id' => $cartoon->id]) }}">{{ $cartoon->title }}</a><br>
+                                <i class="fa fa-tags text-red" aria-hidden="true"></i>
+                                <strong>
+                                    @if ($cartoon->genres)
+                                        @foreach ($cartoon->genres as $genre)
+                                            {{ $genre->name }}
+                                        @endforeach
+                                    @endif
+                                </strong>
+                                <br>
+                                <i class="fa fa-calendar text-blue" aria-hidden="true"></i>
+                                <strong>{{ __('mediahub.release-date') }} </strong>{{ $cartoon->release_date }}<br>
+                            </td>
+                            <td class="col-xs-pull-6"><i class="fa fa-book text-gold" aria-hidden="true"></i>
+                                <strong>{{ __('mediahub.plot') }} </strong>
+                                {{ $cartoon->overview }}
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+                </tbody>
+            </table>
+        </div>
+<!-- Cartoon -->
+
+<!-- Tv -->
         <div class="block">
             <table class="table table-striped clearfix">
                 <tbody>
@@ -177,5 +246,6 @@
                 </tbody>
             </table>
         </div>
+<!-- Tv -->
     </div>
 @endsection

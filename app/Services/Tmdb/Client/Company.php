@@ -120,4 +120,17 @@ class Company
 
         return $array;
     }
+    public function get_cartoons(): array
+    {
+        $array = [];
+        $this->page = 1;
+        while ($data = $this->data['cartoons'][$this->page++]) {
+            $json = \json_decode($data, true, 512, JSON_THROW_ON_ERROR);                                   //01
+            foreach ($json['results'] as $row) {
+                $array[] = $row;
+            }
+        }
+
+        return $array;
+    }
 }
