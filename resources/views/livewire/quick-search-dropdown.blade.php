@@ -122,6 +122,27 @@
                                     </h2>
                                 </a>
                             @break
+                            @case ("risanke")
+                                <a
+                                    class="quick-search__result-link"
+                                    href="{{ route('torrents.similar', ['category_id' => '2', 'tmdb' => $search_result->id]) }}"
+                                >
+                                    <img
+                                        class="quick-search__image"
+                                        src="{{ $search_result->poster }}"
+                                        alt="{{ __('torrent.poster') }}"
+                                    />
+                                    <h2 class="quick-search__result-text">
+                                        {{ $search_result->name }}
+                                        <time
+                                            class="quick-search__result-year"
+                                            datetime="{{ $search_result->first_air_date }}"
+                                        >
+                                            {{ substr($search_result->first_air_date, 0, 4) }}
+                                        </time>
+                                    </h2>
+                                </a>
+                            @break
                             @case ("igralci")
                                 <a
                                     class="quick-search__result-link"
