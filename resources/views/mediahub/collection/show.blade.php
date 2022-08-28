@@ -124,20 +124,20 @@
                                     <div class="item mini backdrop mini_card col-md-3">
                                         <div class="image_content">
                                             @php
-                                                $torrent_temp = App\Models\Torrent::where('tmdb', '=', show->id)
+                                                $torrent_temp = App\Models\Torrent::where('tmdb', '=', tv->id)
                                                 ->whereIn('category_id', function ($query) {
                                                 $query->select('id')->from('categories')->where('tv_meta', '=', true);
                                                 })->first()
                                             @endphp
-                                            <a href="{{ route('torrents.similar', ['category_id' => $torrent_temp->category_id, 'tmdb' => $how->id]) }}">
+                                            <a href="{{ route('torrents.similar', ['category_id' => $torrent_temp->category_id, 'tmdb' => $tv->id]) }}">
                                                 <div>
                                                     <img class="backdrop"
                                                          src="{{ tmdb_image('poster_mid', $show->poster) }}">
                                                 </div>
                                                 <div style=" margin-top: 8px;">
                                                     <span class="badge-extra"><i
-                                                                class="fas fa-calendar text-purple"></i> {{ __('common.year') }}: {{ substr($show->release_date, 0, 4) }}</span>
-                                                    <span class="badge-extra"><i class="fas fa-star text-gold"></i> {{ __('torrent.rating') }}: {{ $show->vote_average }}</span>
+                                                                class="fas fa-calendar text-purple"></i> {{ __('common.year') }}: {{ substr($tv->release_date, 0, 4) }}</span>
+                                                    <span class="badge-extra"><i class="fas fa-star text-gold"></i> {{ __('torrent.rating') }}: {{ $tv->vote_average }}</span>
                                                 </div>
                                             </a>
                                         </div>
