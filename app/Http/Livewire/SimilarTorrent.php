@@ -74,15 +74,15 @@ class SimilarTorrent extends Component
             });
         }
 
-        if ($category->tv_meta == true) {
-            $query = $query->whereHas('category', function ($q) {
-                $q->where('tv_meta', '=', true);
-            });
-        }
-
         if ($category->cartoon_meta == true) {
             $query = $query->whereHas('category', function ($q) {
                 $q->where('cartoon_meta', '=', true);
+            });
+        }
+
+        if ($category->tv_meta == true) {
+            $query = $query->whereHas('category', function ($q) {
+                $q->where('tv_meta', '=', true);
             });
         }
 
@@ -149,12 +149,12 @@ class SimilarTorrent extends Component
                         $title = Movie::find($torrent->tmdb);
                         $titles[] = $title->title.' ('.substr($title->release_date, 0, 4).')';
                         break;
-                    case 'tv':
-                        $title = Tv::find($torrent->tmdb);
-                        $titles[] = $title->name.' ('.substr($title->first_air_date, 0, 4).')';
-                        break;
                     case 'cartoon':
                         $title = Cartoon::find($torrent->tmdb);
+                        $titles[] = $title->name.' ('.substr($title->first_air_date, 0, 4).')';
+                        break;
+                    case 'tv':
+                        $title = Tv::find($torrent->tmdb);
                         $titles[] = $title->name.' ('.substr($title->first_air_date, 0, 4).')';
                         break;
                     default:
