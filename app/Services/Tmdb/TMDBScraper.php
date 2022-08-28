@@ -164,7 +164,7 @@ class TMDBScraper implements ShouldQueue
 
             ProcessCartoonJob::dispatch($cartoon, $id);
 
-            //return ['message' => 'Cartoon with id: ' . $id . ' Has been added  to the database, But relations are loaded with the queue'];
+            //return ['message' => 'Cartoons with id: ' . $id . ' Has been added  to the database, But relations are loaded with the queue'];
         }
     }
 
