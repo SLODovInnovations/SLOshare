@@ -237,6 +237,21 @@ theMovieDb.account = {
             error
         );
     },
+    getFavoritesCartoons: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'account/' + options.id + '/favorite/movies' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
     getFavoritesTvShows: function (options, success, error) {
         'use strict';
 
@@ -298,6 +313,21 @@ theMovieDb.account = {
             error
         );
     },
+    getRatedCartoons: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'account/' + options.id + '/rated/movies' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
     getRatedTvShows: function (options, success, error) {
         'use strict';
 
@@ -329,6 +359,21 @@ theMovieDb.account = {
         );
     },
     getMovieWatchlist: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'account/' + options.id + '/watchlist/movies' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getCartoonWatchlist: function (options, success, error) {
         'use strict';
 
         theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
@@ -476,6 +521,21 @@ theMovieDb.certifications = {
             error
         );
     },
+    getCartoonList: function (success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 2);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'certification/movie/list' + theMovieDb.common.generateQuery(),
+            },
+            success,
+            error
+        );
+    },
     getTvList: function (success, error) {
         'use strict';
 
@@ -495,6 +555,21 @@ theMovieDb.certifications = {
 
 theMovieDb.changes = {
     getMovieChanges: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'movie/changes' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getCartoonChanges: function (options, success, error) {
         'use strict';
 
         theMovieDb.common.validateRequired(arguments, 3, '', '', true);
@@ -656,6 +731,21 @@ theMovieDb.discover = {
             error
         );
     },
+    getCartoons: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'discover/movie' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
     getTvShows: function (options, success, error) {
         'use strict';
 
@@ -722,6 +812,36 @@ theMovieDb.genres = {
             error
         );
     },
+    getCartoonList: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'genre/movie/list' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getCartoons: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'genre/' + options.id + '/movies' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
     getTvList: function (options, success, error) {
         'use strict';
 
@@ -741,6 +861,21 @@ theMovieDb.genres = {
 
 theMovieDb.guestSession = {
     getRatedMovies: function (success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'guest_session/' + options.id + '/rated/movies' + theMovieDb.common.generateQuery(),
+            },
+            success,
+            error
+        );
+    },
+    getRatedCartoons: function (success, error) {
         'use strict';
 
         theMovieDb.common.validateRequired(arguments, 3, ['id']);
@@ -804,6 +939,21 @@ theMovieDb.keywords = {
         );
     },
     getMovies: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'keyword/' + options.id + '/movies' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getCartoons: function (options, success, error) {
         'use strict';
 
         theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
@@ -1426,6 +1576,21 @@ theMovieDb.people = {
             error
         );
     },
+    getCartoonCredits: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'person/' + options.id + '/movie_credits' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
     getTvCredits: function (options, success, error) {
         'use strict';
 
@@ -1592,6 +1757,21 @@ theMovieDb.search = {
         theMovieDb.common.client(
             {
                 url: 'search/collection' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getCartoon: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['query']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'search/movie' + theMovieDb.common.generateQuery(options),
             },
             success,
             error
