@@ -125,7 +125,7 @@
                             @case ("risanke")
                                 <a
                                     class="quick-search__result-link"
-                                    href="{{ route('torrents.similar', ['category_id' => '2', 'tmdb' => $search_result->id]) }}"
+                                    href="{{ route('torrents.similar', ['category_id' => '1', 'tmdb' => $search_result->id]) }}"
                                 >
                                     <img
                                         class="quick-search__image"
@@ -133,12 +133,12 @@
                                         alt="{{ __('torrent.poster') }}"
                                     />
                                     <h2 class="quick-search__result-text">
-                                        {{ $search_result->name }}
+                                        {{ $search_result->title }}
                                         <time
                                             class="quick-search__result-year"
-                                            datetime="{{ $search_result->first_air_date }}"
+                                            datetime="{{ $search_result->release_date }}"
                                         >
-                                            {{ substr($search_result->first_air_date, 0, 4) }}
+                                            {{ substr($search_result->release_date, 0, 4) }}
                                         </time>
                                     </h2>
                                 </a>
