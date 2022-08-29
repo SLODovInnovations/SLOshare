@@ -957,7 +957,7 @@
                                 @case('movie')
                                 {{ $meta->title }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
                                 @break
-                              @case('cartoon')
+                                @case('cartoon')
                                 {{ $meta->title }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
                                 @break
                                 @case('tv')
