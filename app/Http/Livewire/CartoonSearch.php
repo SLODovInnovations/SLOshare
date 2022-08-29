@@ -27,7 +27,7 @@ class CartoonSearch extends Component
         $this->resetPage();
     }
 
-    final public function getCartoonProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    final public function getCartoonsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         return Cartoon::query()
             ->with(['companies', 'genres'])
