@@ -20,18 +20,8 @@ class Collection extends Model
         return $this->hasMany(Comment::class, 'collection_id');
     }
 
-    public function tv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Tv::class);
-    }
-
     public function movie(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Movie::class);
-    }
-
-    public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Cartoon::class);
     }
 }
