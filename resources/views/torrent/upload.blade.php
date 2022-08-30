@@ -264,7 +264,7 @@
                                 x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon') ? '{{ $tmdb ?: old('tmdb') }}' : '0'"
                                 x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'"
                             >
-                            <label class="form__label form__label--floating" for="autotmdb">TMDB ID/label>
+                            <label class="form__label form__label--floating" for="autotmdb">TMDB ID</label>
                             <output name="apimatch" id="apimatch" for="torrent"></output>
                         </p>
                         <p class="form__group">
@@ -295,7 +295,7 @@
                             >
                             <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
                         </p>
-                        <p class="form__group">
+                        <!--<p class="form__group">
                             <input type="hidden" name="mal" value="0" />
                             <input
                                 type="text"
@@ -308,7 +308,9 @@
                                 placeholder=""
                             >
                             <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
-                        </p>
+                        </p>-->
+                        <input type="hidden" name="mal" value="0" />
+
                     </div>
                     <p class="form__group" x-show="cats[cat].type === 'game'">
                         <input
@@ -359,7 +361,7 @@
                             BDInfo (Quick Summary)
                         </label>
                     </p>-->
-                    <p class="form__group">
+                    <!--<p class="form__group">
                         <input type="hidden" name="anonymous" value="0">
                         <input
                             type="checkbox"
@@ -370,8 +372,9 @@
                             @checked(old('anonymous'))
                         >
                         <label for="anonymous">{{ __('common.anonymous') }}?</label>
-                    </p>
-                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
+                    </p>-->
+                    <input type="hidden" name="anonymous" value="0">
+                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
                         <input type="hidden" name="stream" value="0">
                         <input
                             type="checkbox"
@@ -382,8 +385,9 @@
                             @checked(old('stream'))
                         >
                         <label for="stream">{{ __('torrent.stream-optimized') }}?</label>
-                    </p>
-                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
+                    </p>-->
+                    <input type="hidden" name="stream" value="0">
+                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
                         <input type="hidden" name="sd" value="0">
                         <input
                             type="checkbox"
@@ -394,7 +398,8 @@
                             @checked(old('sd'))
                         >
                         <label for="sd">{{ __('torrent.sd-content') }}?</label>
-                    </p>
+                    </p>-->
+                    <input type="hidden" name="sd" value="0">
                     @if (auth()->user()->group->is_modo || auth()->user()->group->is_internal)
                         <p class="form__group">
                             <input type="hidden" name="internal" value="0">
@@ -411,7 +416,7 @@
                     @else
                         <input type="hidden" name="internal" value="0">
                     @endif
-                    <p class="form__group">
+                    <!--<p class="form__group">
                         <input type="hidden" name="personal_release" value="0">
                         <input
                             type="checkbox"
@@ -422,7 +427,8 @@
                             @checked(old('personal_release'))
                         >
                         <label for="personal_release">Personal Release?</label>
-                    </p>
+                    </p>-->
+                    <input type="hidden" name="personal_release" value="0">
                     @if (auth()->user()->group->is_modo || auth()->user()->group->is_internal)
                         <p class="form__group">
                             <select name="free" id="free" class="form__select">
