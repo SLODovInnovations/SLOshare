@@ -117,8 +117,8 @@
                             </a>
                         </span>
                     @endforeach
-                @endif
-            </div>-->
+                @endif-->
+            </div>
 
             <div class="movie-details">
                 @if(isset($meta) && !empty(trim($meta->homepage)))
