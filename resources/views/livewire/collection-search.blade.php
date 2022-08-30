@@ -16,14 +16,6 @@
                             @foreach($collection->movie as $collection_movie)
                                 {{ $collection_movie->title }},
                             @endforeach
-
-                            @foreach($collection->tv as $collection_tv)
-                                {{ $collection_tv->title }},
-                            @endforeach
-
-                            @foreach($collection->cartoon as $cartoon_collection)
-                                {{ $cartoon_collection->title }},
-                            @endforeach
                         </p>
 
                         <a href="{{ route('mediahub.collections.show', ['id' => $collection->id]) }}" role="button"
