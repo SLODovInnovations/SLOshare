@@ -118,7 +118,7 @@
                     </span>
                 @endif
 
-                <br>
+                <!--<br>
                 @if (isset($meta->genres) && $meta->genres->isNotEmpty())
                     @foreach ($meta->genres as $genre)
                         <span class="badge-user text-bold text-green">
@@ -127,9 +127,9 @@
                     </a>
                 </span>
                     @endforeach
-                @endif
+                @endif-->
 
-                <br>
+                <!--<br>
                 @if ($torrent->keywords)
                     @foreach ($torrent->keywords as $keyword)
                         <span class="badge-user text-bold text-green">
@@ -138,7 +138,7 @@
                             </a>
                         </span>
                     @endforeach
-                @endif
+                @endif-->
             </div>
 
             <div class="movie-details">
