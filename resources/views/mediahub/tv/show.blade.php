@@ -16,7 +16,7 @@
     </li>
     <li class="breadcrumbV2">
         <a href="{{ route('mediahub.shows.index') }}" class="breadcrumb__link">
-            TV Shows
+            TV Serija
         </a>
     </li>
     <li class="breadcrumb--active">
