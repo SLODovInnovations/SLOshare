@@ -34,6 +34,12 @@ class CollectionSearch extends Component
             ->where('name', 'LIKE', '%'.$this->search.'%')
             ->oldest('name')
             ->paginate(25);
+
+        return Collection::withCount('cartoon')
+            ->with('cartoon')
+            ->where('name', 'LIKE', '%'.$this->search.'%')
+            ->oldest('name')
+            ->paginate(25);
     }
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
