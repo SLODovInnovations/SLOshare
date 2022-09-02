@@ -70,15 +70,8 @@
         </li>
         <li>
             <button type="button" class="form__standard-icon-button" x-on:click="insert('[video=&quot;youtube&quot;]', '[/video]')">
-                <abbr title="Dodaj YouTube">
+                <abbr title="Insert YouTube">
                     <i class="fab fa-youtube"></i>
-                </abbr>
-            </button>
-        </li>
-        <li>
-            <button type="button" class="form__standard-icon-button" x-on:click="insert('[video=&quot;vimeo&quot;]', '[/vimeo]')">
-                <abbr title="Dodaj Vimeo">
-                    <i class="{{ config('other.font-awesome') }} fa-vimeo"></i>
                 </abbr>
             </button>
         </li>

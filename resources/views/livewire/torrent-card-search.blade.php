@@ -197,6 +197,11 @@
                                      class="show-poster" alt="{{ __('torrent.poster') }}">
                             @endif
 
+                            @if ($torrent->category->cartoon_meta)
+                                <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_200x300.jpg' }}"
+                                     class="show-poster" alt="{{ __('torrent.poster') }}">
+                            @endif
+
                             @if ($torrent->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                                 <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{ $meta->cover['image_id'] }}.jpg"
                                      class="show-poster"
