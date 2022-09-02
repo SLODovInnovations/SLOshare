@@ -78,7 +78,7 @@
         <li>
             <button type="button" class="form__standard-icon-button" x-on:click="insert('[video=&quot;vimeo&quot;]', '[/vimeo]')">
                 <abbr title="Dodaj Vimeo">
-                    <i class="{{ config('other.font-awesome') }} fa-vimeo"></i>
+                    <i class="fab fa-vimeo-v"></i>
                 </abbr>
             </button>
         </li>

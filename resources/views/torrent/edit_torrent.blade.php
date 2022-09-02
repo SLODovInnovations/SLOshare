@@ -229,12 +229,7 @@
                         </div>
                     @endif
 
-                    <div class="form-group">
-                        <label for="description">{{ __('common.description') }}</label>
-                        <label for="upload-form-description"></label>
-                        <textarea id="editor" name="description" cols="30" rows="10"
-                                  class="form-control">{{ $torrent->description }}</textarea>
-                    </div>
+                    @livewire('bbcode-input', ['name' => 'description', 'label' => __('common.description') ])
 
                     <!--<div class="form-group">
                         <label for="description">{{ __('torrent.media-info') }}</label>
