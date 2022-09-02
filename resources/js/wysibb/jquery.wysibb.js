@@ -27,8 +27,7 @@ WBBLANG['en'] = CURLANG = {
     fs_big: 'Big',
     fs_verybig: 'Very big',
     smilebox: 'Insert emoticon',
-    video: 'Dodaj YouTube',
-    videovimeo: 'Dodaj Vimeo',
+    video: 'Insert YouTube',
     removeFormat: 'Remove Format',
 
     modal_link_title: 'Insert link',
@@ -354,44 +353,6 @@ wbbdebug = true;
                     transform: {
                         '<iframe src="https://www.youtube-nocookie.com/embed/{SRC}?rel=0" width="640" height="480" frameborder="0"></iframe>':
                             '[video="youtube"]{SRC}[/video]',
-                    },
-                },
-
-                videovimeo: {
-                    title: CURLANG.videovimeo,
-                    buttonHTML: '<span class="fonticon ve-tlb-video1">\uE008</span>',
-                    modal: {
-                        title: CURLANG.videovimeo,
-                        width: '600px',
-                        tabs: [
-                            {
-                                title: CURLANG.videovimeo,
-                                input: [{ param: 'SRC', title: CURLANG.modal_video_text }],
-                            },
-                        ],
-                        onSubmit: function (cmd, opt, queryState) {
-                            let url = this.$modal.find('input[name="SRC"]').val();
-                            if (url) {
-                                url = url.replace(/^\s+/, '').replace(/\s+$/, '');
-                            }
-                            let a;
-                            if (url.indexOf('vimeo.com') != -1) {
-                                a = url.match(/^http[s]*:\/\/vimeo\.com\/([a-z0-9_-]+)/i);
-                            } else {
-                                a = url.match(/^http[s]*:\/\/vimeo\.com\/watch\?.*?v=([a-z0-9_-]+)/i);
-                            }
-                            if (a && a.length == 2) {
-                                let code = a[1];
-                                this.insertAtCursor(this.getCodeByCommand(cmd, { src: code }));
-                            }
-                            this.closeModal();
-                            this.updateUI();
-                            return false;
-                        },
-                    },
-                    transform: {
-                        '<iframe src="//player.vimeo.com/video/{IDENTIFIER}{SRC}?title=1&byline=1&portrait=1" width="640" height="480" frameborder="0"></iframe>':
-                            '[video="vimeo"]{SRC}[/video]',
                     },
                 },
 
