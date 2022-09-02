@@ -363,6 +363,19 @@ class BBCodeConverter
     }
 
     /**
+     * @brief Replace BBCode Vimeo.
+     */
+    protected function replaceVimeo(): void
+    {
+        $this->text = \preg_replace_callback('#\[vimeo\]([\W\D\w\s]*?)\[/vimeo\]#iu',
+
+            fn ($matches) => '<iframe src="//player.vimeo.com/video/{IDENTIFIER}?title=1&byline=1&portrait=1" width="640" height="480" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
+
+            $this->text
+        );
+    }
+
+    /**
      * @brief Replace BBCode Alert.
      */
     protected function replaceAlert(): void
