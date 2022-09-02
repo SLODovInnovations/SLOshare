@@ -192,7 +192,7 @@
                     </div>
                     <div class="card_body">
                         <div class="body_poster">
-                            @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                            @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                                 <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/mediahub_no_image_200x300.jpg' }}"
                                      class="show-poster" alt="{{ __('torrent.poster') }}">
                             @endif

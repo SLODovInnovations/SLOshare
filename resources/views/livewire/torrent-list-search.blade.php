@@ -220,7 +220,7 @@
                         <td class="torrent-listings-poster" style="width: 1%;">
 
                                 <div class="torrent-poster pull-left">
-                                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                                         <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
                                              class="torrent-poster-img-small" loading="lazy" alt="{{ __('torrent.poster') }}">
                                     @endif
