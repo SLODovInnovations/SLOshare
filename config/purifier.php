@@ -36,6 +36,10 @@ return [
             'HTML.SafeIframe'      => 'true',
             'URI.SafeIframeRegexp' => '%^(http://|https://|//)(www.youtube-nocookie.com/embed/)%',
         ],
+        'youtube' => [
+            'HTML.SafeIframe'      => 'true',
+            'URI.SafeIframeRegexp' => '%^(http://|https://|//)(player.vimeo.com/video/)%',
+        ],
         'custom_definition' => [
             'id'       => 'html5-definitions',
             'rev'      => 1,
