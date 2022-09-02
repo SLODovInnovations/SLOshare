@@ -37,7 +37,7 @@ class Cartoon extends Model
 
     public function collection(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Collection::class)->take(1);
+        return $this->belongsToMany(Collection::class)->take(2);
     }
 
     public function recommendations(): \Illuminate\Database\Eloquent\Relations\HasMany

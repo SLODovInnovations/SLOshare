@@ -24,4 +24,9 @@ class Collection extends Model
     {
         return $this->belongsToMany(Movie::class);
     }
+
+    public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Cartoon::class);
+    }
 }
