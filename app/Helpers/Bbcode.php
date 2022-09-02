@@ -66,10 +66,9 @@ class Bbcode
             'closeHtml'   => '</s>',
         ],
         'size' => [
-            'openBbcode'  => '/^\[size=(\d+)\]/i',
-            'closeBbcode' => '[/size]',
-            'openHtml'    => '<span style="font-size: clamp(10px, $1, 100px);">',
-            'closeHtml'   => '</span>',
+            'pattern' => '/\[size\=(.*?)\](.*?)\[\/size\]/s',
+            'replace' => '<span style="font-size: $1px;">$2</span>',
+            'content' => '$2',
         ],
         'font' => [
             'openBbcode'  => '/^\[font=([a-z0-9 ]+)\]/i',
