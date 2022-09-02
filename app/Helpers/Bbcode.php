@@ -250,6 +250,11 @@ class Bbcode
             fn ($matches) => '<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/'.\htmlspecialchars($matches[1]).'?rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
             $source
         );
+        $source = \preg_replace_callback(
+            '/\[vimeo\](.*?)\[\/vimeo\]/i',
+            fn ($matches) => '<iframe width="560" height="315" src="//player.vimeo.com/video/{IDENTIFIER}?title=1&byline=1&portrait=1" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
+            $source
+        );
 
         // Stack of unclosed elements
         $openedElements = [];
