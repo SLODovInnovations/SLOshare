@@ -424,6 +424,7 @@ class BBCodeConverter
         $this->replaceColor();
         $this->replaceVideo();
         $this->replaceYoutube();
+        $this->replaceVimeo();
         $this->replaceAlert();
         $this->replaceNote();
 
