@@ -54,6 +54,11 @@
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
             @endif
 
+			@if ($seed->category->cartoon_meta)
+			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
+			        class="show-poster" alt="{{ __('torrent.poster') }}>
+            @endif
+
             @if ($seed->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                 style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
                     class="show-poster"  alt="{{ __('torrent.poster') }}>
@@ -140,10 +145,15 @@
     							@php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($leech->igdb); @endphp
     						@endif
     					@endif
-            <div class="item mini backdrop mini_card">
+            <div class="item mini backdrop mini_card">cartoon_no_image_400x600.jpg
     			<div class="gallery-item"
 			@if ($leech->category->movie_meta || $leech->category->tv_meta || $leech->category->cartoon_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+			        class="show-poster" alt="{{ __('torrent.poster') }}>
+            @endif
+
+			@if ($leech->category->cartoon_meta)
+			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
             @endif
 
