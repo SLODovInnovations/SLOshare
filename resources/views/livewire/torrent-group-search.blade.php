@@ -929,11 +929,9 @@
                             <img
                                     @switch($media->meta)
                                     @case ('movie')
+                                    @case ('cartoon')
                                     @case ('tv')
                                     src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
-                                    @break
-                                    @case ('cartoon')
-                                    src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_90x135.jpg' }}"
                                     @break
                                     @case ('game')
                                     src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
@@ -959,7 +957,7 @@
                                 @case('movie')
                                 {{ $meta->title }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
                                 @break
-                                @case('cartoon')
+                              @case('cartoon')
                                 {{ $meta->title }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
                                 @break
                                 @case('tv')
