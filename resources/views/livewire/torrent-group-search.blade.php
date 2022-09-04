@@ -930,14 +930,33 @@
                                     @switch($media->meta)
                                     @case ('movie')
                                     @case ('tv')
-                                    src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                        @if(file_exists(public_path().'/files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg'))
+                                            src="{{ url('files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg') }}"
+                                        @else
+                                            src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                        @endif
                                     @break
+
                                     @case ('cartoon')
-                                    src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_90x135.jpg' }}"
+                                        @if(file_exists(public_path().'/files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg'))
+                                            src="{{ url('files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg') }}"
+                                        @else
+                                            src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_90x135.jpg' }}"
+                                        @endif
                                     @break
+
                                     @case ('game')
                                     src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
                                     @break
+
+                                    @case ('music')
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg'))
+                                    src="{{ url('files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg') }}"
+                                    @else
+                                    src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                    @endif
+                                    @break
+
                                     @case ('no')
                                     @if(file_exists(public_path().'/files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg'))
                                     src="{{ url('files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg') }}"
@@ -946,7 +965,6 @@
                                     @endif
                                     @break
                                     @default
-                                    src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
                                     @endswitch
                                     alt="{{ __('torrent.poster') }}"
                             >
