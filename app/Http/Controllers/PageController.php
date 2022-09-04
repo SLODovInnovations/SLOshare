@@ -92,7 +92,7 @@ class PageController extends Controller
      */
     public function policys(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.policy');
+        return \view('page.policy', ['policys' => $policys]);
     }
 
     /**
