@@ -71,46 +71,28 @@
 			            <div class="gallery-item"
 			                @if ($newslo->category->movie_meta || $newslo->category->tv_meta)
 			                    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
-			                    alt="{{ $newslo->name }}">
-                            @else
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');"
-                                    alt="{{ $newslo->name }}">
-                                @endif
+			                    class="show-poster" alt="{{ $newslo->name }}>
                             @endif
 
 			                @if ($newslo->category->cartoon_meta)
 			                    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
-			                    alt="{{ $newslo->name }}">
-                            @else
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');"
-                                    alt="{{ $newslo->name }}">
-                                @endif
+			                    class="show-poster" alt="{{ $newslo->name }}>
                             @endif
 
                             @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                                 style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
-                                alt="{{ $newslo->name }}">
+                                class="show-poster" alt="{{ $newslo->name }}>
                             @endif
 
-                            @if ($newslo->category->no_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');"
-                                    alt="{{ $newslo->name }}">
-                                @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');"
-                                    alt="{{ $newslo->name }}">
-                                @endif
+                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');"
+                            @else
+                                style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');"
                             @endif
 
-			                @if ($newslo->category->music_meta)
+                            @if ($newslo->category->music_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');"
-                                    alt="{{ $newslo->name }}">
-                                @else
-                                    style="background-image: url('/img/SLOshare/music_no_image_400x600.jpg');"
-                                    alt="{{ $newslo->name }}">
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
                                 @endif
                             @endif
 

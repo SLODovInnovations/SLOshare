@@ -46,46 +46,28 @@
 			            <div class="gallery-item"
 			                @if ($seed->category->movie_meta || $seed->category->tv_meta)
 			                    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
-                                alt="{{ $seed->name }}">
-                            @else
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');"
-                                    alt="{{ $seed->name }}">
-                                @endif
+			                    class="show-poster" alt="{{ $seed->name }}>
                             @endif
 
 			                @if ($seed->category->cartoon_meta)
 			                    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
-			                    alt="{{ $seed->name }}">
-                            @else
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');"
-                                    alt="{{ $seed->name }}">
-                                @endif
+			                    class="show-poster" alt="{{ $seed->name }}>
                             @endif
 
                             @if ($seed->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                                 style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
-                                alt="{{ $seed->name }}">
+                                class="show-poster" alt="{{ $seed->name }}>
                             @endif
 
-                            @if ($seed->category->no_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');"
-                                    alt="{{ $seed->name }}">
-                                @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');"
-                                    alt="{{ $seed->name }}">
-                                @endif
+                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
+                                style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');"
+                            @else
+                                style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');"
                             @endif
 
-			                @if ($seed->category->music_meta)
+                            @if ($seed->category->music_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');"
-                                    alt="{{ $seed->name }}">
-                                @else
-                                    style="background-image: url('/img/SLOshare/music_no_image_400x600.jpg');"
-                                    alt="{{ $seed->name }}">
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');">
                                 @endif
                             @endif
 				            <div class="release-info">
@@ -156,46 +138,28 @@
 			            <div class="gallery-item"
 			                @if ($leech->category->movie_meta || $leech->category->tv_meta)
 			                    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
-                                alt="{{ $leech->name }}">
-                            @else
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');"
-                                    alt="{{ $leech->name }}">
-                                @endif
+			                    class="show-poster" alt="{{ $leech->name }}>
                             @endif
 
 			                @if ($leech->category->cartoon_meta)
 			                    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
-			                    alt="{{ $leech->name }}">
-                            @else
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');"
-                                    alt="{{ $leech->name }}">
-                                @endif
+			                    class="show-poster" alt="{{ $leech->name }}>
                             @endif
 
                             @if ($leech->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                                 style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
-                                alt="{{ $leech->name }}">
+                                class="show-poster" alt="{{ $leech->name }}>
                             @endif
 
-                            @if ($leech->category->no_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');"
-                                    alt="{{ $leech->name }}">
-                                @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');"
-                                    alt="{{ $leech->name }}">
-                                @endif
+                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
+                                style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');"
+                            @else
+                                style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');"
                             @endif
 
-			                @if ($leech->category->music_meta)
+                            @if ($leech->category->music_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');"
-                                    alt="{{ $leech->name }}">
-                                @else
-                                    style="background-image: url('/img/SLOshare/music_no_image_400x600.jpg');"
-                                    alt="{{ $leech->name }}">
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');">
                                 @endif
                             @endif
 				            <div class="release-info">
