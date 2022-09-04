@@ -73,14 +73,22 @@
                 @endif
             <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
-			@if ($newslo->category->movie_meta || $newslo->category->tv_meta || $newslo->category->cartoon_meta)
+			@if ($newslo->category->movie_meta || $newslo->category->tv_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
+            @else
+                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
+                @endif
             @endif
 
 			@if ($newslo->category->cartoon_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
+            @else
+                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
+                @endif
             @endif
 
             @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
@@ -88,16 +96,18 @@
                     class="show-poster"  alt="{{ __('torrent.poster') }}>
             @endif
 
-            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-            style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
-            @else
-            style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
+            @if ($newslo->category->no_meta)
+                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
+                @else
+                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
+                @endif
             @endif
 
 			@if ($newslo->category->music_meta)
-            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
-			@endif
+                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
+			    @endif
             @endif
 
 				<div class="release-info">
@@ -162,11 +172,9 @@
 			@if ($videos->tmdb != 0 && $videos->tmdb != null)
 			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg'; }}');">
             @else
-            @if(file_exists(public_path().'/files/img/torrent-cover_'.$videos->id.'.jpg'))
-            style="background-image: url('{{ url('files/img/torrent-cover_' . $videos->id . '.jpg') }}');">
-            @else
-            style="background-image: url('/img/SLOshare/movie_no_image_holder_400x600.jpg');">
-            @endif
+                @if(file_exists(public_path().'/files/img/torrent-cover_'.$videos->id.'.jpg'))
+                    style="background-image: url('{{ url('files/img/torrent-cover_' . $videos->id . '.jpg') }}');">
+                @endif
             @endif
 
 				<div class="release-info">
@@ -231,11 +239,9 @@
 			@if ($tv->tmdb != 0 && $tv->tmdb != null)
 			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg'; }}');">
             @else
-            @if(file_exists(public_path().'/files/img/torrent-cover_'.$tv->id.'.jpg'))
-            style="background-image: url('{{ url('files/img/torrent-cover_' . $tv->id . '.jpg') }}');">
-            @else
-            style="background-image: url('/img/SLOshare/movie_no_image_holder_400x600.jpg');">
-            @endif
+                @if(file_exists(public_path().'/files/img/torrent-cover_'.$tv->id.'.jpg'))
+                    style="background-image: url('{{ url('files/img/torrent-cover_' . $tv->id . '.jpg') }}');">
+                @endif
             @endif
 
 				<div class="release-info">
@@ -344,11 +350,11 @@
             <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
 			@if ($application->category->no_meta)
-            @if(file_exists(public_path().'/files/img/torrent-cover_'.$application->id.'.jpg'))
-            style="background-image: url('{{ url('files/img/torrent-cover_' . $application->id . '.jpg') }}');">
-            @else
-            style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
-            @endif
+                @if(file_exists(public_path().'/files/img/torrent-cover_'.$application->id.'.jpg'))
+                    style="background-image: url('{{ url('files/img/torrent-cover_' . $application->id . '.jpg') }}');">
+                @else
+                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
+                @endif
             @endif
 				<div class="release-info">
 
@@ -400,11 +406,9 @@
 			@if ($cartoone->tmdb != 0 && $cartoone->tmdb != null)
 			    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg'; }}');">
             @else
-            @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoone->id.'.jpg'))
-            style="background-image: url('{{ url('files/img/torrent-cover_' . $cartoone->id . '.jpg') }}');">
-            @else
-            style="background-image: url('/img/SLOshare/cartoon_no_image_400x600.jpg');">
-            @endif
+                @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoone->id.'.jpg'))
+                    style="background-image: url('{{ url('files/img/torrent-cover_' . $cartoone->id . '.jpg') }}');">
+                @endif
             @endif
 
 
@@ -455,11 +459,11 @@
             <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
 			@if ($application->category->no_meta)
-            @if(file_exists(public_path().'/files/img/torrent-cover_'.$x->id.'.jpg'))
-            style="background-image: url('{{ url('files/img/torrent-cover_' . $x->id . '.jpg') }}');">
-            @else
-            style="background-image: url('/img/SLOshare/movie_no_image_holder_400x600.jpg');">
-            @endif
+                @if(file_exists(public_path().'/files/img/torrent-cover_'.$x->id.'.jpg'))
+                    style="background-image: url('{{ url('files/img/torrent-cover_' . $x->id . '.jpg') }}');">
+                @else
+                    style="background-image: url('/img/SLOshare/movie_no_image_holder_400x600.jpg');">
+                @endif
             @endif
 				<div class="release-info">
                     @if ($x->free == '1' || $x->free >= '90' || $x->free < '90' && $x->free >= '30' || $x->free < '30' && $x->free != '0' || config('other.freeleech') == '1')
