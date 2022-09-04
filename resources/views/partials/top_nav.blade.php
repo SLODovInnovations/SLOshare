@@ -161,13 +161,13 @@
             </a>
             <ul>
                 <li>
-                    <a href="{{ route('policy') }}">
+                    <a href="{{ route('policys') }}">
                         <i class="{{ config('other.font-awesome') }} fa-info"></i>
                         {{ __('common.rules') }}
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('faq') }}">
+                    <a href="{{ route('faqs') }}">
                         <i class="{{ config('other.font-awesome') }} fa-question"></i>
                         {{ __('common.faq') }}
                     </a>
