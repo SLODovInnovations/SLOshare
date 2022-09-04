@@ -75,8 +75,9 @@
             @if ($seed->category->no_meta)
                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
                     style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');">
-            @else
-                style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
+                @else
+                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
+                @endif
             @endif
 
 			@if ($seed->category->music_meta)
