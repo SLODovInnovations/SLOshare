@@ -71,83 +71,91 @@
                         @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($newslo->igdb) @endphp
                     @endif
                 @endif
-            <div class="item mini backdrop mini_card">
-			<div class="gallery-item"
-			@if ($newslo->category->movie_meta || $newslo->category->tv_meta)
-			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
-			        class="show-poster" alt="{{ __('torrent.poster') }}>
-            @else
-                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
-                @endif
-            @endif
-
-			@if ($newslo->category->cartoon_meta)
-			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
-			        class="show-poster" alt="{{ __('torrent.poster') }}>
-            @else
-                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
-                @endif
-            @endif
-
-            @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
-                style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
-                    class="show-poster"  alt="{{ __('torrent.poster') }}>
-            @endif
-
-            @if ($newslo->category->no_meta)
-                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
-                @else
-                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
-                @endif
-            @endif
-
-			@if ($newslo->category->music_meta)
-                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
-			    @endif
-            @endif
-
-				<div class="release-info">
-
-				    @if ($newslo->free == '1' || $newslo->free >= '90' || $newslo->free < '90' && $newslo->free >= '30' || $newslo->free < '30' && $newslo->free != '0' || config('other.freeleech') == '1')
-					<a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
-					@else
-					<a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }}</a>
-                    @endif
-
-					<a href="{{ route('torrent', ['id' => $newslo->id]) }}"title="{{ $newslo->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($newslo->name, 50))</a>
-					<div class="release-info-container">
-						<div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $newslo->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $newslo->comments_count }}</span></div>
-
-						@if ($newslo->category->game_meta)
-						<div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
-						@endif
-                        @if ($newslo->tmdb != 0 && $newslo->tmdb != null)
-                        <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
+                <div class="item mini backdrop mini_card">
+			        <div class="gallery-item"
+			            @if ($newslo->category->movie_meta || $newslo->category->tv_meta)
+			                style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+			                class="show-poster" alt="{{ __('torrent.poster') }}>
+                        @else
+                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');"
+                                class="show-poster" alt="{{ __('torrent.poster') }}>
+                            @endif
                         @endif
 
-						<div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $newslo->created_at->getTimestamp()) }} | {{ date('H:m', $newslo->created_at->getTimestamp()) }}</div>
-						<div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $newslo->user->username }}</div>
-					</div>
-					<div class="release-info-rating">
-						<a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $newslo->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $newslo->getSize() }}</a>
-						<div style="float: right;">
-							<span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $newslo->seeders }}</span>
-							<span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $newslo->leechers }}</span>
-						</div>
-					</div>
-				</div>
-				<!--<span class="torrent-new" title="" data-title-tooltip></span>-->
-			</div>
-		</div>
-@endforeach
+			            @if ($newslo->category->cartoon_meta)
+			                style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
+			                class="show-poster" alt="{{ __('torrent.poster') }}>
+                        @else
+                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');"
+                                class="show-poster" alt="{{ __('torrent.poster') }}>
+                            @endif
+                        @endif
+
+                        @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
+                            style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
+                            class="show-poster"  alt="{{ __('torrent.poster') }}>
+                        @endif
+
+                        @if ($newslo->category->no_meta)
+                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');"
+                                class="show-poster" alt="{{ __('torrent.poster') }}>
+                            @else
+                                style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');"
+                                class="show-poster" alt="{{ __('torrent.poster') }}>
+                            @endif
+                        @endif
+
+			            @if ($newslo->category->music_meta)
+                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');"
+                                class="show-poster" alt="{{ __('torrent.poster') }}>
+                            @else
+                                style="background-image: url('/img/SLOshare/music_no_image_400x600.jpg');"
+                                class="show-poster" alt="{{ __('torrent.poster') }}>
+                            @endif
+                        @endif
+
+				        <div class="release-info">
+
+				        @if ($newslo->free == '1' || $newslo->free >= '90' || $newslo->free < '90' && $newslo->free >= '30' || $newslo->free < '30' && $newslo->free != '0' || config('other.freeleech') == '1')
+					        <a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+					    @else
+					        <a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }}</a>
+                        @endif
+
+					        <a href="{{ route('torrent', ['id' => $newslo->id]) }}"title="{{ $newslo->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($newslo->name, 50))</a>
+					        <div class="release-info-container">
+						        <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $newslo->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $newslo->comments_count }}</span></div>
+
+						        @if ($newslo->category->game_meta)
+						        <div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
+						        @endif
+                                @if ($newslo->tmdb != 0 && $newslo->tmdb != null)
+                                <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
+                                @endif
+
+						        <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $newslo->created_at->getTimestamp()) }} | {{ date('H:m', $newslo->created_at->getTimestamp()) }}</div>
+						        <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $newslo->user->username }}</div>
+					        </div>
+					        <div class="release-info-rating">
+						        <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $newslo->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $newslo->getSize() }}</a>
+						        <div style="float: right;">
+							        <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $newslo->seeders }}</span>
+							        <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $newslo->leechers }}</span>
+						        </div>
+					        </div>
+				        </div>
+				        <!--<span class="torrent-new" title="" data-title-tooltip></span>-->
+			        </div>
+		        </div>
+            @endforeach
 
             </div>
         </section>
-        </div>
+    </div>
 
 
 
@@ -159,7 +167,7 @@
 
 
 
-@foreach ($video as $videos)
+                @foreach ($video as $videos)
 
 					@php $meta = null; @endphp
 					@if ($videos->category->movie_meta)
