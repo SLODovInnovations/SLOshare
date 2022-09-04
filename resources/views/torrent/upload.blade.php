@@ -97,7 +97,7 @@
                         </label>
                         <input id="nfo" class="upload-form-file form__file" type="file" accept=".nfo" name="nfo">
                     </p>-->
-                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon' || cats[cat].type === 'no'">
+                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon' || cats[cat].type === 'music' || cats[cat].type === 'no'">
                         <label for="torrent-cover" class="form__label">
                             {{ __('torrent.banner') }} {{ __('torrent.file') }} ({{ __('torrent.optional') }})
                         </label>
