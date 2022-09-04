@@ -14,7 +14,7 @@
             @endif
             @if($torrent->category->cartoon_meta)
                 <a :class="{ 'active': 'cartoon_collection' === tab }"
-                   @click.prevent="tab = 'cartoon_collection'; window.location.hash = 'cartoon_collection'" href="#">{{ __('torrent.collection-of-cartoon') }}</a> |
+                   @click.prevent="tab = 'cartoon_collection'; window.location.hash = 'cartoon_collection'" href="#">{{ __('torrent.collection-of-cartoons') }}</a> |
             @endif
             @if($torrent->category->tv_meta)
                 <a :class="{ 'active': 'tv_collection' === tab }"
