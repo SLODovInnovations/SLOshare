@@ -17,7 +17,7 @@ return [
     'blacklist-browsers'    => 'Brskalniki',
     'blacklist-btclient'    => 'BitTorrent Client',
     'blacklist-clients'     => 'Stranke',
-    'blacklist-desc'        => 'Naslednji brskalniki in odjemalci Bittorrent so na črni listi / prepovedani iz objavljanja na :titles',
+    'blacklist-desc'        => 'Naslednji brskalniki in odjemalci Bittorrent so na črni listi / prepovedani iz objavljanja na :title',
     'blacklist-webbrowser'  => 'Spletni brskalnik',
     'blacklist-emaildomain' => 'Blokirana domena',
     'email-blacklist-desc'  => 'Naslednje E-Mail domene so blokirane. Ne morete se registrirati ali poslati povabila na naslednje.',
