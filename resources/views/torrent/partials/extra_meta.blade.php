@@ -12,6 +12,14 @@
                 <a :class="{ 'active': 'movie_collection' === tab }"
                    @click.prevent="tab = 'movie_collection'; window.location.hash = 'movie_collection'" href="#">{{ __('torrent.collection-of-movies') }}</a> |
             @endif
+            @if($torrent->category->cartoon_meta)
+                <a :class="{ 'active': 'cartoon_collection' === tab }"
+                   @click.prevent="tab = 'cartoon_collection'; window.location.hash = 'cartoon_collection'" href="#">{{ __('torrent.collection-of-cartoon') }}</a> |
+            @endif
+            @if($torrent->category->tv_meta)
+                <a :class="{ 'active': 'tv_collection' === tab }"
+                   @click.prevent="tab = 'tv_collection'; window.location.hash = 'tve_collection'" href="#">{{ __('torrent.collection-of-tv') }}</a> |
+            @endif
                 <a :class="{ 'active': 'playlists' === tab }"
                    @click.prevent="tab = 'playlists'; window.location.hash = 'playlists'" href="#">{{ __('torrent.playlists') }}</a>
             </nav>
@@ -24,6 +32,12 @@
     </div>
     <div x-show="tab === 'movie_collection'">
         @include('torrent.partials.movie_collection')
+    </div>
+    <div x-show="tab === 'cartoon_collection'">
+        @include('torrent.partials.cartoon_collection')
+    </div>
+    <div x-show="tab === 'tv_collection'">
+        @include('torrent.partials.tv_collection')
     </div>
     <div x-show="tab === 'playlists'">
         @include('torrent.partials.playlists')
