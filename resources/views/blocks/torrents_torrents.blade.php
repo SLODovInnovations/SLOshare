@@ -73,14 +73,22 @@
                 @endif
             <div class="item mini backdrop mini_card">
 			<div class="gallery-item"
-			@if ($newslo->category->movie_meta || $newslo->category->tv_meta || $newslo->category->cartoon_meta)
+			@if ($newslo->category->movie_meta || $newslo->category->tv_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
+            @else
+            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
+            @endif
             @endif
 
 			@if ($newslo->category->cartoon_meta)
 			    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
 			        class="show-poster" alt="{{ __('torrent.poster') }}>
+            @else
+            @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
+            @endif
             @endif
 
             @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
@@ -88,10 +96,11 @@
                     class="show-poster"  alt="{{ __('torrent.poster') }}>
             @endif
 
+            @if ($newslo->category->no_meta)
             @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-            style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
+                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');">
             @else
-            style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
+                style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');">
             @endif
 
 			@if ($newslo->category->music_meta)
