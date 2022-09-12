@@ -522,7 +522,7 @@ class CommentController extends Controller
                     $comment
                 );
             }
-
+        }
 
         // Achievements
 //        if ($comment->anon == 0) {
