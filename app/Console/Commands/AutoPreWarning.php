@@ -34,7 +34,7 @@ class AutoPreWarning extends Command
      */
     public function handle(): void
     {
-        if (\config('hitrun.enabled') == true) {
+        if (\config('hitrun.enabled')) {
             $carbon = new Carbon();
             $prewarn = History::with(['user', 'torrent'])
                 ->where('prewarn', '=', 0)

@@ -338,7 +338,7 @@
                             {{ __('torrent.keywords') }} (<i>{{ __('torrent.keywords-example') }}</i>)
                         </label>
                     </p>
-                    @livewire('bbcode-input', ['name' => 'description', 'label' => __('common.description') ])
+                    @livewire('bbcode-input', ['name' => 'description', 'label' => __('common.description'), 'required' => true])
                     <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
                         <textarea
                             id="upload-form-mediainfo"
@@ -371,10 +371,9 @@
                             value="1"
                             @checked(old('anonymous'))
                         >
-                        <label for="anonymous">{{ __('common.anonymous') }}?</label>
-                    </p>-->
-                    <input type="hidden" name="anonymous" value="0">
-                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
+                        <label class="form__label" for="anonymous">{{ __('common.anonymous') }}?</label>
+                    </p>
+                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
                         <input type="hidden" name="stream" value="0">
                         <input
                             type="checkbox"
@@ -384,10 +383,9 @@
                             x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon') ? '1' : '0'"
                             @checked(old('stream'))
                         >
-                        <label for="stream">{{ __('torrent.stream-optimized') }}?</label>
-                    </p>-->
-                    <input type="hidden" name="stream" value="0">
-                    <!--<p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
+                        <label class="form__label" for="stream">{{ __('torrent.stream-optimized') }}?</label>
+                    </p>
+                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
                         <input type="hidden" name="sd" value="0">
                         <input
                             type="checkbox"
@@ -397,9 +395,8 @@
                             x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon') ? '1' : '0'""
                             @checked(old('sd'))
                         >
-                        <label for="sd">{{ __('torrent.sd-content') }}?</label>
-                    </p>-->
-                    <input type="hidden" name="sd" value="0">
+                        <label class="form__label" for="sd">{{ __('torrent.sd-content') }}?</label
+                    </p>
                     @if (auth()->user()->group->is_modo || auth()->user()->group->is_internal)
                         <p class="form__group">
                             <input type="hidden" name="internal" value="0">
@@ -411,7 +408,7 @@
                                 value="1"
                                 @checked(old('internal'))
                             >
-                            <label for="internal">{{ __('torrent.internal') }}?</label>
+                            <label class="form__label" for="internal">{{ __('torrent.internal') }}?</label>
                         </p>
                     @else
                         <input type="hidden" name="internal" value="0">
@@ -426,21 +423,20 @@
                             value="1"
                             @checked(old('personal_release'))
                         >
-                        <label for="personal_release">Personal Release?</label>
-                    </p>-->
-                    <input type="hidden" name="personal_release" value="0">
-                    @if (auth()->user()->group->is_modo || auth()->user()->group->is_internal)
+                        <label class="form__label" for="personal_release">Personal Release?</label>
+                    </p>
+                    @if ($user->group->is_trusted)
                         <p class="form__group">
-                            <select name="free" id="free" class="form__select">
-                                <option value="0" @selected(old('free') === '0' || old('free') === null)>{{ __('common.no') }}</option>
-                                <option value="25" @selected(old('free') === '25')>25%</option>
-                                <option value="50" @selected(old('free') === '50')>50%</option>
-                                <option value="75" @selected(old('free') === '75')>75%</option>
-                                <option value="100" @selected(old('free') === '100')>100%</option>
-                            </select>
-                            <label class="form__label form__label--floating" for="free">
-                                {{ __('torrent.freeleech') }}
-                            </label>
+                            <input type="hidden" name="mod_queue_opt_in" value="0">
+                            <input
+                                type="checkbox"
+                                class="form__checkbox"
+                                id="mod_queue_opt_in"
+                                name="mod_queue_opt_in"
+                                value="1"
+                                @checked(old('mod_queue_opt_in'))
+                            >
+                            <label class="form__label" for="mod_queue_opt_in">Prijavite se v čakalno vrsto za moderiranje?</label>
                         </p>
                     @else
                         <input type="hidden" name="free" value="0" />

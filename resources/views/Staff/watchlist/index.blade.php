@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>Watchlist {{ __('common.search') }} - {{ __('staff.staff-dashboard') }} - {{ config('other.title') }}</title>
+    <title>Seznam za spremljanje {{ __('common.search') }} - {{ __('staff.staff-dashboard') }}</title>
 @endsection
 
 @section('meta')
@@ -15,17 +15,12 @@
         </a>
     </li>
     <li class="breadcrumb--active">
-        Watchlist
+        Seznam za spremljanje
     </li>
 @endsection
 
-@section('content')
-    <style>
-        td {
-            vertical-align: middle !important;
-        }
-    </style>
-    <div class="box container">
-        @livewire('watchlist-search')
-    </div>
+@section('page', 'page__watchlist--index')
+
+@section('main')
+    @livewire('watchlist-search')
 @endsection

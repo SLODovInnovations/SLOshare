@@ -71,6 +71,12 @@ class TorrentDownloadController extends Controller
             $dict['announce'] = \route('announce', ['passkey' => $user->passkey]);
             // Remove Other announce url
             unset($dict['announce-list']);
+            // Set link to torrent as the comment
+            if (config('torrent.comment')) {
+                $dict['comment'] = \config('torrent.comment').'. '.\route('torrent', ['id' => $id]);
+            } else {
+                $dict['comment'] = \route('torrent', ['id' => $id]);
+            }
         } else {
             return \to_route('login');
         }
@@ -81,7 +87,7 @@ class TorrentDownloadController extends Controller
         $torrentDownload = new TorrentDownload();
         $torrentDownload->user_id = $user->id;
         $torrentDownload->torrent_id = $id;
-        $torrentDownload->type = $rsskey ? 'RSS/API' : 'Stran';
+        $torrentDownload->type = $rsskey ? 'Uporaba RSS/API '.$request->header('User-Agent') : 'Uporaba spletnega mesta '.$request->header('User-Agent');
         $torrentDownload->save();
 
         return \response()->download(\getcwd().'/files/tmp/'.$tmpFileName)->deleteFileAfterSend(true);

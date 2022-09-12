@@ -43,7 +43,7 @@ class TorrentBuffController extends Controller
         );
 
         // Announce To IRC
-        if (\config('irc-bot.enabled') == true) {
+        if (\config('irc-bot.enabled')) {
             $appname = \config('app.name');
             $ircAnnounceBot = new IRCAnnounceBot();
             $ircAnnounceBot->message(\config('irc-bot.channel'), '['.$appname.'] Uporabnik '.$user->username.' je udaril '.$torrent->name.' , lahko bi porabil več semen!');

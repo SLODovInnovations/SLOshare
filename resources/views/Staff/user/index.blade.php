@@ -1,8 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('common.user') }} {{ __('common.search') }} - {{ __('staff.staff-dashboard') }}
-        - {{ config('other.title') }}</title>
+    <title>{{ __('common.user') }} {{ __('common.search') }} - {{ __('staff.staff-dashboard') }}</title>
 @endsection
 
 @section('meta')
@@ -20,13 +19,8 @@
     </li>
 @endsection
 
-@section('content')
-    <style>
-        td {
-            vertical-align: middle !important;
-        }
-    </style>
-    <div class="box container">
-        @livewire('user-search')
-    </div>
+@section('page', 'page__users--index')
+
+@section('main')
+    @livewire('user-search')
 @endsection

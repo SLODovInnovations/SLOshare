@@ -3,7 +3,6 @@
 // uploadExtensionBuilder - To parse torrent files titles / Used: Upload
 // userFilterBuilder - To add filters for user search / Used: All User Histories
 // forumTipBuilder - To add tip buttons for forum / Used: Topics
-// userExtensionBuilder - To add toggle capabilities to BON / Used: BON
 //
 // After classes, event attachments then globals.
 class uploadExtensionBuilder {
@@ -689,33 +688,6 @@ class userFilterBuilder {
     }
 }
 
-class userExtensionBuilder {
-    constructor() {
-        this.csrf = document.querySelector("meta[name='csrf-token']").getAttribute('content');
-    }
-
-    handle(flag) {
-        if (flag) {
-            $('.' + this.extension).each(function () {
-                $(this).show();
-            });
-        } else {
-            $('.' + this.extension).each(function () {
-                $(this).hide();
-            });
-        }
-    }
-
-    init() {
-        this.extension = $('#userExtension').attr('extension');
-        $('#extended').off('change');
-        $('#extended').on('change', function () {
-            userExtension.handle($(this).is(':checked'));
-        });
-        this.handle();
-    }
-}
-
 class forumTipBuilder {
     constructor() {
         this.csrf = document.querySelector("meta[name='csrf-token']").getAttribute('content');
@@ -803,9 +775,6 @@ $(document).ready(function () {
     if (document.getElementById('forumTip')) {
         forumTip.init();
     }
-    if (document.getElementById('userExtension')) {
-        userExtension.init();
-    }
 });
 $(document).on('click', '.pagination a', function (e) {
     var url = $(this).attr('href');
@@ -852,7 +821,6 @@ $(document).mousedown(function () {
 // Globals
 const userFilter = new userFilterBuilder();
 const forumTip = new forumTipBuilder();
-const userExtension = new userExtensionBuilder();
 const uploadExtension = new uploadExtensionBuilder();
 var userFilterXHR = null;
 var audioLoaded = 0;
