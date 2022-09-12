@@ -35,7 +35,7 @@ class QuickSearchDropdown extends Component
                 ->take(10)
                 ->get(),
             'risanke' => Cartoon::query()
-                ->select(['id', 'poster', 'name', 'release_date'])
+                ->select(['id', 'poster', 'title', 'release_date'])
                 ->selectRaw("concat(title, ' ', release_date) as title_and_year")
                 ->having('title_and_year', 'LIKE', $search)
                 ->has('torrents')

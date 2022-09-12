@@ -29,8 +29,14 @@ class CollectionSearch extends Component
 
     final public function getCollectionsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        return Collection::withCount('movie', 'tv', 'cartoon')
-            ->with('movie', 'tv', 'cartoon')
+        return Collection::withCount('movie')
+            ->with('movie')
+            ->where('name', 'LIKE', '%'.$this->search.'%')
+            ->oldest('name')
+            ->paginate(25);
+
+        return Collection::withCount('cartoon')
+            ->with('cartoon')
             ->where('name', 'LIKE', '%'.$this->search.'%')
             ->oldest('name')
             ->paginate(25);

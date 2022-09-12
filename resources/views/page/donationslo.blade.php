@@ -27,7 +27,7 @@
             Portal SLOshare.eu je v celoti plod dela ekipe SLOshare, ki se bori za pravice do prostega pretoka informaci v SLOVENIJI
             in v osnovi deluje popolnoma neprofitno, če prav SLOshare marsikateremu članu predstavlja 8-urni delovnik.
             Primarni cilj projekta je spodbujanje in nagrajevanje P2P skupnosti.Ekipa SLOshare se zelo trudi da naredi
-            stran moderno in bolj prijazno uporabnikom. Vsa ekipa SLOshare se trudi in vam ponuja številjne stare in nove informacije.
+            stran moderno in bolj prijazno uporabnikom. Vsa ekipa SLOshare se trudi in vam ponuja številne stare in nove informacije.
             <br>
             <br>
             Zato smo zelo veseli vsakega prostovoljnega prispevka s strani uporabnikov našega in vašega portala. SLOshare
@@ -56,7 +56,7 @@
                             <p>
                             - VIP
                             <br>
-                            - 1000 GB UL
+                            - 1 TB UL
                             </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
                             <input type="hidden" name="hosted_button_id" value="9VSKWN3QQJCQU" />
@@ -71,7 +71,7 @@
                             <h4>10€</h4>
                             - VIP
                             <br>
-                            - 2000 GB UL
+                            - 2 TB UL
                             </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
                             <input type="hidden" name="hosted_button_id" value="RP96883WS92ZJ" />
@@ -86,7 +86,7 @@
                             <h4>15€</h4>
                             - VIP
                             <br>
-                            - 5000 GB UL
+                            - 5 TB UL
                             </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
                             <input type="hidden" name="hosted_button_id" value="VTBES36PDSMWJ" />
@@ -101,7 +101,7 @@
                             <h4>20€</h4>
                             - VIP
                             <br>
-                            - 1 TB UL
+                            - 10 TB UL
                             </p>
                             <form action="https://www.paypal.com/donate" method="post" target="_black">
                             <input type="hidden" name="hosted_button_id" value="9ZSEYX2SXHQPC" />

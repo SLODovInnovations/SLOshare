@@ -23,7 +23,7 @@ return [
     'ascending'            => 'Naraščajoče',
     'author'               => 'Avtor',
     'balance'              => 'Ravnovesje',
-    'blacklist'            => 'Črni seznam strank',
+    'blacklist'            => 'Črni seznam odjemalcev',
     'buffer'               => 'Buffer',
     'bug'                  => 'Prijavite napako',
     'but'                  => 'Toda',
