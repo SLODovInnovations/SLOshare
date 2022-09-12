@@ -37,7 +37,7 @@ class InviteController extends Controller
     {
         $user = $request->user();
 
-        if (\config('other.invite-only') == false) {
+        if (! \config('other.invite-only')) {
             return \to_route('home.index')
             ->withErrors(\trans('user.invites-disabled'));
         }
@@ -47,7 +47,7 @@ class InviteController extends Controller
             ->withErrors(\trans('user.invites-banned'));
         }
 
-        if (\config('other.invites_restriced') == true && ! \in_array($user->group->name, \config('other.invite_groups'), true)) {
+        if (\config('other.invites_restriced') && ! \in_array($user->group->name, \config('other.invite_groups'), true)) {
             return \to_route('home.index')
                 ->withErrors(\trans('user.invites-disabled-group'));
         }
@@ -65,7 +65,7 @@ class InviteController extends Controller
         $carbon = new Carbon();
         $user = $request->user();
 
-        if (\config('other.invites_restriced') == true && ! \in_array($user->group->name, \config('other.invite_groups'), true)) {
+        if (\config('other.invites_restriced') && ! \in_array($user->group->name, \config('other.invite_groups'), true)) {
             return \to_route('home.index')
                 ->withErrors(\trans('user.invites-disabled-group'));
         }

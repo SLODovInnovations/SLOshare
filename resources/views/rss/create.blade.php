@@ -170,13 +170,21 @@
                             </span>
                             <span class="badge-user">
                                 <label class="inline">
+                                    <input type="checkbox" id="personalrelease" name="personalrelease" value="1"> <span
+                                            class="{{ config('other.font-awesome') }} fa-user-plus"
+                                            style="color: #865be9;"></span>
+                                    {{ __('torrent.personal-release') }}
+                                </label>
+                            </span>
+                            <span class="badge-user">
+                                <label class="inline">
                                     <input type="checkbox" id="bookmark" name="bookmark" value="1"> <span
                                             class="{{ config('other.font-awesome') }} fa-bookmark text-blue"></span>
                                     {{ __('torrent.bookmark') }}
                                 </label>
                             </span>
                         </div>
-                    </div>
+                    </div>>
 
                     <div class="form-group">
                         <label for="type">{{ __('torrent.health') }}</label>

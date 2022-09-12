@@ -111,7 +111,7 @@ class CommentController extends Controller
                         $comment
                     );
             } else {
-                $sender = $comment->anon !== 0 ? $user->username : 'Anonymous';
+                $sender = $comment->anon ? 'Anonymous' : $user->username;
                 $this->taggedUserRepository->messageTaggedCommentUsers(
                         'collection',
                         $request->input('content'),
@@ -209,7 +209,7 @@ class CommentController extends Controller
                     $comment
                 );
             } else {
-                $sender = $comment->anon !== 0 ? $user->username : 'Anonymous';
+                $sender = $comment->anon ? 'Anonymous' : $user->username;
                 $this->taggedUserRepository->messageTaggedCommentUsers(
                     'article',
                     $request->input('content'),
@@ -307,7 +307,7 @@ class CommentController extends Controller
                     $comment
                 );
             } else {
-                $sender = $comment->anon !== 0 ? $user->username : 'Anonymous';
+                $sender = $comment->anon ? 'Anonymous' : $user->username;
                 $this->taggedUserRepository->messageTaggedCommentUsers(
                     'playlist',
                     $request->input('content'),
@@ -410,7 +410,7 @@ class CommentController extends Controller
                     $comment
                 );
             } else {
-                $sender = $comment->anon !== 0 ? $user->username : 'Anonymous';
+                $sender = $comment->anon ? 'Anonymous' : $user->username;
                 $this->taggedUserRepository->messageTaggedCommentUsers(
                     'torrent',
                     $request->input('content'),
@@ -513,7 +513,7 @@ class CommentController extends Controller
                     $comment
                 );
             } else {
-                $sender = $comment->anon !== 0 ? $user->username : 'Anonymous';
+                $sender = $comment->anon ? 'Anonymous' : $user->username;
                 $this->taggedUserRepository->messageTaggedCommentUsers(
                     'request',
                     $request->input('content'),
@@ -522,7 +522,7 @@ class CommentController extends Controller
                     $comment
                 );
             }
-        }
+
 
         // Achievements
 //        if ($comment->anon == 0) {

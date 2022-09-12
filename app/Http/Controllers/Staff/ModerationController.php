@@ -56,11 +56,11 @@ class ModerationController extends Controller
             // Announce To Shoutbox
             if ($anon == 0) {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Uporabnik [url=%s/users/', $appurl).$username.']'.$username.\sprintf('[/url] je naložil [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] prenesi ga zdaj! :slight_smile:'
+                    \sprintf('Uporabnik [url=%s/users/', $appurl).$username.']'.$username.\sprintf('[/url] je naložil '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] prenesi ga zdaj! :slight_smile:'
                 );
             } else {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Anonimni uporabnik je naložil [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] prenesi ga zdaj! :slight_smile:'
+                    \sprintf('Anonimni uporabnik je naložil '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] prenesi ga zdaj! :slight_smile:'
                 );
             }
 

@@ -888,13 +888,13 @@
         @foreach ($medias as $media)
             @php
                 if ($media->category->movie_meta) {
-                    $media->meta = 'movie';
+                    $$mediaType = 'movie';
                 } elseif ($media->category->cartoon_meta) {
-                    $media->meta = 'cartoon';
+                    $$mediaType = 'cartoon';
                 } elseif ($media->category->tv_meta) {
-                    $media->meta = 'tv';
+                    $$mediaType = 'tv';
                 } else {
-                    $media->meta = 'no';
+                    $$mediaType = 'no';
                 }
 
                 $meta = null;
@@ -918,7 +918,7 @@
             <article class="torrent-search--grouped__result">
                 <header class="torrent-search--grouped__header" >
                         <a
-                                @switch($media->meta)
+                                @switch($mediaType)
                                 @case('movie')
                                 @case('cartoon')
                                 @case('tv')
@@ -927,7 +927,7 @@
                                 class="torrent-search--grouped__poster"
                         >
                             <img
-                                    @switch($media->meta)
+                                    @switch($mediaType)
                                     @case ('movie')
                                     @case ('cartoon')
                                     @case ('tv')
@@ -953,21 +953,21 @@
                         <a
                                 href="{{ route('torrents.similar', ['category_id' => $media->torrents->first()->category_id, 'tmdb' => $media->tmdb]) }}"
                         >
-                            @switch ($media->meta)
+                            @switch ($mediaType)
                                 @case('movie')
-                                {{ $meta->title }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
+                                {{ $meta->title ?? '' }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
                                 @break
                               @case('cartoon')
-                                {{ $meta->title }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
+                                {{ $meta->title ?? '' }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
                                 @break
                                 @case('tv')
-                                {{ $meta->name }} (<time>{{ \substr($meta->first_air_date, 0, 4) ?? '' }}</time>)
+                                {{ $meta->name ?? ''}} (<time>{{ \substr($meta->first_air_date, 0, 4) ?? '' }}</time>)
                                 @break
                             @endswitch
                         </a>
                     </h2>
                     <address class="torrent-search--grouped__directors">
-                        @switch ($media->meta)
+                        @switch ($mediaType)
                             @case('movie')
                             @if(!empty($directors = (new App\Services\Tmdb\Client\Movie($media->tmdb))->get_crew()))
                                 <span class="torrent-search-grouped__directors-by">Avtor</span>
@@ -1016,27 +1016,29 @@
                         @endswitch
                     </address>
                     <div class="torrent-search--grouped__genres">
-                        @foreach ($meta->genres->take(3) as $genre)
-                            <a
+                        @if (isset($meta->genres) && $meta->genres->isNotEmpty())
+                            @foreach ($meta->genres->take(3) as $genre)
+                                <a
                                     href="{{ route('mediahub.genres.show', ['id' => $genre->id]) }}"
                                     class="torrent-search--grouped__genre"
-                            >
-                                {{ $genre->name }}
-                            </a>
-                        @endforeach
+                                >
+                                    {{ $genre->name }}
+                                </a>
+                            @endforeach
+                        @endif
                     </div>
                     <p class="torrent-search--grouped__plot">
                         @switch (true)
-                            @case($media->meta === 'movie')
-                            @case($media->meta === 'cartoon')
-                            @case($media->meta === 'tv')
+                            @case($mediaType === 'movie')
+                            @case($mediaType === 'cartoon')
+                            @case($mediaType === 'tv')
                             {{ $meta->overview }}
                             @break
                         @endswitch
                     </p>
                 </header>
                 <section>
-                    @switch ($media->meta)
+                    @switch ($mediaType)
                         @case('movie')
                         <table class="torrent-search--grouped__movie-torrents">
                             @foreach ($media->torrents->sortBy('type.position')->values()->groupBy('type_id') as $torrentsByType)

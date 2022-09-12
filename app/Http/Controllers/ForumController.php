@@ -128,14 +128,12 @@ class ForumController extends Controller
                 $sorting = 'posts.id';
                 $direction = 'desc';
             }
+        } elseif ($request->has('sorting') && $request->input('sorting') != null) {
+            $sorting = \sprintf('topics.%s', $request->input('sorting'));
+            $direction = $request->input('direction');
         } else {
-            if ($request->has('sorting') && $request->input('sorting') != null) {
-                $sorting = \sprintf('topics.%s', $request->input('sorting'));
-                $direction = $request->input('direction');
-            } else {
-                $sorting = 'topics.last_reply_at';
-                $direction = 'desc';
-            }
+            $sorting = 'topics.last_reply_at';
+            $direction = 'desc';
         }
         $results = $result->orderBy($sorting, $direction)->paginate(25)->withQueryString();
 
@@ -317,7 +315,7 @@ class ForumController extends Controller
 
         // Check if the user has permission to view the forum
         $category = Forum::findOrFail($forum->id);
-        if ($category->getPermission()->show_forum != true) {
+        if (! $category->getPermission()->show_forum) {
             return \to_route('forums.index')
                 ->withErrors(\trans('forum.error'));
         }

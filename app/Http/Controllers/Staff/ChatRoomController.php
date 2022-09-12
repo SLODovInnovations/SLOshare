@@ -33,6 +33,14 @@ class ChatRoomController extends Controller
     }
 
     /**
+     * Show Form For Creating A New Chatroom.
+     */
+    public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        return \view('Staff.chat.room.create');
+    }
+
+    /**
      * Store A New Chatroom.
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
@@ -53,6 +61,16 @@ class ChatRoomController extends Controller
 
         return \to_route('staff.rooms.index')
             ->withSuccess('Klepetalnica je bila uspešno dodana');
+    }
+
+    /**
+     * Chatroom Edit Form.
+     */
+    public function edit(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        $chatroom = Chatroom::findOrFail($id);
+
+        return \view('Staff.chat.room.edit', ['chatroom' => $chatroom]);
     }
 
     /**

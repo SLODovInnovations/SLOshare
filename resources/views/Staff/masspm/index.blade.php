@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('staff.mass-pm') }} - {{ __('staff.staff-dashboard') }} - {{ config('other.title') }}</title>
+    <title>{{ __('staff.mass-pm') }} - {{ __('staff.staff-dashboard') }}</title>
 @endsection
 
 @section('meta')
@@ -19,33 +19,47 @@
     </li>
 @endsection
 
-@section('content')
-    <div class="container box">
-        <h2>{{ __('staff.mass-pm') }}</h2>
-        <form action="{{ route('staff.mass-pm.store') }}" method="POST">
-            @csrf
-            <div class="form-group">
-                <label for="subject">{{ __('pm.subject') }}</label>
-                <label>
-                    <input type="text" class="form-control" name="subject">
-                </label>
-            </div>
+@section('page', 'page__mass-pm--index')
 
-            <div class="form-group">
-                <label for="message">{{ __('pm.message') }}</label>
-                <textarea id="message" name="message" cols="30" rows="10" class="form-control"></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-default">{{ __('pm.send') }}</button>
-        </form>
-    </div>
-@endsection
-
-@section('javascripts')
-    <script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce('script') }}">
-      $(document).ready(function () {
-        $('#message').wysibb({})
-      })
-
-    </script>
+@section('main')
+    <section class="panelV2">
+        <h2 class="panel__heading">{{ __('staff.mass-pm') }}</h2>
+        <div class="panel__body">
+            <form class="form" action="{{ route('staff.mass-pm.store') }}" method="POST" x-data>
+                @csrf
+                <p class="form__group">
+                    <input
+                        id="subject"
+                        class="form__text"
+                        minlength="5"
+                        name="subject"
+                        type="text"
+                        required
+                    >
+                    <label class="form__label form__label--floating" for="subject">
+                        {{ __('pm.subject') }}
+                    </label>
+                </p>
+                @livewire('bbcode-input', ['name' => 'message', 'label' => __('pm.message'), 'required' => true])
+                <p class="form__group">
+                    <button
+                        x-on:click.prevent="Swal.fire({
+                            title: 'Ali si prepričan?',
+                            text: 'Ali ste prepričani, da želite poslati to zasebno sporočilo vsem uporabnikom na spletnem mestu?',
+                            icon: 'warning',
+                            showConfirmButton: true,
+                            showCancelButton: true,
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                $root.submit();
+                            }
+                        })"
+                        class="form__button form__button--filled"
+                    >
+                        {{ __('pm.send') }}
+                    </button>
+                </p>
+            </form>
+        </div>
+    </section>
 @endsection

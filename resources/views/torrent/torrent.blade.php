@@ -124,12 +124,6 @@
 @endsection
 
 @section('javascripts')
-    <script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce() }}">
-      $(document).ready(function () {
-        $('#content').wysibb({})
-      })
-    </script>
-
     @if (isset($trailer))
         <script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce() }}">
           $('.show-trailer').each(function () {
@@ -149,4 +143,34 @@
           })
         </script>
     @endif
+
+    <script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce() }}">
+      $('.torrent-freeleech-token').on('click', function (event) {
+        event.preventDefault();
+        let form = $(this).parents('form');
+        Swal.fire({
+          title: 'Ali si prepričan?',
+          text: 'To bo uporabilo enega od vaših žetonov Freeleech!',
+          icon: 'warning',
+          showConfirmButton: true,
+          showCloseButton: true,
+        }).then((result) => {
+          if (result.isConfirmed && {{ $torrent->seeders }} == 0) {
+            Swal.fire({
+              title: 'Ali si prepričan?',
+              text: 'Ta torrent ima 0 sejalnikov!',
+              icon: 'warning',
+              showConfirmButton: true,
+              showCancelButton: true,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                form.submit();
+              }
+            });
+          } else if (result.isConfirmed) {
+            form.submit();
+          }
+        });
+      });
+    </script>
 @endsection

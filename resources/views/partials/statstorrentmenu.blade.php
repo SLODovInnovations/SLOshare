@@ -1,40 +1,56 @@
-<li class="{{ Route::is('seeded') ? 'nav-tab--active' : 'nav-tabV2' }}">
+<li class="{{ Route::is('uploaded') ? 'nav-tab--active' : 'nav-tabV2' }}">
     <a
-        class="{{ Route::is('seeded') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
-        href="{{ route('seeded') }}"
+        class="{{ Route::is('uploaded') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
+        href="{{ route('uploaded') }}"
     >
-        {{ __('user.top-seeded') }}
+        {{ __('user.top-uploaders-data') }}
     </a>
 </li>
-<li class="{{ Route::is('leeched') ? 'nav-tab--active' : 'nav-tabV2' }}">
+<li class="{{ Route::is('seeders') ? 'nav-tab--active' : 'nav-tabV2' }}">
     <a
-        class="{{ Route::is('leeched') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
-        href="{{ route('leeched') }}"
+        class="{{ Route::is('seeders') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
+        href="{{ route('seeders') }}"
     >
-        {{ __('user.top-leeched') }}
+        {{ __('user.top-seeders') }}
     </a>
 </li>
-<li class="{{ Route::is('completed') ? 'nav-tab--active' : 'nav-tabV2' }}">
+<li class="{{ Route::is('leechers') ? 'nav-tab--active' : 'nav-tabV2' }}">
     <a
-        class="{{ Route::is('completed') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
-        href="{{ route('completed') }}"
+        class="{{ Route::is('leechers') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
+        href="{{ route('leechers') }}"
     >
-        {{ __('user.top-completed') }}
+        {{ __('user.top-leechers') }}
     </a>
 </li>
-<li class="{{ Route::is('dying') ? 'nav-tab--active' : 'nav-tabV2' }}">
+<li class="{{ Route::is('uploaders') ? 'nav-tab--active' : 'nav-tabV2' }}">
     <a
-        class="{{ Route::is('dying') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
-        href="{{ route('dying') }}"
+        class="{{ Route::is('uploaders') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
+        href="{{ route('uploaders') }}"
     >
-        {{ __('user.top-dying') }}
+        {{ __('user.top-uploaders-count') }}
     </a>
 </li>
-<li class="{{ Route::is('dead') ? 'nav-tab--active' : 'nav-tabV2' }}">
+<li class="{{ Route::is('bankers') ? 'nav-tab--active' : 'nav-tabV2' }}">
     <a
-        class="{{ Route::is('dead') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
-        href="{{ route('dead') }}"
+        class="{{ Route::is('bankers') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
+        href="{{ route('bankers') }}"
     >
-        {{ __('user.top-dead') }}
+        {{ __('user.top-bankers') }}
+    </a>
+</li>
+<li class="{{ Route::is('seedtime') ? 'nav-tab--active' : 'nav-tabV2' }}">
+    <a
+        class="{{ Route::is('seedtime') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
+        href="{{ route('seedtime') }}"
+    >
+        {{ __('user.top-seedtime') }}
+    </a>
+</li>
+<li class="{{ Route::is('seedsize') ? 'nav-tab--active' : 'nav-tabV2' }}">
+    <a
+        class="{{ Route::is('seedsize') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
+        href="{{ route('seedsize') }}"
+    >
+        {{ __('user.top-seeding-size') }}
     </a>
 </li>

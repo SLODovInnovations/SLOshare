@@ -1,8 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('backup.backup') }} {{ __('backup.manager') }} - {{ __('staff.staff-dashboard') }}
-        - {{ config('other.title') }}</title>
+    <title>{{ __('backup.backup') }} {{ __('backup.manager') }} - {{ __('staff.staff-dashboard') }}</title>
 @endsection
 
 @section('meta')
@@ -20,8 +19,8 @@
     </li>
 @endsection
 
-@section('content')
-    <div>
-        @livewire('backup-panel')
-    </div>
+@section('page', 'page__backup-manager--index')
+
+@section('main')
+    @livewire('backup-panel')
 @endsection

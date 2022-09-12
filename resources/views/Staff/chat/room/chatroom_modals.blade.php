@@ -30,7 +30,7 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <h4 class="modal-title">{{ __('common.delete') }} Chatroom ({{ $chatroom->name }}) Permanently</h4>
+                <h4 class="modal-title">{{ __('common.delete') }} Chatroom ({{ $chatroom->name }}) Za stalno</h4>
             </div>
 
             <form class="form-horizontal" role="form" method="POST"
@@ -38,7 +38,7 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-body">
-                    <p>Are you sure about this?</p>
+                    <p>Ste prepričani o tem?</p>
                 </div>
 
                 <div class="modal-footer">

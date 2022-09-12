@@ -132,7 +132,7 @@
                                 <span class="badge-user">
                                     <label class="inline">
                                         @if(is_array($rss->object_torrent->genres) &&
-                                            in_array($genre->id, $rss->object_torrent->genres, true))
+                                            in_array((string)$genre->id, $rss->object_torrent->genres, true))
                                             <input type="checkbox" id="{{ $genre->name }}" name="genres[]"
                                                    value="{{ $genre->id }}"
                                                    class="genre" CHECKED> {{ $genre->name }}
@@ -250,6 +250,21 @@
                             </span>
                             <span class="badge-user">
                                 <label class="inline">
+                                    @if($rss->object_torrent->personalrelease)
+                                        <input type="checkbox" id="personalrelease" name="personalrelease" value="1" CHECKED><span
+                                                class="{{ config('other.font-awesome') }} fa-user-plus"
+                                                style="color: #865be9;"></span>
+                                        {{ __('torrent.personal-release') }}
+                                    @else
+                                        <input type="checkbox" id="personalrelease" name="personalrelease" value="1"><span
+                                                class="{{ config('other.font-awesome') }} fa-user-plus"
+                                                style="color: #865be9;"></span>
+                                        {{ __('torrent.personal-release') }}
+                                    @endif
+                                </label>
+                            </span>
+                            <span class="badge-user">
+                                <label class="inline">
                                     @if($rss->object_torrent->bookmark)
                                         <input type="checkbox" id="bookmark" name="bookmark" value="1" CHECKED><span
                                                 class="{{ config('other.font-awesome') }} fa-bookmark text-blue"></span>
@@ -262,7 +277,7 @@
                                 </label>
                             </span>
                         </div>
-                    </div>
+                    </div>>
 
                     <div class="form-group">
                         <label for="type">{{ __('torrent.health') }}</label>
