@@ -128,6 +128,8 @@
                             </label>
                         </div>-->
 
+                        <input type="hidden" name="mal" value="0"
+
                         <div class="form-group">
                             <label for="name">IGDB ID <b>({{ __('request.required') }} za IGRE)</b></label>
                             <br>

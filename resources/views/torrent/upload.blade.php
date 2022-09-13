@@ -97,7 +97,7 @@
                         </label>
                         <input id="nfo" class="upload-form-file form__file" type="file" accept=".nfo" name="nfo">
                     </p>-->
-                    <p class="form__group" x-show="cats[cat].type === 'no'">
+                    <p class="form__group" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon' || cats[cat].type === 'music' || cats[cat].type === 'no'">
                         <label for="torrent-cover" class="form__label">
                             {{ __('torrent.banner') }} {{ __('torrent.file') }} ({{ __('torrent.optional') }})
                         </label>
@@ -264,7 +264,7 @@
                                 x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon') ? '{{ $tmdb ?: old('tmdb') }}' : '0'"
                                 x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'"
                             >
-                            <label class="form__label form__label--floating" for="autotmdb">TMDB ID/label>
+                            <label class="form__label form__label--floating" for="autotmdb">TMDB ID</label>
                             <output name="apimatch" id="apimatch" for="torrent"></output>
                         </p>
                         <p class="form__group">
@@ -295,7 +295,7 @@
                             >
                             <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
                         </p>
-                        <p class="form__group">
+                        <!--<p class="form__group">
                             <input type="hidden" name="mal" value="0" />
                             <input
                                 type="text"
@@ -308,7 +308,9 @@
                                 placeholder=""
                             >
                             <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
-                        </p>
+                        </p>-->
+                        <input type="hidden" name="mal" value="0" />
+
                     </div>
                     <p class="form__group" x-show="cats[cat].type === 'game'">
                         <input
@@ -359,7 +361,7 @@
                             BDInfo (Quick Summary)
                         </label>
                     </p>-->
-                    <p class="form__group">
+                    <!--<p class="form__group">
                         <input type="hidden" name="anonymous" value="0">
                         <input
                             type="checkbox"
@@ -411,7 +413,7 @@
                     @else
                         <input type="hidden" name="internal" value="0">
                     @endif
-                    <p class="form__group">
+                    <!--<p class="form__group">
                         <input type="hidden" name="personal_release" value="0">
                         <input
                             type="checkbox"
