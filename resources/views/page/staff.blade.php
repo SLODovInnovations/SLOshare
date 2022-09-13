@@ -2,7 +2,7 @@
 
 @section('breadcrumbs')
     <li class="breadcrumb--active">
-        {{ config('other.title') }} {{ __('common.staff') }}
+        {{ __('common.staff') }}
     </li>
 @endsection
 
