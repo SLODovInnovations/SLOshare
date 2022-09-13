@@ -240,7 +240,6 @@ return [
     'id'                   => 'ID',
     'sloshare'             => 'SLOshare.eu',
     'effect'               => 'Učinek',
-    'donations'            => 'Donacije',
     'double_upload'        => 'Dvojni prenos',
     'content'              => 'Opis',
     'admin'                => 'Admin',

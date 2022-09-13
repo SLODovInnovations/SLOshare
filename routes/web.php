@@ -127,6 +127,7 @@ Route::group(['middleware' => 'language'], function () {
             Route::get('/users', [App\Http\Controllers\PageController::class, 'users'])->name('users');
             Route::get('/internal', [App\Http\Controllers\PageController::class, 'internal'])->name('internal');
             Route::get('/blacklist', [App\Http\Controllers\PageController::class, 'blacklist'])->name('blacklist');
+            Route::get('/chat', [App\Http\Controllers\PageController::class, 'chat'])->name('chat');
             Route::get('/aboutus', [App\Http\Controllers\PageController::class, 'about'])->name('about');
             Route::get('/faq', [App\Http\Controllers\PageController::class, 'faqs'])->name('faqs');
             Route::get('/policy', [App\Http\Controllers\PageController::class, 'policys'])->name('policys');

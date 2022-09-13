@@ -126,4 +126,12 @@ class PageController extends Controller
     {
         return \view('page.donationslo');
     }
+
+    /**
+     * Show About Chat.
+     */
+    public function chat(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        return \view('page.chat');
+    }
 }

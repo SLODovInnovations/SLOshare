@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta')
-    <meta name="description" content="{{ __('common.faq') }}">
+    <meta name="description" content="{{ __('page.title-conditionsofuse') }}">
 @endsection
 
 @section('breadcrumbs')

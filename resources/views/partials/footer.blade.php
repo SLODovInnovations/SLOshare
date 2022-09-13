@@ -26,7 +26,7 @@
             <ul>
                 <li><a href="{{ route('forums.index') }}">{{ __('forum.forum') }}</a></li>
                 @if (auth()->user()->group->is_admin)
-                <li><a href="">{{ __('common.chat') }}</a></li>
+                <li><a href="{{ route('chat') }}">{{ __('common.chat') }}</a></li>
                 @endif
                 <li><a href="{{ route('users') }}">{{ __('common.user-list') }}</a></li>
                 @if (auth()->user()->group->is_admin)

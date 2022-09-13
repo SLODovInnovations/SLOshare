@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta')
-    <meta name="description" content="{{ __('common.donations') }}">
+    <meta name="description" content="{{ __('page.title-donation') }}">
 @endsection
 
 @section('breadcrumbs')

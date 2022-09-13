@@ -443,7 +443,7 @@
                         </p>
                     @endif
                     <input type="hidden" name="personal_release" value="0">
-                    @if (auth()->user()->group->is_modo || auth()->user()->group->is_internal)
+                    @if (auth()->user()->group->is_modo || auth()->user()->group->is_internal || auth()->user()->group->can_upload)
                         <p class="form__group">
                             <select name="free" id="free" class="form__select">
                                 <option value="0" @selected(old('free') === '0' || old('free') === null)>{{ __('common.no') }}</option>
