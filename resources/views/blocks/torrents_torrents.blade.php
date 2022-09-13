@@ -77,7 +77,6 @@
     							    class="show-poster" alt="{{ $newslo->name }}>
     					        @endif
                             @endif
-
     			            @if ($newslo->category->cartoon_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt="{{ $newslo->name }}>

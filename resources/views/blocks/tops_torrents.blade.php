@@ -52,7 +52,6 @@
     							    class="show-poster" alt="{{ $seed->name }}>
     						    @endif
                             @endif
-
     			            @if ($seed->category->cartoon_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');" class="show-poster" alt="{{ $seed->name }}>
@@ -154,7 +153,6 @@
     							    class="show-poster" alt="{{ $leech->name }}>
     						    @endif
                             @endif
-
     			            @if ($leech->category->cartoon_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');" class="show-poster" alt="{{ $leech->name }}>
