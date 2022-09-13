@@ -96,7 +96,7 @@
                         <i class="{{ config('other.font-awesome') }} fa-film"></i> IMDB: {{ \str_pad((int) $torrent->imdb, \max(\strlen((int) $torrent->imdb), 7), '0', STR_PAD_LEFT) }}
                     </a>
                 </span>
-                @endi
+                @endif
 
                 @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
                     <span class="badge-user text-bold">

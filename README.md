@@ -1,12 +1,11 @@
 ## 📝 Kazalo
 
-1 [Namestitev](#namestitev)
-
-1.1 [Samodejni namestitveni program](#samodejni-namestitveni-program)
-
-2 [Posodabljanje](#posodabljanje)
-
-3 [Za obnovitev SSL potrdila](#obnovitev-ssl-potrdila)
+1. [Namestitev](#namestitev)
+1.1. [Samodejni namestitveni program](#samodejni-namestitveni-program)
+2. [Posodabljanje](#posodabljanje)
+3. [Posebnosti posodobitev](#posebnosti-posodobitev)
+4. [Brisanje polnilnika](#brisanje-polnilnika)
+5. [Za obnovitev SSL potrdila](#obnovitev-ssl-potrdila)
 
 ## <a name="namestitev"></a> 🖥️ Namestitev
 ```
@@ -45,8 +44,30 @@ sudo ./install.sh
 ```
 php artisan git:update
 ```
+## <a name="posebnosti-posodobitev"></a> 🚨 Posebnosti posodobitev
+V1.x.x -> V1.3.x
+```
+composer dump-autoload -o
+```
+v1.3.x -> V1.4.x
+```
+ php artisan migrate && sudo rm -rf node_modules && sudo npm cache clean --force && sudo npm install && sudo npx mix -p && php artisan optimize:clear && composer self-update && composer install && composer dump-autoload -o && php artisan optimize && sudo chown -R www-data: storage bootstrap public config && sudo find . -type d -exec chmod 0775 '{}' + -or -type f -exec chmod 0644 '{}' + && php artisan queue:restart && sudo supervisorctl reread && sudo supervisorctl update && sudo supervisorctl reload && sudo systemctl restart php8.1-fpm
+```
+## <a name="brisanje-polnilnika"></a> ✍️ Brisanje polnilnika
+```
+php artisan config:clear
+php artisan config:cache
+php artisan route:clear
+php artisan route:cache
+php artisan view:clear
+php artisan view:cache
+php artisan event:clear
+php artisan event:cache
+php artisan cache:clear
+php artisan optimize:clear
+```
 ## <a name="obnovitev-ssl-potrdila"></a> 🔐 Za obnovitev SSL potrdila
 **Za obnovitev SSL potrdila LetsEncrypt:**
 ```
-cerbot renew --dry-run
+certbot renew --dry-run
 ```

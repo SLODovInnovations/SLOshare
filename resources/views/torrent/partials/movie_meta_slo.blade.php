@@ -72,7 +72,7 @@
                                 @if (! $loop->last)
                                     ,
                                 @endif
-                            @endforeach
+                        @endforeach
                     </span>
                     @endif
                 @endif
@@ -138,7 +138,7 @@
                     <a href="{{ $meta->homepage }}" title="Homepage" rel="noopener noreferrer" target="_blank">
                         <i class="{{ config('other.font-awesome') }} fa-external-link-alt"></i> Domača stran
                     </a>
-                </span>
+                    </span>
                 @endif
 
                 <span class="badge-user text-bold text-orange">
@@ -149,7 +149,7 @@
                     <span class="badge-user text-bold text-orange">
                     {{ __('torrent.runtime') }}: {{ $meta->runtime }}
                         {{ __('common.minute') }}{{ __('common.plural-suffix') }}
-                </span>
+                    </span>
                 @endif
 
                 <span class="badge-user text-bold text-gold">{{ __('torrent.rating') }}:
