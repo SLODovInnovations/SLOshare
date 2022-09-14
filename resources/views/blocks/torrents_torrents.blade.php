@@ -77,6 +77,7 @@
     							    class="show-poster" alt="{{ $newslo->name }}>
     					        @endif
                             @endif
+
     			            @if ($newslo->category->cartoon_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt="{{ $newslo->name }}>
@@ -156,14 +157,13 @@
 			        @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-			                @if ($videos->tmdb != 0 && $videos->tmdb != null)
+				            @if ($videos->category->movie_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$videos->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $videos->id . '.jpg') }}');"
-                                    alt="{{ $videos->name }}">
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $videos->id . '.jpg') }}');" class="show-poster" alt="{{ $videos->name }}">
                                 @else
-			                        style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg'; }}');"
-			                        alt="{{ $videos->name }}">
-                                @endif
+    							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+    							    class="show-poster" alt="{{ $videos->name }}">
+    					        @endif
                             @endif
 
 				            <div class="release-info">
@@ -178,9 +178,6 @@
 					            <div class="release-info-container">
 						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $videos->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $videos->comments_count }}</span></div>
 
-						            @if ($videos->category->game_meta)
-						                <div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
-						            @endif
                                     @if ($videos->tmdb != 0 && $videos->tmdb != null)
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
@@ -217,14 +214,13 @@
 			        @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-			                @if ($tv->tmdb != 0 && $tv->tmdb != null)
+				            @if ($tv->category->tv_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$tv->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $tv->id . '.jpg') }}');"
-                                    alt="{{ $tv->name }}">
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $tv->id . '.jpg') }}');" class="show-poster" alt="{{ $tv->name }}">
                                 @else
-			                        style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg'; }}');"
-			                        alt="{{ $tv->name }}">
-                                @endif
+    							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+    							    class="show-poster" alt="{{ $tv->name }}">
+    					        @endif
                             @endif
 
 				            <div class="release-info">
@@ -239,9 +235,6 @@
 					            <div class="release-info-container">
 						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $tv->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $tv->comments_count }}</span></div>
 
-						            @if ($tv->category->game_meta)
-						                <div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
-						            @endif
                                     @if ($tv->tmdb != 0 && $tv->tmdb != null)
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
@@ -296,9 +289,6 @@
 						            @if ($games->category->game_meta)
 						                <div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
 						            @endif
-                                    @if ($games->tmdb != 0 && $games->tmdb != null)
-                                        <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
-                                    @endif
 
 						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $games->created_at->getTimestamp()) }} | {{ date('H:m', $games->created_at->getTimestamp()) }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $games->user->username }}</div>
@@ -348,6 +338,10 @@
 					            <a href="{{ route('torrent', ['id' => $application->id]) }}"title="{{ $application->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($application->name, 50))</a>
 					            <div class="release-info-container">
 						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $application->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $application->comments_count }}</span></div>
+
+                                    @if ($tv->tmdb != 0 && $tv->tmdb != null)
+                                        <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
+                                    @endif
 
 						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $application->created_at->getTimestamp()) }} | {{ date('H:m', $application->created_at->getTimestamp()) }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $application->user->username }}</div>
