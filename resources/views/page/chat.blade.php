@@ -15,5 +15,10 @@
 @endsection
 
 @section('content')
-<chatbox :user="{{ App\Models\User::with(['chatStatus', 'chatroom', 'group'])->find(auth()->id()) }}"></chatbox>
+    @if (!auth()->user()->chat_hidden)
+        <div id="vue">
+            <script src="{{ mix('js/chat.js') }}" crossorigin="anonymous"></script>
+            <chatbox :user="{{ App\Models\User::with(['chatStatus', 'chatroom', 'group'])->find(auth()->id()) }}"></chatbox>
+        </div>
+    @endif
 @endsection
