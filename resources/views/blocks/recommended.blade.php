@@ -79,7 +79,7 @@
 										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$slorecommendeds->id.'.jpg'))
                                                 <img src="{{ url('files/img/torrent-cover_' . $slorecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else
-											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/poster/movie_no_image_holder_400x600.jpg' }}"
+											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
 											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@endif
 										@endif
@@ -88,13 +88,13 @@
 										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$slorecommendeds->id.'.jpg'))
                                                 <img src="{{ url('files/img/torrent-cover_' . $slorecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else
-											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/poster/cartoon_no_image_400x600.jpg' }}"
+											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
 											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@endif
 										@endif
 
 										@if ($slorecommendeds->category->game_meta)
-											<img style="height: 80px;" src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}"
+											<img style="height: 80px;" src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}"
 											     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 										@endif
 
@@ -355,7 +355,7 @@
 										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$videorecommendeds->id.'.jpg'))
                                                 <img src="{{ url('files/img/torrent-cover_' . $videorecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else
-											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/poster/movie_no_image_holder_400x600.jpg' }}"
+											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
 											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@endif
 										@endif
@@ -364,13 +364,13 @@
 										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$videorecommendeds->id.'.jpg'))
                                                 <img src="{{ url('files/img/torrent-cover_' . $videorecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else
-											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/poster/cartoon_no_image_400x600.jpg' }}"
+											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
 											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@endif
 										@endif
 
 										@if ($videorecommendeds->category->game_meta)
-											<img style="height: 80px;" src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}"
+											<img style="height: 80px;" src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}"
 											     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 										@endif
 
@@ -411,14 +411,14 @@
                                     </a>
                                     @if (config('torrent.download_check_page') == 1)
                                     <a href="{{ route('download_check', ['id' => $videorecommendeds->id]) }}">
-                                        <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
+                                        <button class="btn btn-primary" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
                                         </button>
                                     </a>
                                     @else
                                     <a href="{{ route('download', ['id' => $videorecommendeds->id]) }}">
-                                        <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
+                                        <button class="btn btn-primary" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
                                         </button>
