@@ -11,7 +11,7 @@
 @else
     <div class="movie-poster">
         <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
-            <img src="{{ ($meta && $meta->poster) ? tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+            <img src="{{ ($meta && $meta->poster) ? tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
                  class="img-responsive" id="meta-poster">
         </a>
     </div>
