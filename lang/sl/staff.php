@@ -11,6 +11,7 @@ return [
     'article-content'         => 'Vsebina',
     'bans-log'                => 'Dnevnik prepovedi',
     'blocks'                  => 'Bloki',
+    'bon-exchange'            => 'Menjava BON-ov',
     'bot'                     => 'Bot',
     'bots'                    => 'Bots',
     'chat'                    => 'Klepet',

@@ -84,7 +84,7 @@
                         ⚠️ Vsebina katera je na SLOshare.eu se ne sme prenalagati na druge trackerje ⚠️
                         </div>
                         <p>Poganja ga SLOshare.eu  ©2021 - {{ date('Y') }}</p>
-                        <p>Čas nalaganja {{ round(microtime(true) - LARAVEL_START, 3) }} s </p>
+                        <p>Čas nalaganja {{ number_format(microtime(true) - LARAVEL_START, 3) }} s </p>
                     </span>
                 </div>
             </div>
