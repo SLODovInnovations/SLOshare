@@ -1583,7 +1583,7 @@ class Markdown
         }
 
         return $markup.($autoBreak ? "\n" : '');
-
+    }
 
     // ~
 
