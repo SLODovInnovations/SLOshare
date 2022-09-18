@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Bencode;
 use App\Models\Movie;
-use App\Models\Cartoon;
 use App\Models\Playlist;
 use App\Models\PlaylistTorrent;
 use App\Models\Torrent;
