@@ -79,7 +79,7 @@ return [
      *                  'same-origin', 'strict-origin', 'strict-origin-when-cross-origin', 'unsafe-url'
      */
 
-    'referrer-policy' => 'same-origin',
+    'referrer-policy' => 'no-referrer-when-downgrade',
 
     /*
      * Clear-Site-Data

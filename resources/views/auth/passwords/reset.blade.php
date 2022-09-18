@@ -20,6 +20,17 @@
     <link rel="shortcut icon" href="{{ url('/favicon.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ url('/favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ mix('css/main/login.css') }}" crossorigin="anonymous">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8PXB7XS8X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Q8PXB7XS8X');
+</script>
+<!-- Google tag (gtag.js) -->
+<script type="text/javascript" async="" src="https://adserver.adman.si/add/adman.js"></script>
 </head>
 
 @php $bg = rand(1, 38); $bgchange = $bg.".jpg" @endphp
