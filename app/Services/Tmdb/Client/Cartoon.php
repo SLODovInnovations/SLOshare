@@ -6,7 +6,7 @@ class Cartoon
 {
     public \GuzzleHttp\Client $client;
 
-    public final const API_BASE_URI = 'https://api.themoviedb.org/3/';
+    final public const API_BASE_URI = 'https://api.themoviedb.org/3/';
 
     public $data;
 

@@ -11,6 +11,10 @@ use Illuminate\Queue\SerializesModels;
 
 class ProcessMassPM implements ShouldQueue
 {
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
     /**
      * @var mixed
      */
@@ -20,11 +24,6 @@ class ProcessMassPM implements ShouldQueue
      * @var mixed
      */
     public $receiver_id;
-
-    use Dispatchable;
-    use InteractsWithQueue;
-    use Queueable;
-    use SerializesModels;
 
     /**
      * ProcessMassPM Constructor.

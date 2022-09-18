@@ -275,13 +275,17 @@ class TorrentController extends BaseController
             if ($free >= 1 && $featured == 0) {
                 if ($torrent->fl_until === null) {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Dame in Gospodje, [url=%s/torrents/',
-                            $appurl).$torrent->id.']'.$torrent->name.'[/url] je bilo odobreno '.$free.'% Freeleech! Prenesi ga zdajn! :fire:'
+                        \sprintf(
+                            'Dame in Gospodje, [url=%s/torrents/',
+                            $appurl
+                        ).$torrent->id.']'.$torrent->name.'[/url] je bilo odobreno '.$free.'% Freeleech! Prenesi ga zdajn! :fire:'
                     );
                 } else {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Dame in Gospodje, [url=%s/torrents/',
-                            $appurl).$torrent->id.']'.$torrent->name.'[/url] je bila odobrena '.$free.'% Freeleech za '.$request->input('fl_until').' dni. :stopwatch:'
+                        \sprintf(
+                            'Dame in Gospodje, [url=%s/torrents/',
+                            $appurl
+                        ).$torrent->id.']'.$torrent->name.'[/url] je bila odobrena '.$free.'% Freeleech za '.$request->input('fl_until').' dni. :stopwatch:'
                     );
                 }
             }
@@ -289,13 +293,17 @@ class TorrentController extends BaseController
             if ($doubleup == 1 && $featured == 0) {
                 if ($torrent->du_until === null) {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Dame in Gospodj, [url=%s/torrents/',
-                            $appurl).$torrent->id.']'.$torrent->name.'[/url] je bil odobren dvojni prenos! Prenesi, dokler lahko! :fire:'
+                        \sprintf(
+                            'Dame in Gospodj, [url=%s/torrents/',
+                            $appurl
+                        ).$torrent->id.']'.$torrent->name.'[/url] je bil odobren dvojni prenos! Prenesi, dokler lahko! :fire:'
                     );
                 } else {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Dame in Gospodj, [url=%s/torrents/',
-                            $appurl).$torrent->id.']'.$torrent->name.'[/url] je bila odobrena dvojna nalaganja za '.$request->input('du_until').' dni. :stopwatch:'
+                        \sprintf(
+                            'Dame in Gospodj, [url=%s/torrents/',
+                            $appurl
+                        ).$torrent->id.']'.$torrent->name.'[/url] je bila odobrena dvojna nalaganja za '.$request->input('du_until').' dni. :stopwatch:'
                     );
                 }
             }

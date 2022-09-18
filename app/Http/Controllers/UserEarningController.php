@@ -47,7 +47,9 @@ class UserEarningController extends Controller
 
         $dying = $distinctSeeds
             ->clone()
-            ->whereHas('torrent', fn ($query) => $query
+            ->whereHas(
+                'torrent',
+                fn ($query) => $query
                 ->where('seeders', '=', 1)
                 ->where('times_completed', '>=', 3)
             )
@@ -60,7 +62,9 @@ class UserEarningController extends Controller
 
         $old = $distinctSeeds
             ->clone()
-            ->whereHas('torrent', fn ($query) => $query
+            ->whereHas(
+                'torrent',
+                fn ($query) => $query
                 ->where('created_at', '<', Carbon::now()->subMonths(6)->toDateTimeString())
                 ->where('created_at', '>', Carbon::now()->subYear()->toDateTimeString()),
             )
@@ -73,7 +77,9 @@ class UserEarningController extends Controller
 
         $large = $distinctSeeds
             ->clone()
-            ->whereHas('torrent', fn ($query) => $query
+            ->whereHas(
+                'torrent',
+                fn ($query) => $query
                 ->where('size', '>=', $this->byteUnits->bytesFromUnit('25GiB'))
                 ->where('size', '<', $this->byteUnits->bytesFromUnit('100GiB'))
             )
@@ -81,7 +87,9 @@ class UserEarningController extends Controller
 
         $regular = $distinctSeeds
             ->clone()
-            ->whereHas('torrent', fn ($query) => $query
+            ->whereHas(
+                'torrent',
+                fn ($query) => $query
                 ->where('size', '>=', $this->byteUnits->bytesFromUnit('1GiB'))
                 ->where('size', '<', $this->byteUnits->bytesFromUnit('25GiB'))
             )
