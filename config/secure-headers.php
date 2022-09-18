@@ -588,16 +588,16 @@ return [
             'report-sample' => false,
 
             'allow' => [
-				'https://pagead2.googlesyndication.com/',
-				'https://partner.googleadservices.com/',
-				'https://tpc.googlesyndication.com/',
-				'https://www.googletagservices.com/',
-				'https://adservice.google.com/',
-				'https://adservice.google.si/',
-				'https://ajax.googleapis.com/',
-				'https://www.googletagmanager.com/',
-				'https://www.google-analytics.com/',
-				'https://adserver.adman.si/',
+                'https://pagead2.googlesyndication.com/',
+                'https://partner.googleadservices.com/',
+                'https://tpc.googlesyndication.com/',
+                'https://www.googletagservices.com/',
+                'https://adservice.google.com/',
+                'https://adservice.google.si/',
+                'https://ajax.googleapis.com/',
+                'https://www.googletagmanager.com/',
+                'https://www.google-analytics.com/',
+                'https://adserver.adman.si/',
             ],
 
             'schemes' => [

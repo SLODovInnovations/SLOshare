@@ -204,7 +204,7 @@ class TorrentController extends Controller
         $category = Category::findOrFail($request->input('category_id'));
 
         $resolutionRule = 'nullable|exists:resolutions,id';
-        if ($category->movie_meta || $category->tv_meta || $category->cartoon_meta)  {
+        if ($category->movie_meta || $category->tv_meta || $category->cartoon_meta) {
             $resolutionRule = 'required|exists:resolutions,id';
         }
 

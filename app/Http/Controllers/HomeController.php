@@ -14,11 +14,6 @@ use App\Models\Topic;
 use App\Models\Torrent;
 use App\Models\User;
 //SLOshare
-use App\Models\Category;
-use App\Models\History;
-use App\Models\Language;
-use App\Models\Peer;
-use App\Models\TorrentRequest;
 //SLOshare
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -30,7 +25,6 @@ use Illuminate\Support\Facades\DB;
  */
 class HomeController extends Controller
 {
-
     /**
      * Display Home Page.
      *
@@ -190,10 +184,10 @@ class HomeController extends Controller
             ->take(10)
             ->get());
 
-//SLOshare
+        //SLOshare
         // Total Members Count (All Groups)
         $allUser = \cache()->remember('all_user', $expiresAt, fn () => User::withTrashed()->get());
-//SLOshare
+        //SLOshare
 
         $freeleechTokens = FreeleechToken::where('user_id', $user->id)->get();
         $bookmarks = Bookmark::where('user_id', $user->id)->get();

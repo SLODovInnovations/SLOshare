@@ -30,7 +30,7 @@ return [
     'logs'                    => 'Dnevniki',
     'mass-pm'                 => 'Masa PM',
     'mass-validate-users'     => 'Uporabniki z množičnim preverjanjem veljavnosti',
-	'media-languages-desc'    => '(Jeziki, ki se uporabljajo za zapolnitev spustnih menijev za jezike za podnapise / zvoke / itd.)',
+    'media-languages-desc'    => '(Jeziki, ki se uporabljajo za zapolnitev spustnih menijev za jezike za podnapise / zvoke / itd.)',
     'moderation'              => 'Moderiranje',
     'moderation-since'        => 'Moderirano pri',
     'page'                    => 'Stran',
