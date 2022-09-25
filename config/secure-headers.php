@@ -622,8 +622,8 @@ return [
             'hashes' => [
                 'sha256' => [
                     // 'sha256-hash-value-with-base64-encode',
-					'13/MTDULKJjVyAx9SM2SM/OiUE/Mhv6eOQbf55hx2as=',
-					'Ps1pSUUjFj7fOI6sTXawy6rMokz4B4KdLAFO5xcPZio=',
+                    '13/MTDULKJjVyAx9SM2SM/OiUE/Mhv6eOQbf55hx2as=',
+                    'Ps1pSUUjFj7fOI6sTXawy6rMokz4B4KdLAFO5xcPZio=',
                 ],
 
                 'sha384' => [
