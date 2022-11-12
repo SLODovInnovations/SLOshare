@@ -109,7 +109,8 @@ class BanController extends Controller
         $ban->save();
 
         // Send Notifications
-        $user->notify(new UserBanExpire());;
+        $user->notify(new UserBanExpire());
+        ;
 
         return \to_route('users.show', ['username' => $user->username])
             ->withSuccess('Uporabnik je zdaj oproščen prepovedi!');
