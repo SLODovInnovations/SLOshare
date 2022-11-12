@@ -23,7 +23,8 @@ class TrackerException extends \Exception
         125 => 'Vaša stranka je prestara. prosimo, da ga posodobite pozneje :start .',
         126 => 'Stranka :ua ni sprejemljivo! Preverite naš seznam dovoljenih.',
         127 => 'Stranka :ua prepovedano zaradi: :comment .',
-        128 => 'Stranka :ua ni sprejemljivo! Preverite naš črni seznam.',
+        128 => 'Stranka :ua ni sprejemljivo! Preverite naš črni seznam.'
+        129 => 'Neveljavna Zahteva!',
 
         // Error message about Requests ( Part.2 request params )
         130 => 'ključ: :attribute manjka!',

@@ -34,14 +34,14 @@ class NewComment extends Notification
             if ($this->comment->anon == 0) {
                 return [
                     'title' => 'Prejet nov komentar Torrenta',
-                    'body'  => $this->comment->user->username.' vam je pustil komentar o Torrentu '.$this->comment->torrent->name,
-                    'url'   => '/torrents/'.$this->comment->torrent->id,
+                    'body'  => $this->comment->user->username.' vam je pustil komentar o Torrentu '.$this->comment->commentable->name,
+                    'url'   => '/torrents/'.$this->comment->commentable->id,
                 ];
             }
 
             return [
                 'title' => 'Prejet nov komentar Torrenta',
-                'body'  => 'Anonimnež vam je pustil komentar o Torrentu '.$this->comment->torrent->name,
+                'body'  => 'Anonimnež vam je pustil komentar o Torrentu '.$this->comment->commentable->name,
                 'url'   => '/torrents/'.$this->comment->torrent->id,
             ];
         }
@@ -49,15 +49,15 @@ class NewComment extends Notification
         if ($this->comment->anon == 0) {
             return [
                 'title' => 'Prejet je bil nov komentar o zahtevi',
-                'body'  => $this->comment->user->username.' vam je pustil komentar zahtevo za Torrent '.$this->comment->request->name,
-                'url'   => '/requests/'.$this->comment->request->id,
+                'body'  => $this->comment->user->username.' vam je pustil komentar zahtevo za Torrent '.$this->comment->commentable->name,
+                'url'   => '/requests/'.$this->comment->commentable->id,
             ];
         }
 
         return [
             'title' => 'Prejet je bil nov komentar o zahtevi',
-            'body'  => 'Anonimnež vam je pustil komentar zahtevo za Torrent '.$this->comment->request->name,
-            'url'   => '/requests/'.$this->comment->request->id,
+            'body'  => 'Anonimnež vam je pustil komentar zahtevo za Torrent '.$this->comment->commentable->name,
+            'url'   => '/requests/'.$this->comment->commentable->id,
         ];
     }
 }

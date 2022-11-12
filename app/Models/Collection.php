@@ -12,21 +12,13 @@ class Collection extends Model
 
     protected $table = 'collection';
 
-    /**
-     * Has Many Comments.
-     */
-    public function comments(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function comments(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
-        return $this->hasMany(Comment::class, 'collection_id');
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function movie(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Movie::class);
-    }
-
-    public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Cartoon::class);
     }
 }
