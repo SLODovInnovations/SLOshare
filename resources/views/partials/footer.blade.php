@@ -84,7 +84,7 @@
                         ⚠️ Vsebina katera je na SLOshare.eu se ne sme prenalagati na druge trackerje ⚠️
                         </div>
                         <p>Poganja ga SLOshare.eu  ©2021 - {{ date('Y') }}</p>
-                        <p>Upodabljanje te strani je trajalo {{ number_format(microtime(true) - (defined('LARAVEL_START') ? LARAVEL_START : request()->server('REQUEST_TIME_FLOAT')), 3) }} sekund in {{ number_format(memory_get_peak_usage(true) ) / 1024 / 1024, 2) }} MB pomnilnika </p>
+                        <p>Upodabljanje te strani je trajalo {{ number_format(microtime(true) - (defined('LARAVEL_START') ? LARAVEL_START : request()->server('REQUEST_TIME_FLOAT')), 3) }} sekund in {{ number_format(memory_get_peak_usage(true) / 1024 / 1024, 2) }} MB pomnilnika </p>
                     </span>
                 </div>
             </div>
