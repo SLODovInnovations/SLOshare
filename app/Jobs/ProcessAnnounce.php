@@ -12,7 +12,6 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\DB;
 
 class ProcessAnnounce implements ShouldQueue
 {
@@ -52,8 +51,7 @@ class ProcessAnnounce implements ShouldQueue
         $event = \strtolower($this->queries['event']);
 
         // Get The Current Peer
-        $peer = Peer::query()
-            ->where('torrent_id', '=', $this->torrent->id)
+        $peer = $this->torrent->peers
             ->where('peer_id', '=', $this->queries['peer_id'])
             ->where('user_id', '=', $this->user->id)
             ->first();
@@ -139,7 +137,7 @@ class ProcessAnnounce implements ShouldQueue
                 $peer->user_id = $this->user->id;
                 $peer->updateConnectableStateIfNeeded();
                 $peer->updated_at = \now();
-                $peer->save();
+                Redis::connection('cache')->command('LPUSH', [config('cache.prefix').':peers:batch', serialize($peer)]);
 
                 $history->user_id = $this->user->id;
                 $history->torrent_id = $this->torrent->id;
@@ -172,7 +170,7 @@ class ProcessAnnounce implements ShouldQueue
                 $peer->user_id = $this->user->id;
                 $peer->updateConnectableStateIfNeeded();
                 $peer->updated_at = \now();
-                $peer->save();
+                Redis::connection('cache')->command('LPUSH', [config('cache.prefix').':peers:batch', serialize($peer)]);
 
                 $history->user_id = $this->user->id;
                 $history->torrent_id = $this->torrent->id;
@@ -252,7 +250,7 @@ class ProcessAnnounce implements ShouldQueue
                 $peer->user_id = $this->user->id;
                 $peer->updateConnectableStateIfNeeded();
                 $peer->updated_at = \now();
-                $peer->save();
+                Redis::connection('cache')->command('LPUSH', [config('cache.prefix').':peers:batch', serialize($peer)]);
 
                 $history->user_id = $this->user->id;
                 $history->torrent_id = $this->torrent->id;
@@ -282,13 +280,22 @@ class ProcessAnnounce implements ShouldQueue
                 // End User Update
         }
 
-        $peerCount = DB::table('peers')
-            ->where('torrent_id', '=', $this->torrent->id)
-            ->selectRaw('count(case when peers.left > 0 then 1 end) as leechers')
-            ->selectRaw('count(case when peers.left = 0 then 1 end) as seeders')
-            ->first();
-        $this->torrent->seeders = $peerCount->seeders;
-        $this->torrent->leechers = $peerCount->leechers;
+        $oldSeeders = $this->torrents->peers->where('left', '=', 0)->count();
+        $oldLeechers = $this->torrents->peers->where('left', '>', 0)->count();
+
+        $this->torrent->seeders = match ($event) {
+            'started'   => $oldSeeders + (int) ($this->queries['left'] == 0),
+            'completed' => $oldSeeders + 1,
+            'stopped'   => $oldSeeders - (int) ($this->queries['left'] == 0),
+            default     => $oldSeeders
+        };
+        $this->torrent->leechers = match ($event) {
+            'started'   => $oldLeechers + (int) ($this->queries['left'] > 0),
+            'completed' => $oldLeechers - 1,
+            'stopped'   => $oldLeechers - (int) ($this->queries['left'] > 0),
+            default     => $oldLeechers
+        };
+
         $this->torrent->save();
     }
 }

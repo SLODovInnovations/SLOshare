@@ -2,67 +2,144 @@
 
 namespace App\Http\Controllers\Staff;
 
-use App\Events\MessageDeleted;
+use App\Helpers\TorrentHelper;
 use App\Http\Controllers\Controller;
-use App\Models\History;
-use App\Models\Message;
-use App\Models\Peer;
+use App\Models\PrivateMessage;
+use App\Models\Torrent;
 use App\Repositories\ChatRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 /**
- * @see \Tests\Todo\Feature\Http\Controllers\Staff\FlushControllerTest
+ * @see \Tests\Todo\Feature\Http\Controllers\Staff\ModerationControllerTest
  */
-class FlushController extends Controller
+class ModerationController extends Controller
 {
     /**
-     * FlushController Constructor.
+     * ModerationController Constructor.
      */
     public function __construct(private readonly ChatRepository $chatRepository)
     {
     }
 
     /**
-     * Flsuh All Old Peers From Database.
-     *
-     * @throws \Exception
+     * Torrent Moderation Panel.
      */
-    public function peers(): \Illuminate\Http\RedirectResponse
+    public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $carbon = new Carbon();
-        $peers = Peer::select(['id', 'torrent_id', 'user_id', 'updated_at'])->where('updated_at', '<', $carbon->copy()->subHours(2)->toDateTimeString())->get();
+        $current = Carbon::now();
+        $pending = Torrent::with(['user', 'category', 'type'])->pending()->get();
+        $postponed = Torrent::with(['user', 'category', 'type'])->postponed()->get();
+        $rejected = Torrent::with(['user', 'category', 'type'])->rejected()->get();
 
-        foreach ($peers as $peer) {
-            $history = History::where('torrent_id', '=', $peer->torrent_id)->where('user_id', '=', $peer->user_id)->first();
-            if ($history) {
-                $history->active = false;
-                $history->save();
-            }
-
-            $peer->delete();
-        }
-
-        return \to_route('staff.dashboard.index')
-            ->withSuccess('Ghost Peers so bili splakovani');
+        return \view('Staff.moderation.index', [
+            'current'   => $current,
+            'pending'   => $pending,
+            'postponed' => $postponed,
+            'rejected'  => $rejected,
+        ]);
     }
 
     /**
-     * Flush All Chat Messages.
-     *
-     * @throws \Exception
+     * Update a torrent's moderation status.
      */
-    public function chat(): \Illuminate\Http\RedirectResponse
+    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        foreach (Message::all() as $message) {
-            \broadcast(new MessageDeleted($message));
-            $message->delete();
+        $torrent = Torrent::withAnyStatus()->where('id', '=', $id)->first();
+
+        if ((int) $request->old_status !== $torrent->status) {
+            return \to_route('torrent', ['id' => $id])
+                ->withInput()
+                ->withErrors('Torrent je bil že moderiran, odkar je bila ta stran naložena.');
         }
 
-        $this->chatRepository->systemMessage(
-            'Klepetalnica je bila splakovana! :broom:'
-        );
+        if ((int) $request->status === $torrent->status) {
+            return \to_route('torrent', ['id' => $id])
+                ->withInput()
+                ->withErrors(
+                    match ($torrent->status) {
+                        0       => 'Torrent je že na čakanju.',
+                        1       => 'Torrent je že odobren.',
+                        2       => 'Torrent je že zavrnjen.',
+                        3       => 'Torrent je že prestavljen.',
+                        default => 'Neveljavno stanje moderiranja.'
+                    }
+                );
+        }
 
-        return \to_route('staff.dashboard.index')
-            ->withSuccess('Klepetalnica je bila splakovana');
+        $user = $torrent->user;
+
+        switch ($request->status) {
+            case 1: // Approve
+                $appurl = \config('app.url');
+                $username = $user->username;
+                $anon = $torrent->anon;
+
+                // Announce To Shoutbox
+                if ($anon == 0) {
+                    $this->chatRepository->systemMessage(
+                        \sprintf('Uporabnik [url=%s/users/', $appurl).$username.']'.$username.\sprintf('[/url] je naložil nov '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
+                    );
+                } else {
+                    $this->chatRepository->systemMessage(
+                        \sprintf('Anonimni uporabnik je naložil novo '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
+                    );
+                }
+
+                TorrentHelper::approveHelper($torrent->id);
+
+                return \to_route('staff.moderation.index')
+                    ->withSuccess('Torrent odobren');
+
+            case 2: // Reject
+                $v = \validator($request->all(), [
+                    'id'      => 'required|exists:torrents',
+                    'slug'    => 'required|exists:torrents',
+                    'message' => 'required',
+                ]);
+
+                if ($v->fails()) {
+                    return \to_route('staff.moderation.index')
+                        ->withErrors($v->errors());
+                }
+
+                $torrent->markRejected();
+                $privateMessage = new PrivateMessage();
+                $privateMessage->sender_id = $user->id;
+                $privateMessage->receiver_id = $torrent->user_id;
+                $privateMessage->subject = \sprintf('Vaš prenos, %s ,je zavrnil %s', $torrent->name, $user->username);
+                $privateMessage->message = \sprintf("Pozdravljeni, \n\nVaš prenos %s je bil zavrnjen. Spodaj si oglejte sporočilo uslužbenca.\n\n%s", $torrent->name, $request->message);
+                $privateMessage->save();
+
+                return \to_route('staff.moderation.index')
+                    ->withSuccess('Torrent zavrnjen');
+
+            case 3: // Postpone
+                $v = \validator($request->all(), [
+                    'id'      => 'required|exists:torrents',
+                    'slug'    => 'required|exists:torrents',
+                    'message' => 'required',
+                ]);
+
+                if ($v->fails()) {
+                    return \to_route('staff.moderation.index')
+                        ->withErrors($v->errors());
+                }
+
+                $torrent->markPostponed();
+                $privateMessage = new PrivateMessage();
+                $privateMessage->sender_id = $user->id;
+                $privateMessage->receiver_id = $torrent->user_id;
+                $privateMessage->subject = \sprintf('Vaše nalaganje, %s, je bilo preloženo za %s', $torrent->name, $user->username);
+                $privateMessage->message = \sprintf("Pozdravljeni, \n\nVaše nalaganje, %s, je bilo preloženo. Spodaj si oglejte sporočilo uslužbenca.\n\n%s", $torrent->name, $request->message);
+                $privateMessage->save();
+
+                return \to_route('staff.moderation.index')
+                    ->withSuccess('Torrent preložen');
+
+            default: // Undefined status
+                return \to_route('torrent', ['id' => $id])
+                    ->withErrors('Neveljavno stanje moderiranja.');
+        }
     }
 }
