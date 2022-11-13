@@ -74,7 +74,7 @@ class TicketController extends Controller
     {
         $user = $request->user();
         $ticket = Ticket::with(['comments'])->findOrFail($id);
-        \abort_unless($user->group->is_modo, 403);
+        \abort_unless($user->group->is_modo || $user->id == $ticket->user_id, 403);
 
         if ($user->id == $ticket->user_id) {
             $ticket->user_read = 1;
@@ -133,7 +133,7 @@ class TicketController extends Controller
     {
         $ticket = Ticket::findOrFail($id);
         $user = $request->user();
-        \abort_unless($user->group->is_modo || $user->id == $ticket->user_id, 403);
+        \abort_unless($user->group->is_modo, 403);
 
         Comment::where('ticket_id', '=', $id)->delete();
         TicketAttachment::where('ticket_id', '=', $id)->delete();
