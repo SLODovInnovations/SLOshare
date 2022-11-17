@@ -68,4 +68,10 @@ mix.options({
     .js('resources/js/sloshare/imgbb.js', 'public/js')
     .js('resources/js/vendor/alpine.js', 'public/js')
     .js('resources/js/vendor/virtual-select.js', 'public/js')
-    .js('resources/js/sloshare/chat.js', 'public/js');
+    .js('resources/js/sloshare/chat.js', 'public/js')
+
+    /*
+     * Snowfall JS
+     */
+    .js('resources/js/snowfall/jquery.snowfall.js', 'public/js')
+        .js('resources/js/snowfall/jquery-1.12.4.js', 'public/js');
