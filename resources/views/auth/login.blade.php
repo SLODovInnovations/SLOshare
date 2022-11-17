@@ -20,6 +20,10 @@
     <link rel="shortcut icon" href="{{ url('/favicon.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ url('/favicon.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ mix('css/main/login.css') }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ mix('css/snowfall/font-awesome.css') }}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ mix('css/snowfall/jqueryscripttop.css') }}" crossorigin="anonymous">
+    <script src="{{ mix('js/jquery.snowfall.js') }}" crossorigin="anonymous"></script>
+    <script src="{{ mix('js/jquery-1.12.4.js') }}" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8PXB7XS8X"></script>
 <script>
