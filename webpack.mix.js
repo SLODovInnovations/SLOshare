@@ -48,8 +48,8 @@ mix.options({
     .sass('resources/sass/main/login.scss', 'public/css/main/login.css')
     .sass('resources/sass/main/twostep.scss', 'public/css/main/twostep.css')
 
-    .sass('resources/sass/snowfall/font-awesome.scss', 'public/css/snowfall/font-awesome.scss')
-    .sass('resources/sass/snowfall/jqueryscripttop.scss', 'public/css/snowfall/jqueryscripttop.scss')
+    .sass('resources/sass/snowfall/font-awesome.scss', 'public/css/snowfall/font-awesome.css')
+    .sass('resources/sass/snowfall/jqueryscripttop.scss', 'public/css/snowfall/jqueryscripttop.css')
 
     /*
      * Here we take all these scripts and compile them into a single 'sloshare.js' file that will be loaded after 'app.js'
