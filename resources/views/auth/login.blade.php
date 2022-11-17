@@ -47,6 +47,7 @@
         @endforeach
     </div>
 @endif
+<div class="jquery-script-center">
 <div class="wrapper fadeInDown">
     <div id="formContent">
         <a href="{{ route('login') }}">
@@ -150,7 +151,15 @@
     var _admBCC = document.getElementsByTagName('script')[0]; _admBCC.parentNode.insertBefore(_admBC, _admBCC);
   })();
 </script>
-
+<script type="text/javascript">
+    $.snowfall.start({
+        content: '<i class="fa fa-snowflake-o"></i>',
+        size: {
+            min: 20,
+            max: 50
+        }
+    });
+</script>
 </body>
 
 </html>
