@@ -26,15 +26,11 @@
     <script src="{{ mix('js/jquery-1.12.4.js') }}" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8PXB7XS8X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Q8PXB7XS8X');
-</script>
+<script src="{{ mix('js/google.js') }}" crossorigin="anonymous"></script>
 <!-- Google tag (gtag.js) -->
 <script type="text/javascript" async="" src="https://adserver.adman.si/add/adman.js"></script>
+<script src="{{ mix('js/ad.js') }}" crossorigin="anonymous"></script>
+<script src="{{ mix('js/snowfall.js') }}" crossorigin="anonymous"></script>
 </head>
 
 @php $bg = rand(1, 38); $bgchange = $bg.".jpg" @endphp
@@ -147,23 +143,6 @@
 
     </script>
 @endif
-
-<script type="text/javascript">
-  (function() {
-    var _admBC = document.createElement('script'); _admBC.type = 'text/javascript'; _admBC.async = true;
-    _admBC.src = 'https://adserver.adman.si/add/adman.js';
-    var _admBCC = document.getElementsByTagName('script')[0]; _admBCC.parentNode.insertBefore(_admBC, _admBCC);
-  })();
-</script>
-<script type="text/javascript">
-    $.snowfall.start({
-        content: '<i class="fa fa-snowflake-o"></i>',
-        size: {
-            min: 20,
-            max: 50
-        }
-    });
-</script>
 </body>
 
 </html>

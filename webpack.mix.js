@@ -48,9 +48,6 @@ mix.options({
     .sass('resources/sass/main/login.scss', 'public/css/main/login.css')
     .sass('resources/sass/main/twostep.scss', 'public/css/main/twostep.css')
 
-    .sass('resources/sass/snowfall/font-awesome.scss', 'public/css/snowfall/font-awesome.css')
-    .sass('resources/sass/snowfall/jqueryscripttop.scss', 'public/css/snowfall/jqueryscripttop.css')
-
     /*
      * Here we take all these scripts and compile them into a single 'sloshare.js' file that will be loaded after 'app.js'
      *
@@ -74,7 +71,19 @@ mix.options({
     .js('resources/js/sloshare/chat.js', 'public/js')
 
     /*
-     * Snowfall JS
+     * Snowfall JS login page
      */
     .js('resources/js/snowfall/jquery.snowfall.js', 'public/js')
-    .js('resources/js/snowfall/jquery-1.12.4.js', 'public/js');
+    .js('resources/js/snowfall/jquery-1.12.4.js', 'public/js')
+    .sass('resources/sass/snowfall/font-awesome.scss', 'public/css/snowfall/font-awesome.css')
+    .sass('resources/sass/snowfall/jqueryscripttop.scss', 'public/css/snowfall/jqueryscripttop.css')
+
+    /*
+     * Google JS login page
+     */
+    .js('resources/js/sloshare/google.js', 'public/js')
+
+    /*
+     * AD JS login page
+     */
+    .js('resources/js/sloshare/ad.js', 'public/js');
