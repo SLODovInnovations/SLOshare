@@ -75,6 +75,7 @@ mix.options({
      */
     .js('resources/js/snowfall/jquery.snowfall.js', 'public/js')
     .js('resources/js/snowfall/jquery-1.12.4.js', 'public/js')
+    .js('resources/js/snowfall/snowfall.js', 'public/js')
     .sass('resources/sass/snowfall/font-awesome.scss', 'public/css/snowfall/font-awesome.css')
     .sass('resources/sass/snowfall/jqueryscripttop.scss', 'public/css/snowfall/jqueryscripttop.css')
 
