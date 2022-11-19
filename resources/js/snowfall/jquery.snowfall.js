@@ -17,7 +17,7 @@
             }, options);
 
             if ($wrapper == undefined) {
-                $('body').append('<div id="snowfall-wrapper" />');
+                $('body');
                 $wrapper = $('#snowfall-wrapper');
 
                 $wrapper.css({
