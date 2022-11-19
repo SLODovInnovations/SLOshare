@@ -23,20 +23,21 @@
     <link rel="stylesheet" href="{{ mix('css/snowfall/font-awesome.css') }}" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ mix('css/snowfall/jqueryscripttop.css') }}" crossorigin="anonymous">
     <script src="{{ mix('js/jquery-1.12.4.js') }}" crossorigin="anonymous"></script>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8PXB7XS8X"></script>
-<script src="{{ mix('js/google.js') }}" crossorigin="anonymous"></script>
-<!-- Google tag (gtag.js) -->
-<script type="text/javascript" async="" src="https://adserver.adman.si/add/adman.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q8PXB7XS8X"></script>
+    <script src="{{ mix('js/google.js') }}" crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script type="text/javascript" async="" src="https://adserver.adman.si/add/adman.js"></script>
 </head>
 
-@php $bg = rand(1, 38); $bgchange = $bg.".jpg" @endphp
-<body style="background: url('/img/login/background/{{ $bgchange }}');background-position-x: 50%;background-position-y: center;background-size: cover;background-attachment: fixed;">
+@php $bgchange = ".jpg" @endphp
+<body style="background: url('/img/login/background/<php echo date("m"); ?>/{{ $bgchange }}');background-position-x: 50%;background-position-y: center;background-size: cover;background-attachment: fixed;">
 
 <!-- Dont Not Change! For Jackett Support -->
 <div class="Jackett" style="display:none;">{{ config('sloshare.powered-by') }}</div>
 <!-- Dont Not Change! For Jackett Support -->
 
+<div id="snowfall-wrapper" />
 @if ($errors->any())
     <div id="ERROR_COPY" style="display: none;">
         @foreach ($errors->all() as $error)
