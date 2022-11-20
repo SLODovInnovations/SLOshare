@@ -182,7 +182,7 @@
                             {{ __('request.reward') }} ({{ __('request.reward-desc') }})
                         </label>
                     </p>
-                    <p class="form__group">
+                    <!--<p class="form__group">
                         <input type="hidden" name="anon" value="0">
                         <input
                             type="checkbox"
@@ -193,7 +193,7 @@
                             @checked(old('anon'))
                         >
                         <label class="form__label" for="anon">{{ __('common.anonymous') }}?</label>
-                    </p>
+                    </p>-->
                     <p class="form__group">
                         <button class="form__button form__button--filled">
                             {{ __('common.submit') }}

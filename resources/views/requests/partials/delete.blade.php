@@ -7,8 +7,8 @@
     <div class="form__group form__group--short-horizontal">
         <button
             x-on:click.prevent="Swal.fire({
-                title: 'Are you sure?',
-                text: 'Are you sure you want to delete this torrent request and lose the BON?',
+                title: 'Ali si prepričan?',
+                text: 'Ali ste prepričani, da želite izbrisati to zahtevo za torrent?',
                 icon: 'warning',
                 showConfirmButton: true,
                 showCancelButton: true,

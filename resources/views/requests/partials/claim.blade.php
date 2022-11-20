@@ -13,7 +13,7 @@
             x-on:click.outside="open = false; $refs.dialog.close();"
         >
             @csrf
-            <p class="form__group">
+            <!--<p class="form__group">
                 <input type="hidden" name="anon" value="0">
                 <input
                     id="anon_claim"
@@ -25,7 +25,7 @@
                 <label class="form__label" for="anon_claim">
                     {{ __('common.anonymous') }}?
                 </label>
-            </p>
+            </p>-->
             <p class="form__group">
                 <button class="form__button form__button--filled">
                     {{ __('request.claim-now') }}

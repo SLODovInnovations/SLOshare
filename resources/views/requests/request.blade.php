@@ -21,7 +21,7 @@
     @if ($user->can_request)
         <section class="panelV2">
             <h2 class="panel__heading">
-                {{ $torrentRequest->name }} {{ __('request.for') }}
+                {{ $torrentRequest->name }}
 <!--                <i class="{{ config('other.font-awesome') }} fa-coins text-gold"></i>
                 {{ $torrentRequest->bounty }} {{ __('bon.bon') }}-->
             </h2>
@@ -104,16 +104,16 @@
             <dl class="key-value">
                 <dt>{{ __('request.claimed') }}</dt>
                 <dd>
-                    @if ($torrentRequestClaim->anon)
+                    <!--@if ($torrentRequestClaim->anon)
                         {{ strtoupper(__('common.anonymous')) }}
                         @if ($user->group->is_modo || $torrentRequestClaim->username == $user->username)
                             ({{ $torrentRequestClaim->username }})
                         @endif
-                    @else
+                    @else-->
                         <a href="{{ route('users.show', ['username' => $torrentRequestClaim->username]) }}">
                             {{ $torrentRequestClaim->username }}
                         </a>
-                    @endif
+                    <!--@endif-->
                 </dd>
                 <dt>{{ __('request.claimed') }} PRED</dt>
                 <dd>
