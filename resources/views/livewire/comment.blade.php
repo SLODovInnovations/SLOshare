@@ -7,7 +7,7 @@
                     alt=""
             >
             <address class="comment__author">
-                <x-user_tag :user="$comment->user"/>
+                <x-user_tag :user="$comment->user :anon="false""/>
             </address>
             <time
                     class="comment__timestamp"
@@ -19,7 +19,7 @@
             <menu class="comment__actions">
                 @if ($comment->isParent())
                     <button wire:click="$toggle('isReplying')" class="comment__reply">
-                        <abbr class="comment__reply-abbr" title="Reply to this comment">
+                        <abbr class="comment__reply-abbr" title="Odgovori na ta komentar">
                             <i class="{{ config('other.font-awesome') }} fa-reply"></i>
                             <span class="sr-only">__('pm.reply')</span>
                         </abbr>
@@ -37,7 +37,7 @@
                             x-on:click="confirmCommentDeletion"
                             x-data="{
                             confirmCommentDeletion () {
-                                if (window.confirm('You sure?')) {
+                                if (window.confirm('Si prepričan?')) {
                                 @this.call('deleteComment')
                                 }
                             }
@@ -66,7 +66,7 @@
                         @error('editState.content')
                         <strong>{{ __('common.error') }}: </strong>
                         @enderror
-                        Edit your comment...
+                        Uredi svoj komentar...
                     </label>
                     @error('editState.content')
                     <span class="form__hint" id="edit-comment__textarea-hint">{{ $message }}</p>
@@ -106,7 +106,7 @@
                             @error('editState.content')
                             <strong>{{ __('common.error') }}: </strong>
                             @enderror
-                            Reply to parent comment...
+                            Odgovori na komentar...
                         </label>
                         @error('replyState.content')
                         <span class="form__hint" id="reply-comment__textarea-hint">{{ $message }}</p>
