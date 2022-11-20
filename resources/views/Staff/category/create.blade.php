@@ -112,6 +112,17 @@
                     <label for="cartoon_meta">{{ __('staff.cartoons-meta-data') }}</label>
                 </p>
                 <p class="form__group">
+                    <input type="hidden" name="cartoontv_meta" value="0">
+                    <input
+                        id="cartoontv_meta"
+                        class="form__checkbox"
+                        type="checkbox"
+                        name="cartoontv_meta"
+                        value="1"
+                    >
+                    <label for="cartoontv_meta">{{ __('staff.cartoontvs-meta-data') }}</label>
+                </p>
+                <p class="form__group">
                     <input type="hidden" name="game_meta" value="0">
                     <input
                         id="game_meta"
