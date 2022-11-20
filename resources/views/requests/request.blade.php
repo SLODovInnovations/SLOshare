@@ -113,13 +113,12 @@
             <dl class="key-value">
                 <dt>{{ __('request.claimed') }}</dt>
                 <dd>
-                     @if ($user->group->is_modo || $torrentRequestClaim->username == $user->username)
+                    @if ($user->group->is_modo || $torrentRequestClaim->username == $user->username)
                         ({{ $torrentRequestClaim->username }})
                     @endif
                         <a href="{{ route('users.show', ['username' => $torrentRequestClaim->username]) }}">
                             {{ $torrentRequestClaim->username }}
                         </a>
-                    <!--@endif-->
                 </dd>
                 <dt>{{ __('request.claimed') }} PRED</dt>
                 <dd>
@@ -136,7 +135,7 @@
             <dl class="key-value">
                 <dt>{{ __('request.filled') }}</dt>
                 <dd>
-                    <x-user_tag :user="$torrentRequest->FillUser" />
+                    <x-user_tag :user="$torrentRequest->FillUser :anon="false"" />
                 </dd>
                 <dt>{{ __('request.filled') }} PRED</dt>
                 <dd>
@@ -144,7 +143,7 @@
                         {{ $torrentRequest->filled_when->diffForHumans() }}
                     </time>
                 </dd>
-                <dt>{{ __('request.filled') }} with</dt>
+                <dt>{{ __('request.filled') }}</dt>
                 <dd>
                     <a
                         href="{{ route('torrent', ['id' => $torrentRequest->torrent->id]) }}"
