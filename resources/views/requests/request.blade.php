@@ -243,7 +243,7 @@
                     @foreach ($voters as $voter)
                         <tr>
                             <td>
-                                <x-user_tag :user="$voter->user" />
+                                <x-user_tag :user="$voter->user" :anon="false" />
                             </td>
                             <!--<td>{{ $voter->seedbonus }}</td>-->
                             <td>
