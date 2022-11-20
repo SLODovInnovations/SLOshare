@@ -21,7 +21,7 @@
     @if ($user->can_request)
         <section class="panelV2">
             <h2 class="panel__heading">
-                {{ $torrentRequest->name }} {{ __('request.for') }}
+                {{ $torrentRequest->name }}
 <!--                <i class="{{ config('other.font-awesome') }} fa-coins text-gold"></i>
                 {{ $torrentRequest->bounty }} {{ __('bon.bon') }}-->
             </h2>
@@ -66,9 +66,9 @@
             <dt>{{ __('torrent.resolution') }}</dt>
             <dd>{{ $torrentRequest->resolution->name ?? 'No Res' }}</dd>
             <dt>{{ __('request.requested-by') }}</dt>
-            <!--<dd>
-                <x-user_tag :user="$torrentRequest->user" :anon="$torrentRequest->anon" />
-            </dd>-->
+            <dd>
+                <x-user_tag :user="$torrentRequest->user" />
+            </dd>
             <dt>{{ __('common.created_at') }}</dt>
             <dd>
                 <time datetime="{{ $torrentRequest->created_at }}" title="{{ $torrentRequest->created_at }}">
@@ -104,16 +104,16 @@
             <dl class="key-value">
                 <dt>{{ __('request.claimed') }}</dt>
                 <dd>
-                    @if ($torrentRequestClaim->anon)
+                    <!--@if ($torrentRequestClaim->anon)
                         {{ strtoupper(__('common.anonymous')) }}
                         @if ($user->group->is_modo || $torrentRequestClaim->username == $user->username)
                             ({{ $torrentRequestClaim->username }})
                         @endif
-                    @else
+                    @else-->
                         <a href="{{ route('users.show', ['username' => $torrentRequestClaim->username]) }}">
                             {{ $torrentRequestClaim->username }}
                         </a>
-                    @endif
+                    <!--@endif-->
                 </dd>
                 <dt>{{ __('request.claimed') }} PRED</dt>
                 <dd>
@@ -129,9 +129,9 @@
             <h2 class="panel__heading">{{ __('request.filled') }}</h2>
             <dl class="key-value">
                 <dt>{{ __('request.filled') }}</dt>
-                <!--<dd>
-                    <x-user_tag :user="$torrentRequest->FillUser" :anon="$torrentRequest->filled_anon" />
-                </dd>-->
+                <dd>
+                    <x-user_tag :user="$torrentRequest->FillUser" />
+                </dd>
                 <dt>{{ __('request.filled') }} PRED</dt>
                 <dd>
                     <time datetime="{{ $torrentRequest->filled_when }}" title="{{ $torrentRequest->filled_when }}">
@@ -236,10 +236,10 @@
                 <tbody>
                     @foreach ($voters as $voter)
                         <tr>
-                            <!--<td>
-                                <x-user_tag :user="$voter->user" :anon="$voter->anon" />
-                            </td>-->
-                            <td>{{ $voter->seedbonus }}</td>
+                            <td>
+                                <x-user_tag :user="$voter->user" />
+                            </td>
+                            <!--<td>{{ $voter->seedbonus }}</td>-->
                             <td>
                                 <time datetime="{{ $voter->created_at }}" title="{{ $voter->created_at }}">
                                     {{ $voter->created_at->diffForHumans() }}

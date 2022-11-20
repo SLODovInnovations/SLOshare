@@ -26,7 +26,7 @@
                     {{ __('request.enter-hash') }}
                 </label>
             </p>
-            <p class="form__group">
+            <!--<p class="form__group">
                 <input type="hidden" name="filled_anon" value="0">
                 <input
                     type="checkbox"
@@ -38,7 +38,7 @@
                 <label class="form__label" for="filled_anon">
                     {{ __('common.anonymous') }}?
                 </label>
-            </p>
+            </p>-->
             <p class="form__group">
                 <button class="form__button form__button--filled">
                     {{ __('request.fulfill') }}

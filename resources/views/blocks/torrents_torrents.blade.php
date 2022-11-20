@@ -115,7 +115,7 @@
                             @endif
 
                             @if($newslo->category->no_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
                                 @else
                                     style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $newslo->name }}>
