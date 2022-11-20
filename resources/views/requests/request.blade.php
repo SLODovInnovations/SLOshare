@@ -76,7 +76,7 @@
             <dd>{{ $torrentRequest->resolution->name ?? 'No Res' }}</dd>
             <dt>{{ __('request.requested-by') }}</dt>
             <dd>
-                <x-user_tag :user="$torrentRequest->user" />
+                <x-user_tag :user="$torrentRequest->user" :anon="false" />
             </dd>
             <dt>{{ __('common.created_at') }}</dt>
             <dd>
