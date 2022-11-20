@@ -7,7 +7,7 @@
                     alt=""
             >
             <address class="comment__author">
-                <x-user_tag :anon="$comment->anon" :user="$comment->user"/>
+                <x-user_tag :user="$comment->user"/>
             </address>
             <time
                     class="comment__timestamp"

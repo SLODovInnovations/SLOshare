@@ -196,6 +196,7 @@
                         >
                         <label class="form__label" for="anon">{{ __('common.anonymous') }}?</label>
                     </p>-->
+                    <input type="hidden" name="anon" value="0">
                     <p class="form__group">
                         <button class="form__button form__button--filled">
                             {{ __('common.submit') }}

@@ -28,6 +28,7 @@
                     {{ __('request.enter-bp') }}
                 </label>
             </p>-->
+            <input type="hidden" name="bonus_value" value="0">
             <!--<p class="form__group">
                 <input type="hidden" name="anon" value="0">
                 <input

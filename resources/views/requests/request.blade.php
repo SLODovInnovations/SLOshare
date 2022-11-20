@@ -76,7 +76,7 @@
             <dd>{{ $torrentRequest->resolution->name ?? 'No Res' }}</dd>
             <dt>{{ __('request.requested-by') }}</dt>
             <dd>
-                <x-user_tag :user="$torrentRequest->user" />
+                <x-user_tag :user="$torrentRequest->user" :anon="false" />
             </dd>
             <dt>{{ __('common.created_at') }}</dt>
             <dd>
@@ -113,12 +113,9 @@
             <dl class="key-value">
                 <dt>{{ __('request.claimed') }}</dt>
                 <dd>
-                    <!--@if ($torrentRequestClaim->anon)
-                        {{ strtoupper(__('common.anonymous')) }}
-                        @if ($user->group->is_modo || $torrentRequestClaim->username == $user->username)
-                            ({{ $torrentRequestClaim->username }})
-                        @endif
-                    @else-->
+                     @if ($user->group->is_modo || $torrentRequestClaim->username == $user->username)
+                        ({{ $torrentRequestClaim->username }})
+                    @endif
                         <a href="{{ route('users.show', ['username' => $torrentRequestClaim->username]) }}">
                             {{ $torrentRequestClaim->username }}
                         </a>
@@ -246,7 +243,7 @@
                     @foreach ($voters as $voter)
                         <tr>
                             <td>
-                                <x-user_tag :user="$voter->user" />
+                                <x-user_tag :user="$voter->user" :anon="false" />
                             </td>
                             <!--<td>{{ $voter->seedbonus }}</td>-->
                             <td>

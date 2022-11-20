@@ -24,10 +24,11 @@
                     <span class="form__hint" id="new-comment__textarea-hint">{{ $message }}</p>
                 @enderror
             </p>
-            <p class="form__group">
+            <!--<p class="form__group">
                 <input type="checkbox" id="anon" class="form__checkbox" wire:modal="anon">
                 <label for="anon" class="form__label">{{ __('common.anonymous') }}?</label>
-            </p>
+            </p>-->
+            <input type="hidden" name="anon" value="0">
             <p class="form__group">
                 <button type="submit" class="form__button form__button--filled">
                     Comment

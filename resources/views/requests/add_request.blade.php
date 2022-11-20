@@ -170,18 +170,19 @@
                         'label' => __('request.description'),
                         'required' => true
                     ])
-                    <p class="form__group">
+                    <!--<p class="form__group">
                         <input
                             class="form__text"
                             name="bounty"
                             type="text"
                             pattern="[0-9]*?[1-9][0-9]{2,}"
-                            value="100"
+                            value="0"
                             required>
                         <label class="form__label form__label--floating" for="bonus_point">
                             {{ __('request.reward') }} ({{ __('request.reward-desc') }})
                         </label>
-                    </p>
+                    </p>-->
+                    <input type="hidden" name="bonus_point" value="0">
                     <!--<p class="form__group">
                         <input type="hidden" name="anon" value="0">
                         <input
@@ -194,6 +195,7 @@
                         >
                         <label class="form__label" for="anon">{{ __('common.anonymous') }}?</label>
                     </p>-->
+                    <input type="hidden" name="anon" value="0">
                     <p class="form__group">
                         <button class="form__button form__button--filled">
                             {{ __('common.submit') }}

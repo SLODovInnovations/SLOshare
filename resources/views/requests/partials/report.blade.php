@@ -29,7 +29,7 @@
             <p class="form__group">
                 <button
                     class="form__button form__button--filled"
-                    @if ($user->seedbonus < 100)
+                    @if ($user->seedbonus < 0)
                         disabled
                         title="{{ __('request.dont-have-bps') }}"
                     @endif
