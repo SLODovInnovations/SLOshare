@@ -113,12 +113,9 @@
             <dl class="key-value">
                 <dt>{{ __('request.claimed') }}</dt>
                 <dd>
-                    <!--@if ($torrentRequestClaim->anon)
-                        {{ strtoupper(__('common.anonymous')) }}
-                        @if ($user->group->is_modo || $torrentRequestClaim->username == $user->username)
-                            ({{ $torrentRequestClaim->username }})
-                        @endif
-                    @else-->
+                     @if ($user->group->is_modo || $torrentRequestClaim->username == $user->username)
+                        ({{ $torrentRequestClaim->username }})
+                    @endif
                         <a href="{{ route('users.show', ['username' => $torrentRequestClaim->username]) }}">
                             {{ $torrentRequestClaim->username }}
                         </a>
