@@ -40,7 +40,6 @@ class Kernel extends ConsoleKernel
         //$schedule->command('backup:clean')->daily();
         //$schedule->command('backup:run')->daily();
     }
-    }
 
     /**
      * Register the Closure based commands for the application.
