@@ -11,7 +11,6 @@ use App\Helpers\TorrentTools;
 use App\Models\Audit;
 use App\Models\BonTransactions;
 use App\Models\Category;
-use App\Models\Comment;
 use App\Models\Distributor;
 use App\Models\FeaturedTorrent;
 use App\Models\FreeleechToken;
@@ -568,7 +567,7 @@ class TorrentController extends Controller
         }
 
         // Torrent FL 100%
-        if (config('torrent.size_freeleech') == true && $torrent->size >= \config('torrent.size_threshold')){
+        if (config('torrent.size_freeleech') == true && $torrent->size >= \config('torrent.size_threshold')) {
             $torrent->free = 100;
         }
 

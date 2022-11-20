@@ -67,6 +67,6 @@ return [
     |
     */
 
-    'size_freeleech' => False,
+    'size_freeleech' => false,
     'size_threshold' => '53687091200', //in bytes, default is 53687091200 (50GiB)
 ];

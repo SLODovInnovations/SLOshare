@@ -208,7 +208,7 @@ class TorrentController extends BaseController
         }
 
         // Torrent FL 100%
-        if (config('torrent.size_freeleech') == true && $torrent->size >= \config('torrent.size_threshold')){
+        if (config('torrent.size_freeleech') == true && $torrent->size >= \config('torrent.size_threshold')) {
             $torrent->free = 100;
         }
 

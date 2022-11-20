@@ -22,8 +22,8 @@
         <section class="panelV2">
             <h2 class="panel__heading">
                 {{ $torrentRequest->name }} {{ __('request.for') }}
-                <i class="{{ config('other.font-awesome') }} fa-coins text-gold"></i>
-                {{ $torrentRequest->bounty }} {{ __('bon.bon') }}
+<!--                <i class="{{ config('other.font-awesome') }} fa-coins text-gold"></i>
+                {{ $torrentRequest->bounty }} {{ __('bon.bon') }}-->
             </h2>
             @switch(true)
                 @case($torrentRequest->category->movie_meta)
@@ -66,9 +66,9 @@
             <dt>{{ __('torrent.resolution') }}</dt>
             <dd>{{ $torrentRequest->resolution->name ?? 'No Res' }}</dd>
             <dt>{{ __('request.requested-by') }}</dt>
-            <dd>
+            <!--<dd>
                 <x-user_tag :user="$torrentRequest->user" :anon="$torrentRequest->anon" />
-            </dd>
+            </dd>-->
             <dt>{{ __('common.created_at') }}</dt>
             <dd>
                 <time datetime="{{ $torrentRequest->created_at }}" title="{{ $torrentRequest->created_at }}">
@@ -102,7 +102,7 @@
         <section class="panelV2">
             <h2 class="panel__heading">{{ __('request.claimed') }}</h2>
             <dl class="key-value">
-                <dt>{{ __('request.claimed') }} by</dt>
+                <dt>{{ __('request.claimed') }}</dt>
                 <dd>
                     @if ($torrentRequestClaim->anon)
                         {{ strtoupper(__('common.anonymous')) }}
@@ -115,7 +115,7 @@
                         </a>
                     @endif
                 </dd>
-                <dt>{{ __('request.claimed') }} at</dt>
+                <dt>{{ __('request.claimed') }} PRED</dt>
                 <dd>
                     <time datetime="{{ $torrentRequestClaim->created_at }}" title="{{ $torrentRequestClaim->created_at }}">
                         {{ $torrentRequestClaim->created_at->diffForHumans() }}
@@ -128,11 +128,11 @@
         <section class="panelV2">
             <h2 class="panel__heading">{{ __('request.filled') }}</h2>
             <dl class="key-value">
-                <dt>{{ __('request.filled') }} by</dt>
-                <dd>
+                <dt>{{ __('request.filled') }}</dt>
+                <!--<dd>
                     <x-user_tag :user="$torrentRequest->FillUser" :anon="$torrentRequest->filled_anon" />
-                </dd>
-                <dt>{{ __('request.filled') }} at</dt>
+                </dd>-->
+                <dt>{{ __('request.filled') }} PRED</dt>
                 <dd>
                     <time datetime="{{ $torrentRequest->filled_when }}" title="{{ $torrentRequest->filled_when }}">
                         {{ $torrentRequest->filled_when->diffForHumans() }}
@@ -229,16 +229,16 @@
                 <thead>
                     <tr>
                         <th>{{ __('common.user') }}</th>
-                        <th>{{ __('bon.bon') }}</th>
+                        <!--<th>{{ __('bon.bon') }}</th>-->
                         <th>{{ __('request.last-vote') }}</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($voters as $voter)
                         <tr>
-                            <td>
+                            <!--<td>
                                 <x-user_tag :user="$voter->user" :anon="$voter->anon" />
-                            </td>
+                            </td>-->
                             <td>{{ $voter->seedbonus }}</td>
                             <td>
                                 <time datetime="{{ $voter->created_at }}" title="{{ $voter->created_at }}">
