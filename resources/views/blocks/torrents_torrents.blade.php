@@ -115,9 +115,11 @@
                             @endif
 
                             @if($newslo->category->no_meta)
-                                style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
-                            @else
-                                style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $newslo->name }}>
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
+                                @else
+                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $newslo->name }}>
+                                @endif
                             @endif
 
 				            <div class="release-info">
@@ -387,6 +389,7 @@
 				        @if ($cartoone->tmdb || $cartoone->tmdb != 0)
 					        @php $meta = App\Models\Cartoon::where('id', '=', $cartoone->tmdb)->first(); @endphp
 				        @endif
+                    @endif
 
 			        @if ($cartoone->category->cartoontv_meta)
 				        @if ($cartoone->tmdb || $cartoone->tmdb != 0)

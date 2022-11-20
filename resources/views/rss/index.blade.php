@@ -126,7 +126,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="8">No public RSS feeds</td>
+                            <td colspan="8">Ni javnih virov RSS</td>
                         </tr>
                     @endforelse
                 </tbody>
