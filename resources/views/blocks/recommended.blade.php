@@ -66,6 +66,11 @@
                             	    @php $meta = App\Models\Cartoon::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
+                            @if ($slorecommendeds->category->cartoontv_meta)
+                                @if ($slorecommendeds->tmdb || $slorecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\Cartoontv::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
+                                @endif
+                            @endif
                             @if ($slorecommendeds->category->game_meta)
                                 @if ($slorecommendeds->igdb || $slorecommendeds->igdb != 0)
                             	    @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($slorecommendeds->igdb); @endphp
@@ -85,6 +90,15 @@
 										@endif
 
 										@if ($slorecommendeds->category->cartoon_meta)
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$slorecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $slorecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+											@else
+											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
+											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+											@endif
+										@endif
+
+										@if ($slorecommendeds->category->cartoontv_meta)
 										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$slorecommendeds->id.'.jpg'))
                                                 <img src="{{ url('files/img/torrent-cover_' . $slorecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else

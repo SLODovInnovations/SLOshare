@@ -62,6 +62,11 @@
                             @php $meta = cache()->remember('cartoonmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Cartoon::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
                         @endif
                     @endif
+                    @if ($newslo->category->cartoontv_meta)
+                        @if ($newslo->tmdb || $newslo->tmdb != 0)
+                            @php $meta = cache()->remember('tvmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\cartoontv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                        @endif
+                    @endif
                     @if ($newslo->category->game_meta)
                         @if ($newslo->igdb || $newslo->igdb != 0)
                             @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($newslo->igdb) @endphp
@@ -79,6 +84,15 @@
                             @endif
 
     			            @if ($newslo->category->cartoon_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt="{{ $newslo->name }}>
+                                @else
+    							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
+    							    class="show-poster" alt="{{ $newslo->name }}>
+    						    @endif
+                            @endif
+
+    			            @if ($newslo->category->cartoontv_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt="{{ $newslo->name }}>
                                 @else
@@ -373,6 +387,11 @@
 				        @if ($cartoone->tmdb || $cartoone->tmdb != 0)
 					        @php $meta = App\Models\Cartoon::where('id', '=', $cartoone->tmdb)->first(); @endphp
 				        @endif
+
+			        @if ($cartoone->category->cartoontv_meta)
+				        @if ($cartoone->tmdb || $cartoone->tmdb != 0)
+					        @php $meta = App\Models\Cartoontv::where('id', '=', $cartoone->tmdb)->first(); @endphp
+				        @endif
 			        @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
@@ -450,7 +469,7 @@
 						            @if ($x->category->game_meta)
 						                <div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
 						            @endif
-                                    @if ($x->category->movie_meta || $x->category->tv_meta || $x->category->cartoon_meta)
+                                    @if ($x->category->movie_meta || $x->category->tv_meta || $x->category->cartoon_meta || $x->category->cartoontv_meta)
                                     <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 

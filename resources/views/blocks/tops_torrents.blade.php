@@ -37,6 +37,11 @@
          			        @php $meta = App\Models\Cartoon::where('id', '=', $seed->tmdb)->first(); @endphp
          		        @endif
          	        @endif
+         		    @if ($seed->category->cartoontv_meta)
+         		         @if ($seed->tmdb || $seed->tmdb != 0)
+         			            @php $meta = App\Models\Cartoontv::where('id', '=', $seed->tmdb)->first(); @endphp
+                         @endif
+                    @endif
          		    @if ($seed->category->game_meta)
          			    @if ($seed->igdb || $seed->igdb != 0)
          				    @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($seed->igdb); @endphp
@@ -53,6 +58,14 @@
     						    @endif
                             @endif
     			            @if ($seed->category->cartoon_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');" class="show-poster" alt="{{ $seed->name }}>
+                                @else
+    							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
+    							    class="show-poster" alt="{{ $seed->name }}>
+    						    @endif
+                            @endif
+    			            @if ($seed->category->cartoontv_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');" class="show-poster" alt="{{ $seed->name }}>
                                 @else
@@ -138,6 +151,11 @@
     					    @php $meta = App\Models\Cartoon::where('id', '=', $leech->tmdb)->first(); @endphp
     				    @endif
     			    @endif
+    			    @if ($leech->category->cartoontv_meta)
+    				    @if ($leech->tmdb || $leech->tmdb != 0)
+    					    @php $meta = App\Models\Cartoontv::where('id', '=', $leech->tmdb)->first(); @endphp
+    				    @endif
+                    @endif
     			    @if ($leech->category->game_meta)
     				    @if ($leech->igdb || $leech->igdb != 0)
     			            @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($leech->igdb); @endphp
@@ -154,6 +172,14 @@
     						    @endif
                             @endif
     			            @if ($leech->category->cartoon_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');" class="show-poster" alt="{{ $leech->name }}>
+                                @else
+    						        style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
+    							    class="show-poster" alt="{{ $leech->name }}>
+    					        @endif
+                            @endif
+    			            @if ($leech->category->cartoontv_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');" class="show-poster" alt="{{ $leech->name }}>
                                 @else
