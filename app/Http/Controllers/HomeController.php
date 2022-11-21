@@ -185,8 +185,7 @@ class HomeController extends Controller
             ->get());
 
         //SLOshare
-        // Total Members Count (All Groups)
-        $allUser = \cache()->remember('all_user', $expiresAt, fn () => User::withTrashed()->get());
+        $allUser = \cache()->remember('all_user', $this->carbon, fn () => User::withTrashed()->count())
         //SLOshare
 
         $freeleechTokens = FreeleechToken::where('user_id', $user->id)->get();
@@ -221,7 +220,7 @@ class HomeController extends Controller
             'freeleech_tokens'   => $freeleechTokens,
             'bookmarks'          => $bookmarks,
             //SLOshare
-            'all_user'          => $allUser,
+            'all_user'           => $allUser,
             //SLOshare
         ]);
     }
