@@ -185,7 +185,7 @@ class HomeController extends Controller
             ->get());
 
         //SLOshare
-        $allUser = \cache()->remember('all_user', $this->current, fn () => User::withTrashed()->count());
+        $allUser = \cache()->remember('all_user', $current, fn () => User::withTrashed()->count());
         //SLOshare
 
         $freeleechTokens = FreeleechToken::where('user_id', $user->id)->get();
