@@ -14,6 +14,7 @@ use App\Models\Topic;
 use App\Models\Torrent;
 use App\Models\User;
 //SLOshare
+use App\Models\Peer;
 //SLOshare
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
