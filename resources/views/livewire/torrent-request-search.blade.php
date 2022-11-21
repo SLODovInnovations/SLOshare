@@ -72,7 +72,7 @@
                                 <td>{{ number_format($torrentRequest->bounty) }}</td>
                                 <td>
                                     <time datetime="{{ $torrentRequest->created_at }}" title="{{ $torrentRequest->created_at }}">
-                                        {{ $torrentRequest->created_at->diffForHumans() }}
+                                        {{ date('d.m.Y', $torrentRequest->created_at->getTimestamp()) }}
                                     </time>
                                 </td>
                                 <td>

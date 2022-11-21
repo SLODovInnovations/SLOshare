@@ -34,7 +34,7 @@
             <dt>ID</dt>
             <dd>{{ $ticket->id }}</dd>
             <dt>{{ __('common.created_at') }}</dt>
-            <dd>{{ $ticket->created_at->format('Y-m-d') }}</dd>
+            <dd>{{ $ticket->created_at->format('d.m.Y') }}</dd>
             <dt>{{ __('ticket.opened-by') }}</dt>
             <dd>
                 <x-user_tag :user="$ticket->user" :anon="false" />
@@ -58,7 +58,7 @@
             </dd>
             @if (!empty($ticket->closed_at))
                 <dt>{{ __('ticket.closed') }}</dt>
-                <dd>{{ $ticket->closed_at->format('m/d/Y') }}</dd>
+                <dd>{{ $ticket->closed_at->format('d.m.Y') }}</dd>
             @endif
         </dl>
     </section>
