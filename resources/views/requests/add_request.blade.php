@@ -161,7 +161,7 @@
                                 type="text"
                                 x-bind:value="{{ old('igdb') }}"
                             >
-                            <label class="form__label form__label--floating" for="igdb">IGDB ID</label>
+                            <label class="form__label form__label--floating" for="igdb">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
                         </p>
                     </div>
                     @livewire('bbcode-input', [
