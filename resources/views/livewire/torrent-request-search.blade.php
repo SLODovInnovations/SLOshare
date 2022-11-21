@@ -325,11 +325,6 @@
                 <dt>{{ __('request.unfilled') }}:</dt>
                 <dd>{{ number_format($torrentRequestStat->unfilled) }}</dd>
                 <dt>{{ __('request.total-bounty') }}:</dt>
-                <dd>{{ number_format($torrentRequestBountyStat->total) }} {{ __('bon.bon') }}</dd>
-                <dt>{{ __('request.bounty-claimed') }}:</dt>
-                <dd>{{ number_format($torrentRequestBountyStat->claimed) }} {{ __('bon.bon') }}</dd>
-                <dt>{{ __('request.bounty-unclaimed') }}:</dt>
-                <dd>{{ number_format($torrentRequestBountyStat->unclaimed) }} {{ __('bon.bon') }}</dd>
             </dl>
         </section>
     </aside>

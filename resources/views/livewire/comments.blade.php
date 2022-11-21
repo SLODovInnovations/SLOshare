@@ -18,7 +18,7 @@
                     @error('newCommentState.content')
                         <strong>{{ __('common.error') }}: </strong>
                     @enderror
-                    Add a comment...
+                    Dodaj komentar...
                 </label>
                 @error('newCommentState.content')
                     <span class="form__hint" id="new-comment__textarea-hint">{{ $message }}</p>
@@ -31,7 +31,7 @@
             <input type="hidden" name="anon" value="0">
             <p class="form__group">
                 <button type="submit" class="form__button form__button--filled">
-                    Comment
+                    {{ __('common.comment') }}
                 </button>
                 <button type="reset" class="form__button form__button--text">
                     {{ __('common.cancel') }}
@@ -50,7 +50,7 @@
         </ul>
         @if ($comments->hasMorePages())
             <div class="text-center">
-                <button class="btn btn-md btn-primary" wire:click.prevent="loadMore">Load More Comments</button>
+                <button class="btn btn-md btn-primary" wire:click.prevent="loadMore">Naloži več komentarjev</button>
             </div>
         @endif
     </div>
