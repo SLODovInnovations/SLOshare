@@ -324,7 +324,6 @@
                 <dd>{{ number_format($torrentRequestStat->filled) }}</dd>
                 <dt>{{ __('request.unfilled') }}:</dt>
                 <dd>{{ number_format($torrentRequestStat->unfilled) }}</dd>
-                <dt>{{ __('request.total-bounty') }}:</dt>
             </dl>
         </section>
     </aside>

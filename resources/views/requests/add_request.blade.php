@@ -135,7 +135,7 @@
                             >
                             <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
                         </p>
-                        <p class="form__group">
+                        <!--<p class="form__group">
                             <input type="hidden" name="mal" value="0" />
                             <input
                                 id="automal"
@@ -148,8 +148,9 @@
                                 value="{{ old('mal') }}"
                             >
                             <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
-                        </p>
+                        </p>-->
                         <p class="form__group">
+                            <input type="hidden" name="igdb" value="0" />
                             <input
                                 id="igdb"
                                 class="form__text"
@@ -158,11 +159,9 @@
                                 pattern="[0-9]*"
                                 placeholder
                                 type="text"
-                                value="{{ old('igdb') ?? '0' }}"
+                                x-bind:value="{{ old('igdb') }}"
                             >
-                            <label class="form__label form__label--floating" for="name">
-                                IGDB ID ({{ __('request.required') }} For Games)
-                            </label>
+                            <label class="form__label form__label--floating" for="igdb">IGDB ID</label>
                         </p>
                     </div>
                     @livewire('bbcode-input', [
@@ -220,7 +219,13 @@
         <section class="panelV2">
             <h2 class="panel__heading">{{ __('common.info') }}</h2>
             <div class="panel__body">
-                {{ __('request.no-imdb-id') }}
+                <p>{{ __('request.no-imdb-id') }}</p>
+                <br>
+                <p>{{ __('torrent.tmdb') }} <a href="https://www.themoviedb.org/" target="_blank">https://www.themoviedb.org/</a></p>
+                <p>{{ __('torrent.imdb') }} <a href="https://www.imdb.com/" target="_blank">https://www.imdb.com/</a></p>
+                <p>{{ __('torrent.tvdb') }} <a href="https://www.thetvdb.com/" target="_blank">https://www.thetvdb.com/</a></p>
+                <p>{{ __('torrent.mal') }} <a href="https://myanimelist.net/" target="_blank">https://myanimelist.net/</a></p>
+                <p>{{ __('torrent.igdb') }} <a href="https://www.igdb.com/discover" target="_blank">https://www.igdb.com/discover</a></p>
             </div>
         </div>
     @endsection
