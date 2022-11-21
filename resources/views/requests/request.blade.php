@@ -38,12 +38,6 @@
                 @case($torrentRequest->category->cartoon_meta)
                     @include('torrent.partials.cartoon_meta', ['torrent' => $torrentRequest])
                     @break
-                @case($torrentRequest->category->music_meta)
-                    @include('torrent.partials.music_meta', ['torrent' => $torrentRequest])
-                    @break
-                @case($torrentRequest->category->no_meta)
-                    @include('torrent.partials.no_meta', ['torrent' => $torrentRequest])
-                    @break
             @endswitch
         </section>
         <section class="panelV2">
@@ -189,7 +183,7 @@
                     {{-- Claimed --}}
                     @case ($torrentRequest->claimed !== null && $torrentRequest->filled_hash === null)
                         @includeWhen($user->group->is_modo || $torrentRequestClaim->username == $user->username, 'requests.partials.unclaim')
-                        @includeWhen($torrentRequest->category->movie_meta || $torrentRequest->category->tv_meta || $torrentRequest->category->cartoon_meta || $torrentRequest->category->music_meta || $torrentRequest->category->no_meta, 'requests.partials.upload')
+                        @includeWhen($torrentRequest->category->movie_meta || $torrentRequest->category->tv_meta || $torrentRequest->category->cartoon_meta, 'requests.partials.upload')
                         @includeWhen($user->group->is_modo || $torrentRequestClaim->username == $user->username, 'requests.partials.fulfill')
                         @include('requests.partials.report')
                         @includeWhen($user->group->is_modo || $torrentRequest->user->id == $user->id, 'requests.partials.edit')

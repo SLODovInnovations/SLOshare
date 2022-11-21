@@ -25,7 +25,7 @@
                         </abbr>
                     </button>
                 @endif
-                @if ($comment->user_id === auth()->id() || auth()->user()->group->is_modo)
+                @if (auth()->user()->group->is_modo)
                     <button wire:click="$toggle('isEditing')" class="comment__edit">
                         <abbr class="comment__edit-abbr" title="{{ __('common.edit-your-comment') }}">
                             <i class="{{ config('other.font-awesome') }} fa-pencil"></i>
@@ -51,7 +51,8 @@
                 @endif
             </menu>
         </header>
-        @if ($isEditing)
+        @if ($isEditing
+        @if (auth()->user()->group->is_modo)
             <form wire:submit.prevent="editComment" class="form edit-comment">
                 <p class="form__group">
                     <textarea
@@ -81,6 +82,7 @@
                     </button>
                 </p>
             </form>
+        @endif
         @else
             <p class="comment__content">
                 @joypixels($comment->getContentHtml())
@@ -90,7 +92,7 @@
 
     @if ($comment->isParent())
         <section class="comment__replies">
-            <h5 class="sr-only">Replies</h5>
+            <h5 class="sr-only">Odgovori</h5>
             @if ($isReplying)
                 <form wire:submit.prevent="postReply" class="form reply-comment">
                     <p class="form__group">
