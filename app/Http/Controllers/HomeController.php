@@ -185,7 +185,18 @@ class HomeController extends Controller
             ->get());
 
         //SLOshare
+        // Total Members Count (All Groups)
         $allUser = \cache()->remember('all_user', $current, fn () => User::withTrashed()->count());
+        // Total Torrents Count
+        $numTorrent = \cache()->remember('num_torrent', $current, fn () => Torrent::count());
+        // Total Seeders
+        $numSeeders = \cache()->remember('num_seeders', $current, fn () => Peer::where('seeder', '=', 1)->count());
+        // Total Leechers
+        $numLeechers = \cache()->remember('num_leechers', $current, fn () => Peer::where('seeder', '=', 0)->count());
+        //Total Upload Traffic With Double Upload
+        $creditedUpload = \cache()->remember('credited_upload', $current, fn () => History::sum('uploaded'));
+        //Total Download Traffic With Freeleech
+        $creditedDownload = \cache()->remember('credited_download', $current, fn () => History::sum('downloaded'));
         //SLOshare
 
         $freeleechTokens = FreeleechToken::where('user_id', $user->id)->get();
@@ -221,6 +232,11 @@ class HomeController extends Controller
             'bookmarks'          => $bookmarks,
             //SLOshare
             'all_user'           => $allUser,
+            'num_torrent'        => $numTorrent,
+            'num_seeders'        => $numSeeders,
+            'num_leechers'       => $numLeechers,
+            'credited_upload'    => $creditedUpload,
+            'credited_download'  => $creditedDownload,
             //SLOshare
         ]);
     }
