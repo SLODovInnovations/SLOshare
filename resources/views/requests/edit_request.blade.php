@@ -115,7 +115,7 @@
                                 pattern="[0-9]*"
                                 required
                                 type="text"
-                                value="{{ $torrentRequest->tmdb ?: old('tmdb') }}"
+                                value="{{ $torrentRequest->tmdb ?: old('tmdb') ?? '0') }}"
                             >
                             <label class="form__label form__label--floating" for="autotmdb">TMDB ID</label>
                             <output name="apimatch" id="apimatch" for="torrent"></output>
@@ -130,7 +130,7 @@
                                 pattern="[0-9]*"
                                 required
                                 type="text"
-                                value="{{ $torrentRequest->imdb ?: old('imdb') }}"
+                                value="{{ $torrentRequest->imdb ?: old('imdb') ?? '0') }}"
                             >
                             <label class="form__label form__label--floating" for="autoimdb">IMDB ID</label>
                         </p>
@@ -148,7 +148,7 @@
                             >
                             <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
                         </p>
-                        <p class="form__group">
+                        <!--<p class="form__group">
                             <input type="hidden" name="mal" value="0" />
                             <input
                                 id="automal"
@@ -161,7 +161,7 @@
                                 value="{{ $torrentRequest->mal ?: (old('mal') ?? '0') }}"
                             >
                             <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
-                        </p>
+                        </p>-->
                         <p class="form__group">
                             <input
                                 id="igdb"
@@ -173,9 +173,7 @@
                                 type="text"
                                 value="{{ $torrentRequest->igdb ?: (old('igdb') ?? '0') }}"
                             >
-                            <label class="form__label form__label--floating" for="name">
-                                IGDB ID ({{ __('request.required') }} For Games)
-                            </label>
+                            <label class="form__label form__label--floating" for="name">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
                         </p>
                     </div>
                     @livewire('bbcode-input', [

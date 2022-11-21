@@ -55,7 +55,8 @@
             <dt>{{ __('pm.sent') }}</dt>
             <dd>
                 <time datetime="{{ $pm->created_at }}" title="{{ $pm->created_at }}">
-                    {{ $pm->created_at->diffForHumans() }}
+                    {{ $pm->created_at->diffForHumans() }} ||
+                    {{ $pm->created_at->format('d.m.Y') }}
                 </time>
             </dd>
         </dl>

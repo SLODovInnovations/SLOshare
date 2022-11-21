@@ -75,7 +75,7 @@
             <dt>{{ __('common.created_at') }}</dt>
             <dd>
                 <time datetime="{{ $torrentRequest->created_at }}" title="{{ $torrentRequest->created_at }}">
-                    {{ $torrentRequest->created_at->diffForHumans() }}
+                    {{ date('d.m.Y', $torrentRequest->created_at->getTimestamp()) }}
                 </time>
             </dd>
             <dt>{{ __('common.status') }}</dt>
@@ -117,7 +117,7 @@
                 <dt>{{ __('request.claimed') }} PRED</dt>
                 <dd>
                     <time datetime="{{ $torrentRequestClaim->created_at }}" title="{{ $torrentRequestClaim->created_at }}">
-                        {{ $torrentRequestClaim->created_at->diffForHumans() }}
+                        {{ date('d.m.Y', $torrentRequestClaim->created_at->getTimestamp()) }}
                     </time>
                 </dd>
             </dl>
@@ -134,7 +134,7 @@
                 <dt>{{ __('request.filled') }} PRED</dt>
                 <dd>
                     <time datetime="{{ $torrentRequest->filled_when }}" title="{{ $torrentRequest->filled_when }}">
-                        {{ $torrentRequest->filled_when->diffForHumans() }}
+                        {{ date('d.m.Y', $torrentRequest->filled_when->getTimestamp()) }}
                     </time>
                 </dd>
                 <dt>{{ __('request.filled') }}</dt>
@@ -241,7 +241,7 @@
                             <!--<td>{{ $voter->seedbonus }}</td>-->
                             <td>
                                 <time datetime="{{ $voter->created_at }}" title="{{ $voter->created_at }}">
-                                    {{ $voter->created_at->diffForHumans() }}
+                                    {{ date('d.m.Y', $voter->created_at->getTimestamp()) }}
                                 </time>
                             </td>
                         </tr>
