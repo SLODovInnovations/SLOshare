@@ -1,4 +1,5 @@
-<div class="col-md-10 col-sm-10 col-md-offset-1">
+<div>
+	<section class="panelV2 table-responsive">
 
     <!-- Buttons -->
     <ul class="nav nav-tabs-user mb-5-user" role="tablist">
@@ -76,41 +77,41 @@
 			            <div class="gallery-item"
 				            @if ($newslo->category->movie_meta || $newslo->category->tv_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt="{{ $newslo->name }}>
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
-    							    class="show-poster" alt="{{ $newslo->name }}>
+    							    class="show-poster" alt={{ $newslo->name }}>
     					        @endif
                             @endif
 
     			            @if ($newslo->category->cartoon_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt="{{ $newslo->name }}>
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
-    							    class="show-poster" alt="{{ $newslo->name }}>
+    							    class="show-poster" alt={{ $newslo->name }}>
     						    @endif
                             @endif
 
     			            @if ($newslo->category->cartoontv_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt="{{ $newslo->name }}>
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
-    							    class="show-poster" alt="{{ $newslo->name }}>
+    							    class="show-poster" alt={{ $newslo->name }}>
     						    @endif
                             @endif
 
                             @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                                 style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
-                                class="show-poster" alt="{{ $newslo->name }}>
+                                class="show-poster" alt={{ $newslo->name }}>
                             @endif
 
                             @if ($newslo->category->music_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt="{{ $newslo->name }}>
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
     						    @else
-    							    style="background-image: url('/img/SLOshare/music_no_image_holder_400x600.jpg')" class="show-poster" alt="{{ $newslo->name }}>
+    							    style="background-image: url('/img/SLOshare/music_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $newslo->name }}>
                                 @endif
                             @endif
 
@@ -232,10 +233,10 @@
 			            <div class="gallery-item"
 				            @if ($tv->category->tv_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$tv->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $tv->id . '.jpg') }}');" class="show-poster" alt="{{ $tv->name }}">
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $tv->id . '.jpg') }}');" class="show-poster" alt={{ $tv->name }}>
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
-    							    class="show-poster" alt="{{ $tv->name }}">
+    							    class="show-poster" alt={{ $tv->name }}>
     					        @endif
                             @endif
 
@@ -333,13 +334,11 @@
                 @foreach ($applications as $application)
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-			                @if ($application->category->no_meta)
+                            @if($application->category->no_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$application->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $application->id . '.jpg') }}');"
-                                    alt="{{ $application->name }}">
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $application->id . '.jpg') }}');" class="show-poster" alt={{ $application->name }}>
                                 @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');"
-                                    alt="{{ $application->name }}">
+                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $application->name }}>
                                 @endif
                             @endif
 
@@ -398,14 +397,13 @@
 			        @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-			                @if ($cartoone->tmdb != 0 && $cartoone->tmdb != null)
-			                    style="background-image: url('{{ ($meta && $meta->poster) ? \tmdb_image('poster_big', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg'; }}');"
-			                    alt="{{ $cartoone->name }}">
-                            @else
+    			            @if ($cartoone->category->cartoon_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoone->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $cartoone->id . '.jpg') }}');"
-                                    alt="{{ $cartoone->name }}">
-                                @endif
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $cartoone->id . '.jpg') }}');" class="show-poster" alt={{ $cartoone->name }}>
+                                @else
+    							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
+    							    class="show-poster" alt={{ $cartoone->name }}>
+    						    @endif
                             @endif
 
 				            <div class="release-info">
@@ -447,13 +445,11 @@
                 @foreach ($xxx as $x)
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-			                @if ($application->category->no_meta)
+                            @if($x->category->no_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$x->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $x->id . '.jpg') }}');"
-                                    alt="{{ $x->name }}">
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $x->id . '.jpg') }}');" class="show-poster" alt={{ $x->name }}>
                                 @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg');"
-                                    alt="{{ $x->name }}">
+                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $x->name }}>
                                 @endif
                             @endif
 
@@ -494,5 +490,5 @@
                 </div>
             </section>
         </div>
-    </div>
-</div>
+	</div>
+	</section>

@@ -1465,10 +1465,29 @@ select.form-control.page-search {
     margin-right: 15px;
 }
 .newbodyimg {
-    width: 200px;
-    height: 116px;
+    width: 100px;
     float: left;
 }
+.responsive {
+    width: 100%;
+    height: auto;
+}
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px;
+    height: 0;
+    overflow: hidden;
+}
+
+.video-container iframe, .video-container object, .video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* =================== ??? ==================== */
 .newbodytext {
     float: left;
     width: 195px;
@@ -1481,4 +1500,5 @@ select.form-control.page-search {
     margin-left: auto;
     margin-right: auto;
 }
+/* =================== ??? ==================== */
 /* =================== NEWS HOME ==================== */

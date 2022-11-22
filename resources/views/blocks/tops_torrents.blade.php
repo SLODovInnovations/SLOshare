@@ -1,5 +1,4 @@
-<div class="col-md-10 col-sm-10 col-md-offset-1">
-
+	<section class="panelV2 table-responsive">
     <!-- Buttons -->
     <ul class="nav nav-tabs-user mb-5-user" role="tablist">
         <li class="active">
@@ -243,5 +242,5 @@
                 </div>
             </section>
         </div>
-    </div>
+	</section>
 </div>

@@ -1,5 +1,4 @@
-    <aside>
-        <section class="panelV2">
+    <section class="panelV2">
 @if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
         <div class="panel panel-danger">
             <div class="panel-heading">
@@ -57,5 +56,4 @@
             </div>
         </div>
 @endif
-        </section>
-    </aside>
+	</section>
