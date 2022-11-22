@@ -1,5 +1,4 @@
-    <div class="col-md-10 col-sm-10 col-md-offset-1 col-slo-ad">
-        <div class="panel-slo">
-            <img src="{{ url('img/ad/top.jpg') }}" alt="ad-head" style="width: 1530.83px;">
-        </div>
-    </div>
+<div>
+	<section class="panelV2">
+		<img class="responsive" border="0" src="https://adserver.adman.si/banners/j4i0qpyd/61b9792f.jpg">
+	</section>

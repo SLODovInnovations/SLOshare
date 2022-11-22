@@ -31,13 +31,16 @@
 </head>
 
 @php $bg = rand(1, 38); $bgchange = $bg.".jpg" @endphp
-<body style="background: url('/img/login/background/{{ $bgchange }}');background-position-x: 50%;background-position-y: center;background-size: cover;background-attachment: fixed;">
+<body style="background: url('/img/login/december/{{ $bgchange }}');background-position-x: 50%;background-position-y: center;background-size: cover;background-attachment: fixed;">
 
 <!-- Dont Not Change! For Jackett Support -->
 <div class="Jackett" style="display:none;">{{ config('sloshare.powered-by') }}</div>
 <!-- Dont Not Change! For Jackett Support -->
 
+<!-- December -->
 <div id="snowfall-wrapper" />
+<!-- December -->
+
 @if ($errors->any())
     <div id="ERROR_COPY" style="display: none;">
         @foreach ($errors->all() as $error)

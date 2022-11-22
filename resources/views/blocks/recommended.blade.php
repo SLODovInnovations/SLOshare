@@ -1,5 +1,4 @@
-<div class="col-md-5 col-sm-5-slo col-slo">
-    <div class="panel-slo">
+	<section class="panelV2 table-responsive">
 
     <!-- Buttons -->
         <ul class="nav nav-tabs-user mb-5-user" role="tablist">
@@ -605,5 +604,4 @@
             </div>
 
         </div>
-    </div>
-</div>
+	</section>

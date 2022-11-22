@@ -1,5 +1,5 @@
-    <aside>
-        <section class="panelV2">
+<aside>
+	<section class="panelV2">
 @foreach ($articles as $article)
             <div class="panel panel-danger">
                 <div class="nav nav-tabs-user">
@@ -26,9 +26,7 @@
                             @endif
                             </a>
                         </div>
-                        <div class="newbodytext">
-                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->content, 120)))
-                        </div>
+                            @joypixels(preg_replace('#\[[^\]]+\]#', '', Str::limit($article->content, 160)))
                     </div>
                     <!--Body-->
                     <!--Footer-->
@@ -50,5 +48,5 @@
                 </div>
             </div>
 @endforeach
-        </section>
-    </aside>
+	</section>
+</aside>

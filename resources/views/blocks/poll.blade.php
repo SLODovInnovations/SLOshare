@@ -1,4 +1,4 @@
-    <div class="col-md-1 col-sm-1-slo col-md-br-1 col-slo-poll">
+    <section class="panelV2">
 @if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
         <div class="panel panel-danger">
             <div class="panel-heading">
@@ -56,4 +56,4 @@
             </div>
         </div>
 @endif
-    </div>
+	</section>
