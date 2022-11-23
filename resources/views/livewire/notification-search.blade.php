@@ -88,6 +88,7 @@
                 <fieldset class="form__fieldset">
                     <legend class="form__legend">{{ __('torrent.filters') }}</legend>
                     <div class="form__fieldset-checkbox-container">
+@if (auth()->user()->group->is_admin)
                         <p class="form__group">
                             <label class="form__label">
                                 <input class="form__checkbox" type="checkbox" wire:model.prefetch="bon_gifts" value="1">
@@ -95,6 +96,7 @@
                                 {{ __('notification.bon-gifts') }}
                             </label>
                         </p>
+@endif
                         <p class="form__group">
                             <label class="form__label">
                                 <input class="form__checkbox" type="checkbox" wire:model.prefetch="comment" value="1">

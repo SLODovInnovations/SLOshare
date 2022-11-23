@@ -1,5 +1,5 @@
 <aside>
 	<section class="panelV2">
-		<img class="responsive" border="0" src="https://adserver.adman.si/banners/j4i0qpyd/bfb66710.png">
+		<div style="width: 300px; height: 1050px;" data-admanids="f57b6946_0c64b25f"></div>
 	</section>
 </aside>

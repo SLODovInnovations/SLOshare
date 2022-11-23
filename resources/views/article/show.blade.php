@@ -36,12 +36,6 @@
     </div>
 </section>
 <section class="panelV2">
-    <h4 class="panel__heading">
-        <i class="{{ config('other.font-awesome') }} fa-comment"></i>
-        {{ __('common.comments') }}
-    </h4>
-    <div class="panel-body no-padding">
         <livewire:comments :model="$article"/>
-    </div>
 </section>
 @endsection

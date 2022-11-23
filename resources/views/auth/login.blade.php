@@ -30,7 +30,7 @@
     <script type="text/javascript" async="" src="https://adserver.adman.si/add/adman.js"></script>
 </head>
 
-@php $bg = rand(1, 38); $bgchange = $bg.".jpg" @endphp
+@php $bg = rand(1, 4); $bgchange = $bg.".jpg" @endphp
 <body style="background: url('/img/login/december/{{ $bgchange }}');background-position-x: 50%;background-position-y: center;background-size: cover;background-attachment: fixed;">
 
 <!-- Dont Not Change! For Jackett Support -->

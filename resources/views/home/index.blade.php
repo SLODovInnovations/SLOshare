@@ -13,20 +13,13 @@
 		@include('blocks.news')
 	</div>
 
-        <!--@include('blocks.featured')-->
 	<div class="sidebar2 sidebar--inverse">
 		@include('blocks.torrents_torrents')
         @include('blocks.tops_torrents')
+        @include('blocks.ad_center')
+        @include('blocks.online')
+
 		@include('blocks.ad_left')
 	</div>
-        @include('blocks.online')
         @include('blocks.notification')
-    <div class="page__home">
-
-        <!--@include('blocks.top_torrents')-->
-        <!--@include('blocks.top_uploaders')-->
-        <!--@include('blocks.latest_topics')-->
-        <!--@include('blocks.latest_posts')-->
-
-    </div>
 @endsection
