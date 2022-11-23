@@ -38,7 +38,7 @@
                     <td>{{ $subtitle->extension }}</td>
                     <td>{{ $subtitle->getSize() }}</td>
                     <td>{{ $subtitle->downloads }}</td>
-                    <td>{{ date('d.m.Y h:i:s', $subtitle->created_at->getTimestamp()) }}</td>
+                    <td>{{ $subtitle->created_at->format('d.m.Y h:i:s') }}</td>
                     <td>
                         @if ($subtitle->anon == true)
                             <span class="badge-user text-orange text-bold">{{ strtoupper(__('common.anonymous')) }}

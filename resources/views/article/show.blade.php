@@ -27,7 +27,7 @@
         <h1 class="panel__heading">{{ $article->title }}</h1>
         <div class="panel__actions">
             <time class="panel__action page__published" datetime="{{ $article->created_at }}">
-                {{ date('d.m.Y', $article->created_at->getTimestamp()) }} | {{ date('H:m:s', $article->created_at->getTimestamp()) }}
+                {{ $article->created_at->format('d.m.Y') }} | {{ $article->created_at->format('H:m:s') }}
             </time>
         </div>
     </header>

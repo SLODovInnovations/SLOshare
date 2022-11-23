@@ -15,7 +15,7 @@
                 <tr>
                     <td>
                         <span>
-                            {{ $audit->user->username }} {{ $audit->action }} ta torrent {{ date('d.m.Y h:i:s', $audit->created_at->getTimestamp()) }}
+                            {{ $audit->user->username }} {{ $audit->action }} ta torrent {{ $audit->created_at->format('d.m.Y h:i:s') }}
                         </span>
                     </td>
                 </tr>

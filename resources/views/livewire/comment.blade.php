@@ -14,7 +14,7 @@
                     datetime="{{ $comment->created_at }}"
                     title="{{ $comment->created_at }}"
             >
-                {{ date('d.m.Y', $comment->created_at->getTimestamp()) }}
+                {{ $comment->created_at->format('d.m.Y') }}
             </time>
             <menu class="comment__actions">
                 @if ($comment->isParent())

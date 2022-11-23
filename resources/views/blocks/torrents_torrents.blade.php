@@ -142,7 +142,7 @@
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $newslo->created_at->getTimestamp()) }} | {{ date('H:m', $newslo->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ $newslo->created_at->format('d.m.Y') }} | {{ $newslo->created_at->format('H:m') }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $newslo->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
@@ -199,7 +199,7 @@
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $videos->created_at->getTimestamp()) }} | {{ date('H:m', $videos->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ $videos->created_at->format('d.m.Y') }} | {{ $videos->created_at->format('H:m') }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $videos->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
@@ -256,7 +256,7 @@
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $tv->created_at->getTimestamp()) }} | {{ date('H:m', $tv->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ $tv->created_at->format('d.m.Y') }} | {{ $tv->created_at->format('H:m') }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $tv->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
@@ -307,7 +307,7 @@
 						                <div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
 						            @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $games->created_at->getTimestamp()) }} | {{ date('H:m', $games->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ $games->created_at->format('d.m.Y') }} | {{ $games->created_at->format('H:m') }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $games->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
@@ -358,7 +358,7 @@
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $application->created_at->getTimestamp()) }} | {{ date('H:m', $application->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ $application->created_at->format('d.m.Y') }} | {{ $application->created_at->format('H:m') }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $application->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
@@ -418,7 +418,7 @@
 					            <div class="release-info-container">
 						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $cartoone->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $cartoone->comments_count }}</span></div>
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $cartoone->created_at->getTimestamp()) }} | {{ date('H:m', $cartoone->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ $cartoone->created_at->format('d.m.Y') }} | {{ $cartoone->created_at->format('H:m') }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $cartoone->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
@@ -472,7 +472,7 @@
                                     <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $x->created_at->getTimestamp()) }} | {{ date('H:m', $x->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ $x->created_at->format('d.m.Y') }} | {{ $x->created_at->format('H:m') }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $x->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">

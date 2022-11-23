@@ -615,7 +615,7 @@
                             </a>
                         </td>
                         <td class="torrent-listings-age text-center" style="vertical-align: middle;">
-								{{ date('d.m.Y', $torrent->created_at->getTimestamp()) }}
+								{{ $torrent->created_at->format('d.m.Y') }}
                         </td>
                     </tr>
                     @endforeach

@@ -158,7 +158,7 @@
                     </td>
                     <td>
 						<time datetime="{{ $ticket->created_at }}" title="{{ $ticket->created_at }}">
-							{{ date('d.m.Y', $ticket->created_at->getTimestamp()) }}
+							{{ $ticket->created_at->format('d.m.Y') }}
                         </time>
                     </td>
                     <td>

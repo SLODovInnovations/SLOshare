@@ -25,7 +25,7 @@
                             </td>
                             <td>
                                 <time datetime="{{ $notification->created_at }}" title="{{ $notification->created_at }}">
-                                    {{ $notification->created_at->diffForHumans() }}
+                                    {{ $notification->created_at->format('d.m.Y h:i:s') }}
                                 </time>
                             </td>
                             <td>
