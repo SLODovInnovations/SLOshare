@@ -637,6 +637,18 @@ Route::group(['middleware' => 'language'], function () {
             });
         });
 
+        // VideoHome System
+        Route::group(['prefix' => 'homevideos'], function () {
+            Route::name('staff.homevideos.clients.')->group(function () {
+                Route::get('/clients', [App\Http\Controllers\Staff\HomeVideoController::class, 'index'])->name('index');
+                Route::get('/clients/create', [App\Http\Controllers\Staff\HomeVideoController::class, 'create'])->name('create');
+                Route::post('/clients/store', [App\Http\Controllers\Staff\HomeVideoController::class, 'store'])->name('store');
+                Route::get('/clients/{id}/edit', [App\Http\Controllers\Staff\HomeVideoController::class, 'edit'])->name('edit');
+                Route::patch('/clients/{id}/update', [App\Http\Controllers\Staff\HomeVideoController::class, 'update'])->name('update');
+                Route::delete('/clients/{id}/destroy', [App\Http\Controllers\Staff\HomeVideoController::class, 'destroy'])->name('destroy');
+            });
+        });
+
         // Bon Exchanges
         Route::group(['prefix' => 'bon-exchanges'], function () {
             Route::name('staff.bon_exchanges.')->group(function () {
