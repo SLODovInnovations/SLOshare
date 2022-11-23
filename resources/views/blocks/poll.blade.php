@@ -63,7 +63,7 @@
                     </div>
                 </h4>
             </div>
-        <h2 class="panel__heading">{{ $poll->title }}</h2>
+        <h2 class="panel__heading"></h2>
             <div class="panel-body">
             @php($total = $poll->options->sum('votes'))
             @foreach ($poll->options as $option)
