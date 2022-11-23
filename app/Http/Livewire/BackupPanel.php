@@ -79,7 +79,7 @@ class BackupPanel extends Component
 
                 return [
                     'path' => $backup->path(),
-                    'date' => $backup->date()->format('d.m.Y H:i:s'),
+                    'date' => $backup->date()->format('Y-m-d H:i:s'),
                     'size' => Format::humanReadableSize($size),
                 ];
             })
