@@ -66,7 +66,7 @@
                             </td>
                             <td>
                                 <time datetime="{{ $pm->created_at }}" title="{{ $pm->created_at }}">
-                                    {{ $pm->created_at->format('d.m.Y h:i:s') }}
+                                    {{ date('d.m.Y h:i:s', $pm->created_at->getTimestamp()) }}
                                 </time>
                             </td>
                             <td>

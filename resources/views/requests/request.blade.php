@@ -241,7 +241,7 @@
                             <!--<td>{{ $voter->seedbonus }}</td>-->
                             <td>
                                 <time datetime="{{ $voter->created_at }}" title="{{ $voter->created_at }}">
-                                    {{ $voter->created_at->format('d.m.Y') }}
+                                    {{ date('d.m.Y', $torrentRequest->created_at->getTimestamp()) }}
                                 </time>
                             </td>
                         </tr>

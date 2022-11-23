@@ -31,7 +31,7 @@
                     <strong>{{ __('torrent.uploaded') }}:</strong>
                 </td>
                 <td class="col-sm-9 torrentinforight">
-                    {{ $torrent->created_at->format('d.m.Y') }} ob {{ $torrent->created_at->format('H:m:s') }}
+                    {{ date('d.m.Y', $torrent->created_at->getTimestamp()) }} ob {{ date('H:m:s', $torrent->created_at->getTimestamp()) }}
                 </td>
             </tr>
 
