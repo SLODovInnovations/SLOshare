@@ -1,4 +1,5 @@
-    <section class="panelV2">
+<section class="panelV2">
+@if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
         <div class="panel panel-danger">
             <div class="panel-heading">
                 <h4 class="text-center">
@@ -7,9 +8,9 @@
                     </div>
                 </h4>
             </div>
+			<h2 class="panel__heading">{{ $poll->title }}</h2>
             <div class="panel-body">
-@if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
-                <h2 class="panel__heading">{{ $poll->title }}</h2>
+
                 <form class="form-horizontal" method="POST" action="/polls/vote">
                     @csrf
                     @if (count($errors) > 0)
@@ -56,9 +57,17 @@
             </div>
         </div>
 @endif
+@if($total = $poll->options->sum('votes'))
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h4 class="text-center">
+                    <div class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" style="color:#ffffff;">
+                        <i class="{{ config('other.font-awesome') }} fa-chart-pie"></i> {{ __('poll.poll') }}
+                    </div>
+                </h4>
+            </div>
+			<h2 class="panel__heading">{{ $poll->title }}</h2>
             <div class="panel-body">
-            @php($total = $poll->options->sum('votes'))
-            <h2 class="panel__heading">{{ $poll->title }}</h2>
             @foreach ($poll->options as $option)
                 <p class="form__group">
                     <label class="form__label" for="option{{ $loop->iteration }}">
@@ -76,5 +85,6 @@
                 </p>
             @endforeach
             </div>
-        </div>
+		</div>
+@endif
 	</section>
