@@ -57,25 +57,24 @@
         </div>
 @else
             <div class="panel-body">
-            @php($total = $poll->optionse->sum('votes'))
-            @foreach ($poll->optionse as $optione)
+            @php($total = $poll->options->sum('votes'))
+            @foreach ($poll->options as $option)
                 <p class="form__group">
                     <label class="form__label" for="option{{ $loop->iteration }}">
-                        {{ $optione->name }} ({{ \number_format($total === 0 ? 0 : 100 * $optione->votes / $total, 2) }}%)
+                        {{ $option->name }} ({{ \number_format($total === 0 ? 0 : 100 * $option->votes / $total, 2) }}%)
                     </label>
                     <meter
                         id="option{{ $loop->iteration }}"
                         class="form__meter"
                         min="0"
                         max="{{ $total }}"
-                        value="{{ $optione->votes }}"
-						style="color: var(--color-magenta)!important;"
+                        value="{{ $option->votes }}"
                     >
-                        {{ $optione->votes }} {{ $optione->votes === 1 ? __('poll.vote') : __('poll.votes') }}
+                        {{ $option->votes }} {{ $option->votes === 1 ? __('poll.vote') : __('poll.votes') }}
                     </meter>
                 </p>
             @endforeach
             </div>
-        </div>
 @endif
+        </div>
 	</section>
