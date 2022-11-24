@@ -57,9 +57,9 @@
         </div>
 @else
             <div class="panel-body">
-            @php($total = $poll->options->sum('votes'))
+            @php($total = $poll->optiones->sum('votes'))
             <h2 class="panel__heading">{{ $poll->title }}</h2>
-            @foreach ($poll->options as $option)
+            @foreach ($poll->optiones as $option)
                 <p class="form__group">
                     <label class="form__label" for="option{{ $loop->iteration }}">
                         {{ $option->name }} ({{ \number_format($total === 0 ? 0 : 100 * $option->votes / $total, 2) }}%)
