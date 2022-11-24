@@ -8,8 +8,8 @@
                 </h4>
             </div>
             <div class="panel-body">
-                <h2 class="panel__heading">{{ $poll->title }}</h2>
 @if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
+                <h2 class="panel__heading">{{ $poll->title }}</h2>
                 <form class="form-horizontal" method="POST" action="/polls/vote">
                     @csrf
                     @if (count($errors) > 0)
@@ -58,6 +58,7 @@
 @else
             <div class="panel-body">
             @php($total = $poll->options->sum('votes'))
+            <h2 class="panel__heading">{{ $poll->title }}</h2>
             @foreach ($poll->options as $option)
                 <p class="form__group">
                     <label class="form__label" for="option{{ $loop->iteration }}">
