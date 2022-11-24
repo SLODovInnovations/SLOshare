@@ -57,6 +57,7 @@
         </div>
 @endif
             <div class="panel-body">
+            @php($total = $poll->options->sum('votes'))
             <h2 class="panel__heading">{{ $poll->title }}</h2>
             @foreach ($poll->options as $option)
                 <p class="form__group">
@@ -75,6 +76,5 @@
                 </p>
             @endforeach
             </div>
-
         </div>
 	</section>
