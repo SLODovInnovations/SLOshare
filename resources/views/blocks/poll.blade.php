@@ -57,7 +57,7 @@
         </div>
 @else
             <div class="panel-body">
-            @php($total = $poll->options->sum('votes'))
+            @php($total = $poll->optionse->sum('votes'))
             @foreach ($poll->optionse as $optione)
                 <p class="form__group">
                     <label class="form__label" for="option{{ $loop->iteration }}">
