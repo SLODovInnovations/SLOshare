@@ -64,9 +64,9 @@ return [
     |--------------------------------------------------------------------------
     |
     | Enable/Disable freeleech on torrents over specified size threshold
-    |
+    | true/false
     */
 
-    'size_freeleech' => false,
+    'size_freeleech' => true,
     'size_threshold' => '53687091200', //in bytes, default is 53687091200 (50GiB)
 ];

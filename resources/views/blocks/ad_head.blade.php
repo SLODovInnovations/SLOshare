@@ -1,4 +1,4 @@
 <div>
 	<section class="panelV2">
-		<img class="responsive" border="0" src="https://adserver.adman.si/banners/j4i0qpyd/61b9792f.jpg">
+		<div style="width: 728px; height: 90px;" data-admanids="f57b6946_898033c5"></div>
 	</section>

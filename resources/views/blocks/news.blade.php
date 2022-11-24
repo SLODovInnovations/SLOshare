@@ -12,7 +12,7 @@
                 <div class="panel-body no-padding">
                     <p class="text-muted" style="padding-bottom: 4px;">
                         <em>{{ __('articles.published-at') }}
-                            {{ date('d.m.Y', $article->created_at->getTimestamp()) }} | {{ date('H:m:s', $article->created_at->getTimestamp()) }}
+                            {{ $article->created_at->format('d.m.Y') }} | {{ $article->created_at->format('H:m:s') }}
                         </em>
                     </p>
                     <!--Body-->

@@ -110,7 +110,7 @@
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $seed->created_at->getTimestamp()) }} | {{ date('H:m', $seed->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $seed->created_at->getTimestamp()) }} | {{ date('h:m', $seed->created_at->getTimestamp()) }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $seed->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
@@ -224,7 +224,7 @@
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $leech->created_at->getTimestamp()) }} | {{ date('H:m', $leech->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $leech->created_at->getTimestamp()) }} | {{ date('h:m', $leech->created_at->getTimestamp()) }}</div>
 						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $leech->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
@@ -243,4 +243,3 @@
             </section>
         </div>
 	</section>
-</div>

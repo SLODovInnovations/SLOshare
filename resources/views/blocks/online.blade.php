@@ -1,4 +1,3 @@
-<div>
 	<section class="panelV2">
 		<div class="clearfix visible-sm-block"></div>
 		<div class="panel panel-chat shoutbox">
