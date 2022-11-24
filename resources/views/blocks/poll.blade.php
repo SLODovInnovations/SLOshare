@@ -1,5 +1,4 @@
     <section class="panelV2">
-@if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
         <div class="panel panel-danger">
             <div class="panel-heading">
                 <h4 class="text-center">
@@ -8,6 +7,7 @@
                     </div>
                 </h4>
             </div>
+@if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
             <div class="panel-body">
                 <h3 class="poll-title">{{ $poll->title }}</h3>
                 <form class="form-horizontal" method="POST" action="/polls/vote">
@@ -56,15 +56,6 @@
             </div>
         </div>
 @else
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                <h4 class="text-center">
-                    <div class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" style="color:#ffffff;">
-                        <i class="{{ config('other.font-awesome') }} fa-chart-pie"></i> {{ __('poll.poll') }}
-                    </div>
-                </h4>
-            </div>
-            <h2 class="panel__heading">{{ $poll->title }}</h2>
             <div class="panel-body">
             @php($total = $poll->options->sum('votes'))
             @foreach ($poll->optionse as $optione)
