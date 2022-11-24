@@ -9,6 +9,7 @@
                 </h4>
             </div>
             <div class="panel-body">
+                <h3 class="poll-title">{{ $poll->title }}</h3>
                 <form class="form-horizontal" method="POST" action="/polls/vote">
                     @csrf
                     @if (count($errors) > 0)
@@ -63,23 +64,23 @@
                     </div>
                 </h4>
             </div>
-        <h2 class="panel__heading"></h2>
+            <h2 class="panel__heading">{{ $poll->title }}</h2>
             <div class="panel-body">
             @php($total = $poll->options->sum('votes'))
-            @foreach ($poll->options as $option)
+            @foreach ($poll->optionse as $optione)
                 <p class="form__group">
                     <label class="form__label" for="option{{ $loop->iteration }}">
-                        {{ $option->name }} ({{ \number_format($total === 0 ? 0 : 100 * $option->votes / $total, 2) }}%)
+                        {{ $optione->name }} ({{ \number_format($total === 0 ? 0 : 100 * $optione->votes / $total, 2) }}%)
                     </label>
                     <meter
                         id="option{{ $loop->iteration }}"
                         class="form__meter"
                         min="0"
                         max="{{ $total }}"
-                        value="{{ $option->votes }}"
+                        value="{{ $optione->votes }}"
 						style="color: var(--color-magenta)!important;"
                     >
-                        {{ $option->votes }} {{ $option->votes === 1 ? __('poll.vote') : __('poll.votes') }}
+                        {{ $optione->votes }} {{ $optione->votes === 1 ? __('poll.vote') : __('poll.votes') }}
                     </meter>
                 </p>
             @endforeach
