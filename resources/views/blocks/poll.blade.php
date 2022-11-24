@@ -7,9 +7,9 @@
                     </div>
                 </h4>
             </div>
-@if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
             <div class="panel-body">
-                <h3 class="poll-title">{{ $poll->title }}</h3>
+                <h2 class="panel__heading">{{ $poll->title }}</h2>
+@if ($poll && $poll->voters->where('user_id', '=', auth()->user()->id)->isEmpty())
                 <form class="form-horizontal" method="POST" action="/polls/vote">
                     @csrf
                     @if (count($errors) > 0)

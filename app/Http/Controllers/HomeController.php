@@ -16,6 +16,7 @@ use App\Models\User;
 //SLOshare
 use App\Models\Peer;
 use App\Models\History;
+use App\Models\Option;
 //SLOshare
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
