@@ -16,6 +16,7 @@ use App\Models\User;
 //SLOshare
 use App\Models\Peer;
 use App\Models\History;
+use App\Models\HomeVideo;
 //SLOshare
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -199,6 +200,8 @@ class HomeController extends Controller
         $creditedUpload = \cache()->remember('credited_upload', $current, fn () => History::sum('uploaded'));
         //Total Download Traffic With Freeleech
         $creditedDownload = \cache()->remember('credited_download', $current, fn () => History::sum('downloaded'));
+
+        $clients = HomeVideo::all();
         //SLOshare
 
         $freeleechTokens = FreeleechToken::where('user_id', $user->id)->get();
@@ -239,6 +242,7 @@ class HomeController extends Controller
             'num_leechers'       => $numLeechers,
             'credited_upload'    => $creditedUpload,
             'credited_download'  => $creditedDownload,
+            'clients'            => $clients,
             //SLOshare
         ]);
     }
