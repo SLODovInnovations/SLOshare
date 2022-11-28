@@ -20,7 +20,7 @@ class HomeVideoController extends Controller
 
         $clients = HomeVideo::latest()->get();
 
-        return \view('Staff.homevideos.index', ['clients' => $clients]); ?
+        return \view('Staff.homevideo.index', ['clients' => $clients]); ?
     }
 
     /**
@@ -32,7 +32,7 @@ class HomeVideoController extends Controller
 
         $client = HomeVideo::findOrFail($id);
 
-        return \view('Staff.homevideos.edit', ['client' => $client]);
+        return \view('Staff.homevideo.edit', ['client' => $client]);
     }
 
     /**
@@ -52,13 +52,13 @@ class HomeVideoController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \to_route('staff.homevideos.index')
+            return \to_route('staff.homevideo.index')
                 ->withErrors($v->errors());
         }
 
         $client->save();
 
-        return \to_route('staff.homevideos.clients.index')
+        return \to_route('staff.homevideo.index')
             ->withSuccess('Odjemalec na črnem seznamu je bil uspešno posodobljen!');
     }
 
@@ -67,7 +67,7 @@ class HomeVideoController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.homevideos.create');
+        return \view('Staff.homevideo');
     }
 
     /**
@@ -87,13 +87,13 @@ class HomeVideoController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \to_route('staff.homevideos.index')
+            return \to_route('staff.homevideo.index')
                 ->withErrors($v->errors());
         }
 
         $client->save();
 
-        return \to_route('staff.homevideos.index')
+        return \to_route('staff.homevideo.index')
             ->withSuccess('Video na domači strani je bil uspešno shranjen!');
     }
 
@@ -107,7 +107,7 @@ class HomeVideoController extends Controller
         $client = HomeVideo::findOrFail($id);
         $client->delete();
 
-        return \to_route('staff.homevideos.index')
+        return \to_route('staff.homevideo.index')
             ->withSuccess('Video na domači strani je bil uspešno odstranjen!');
     }
 }
