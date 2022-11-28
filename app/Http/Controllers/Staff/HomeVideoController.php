@@ -82,7 +82,7 @@ class HomeVideoController extends Controller
         $client->link = $request->input('link');
 
         $v = \validator($client->toArray(), [
-            'name'   => 'required|string|unique:home_video',
+            'name'   => 'required|string|unique:home_videos',
             'link'   => 'sometimes|string',
         ]);
 

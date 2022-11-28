@@ -12,7 +12,7 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Schema::create('home_video', function (Blueprint $table) {
+        Schema::create('home_videos', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
             $table->longText('link')->nullable();
@@ -27,6 +27,6 @@ return new class () extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('home_video');
+        Schema::dropIfExists('home_videos');
     }
 };
