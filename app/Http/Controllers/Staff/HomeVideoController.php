@@ -44,11 +44,11 @@ class HomeVideoController extends Controller
 
         $client = HomeVideo::findOrFail($id);
         $client->name = $request->input('name');
-        $client->reason = $request->input('reason');
+        $client->link = $request->input('link');
 
         $v = \validator($client->toArray(), [
             'name'   => 'required|string',
-            'reason' => 'sometimes|string',
+            'link'   => 'sometimes|string',
         ]);
 
         if ($v->fails()) {
@@ -79,11 +79,11 @@ class HomeVideoController extends Controller
 
         $client = new HomeVideo();
         $client->name = $request->input('name');
-        $client->reason = $request->input('reason');
+        $client->link = $request->input('link');
 
         $v = \validator($client->toArray(), [
             'name'   => 'required|string|unique:home_video',
-            'reason' => 'sometimes|string',
+            'link'   => 'sometimes|string',
         ]);
 
         if ($v->fails()) {
