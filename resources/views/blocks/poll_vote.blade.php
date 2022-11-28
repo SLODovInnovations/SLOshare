@@ -1,13 +1,3 @@
-        <div class="panel panel-danger">
-            <div class="panel-heading">
-                <h4 class="text-center">
-                    <div class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" style="color:#ffffff;">
-                        <i class="{{ config('other.font-awesome') }} fa-chart-pie"></i> {{ __('poll.poll') }}
-                    </div>
-                </h4>
-            </div>
-            <div class="panel-body">
-            <h2 class="panel__heading">{{ $poll->title }}</h2>
             @php($total = $poll->options->sum('votes'))
             @foreach ($poll->options as $option)
                 <p class="form__group">
@@ -26,5 +16,3 @@
                     </meter>
                 </p>
             @endforeach
-            </div>
-        </div>
