@@ -56,6 +56,6 @@
             </div>
         </div>
 @else
-        @include('poll_vole')
+        @include('poll_vote')
 @endif
 	</section>
