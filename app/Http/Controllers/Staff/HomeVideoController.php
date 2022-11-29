@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class HomeVideoController extends Controller
 {
     /**
-     * Display All Home Video. ?
+     * Display All Home Video.
      */
     public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
@@ -20,11 +20,11 @@ class HomeVideoController extends Controller
 
         $clients = HomeVideo::latest()->get();
 
-        return \view('Staff.homevideo.index', ['clients' => $clients]); ?
+        return \view('Staff.homevideo.index', ['clients' => $clients]);
     }
 
     /**
-     * Home Video.  ?
+     * Home Video.
      */
     public function edit(Request $request, int $id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
@@ -36,7 +36,7 @@ class HomeVideoController extends Controller
     }
 
     /**
-     * Edit A Home Video. ?
+     * Edit A Home Video.
      */
     public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
@@ -52,13 +52,13 @@ class HomeVideoController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \to_route('staff.homevideo.index')
+            return \to_route('staff.homevideos.index')
                 ->withErrors($v->errors());
         }
 
         $client->save();
 
-        return \to_route('staff.homevideo.index')
+        return \to_route('staff.homevideos.index')
             ->withSuccess('Odjemalec na črnem seznamu je bil uspešno posodobljen!');
     }
 
@@ -71,7 +71,7 @@ class HomeVideoController extends Controller
     }
 
     /**
-     * Store A New Home Video. ?
+     * Store A New Home Video.
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
@@ -87,18 +87,18 @@ class HomeVideoController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \to_route('staff.homevideo.index')
+            return \to_route('staff.homevideos.index')
                 ->withErrors($v->errors());
         }
 
         $client->save();
 
-        return \to_route('staff.homevideo.index')
+        return \to_route('staff.homevideos.index')
             ->withSuccess('Video na domači strani je bil uspešno shranjen!');
     }
 
     /**
-     * Delete A Home Video. ?
+     * Delete A Home Video.
      */
     public function destroy(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
@@ -107,7 +107,7 @@ class HomeVideoController extends Controller
         $client = HomeVideo::findOrFail($id);
         $client->delete();
 
-        return \to_route('staff.homevideo.index')
+        return \to_route('staff.homevideos.index')
             ->withSuccess('Video na domači strani je bil uspešno odstranjen!');
     }
 }
