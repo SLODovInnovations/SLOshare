@@ -25,6 +25,7 @@ return [
     'leechers'                  => 'Odjemalcev',
     'subtitles'                 => 'Podnapisi:',
     'postal-bi'                 => 'Postal bi...',
+
     'success'                   => 'Vaše sporočilo je bilo uspešno poslano',
     'home-video'                => 'Home Video',
     'link'                      => 'ID Videa iz YouTube',

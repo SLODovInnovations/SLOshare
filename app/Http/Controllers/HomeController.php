@@ -200,8 +200,8 @@ class HomeController extends Controller
         $creditedUpload = \cache()->remember('credited_upload', $current, fn () => History::sum('uploaded'));
         //Total Download Traffic With Freeleech
         $creditedDownload = \cache()->remember('credited_download', $current, fn () => History::sum('downloaded'));
-
-        $clients = HomeVideo::all();
+        //Home Video
+        $clients = \cache()->remember('link', $expiresAt, fn () => HomeVideo::latest()->take(1)->get());
         //SLOshare
 
         $freeleechTokens = FreeleechToken::where('user_id', $user->id)->get();
