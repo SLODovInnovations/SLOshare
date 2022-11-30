@@ -1,5 +1,9 @@
 @extends('layout.default')
 
+@section('title')
+    <title>{{ __('sloshare.home-video') }} - {{ __('staff.staff-dashboard') }}</title>
+@endsection
+
 @section('breadcrumbs')
     <li class="breadcrumbV2">
         <a href="{{ route('staff.dashboard.index') }}" class="breadcrumb__link">
