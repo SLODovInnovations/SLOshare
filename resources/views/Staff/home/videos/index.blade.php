@@ -7,7 +7,7 @@
         </a>
     </li>
     <li class="breadcrumb--active">
-        Home Video
+        {{ __('sloshare.home-video') }}
     </li>
 @endsection
 
@@ -26,7 +26,7 @@
                 <thead>
                 <tr>
                     <th>{{ __('common.name') }}</th>
-                    <th>{{ __('common.link') }}</th>
+                    <th>{{ __('sloshare.link') }}</th>
                     <th>{{ __('common.actions') }}</th>
                 </tr>
                 </thead>

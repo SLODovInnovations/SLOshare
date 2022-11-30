@@ -147,7 +147,7 @@
                 <p class="form__group form__group--horizontal">
                     <a class="form__button form__button--text" href="{{ route('staff.homes.videos.index') }}">
                         <i class="fas fa-youtube"></i>
-                        Home Video
+                        {{ __('sloshare.home-video') }}
                     </a>
                 </p>
             </div>
