@@ -16,7 +16,7 @@
         <header class="panel__header">
             <h2 class="panel__heading">Home Video</h2>
             <div class="panel__actions">
-                <a href="{{ route('staff.homevideos.create') }}" class="panel__action">
+                <a href="{{ route('staff.homes.videos.create') }}" class="panel__action">
                     {{ __('common.add') }}
                 </a>
             </div>
@@ -36,10 +36,10 @@
                         <td>{{ $client->name }}</td>
                         <td>{{ $client->link }}</td>
                         <td>
-                            <form x-data action="{{ route('staff.homevideos.destroy', ['id' => $client->id]) }}" method="POST">
+                            <form x-data action="{{ route('staff.homes.videos.destroy', ['id' => $client->id]) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <a href="{{ route('staff.homevideos.edit', ['id' => $client->id]) }}"
+                                <a href="{{ route('staff.homes.videos.edit', ['id' => $client->id]) }}"
                                    class="form__button form__button--filled">
                                     {{ __('common.edit') }}
                                 </a>

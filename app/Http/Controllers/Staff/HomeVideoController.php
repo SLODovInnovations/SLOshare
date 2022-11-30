@@ -77,7 +77,7 @@ class HomeVideoController extends Controller
     {
         \abort_unless($request->user()->group->is_admin, 403);
 
-        $client = new BlacklistClient();
+        $client = new HomeVideo();
         $client->name = $request->input('name');
         $client->link = $request->input('link');
 
