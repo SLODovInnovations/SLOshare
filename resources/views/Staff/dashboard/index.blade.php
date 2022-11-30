@@ -146,8 +146,8 @@
                 </p>
                 <p class="form__group form__group--horizontal">
                     <a class="form__button form__button--text" href="{{ route('staff.homes.videos.index') }}">
-                        <i class="{{ config('other.font-awesome') }} fa-ban"></i>
-                        Home Video
+                        <i class="fas fa-youtube"></i>
+                        {{ __('sloshare.home-video') }}
                     </a>
                 </p>
             </div>

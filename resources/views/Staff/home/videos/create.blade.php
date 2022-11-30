@@ -7,8 +7,8 @@
         </a>
     </li>
     <li class="breadcrumbV2">
-        <a href="{{ route('staff.homevideos.index') }}" class="breadcrumb__link">
-            Home Video
+        <a href="{{ route('staff.homes.videos.index') }}" class="breadcrumb__link">
+            {{ __('sloshare.home-video') }}
         </a>
     </li>
     <li class="breadcrumb--active">
@@ -27,7 +27,7 @@
                     class="upload-form form"
                     id="upload-form"
                     method="POST"
-                    action="{{ route('staff.homevideos.store') }}"
+                    action="{{ route('staff.homes.videos.store') }}"
             >
                 @csrf
                 <p class="form__group">
@@ -50,7 +50,7 @@
                             value="{{ old('link') }}"
                     >
                     <label class="form__label form__label--floating" for="link">
-                        {{ __('common.link') }}
+                        {{ __('sloshare.link') }}
                     </label>
                 </p>
                 <p class="form__group">
