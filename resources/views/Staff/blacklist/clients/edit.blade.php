@@ -1,5 +1,9 @@
 @extends('layout.default')
 
+@section('title')
+    <title>{{ __('common.blacklist') } - {{ __('staff.staff-dashboard') }}</title>
+@endsection
+
 @section('breadcrumbs')
     <li class="breadcrumbV2">
         <a href="{{ route('staff.dashboard.index') }}" class="breadcrumb__link">
@@ -8,7 +12,7 @@
     </li>
     <li class="breadcrumbV2">
         <a href="{{ route('staff.blacklists.clients.index') }}" class="breadcrumb__link">
-            Blacklisted Clients
+            {{ __('common.blacklist') }}
         </a>
     </li>
     <li class="breadcrumb--active">
