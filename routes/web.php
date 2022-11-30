@@ -638,14 +638,14 @@ Route::group(['middleware' => 'language'], function () {
         });
 
         // VideoHome System
-        Route::group(['prefix' => 'homevideos'], function () {
-            Route::name('staff.homevideos.')->group(function () {
-                Route::get('/', [App\Http\Controllers\Staff\HomeVideoController::class, 'index'])->name('index');
-                Route::get('/create', [App\Http\Controllers\Staff\HomeVideoController::class, 'create'])->name('create');
-                Route::post('/store', [App\Http\Controllers\Staff\HomeVideoController::class, 'store'])->name('store');
-                Route::get('/{id}/edit', [App\Http\Controllers\Staff\HomeVideoController::class, 'edit'])->name('edit');
-                Route::patch('/{id}/update', [App\Http\Controllers\Staff\HomeVideoController::class, 'update'])->name('update');
-                Route::delete('/{id}/destroy', [App\Http\Controllers\Staff\HomeVideoController::class, 'destroy'])->name('destroy');
+        Route::group(['prefix' => 'homes'], function () {
+            Route::name('staff.homes.videos.')->group(function () {
+                Route::get('/videos', [App\Http\Controllers\Staff\HomeVideoController::class, 'index'])->name('index');
+                Route::get('/videos/create', [App\Http\Controllers\Staff\HomeVideoController::class, 'create'])->name('create');
+                Route::post('/videos/store', [App\Http\Controllers\Staff\HomeVideoController::class, 'store'])->name('store');
+                Route::get('/videos/{id}/edit', [App\Http\Controllers\Staff\HomeVideoController::class, 'edit'])->name('edit');
+                Route::patch('/videos/{id}/update', [App\Http\Controllers\Staff\HomeVideoController::class, 'update'])->name('update');
+                Route::delete('/videos/{id}/destroy', [App\Http\Controllers\Staff\HomeVideoController::class, 'destroy'])->name('destroy');
             });
         });
 

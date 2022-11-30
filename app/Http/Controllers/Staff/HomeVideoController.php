@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class HomeVideoController extends Controller
 {
     /**
-     * Display All Home Video.
+     * Display All Blacklisted Clients.
      */
     public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
@@ -20,11 +20,11 @@ class HomeVideoController extends Controller
 
         $clients = HomeVideo::latest()->get();
 
-        return \view('Staff.homevideo.index', ['clients' => $clients]);
+        return \view('Staff.home.videos.index', ['clients' => $clients]);
     }
 
     /**
-     * Home Video.
+     * Home Video Edit Form.
      */
     public function edit(Request $request, int $id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
@@ -32,7 +32,7 @@ class HomeVideoController extends Controller
 
         $client = HomeVideo::findOrFail($id);
 
-        return \view('Staff.homevideo.edit', ['client' => $client]);
+        return \view('Staff.home.videos.edit', ['client' => $client]);
     }
 
     /**
@@ -52,13 +52,13 @@ class HomeVideoController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \to_route('staff.homevideos.index')
+            return \to_route('staff.homes.videos.index')
                 ->withErrors($v->errors());
         }
 
         $client->save();
 
-        return \to_route('staff.homevideos.index')
+        return \to_route('staff.homes.videos.index')
             ->withSuccess('Odjemalec na črnem seznamu je bil uspešno posodobljen!');
     }
 
@@ -67,7 +67,7 @@ class HomeVideoController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.homevideo');
+        return \view('Staff.home.videos.create');
     }
 
     /**
@@ -77,7 +77,7 @@ class HomeVideoController extends Controller
     {
         \abort_unless($request->user()->group->is_admin, 403);
 
-        $client = new HomeVideo();
+        $client = new BlacklistClient();
         $client->name = $request->input('name');
         $client->link = $request->input('link');
 
@@ -87,13 +87,13 @@ class HomeVideoController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \to_route('staff.homevideos.index')
+            return \to_route('staff.homes.videos.index')
                 ->withErrors($v->errors());
         }
 
         $client->save();
 
-        return \to_route('staff.homevideos.index')
+        return \to_route('staff.homes.videos.index')
             ->withSuccess('Video na domači strani je bil uspešno shranjen!');
     }
 
@@ -107,7 +107,7 @@ class HomeVideoController extends Controller
         $client = HomeVideo::findOrFail($id);
         $client->delete();
 
-        return \to_route('staff.homevideos.index')
+        return \to_route('staff.homes.videos.index')
             ->withSuccess('Video na domači strani je bil uspešno odstranjen!');
     }
 }

@@ -1,4 +1,4 @@
-            @php($total = $poll->options->sum('votes') ?? 'aa')
+            @php($total = $poll->options->sum('votes'))
             @foreach ($poll->options as $option)
                 <h2 class="panel__heading">{{ $poll->title }}</h2>
                 <p class="form__group">

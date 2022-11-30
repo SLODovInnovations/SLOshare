@@ -17,7 +17,6 @@ use App\Models\User;
 use App\Models\Peer;
 use App\Models\History;
 use App\Models\HomeVideo;
-use App\Models\Option;
 //SLOshare
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -171,7 +170,6 @@ class HomeController extends Controller
 
         // Latest Poll Block
         $poll = \cache()->remember('latest_poll', $expiresAt, fn () => Poll::latest()->first());
-        $options = \cache()->remember('options', $expiresAt, fn () => Option::latest()->first());
 
         // Top Uploaders Block
         $uploaders = \cache()->remember('top_uploaders', $expiresAt, fn () => Torrent::with('user', 'user.group')
@@ -245,7 +243,6 @@ class HomeController extends Controller
             'credited_upload'    => $creditedUpload,
             'credited_download'  => $creditedDownload,
             'clients'            => $clients,
-            'options'            => $options,
             //SLOshare
         ]);
     }
