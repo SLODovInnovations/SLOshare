@@ -22,7 +22,7 @@
             @yield('nav-tabs')
         </ul>
     </nav>
-    @include('partials.alerts')
+    <!--@include('partials.alerts')-->
     @if (Session::has('achievement'))
         @include('partials.achievement_modal')
     @endif
