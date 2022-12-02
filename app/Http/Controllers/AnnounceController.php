@@ -184,7 +184,7 @@ class AnnounceController extends Controller
         // If Passkey Format Is Wrong
         \throw_if(
             \strspn(\strtolower($passkey), 'abcdef0123456789') !== 32,
-            new TrackerException(131, [':attribute' => 'passkey', ':reason' => 'Passkey format is incorrect'])
+            new TrackerException(131, [':attribute' => 'passkey', ':reason' => 'Oblika PASSKEY ni pravilna'])
         );
     }
 
@@ -358,19 +358,19 @@ class AnnounceController extends Controller
         // If Torrent Is Pending Moderation Return Error to Client
         \throw_if(
             $torrent->status === self::PENDING,
-            new TrackerException(151, [':status' => 'PENDING In Moderation'])
+            new TrackerException(151, [':status' => 'V ČAKANJU Moderacija'])
         );
 
         // If Torrent Is Rejected Return Error to Client
         \throw_if(
             $torrent->status === self::REJECTED,
-            new TrackerException(151, [':status' => 'REJECTED In Moderation'])
+            new TrackerException(151, [':status' => 'ZAVRNJENO Moderiranje'])
         );
 
         // If Torrent Is Postponed Return Error to Client
         \throw_if(
             $torrent->status === self::POSTPONED,
-            new TrackerException(151, [':status' => 'POSTPONED In Moderation'])
+            new TrackerException(151, [':status' => 'PRESTAVLJENO Moderiranje'])
         );
 
         return $torrent;
