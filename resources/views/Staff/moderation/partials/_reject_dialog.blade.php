@@ -10,16 +10,18 @@
         <form
             class="dialog__form"
             method="POST"
-            action="{{ route("staff.moderation.reject") }}"
+            action="{{ route("staff.moderation.update", ['id' => $torrent->id]) }}"
             x-on:click.outside="open = false; $refs.dialog.close();"
         >
             @csrf
             <input id="type" type="hidden" name="type" value="{{ __('torrent.torrent') }}">
             <input id="id" type="hidden" name="id" value="{{ $torrent->id }}">
             <input id="slug" type="hidden" name="slug" value="{{ $torrent->slug }}">
+            <input type="hidden" name="old_status" value="{{ $torrent->status }}">
+            <input type="hidden" name="status" value="2">
             <p class="form__group">
-                <textarea id="message" class="form__textarea" name="message"></textarea>
-                <label for="message" class="form__label form__label__floating">Rejection Message</label>
+                <textarea id="message" class="form__textarea" name="message">{{ old('message') }}</textarea>
+                <label for="message" class="form__label form__label__floating">Sporočilo o zavrnitvi</label>
             </p>
             <p class="form__group">
                 <button class="form__button form__button--filled">
