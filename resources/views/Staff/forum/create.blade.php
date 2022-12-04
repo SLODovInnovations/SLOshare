@@ -5,7 +5,7 @@
 @endsection
 
 @section('meta')
-    <meta name="description" content="Add Forums - {{ __('staff.staff-dashboard') }}">
+    <meta name="description" content="Dodajte Forum - {{ __('staff.staff-dashboard') }}">
 @endsection
 
 @section('breadcrumbs')

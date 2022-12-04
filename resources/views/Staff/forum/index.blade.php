@@ -1,11 +1,11 @@
 @extends('layout.default')
 
 @section('title')
-    <title>Forums - {{ __('staff.staff-dashboard') }}</title>
+    <title>Forum - {{ __('staff.staff-dashboard') }}</title>
 @endsection
 
 @section('meta')
-    <meta name="description" content="Forums - {{ __('staff.staff-dashboard') }}">
+    <meta name="description" content="Forum - {{ __('staff.staff-dashboard') }}">
 @endsection
 
 @section('breadcrumbs')
@@ -17,6 +17,8 @@
     <li class="breadcrumb--active">
         {{ __('staff.forums') }}
     </li>
+@endsection
+
 @section('page', 'page__forums-admin--index')
 
 @section('main')
