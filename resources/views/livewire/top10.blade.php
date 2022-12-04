@@ -25,6 +25,11 @@
                     @php $meta = App\Models\Cartoon::where('id', '=', $torrent->tmdb)->first() @endphp
                 @endif
             @endif
+            @if ($torrent->category->cartoontv_meta)
+                @if ($torrent->tmdb || $torrent->tmdb != 0)
+                    @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                @endif
+            @endif
             @if ($torrent->category->game_meta)
                 @if ($torrent->igdb || $torrent->igdb != 0)
                     @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($torrent->igdb) @endphp
@@ -45,7 +50,7 @@
                                     @endif
                                 @endif
 
-                                @if ($torrent->category->cartoon_meta)
+                                @if ($torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                                     @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
@@ -86,14 +91,14 @@
                     <td class="torrent-listings-format" style="width: 5%; text-align: center;">
                         <div class="text-center">
                             <i class="{{ $torrent->category->icon }} torrent-icon"
-                               style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
+                               style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
                         </div>
                         <div class="text-center">
                             <span class="label label-success" style="font-size: 13px">
                                 {{ $torrent->type->name }}
                             </span>
                         </div>
-                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                             <div class="text-center" style="padding-top: 5px;">
                                 <span class="label label-success" style="font-size: 13px">
                                     {{ $torrent->resolution->name ?? 'N/A' }}
@@ -347,7 +352,7 @@
                                                     class="{{ config('other.font-awesome') }} fa-star-half-alt"></i> {{ round($meta->rating ?? 0) }}/100 </span>
                                     </span>
                         @endif
-                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                             <span class='badge-extra'>
 	                                    <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
 											<img src="{{ url('img/tmdb_small.png') }}" alt="tmdb_id"
@@ -422,6 +427,11 @@
                     @php $meta = App\Models\Cartoon::where('id', '=', $torrent->tmdb)->first() @endphp
                 @endif
             @endif
+            @if ($torrent->category->cartoontv_meta)
+                @if ($torrent->tmdb || $torrent->tmdb != 0)
+                    @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                @endif
+            @endif
             @if ($torrent->category->game_meta)
                 @if ($torrent->igdb || $torrent->igdb != 0)
                     @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($torrent->igdb) @endphp
@@ -432,45 +442,65 @@
             <tr>
                 <td class="torrent-listings-poster" style="width: 1%;">
                     <div class="torrent-poster pull-left">
-                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
-                            <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
-                                 class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                        @endif
+                                @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                            class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
 
-                        @if ($torrent->category->game_meta)
-                            <img style="height: 80px;"
-                                 src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
-                                 class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                        @endif
+                                @if ($torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_90x135.jpg' }}"
+                                            class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
 
-                        @if ($torrent->category->music_meta)
-                            <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
-                                 alt="{{ __('torrent.poster') }}">
-                        @endif
+                                @if ($torrent->category->game_meta)
+                                    <img style="height: 80px;"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
+                                         class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                @endif
 
-                        @if ($torrent->category->no_meta)
-                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
-                                <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
-                                     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                            @else
-                                <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
-                                     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                            @endif
-                        @endif
-                    </div>
+                                @if ($torrent->category->music_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
+                                            alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
+
+                                @if ($torrent->category->no_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
+                            </div>
                 </td>
 
                 <td class="torrent-listings-format" style="width: 5%; text-align: center;">
                     <div class="text-center">
                         <i class="{{ $torrent->category->icon }} torrent-icon"
-                           style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
+                           style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
                     </div>
                     <div class="text-center">
                         <span class="label label-success" style="font-size: 13px">
                             {{ $torrent->type->name }}
                         </span>
                     </div>
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <div class="text-center" style="padding-top: 5px;">
                                 <span class="label label-success" style="font-size: 13px">
                                     {{ $torrent->resolution->name ?? 'N/A' }}
@@ -724,7 +754,7 @@
                                                     class="{{ config('other.font-awesome') }} fa-star-half-alt"></i> {{ round($meta->rating ?? 0) }}/100 </span>
                                     </span>
                     @endif
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <span class='badge-extra'>
 	                                    <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
 											<img src="{{ url('img/tmdb_small.png') }}" alt="tmdb_id"
@@ -800,6 +830,11 @@
                     @php $meta = App\Models\Cartoon::where('id', '=', $torrent->tmdb)->first() @endphp
                 @endif
             @endif
+            @if ($torrent->category->cartoontv_meta)
+                @if ($torrent->tmdb || $torrent->tmdb != 0)
+                    @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                @endif
+            @endif
             @if ($torrent->category->game_meta)
                 @if ($torrent->igdb || $torrent->igdb != 0)
                     @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($torrent->igdb) @endphp
@@ -810,45 +845,65 @@
             <tr>
                 <td class="torrent-listings-poster" style="width: 1%;">
                     <div class="torrent-poster pull-left">
-                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
-                            <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
-                                 class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                        @endif
+                                @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                            class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
 
-                        @if ($torrent->category->game_meta)
-                            <img style="height: 80px;"
-                                 src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
-                                 class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                        @endif
+                                @if ($torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_90x135.jpg' }}"
+                                            class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
 
-                        @if ($torrent->category->music_meta)
-                            <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
-                                 alt="{{ __('torrent.poster') }}">
-                        @endif
+                                @if ($torrent->category->game_meta)
+                                    <img style="height: 80px;"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
+                                         class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                @endif
 
-                        @if ($torrent->category->no_meta)
-                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
-                                <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
-                                     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                            @else
-                                <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
-                                     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                            @endif
-                        @endif
-                    </div>
+                                @if ($torrent->category->music_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
+                                            alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
+
+                                @if ($torrent->category->no_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
+                            </div>
                 </td>
 
                 <td class="torrent-listings-format" style="width: 5%; text-align: center;">
                     <div class="text-center">
                         <i class="{{ $torrent->category->icon }} torrent-icon"
-                           style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
+                           style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
                     </div>
                     <div class="text-center">
                         <span class="label label-success" style="font-size: 13px">
                             {{ $torrent->type->name }}
                         </span>
                     </div>
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <div class="text-center" style="padding-top: 5px;">
                                 <span class="label label-success" style="font-size: 13px">
                                     {{ $torrent->resolution->name ?? 'N/A' }}
@@ -1102,7 +1157,7 @@
                                                     class="{{ config('other.font-awesome') }} fa-star-half-alt"></i> {{ round($meta->rating ?? 0) }}/100 </span>
                                     </span>
                     @endif
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <span class='badge-extra'>
 	                                    <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
 											<img src="{{ url('img/tmdb_small.png') }}" alt="tmdb_id"
@@ -1178,6 +1233,11 @@
                     @php $meta = App\Models\Cartoon::where('id', '=', $torrent->tmdb)->first() @endphp
                 @endif
             @endif
+            @if ($torrent->category->cartoontv_meta)
+                @if ($torrent->tmdb || $torrent->tmdb != 0)
+                    @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                @endif
+            @endif
             @if ($torrent->category->game_meta)
                 @if ($torrent->igdb || $torrent->igdb != 0)
                     @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($torrent->igdb) @endphp
@@ -1188,45 +1248,65 @@
             <tr>
                 <td class="torrent-listings-poster" style="width: 1%;">
                     <div class="torrent-poster pull-left">
-                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
-                            <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
-                                 class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                        @endif
+                                @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                            class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
 
-                        @if ($torrent->category->game_meta)
-                            <img style="height: 80px;"
-                                 src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
-                                 class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                        @endif
+                                @if ($torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_90x135.jpg' }}"
+                                            class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
 
-                        @if ($torrent->category->music_meta)
-                            <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
-                                 alt="{{ __('torrent.poster') }}">
-                        @endif
+                                @if ($torrent->category->game_meta)
+                                    <img style="height: 80px;"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
+                                         class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                @endif
 
-                        @if ($torrent->category->no_meta)
-                            @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
-                                <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
-                                     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                            @else
-                                <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
-                                     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                            @endif
-                        @endif
-                    </div>
+                                @if ($torrent->category->music_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
+                                            alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
+
+                                @if ($torrent->category->no_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
+                            </div>
                 </td>
 
                 <td class="torrent-listings-format" style="width: 5%; text-align: center;">
                     <div class="text-center">
                         <i class="{{ $torrent->category->icon }} torrent-icon"
-                           style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
+                           style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
                     </div>
                     <div class="text-center">
                         <span class="label label-success" style="font-size: 13px">
                             {{ $torrent->type->name }}
                         </span>
                     </div>
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <div class="text-center" style="padding-top: 5px;">
                                 <span class="label label-success" style="font-size: 13px">
                                     {{ $torrent->resolution->name ?? 'N/A' }}
@@ -1480,7 +1560,7 @@
                                                     class="{{ config('other.font-awesome') }} fa-star-half-alt"></i> {{ round($meta->rating ?? 0) }}/100 </span>
                                     </span>
                     @endif
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <span class='badge-extra'>
 	                                    <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
 											<img src="{{ url('img/tmdb_small.png') }}" alt="tmdb_id"
@@ -1556,6 +1636,11 @@
                         @php $meta = App\Models\Cartoon::where('id', '=', $torrent->tmdb)->first() @endphp
                     @endif
                 @endif
+                @if ($torrent->category->cartoontv_meta)
+                    @if ($torrent->tmdb || $torrent->tmdb != 0)
+                        @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                    @endif
+                @endif
                 @if ($torrent->category->game_meta)
                     @if ($torrent->igdb || $torrent->igdb != 0)
                         @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($torrent->igdb) @endphp
@@ -1566,45 +1651,65 @@
                 <tr>
                     <td class="torrent-listings-poster" style="width: 1%;">
                         <div class="torrent-poster pull-left">
-                            @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
-                                <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
-                                     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                            @endif
+                                @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                            class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
 
-                            @if ($torrent->category->game_meta)
-                                <img style="height: 80px;"
-                                     src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
-                                     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                            @endif
+                                @if ($torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_90x135.jpg' }}"
+                                            class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
 
-                            @if ($torrent->category->music_meta)
-                                <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
-                                     alt="{{ __('torrent.poster') }}">
-                            @endif
-
-                            @if ($torrent->category->no_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
-                                    <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
-                                         class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
-                                @else
-                                    <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                @if ($torrent->category->game_meta)
+                                    <img style="height: 80px;"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
                                          class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
-                            @endif
-                        </div>
+
+                                @if ($torrent->category->music_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
+                                            alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
+
+                                @if ($torrent->category->no_meta)
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                    @endif
+                                @endif
+                            </div>
                     </td>
 
                     <td class="torrent-listings-format" style="width: 5%; text-align: center;">
                         <div class="text-center">
                             <i class="{{ $torrent->category->icon }} torrent-icon"
-                               style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
+                               style="@if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta) padding-top: 1px; @else padding-top: 15px; @endif font-size: 24px;"></i>
                         </div>
                         <div class="text-center">
                             <span class="label label-success" style="font-size: 13px">
                                 {{ $torrent->type->name }}
                             </span>
                         </div>
-                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                             <div class="text-center" style="padding-top: 5px;">
                                 <span class="label label-success" style="font-size: 13px">
                                     {{ $torrent->resolution->name ?? 'N/A' }}
@@ -1858,7 +1963,7 @@
                                                     class="{{ config('other.font-awesome') }} fa-star-half-alt"></i> {{ round($meta->rating ?? 0) }}/100 </span>
                                     </span>
                         @endif
-                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta)
+                        @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                             <span class='badge-extra'>
 	                                    <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
 											<img src="{{ url('img/tmdb_small.png') }}" alt="tmdb_id"

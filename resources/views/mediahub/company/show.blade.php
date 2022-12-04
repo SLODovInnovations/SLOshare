@@ -35,7 +35,8 @@
                     </h1>
                     <h2 class="text-center" style="margin: 0;">{{ $company->tv_count }} {{ __('mediahub.shows') }}
                         | {{ $company->movie_count }} {{ __('mediahub.movies') }}
-                        | {{ $company->cartoon_count }} {{ __('mediahub.cartoons') }}</h2>
+                        | {{ $company->cartoon_count }} {{ __('mediahub.cartoons') }}
+                        | {{ $company->cartoontv_count }} {{ __('mediahub.cartoontvs') }}</h2>
                     @foreach($shows as $show)
                         <div class="col-md-12">
                             <div class="card is-torrent">
@@ -156,8 +157,53 @@
                             </div>
                         </div>
                     @endforeach
+                    @if ($cartoontvs->isNotEmpty())
+                        <div class="col-md-12">
+                            <h2 class="text-center">Risanke TV</h2>
+                        </div>
+                    @endif
+                    @foreach($cartoontvs as $cartoontv)
+                        <div class="col-md-12">
+                            <div class="card is-torrent">
+                                <div class="card_head">
+                                    <span class="badge-user text-bold" style="float:right;">
+                                        {{ $cartoontv->number_of_seasons }} {{ __('mediahub.seasons') }}
+                                    </span>
+                                    <span class="badge-user text-bold" style="float:right;">
+                                        {{ $cartoontv->number_of_episodes }} {{ __('mediahub.episodes') }}
+                                    </span>
+                                </div>
+                                <div class="card_body">
+                                    <div class="body_poster">
+                                        <img src="{{ isset($show->poster) ? tmdb_image('poster_mid', $cartoontv->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
+                                             class="show-poster">
+                                    </div>
+                                    <div class="body_description">
+                                        <h3 class="description_title">
+                                            <a href="{{ route('mediahub.cartoontvs.show', ['id' => $cartoontv->id]) }}">{{ $cartoontv->name }}
+                                                <span class="text-bold text-pink"> {{ substr($cartoontv->first_air_date, 0, 4) }}</span>
+                                            </a>
+                                        </h3>
+                                        @if ($cartoontv->genres)
+                                            @foreach ($cartoontv->genres as $genre)
+                                                <span class="genre-label">{{ $genre->name }}</span>
+                                            @endforeach
+                                        @endif
+                                        <p class="description_plot">
+                                            {{ $cartoontv->overview }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card_footer">
+                                    <div style="float: left;">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                     <div class="text-center">
-                        {{ ($company->tv_count > 25 && $company->tv_count > $company->movie_count > $company->cartoon_count) ? $shows->links() : $movies->links() : $cartoons->links() }}
+                        {{ ($company->tv_count > 25 && $company->tv_count > $company->movie_count > $company->cartoon_countt > $company->cartoontv_count) ? $shows->links() : $movies->links() : $cartoons->links() : $cartoontvs->links() }}
                     </div>
                 </div>
             </div>

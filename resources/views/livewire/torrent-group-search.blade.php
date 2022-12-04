@@ -893,6 +893,8 @@
                     $mediaType = 'cartoon';
                 } elseif ($media->category->tv_meta) {
                     $mediaType = 'tv';
+                } elseif ($media->category->cartoontv_meta) {
+                    $mediaType = 'cartoontv';
                 } else {
                     $mediaType = 'no';
                 }
@@ -906,6 +908,9 @@
                 }
                 if ($media->category->tv_meta && $media->tmdb && $media->tmdb != 0 && $media->tmdb != '') {
                     $meta = \App\Models\Tv::with(['genres'])->find($media->tmdb);
+                }
+                if ($media->category->cartoontv_meta && $media->tmdb && $media->tmdb != 0 && $media->tmdb != '') {
+                    $meta = \App\Models\Cartoontv::with(['genres'])->find($media->tmdb);
                 }
 
                 $media->torrents = \App\Models\Torrent::select(['id', 'name', 'size', 'seeders', 'leechers', 'times_completed',
@@ -922,6 +927,7 @@
                                 @case('movie')
                                 @case('cartoon')
                                 @case('tv')
+                                @case('cartoontv')
                                 href="{{ route('torrents.similar', ['category_id' => $media->torrents->first()->category_id, 'tmdb' => $media->tmdb]) }}"
                                 @endswitch
                                 class="torrent-search--grouped__poster"
@@ -931,6 +937,7 @@
                                     @case ('movie')
                                     @case ('cartoon')
                                     @case ('tv')
+                                    @case ('cartoontv')
                                     src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
                                     @break
                                     @case ('game')
@@ -961,6 +968,9 @@
                                 {{ $meta->title ?? '' }} (<time>{{ \substr($meta->release_date, 0, 4) ?? '' }}</time>)
                                 @break
                                 @case('tv')
+                                {{ $meta->name ?? ''}} (<time>{{ \substr($meta->first_air_date, 0, 4) ?? '' }}</time>)
+                                @break
+                                @case('cartoontv')
                                 {{ $meta->name ?? ''}} (<time>{{ \substr($meta->first_air_date, 0, 4) ?? '' }}</time>)
                                 @break
                             @endswitch
@@ -1013,6 +1023,21 @@
                                 @endforeach
                             @endif
                             @break
+                            @case('cartoontv')
+                            @if(!empty($creators = (new App\Services\Tmdb\Client\TV($media->tmdb))->get_creator()))
+                                <span class="torrent-search-grouped__directors-by">Avtor</span>
+                                @foreach($creators as $creator)
+                                    <a href="{{ route('mediahub.persons.show', ['id' => $creator['id']]) }}"
+                                       class="torrent-search--grouped__director"
+                                    >
+                                        {{ $creator['name'] }}
+                                    </a>
+                                    @if (! $loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            @endif
+                            @break
                         @endswitch
                     </address>
                     <div class="torrent-search--grouped__genres">
@@ -1032,6 +1057,7 @@
                             @case($mediaType === 'movie')
                             @case($mediaType === 'cartoon')
                             @case($mediaType === 'tv')
+                            @case($mediaType === 'cartoontv')
                             {{ $meta->overview }}
                             @break
                         @endswitch
@@ -1084,6 +1110,92 @@
                         </table>
                         @break
                         @case('tv')
+                        @foreach($media->torrents->groupBy('season_number')->sortKeys() as $season_number => $season)
+                            @if ($season_number === 0)
+                                @foreach ($season->groupBy('episode_number')->sortKeys() as $episode_number => $episode)
+                                    @if ($episode_number === 0)
+                                        <details class="torrent-search--grouped__complete-pack-dropdown" open>
+                                            <summary>Complete Pack</summary>
+                                            <table class="torrent-search--grouped__complete-pack-torrents">
+                                                @foreach ($episode->sortBy('type.position')->groupBy('type_id') as $torrentsByType)
+                                                    <tbody>
+                                                    @foreach ($torrentsByType as $torrent)
+                                                        <tr>
+                                                            @if ($loop->first)
+                                                                <th
+                                                                        class="torrent-search--grouped__type"
+                                                                        scope="rowgroup"
+                                                                        rowspan="{{ $loop->count }}"
+                                                                >
+                                                                    {{ $torrent->type->name }}
+                                                                </th>
+                                                            @endif
+                                                            @include('livewire.includes._torrent-group-row')
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                @endforeach
+                                            </table>
+                                        </details>
+                                    @endif
+                                @endforeach
+                            @else
+                                <details
+                                        class="torrent-search--grouped__season-dropdown"
+                                        @if ($loop->last)
+                                        open
+                                        @endif
+                                >
+                                    <summary>Season {{ $season_number }}</summary>
+                                    @foreach ($season->groupBy('episode_number')->sortKeys() as $episode_number => $episode)
+                                        <details
+                                                @if ($episode_number === 0)
+                                                class="torrent-search--grouped__season-pack-dropdown"
+                                                open
+                                                @else
+                                                class="torrent-search--grouped__episode-dropdown"
+                                                @endif
+                                        >
+                                            <summary>
+                                                @if ($episode_number === 0)
+                                                    Season Pack
+                                                @else
+                                                    Episode {{ $episode_number }}
+                                                @endif
+                                            </summary>
+                                            <table
+                                                    @if ($episode_number == 0)
+                                                    class="torrent-search--grouped__season-pack-torrents"
+                                                    @else
+                                                    class="torrent-search--grouped__episode-torrents"
+                                                    @endif
+                                            >
+                                                @foreach ($episode->sortBy('type.position')->groupBy('type_id') as $torrentsByType)
+                                                    <tbody>
+                                                    @foreach ($torrentsByType->filter(fn ($torrent) => !($torrent->episode_number === 0 && $torrent->season_number === 0))->sortBy([['resolution.position', 'asc'], ['internal', 'desc'], ['size', 'desc']]) as $torrent)
+                                                        <tr>
+                                                            @if ($loop->first)
+                                                                <th
+                                                                        class="torrent-search--grouped__type"
+                                                                        scope="rowgroup"
+                                                                        rowspan="{{ $loop->count }}"
+                                                                >
+                                                                    {{ $torrent->type->name }}
+                                                                </th>
+                                                            @endif
+                                                            @include('livewire.includes._torrent-group-row')
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                @endforeach
+                                            </table>
+                                        </details>
+                                    @endforeach
+                                </details>
+                            @endif
+                        @endforeach
+                        @break
+                        @case('cartoontv')
                         @foreach($media->torrents->groupBy('season_number')->sortKeys() as $season_number => $season)
                             @if ($season_number === 0)
                                 @foreach ($season->groupBy('episode_number')->sortKeys() as $episode_number => $episode)
