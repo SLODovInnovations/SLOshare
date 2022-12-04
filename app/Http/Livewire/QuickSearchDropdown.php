@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Movie;
 use App\Models\Cartoon;
+use App\Models\CartoonTV;
 use App\Models\Person;
 use App\Models\Tv;
 use Livewire\Component;
@@ -35,6 +36,14 @@ class QuickSearchDropdown extends Component
                 ->take(10)
                 ->get(),
             'risanke' => Cartoon::query()
+                ->select(['id', 'poster', 'title', 'release_date'])
+                ->selectRaw("concat(title, ' ', release_date) as title_and_year")
+                ->having('title_and_year', 'LIKE', $search)
+                ->has('torrents')
+                ->oldest('title')
+                ->take(10)
+                ->get(),
+            'risanketv' => Cartoon::query()
                 ->select(['id', 'poster', 'title', 'release_date'])
                 ->selectRaw("concat(title, ' ', release_date) as title_and_year")
                 ->having('title_and_year', 'LIKE', $search)

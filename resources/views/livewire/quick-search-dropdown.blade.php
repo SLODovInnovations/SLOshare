@@ -1,7 +1,7 @@
 <div
     class="quick-search"
     x-data="{ ...quickSearchKeyboardNavigation() }"
-    x-on:keydown.escape.window="$refs.movieSearch.blur(); $refs.seriesSearch.blur(); $refs.cartoonSearch.blur(); $refs.personSearch.blur()"
+    x-on:keydown.escape.window="$refs.movieSearch.blur(); $refs.seriesSearch.blur(); $refs.cartoonSearch.blur(); $refs.cartoontvSearch.blur(); $refs.personSearch.blur()"
 >
     <div class="quick-search__inputs">
         <div class="quick-search__radios">
@@ -45,6 +45,20 @@
                 <i
                     class="quick-search__radio-icon {{ \config('other.font-awesome') }} fa-baby"
                     title="{{ __('mediahub.cartoons') }}"
+                ></i>
+            </label>
+            <label class="quick-search__radio-label">
+                <input
+                    type="radio"
+                    class="quick-search__radio"
+                    name="quicksearchRadio"
+                    value="risanketv"
+                    wire:model="quicksearchRadio"
+                    x-on:click="$nextTick(() => $refs.quickSearch.focus());"
+                />
+                <i
+                    class="quick-search__radio-icon {{ \config('other.font-awesome') }} fa-baby"
+                    title="{{ __('mediahub.cartoonstv') }}"
                 ></i>
             </label>
             <label class="quick-search__radio-label">
@@ -123,6 +137,27 @@
                                 </a>
                             @break
                             @case ("risanke")
+                                <a
+                                    class="quick-search__result-link"
+                                    href="{{ route('torrents.similar', ['category_id' => '3', 'tmdb' => $search_result->id]) }}"
+                                >
+                                    <img
+                                        class="quick-search__image"
+                                        src="{{ $search_result->poster }}"
+                                        alt="{{ __('torrent.poster') }}"
+                                    />
+                                    <h2 class="quick-search__result-text">
+                                        {{ $search_result->title }}
+                                        <time
+                                            class="quick-search__result-year"
+                                            datetime="{{ $search_result->release_date }}"
+                                        >
+                                            {{ substr($search_result->release_date, 0, 4) }}
+                                        </time>
+                                    </h2>
+                                </a>
+                            @break
+                            @case ("risanketv")
                                 <a
                                     class="quick-search__result-link"
                                     href="{{ route('torrents.similar', ['category_id' => '3', 'tmdb' => $search_result->id]) }}"
