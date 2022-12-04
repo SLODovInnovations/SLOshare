@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\Movie;
 use App\Models\Cartoon;
-use App\Models\CartoonTV;
 use App\Models\Person;
 use App\Models\Tv;
 use Livewire\Component;
