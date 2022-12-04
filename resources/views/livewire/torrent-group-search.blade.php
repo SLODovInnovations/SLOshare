@@ -910,7 +910,7 @@
                     $meta = \App\Models\Tv::with(['genres'])->find($media->tmdb);
                 }
                 if ($media->category->cartoontv_meta && $media->tmdb && $media->tmdb != 0 && $media->tmdb != '') {
-                    $meta = \App\Models\Cartoontv::with(['genres'])->find($media->tmdb);
+                    $meta = \App\Models\CartoonTv::with(['genres'])->find($media->tmdb);
                 }
 
                 $media->torrents = \App\Models\Torrent::select(['id', 'name', 'size', 'seeders', 'leechers', 'times_completed',

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\MediaHub;
 
 use App\Http\Controllers\Controller;
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 
-class CartoontvShowController extends Controller
+class CartoonTvController extends Controller
 {
     /**
      * Display All Cartoon TV Shows.
@@ -16,14 +16,14 @@ class CartoontvShowController extends Controller
     }
 
     /**
-     * Show A Cartoon TV Show.
+     * Show A Cartoon TV.
      */
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $show = Cartoontv::with(['seasons', 'genres', 'networks', 'companies', 'torrents'])->withCount('torrents')->findOrFail($id);
+        $cartoontv = CartoonTv::with(['seasons', 'genres', 'networks', 'companies', 'torrents'])->withCount('torrents')->findOrFail($id);
 
         return \view('mediahub.cartoontv.show', [
-            'show' => $show,
+            'cartoontv' => $cartoontv,
         ]);
     }
 }

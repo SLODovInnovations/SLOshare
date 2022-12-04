@@ -67,7 +67,7 @@
                             @endif
                             @if ($slorecommendeds->category->cartoontv_meta)
                                 @if ($slorecommendeds->tmdb || $slorecommendeds->tmdb != 0)
-                            	    @php $meta = App\Models\Cartoontv::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
+                            	    @php $meta = App\Models\CartoonTv::where('id', '=', $slorecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
                             @if ($slorecommendeds->category->game_meta)

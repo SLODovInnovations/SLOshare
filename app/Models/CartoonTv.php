@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cartoontv extends Model
+class CartoonTv extends Model
 {
     protected $guarded = [];
 

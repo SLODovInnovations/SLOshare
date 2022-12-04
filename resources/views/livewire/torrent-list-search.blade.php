@@ -208,7 +208,7 @@
                 @endif
                 @if ($torrent->category->cartoontv_meta)
                     @if ($torrent->tmdb || $torrent->tmdb != 0)
-                        @php $meta = cache()->remember('tvmeta:'.$torrent->tmdb.$torrent->category_id, 3_600, fn () => App\Models\Cartoontv::select(['id', 'poster', 'vote_average'])->where('id', '=', $torrent->tmdb)->first()) @endphp
+                        @php $meta = cache()->remember('tvmeta:'.$torrent->tmdb.$torrent->category_id, 3_600, fn () => App\Models\CartoonTv::select(['id', 'poster', 'vote_average'])->where('id', '=', $torrent->tmdb)->first()) @endphp
                     @endif
                 @endif
                 @if ($torrent->category->game_meta)

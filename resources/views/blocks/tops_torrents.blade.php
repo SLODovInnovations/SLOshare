@@ -38,7 +38,7 @@
          	        @endif
          		    @if ($seed->category->cartoontv_meta)
          		         @if ($seed->tmdb || $seed->tmdb != 0)
-         			            @php $meta = App\Models\Cartoontv::where('id', '=', $seed->tmdb)->first(); @endphp
+         			            @php $meta = App\Models\CartoonTv::where('id', '=', $seed->tmdb)->first(); @endphp
                          @endif
                     @endif
          		    @if ($seed->category->game_meta)
@@ -152,7 +152,7 @@
     			    @endif
     			    @if ($leech->category->cartoontv_meta)
     				    @if ($leech->tmdb || $leech->tmdb != 0)
-    					    @php $meta = App\Models\Cartoontv::where('id', '=', $leech->tmdb)->first(); @endphp
+    					    @php $meta = App\Models\CartoonTv::where('id', '=', $leech->tmdb)->first(); @endphp
     				    @endif
                     @endif
     			    @if ($leech->category->game_meta)

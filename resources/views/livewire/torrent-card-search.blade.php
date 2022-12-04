@@ -164,7 +164,7 @@
                 @if ($torrent->tmdb || $torrent->tmdb != 0)
                     @php
                         $meta = cache()->remember('cartoontv.'.$torrent->tmdb, 3_600, function() use ($torrent) {
-                            return App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first();
+                            return App\Models\CartoonTv::where('id', '=', $torrent->tmdb)->first();
                         })
                     @endphp
                 @endif

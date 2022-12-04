@@ -17,7 +17,7 @@ use App\Models\Torrent;
 use App\Models\TorrentFile;
 use App\Models\TorrentRequest;
 use App\Models\Tv;
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 use App\Models\Warning;
 use Livewire\Component;
 
@@ -167,7 +167,7 @@ class SimilarTorrent extends Component
                         $titles[] = $title->name.' ('.substr($title->first_air_date, 0, 4).')';
                         break;
                     case 'cartoontv':
-                        $title = Cartoontv::find($torrent->tmdb);
+                        $title = CartoonTv::find($torrent->tmdb);
                         $titles[] = $title->name.' ('.substr($title->first_air_date, 0, 4).')';
                         break;
                     default:

@@ -494,6 +494,12 @@ Route::group(['middleware' => 'language'], function () {
 
         // Cartoon
         Route::get('/cartoons/{id}', [App\Http\Controllers\MediaHub\CartoonController::class, 'show'])->name('mediahub.cartoons.show');
+
+        // Cartoon TVs
+        Route::get('/cartoontvs', [App\Http\Controllers\MediaHub\CartoonTvController::class, 'index'])->name('mediahub.cartoontvs.index');
+
+        // Cartoon TV
+        Route::get('/cartoontvs/{id}', [App\Http\Controllers\MediaHub\CartoonTvController::class, 'show'])->name('mediahub.cartoontvs.show');
     });
 
     /*

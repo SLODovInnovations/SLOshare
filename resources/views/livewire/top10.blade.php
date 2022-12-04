@@ -27,7 +27,7 @@
             @endif
             @if ($torrent->category->cartoontv_meta)
                 @if ($torrent->tmdb || $torrent->tmdb != 0)
-                    @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                    @php $meta = App\Models\CartoonTv::where('id', '=', $torrent->tmdb)->first() @endphp
                 @endif
             @endif
             @if ($torrent->category->game_meta)
@@ -429,7 +429,7 @@
             @endif
             @if ($torrent->category->cartoontv_meta)
                 @if ($torrent->tmdb || $torrent->tmdb != 0)
-                    @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                    @php $meta = App\Models\CartoonTv::where('id', '=', $torrent->tmdb)->first() @endphp
                 @endif
             @endif
             @if ($torrent->category->game_meta)
@@ -832,7 +832,7 @@
             @endif
             @if ($torrent->category->cartoontv_meta)
                 @if ($torrent->tmdb || $torrent->tmdb != 0)
-                    @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                    @php $meta = App\Models\CartoonTv::where('id', '=', $torrent->tmdb)->first() @endphp
                 @endif
             @endif
             @if ($torrent->category->game_meta)
@@ -1235,7 +1235,7 @@
             @endif
             @if ($torrent->category->cartoontv_meta)
                 @if ($torrent->tmdb || $torrent->tmdb != 0)
-                    @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                    @php $meta = App\Models\CartoonTv::where('id', '=', $torrent->tmdb)->first() @endphp
                 @endif
             @endif
             @if ($torrent->category->game_meta)
@@ -1638,7 +1638,7 @@
                 @endif
                 @if ($torrent->category->cartoontv_meta)
                     @if ($torrent->tmdb || $torrent->tmdb != 0)
-                        @php $meta = App\Models\Cartoontv::where('id', '=', $torrent->tmdb)->first() @endphp
+                        @php $meta = App\Models\CartoonTv::where('id', '=', $torrent->tmdb)->first() @endphp
                     @endif
                 @endif
                 @if ($torrent->category->game_meta)

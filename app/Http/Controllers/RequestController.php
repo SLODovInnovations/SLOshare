@@ -16,7 +16,7 @@ use App\Models\TorrentRequest;
 use App\Models\TorrentRequestBounty;
 use App\Models\TorrentRequestClaim;
 use App\Models\Tv;
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 use App\Models\Type;
 use App\Models\User;
 use App\Notifications\NewRequestBounty;
@@ -77,7 +77,7 @@ class RequestController extends Controller
         }
 
         if ($torrentRequest->category->cartoontv_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $meta = Cartoontv::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
+            $meta = CartoonTv::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
         }
 
         if ($torrentRequest->category->game_meta && ($torrentRequest->igdb || $torrentRequest->igdb != 0)) {

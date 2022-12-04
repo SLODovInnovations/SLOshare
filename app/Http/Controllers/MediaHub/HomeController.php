@@ -11,7 +11,7 @@ use App\Models\Cartoon;
 use App\Models\Network;
 use App\Models\Person;
 use App\Models\Tv;
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 
 class HomeController extends Controller
 {
@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         $tv = Tv::count();
-        $cartoontv = Cartoontv::count();
+        $cartoontv = CartoonTv::count();
         $movies = Movie::count();
         $cartoons = Cartoon::count();
         $collections = Collection::count();

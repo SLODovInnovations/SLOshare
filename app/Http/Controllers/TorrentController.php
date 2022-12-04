@@ -30,7 +30,7 @@ use App\Models\Torrent;
 use App\Models\TorrentFile;
 use App\Models\TorrentRequest;
 use App\Models\Tv;
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 use App\Models\Type;
 use App\Models\Warning;
 use App\Repositories\ChatRepository;
@@ -104,8 +104,8 @@ class TorrentController extends Controller
         }
 
         if ($torrent->category->cartoontv_meta && $torrent->tmdb && $torrent->tmdb != 0) {
-            $meta = Cartoontv::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
-            $trailer = ( new \App\Services\Tmdb\Client\Cartoontv($torrent->tmdb))->get_trailer();
+            $meta = CartoonTv::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
+            $trailer = ( new \App\Services\Tmdb\Client\CartoonTv($torrent->tmdb))->get_trailer();
         }
 
         if ($torrent->category->game_meta && ($torrent->igdb || $torrent->igdb != 0)) {
