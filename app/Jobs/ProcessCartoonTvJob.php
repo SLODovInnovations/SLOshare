@@ -12,7 +12,7 @@ use App\Models\Network;
 use App\Models\Person;
 use App\Models\Recommendation;
 use App\Models\Season;
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 use App\Services\Tmdb\Client;
 use App\Services\Tmdb\TMDB;
 use Illuminate\Bus\Queueable;
@@ -22,7 +22,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Str;
 
-class ProcessCartoontvJob implements ShouldQueue
+class ProcessCartoonTvJob implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
@@ -30,7 +30,7 @@ class ProcessCartoontvJob implements ShouldQueue
     use SerializesModels;
 
     /**
-     * ProcessCartoontvJob Constructor.
+     * ProcessCartoonTvJob Constructor.
      */
     public function __construct(public $cartoontv, public $id)
     {
@@ -166,7 +166,7 @@ class ProcessCartoontvJob implements ShouldQueue
 
         if (isset($this->cartoontv['recommendations'])) {
             foreach ($this->cartoontv['recommendations']['results'] as $recommendation) {
-                if (Cartoontv::where('id', '=', $recommendation['id'])->count() !== 0) {
+                if (CartoonTv::where('id', '=', $recommendation['id'])->count() !== 0) {
                     Recommendation::updateOrCreate(
                         ['recommendation_cartoontv_id' => $recommendation['id'], 'cartoontv_id' => $this->cartoontv['id']],
                         ['title' => $recommendation['name'], 'vote_average' => $recommendation['vote_average'], 'poster' => $tmdb->image('poster', $recommendation), 'first_air_date' => $recommendation['first_air_date']]

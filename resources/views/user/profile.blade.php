@@ -86,7 +86,7 @@
                                     @if ($watched && auth()->user()->group->is_admin)
                                         <i class="{{ config('other.font-awesome') }} fa-eye fa-beat text-danger"
                                            aria-hidden="true" data-toggle="tooltip"
-                                           title="" data-original-title="Uporabnik je pod nadzorom!">
+                                           title="" data-original-title="Gledan razlog: {{ $watched->message }}">
                                         </i>
                                     @endif
                                 </h2>

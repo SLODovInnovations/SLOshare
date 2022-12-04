@@ -42,6 +42,14 @@ class QuickSearchDropdown extends Component
                 ->oldest('title')
                 ->take(10)
                 ->get(),
+            'risanketv' => Cartoon::query()
+                ->select(['id', 'poster', 'title', 'release_date'])
+                ->selectRaw("concat(title, ' ', release_date) as title_and_year")
+                ->having('title_and_year', 'LIKE', $search)
+                ->has('torrents')
+                ->oldest('title')
+                ->take(10)
+                ->get(),
             'igralci' => Person::query()
                 ->select(['id', 'still', 'name'])
                 ->whereNotNull('still')

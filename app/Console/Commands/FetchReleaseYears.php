@@ -6,7 +6,7 @@ use App\Models\Movie;
 use App\Models\Cartoon;
 use App\Models\Torrent;
 use App\Models\Tv;
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 use Illuminate\Console\Command;
 
 /**
@@ -66,7 +66,7 @@ class FetchReleaseYears extends Command
             }
 
             if ($torrent->category->cartoontv_meta && $torrent->tmdb && $torrent->tmdb != 0) {
-                $meta = Cartoontv::where('id', '=', $torrent->tmdb)->first();
+                $meta = CartoonTv::where('id', '=', $torrent->tmdb)->first();
                 if (isset($meta->first_air_date) && \substr($meta->first_air_date, 0, 4) > '1900') {
                     $torrent->release_year = \substr($meta->first_air_date, 0, 4);
                     $torrent->save();

@@ -65,7 +65,7 @@
                     @endif
                     @if ($newslo->category->cartoontv_meta)
                         @if ($newslo->tmdb || $newslo->tmdb != 0)
-                            @php $meta = cache()->remember('tvmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\cartoontv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                            @php $meta = cache()->remember('tvmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\CartoonTv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
                         @endif
                     @endif
                     @if ($newslo->category->game_meta)
@@ -392,7 +392,7 @@
 
 			        @if ($cartoone->category->cartoontv_meta)
 				        @if ($cartoone->tmdb || $cartoone->tmdb != 0)
-					        @php $meta = App\Models\Cartoontv::where('id', '=', $cartoone->tmdb)->first(); @endphp
+					        @php $meta = App\Models\CartoonTv::where('id', '=', $cartoone->tmdb)->first(); @endphp
 				        @endif
 			        @endif
                     <div class="item mini backdrop mini_card">

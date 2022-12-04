@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class CartoontvSearch extends Component
+class CartoonTvSearch extends Component
 {
     use WithPagination;
 
@@ -29,7 +29,7 @@ class CartoontvSearch extends Component
 
     final public function getShowsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        return Cartoontv::with(['networks', 'genres'])
+        return CartoonTv::with(['networks', 'genres'])
             ->withCount('seasons')
             ->when($this->search, fn ($query) => $query->where('name', 'LIKE', '%'.$this->search.'%'))
             ->oldest('name')

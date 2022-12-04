@@ -52,6 +52,15 @@
                                 </div>
                             </a>
 
+                            {{--Cartoons TV--}}
+                            <a href="{{ route('mediahub.cartoontvs.index') }}" class="">
+                                <div class="movie media_blocks" style="background-color: rgba(0, 0, 0, 0.33);">
+                                    <h2>{{ __('mediahub.cartoontvs') }}</h2>
+                                    <span style="background-color: #01d277;"></span>
+                                    <h2 style="font-size: 12px;">{{ $cartoontvs }} {{ __('mediahub.cartoontvs') }}</h2>
+                                </div>
+                            </a>
+
                             {{--Collections--}}
                             <a href="{{ route('mediahub.collections.index') }}" class="">
                                 <div class="movie media_blocks" style="background-color: rgba(0, 0, 0, 0.33);">

@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('bon.bon') }} {{ __('bon.exchange') }} - {{ __('staff.staff-dashboard') }}</title>
+    <title>Uredi {{ __('bon.bon') }} {{ __('bon.exchange') }} - {{ __('staff.staff-dashboard') }}</title>
 @endsection
 
 @section('breadcrumbs')

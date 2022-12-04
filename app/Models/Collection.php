@@ -22,18 +22,18 @@ class Collection extends Model
         return $this->belongsToMany(Movie::class);
     }
 
-    public function movie(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function tv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Tv::class);
     }
 
-    public function movie(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Cartoon::class);
     }
 
-    public function movie(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Cartoontv::class);
+        return $this->belongsToMany(CartoonTv::class);
     }
 }

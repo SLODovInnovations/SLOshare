@@ -4,9 +4,9 @@ namespace App\Http\Controllers\MediaHub;
 
 use App\Http\Controllers\Controller;
 use App\Models\Season;
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 
-class CartoontvSeasonController extends Controller
+class CartoonTvSeasonController extends Controller
 {
     /**
      * Show A Cartoon TV Season.
@@ -14,11 +14,11 @@ class CartoontvSeasonController extends Controller
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         $season = Season::with(['episodes', 'torrents'])->findOrFail($id);
-        $show = Cartoontv::where('id', '=', $season->cartoontv_id)->first();
+        $cartoontv = CartoonTv::where('id', '=', $season->cartoontv_id)->first();
 
         return \view('mediahub.cartoontv.season.show', [
-            'season' => $season,
-            'show'   => $show,
+            'season'      => $season,
+            'cartoontv'   => $cartoontv,
         ]);
     }
 }

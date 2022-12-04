@@ -39,6 +39,6 @@ class Cast extends Model
 
     public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Cartoontv::class, 'cast_cartoontv', 'cartoontv_id', 'cast_id');
+        return $this->belongsToMany(CartoonTv::class, 'cast_cartoontv', 'cartoontv_id', 'cast_id');
     }
 }

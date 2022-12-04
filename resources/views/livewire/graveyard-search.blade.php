@@ -243,7 +243,7 @@
                     @endif
                     @if ($torrent->category->cartoontv_meta)
                         @if ($torrent->tmdb || $torrent->tmdb != 0)
-                            @php $meta = App\Models\Cartoontv::with('genres')->where('id', '=', $torrent->tmdb)->first() @endphp
+                            @php $meta = App\Models\CartoonTv::with('genres')->where('id', '=', $torrent->tmdb)->first() @endphp
                         @endif
                     @endif
                     <tr>

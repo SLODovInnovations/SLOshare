@@ -7,13 +7,13 @@ use App\Jobs\ProcessCompanyJob;
 use App\Jobs\ProcessMovieJob;
 use App\Jobs\ProcessCartoonJob;
 use App\Jobs\ProcessTvJob;
-use App\Jobs\ProcessCartoontvJob;
+use App\Jobs\ProcessCartoonTvJob;
 use App\Models\Collection;
 use App\Models\Company;
 use App\Models\Movie;
 use App\Models\Cartoon;
 use App\Models\Tv;
-use App\Models\Cartoontv;
+use App\Models\CartoonTv;
 use DateTime;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Http\Request;
@@ -82,7 +82,7 @@ class TMDBScraper implements ShouldQueue
         }
 
         $tmdb = new TMDB();
-        $cartoontv = (new Client\TV($id))->getData();
+        $cartoontv = (new Client\CartoonTv($id))->getData();
         if (isset($cartoontv['id'])) {
             $array = [
                 'backdrop'           => $tmdb->image('backdrop', $cartoontv),
@@ -107,9 +107,9 @@ class TMDBScraper implements ShouldQueue
                 'vote_count'         => $cartoontv['vote_count'],
             ];
 
-            Cartoontv::updateOrCreate(['id' => $id], $array);
+            CartoonTv::updateOrCreate(['id' => $id], $array);
 
-            ProcessCartoontvJob::dispatch($cartoontv, $id);
+            ProcessCartoonTvJob::dispatch($cartoontv, $id);
 
             //return ['message' => 'CartoonTv with id: ' . $id . ' Has been added  to the database, But episodes are loaded with the queue'];
         }
