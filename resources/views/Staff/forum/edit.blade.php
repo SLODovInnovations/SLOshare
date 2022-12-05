@@ -25,6 +25,8 @@
     <li class="breadcrumb--active">
         {{ __('common.edit') }}
     </li>
+@endsection
+
 @section('page', 'page__forums-admin--edit')
 
 @section('main')
