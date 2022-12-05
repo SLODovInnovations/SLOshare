@@ -502,7 +502,7 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/cartoon-tv/{id}', [App\Http\Controllers\MediaHub\CartoonTvController::class, 'show'])->name('mediahub.cartoontv.show');
 
         // Cartoon TV Season
-        Route::get('/cartoon-tv/season/{id}', [App\Http\Controllers\MediaHub\TvSeasonController::class, 'show'])->name('mediahub.season.show');
+        Route::get('/cartoon-tv/season/{id}', [App\Http\Controllers\MediaHub\CartoonTvSeasonController::class, 'show'])->name('mediahub.season.show');
     });
 
     /*
