@@ -22,10 +22,12 @@ class NetworkController extends Controller
     {
         $network = Network::withCount('tv')->findOrFail($id);
         $shows = $network->tv()->oldest('name')->paginate(25);
+        $cartoontvs = $network->tv()->oldest('name')->paginate(25);
 
         return \view('mediahub.network.show', [
             'network' => $network,
             'shows'   => $shows,
+            'cartoontvs'   => $cartoontvs,
         ]);
     }
 }

@@ -496,10 +496,13 @@ Route::group(['middleware' => 'language'], function () {
         Route::get('/cartoons/{id}', [App\Http\Controllers\MediaHub\CartoonController::class, 'show'])->name('mediahub.cartoons.show');
 
         // Cartoon TVs
-        Route::get('/cartoontvs', [App\Http\Controllers\MediaHub\CartoonTvController::class, 'index'])->name('mediahub.cartoontvs.index');
+        Route::get('/cartoon-tv', [App\Http\Controllers\MediaHub\CartoonTvController::class, 'index'])->name('mediahub.cartoontv.index');
 
         // Cartoon TV
-        Route::get('/cartoontvs/{id}', [App\Http\Controllers\MediaHub\CartoonTvController::class, 'show'])->name('mediahub.cartoontvs.show');
+        Route::get('/cartoon-tv/{id}', [App\Http\Controllers\MediaHub\CartoonTvController::class, 'show'])->name('mediahub.cartoontv.show');
+
+        // Cartoon TV Season
+        Route::get('/cartoon-tv/season/{id}', [App\Http\Controllers\MediaHub\TvSeasonController::class, 'show'])->name('mediahub.season.show');
     });
 
     /*

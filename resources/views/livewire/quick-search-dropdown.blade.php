@@ -58,7 +58,7 @@
                 />
                 <i
                     class="quick-search__radio-icon {{ \config('other.font-awesome') }} fa-baby"
-                    title="{{ __('mediahub.cartoonstv') }}"
+                    title="{{ __('mediahub.cartoontvs') }}"
                 ></i>
             </label>
             <label class="quick-search__radio-label">
