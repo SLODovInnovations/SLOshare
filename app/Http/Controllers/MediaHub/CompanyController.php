@@ -24,8 +24,7 @@ class CompanyController extends Controller
         $shows = $company->tv()->oldest('name')->paginate(25);
         $movies = $company->movie()->oldest('title')->paginate(25);
         $cartoons = $company->cartoon()->oldest('title')->paginate(25);
-        $cartoontvs = $company->cartoon()->oldest('title')->paginate(25);
-        $showscartoon = $company->cartoontv()->oldest('name')->paginate(25);
+        $cartoontvs = $company->cartoontv()->oldest('name')->paginate(25);
 
         return \view('mediahub.company.show', [
             'company' => $company,
@@ -33,7 +32,6 @@ class CompanyController extends Controller
             'movies'  => $movies,
             'cartoons'=> $cartoons,
             'cartoontvs'=> $cartoontvs,
-            'showscartoon'   => $showscartoon,
         ]);
     }
 }

@@ -26,7 +26,6 @@ class GenreController extends Controller
         $shows = $genre->tv()->oldest('name')->paginate(25);
         $movies = $genre->movie()->oldest('title')->paginate(25);
         $cartoons = $genre->cartoon()->oldest('title')->paginate(25);
-        $cartoontvs = $genre->cartoon()->oldest('title')->paginate(25);
         $showscartoon = $genre->cartoontv()->oldest('name')->paginate(25);
 
         return \view('mediahub.genre.show', [
@@ -34,7 +33,6 @@ class GenreController extends Controller
             'shows'  => $shows,
             'movies' => $movies,
             'cartoons' => $cartoons,
-            'cartoontvs' => $cartoontvs,
             'showscartoon'  => $showscartoon,
         ]);
     }
