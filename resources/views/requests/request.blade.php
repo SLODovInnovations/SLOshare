@@ -32,6 +32,9 @@
                 @case($torrentRequest->category->tv_meta)
                     @include('torrent.partials.tv_meta', ['torrent' => $torrentRequest])
                     @break
+                @case($torrentRequest->category->cartoontv_meta)
+                    @include('torrent.partials.cartoontv_meta', ['torrent' => $torrentRequest])
+                    @break
                 @case($torrentRequest->category->game_meta)
                     @include('torrent.partials.game_meta', ['torrent' => $torrentRequest])
                     @break
