@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         $tv = Tv::count();
-        $cartoontv = CartoonTv::count();
+        $cartoontvs  = CartoonTv::count();
         $movies = Movie::count();
         $cartoons = Cartoon::count();
         $collections = Collection::count();
