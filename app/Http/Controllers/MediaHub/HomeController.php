@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         return \view('mediahub.index', [
             'tv'          => $tv,
-            'cartoontv'   => $cartoontv,
+            'cartoontvs'   => $cartoontvs,
             'movies'      => $movies,
             'cartoons'    => $cartoons,
             'collections' => $collections,
