@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>Ustvari {{ __('common.blacklist') } - {{ __('staff.staff-dashboard') }}</title>
+    <title>Ustvari {{ __('common.blacklist') }} - {{ __('staff.staff-dashboard') }}</title>
 @endsection
 
 @section('breadcrumbs')
