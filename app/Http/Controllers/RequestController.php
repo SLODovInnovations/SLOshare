@@ -60,7 +60,6 @@ class RequestController extends Controller
         $user = $request->user();
         $torrentRequestClaim = TorrentRequestClaim::where('request_id', '=', $id)->first();
         $voters = $torrentRequest->requestBounty()->get();
-        $comments = $torrentRequest->comments()->latest('created_at')->paginate(6);
         $carbon = Carbon::now()->addDay();
 
         $meta = null;
@@ -72,14 +71,6 @@ class RequestController extends Controller
             $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
         }
 
-        if ($torrentRequest->category->cartoon_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $meta = Cartoon::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
-        }
-
-        if ($torrentRequest->category->cartoontv_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $meta = CartoonTv::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
-        }
-
         if ($torrentRequest->category->game_meta && ($torrentRequest->igdb || $torrentRequest->igdb != 0)) {
             $meta = Game::with([
                 'cover'    => ['url', 'image_id'],
@@ -88,14 +79,14 @@ class RequestController extends Controller
                 'videos'   => ['video_id', 'name'],
                 'involved_companies.company',
                 'involved_companies.company.logo',
-                'platforms',])
+                'platforms', ])
                 ->find($torrentRequest->igdb);
         }
 
         return \view('requests.request', [
             'torrentRequest'      => $torrentRequest,
-            'voters'              => $voters, 'user' => $user,
-            'comments'            => $comments,
+            'voters'              => $voters,
+            'user'                => $user,
             'carbon'              => $carbon,
             'meta'                => $meta,
             'torrentRequestClaim' => $torrentRequestClaim,
