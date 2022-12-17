@@ -18,7 +18,6 @@ use App\Models\Graveyard;
 use App\Models\History;
 use App\Models\Keyword;
 use App\Models\Movie;
-use App\Models\Cartoon;
 use App\Models\Peer;
 use App\Models\PersonalFreeleech;
 use App\Models\PlaylistTorrent;
@@ -30,7 +29,6 @@ use App\Models\Torrent;
 use App\Models\TorrentFile;
 use App\Models\TorrentRequest;
 use App\Models\Tv;
-use App\Models\CartoonTv;
 use App\Models\Type;
 use App\Models\Warning;
 use App\Repositories\ChatRepository;
@@ -74,14 +72,13 @@ class TorrentController extends Controller
      */
     public function show(Request $request, int|string $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $torrent = Torrent::withAnyStatus()->with(['comments', 'category', 'type', 'resolution', 'subtitles', 'playlists'])->findOrFail($id);
-        $uploader = $torrent->user;
         $user = $request->user();
+
+        $torrent = Torrent::withAnyStatus()->with(['user', 'comments', 'category', 'type', 'resolution', 'subtitles', 'playlists'])->findOrFail($id);
         $freeleechToken = FreeleechToken::where('user_id', '=', $user->id)->where('torrent_id', '=', $torrent->id)->first();
         $personalFreeleech = PersonalFreeleech::where('user_id', '=', $user->id)->first();
-        $comments = $torrent->comments()->latest()->paginate(10);
         $totalTips = BonTransactions::where('torrent_id', '=', $id)->sum('cost');
-        $userTips = BonTransactions::where('torrent_id', '=', $id)->where('sender', '=', $request->user()->id)->sum('cost');
+        $userTips = BonTransactions::where('torrent_id', '=', $id)->where('sender', '=', $user->id)->sum('cost');
         $lastSeedActivity = History::where('torrent_id', '=', $torrent->id)->where('seeder', '=', 1)->latest('updated_at')->first();
         $audits = Audit::with('user')->where('model_entry_id', '=', $torrent->id)->where('model_name', '=', 'Torrent')->latest()->get();
 
@@ -96,16 +93,6 @@ class TorrentController extends Controller
         if ($torrent->category->movie_meta && $torrent->tmdb && $torrent->tmdb != 0) {
             $meta = Movie::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
             $trailer = ( new \App\Services\Tmdb\Client\Movie($torrent->tmdb))->get_trailer();
-        }
-
-        if ($torrent->category->cartoon_meta && $torrent->tmdb && $torrent->tmdb != 0) {
-            $meta = Cartoon::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
-            $trailer = ( new \App\Services\Tmdb\Client\Cartoon($torrent->tmdb))->get_trailer();
-        }
-
-        if ($torrent->category->cartoontv_meta && $torrent->tmdb && $torrent->tmdb != 0) {
-            $meta = CartoonTv::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
-            $trailer = ( new \App\Services\Tmdb\Client\CartoonTv($torrent->tmdb))->get_trailer();
         }
 
         if ($torrent->category->game_meta && ($torrent->igdb || $torrent->igdb != 0)) {
@@ -134,7 +121,6 @@ class TorrentController extends Controller
 
         return \view('torrent.torrent', [
             'torrent'            => $torrent,
-            'comments'           => $comments,
             'user'               => $user,
             'personal_freeleech' => $personalFreeleech,
             'freeleech_token'    => $freeleechToken,
@@ -145,7 +131,6 @@ class TorrentController extends Controller
             'user_tips'          => $userTips,
             'featured'           => $featured,
             'mediaInfo'          => $mediaInfo,
-            'uploader'           => $uploader,
             'last_seed_activity' => $lastSeedActivity,
             'playlists'          => $playlists,
             'audits'             => $audits,
