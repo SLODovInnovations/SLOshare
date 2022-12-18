@@ -60,9 +60,9 @@
                         <i class="{{ config('other.font-awesome') }} fa-fw fa-users"></i> {{ __('torrent.uploader') }}
                     </span>
                     <div class="numup" style="padding-top:5px;">
-                        <a href="{{ route('users.show', ['username' => $uploader->username]) }}">
-                            <span style="color:#ffffff; background-image:{{ $uploader->group->effect }};">
-                                <i class="{{ $uploader->group->icon }}" data-toggle="tooltip" data-original-title="{{ $uploader->group->name }}"></i> {{ $uploader->username }}
+                        <a href="{{ route('users.show', ['username' => $torrent->user->username]) }}">
+                            <span style="color:#ffffff; background-image:{{ $torrent->user->group->effect }};">
+                                <i class="{{ $torrent->user->group->icon }}" data-toggle="tooltip" data-original-title="{{ $torrent->user->group->name }}"></i> {{ $torrent->user->username }}
                             </span>
                         </a>
                     </div>
