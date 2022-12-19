@@ -122,7 +122,6 @@
                         <tr>
                             @endif
                             <td class="torrent-listings-poster" style="width: 1%;">
-
                                     <div class="torrent-poster pull-left">
                                         @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
                                             <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
@@ -161,7 +160,6 @@
                                             @endif
                                         @endif
                                     </div>
-
                             <td class="torrent-listings-format" style="width: 5%; text-align: center;">
                                 <div class="text-center">
                                     @if ($torrent->category->image !== null)
@@ -230,34 +228,34 @@
                                 <span class='text-green torrent-listings-comments'>
                                     <i class="{{ config('other.font-awesome') }} fa-comment-alt-lines"></i> {{ $torrent->comments_count }}
                                 </span>
-                                |
                                 @if ($torrent->internal == 1)
+								|
                                     <span class='text-bold torrent-listings-internal'>
                                     <i class='{{ config('other.font-awesome') }} fa-magic'
                                        title='{{ __('torrent.internal-release') }}'
                                        style="color: #baaf92;"></i>
                                 </span>
-                                |
-                                @endif
+								@endif
 
                                 @if ($torrent->personal_release == 1)
+								|
                                     <span class='text-bold torrent-listings-personal'>
                                     <i class='{{ config('other.font-awesome') }} fa-user-plus'
                                        title='Personal Release' style="color: #865be9;"></i>
                                 </span>
-                                |
                                 @endif
 
                                 @if ($torrent->stream == 1)
+								|
                                     <span class='text-bold torrent-listings-stream-optimized'>
                                     <i class='{{ config('other.font-awesome') }} fa-play text-red'
                                        title='{{ __('torrent.stream-optimized') }}'></i>
                                 </span>
-                                |
                                 @endif
 
                                 @if ($torrent->featured == 0)
                                     @if ($torrent->doubleup == 1)
+									|
                                         <span class='text-bold torrent-listings-double-upload'>
                                         <i class='{{ config('other.font-awesome') }} fa-gem text-green'
                                            title='{{ __('torrent.double-upload') }}'></i>
@@ -271,16 +269,19 @@
                                     @endif
 
                                     @if (config('other.freeleech') == 1)
+									|
                                         <span class='text-bold torrent-listings-global-freeleech'>
                                         <i class='{{ config('other.font-awesome') }} fa-star'
                                             title='{{ __('torrent.global-freeleech') }}'></i>
                                     </span>
                                     @elseif ($torrent->free >= '90')
+									|
                                         <span class="torrent-listings-freeleech"
                                               title='{{ $torrent->free }}% {{ __('common.free') }}'>
                                         <i class="{{ config('other.font-awesome') }} fa-star text-gold"></i>
                                     </span>
                                     @elseif ($torrent->free < '90' && $torrent->free >= '30')
+									|
                                         <style>
                                             .star50 {
                                                 position: relative;
@@ -301,6 +302,7 @@
                                         <i class="star50 {{ config('other.font-awesome') }} fa-star"></i>
                                     </span>
                                     @elseif ($torrent->free < '30' && $torrent->free != '0')
+									|
                                         <style>
                                             .star30 {
                                                 position: relative;
@@ -322,6 +324,7 @@
                                     </span>
                                     @endif
                                     @if ($torrent->fl_until !== null)
+									|
                                         <span class='text-bold torrent-listings-freeleech'>
                                             <i class='{{ config('other.font-awesome') }} fa-clock'
                                                title='{{ Illuminate\Support\Carbon::now()->diffForHumans($torrent->fl_until) }} Freeleech poteče.'></i>
@@ -407,8 +410,6 @@
                                 </span>
                                 @endif-->
                             </td>
-
-
                             <td class="torrent-listings-download text-center" style="vertical-align: middle;">
                                 @if (config('torrent.download_check_page') == 1)
                                     <a href="{{ route('download_check', ['id' => $torrent->id]) }}">
@@ -448,7 +449,7 @@
                                 @endif
                                 @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                                     <div id="imdb_id" style="display: none;">tt{{ $torrent->imdb }}</div>
-                                    <span >
+                                    <span>
                                     <a href="{{ route('torrents.similar', ['category_id' => $torrent->category_id, 'tmdb' => $torrent->tmdb]) }}">
                                         <img src="{{ url('img/tmdb_small.png') }}" alt="tmdb_id"
                                              style="margin-left: -5px;" width="24px" height="24px" loading="lazy">
@@ -490,7 +491,7 @@
                             </td>
                             <td class="torrent-listings-age text-center" style="vertical-align: middle;">
 							<span>
-								{{ $torrent->created_at->format('d.m.Y) }}
+								{{ $torrent->created_at->format('d.m.Y') }}
 							</span>
                             </td>
                         </tr>
@@ -520,8 +521,8 @@
       options: myOptions,
       multiple: true,
       search: true,
-      placeholder: "{{__('Izberite Regije')}}",
-      noOptionsText: "{{__('Ni zadetkov')}}",
+      placeholder: "{{__('Select Regions')}}",
+      noOptionsText: "{{__('No results found')}}",
     })
 
     let regions = document.querySelector('#regions')
@@ -542,8 +543,8 @@
       options: myOptions2,
       multiple: true,
       search: true,
-      placeholder: "{{__('Izberite Distributorje')}}",
-      noOptionsText: "{{__('Ni zadetkov')}}",
+      placeholder: "{{__('Select Distributor')}}",
+      noOptionsText: "{{__('No results found')}}",
     })
 
     let distributors = document.querySelector('#distributors')
