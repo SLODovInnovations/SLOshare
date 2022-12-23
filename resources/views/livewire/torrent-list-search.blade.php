@@ -471,10 +471,8 @@
       options: myOptions,
       multiple: true,
       search: true,
-
       placeholder: "{{__('Izberite Regijo')}}",
       noOptionsText: "{{__('Ni zadetkov')}}",
-
     })
 
     let regions = document.querySelector('#regions')
@@ -495,10 +493,8 @@
       options: myOptions2,
       multiple: true,
       search: true,
-
       placeholder: "{{__('Izberite Distributorja')}}",
       noOptionsText: "{{__('Ni zadetkov')}}",
-
     })
 
     let distributors = document.querySelector('#distributors')
