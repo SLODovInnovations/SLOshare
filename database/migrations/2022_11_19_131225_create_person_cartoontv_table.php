@@ -12,8 +12,8 @@ return new class () extends Migration {
     {
         Schema::create('artoon_tv_person', function (Blueprint $table) {
             $table->unsignedInteger('person_id');
-            $table->unsignedInteger('cartoon_tv_id');
-            $table->primary(['person_id', 'cartoon_tv_id']);
+            $table->unsignedInteger('cartoontv_id');
+            $table->primary(['person_id', 'cartoontv_id']);
         });
     }
 };
