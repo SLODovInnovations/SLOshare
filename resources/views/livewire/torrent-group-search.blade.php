@@ -589,7 +589,6 @@
             @endphp
             <article class="torrent-search--grouped__result">
                 <header class="torrent-search--grouped__header" >
-                    @if ($user->show_poster == 1)
                         <a
                                 @switch($mediaType)
                                 @case('movie')
@@ -603,10 +602,12 @@
                             <img
                                     @switch($mediaType)
                                     @case ('movie')
-                                    @case ('cartoon')
                                     @case ('tv')
-                                    @case ('cartoontv')
                                     src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                    @break
+                                    @case ('cartoon')
+                                    @case ('cartoontv')
+                                    src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_90x135.jpg' }}"
                                     @break
                                     @case ('game')
                                     src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
@@ -624,7 +625,6 @@
                                     alt="{{ __('torrent.poster') }}"
                             >
                         </a>
-                    @endif
                     <h2 class="torrent-search--grouped__title-name">
                         <a
                                 href="{{ route('torrents.similar', ['category_id' => $media->torrents->first()->category_id, 'tmdb' => $media->tmdb]) }}"
@@ -836,7 +836,7 @@
       options: myOptions,
       multiple: true,
       search: true,
-      placeholder: "{{__('Izberite Regije')}}",
+      placeholder: "{{__('Izberite Regijo')}}",
       noOptionsText: "{{__('Ni zadetkov')}}",
     })
 
@@ -858,7 +858,7 @@
       options: myOptions2,
       multiple: true,
       search: true,
-      placeholder: "{{__('Izberite Distributorje')}}",
+      placeholder: "{{__('Izberite Distributorja')}}",
       noOptionsText: "{{__('Ni zadetkov')}}",
     })
 

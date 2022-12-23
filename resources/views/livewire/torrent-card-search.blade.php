@@ -26,68 +26,7 @@
         </header>
         <div class="data-table-wrapper">
             {{ $torrents->links('partials.pagination') }}
-            <table class="data-table">
-                <thead>
-                <tr>
-                    <th class="torrent-listings-poster"></th>
-                    <th class="torrent-listings-format"></th>
-                    <th class="torrents-filename torrent-listings-overview">
-                        <div sortable wire:click="sortBy('name')"
-                             :direction="$sortField === 'name' ? $sortDirection : null"
-                             role="button">
-                            {{ __('common.name') }}
-                            @include('livewire.includes._sort-icon', ['field' => 'name'])
-                        </div>
-                    </th>
-                    <th class="torrent-listings-download">
-                        <div>
-                            <i class="{{ config('other.font-awesome') }} fa-download"></i>
-                        </div>
-                    </th>
-                    <th class="torrent-listings-tmdb">
-                        <div>
-                            <i class="{{ config('other.font-awesome') }} fa-id-badge"></i>
-                        </div>
-                    </th>
-                    <th class="torrent-listings-size">
-                        <div sortable wire:click="sortBy('size')"
-                             :direction="$sortField === 'size' ? $sortDirection : null"
-                             role="button">
-                            <i class="{{ config('other.font-awesome') }} fa-database"></i>
-                            @include('livewire.includes._sort-icon', ['field' => 'size'])
-                        </div>
-                    </th>
-                    <th class="torrent-listings-seeders">
-                        <div sortable wire:click="sortBy('seeders')"
-                             :direction="$sortField === 'seeders' ? $sortDirection : null" role="button">
-                            <i class="{{ config('other.font-awesome') }} fa-arrow-alt-circle-up"></i>
-                            @include('livewire.includes._sort-icon', ['field' => 'seeders'])
-                        </div>
-                    </th>
-                    <th class="torrent-listings-leechers">
-                        <div sortable wire:click="sortBy('leechers')"
-                             :direction="$sortField === 'leechers' ? $sortDirection : null" role="button">
-                            <i class="{{ config('other.font-awesome') }} fa-arrow-alt-circle-down"></i>
-                            @include('livewire.includes._sort-icon', ['field' => 'leechers'])
-                        </div>
-                    </th>
-                    <th class="torrent-listings-completed">
-                        <div sortable wire:click="sortBy('times_completed')"
-                             :direction="$sortField === 'times_completed' ? $sortDirection : null" role="button">
-                            <i class="{{ config('other.font-awesome') }} fa-check-circle"></i>
-                            @include('livewire.includes._sort-icon', ['field' => 'times_completed'])
-                        </div>
-                    </th>
-                    <th class="torrent-listings-age">
-                        <div sortable wire:click="sortBy('created_at')"
-                             :direction="$sortField === 'created_at' ? $sortDirection : null" role="button">
-                            {{ __('common.created_at') }}
-                            @include('livewire.includes._sort-icon', ['field' => 'created_at'])
-                        </div>
-                    </th>
-                </tr>
-                </thead>
-            </table>
+
             @foreach($torrents as $torrent)
                 @php $meta = null @endphp
                 @if ($torrent->category->tv_meta)
@@ -159,30 +98,50 @@
                         <div class="card_body">
                             <div class="body_poster">
                                 @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
-                                    <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
-                                         class="show-poster" alt="{{ __('torrent.poster') }}">
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="show-poster" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
+                                             class="show-poster" alt="{{ __('torrent.poster') }}">
+                                    @endif
                                 @endif
 
                                 @if ($torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
-                                    <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_200x300.jpg' }}"
-                                         class="show-poster" alt="{{ __('torrent.poster') }}">
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="show-poster" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_200x300.jpg' }}"
+                                             class="show-poster" alt="{{ __('torrent.poster') }}">
+                                    @endif
                                 @endif
 
                                 @if ($torrent->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
-                                    <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{ $meta->cover['image_id'] }}.jpg"
-                                         class="show-poster"
-                                         data-name='<i style="color: #a5a5a5;">{{ $meta->name ?? 'N/A' }}</i>'
-                                         data-image='<img src="https://images.igdb.com/igdb/image/upload/t_original/{{ $meta->cover['image_id'] }}.jpg"
-									     alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
-                                         class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="show-poster" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="https://images.igdb.com/igdb/image/upload/t_cover_big/{{ $meta->cover['image_id'] }}.jpg"
+                                             class="show-poster"
+                                             data-name='<i style="color: #a5a5a5;">{{ $meta->name ?? 'N/A' }}</i>'
+                                             data-image='<img src="https://images.igdb.com/igdb/image/upload/t_original/{{ $meta->cover['image_id'] }}.jpg"
+									         alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
+                                             class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
+                                    @endif
                                 @endif
 
                                 @if ($torrent->category->music_meta)
-                                    <img src="/img/SLOshare/music_no_image_holder_200x300.jpg" class="show-poster"
-                                         data-name='<i style="color: #a5a5a5;">N/A</i>'
-                                         data-image='<img src="https://via.placeholder.com/200x300"
-									     alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
-                                         class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
+                                    @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                        <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
+                                             class="show-poster" alt="{{ __('torrent.poster') }}">
+                                    @else
+                                        <img src="/img/SLOshare/music_no_image_holder_200x300.jpg" class="show-poster"
+                                            data-name='<i style="color: #a5a5a5;">N/A</i>'
+                                            data-image='<img src="https://via.placeholder.com/200x300"
+									        alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
+                                            class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
+                                    @endif
                                 @endif
 
                                 @if ($torrent->category->no_meta)
@@ -272,8 +231,8 @@
                     {{ __('common.no-result') }}
                 </div>
             @endif
-            {{ $torrents->links('partials.pagination') }}
         </div>
+        {{ $torrents->links('partials.pagination') }}
     </section>
 </div>
 
@@ -291,7 +250,7 @@
       options: myOptions,
       multiple: true,
       search: true,
-      placeholder: "{{__('Izberite Regije')}}",
+      placeholder: "{{__('Izberite Regijo')}}",
       noOptionsText: "{{__('Ni zadetkov')}}",
     })
 
@@ -313,7 +272,7 @@
       options: myOptions2,
       multiple: true,
       search: true,
-      placeholder: "{{__('Izberite Distributorje')}}",
+      placeholder: "{{__('Izberite Distributorja')}}",
       noOptionsText: "{{__('Ni zadetkov')}}",
     })
 
@@ -324,4 +283,3 @@
     })
   })
 </script>
-
