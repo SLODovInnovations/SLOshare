@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->unsignedBigInteger('recommendation_cartoontv_id')->nullable()->index();
             $table->foreign('recommendation_cartoontv_id')->references('id')->on('cartoontv')->onDelete('cascade');
 
-            $table->unique(['cartoontv_id', 'recommendation_cartoon_tv_id']);
+            $table->unique(['cartoontv_id', 'recommendation_cartoontv_id']);
         });
     }
 };
