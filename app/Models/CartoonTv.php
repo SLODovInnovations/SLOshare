@@ -8,7 +8,7 @@ class CartoonTv extends Model
 {
     protected $guarded = [];
 
-    public $table = 'cartoontv';
+    public $table = 'cartoon_tv';
 
     protected $hidden = ['created_at', 'updated_at'];
 
@@ -35,12 +35,12 @@ class CartoonTv extends Model
 
     public function cast(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Cast::class, 'cast_cartoontv', 'cast_id', 'cartoontv_id');
+        return $this->belongsToMany(Cast::class, 'cartoon_tv_cast', 'cast_id', 'cartoon_tv_id');
     }
 
     public function crew(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Crew::class, 'crew_cartoontv', 'person_id', 'cartoontv_id');
+        return $this->belongsToMany(Crew::class, 'cartoon_tv_crew', 'person_id', 'cartoon_tv_id');
     }
 
     public function genres(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -70,6 +70,6 @@ class CartoonTv extends Model
 
     public function recommendations(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Recommendation::class, 'cartoontv_id', 'id');
+        return $this->hasMany(Recommendation::class, 'cartoon_tv_id', 'id');
     }
 }

@@ -18,6 +18,7 @@ use App\Models\Graveyard;
 use App\Models\History;
 use App\Models\Keyword;
 use App\Models\Movie;
+use App\Models\Cartoon;
 use App\Models\Peer;
 use App\Models\PersonalFreeleech;
 use App\Models\PlaylistTorrent;
@@ -29,6 +30,7 @@ use App\Models\Torrent;
 use App\Models\TorrentFile;
 use App\Models\TorrentRequest;
 use App\Models\Tv;
+use App\Models\CartoonTv;
 use App\Models\Type;
 use App\Models\Warning;
 use App\Repositories\ChatRepository;
@@ -90,9 +92,19 @@ class TorrentController extends Controller
             $trailer = ( new \App\Services\Tmdb\Client\TV($torrent->tmdb))->get_trailer();
         }
 
+        if ($torrent->category->cartoontv_meta && $torrent->tmdb && $torrent->tmdb != 0) {
+            $meta = CartoonTv::with('genres', 'cast', 'companies', 'networks', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
+            $trailer = ( new \App\Services\Tmdb\Client\CartoonTv($torrent->tmdb))->get_trailer();
+        }
+
         if ($torrent->category->movie_meta && $torrent->tmdb && $torrent->tmdb != 0) {
             $meta = Movie::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
             $trailer = ( new \App\Services\Tmdb\Client\Movie($torrent->tmdb))->get_trailer();
+        }
+
+        if ($torrent->category->cartoon_meta && $torrent->tmdb && $torrent->tmdb != 0) {
+            $meta = Cartoon::with('genres', 'cast', 'companies', 'collection', 'recommendations')->where('id', '=', $torrent->tmdb)->first();
+            $trailer = ( new \App\Services\Tmdb\Client\Cartoon($torrent->tmdb))->get_trailer();
         }
 
         if ($torrent->category->game_meta && ($torrent->igdb || $torrent->igdb != 0)) {

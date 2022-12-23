@@ -108,28 +108,6 @@
                         </a>
                     </span>
                 @endif
-
-                <!--<br>
-                @if (isset($meta->genres) && $meta->genres->isNotEmpty())
-                    @foreach ($meta->genres as $genre)
-                        <span class="badge-user text-bold text-green">
-                    <a href="{{ route('mediahub.genres.show', ['id' => $genre->id]) }}">
-                        <i class="{{ config('other.font-awesome') }} fa-theater-masks"></i> {{ $genre->name }}
-                    </a>
-                </span>
-                    @endforeach
-                @endif-->
-
-                <!--<br>
-                @foreach ($torrent->keywords->take(10) as $keyword)
-                    @foreach ($torrent->keywords as $keyword)
-                        <span class="badge-user text-bold text-green">
-                            <a href="{{ route('torrents', ['keywords' => $keyword->name]) }}">
-                                <i class="{{ config('other.font-awesome') }} fa-tag"></i> {{ $keyword->name }}
-                            </a>
-                        </span>
-                    @endforeach
-                @endif-->
             </div>
 
             <div class="movie-details">
