@@ -2,18 +2,18 @@
 
 namespace App\Http\Livewire;
 
-use App\Achievements\UserMade100Comments;
-use App\Achievements\UserMade200Comments;
-use App\Achievements\UserMade300Comments;
-use App\Achievements\UserMade400Comments;
-use App\Achievements\UserMade500Comments;
-use App\Achievements\UserMade50Comments;
-use App\Achievements\UserMade600Comments;
-use App\Achievements\UserMade700Comments;
-use App\Achievements\UserMade800Comments;
-use App\Achievements\UserMade900Comments;
-use App\Achievements\UserMadeComment;
-use App\Achievements\UserMadeTenComments;
+//use App\Achievements\UserMade100Comments;
+//use App\Achievements\UserMade200Comments;
+//use App\Achievements\UserMade300Comments;
+//use App\Achievements\UserMade400Comments;
+//use App\Achievements\UserMade500Comments;
+//use App\Achievements\UserMade50Comments;
+//use App\Achievements\UserMade600Comments;
+//use App\Achievements\UserMade700Comments;
+//use App\Achievements\UserMade800Comments;
+//use App\Achievements\UserMade900Comments;
+//use App\Achievements\UserMadeComment;
+//use App\Achievements\UserMadeTenComments;
 use App\Models\User;
 use App\Notifications\NewComment;
 use Livewire\Component;
@@ -76,20 +76,20 @@ class Comments extends Component
         ];
 
         // Achievements
-        if ($comment->anon === 0) {
-            $this->user->unlock(new UserMadeComment(), 1);
-            $this->user->addProgress(new UserMadeTenComments(), 1);
-            $this->user->addProgress(new UserMade50Comments(), 1);
-            $this->user->addProgress(new UserMade100Comments(), 1);
-            $this->user->addProgress(new UserMade200Comments(), 1);
-            $this->user->addProgress(new UserMade300Comments(), 1);
-            $this->user->addProgress(new UserMade400Comments(), 1);
-            $this->user->addProgress(new UserMade500Comments(), 1);
-            $this->user->addProgress(new UserMade600Comments(), 1);
-            $this->user->addProgress(new UserMade700Comments(), 1);
-            $this->user->addProgress(new UserMade800Comments(), 1);
-            $this->user->addProgress(new UserMade900Comments(), 1);
-        }
+        //if ($comment->anon === 0) {
+        //    $this->user->unlock(new UserMadeComment(), 1);
+        //    $this->user->addProgress(new UserMadeTenComments(), 1);
+        //    $this->user->addProgress(new UserMade50Comments(), 1);
+        //    $this->user->addProgress(new UserMade100Comments(), 1);
+        //    $this->user->addProgress(new UserMade200Comments(), 1);
+        //    $this->user->addProgress(new UserMade300Comments(), 1);
+        //    $this->user->addProgress(new UserMade400Comments(), 1);
+        //    $this->user->addProgress(new UserMade500Comments(), 1);
+        //    $this->user->addProgress(new UserMade600Comments(), 1);
+        //    $this->user->addProgress(new UserMade700Comments(), 1);
+        //    $this->user->addProgress(new UserMade800Comments(), 1);
+        //    $this->user->addProgress(new UserMade900Comments(), 1);
+        //}
 
         //Notification
         if ($this->user->id !== $this->model->user_id) {

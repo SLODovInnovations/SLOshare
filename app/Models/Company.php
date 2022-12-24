@@ -29,6 +29,6 @@ class Company extends Model
 
     public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(CartoonTv::class, 'cartoon_tv_company', 'cartoontv_id', 'company_id');
+        return $this->belongsToMany(CartoonTv::class);
     }
 }
