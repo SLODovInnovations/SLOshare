@@ -35,12 +35,12 @@ class CartoonTv extends Model
 
     public function cast(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Cast::class, 'cartoon_tv_cast', 'cast_id', 'cartoontv_id');
+        return $this->belongsToMany(Cast::class, 'cartoon_tv_cast', 'cast_id', 'cartoon_tv_id');
     }
 
     public function crew(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Crew::class, 'cartoon_tv_crew', 'person_id', 'cartoontv_id');
+        return $this->belongsToMany(Crew::class, 'cartoon_tv_crew', 'person_id', 'cartoon_tv_id');
     }
 
     public function genres(): \Illuminate\Database\Eloquent\Relations\BelongsToMany

@@ -27,7 +27,7 @@ class CartoonTvSearch extends Component
         $this->resetPage();
     }
 
-    final public function getShowsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
+    final public function getCartoonTvsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
         return CartoonTv::with(['networks', 'genres'])
             ->withCount('seasons')
