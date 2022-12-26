@@ -29,6 +29,6 @@ class Genre extends Model
 
     public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(CartoonTv::class, 'cartoon_tv_genre', 'cartoontv_id', 'genre_id');
+        return $this->belongsToMany(CartoonTv::class);
     }
 }
