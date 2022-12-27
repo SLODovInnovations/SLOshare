@@ -203,7 +203,7 @@
                         </div>
                     @endforeach
                     <div class="text-center">
-                        {{ ($company->tv_count > 25 && $company->tv_count > $company->movie_count > $company->cartoon_countt > $company->cartoontv_count) ? $shows->links() : $movies->links() : $cartoons->links() : $cartoontvs->links() }}
+                        {{ ($company->tv_count > 25 && $company->tv_count > $company->movie_count > $company->cartoon_count > $company->cartoontv_count) ? $shows->links() : $movies->links() : $cartoons->links() : $cartoontvs->links() }}
                     </div>
                 </div>
             </div>
