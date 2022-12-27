@@ -55,7 +55,7 @@
                         </label>
                     </div>
 
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->tvcartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <div class="form-group">
                             <label for="name">TMDB ID <b>({{ __('request.required') }})</b></label>
                             <br>
@@ -69,7 +69,7 @@
                         <input type="hidden" name="tmdb" value="0">
                     @endif
 
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->tvcartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <div class="form-group">
                             <label for="name">IMDB ID <b>({{ __('torrent.optional') }})</b></label>
                             <br>
@@ -97,7 +97,7 @@
                         <input type="hidden" name="tvdb" value="0">
                     @endif
 
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->tvcartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <div class="form-group">
                             <label for="name">MAL ID ({{ __('torrent.required-anime') }})</label>
                             <br>
@@ -146,7 +146,7 @@
                         </label>
                     </div>
 
-                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->tvcartoon_meta)
+                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                         <div class="form-group">
                             <label for="resolution_id">{{ __('torrent.resolution') }}</label>
                             <label>
