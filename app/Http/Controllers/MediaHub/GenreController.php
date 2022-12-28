@@ -24,16 +24,16 @@ class GenreController extends Controller
     {
         $genre = Genre::withCount(['tv', 'movie', 'cartoon', 'cartoontv'])->findOrFail($id);
         $shows = $genre->tv()->oldest('name')->paginate(25);
+        $cartoontvs = $genre->cartoontv()->oldest('name')->paginate(25);
         $movies = $genre->movie()->oldest('title')->paginate(25);
         $cartoons = $genre->cartoon()->oldest('title')->paginate(25);
-        $cartoontvs = $genre->cartoontv()->oldest('name')->paginate(25);
 
         return \view('mediahub.genre.show', [
-            'genre'  => $genre,
-            'shows'  => $shows,
-            'movies' => $movies,
-            'cartoons' => $cartoons,
-            'cartoontvs' => $cartoontvs,
+            'genre'       => $genre,
+            'shows'       => $shows,
+            'cartoontvs'  => $cartoontvs,
+            'movies'      => $movies,
+            'cartoons'    => $cartoons,
         ]);
     }
 }

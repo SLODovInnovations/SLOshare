@@ -251,7 +251,7 @@
                             </label>
                         </p>
                     </div>
-                    <div class="form__group--horizontal" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon'">
+                    <div class="form__group--horizontal" x-show="cats[cat].type === 'movie' || cats[cat].type === 'tv' || cats[cat].type === 'cartoon' || cats[cat].type === 'cartoontv'">
                         <p class="form__group">
                             <input type="hidden" name="tmdb" value="0" />
                             <input
@@ -289,9 +289,9 @@
                                 id="autotvdb"
                                 inputmode="numeric"
                                 pattern="[0-9]*"
-                                x-bind:value="cats[cat].type === 'tv' ? '{{ old('tvdb') }}' : '0'"
+                                x-bind:value="(cats[cat].type === 'tv' || cats[cat].type === 'cartoontv') ? '{{ old('tvdb') }}' : '0'"
                                 class="form__text"
-                                x-bind:required="cats[cat].type === 'tv'"
+                                x-bind:required="cats[cat].type === 'tv' || cats[cat].type === 'cartoontv'"
                             >
                             <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
                         </p>
