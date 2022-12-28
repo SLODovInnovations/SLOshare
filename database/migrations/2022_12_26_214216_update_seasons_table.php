@@ -13,7 +13,7 @@ return new class () extends Migration {
     public function up()
     {
         Schema::table('seasons', function (Blueprint $table) {
-            $table->integer('cartoontv_id');
+            $table->integer('cartoon_tv_id');
         });
     }
 };
