@@ -80,7 +80,7 @@ class CategoriesTableSeeder extends Seeder
                 'name'          => 'Risanke TV',
                 'slug'          => 'risanke-tv',
                 'position'      => 3,
-                'icon'          => config('other.font-awesome').' fa-baby-carriage',
+                'icon'          => config('other.font-awesome').' fa-baby',
                 'num_torrent'   => 0,
                 'image'         => null,
                 'movie_meta'    => 0,
