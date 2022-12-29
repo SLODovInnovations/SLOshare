@@ -22,9 +22,21 @@ class Season extends Model
         });
     }
 
+    public function torrents(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Torrent::class, 'tmdb', 'cartoon_tv_id')->whereHas('category', function ($q) {
+            $q->where('cartoontv_meta', '=', true);
+        });
+    }
+
     public function tv(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Tv::class);
+    }
+
+    public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(CartoonTv::class);
     }
 
     public function episodes(): \Illuminate\Database\Eloquent\Relations\HasMany
