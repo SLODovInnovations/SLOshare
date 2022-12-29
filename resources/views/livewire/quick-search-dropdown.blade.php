@@ -160,7 +160,7 @@
                             @case ("risanketv")
                                 <a
                                     class="quick-search__result-link"
-                                    href="{{ route('torrents.similar', ['category_id' => '3', 'tmdb' => $search_result->id]) }}"
+                                    href="{{ route('torrents.similar', ['category_id' => '4', 'tmdb' => $search_result->id]) }}"
                                 >
                                     <img
                                         class="quick-search__image"
