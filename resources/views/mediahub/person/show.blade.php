@@ -125,7 +125,7 @@
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <h1 class="text-blue">
-                                    <i class="{{ config('other.font-awesome') }} fa-frown text-blue"></i>No Data Found!
+                                    <i class="{{ config('other.font-awesome') }} fa-frown text-blue"></i>{{ __('mediahub.no-data') }}
                                 </h1>
                             </div>
                         </div>
@@ -174,7 +174,7 @@
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <h1 class="text-blue">
-                                    <i class="{{ config('other.font-awesome') }} fa-frown text-blue"></i>No Data Found!
+                                    <i class="{{ config('other.font-awesome') }} fa-frown text-blue"></i>{{ __('mediahub.no-data') }}
                                 </h1>
                             </div>
                         </div>
@@ -287,7 +287,7 @@
                                 <i class="fa fa-tv-retro text-purple" aria-hidden="true"></i>
                                 <strong> {{ __('mediahub.cartoontv') }}</strong><br>
                                 <i class="fa fa-eye text-green" aria-hidden="true"></i> <a
-                                        href="{{ route('mediahub.cartoontvs.show', ['id' => $show->id]) }}">{{ $cartoontv->name }}</a><br>
+                                        href="{{ route('mediahub.cartoontvs.show', ['id' => $cartoontv->id]) }}">{{ $cartoontv->name }}</a><br>
                                 <i class="fa fa-tags text-red" aria-hidden="true"></i>
                                 <strong>
                                     @if ($cartoontv->genres)

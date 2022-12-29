@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ $user->username }} - Settings - {{ __('common.members') }}</title>
+    <title>Nastavitve - {{ $user->username }}</title>
 @endsection
 
 @section('breadcrumbs')
@@ -32,7 +32,7 @@
                           enctype="multipart/form-data">
                         @csrf
                         <div class="well">
-                            <h3>Language</h3>
+                            <h3>Jezik</h3>
                             <hr>
                             <div class="form-group">
                                 <label for="language" class="control-label">{{ __('user.language') }}</label>
@@ -64,8 +64,8 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="custom_css" class="control-label">External CSS Stylesheet (Stacks on top of
-                                    above theme)</label>
+                                <label for="custom_css" class="control-label">Zunanja tabela slogov CSS (Zloženke na vrhu
+                                    nad temo)</label>
                                 <label>
                                     <input type="text" name="custom_css" class="form-control"
                                            value="@if ($user->custom_css) {{ $user->custom_css }}@endif"
@@ -73,8 +73,8 @@
                                 </label>
                             </div>
                             <div class="form-group">
-                                <label for="standalone_css" class="control-label">Standalone CSS Stylesheet (No site
-                                    theme used)</label>
+                                <label for="standalone_css" class="control-label">Samostojna tabela slogov CSS (Brez mesta
+                                    uporabljena tema)</label>
                                 <label>
                                     <input type="text" name="standalone_css" class="form-control"
                                            value="@if ($user->standalone_css) {{ $user->standalone_css }}@endif"
@@ -84,9 +84,9 @@
                         </div>
 
                         <div class="well">
-                            <h3>Chat</h3>
+                            <h3>Klepet</h3>
                             <hr>
-                            <label for="hidden" class="control-label">Language Censor Chat?</label>
+                            <label for="hidden" class="control-label">Jezikovni Cenzorski klepet?</label>
                             <div class="radio-inline">
                                 <label><input type="radio" name="censor" @if ($user->censor == 1) checked
                                               @endif value="1">{{ __('common.yes') }}</label>
@@ -97,7 +97,7 @@
                             </div>
                             <br>
                             <br>
-                            <label for="hidden" class="control-label">Hide Chat?</label>
+                            <label for="hidden" class="control-label">Skrij klepet?</label>
                             <div class="radio-inline">
                                 <label><input type="radio" name="chat_hidden" @if ($user->chat_hidden == 1) checked
                                               @endif value="1">{{ __('common.yes') }}</label>
@@ -111,12 +111,12 @@
                         <div class="well">
                             <h3>Torrent</h3>
                             <hr>
-                            <label for="torrent_layout" class="control-label">Default Torrent Layout?</label>
+                            <label for="torrent_layout" class="control-label">Privzeta postavitev Torrentov?</label>
                             <select class="form-control" id="torrent_layout" name="torrent_layout">
-                                <option @if ($user->torrent_layout == 0) selected @endif value="0">Torrent List</option>
+                                <option @if ($user->torrent_layout == 0) selected @endif value="0">Seznam Torrentov</option>
                             </select>
                             <br>
-                            <label for="poster" class="control-label">Show Posters On Torrent List View?</label>
+                            <label for="poster" class="control-label">Prikaži plakate v pogledu seznama torrentov?</label>
                             <div class="radio-inline">
                                 <label><input type="radio" name="show_poster" @if ($user->show_poster == 1) checked
                                               @endif value="1">{{ __('common.yes') }}</label>
@@ -127,7 +127,7 @@
                             </div>
                             <br>
                             <br>
-                            <label for="ratings" class="control-label">Ratings Source?</label>
+                            <label for="ratings" class="control-label">Kaj naj prikazuje?</label>
                             <div class="radio-inline">
                                 <label><input type="radio" name="ratings" @if ($user->ratings == 1) checked
                                               @endif value="1">IMDB</label>
@@ -139,7 +139,7 @@
                         </div>
                         <div class="well some-padding">
                             <div class="text-center some-padding">
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                <button type="submit" class="btn btn-primary">Shrani spremembe</button>
                             </div>
                         </div>
                     </form>
