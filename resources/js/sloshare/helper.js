@@ -208,14 +208,14 @@ class uploadExtensionBuilder {
             let matcher = name.value.toLowerCase();
 
             // Torrent Category
-            if (release.type === 'Filmi') {
+            if (release.type === 'Movie') {
                 $('#autocat').val(1);
-            } else if (release.type === 'TV Serije') {
+            } else if (release.type === 'TV Show') {
                 $('#autocat').val(2);
-            } else if (release.type === 'Risanke') {
-                $('#autocat').val(2);
-            } else if (release.type === 'Risanke TV') {
-                $('#autocat').val(2);
+            } else if (release.type === 'Cartoons') {
+                $('#autocat').val(3);
+            } else if (release.type === 'Cartoons TV') {
+                $('#autocat').val(4);
             }
 
             // Torrent Type
@@ -266,7 +266,7 @@ class uploadExtensionBuilder {
             }
 
             // Torrent TMDB ID
-            if (release.type === 'Filmi') {
+            if (release.type === 'Movie') {
                 theMovieDb.search.getMovie(
                     {
                         query: release.title,
@@ -275,7 +275,7 @@ class uploadExtensionBuilder {
                     successCB,
                     errorCB
                 );
-            } else if (release.type === 'TV Serije') {
+            } else if (release.type === 'TV Show') {
                 theMovieDb.search.getTv(
                     {
                         query: release.title,
@@ -283,15 +283,16 @@ class uploadExtensionBuilder {
                     successCB,
                     errorCB
                 );
-            } else if (release.type === 'Risanke') {
-                theMovieDb.search.getTv(
+            } else if (release.type === 'Cartoon') {
+                theMovieDb.search.getMovie(
                     {
                         query: release.title,
+                        year: release.year,
                     },
                     successCB,
                     errorCB
                 );
-            } else if (release.type === 'Risanke TV') {
+            } else if (release.type === 'Cartoon TV') {
                 theMovieDb.search.getTv(
                     {
                         query: release.title,
@@ -303,7 +304,7 @@ class uploadExtensionBuilder {
 
             function successCB(data) {
                 data = JSON.parse(data);
-                if (release.type === 'Filmi') {
+                if (release.type === 'Movie') {
                     if (data.results && data.results.length > 0) {
                         $('#autotmdb').val(data.results[0].id);
                         $('#apimatch').val(
@@ -324,7 +325,7 @@ class uploadExtensionBuilder {
                             e
                         );
                     }
-                } else if (release.type === 'TV Serije') {
+                } else if (release.type === 'TV Show') {
                     if (data.results && data.results.length > 0) {
                         $('#autotmdb').val(data.results[0].id);
                         $('#apimatch').val(
@@ -345,7 +346,7 @@ class uploadExtensionBuilder {
                             e
                         );
                     }
-                } else if (release.type === 'Risanke') {
+                } else if (release.type === 'Cartoon') {
                     if (data.results && data.results.length > 0) {
                         $('#autotmdb').val(data.results[0].id);
                         $('#apimatch').val(
@@ -366,7 +367,7 @@ class uploadExtensionBuilder {
                             e
                         );
                     }
-                } else if (release.type === 'Risanke TV') {
+                } else if (release.type === 'Cartoon TV') {
                     if (data.results && data.results.length > 0) {
                         $('#autotmdb').val(data.results[0].id);
                         $('#apimatch').val(
@@ -397,16 +398,16 @@ class uploadExtensionBuilder {
             //Torrent Keywords
             function success(data) {
                 data = JSON.parse(data);
-                if (release.type === 'Filmi') {
+                if (release.type === 'Movie') {
                     let tags = data.keywords.map(({ name }) => name).join(', ');
                     $('#autokeywords').val(tags);
-                } else if (release.type === 'TV Serije' && data?.results.length > 0) {
+                } else if (release.type === 'TV Show' && data?.results.length > 0) {
                     let tags = data.results.map(({ name }) => name).join(', ');
                     $('#autokeywords').val(tags);
-                } else if (release.type === 'Risanke' && data?.results.length > 0) {
+                } else if (release.type === 'Cartoon' && data?.results.length > 0) {
                     let tags = data.results.map(({ name }) => name).join(', ');
                     $('#autokeywords').val(tags);
-                } else if (release.type === 'Risanke TV' && data?.results.length > 0) {
+                } else if (release.type === 'Cartoon TV' && data?.results.length > 0) {
                     let tags = data.results.map(({ name }) => name).join(', ');
                     $('#autokeywords').val(tags);
                 }
@@ -421,14 +422,14 @@ class uploadExtensionBuilder {
                 data = JSON.parse(data);
                 let imdb = data.imdb_id;
                 imdb = imdb.substring(2) ?? 0;
-                if (release.type === 'Filmi') {
+                if (release.type === 'Movie') {
                     $('#autoimdb').val(imdb);
-                } else if (release.type === 'TV Serije') {
+                } else if (release.type === 'TV Show') {
                     $('#autoimdb').val(imdb);
                     $('#autotvdb').val(data.tvdb_id ?? 0);
-                } else if (release.type === 'Risanke') {
+                } else if (release.type === 'Cartoons') {
                     $('#autoimdb').val(imdb);
-                } else if (release.type === 'Risanke TV') {
+                } else if (release.type === 'Cartoons TV') {
                     $('#autoimdb').val(imdb);
                     $('#autotvdb').val(data.tvdb_id ?? 0);
                 }
