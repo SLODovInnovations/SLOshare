@@ -219,7 +219,7 @@
                             </label>
                         </p>
                     </div>
-                    <div class="form__group--horizontal" x-show="cats[cat].type === 'tv'">
+                    <div class="form__group--horizontal" x-show="cats[cat].type === 'tv' || cats[cat].type === 'cartoontv'">
                         <p class="form__group">
                             <input
                                 type="text"
@@ -229,7 +229,7 @@
                                 inputmode="numeric"
                                 pattern="[0-9]*"
                                 value="{{ old('season_number') }}"
-                                x-bind:required="cats[cat].type === 'tv'"
+                                x-bind:required="cats[cat].type === 'tv' || cats[cat].type === 'cartoontv'"
                             >
                             <label class="form__label form__label--floating" for="season_number">
                                 {{ __('torrent.season-number') }}
@@ -244,7 +244,7 @@
                                 inputmode="numeric"
                                 pattern="[0-9]*"
                                 value="{{ old('episode_number') }}"
-                                x-bind:required="cats[cat].type === 'tv'"
+                                x-bind:required="cats[cat].type === 'tv' || cats[cat].type === 'cartoontv'"
                             >
                             <label class="form__label form__label--floating" for="episode_number">
                                 {{ __('torrent.episode-number') }} (Uporabite "0" za sezonske pakete)
@@ -281,7 +281,7 @@
                             >
                             <label class="form__label form__label--floating" for="autoimdb">IMDB ID</label>
                         </p>
-                        <p class="form__group" x-show="cats[cat].type === 'tv'">
+                        <p class="form__group" x-show="cats[cat].type === 'tv' || cats[cat].type === 'cartoontv'">
                             <input type="hidden" name="tvdb" value="0" />
                             <input
                                 type="text"

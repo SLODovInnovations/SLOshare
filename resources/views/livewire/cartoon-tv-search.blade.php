@@ -25,7 +25,7 @@
                     </div>
                     <div class="body_description">
                         <h3 class="description_title">
-                            <a href="{{ route('mediahub.shows.show', ['id' => $cartoontv->id]) }}">{{ $cartoontv->name }}
+                            <a href="{{ route('mediahub.cartoontv.show', ['id' => $cartoontv->id]) }}">{{ $cartoontv->name }}
                                 @if($cartoontv->first_aired)
                                     <span class="text-bold text-pink"> {{ $cartoontv->first_aired }}</span>
                                 @endif
