@@ -173,7 +173,7 @@
                                                     @if ($cartoontv->genres)
                                                         @foreach ($cartoontv->genres as $genre)
                                                             <li><a class="rounded"
-                                                                   href="{{ route('mediahub.genres.cartoontv', ['id' => $genre->id]) }}">{{ $genre->name }}</a>
+                                                                   href="{{ route('mediahub.genres.show', ['id' => $genre->id]) }}">{{ $genre->name }}</a>
                                                             </li>
                                                         @endforeach
                                                     @endif
