@@ -43,7 +43,7 @@
                     x-on:click="$nextTick(() => $refs.quickSearch.focus());"
                 />
                 <i
-                    class="quick-search__radio-icon {{ \config('other.font-awesome') }} fa-baby"
+                    class="quick-search__radio-icon {{ \config('other.font-awesome') }} fa-baby-carriage"
                     title="{{ __('mediahub.cartoons') }}"
                 ></i>
             </label>

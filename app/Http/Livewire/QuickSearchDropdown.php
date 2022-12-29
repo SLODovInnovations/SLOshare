@@ -6,6 +6,7 @@ use App\Models\Movie;
 use App\Models\Cartoon;
 use App\Models\Person;
 use App\Models\Tv;
+use App\Models\CartoonTv;
 use Livewire\Component;
 
 class QuickSearchDropdown extends Component
@@ -42,12 +43,12 @@ class QuickSearchDropdown extends Component
                 ->oldest('title')
                 ->take(10)
                 ->get(),
-            'risanketv' => Cartoon::query()
-                ->select(['id', 'poster', 'title', 'release_date'])
-                ->selectRaw("concat(title, ' ', release_date) as title_and_year")
+            'risanketv' => CartoonTv::query()
+                ->select(['id', 'poster', 'name', 'first_air_date'])
+                ->selectRaw("concat(name, ' ', first_air_date) as title_and_year")
                 ->having('title_and_year', 'LIKE', $search)
                 ->has('torrents')
-                ->oldest('title')
+                ->oldest('name')
                 ->take(10)
                 ->get(),
             'igralci' => Person::query()
