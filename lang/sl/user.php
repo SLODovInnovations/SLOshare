@@ -242,6 +242,7 @@ return [
     'registration-date'                    => 'Datum registracije',
     'removed'                              => 'Odstranjeno',
     'report'                               => 'Prijavi',
+    'report-sent'                          => 'Vaše poročilo je bilo uspešno poslano',
     'request-help'                         => 'Nadzorujte skupno rabo specifičnih statističnih podatkov v zvezi z zahtevki in informacije o skupinah, ki jim je dovoljen dostop do vašega profila. Te nastavitve so razveljavljene, če nobenim skupinam ne dovolite dostopa do vaše zahtevane povezane statistike in informacij ali če <strong>greste zasebno</strong>',
     'request'                              => 'Prošnja',
     'requested'                            => 'Zahteve',

@@ -32,6 +32,7 @@ return [
     'description'         => 'Opis',
     'dont-have-bps'       => 'Nimaš dovolj bonusa',
     'edit-request'        => 'Uredi prošnjo',
+    'edited-request'      => 'Zahteva je bila uspešno urejena.',
     'deleted'             => 'Izbrisali ste %s',
     'enter-bp'            => 'Vnesite bonus točke (najmanj 100)',
     'enter-hash'          => 'Vnesite Info Hash za naloženi Torrent',
