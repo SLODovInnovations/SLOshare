@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('request.edit-request') }} - {{ config('other.title') }}</title>
+    <title>{{ __('request.edit-request') }}</title>
 @endsection
 
 @section('breadcrumbs')
@@ -115,7 +115,7 @@
                                 pattern="[0-9]*"
                                 required
                                 type="text"
-                                value="{{ $torrentRequest->tmdb ?: old('tmdb') ?? '0') }}"
+                                value="{{ $torrentRequest->tmdb ?: (old('tmdb') ?? '0') }}"
                             >
                             <label class="form__label form__label--floating" for="autotmdb">TMDB ID</label>
                             <output name="apimatch" id="apimatch" for="torrent"></output>
@@ -130,7 +130,7 @@
                                 pattern="[0-9]*"
                                 required
                                 type="text"
-                                value="{{ $torrentRequest->imdb ?: old('imdb') ?? '0') }}"
+                                value="{{ $torrentRequest->imdb ?: (old('imdb') ?? '0') }}"
                             >
                             <label class="form__label form__label--floating" for="autoimdb">IMDB ID</label>
                         </p>
@@ -162,6 +162,7 @@
                             >
                             <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
                         </p>-->
+						<input type="hidden" name="mal" value="0" />
                         <p class="form__group">
                             <input
                                 id="igdb"
@@ -190,11 +191,11 @@
                             id="anon"
                             name="anon"
                             value="1"
-                            @checked(old('anon'))
+                            @checked($torrentRequest->anon)
                         >
                         <label class="form__label" for="anon">{{ __('common.anonymous') }}?</label>
                     </p>-->
-                    <input type="hidden" name="anon" value="0">
+					<input type="hidden" name="anon" value="0" />
                     <p class="form__group">
                         <button class="form__button form__button--filled">
                             {{ __('common.submit') }}

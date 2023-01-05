@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('request.add-request') }} - {{ config('other.title') }}</title>
+    <title>{{ __('request.add-request') }}</title>
 @endsection
 
 @section('breadcrumbs')
@@ -149,6 +149,7 @@
                             >
                             <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
                         </p>-->
+                        <input type="hidden" name="mal" value="0" />
                         <p class="form__group">
                             <input type="hidden" name="igdb" value="0" />
                             <input
@@ -181,7 +182,8 @@
                             {{ __('request.reward') }} ({{ __('request.reward-desc') }})
                         </label>
                     </p>-->
-                    <input type="hidden" name="bonus_point" value="0">
+                    <input type="hidden" name="bonus_point" value="0" />
+                    <input type="hidden" name="bounty" value="0" />
                     <!--<p class="form__group">
                         <input type="hidden" name="anon" value="0">
                         <input
@@ -194,7 +196,7 @@
                         >
                         <label class="form__label" for="anon">{{ __('common.anonymous') }}?</label>
                     </p>-->
-                    <input type="hidden" name="anon" value="0">
+                    <input type="hidden" name="anon" value="0" />
                     <p class="form__group">
                         <button class="form__button form__button--filled">
                             {{ __('common.submit') }}
