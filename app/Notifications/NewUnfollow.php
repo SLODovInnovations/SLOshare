@@ -14,7 +14,7 @@ class NewUnfollow extends Notification implements ShouldQueue
     /**
      * NewUnfolllow Constructor.
      */
-    public function __construct(public string $type, public User $sender, public User $target)
+    public function __construct(public string $type, public User $unfollower)
     {
     }
 
@@ -32,9 +32,9 @@ class NewUnfollow extends Notification implements ShouldQueue
     public function toArray($notifiable): array
     {
         return [
-            'title' => $this->sender->username.' Nehal vas je spremljati!',
-            'body'  => $this->sender->username.' vas je prenehal spremljati, zato ne bodo več prejemal obvestil o vaših dejavnostih.',
-            'url'   => '/users/'.$this->sender->username,
+            'title' => $this->unfollower->username.' Nehal vas je spremljati!',
+            'body'  => $this->unfollower->username.' vas je prenehal spremljati, zato ne bodo več prejemal obvestil o vaših dejavnostih.',
+            'url'   => '/users/'.$this->unfollower->username,
         ];
     }
 }

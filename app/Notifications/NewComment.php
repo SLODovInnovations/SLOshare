@@ -42,9 +42,9 @@ class NewComment extends Notification
             return [
                 'title' => 'Prejet nov komentar Torrenta',
                 'body'  => 'Anonimnež vam je pustil komentar o Torrentu '.$this->comment->commentable->name,
-                'url'   => '/torrents/'.$this->comment->torrent->id,
+                'url'   => '/torrents/'.$this->comment->commentable->id,
             ];
-        }
+
 
         if ($this->type == 'torrentrequest') {
             if ($this->comment->anon == 0) {

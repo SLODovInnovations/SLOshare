@@ -17,9 +17,11 @@ namespace App\Http\Controllers;
 use App\Models\Forum;
 use App\Models\Post;
 use App\Models\Topic;
+use App\Models\User;
+use App\Notifications\NewPostTag;
 use App\Repositories\ChatRepository;
-use App\Repositories\TaggedUserRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 /**
  * @see \Tests\Todo\Feature\Http\Controllers\PostControllerTest
@@ -29,7 +31,7 @@ class PostController extends Controller
     /**
      * PostController Constructor.
      */
-    public function __construct(private readonly TaggedUserRepository $taggedUserRepository, private readonly ChatRepository $chatRepository)
+    public function __construct(private readonly ChatRepository $chatRepository)
     {
     }
 
@@ -66,57 +68,22 @@ class PostController extends Controller
         }
 
         $post->save();
-        $appurl = \config('app.url');
-        $href = \sprintf('%s/forums/topics/%s?page=%s#post-%s', $appurl, $topic->id, $post->getPageNumber(), $post->id);
-        $message = \sprintf('%s je označena vaša forum objava. Lahko si jo ogledate [url=%s] TUKAJ [/url]', $user->username, $href);
-        if ($this->taggedUserRepository->hasTags($request->input('content'))) {
-            if ($this->taggedUserRepository->contains($request->input('content'), '@here') && $user->group->is_modo) {
-                $users = \collect([]);
 
-                $topic->posts()->get()->each(function ($p) use ($users) {
-                    $users->push($p->user);
-                });
-
-                $this->taggedUserRepository->messagePostUsers(
-                    'forum',
-                    $users,
-                    $user,
-                    'Staff',
-                    $post
-                );
-            } else {
-                $this->taggedUserRepository->messageTaggedPostUsers(
-                    'forum',
-                    $request->input('content'),
-                    $user,
-                    $user->username,
-                    $post
-                );
-            }
-        }
-
-        // Save last post user data to topic table
         $topic->last_post_user_id = $user->id;
         $topic->last_post_user_username = $user->username;
-        // Count post in topic
         $topic->num_post = Post::where('topic_id', '=', $topic->id)->count();
-        // Update time
         $topic->last_reply_at = $post->created_at;
-        // Save
         $topic->save();
-        // Count posts
+
         $forum->num_post = $forum->getPostCount($forum->id);
-        // Count topics
         $forum->num_topic = $forum->getTopicCount($forum->id);
-        // Save last post user data to the forum table
         $forum->last_post_user_id = $user->id;
         $forum->last_post_user_username = $user->username;
-        // Save last topic data to the forum table
         $forum->last_topic_id = $topic->id;
         $forum->last_topic_name = $topic->name;
-        // Save
         $forum->save();
-        // Post To Chatbox
+
+        // Post To Chatbox and Notify Subscribers
         $appurl = \config('app.url');
         $postUrl = \sprintf('%s/forums/topics/%s?page=%s#post-%s', $appurl, $topic->id, $post->getPageNumber(), $post->id);
         $realUrl = \sprintf('/forums/topics/%s?page=%s#post-%s', $topic->id, $post->getPageNumber(), $post->id);
@@ -134,7 +101,14 @@ class PostController extends Controller
             $topic->notifySubscribers($user, $topic, $post);
         }
 
-        //Achievements
+        // User Tagged Notification
+        if ($user->id !== $post->user_id) {
+            \preg_match_all('/@([\w\-]+)/', $post->content, $matches);
+            $users = User::whereIn('username', $matches[1])->get();
+            Notification::send($users, new NewPostTag($post));
+        }
+
+        // Achievements
 //        $user->unlock(new UserMadeFirstPost(), 1);
 //        $user->addProgress(new UserMade25Posts(), 1);
 //        $user->addProgress(new UserMade50Posts(), 1);

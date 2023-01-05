@@ -7,7 +7,7 @@
                     alt=""
             >
             <address class="comment__author">
-                <x-user_tag :user="$comment->user :anon="false""/>
+                <x-user_tag :user="$comment->user" :anon="false"/>
             </address>
             <time
                     class="comment__timestamp"
@@ -115,7 +115,7 @@
                     @enderror
                     </p>
                     <!--<p class="form__group">
-                        <input type="checkbox" id="reply-anon" class="form__checkbox" wire:modal="anon">
+                        <input type="checkbox" id="reply-anon" class="form__checkbox" wire:model="anon">
                         <label for="reply-anon" class="form__label">{{ __('common.anonymous') }}?</label>
                     </p>-->
                     <input type="hidden" name="anon" value="0">

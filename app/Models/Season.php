@@ -20,10 +20,7 @@ class Season extends Model
         return $this->hasMany(Torrent::class, 'tmdb', 'tv_id')->whereHas('category', function ($q) {
             $q->where('tv_meta', '=', true);
         });
-    }
 
-    public function torrents(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
         return $this->hasMany(Torrent::class, 'tmdb', 'cartoon_tv_id' )->whereHas('category', function ($q) {
             $q->where('cartoontv_meta', '=', true);
         });
@@ -57,6 +54,6 @@ class Season extends Model
 
     public function crew(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Crew::class);
+        return $this->belongsToMany(Crew::class, 'crew_season', 'person_id', 'season_id');
     }
 }

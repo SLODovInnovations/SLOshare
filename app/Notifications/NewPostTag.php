@@ -14,7 +14,7 @@ class NewPostTag extends Notification implements ShouldQueue
     /**
      * NewPostTag Constructor.
      */
-    public function __construct(public string $type, public string $tagger, public Post $post)
+    public function __construct(public Post $post)
     {
     }
 
@@ -32,8 +32,8 @@ class NewPostTag extends Notification implements ShouldQueue
     public function toArray($notifiable): array
     {
         return [
-            'title' => $this->tagger.' Vas je označil v objavi',
-            'body'  => $this->tagger.' vas je označil v objavi v temi '.$this->post->topic->name,
+            'title' => $this->post->user->username.' Vas je označil v objavi',
+            'body'  => $this->post->user->username.' vas je označil v objavi v temi '.$this->post->topic->name,
             'url'   => \sprintf('/forums/topics/%s?page=%s#post-%s', $this->post->topic->id, $this->post->getPageNumber(), $this->post->id),
         ];
     }

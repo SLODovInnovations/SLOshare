@@ -49,5 +49,8 @@ return [
     'updated'                 => '(Updated Every 10 Minutes!)',
     'users-in-group'          => 'Users In Group',
     'users-per-group'         => 'Users Per Group',
-
+    'upload'                  => 'Loaded',
+    'download'                => 'Transferred',
+    'users'                   => 'Users',
+    'torrents'                => 'Torrents',
 ];

@@ -9,12 +9,14 @@ namespace App\Http\Controllers;
 //use App\Models\BonTransactions;
 use App\Models\Category;
 use App\Models\Movie;
+use App\Models\Cartoon;
 use App\Models\Resolution;
 use App\Models\Torrent;
 use App\Models\TorrentRequest;
 use App\Models\TorrentRequestBounty;
 use App\Models\TorrentRequestClaim;
 use App\Models\Tv;
+use App\Models\CartoonTv;
 use App\Models\Type;
 use App\Models\User;
 use App\Notifications\NewRequestBounty;
@@ -184,7 +186,6 @@ class RequestController extends Controller
         //$BonTransactions->name = 'request';
         //$BonTransactions->cost = $request->input('bounty');
         //$BonTransactions->sender = $user->id;
-        //$BonTransactions->receiver = 0;
         //$BonTransactions->comment = \sprintf('new request - %s', $request->input('name'));
         //$BonTransactions->save();
         $user->seedbonus -= $request->input('bounty');
@@ -331,7 +332,6 @@ class RequestController extends Controller
         //$BonTransactions->name = 'request';
         //$BonTransactions->cost = $request->input('bonus_value');
         //$BonTransactions->sender = $user->id;
-        //$BonTransactions->receiver = 0;
         //$BonTransactions->comment = \sprintf('dodajanje bonusa %s', $tr->name);
         //$BonTransactions->save();
         $user->seedbonus -= $request->input('bonus_value');
@@ -368,13 +368,13 @@ class RequestController extends Controller
 
         $torrentRequest = TorrentRequest::findOrFail($id);
         $torrentRequest->filled_by = $user->id;
-        $torrentRequest->filled_hash = $request->input('info_hash');
+        $torrentRequest->torrent_id = $request->input('torrent_id');
         $torrentRequest->filled_when = Carbon::now();
         $torrentRequest->filled_anon = $request->input('filled_anon');
 
         $v = \validator($request->all(), [
             'request_id'  => 'required|exists:requests,id',
-            'info_hash'   => 'required|exists:torrents,info_hash',
+            'torrent_id'  => 'required|exists:torrents,id',
             'filled_anon' => 'required',
         ]);
 
@@ -383,7 +383,7 @@ class RequestController extends Controller
                 ->withErrors($v->errors());
         }
 
-        $torrent = Torrent::withAnyStatus()->where('info_hash', '=', $torrentRequest->filled_hash)->first();
+        $torrent = Torrent::withAnyStatus()->where('id', '=', $torrentRequest->torrent_id)->first();
         if ($torrent->isApproved() === false) {
             return \to_route('request', ['id' => $request->input('request_id')])
                 ->withErrors(\trans('request.pending-moderation'));
@@ -428,7 +428,6 @@ class RequestController extends Controller
             //$BonTransactions->itemID = 0;
             //$BonTransactions->name = 'request';
             //$BonTransactions->cost = $fillAmount;
-            //$BonTransactions->sender = 0;
             //$BonTransactions->receiver = $fillUser->id;
             //$BonTransactions->comment = \sprintf('%s se je napolnila %s in je bil nagrajen %s BONUS.', $fillUser->username, $tr->name, $fillAmount);
             //$BonTransactions->save();
@@ -495,7 +494,7 @@ class RequestController extends Controller
 
             $torrentRequest->filled_by = null;
             $torrentRequest->filled_when = null;
-            $torrentRequest->filled_hash = null;
+            $torrentRequest->torrent_id = null;
             $torrentRequest->save();
 
             return \to_route('request', ['id' => $id])
@@ -608,7 +607,7 @@ class RequestController extends Controller
         $torrentRequest = TorrentRequest::findOrFail($id);
         $torrentRequest->filled_by = null;
         $torrentRequest->filled_when = null;
-        $torrentRequest->filled_hash = null;
+        $torrentRequest->torrent_id = null;
         $torrentRequest->approved_by = null;
         $torrentRequest->approved_when = null;
         $torrentRequest->save();

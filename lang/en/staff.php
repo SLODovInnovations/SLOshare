@@ -59,6 +59,7 @@ return [
     'chat-tools'              => 'Chat Tools',
     'flush-chat'              => 'Flush Chatbox',
     'seedboxes'               => 'Registered Seedboxes',
+    'save'                    => 'Save',
 
     /*
     |--------------------------------------------------------------------------

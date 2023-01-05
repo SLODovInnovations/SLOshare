@@ -86,7 +86,12 @@ class ProcessCartoonJob implements ShouldQueue
 
         if (isset($this->cartoon['credits']['crew'])) {
             foreach ($this->cartoon['credits']['crew'] as $crew) {
-                Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))->cartoon()->syncWithoutDetaching([$this->cartoon['id']]);
+                Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))
+                    ->cartoon()
+                    ->syncWithoutDetaching([$this->cartoon['id'] => [
+                        'department' => $crew['department'] ?? null,
+                        'job'        => $crew['job'] ?? null,
+                    ]]);
             }
         }
 

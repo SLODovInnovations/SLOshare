@@ -4,7 +4,6 @@ namespace App\Console\Commands;
 
 use App\Jobs\SendDeleteUserMail;
 use App\Models\Comment;
-use App\Models\Follow;
 use App\Models\FreeleechToken;
 use App\Models\Group;
 use App\Models\History;
@@ -134,9 +133,8 @@ class AutoSoftDeleteDisabledUsers extends Command
                 }
 
                 // Removes all follows for user
-                foreach (Follow::where('user_id', '=', $user->id)->get() as $follow) {
-                    $follow->delete();
-                }
+                $user->followers()->delete();
+                $user->followees()->delete();
 
                 // Removes UserID from Sent Invites if any and replaces with System UserID (1)
                 foreach (Invite::where('user_id', '=', $user->id)->get() as $sentInvite) {
