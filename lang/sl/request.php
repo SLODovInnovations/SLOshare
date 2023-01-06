@@ -35,7 +35,7 @@ return [
     'edited-request'      => 'Zahteva je bila uspešno urejena.',
     'deleted'             => 'Izbrisali ste %s',
     'enter-bp'            => 'Vnesite bonus točke (najmanj 100)',
-    'enter-hash'          => 'Vnesite Info Hash za naloženi Torrent',
+    'enter-hash'          => 'Vnesite ID za naloženi Torrent',
     'fill'                => 'Izpolnite',
     'fill-request'        => 'Izpolnite to prošnjo',
     'filled'              => 'IZPOLNJENA',

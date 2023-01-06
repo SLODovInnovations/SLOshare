@@ -64,6 +64,8 @@ class BanController extends Controller
         $user->save();
         $ban->save();
 
+        \cache()->forget('user:'.$user->passkey);
+
         // Send Notifications
         $user->notify(new UserBan($ban));
 
@@ -108,9 +110,10 @@ class BanController extends Controller
         $user->save();
         $ban->save();
 
+        \cache()->forget('user:'.$user->passkey);
+
         // Send Notifications
         $user->notify(new UserBanExpire());
-        ;
 
         return \to_route('users.show', ['username' => $user->username])
             ->withSuccess('Uporabnik je zdaj oproščen prepovedi!');

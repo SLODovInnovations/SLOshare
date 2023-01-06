@@ -14,7 +14,7 @@ class NewCommentTag extends Notification implements ShouldQueue
     /**
      * NewCommentTag Constructor.
      */
-    public function __construct(public string $type, public string $tagger, public Comment $comment)
+    public function __construct(public string $type, public Comment $comment)
     {
     }
 
@@ -32,25 +32,97 @@ class NewCommentTag extends Notification implements ShouldQueue
     public function toArray($notifiable): array
     {
         if ($this->type == 'torrent') {
+            if ($this->comment->anon == 0) {
+                return [
+                    'title' => $this->comment->user->username.' vas je označil',
+                    'body'  => $this->comment->user->username.' vas je označil v komentarju na Torrentu '.$this->comment->commentable->name,
+                    'url'   => '/torrents/'.$this->comment->commentable->id,
+                ];
+            }
+
             return [
-                'title' => $this->tagger.' Označil vas je v komentarju Torrenta',
-                'body'  => $this->tagger.' vas je označil v komentarju Torrenta '.$this->comment->torrent->name,
-                'url'   => \sprintf('/torrents/%s', $this->comment->torrent->id),
+                'title' => 'Označeni ste bili',
+                'body'  => 'Anonimni vas je označil v komentarju na Torrentu '.$this->comment->commentable->name,
+                'url'   => '/torrents/'.$this->comment->commentable->id,
             ];
         }
 
-        if ($this->type == 'request') {
+        if ($this->type == 'torrentrequest') {
+            if ($this->comment->anon == 0) {
+                return [
+                    'title' => $this->comment->user->username.' vas je označil',
+                    'body' => $this->comment->user->username.' vas je označil v komentarju na Torrentu Prošnje '.$this->comment->commentable->name,
+                    'url' => '/requests/'.$this->comment->commentable->id,
+                ];
+            }
+
             return [
-                'title' => $this->tagger.' Vas je označil v komentarju za zahtevo',
-                'body'  => $this->tagger.' vas je označil v komentarju za zahtevo '.$this->comment->request->name,
-                'url'   => \sprintf('/requests/%s', $this->comment->request->id),
+                'title' => 'Označeni ste bili',
+                'body' => 'Anonimni vas je označil v komentarju na Torrentu Prošnje '.$this->comment->commentable->name,
+                'url' => '/requests/'.$this->comment->commentable->id,
+            ];
+        }
+
+        if ($this->type == 'ticket') {
+            if ($this->comment->anon == 0) {
+                return [
+                    'title' => $this->comment->user->username.' vas je označil',
+                    'body' => $this->comment->user->username.' vas je označil v komentarju na Ticket '.$this->comment->commentable->subject,
+                    'url' => '/tickets/'.$this->comment->commentable->id,
+                ];
+            }
+
+            return [
+                'title' => 'Označeni ste bili',
+                'body' => 'Anonimni te je označil v komentarju na Ticket '.$this->comment->commentable->subject,
+                'url' => '/tickets/'.$this->comment->commentable->id,
+            ];
+        }
+
+        if ($this->type == 'playlist') {
+            if ($this->comment->anon == 0) {
+                return [
+                    'title' => $this->comment->user->username.' vas je označil',
+                    'body' => $this->comment->user->username.' vas je označil v komentarju na seznamu predvajanja '.$this->comment->commentable->name,
+                    'url' => '/playlists/'.$this->comment->commentable->id,
+                ];
+            }
+
+            return [
+                'title' => 'Označeni ste bili',
+                'body' => 'Anonimni vas je označil v komentarju na seznamu predvajanja '.$this->comment->commentable->name,
+                'url' => '/playlists/'.$this->comment->commentable->id,
+            ];
+        }
+
+        if ($this->type == 'collection') {
+            if ($this->comment->anon == 0) {
+                return [
+                    'title' => $this->comment->user->username.' vas je označil',
+                    'body' => $this->comment->user->username.' vas je označil v komentarju na zbirki '.$this->comment->commentable->name,
+                    'url' => '/mediahub/collections/'.$this->comment->commentable->id,
+                ];
+            }
+
+            return [
+                'title' => 'Označeni ste bili',
+                'body' => 'Anonimni vas je označil v komentarju o zbirki '.$this->comment->commentable->name,
+                'url' => '/mediahub/collections/'.$this->comment->commentable->id,
+            ];
+        }
+
+        if ($this->comment->anon == 0) {
+            return [
+                'title' => $this->comment->user->username.' vas je označil',
+                'body' => $this->comment->user->username.' vas je označil v komentarju na članek '.$this->comment->commentable->title,
+                'url' => '/articles/'.$this->comment->commentable->id,
             ];
         }
 
         return [
-            'title' => $this->tagger.' Vas je označil v komentarju članka',
-            'body'  => $this->tagger.' vas je označil v komentarju članeka '.$this->comment->article->title,
-            'url'   => \sprintf('/articles/%s', $this->comment->article->id),
+            'title' => 'Označeni ste bili',
+            'body' => 'Anonimni vas je označil v komentarju na članek '.$this->comment->commentable->title,
+            'url' => '/articles/'.$this->comment->commentable->id,
         ];
     }
 }

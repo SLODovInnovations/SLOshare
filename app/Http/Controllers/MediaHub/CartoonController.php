@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MediaHub;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cartoon;
-use App\Models\PersonalFreeleech;
 use Illuminate\Http\Request;
 
 class CartoonController extends Controller
@@ -23,7 +22,10 @@ class CartoonController extends Controller
     public function show(Request $request, int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         $user = $request->user();
-        $personalFreeleech = PersonalFreeleech::where('user_id', '=', $user->id)->first();
+        $personalFreeleech = \cache()->rememberForever(
+            'personal_freeleech:'.$user->id,
+            fn () => $user->personalFreeleeches()->exists()
+        );
         $cartoon = Cartoon::with(['cast', 'collection', 'genres', 'companies'])->findOrFail($id);
 
         return \view('mediahub.cartoon.show', [

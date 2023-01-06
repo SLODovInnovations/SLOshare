@@ -22,7 +22,7 @@
                         </div>
                     @endif
 
-                    {!! csrf_field() !!}
+                    @csrf
 
                     @if ($poll->multiple_choice)
                         @foreach ($poll->options as $option)

@@ -216,4 +216,35 @@ return [
     'yes'                  => 'Yes',
     'your'                 => 'Your',
     'your-comment'         => 'Your comment',
+
+    /*
+    |--------------------------------------------------------------------------
+    | SLOshare
+    |--------------------------------------------------------------------------
+    */
+    'notification-title'   => 'About the legality of this site',
+    'notification'         => 'There is no movie or any other copyrighted file on our server, because that would be illegal. Also, there are no links on our pages to files on other servers. SLOshare.eu only provides its users with information about files that are available on the Internet. We inform you which films (or other content) are available, what is the quality of these films, and we also provide (depending on the user who published some content) a description of the film and links to other pages where you can find information or image material. The files described on our site are freely accessible to every Internet user. With the password for our site, you only get information about these files. The files are not located on our server, nor are there any file links on the page. A torrent file is just information for programs that implement the BitTorrent protocol, which tells the program what to look for in the BitTorrent network. BitTorrent is legal, free, and freely available on the Internet. The BitTorrent network is a peer-to-peer (P2P) file sharing network and is completely legal. The staff of this site is not responsible for the actions of site users.',
+    'user-list'            => 'List of users',
+    'trusted'              => 'Trustworthy',
+    'topladder'            => 'Top chart',
+    'shop-sloshare'        => 'SLOshare shop',
+    'support'              => 'Support',
+    'radio-sloshare'       => 'SLOshare radio',
+    'plex-sloshare'        => 'SLOshare plex',
+    'owner'                => 'The owner',
+    'modo'                 => 'Modo',
+    'level'                => 'Level',
+    'incognito'            => 'No history logging',
+    'immune'               => 'Immune',
+    'id'                   => 'ID',
+    'sloshare'             => 'SLOshare.eu',
+    'effect'               => 'The effect',
+    'donations'            => 'Donations',
+    'double_upload'        => 'Double transfer',
+    'content'              => 'Description',
+    'admin'                => 'Admin',
+    'autogroup'            => 'Autogroup',
+    'add_new_group'        => 'Add a new group',
+    'upload-torrents'      => 'Load it',
+    'sloshare'             => 'SLOshare.eu',
 ];

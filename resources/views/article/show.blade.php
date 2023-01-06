@@ -35,7 +35,5 @@
         @joypixels($article->getContentHtml())
     </div>
 </section>
-<section class="panelV2">
-        <livewire:comments :model="$article"/>
-</section>
+<livewire:comments :model="$article"/>
 @endsection

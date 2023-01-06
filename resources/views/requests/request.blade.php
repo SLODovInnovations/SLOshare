@@ -84,15 +84,15 @@
             <dt>{{ __('common.status') }}</dt>
             <dd>
                 @switch(true)
-                    @case ($torrentRequest->claimed !== null && $torrentRequest->filled_hash === null)
+                    @case ($torrentRequest->claimed && $torrentRequest->torrent_id === null)
                         <i class="fas fa-circle text-blue"></i>
                         {{ __('request.claimed') }}
                         @break
-                    @case ($torrentRequest->filled_hash !== null && $torrentRequest->approved_by === null)
+                    @case ($torrentRequest->torrent_id !== null && $torrentRequest->approved_by === null)
                         <i class="fas fa-circle text-purple"></i>
                         {{ __('request.pending') }}
                         @break
-                    @case ($torrentRequest->filled_hash === null)
+                    @case ($torrentRequest->torrent_id === null)
                         <i class="fas fa-circle text-red"></i>
                         {{ __('request.unfilled') }}
                         @break
@@ -104,7 +104,7 @@
             </dd>
         </dl>
     </section>
-    @if ($torrentRequest->claimed !== null && $torrentRequest->filled_hash === null)
+    @if ($torrentRequest->claimed && $torrentRequest->torrent_id === null)
         <section class="panelV2">
             <h2 class="panel__heading">{{ __('request.claimed') }}</h2>
             <dl class="key-value">
@@ -126,7 +126,7 @@
             </dl>
         </section>
     @endif
-    @if ($torrentRequest->filled_hash !== null)
+    @if ($torrentRequest->torrent_id !== null)
         <section class="panelV2">
             <h2 class="panel__heading">{{ __('request.filled') }}</h2>
             <dl class="key-value">
@@ -184,7 +184,7 @@
             <div class="form__group--short-horizontal">
                 @switch(true)
                     {{-- Claimed --}}
-                    @case ($torrentRequest->claimed !== null && $torrentRequest->filled_hash === null)
+                    @case ($torrentRequest->claimed && $torrentRequest->torrent_id === null)
                         @includeWhen($user->group->is_modo || $torrentRequestClaim->username == $user->username, 'requests.partials.unclaim')
                         @includeWhen($torrentRequest->category->movie_meta || $torrentRequest->category->tv_meta || $torrentRequest->category->cartoon_meta, 'requests.partials.upload')
                         @includeWhen($user->group->is_modo || $torrentRequestClaim->username == $user->username, 'requests.partials.fulfill')
@@ -193,14 +193,14 @@
                         @includeWhen($user->group->is_modo || $torrentRequest->user->id == $user->id, 'requests.partials.delete')
                         @break
                     {{-- Pending --}}
-                    @case ($torrentRequest->filled_hash !== null && $torrentRequest->approved_by === null)
+                    @case ($torrentRequest->torrent_id !== null && $torrentRequest->approved_by === null)
                         @include('requests.partials.report')
                         @includeWhen($user->group->is_modo, 'requests.partials.reset')
                         @includeWhen($user->group->is_modo, 'requests.partials.edit')
                         @includeWhen($user->group->is_modo, 'requests.partials.delete')
                         @break
                     {{-- Unfilled --}}
-                    @case ($torrentRequest->filled_hash === null)
+                    @case ($torrentRequest->torrent_id === null)
                         @include('requests.partials.claim')
                         @includeWhen($user->group->is_modo || $torrentRequestClaim?->username == $user->username, 'requests.partials.upload')
                         @include('requests.partials.fulfill')
@@ -223,7 +223,7 @@
         <header class="panel__header">
             <h2 class="panel__heading">{{ __('request.voters') }}</h2>
             <div class="panel__actions">
-                @includeWhen($torrentRequest->filled_hash === null, 'requests.partials.vote')
+                @includeWhen($torrentRequest->torrent_id === null, 'requests.partials.vote')
             </div>
         </header>
         <div class="data-table-wrapper">

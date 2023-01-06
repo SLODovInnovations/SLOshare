@@ -91,5 +91,4 @@ return [
     'success-pinned'            => 'Ta tema je zdaj pripeta!',
     'success-unpinned'          => 'Ta tema je zdaj odpeta!',
     'quote-bbcode'              => 'Citiranje',
-
 ];

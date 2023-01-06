@@ -35,7 +35,7 @@ class AutoWarning extends Command
      */
     public function handle(): void
     {
-        if (\config('hitrun.enabled')) {
+        if (\config('hitrun.enabled') === true) {
             $carbon = new Carbon();
             $hitrun = History::with(['user', 'torrent'])
                 ->where('actual_downloaded', '>', 0)
@@ -84,6 +84,8 @@ class AutoWarning extends Command
                 if ($warning->warneduser->can_download === 1) {
                     $warning->warneduser->can_download = 0;
                     $warning->warneduser->save();
+
+                    \cache()->forget('user:'.$warning->warneduser->passkey);
                 }
             }
         }

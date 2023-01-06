@@ -184,7 +184,15 @@ class Torrent extends Model
      */
     public function request(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(TorrentRequest::class, 'filled_hash', 'info_hash');
+        return $this->hasOne(TorrentRequest::class);
+    }
+
+    /**
+     * Has many free leech tokens.
+     */
+    public function freeleechTokens(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(FreeleechToken::class);
     }
 
     /**
@@ -271,7 +279,7 @@ class Torrent extends Model
      */
     public function isFreeleech($user = null): bool
     {
-        $pfree = $user && ($user->group->is_freeleech || PersonalFreeleech::where('user_id', '=', $user->id)->first());
+        $pfree = $user && ($user->group->is_freeleech || \cache()->rememberForever('personal_freeleech:'.$user->id, fn () => $user->personalFreeleeches()->exists()));
 
         return $this->free || \config('other.freeleech') || $pfree;
     }

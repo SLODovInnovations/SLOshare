@@ -96,7 +96,12 @@ class ProcessCartoonTvJob implements ShouldQueue
 
         if (isset($this->cartoontv['credits']['crew'])) {
             foreach ($this->cartoontv['credits']['crew'] as $crew) {
-                Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))->cartoontv()->syncWithoutDetaching([$this->cartoontv['id']]);
+                Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))
+                    ->cartoontv()
+                    ->syncWithoutDetaching([$this->cartoontv['id'] => [
+                        'department' => $crew['department'] ?? null,
+                        'job'        => $crew['job'] ?? null,
+                    ]]);
             }
         }
 
@@ -157,7 +162,12 @@ class ProcessCartoonTvJob implements ShouldQueue
 
                 foreach ($season['credits']['crew'] as $crew) {
                     if (isset($crew['id'])) {
-                        Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))->season()->syncWithoutDetaching([$season['id']]);
+                        Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))
+                            ->season()
+                            ->syncWithoutDetaching([$season['id'] => [
+                                'department' => $season['department'] ?? null,
+                                'job'        => $season['job'] ?? null,
+                            ]]);
                         Person::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))->cartoontv()->syncWithoutDetaching([$this->id]);
                     }
                 }

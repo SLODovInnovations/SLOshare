@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
@@ -32,7 +33,7 @@ class UsersTableSeeder extends Seeder
                 'username'  => 'System',
                 'email'     => config('sloshare.default-owner-email'),
                 'group_id'  => 13,
-                'password'  => \Hash::make(config('sloshare.default-owner-password')),
+                'password'  => Hash::make(config('sloshare.default-owner-password')),
                 'passkey'   => md5(random_bytes(60)),
                 'rsskey'    => md5(random_bytes(60)),
                 'api_token' => Str::random(100),
@@ -42,7 +43,7 @@ class UsersTableSeeder extends Seeder
                 'username'  => 'Bot',
                 'email'     => config('sloshare.default-owner-email'),
                 'group_id'  => 13,
-                'password'  => \Hash::make(config('sloshare.default-owner-password')),
+                'password'  => Hash::make(config('sloshare.default-owner-password')),
                 'passkey'   => md5(random_bytes(60)),
                 'rsskey'    => md5(random_bytes(60)),
                 'api_token' => Str::random(100),
@@ -52,7 +53,7 @@ class UsersTableSeeder extends Seeder
                 'username'  => config('sloshare.owner-username'),
                 'email'     => config('sloshare.default-owner-email'),
                 'group_id'  => 12,
-                'password'  => \Hash::make(config('sloshare.default-owner-password')),
+                'password'  => Hash::make(config('sloshare.default-owner-password')),
                 'passkey'   => md5(random_bytes(60)),
                 'rsskey'    => md5(random_bytes(60)),
                 'api_token' => Str::random(100),

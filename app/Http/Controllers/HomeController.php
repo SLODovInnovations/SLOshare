@@ -7,7 +7,6 @@ use App\Models\Bookmark;
 use App\Models\FeaturedTorrent;
 use App\Models\FreeleechToken;
 use App\Models\Group;
-use App\Models\PersonalFreeleech;
 use App\Models\Poll;
 use App\Models\Post;
 use App\Models\Topic;
@@ -46,7 +45,10 @@ class HomeController extends Controller
         $articles = \cache()->remember('latest_article', $expiresAt, fn () => Article::latest()->take(5)->get());
 
         // Latest Torrents Block
-        $personalFreeleech = PersonalFreeleech::where('user_id', '=', $user->id)->first();
+        $personalFreeleech = \cache()->rememberForever(
+            'personal_freeleech:'.$user->id,
+            fn () => $user->personalFreeleeches()->exists()
+        );
 
         $newest = \cache()->remember('newest_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
