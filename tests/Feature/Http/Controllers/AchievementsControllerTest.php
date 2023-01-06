@@ -20,13 +20,33 @@ class AchievementsControllerTest extends TestCase
 
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->get(route('users.achievements.index', ['user' => $user]));
+        $response = $this->actingAs($user)->get(route('achievements.index'));
 
         $response->assertOk()
-            ->assertViewIs('user.achievement.index')
+            ->assertViewIs('achievement.index')
             ->assertViewHas('route')
             ->assertViewHas('user')
             ->assertViewHas('achievements')
             ->assertViewHas('pending');
+    }
+
+    /**
+     * @test
+     */
+    public function show_returns_an_ok_response(): void
+    {
+        $this->seed(GroupsTableSeeder::class);
+
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get(route('achievements.show', [
+            'username' => $user->username,
+        ]));
+
+        $response->assertOk()
+            ->assertViewIs('achievement.show')
+            ->assertViewHas('route')
+            ->assertViewHas('user')
+            ->assertViewHas('achievements');
     }
 }
