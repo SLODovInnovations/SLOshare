@@ -1,7 +1,7 @@
 <?php
 
 use App\Models\Season;
-use App\Models\Tv;
+use App\Models\CartoonTv;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,11 +19,11 @@ return new class () extends Migration {
             $table->string('job')->nullable();
         });
 
-        foreach (Tv::all() as $tv) {
-            $data = (new \App\Services\Tmdb\Client\TV($tv->id))->getData();
+        foreach (CartoonTv::all() as $cartoontv) {
+            $data = (new \App\Services\Tmdb\Client\CartoonTv($tv->id))->getData();
 
             foreach ($data['seasons'] as $season) {
-                $season = (new \App\Services\Tmdb\Client\Season($tv->id, \sprintf('%02d', $season['season_number'])))->getData();
+                $season = (new \App\Services\Tmdb\Client\Season($cartoontv->id, \sprintf('%02d', $season['season_number'])))->getData();
                 $seasonModel = Season::find($season['id']);
 
                 if (isset($season['credits']['crew'])) {
