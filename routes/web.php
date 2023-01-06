@@ -57,14 +57,13 @@ Route::group(['middleware' => 'language'], function () {
     |---------------------------------------------------------------------------------
     */
     Route::group(['middleware' => ['auth', 'banned']], function () {
-
         // 2FA Login Verification
         Route::post('/2faVerify', function () {
             return redirect(route('home.index'));
         })->name('2faVerify')->middleware('2fa');
 
         // 2FA Recovery
-        Route::post('/recovery2fa',[App\Http\Controllers\Auth\PasswordSecurityController::class, 'recovery2fa'])->name('recovery2fa');
+        Route::post('/recovery2fa', [App\Http\Controllers\Auth\PasswordSecurityController::class, 'recovery2fa'])->name('recovery2fa');
     });
 
     /*
@@ -73,13 +72,12 @@ Route::group(['middleware' => 'language'], function () {
     |---------------------------------------------------------------------------------
     */
     Route::group(['middleware' => ['auth', '2fa', 'banned']], function () {
-
         // 2FA System
         Route::get('/2fa', [App\Http\Controllers\Auth\PasswordSecurityController::class, 'show2faForm'])->name('2fa');
         Route::post('/generate2faSecret', [App\Http\Controllers\Auth\PasswordSecurityController::class, 'generate2faSecret'])->name('generate2faSecret');
         Route::post('/2fa', [App\Http\Controllers\Auth\PasswordSecurityController::class, 'enable2fa'])->name('enable2fa');
-        Route::post('/disable2fa',[App\Http\Controllers\Auth\PasswordSecurityController::class, 'disable2fa'])->name('disable2fa');
-        Route::post('/generate2faRecovery',[App\Http\Controllers\Auth\PasswordSecurityController::class, 'generateNewRecoveryCodes'])->name('generateNewRecoveryCodes');
+        Route::post('/disable2fa', [App\Http\Controllers\Auth\PasswordSecurityController::class, 'disable2fa'])->name('disable2fa');
+        Route::post('/generate2faRecovery', [App\Http\Controllers\Auth\PasswordSecurityController::class, 'generateNewRecoveryCodes'])->name('generateNewRecoveryCodes');
 
         // General
         Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
