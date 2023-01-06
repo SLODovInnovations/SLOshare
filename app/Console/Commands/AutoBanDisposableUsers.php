@@ -75,6 +75,8 @@ class AutoBanDisposableUsers extends Command
                     // Send Email
                     Mail::to($user->email)->send(new BanUser($user->email, $logban));
                 }
+
+                \cache()->forget('user:'.$user->passkey);
             }
         });
         $this->comment('Samodejni ukaz za prepoved uporabnikov je dokončan');

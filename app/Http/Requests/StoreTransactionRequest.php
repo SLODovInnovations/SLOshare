@@ -35,13 +35,13 @@ class StoreTransactionRequest extends FormRequest
 
                     switch (true) {
                         case $item->cost > $user->seedbonus:
-                            $fail('Not enough BON.');
+                            $fail('Ni dovolj BON-ov.');
                             break;
                         case $item->download && $user->downloaded < $item->value:
-                            $fail('Not enough download.');
+                            $fail('Ni dovolj prenosa.');
                             break;
-                        case $item->personal_freeleech && $user->personalFreeleeches()->exists():
-                            $fail('Your previous personal freeleech is still active.');
+                        case $item->personal_freeleech && \cache()->rememberForever('personal_freeleech:'.$user()->id, fn () => $user->personalFreeleeches()->exists()):
+                            $fail('Vaš prejšnji osebni freeleech je še vedno aktiven.');
                             break;
                     }
                 },
