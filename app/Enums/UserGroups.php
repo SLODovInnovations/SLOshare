@@ -26,5 +26,5 @@ enum UserGroups: int
 //    case ARCHIVIST = 18;
     case INTERNAL = 13;
     case DISABLED = 14;
-//    case PRUNED = 21;
+    case PRUNED = 21;
 }

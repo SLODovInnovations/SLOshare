@@ -9,12 +9,14 @@ namespace App\Http\Controllers;
 //use App\Models\BonTransactions;
 use App\Models\Category;
 use App\Models\Movie;
+use App\Models\Cartoon;
 use App\Models\Resolution;
 use App\Models\Torrent;
 use App\Models\TorrentRequest;
 use App\Models\TorrentRequestBounty;
 use App\Models\TorrentRequestClaim;
 use App\Models\Tv;
+use App\Models\CartoonTv;
 use App\Models\Type;
 use App\Models\User;
 use App\Notifications\NewRequestBounty;
@@ -65,8 +67,16 @@ class RequestController extends Controller
             $meta = Tv::with('genres', 'networks', 'seasons')->where('id', '=', $torrentRequest->tmdb)->first();
         }
 
+        if ($torrentRequest->category->cartoontv_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
+            $meta = CartoonTv::with('genres', 'networks', 'seasons')->where('id', '=', $torrentRequest->tmdb)->first();
+        }
+
         if ($torrentRequest->category->movie_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
             $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
+        }
+
+        if ($torrentRequest->category->cartoon_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
+            $meta = Cartoon::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrentRequest->tmdb)->first();
         }
 
         if ($torrentRequest->category->game_meta && ($torrentRequest->igdb || $torrentRequest->igdb != 0)) {
