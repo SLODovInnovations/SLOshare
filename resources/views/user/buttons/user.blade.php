@@ -18,6 +18,7 @@
                 {{ __('user.profile') }}
             </a>
         </li>
+        @if ($isProfileOwner)
             <li class="{{ Route::is('user_edit_profile_form') ? 'nav-tab--active' : 'nav-tavV2' }}">
                 <a
                     class="{{ Route::is('user_edit_profile_form') ? 'nav-tab--active__link' : 'nav-tab__link' }}"
@@ -26,6 +27,7 @@
                     {{ __('user.edit-profile') }}
                 </a>
             </li>
+        @else
             <li class="nav-tabV2">
                 @if ($user->followers()->where('users.id', '=', auth()->user()->id)->exists())
                     <form
