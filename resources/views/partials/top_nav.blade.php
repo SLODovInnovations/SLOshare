@@ -62,12 +62,14 @@
                         {{ __('rss.rss') }}
                     </a>
                 </li>
+@if (auth()->user()->group->is_modo)
                 <li>
                     <a href="{{ route('mediahub.index') }}">
                         <i class="{{ config('other.font-awesome') }} fa-database"></i>
                         MediaHub
                     </a>
                 </li>
+@endif
             </ul>
         </li>
         <li class="top-nav--left__list-item top-nav__dropdown">
