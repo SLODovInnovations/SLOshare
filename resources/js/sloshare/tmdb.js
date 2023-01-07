@@ -267,6 +267,21 @@ theMovieDb.account = {
             error
         );
     },
+    getFavoritesCartoonTvShows: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'account/' + options.id + '/favorite/tv?' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
     addFavorite: function (options, success, error) {
         'use strict';
         let body;
@@ -343,7 +358,37 @@ theMovieDb.account = {
             error
         );
     },
+    getRatedCartoonTvShows: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'account/' + options.id + '/rated/tv' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
     getRatedTvEpisodes: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'account/' + options.id + 'rated/tv/episodes' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getRatedCartoonTvEpisodes: function (options, success, error) {
         'use strict';
 
         theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
@@ -389,6 +434,21 @@ theMovieDb.account = {
         );
     },
     getTvShowsWatchlist: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'account/' + options.id + '/watchlist/tv' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getCartoonTvShowsWatchlist: function (options, success, error) {
         'use strict';
 
         theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
@@ -552,6 +612,22 @@ theMovieDb.certifications = {
         );
     },
 };
+    getCartoonTvList: function (success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 2);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'certification/tv/list' + theMovieDb.common.generateQuery(),
+            },
+            success,
+            error
+        );
+    },
+};
 
 theMovieDb.changes = {
     getMovieChanges: function (options, success, error) {
@@ -600,6 +676,22 @@ theMovieDb.changes = {
         );
     },
     getTvChanges: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/changes' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+};
+    getCartoonTvChanges: function (options, success, error) {
         'use strict';
 
         theMovieDb.common.validateRequired(arguments, 3, '', '', true);
@@ -762,6 +854,22 @@ theMovieDb.discover = {
         );
     },
 };
+    getCartoonTvShows: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'discover/tv' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+};
 
 theMovieDb.find = {
     getById: function (options, success, error) {
@@ -858,6 +966,22 @@ theMovieDb.genres = {
         );
     },
 };
+    getCartoonTvList: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'genre/tv/list' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+};
 
 theMovieDb.guestSession = {
     getRatedMovies: function (success, error) {
@@ -905,7 +1029,38 @@ theMovieDb.guestSession = {
             error
         );
     },
+    getRatedCartoonTvShows: function (success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'guest_session/' + options.id + '/rated/tv' + theMovieDb.common.generateQuery(),
+            },
+            success,
+            error
+        );
+    },
     getRatedTvEpisodes: function (success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'guest_session/' + options.id + '/rated/tv/episodes' + theMovieDb.common.generateQuery(),
+            },
+            success,
+            error
+        );
+    },
+};
+    getRatedCartoonTvEpisodes: function (success, error) {
         'use strict';
 
         theMovieDb.common.validateRequired(arguments, 3, ['id']);
@@ -1606,6 +1761,21 @@ theMovieDb.people = {
             error
         );
     },
+    getCartoonTvCredits: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'person/' + options.id + '/tv_credits' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
     getCredits: function (options, success, error) {
         'use strict';
 
@@ -1792,6 +1962,22 @@ theMovieDb.search = {
             error
         );
     },
+    getCartoonTv: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['query']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'search/tv' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+
     getPerson: function (options, success, error) {
         'use strict';
 
@@ -2245,6 +2431,398 @@ theMovieDb.tv = {
         );
     },
 };
+theMovieDb.cartoontv = {
+    getById: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getAccountStates: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/account_states' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getAccountStatesGuest: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['guest_session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/account_states' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getAlternativeTitles: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/alternative_titles' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getChanges: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/changes' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getContentRatings: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/content_ratings' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getCredits: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/credits' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getExternalIds: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/external_ids' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getImages: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/images' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getKeywords: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/keywords' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getRecommendations: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/recommendations' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getReviews: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/reviews' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getScreenedTheatrically: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/screened_theatrically' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getSimilar: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/similar' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getTranslations: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/translations' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getVideos: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/videos' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getAiringToday: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/airing_today' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getLatest: function (success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 2, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/latest' + theMovieDb.common.generateQuery(),
+            },
+            success,
+            error
+        );
+    },
+    getOnTheAir: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/on_the_air' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getPopular: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/popular' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getTopRated: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, '', '', true);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/top_rated' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    rate: function (options, rate, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 4, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                method: 'POST',
+                status: 201,
+                url: 'tv/' + options.id + '/rating' + theMovieDb.common.generateQuery(options),
+                body: {
+                    value: rate,
+                },
+            },
+            success,
+            error
+        );
+    },
+    rateGuest: function (options, rate, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 4, options, ['guest_session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                method: 'POST',
+                status: 201,
+                url: 'tv/' + options.id + '/rating' + theMovieDb.common.generateQuery(options),
+                body: {
+                    value: rate,
+                },
+            },
+            success,
+            error
+        );
+    },
+    removeRate: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                method: 'DELETE',
+                status: 200,
+                url: 'tv/' + options.id + '/rating' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    removeRateGuest: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['guest_session_id', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                method: 'DELETE',
+                status: 200,
+                url: 'tv/' + options.id + '/rating' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+};
+
 
 theMovieDb.tvSeasons = {
     getById: function (options, success, error) {
@@ -2404,8 +2982,479 @@ theMovieDb.tvSeasons = {
         );
     },
 };
+theMovieDb.cartoontvSeasons = {
+    getById: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/' + options.id + '/season/' + options.season_number + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getChanges: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/season/' + options.id + '/changes' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getAccountStates: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['session_id', 'season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/account_states' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getAccountStatesGuest: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['guest_session_id', 'season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/account_states' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getCredits: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/credits' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getExternalIds: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/external_ids' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getImages: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/images' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getVideos: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/videos' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+};
 
 theMovieDb.tvEpisodes = {
+    getById: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['episode_number', 'season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getChanges: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url: 'tv/episode/' + options.id + '/changes' + theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getAccountStates: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, [
+            'session_id',
+            'episode_number',
+            'season_number',
+            'id',
+        ]);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/account_states' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getAccountStatesGuest: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, [
+            'guest_session_id',
+            'episode_number',
+            'season_number',
+            'id',
+        ]);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/account_states' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getCredits: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['episode_number', 'season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/credits' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getExternalIds: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['episode_number', 'season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/external_ids' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getImages: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['episode_number', 'season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/images' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    getVideos: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, ['episode_number', 'season_number', 'id']);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/videos' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    rate: function (options, rate, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 4, options, [
+            'episode_number',
+            'season_number',
+            'session_id',
+            'id',
+        ]);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                method: 'POST',
+                status: 201,
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/rating' +
+                    theMovieDb.common.generateQuery(options),
+                body: {
+                    value: rate,
+                },
+            },
+            success,
+            error
+        );
+    },
+    rateGuest: function (options, rate, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 4, options, [
+            'episode_number',
+            'season_number',
+            'guest_session_id',
+            'id',
+        ]);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                method: 'POST',
+                status: 201,
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/rating' +
+                    theMovieDb.common.generateQuery(options),
+                body: {
+                    value: rate,
+                },
+            },
+            success,
+            error
+        );
+    },
+    removeRate: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, [
+            'episode_number',
+            'season_number',
+            'session_id',
+            'id',
+        ]);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                method: 'DELETE',
+                status: 200,
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/rating' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+    removeRateGuest: function (options, success, error) {
+        'use strict';
+
+        theMovieDb.common.validateRequired(arguments, 3, options, [
+            'episode_number',
+            'season_number',
+            'guest_session_id',
+            'id',
+        ]);
+
+        theMovieDb.common.validateCallbacks(success, error);
+
+        theMovieDb.common.client(
+            {
+                method: 'DELETE',
+                status: 200,
+                url:
+                    'tv/' +
+                    options.id +
+                    '/season/' +
+                    options.season_number +
+                    '/episode/' +
+                    options.episode_number +
+                    '/rating' +
+                    theMovieDb.common.generateQuery(options),
+            },
+            success,
+            error
+        );
+    },
+};
+theMovieDb.cartoontvEpisodes = {
     getById: function (options, success, error) {
         'use strict';
 
