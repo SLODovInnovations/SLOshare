@@ -9,7 +9,6 @@ use App\Services\Tmdb\Client\TV;
 use App\Services\Tmdb\TMDBScraper;
 use Exception;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 
 class DemoSeed extends Command
 {
@@ -74,7 +73,6 @@ class DemoSeed extends Command
                         'user_id'        => $uid,
                         'tmdb'           => $id,
                         'name'           => $movie['title'].' ('.$year.')',
-                        'slug'           => Str::slug($movie['title']),
                         'description'    => $movie['overview'],
                         'category_id'    => 1,
                         'type_id'        => random_int(1, 6),
@@ -284,7 +282,6 @@ Menu
                         'user_id'        => $uid,
                         'tmdb'           => $id,
                         'name'           => $tv['name'].' ('.$year.')',
-                        'slug'           => Str::slug($tv['name']),
                         'description'    => $tv['overview'],
                         'category_id'    => 2,
                         'type_id'        => random_int(1, 6),

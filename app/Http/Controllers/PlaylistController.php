@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Bencode;
 use App\Models\Movie;
+use App\Models\Cartoon;
 use App\Models\Playlist;
 use App\Models\PlaylistTorrent;
 use App\Models\Torrent;
 use App\Models\Tv;
+use App\Models\CartoonTv;
 use App\Repositories\ChatRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -125,8 +127,16 @@ class PlaylistController extends Controller
                 $meta = Tv::with('genres', 'networks', 'seasons')->where('id', '=', $torrent->tmdb)->first();
             }
 
+            if ($torrent->category->cartoontv_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
+                $meta = CartoonTv::with('genres', 'networks', 'seasons')->where('id', '=', $torrent->tmdb)->first();
+            }
+
             if ($torrent->category->movie_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
                 $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrent->tmdb)->first();
+            }
+
+            if ($torrent->category->cartoon_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
+                $meta = Cartoon::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $torrent->tmdb)->first();
             }
         }
 
@@ -263,7 +273,7 @@ class PlaylistController extends Controller
                 $torrent = Torrent::withAnyStatus()->find($playlistTorrent->torrent_id);
 
                 // Define The Torrent Filename
-                $tmpFileName = \sprintf('%s.torrent', $torrent->slug);
+                $tmpFileName = \sprintf('%s.torrent', Str::slug($torrent->title));
 
                 // The Torrent File Exist?
                 if (! \file_exists(\getcwd().'/files/torrents/'.$torrent->file_name)) {

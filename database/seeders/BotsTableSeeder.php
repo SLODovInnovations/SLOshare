@@ -29,7 +29,6 @@ class BotsTableSeeder extends Seeder
         return [
             [
                 'name'       => 'SystemBot',
-                'slug'       => 'systembot',
                 'emoji'      => '1f916',
                 'command'    => 'systembot',
                 'position'   => 1,
@@ -52,7 +51,6 @@ Available Bots:
             ],
             [
                 'name'       => 'NerdBot',
-                'slug'       => 'nerdbot',
                 'emoji'      => '1f913',
                 'command'    => 'nerdbot',
                 'position'   => 2,
@@ -94,7 +92,6 @@ None.
             ],
             [
                 'name'         => 'CasinoBot',
-                'slug'         => 'casinobot',
                 'command'      => 'casinobot',
                 'emoji'        => '1f3b0',
                 'position'     => 3,
@@ -106,7 +103,6 @@ None.
             ],
             [
                 'name'         => 'BetBot',
-                'slug'         => 'betbot',
                 'command'      => 'betbot',
                 'emoji'        => '1f3b2',
                 'position'     => 4,
@@ -118,7 +114,6 @@ None.
             ],
             [
                 'name'         => 'TriviaBot',
-                'slug'         => 'triviabot',
                 'command'      => 'triviabot',
                 'emoji'        => '2753',
                 'position'     => 5,

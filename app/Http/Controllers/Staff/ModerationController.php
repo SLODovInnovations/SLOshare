@@ -92,7 +92,6 @@ class ModerationController extends Controller
             case 2: // Reject
                 $v = \validator($request->all(), [
                     'id'      => 'required|exists:torrents',
-                    'slug'    => 'required|exists:torrents',
                     'message' => 'required',
                 ]);
 
@@ -116,7 +115,6 @@ class ModerationController extends Controller
             case 3: // Postpone
                 $v = \validator($request->all(), [
                     'id'      => 'required|exists:torrents',
-                    'slug'    => 'required|exists:torrents',
                     'message' => 'required',
                 ]);
 

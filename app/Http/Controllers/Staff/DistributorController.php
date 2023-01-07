@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\Distributor;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class DistributorController extends Controller
@@ -35,12 +34,10 @@ class DistributorController extends Controller
     {
         $distributor = new Distributor();
         $distributor->name = $request->input('name');
-        $distributor->slug = Str::slug($distributor->name);
         $distributor->position = $request->input('position');
 
         $v = \validator($distributor->toArray(), [
             'name'     => 'required|unique:distributors,name',
-            'slug'     => 'required',
             'position' => 'required',
         ]);
 
@@ -72,12 +69,10 @@ class DistributorController extends Controller
     {
         $distributor = Distributor::findOrFail($id);
         $distributor->name = $request->input('name');
-        $distributor->slug = Str::slug($distributor->name);
         $distributor->position = $request->input('position');
 
         $v = \validator($distributor->toArray(), [
             'name'     => 'required',
-            'slug'     => 'required',
             'position' => 'required',
         ]);
 

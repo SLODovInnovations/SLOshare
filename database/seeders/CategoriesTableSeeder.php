@@ -30,7 +30,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 1,
                 'name'          => 'Video',
-                'slug'          => 'video',
                 'position'      => 0,
                 'icon'          => config('other.font-awesome').' fa-film',
                 'num_torrent'   => 0,
@@ -46,7 +45,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 2,
                 'name'          => 'TV Serije',
-                'slug'          => 'tv-serije',
                 'position'      => 1,
                 'icon'          => config('other.font-awesome').' fa-tv-retro',
                 'num_torrent'   => 0,
@@ -62,7 +60,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 3,
                 'name'          => 'Risanke',
-                'slug'          => 'risanke',
                 'position'      => 2,
                 'icon'          => config('other.font-awesome').' fa-baby-carriage',
                 'num_torrent'   => 0,
@@ -78,7 +75,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 4,
                 'name'          => 'Risanke TV',
-                'slug'          => 'risanke-tv',
                 'position'      => 3,
                 'icon'          => config('other.font-awesome').' fa-baby',
                 'num_torrent'   => 0,
@@ -94,7 +90,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 5,
                 'name'          => 'Dokumentarci',
-                'slug'          => 'dokumentarci',
                 'position'      => 4,
                 'icon'          => config('other.font-awesome').' fa-video',
                 'num_torrent'   => 0,
@@ -110,7 +105,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 6,
                 'name'          => 'Šport',
-                'slug'          => 'sport',
                 'position'      => 5,
                 'icon'          => config('other.font-awesome').' fa-futbol',
                 'num_torrent'   => 0,
@@ -126,7 +120,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 7,
                 'name'          => 'Anime',
-                'slug'          => 'anime',
                 'position'      => 6,
                 'icon'          => config('other.font-awesome').' fa-baby',
                 'num_torrent'   => 0,
@@ -142,7 +135,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 8,
                 'name'          => 'Glasba',
-                'slug'          => 'glasba',
                 'position'      => 7,
                 'icon'          => config('other.font-awesome').' fa-music',
                 'num_torrent'   => 0,
@@ -158,7 +150,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 9,
                 'name'          => 'Igre',
-                'slug'          => 'igre',
                 'position'      => 8,
                 'icon'          => config('other.font-awesome').' fa-gamepad',
                 'num_torrent'   => 0,
@@ -174,7 +165,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 10,
                 'name'          => 'Programi',
-                'slug'          => 'programi',
                 'position'      => 9,
                 'icon'          => config('other.font-awesome').' fa-compact-disc',
                 'num_torrent'   => 0,
@@ -190,7 +180,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 11,
                 'name'          => 'AvdioBook',
-                'slug'          => 'avdiobook',
                 'position'      => 10,
                 'icon'          => config('other.font-awesome').' fa-file-audio',
                 'num_torrent'   => 0,
@@ -206,7 +195,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 12,
                 'name'          => 'Slike',
-                'slug'          => 'slike',
                 'position'      => 11,
                 'icon'          => config('other.font-awesome').' fa-image',
                 'num_torrent'   => 0,
@@ -222,7 +210,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 13,
                 'name'          => 'eKnjige',
-                'slug'          => 'eknjige',
                 'position'      => 12,
                 'icon'          => config('other.font-awesome').' fa-atlas',
                 'num_torrent'   => 0,
@@ -238,7 +225,6 @@ class CategoriesTableSeeder extends Seeder
             [
                 'id'            => 14,
                 'name'          => 'XXX (Nad 18 let)',
-                'slug'          => 'xxx-nad18let',
                 'position'      => 13,
                 'icon'          => config('other.font-awesome').' fa-heart',
                 'num_torrent'   => 0,
