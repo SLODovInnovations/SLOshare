@@ -3454,7 +3454,7 @@ theMovieDb.tvEpisodes = {
         );
     },
 };
-theMovieDb.cartoontvEpisodes = {
+theMovieDb.tvEpisodes = {
     getById: function (options, success, error) {
         'use strict';
 
