@@ -283,22 +283,3 @@ div.header.red div.inner_content,
 .table > tbody > tr > td.text-red {
     color: var(--color-light-red) !important;
 }
-
-/* SLOshare */
-.mb-5-user {
-    padding-bottom: 1px;
-}
-
-ul.nav.nav-tabs-user.mb-5-user {
-    display: flex;
-    justify-content: left;
-}
-
-.nav-tabs {
-    background-color: #373737;
-    border-bottom: none;
-}
-
-.nav-tabs-user {
-    border-bottom: none;
-}
