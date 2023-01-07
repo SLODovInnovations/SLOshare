@@ -11,7 +11,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Str;
 use voku\helper\AntiXSS;
 
 class User extends Authenticatable
@@ -506,14 +505,6 @@ class User extends Authenticatable
     public function personalFreeleeches(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(PersonalFreeleech::class);
-    }
-
-    /**
-     * Get the Users username as slug.
-     */
-    public function getSlugAttribute(): string
-    {
-        return Str::slug($this->username);
     }
 
     /**

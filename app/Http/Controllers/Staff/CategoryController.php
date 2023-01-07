@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -38,7 +37,6 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name = $request->input('name');
-        $category->slug = Str::slug($category->name);
         $category->position = $request->input('position');
         $category->icon = $request->input('icon');
         $category->movie_meta = $request->input('movie_meta');
@@ -61,7 +59,6 @@ class CategoryController extends Controller
 
         $v = \validator($category->toArray(), [
             'name'          => 'required',
-            'slug'          => 'required',
             'position'      => 'required',
             'icon'          => 'required',
             'movie_meta'    => 'required',
@@ -101,7 +98,6 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->name = $request->input('name');
-        $category->slug = Str::slug($category->name);
         $category->position = $request->input('position');
         $category->icon = $request->input('icon');
         $category->movie_meta = $request->input('movie_meta');
@@ -122,7 +118,6 @@ class CategoryController extends Controller
 
         $v = \validator($category->toArray(), [
             'name'          => 'required',
-            'slug'          => 'required',
             'position'      => 'required',
             'icon'          => 'required',
             'movie_meta'    => 'required',

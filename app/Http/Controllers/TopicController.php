@@ -20,7 +20,6 @@ use App\Models\Topic;
 use App\Repositories\ChatRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 /**
  * @see \Tests\Todo\Feature\Http\Controllers\TopicControllerTest
@@ -118,7 +117,6 @@ class TopicController extends Controller
         // Create The Topic
         $topic = new Topic();
         $topic->name = $request->input('title');
-        $topic->slug = Str::slug($request->input('title'));
         $topic->state = 'open';
         $topic->first_post_user_id = $user->id;
         $topic->last_post_user_id = $user->id;
@@ -130,7 +128,6 @@ class TopicController extends Controller
 
         $v = \validator($topic->toArray(), [
             'name'                     => 'required',
-            'slug'                     => 'required',
             'state'                    => 'required',
             'num_post'                 => '',
             'first_post_user_id'       => 'required',
@@ -170,7 +167,6 @@ class TopicController extends Controller
         $forum->num_post = $forum->getPostCount($forum->id);
         $forum->last_topic_id = $topic->id;
         $forum->last_topic_name = $topic->name;
-        $forum->last_topic_slug = $topic->slug;
         $forum->last_post_user_id = $user->id;
         $forum->last_post_user_username = $user->username;
         $forum->save();

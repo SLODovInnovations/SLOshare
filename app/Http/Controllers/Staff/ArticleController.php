@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Staff;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 /**
@@ -38,7 +37,6 @@ class ArticleController extends Controller
     {
         $article = new Article();
         $article->title = $request->input('title');
-        $article->slug = Str::slug($article->title);
         $article->content = $request->input('content');
         $article->user_id = $request->user()->id;
 
@@ -55,7 +53,6 @@ class ArticleController extends Controller
 
         $v = \validator($article->toArray(), [
             'title'   => 'required',
-            'slug'    => 'required',
             'content' => 'required|min:20',
             'user_id' => 'required',
         ]);
@@ -88,7 +85,6 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
         $article->title = $request->input('title');
-        $article->slug = Str::slug($article->title);
         $article->content = $request->input('content');
 
         if ($request->hasFile('image')) {
@@ -104,7 +100,6 @@ class ArticleController extends Controller
 
         $v = \validator($article->toArray(), [
             'title'   => 'required',
-            'slug'    => 'required',
             'content' => 'required|min:20',
         ]);
 

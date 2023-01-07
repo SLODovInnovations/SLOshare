@@ -498,7 +498,7 @@
                                             @if (auth()->user()->group->is_modo)
                                                 <a href="{{ route('warnings.show', ['username' => $user->username]) }}"><span
                                                             class="badge-user text-bold"><strong>{{ __('user.warning-log') }}</strong></span></a>
-                                                <a href="{{ route('banlog', ['username' => $user->username]) }}"><span
+                                                <a href="{{ route('users.bans.index', ['user' => $user]) }}"><span
                                                             class="badge-user text-bold"><strong>{{ __('user.ban-log') }}</strong></span></a>
                                             @endif
                                         </div>
@@ -642,44 +642,39 @@
                                     <th>{{ __('common.port') }}</th>
                                     <th>{{ __('torrent.started') }}</th>
                                     <th>{{ __('torrent.last-update') }}</th>
-                                    <th>{{ __('torrent.torrents') }}</th>
+                                    <th>{{ __('torrent.peers') }}</th>
                                     @if (\config('announce.connectable_check') == true)
                                         <th>Connectable</th>
                                     @endif
                                 </tr>
                             </thead>
                             <tbody>
-                            @php $peer_array = []; @endphp
-                            @foreach ($peers as $p)
-                                @if (!in_array([$p->ip, $p->port], $peer_array))
-                                    @php $count = App\Models\Peer::where('user_id', '=', $user->id)->where('ip', '=', $p->ip)->where('port', '=', $p->port)->count(); @endphp
+                            @foreach ($clients as $client)
                                     <tr>
                                         <td>
-                                            <span class="badge-extra text-purple text-bold">{{ $p->agent }}</span>
+                                            <span class="badge-extra text-purple text-bold">{{ $client->agent }}</span>
                                         </td>
-                                        <td><span class="badge-extra text-bold">{{ $p->ip }}</span></td>
-                                        <td><span class="badge-extra text-bold">{{ $p->port }}</span></td>
-                                        <td>{{ $p->created_at ? $p->created_at->diffForHumans() : 'N/A' }}</td>
-                                        <td>{{ $p->updated_at ? $p->updated_at->diffForHumans() : 'N/A' }}</td>
+                                        <td><span class="badge-extra text-bold">{{ $client->ip }}</span></td>
+                                        <td><span class="badge-extra text-bold">{{ $client->port }}</span></td>
+                                        <td>{{ $client->created_at ? $client->created_at->diffForHumans() : 'N/A' }}</td>
+                                        <td>{{ $client->updated_at ? $client->updated_at->diffForHumans() : 'N/A' }}</td>
                                         <td>
-                                            <a href="{{ route('user_active', ['username' => $user->username, 'ip' => $p->ip, 'port' => $p->port, 'client' => $p->agent]) }}"
+                                            <a href="{{ route('users.peers.index', ['user' => $user, 'ip' => $client->ip, 'port' => $client->port, 'client' => $client->agent]) }}"
                                                itemprop="url" class="l-breadcrumb-item-link">
                                                 <span itemprop="title"
-                                                      class="l-breadcrumb-item-link-title">{{ $count }}</span>
+                                                      class="l-breadcrumb-item-link-title">{{ $client->num_peers }}</span>
                                             </a>
                                         </td>
                                         @if (\config('announce.connectable_check') == true)
                                             @php
                                                 $connectable = false;
-                                                if (cache()->has('peers:connectable:'.$p->ip.'-'.$p->port.'-'.$p->agent)) {
-                                                    $connectable = cache()->get('peers:connectable:'.$p->ip.'-'.$p->port.'-'.$p->agent);
+                                                if (cache()->has('peers:connectable:'.$client->ip.'-'.$client->port.'-'.$client->agent)) {
+                                                    $connectable = cache()->get('peers:connectable:'.$client->ip.'-'.$client->port.'-'.$client->agent);
                                                 }
                                             @endphp
                                             <td>@choice('user.client-connectable-state', $connectable)</td>
                                         @endif
                                     </tr>
-                                    @php array_push($peer_array, [$p->ip, $p->port]) @endphp
-                                @endif
                             @endforeach
                             </tbody>
                         </table>
@@ -693,20 +688,20 @@
                                 <i class="{{ config('other.font-awesome') }} fa-users text-success"></i>
                                 <span>:</span>
                                 @if (auth()->user()->isAllowed($user,'profile','show_profile_follower'))
-                                    @foreach ($followers as $f)
-                                        @if ($f->user->image != null)
-                                            <a href="{{ route('users.show', ['username' => $f->user->username]) }}">
-                                                <img src="{{ url('files/img/' . $f->user->image) }}" data-toggle="tooltip"
-                                                    title="{{ $f->user->username }}" height="50px"
-                                                    data-original-title="{{ $f->user->username }}"
-                                                    alt="{{ $f->user->username }}">
+                                    @foreach ($followers as $follower)
+                                        @if ($follower->image != null)
+                                            <a href="{{ route('users.show', ['username' => $follower->username]) }}">
+                                                <img src="{{ url('files/img/' . $follower->image) }}" data-toggle="tooltip"
+                                                    title="{{ $follower->username }}" height="50px"
+                                                    data-original-title="{{ $follower->username }}"
+                                                    alt="{{ $follower->username }}">
                                             </a>
                                         @else
-                                            <a href="{{ route('users.show', ['username' => $f->user->username]) }}">
+                                            <a href="{{ route('users.show', ['username' => $follower->username]) }}">
                                                 <img src="{{ url('img/profile.png') }}" data-toggle="tooltip"
-                                                    title="{{ $f->user->username }}" height="50px"
-                                                    data-original-title="{{ $f->user->username }}"
-                                                    alt="{{ $f->user->username }}">
+                                                    title="{{ $follower->username }}" height="50px"
+                                                    data-original-title="{{ $follower->username }}"
+                                                    alt="{{ $follower->username }}">
                                             </a>
                                         @endif
                                     @endforeach
@@ -829,5 +824,5 @@
         @endif
     </div>
 
-    @include('user.user_modals', ['user' => $user])
+    @include('user.profile.partials.modals', ['user' => $user])
 @endsection
