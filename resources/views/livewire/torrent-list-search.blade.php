@@ -357,6 +357,7 @@
                                 @endif
                             </td>
                             <td class="torrent-listings-download text-center" style="vertical-align: middle;">
+                                @livewire('small-bookmark-button', ['torrent' => $torrent->id], key('torrent-'.$torrent->id))
                                 @if (config('torrent.download_check_page') == 1)
                                     <a href="{{ route('download_check', ['id' => $torrent->id]) }}">
                                         <button class="btn btn-primary" type="button"
@@ -457,50 +458,3 @@
     </section>
 </div>
 
-<script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce('script') }}">
-  document.addEventListener('livewire:load', function () {
-    let myOptions = [
-            @foreach($regions as $region)
-      {
-        label: "{{ $region->name }}", value: "{{ $region->id }}"
-      },
-        @endforeach
-    ]
-    VirtualSelect.init({
-      ele: '#regions',
-      options: myOptions,
-      multiple: true,
-      search: true,
-      placeholder: "{{__('Izberite Regijo')}}",
-      noOptionsText: "{{__('Ni zadetkov')}}",
-    })
-
-    let regions = document.querySelector('#regions')
-    regions.addEventListener('change', () => {
-      let data = regions.value
-    @this.set('regions', data)
-    })
-
-    let myOptions2 = [
-            @foreach($distributors as $distributor)
-      {
-        label: "{{ $distributor->name }}", value: "{{ $distributor->id }}"
-      },
-        @endforeach
-    ]
-    VirtualSelect.init({
-      ele: '#distributors',
-      options: myOptions2,
-      multiple: true,
-      search: true,
-      placeholder: "{{__('Izberite Distributorja')}}",
-      noOptionsText: "{{__('Ni zadetkov')}}",
-    })
-
-    let distributors = document.querySelector('#distributors')
-    distributors.addEventListener('change', () => {
-      let data = distributors.value
-    @this.set('distributors', data)
-    })
-  })
-</script>
