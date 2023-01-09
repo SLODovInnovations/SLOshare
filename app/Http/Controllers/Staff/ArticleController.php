@@ -33,36 +33,16 @@ class ArticleController extends Controller
     /**
      * Store A New Article.
      */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(StoreArticleRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $article = new Article();
-        $article->title = $request->input('title');
-        $article->content = $request->input('content');
-        $article->user_id = $request->user()->id;
-
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = 'article-'.\uniqid('', true).'.'.$image->getClientOriginalExtension();
             $path = \public_path('/files/img/'.$filename);
             Image::make($image->getRealPath())->fit(75, 75)->encode('png', 100)->save($path);
-            $article->image = $filename;
-        } else {
-            // Use Default /public/img/missing-image.png
-            $article->image = null;
         }
 
-        $v = \validator($article->toArray(), [
-            'title'   => 'required',
-            'content' => 'required|min:20',
-            'user_id' => 'required',
-        ]);
-
-        if ($v->fails()) {
-            return \to_route('staff.articles.index')
-                ->withErrors($v->errors());
-        }
-
-        $article->save();
+        Article::create(['user_id' => $request->user()->id, 'image' => $filename ?? null] + $request->validated());
 
         return \to_route('staff.articles.index')
             ->withSuccess('Vaš članek je bil uspešno objavljen!');
@@ -81,34 +61,16 @@ class ArticleController extends Controller
     /**
      * Edit A Article.
      */
-    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
+    public function update(UpdateArticleRequest $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        $article = Article::findOrFail($id);
-        $article->title = $request->input('title');
-        $article->content = $request->input('content');
-
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = 'article-'.\uniqid('', true).'.'.$image->getClientOriginalExtension();
             $path = \public_path('/files/img/'.$filename);
             Image::make($image->getRealPath())->fit(75, 75)->encode('png', 100)->save($path);
-            $article->image = $filename;
-        } else {
-            // Use Default /public/img/missing-image.png
-            $article->image = null;
         }
 
-        $v = \validator($article->toArray(), [
-            'title'   => 'required',
-            'content' => 'required|min:20',
-        ]);
-
-        if ($v->fails()) {
-            return \to_route('staff.articles.index')
-                ->withErrors($v->errors());
-        }
-
-        $article->save();
+        Article::where('id', '=', $id)->update(['image' => $filename ?? null,] + $request->validated());
 
         return \to_route('staff.articles.index')
             ->withSuccess('Spremembe vašega članka so uspešno objavljene!');

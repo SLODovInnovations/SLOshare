@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Staff\StoreGiftRequest;
 use App\Models\PrivateMessage;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 /**
  * @see \Tests\Feature\Http\Controllers\Staff\GiftControllerTest
@@ -23,48 +23,24 @@ class GiftController extends Controller
     /**
      * Send The Gift.
      */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(StoreGiftRequest $request): \Illuminate\Http\RedirectResponse
     {
         $staff = $request->user();
+        $recipient = User::where('username', '=', $request->username)->sole();
 
-        $username = $request->input('username');
-//        $seedbonus = $request->input('seedbonus');
-//        $invites = $request->input('invites');
-//        $flTokens = $request->input('fl_tokens');
-        $uploaded = $request->input('uploaded');
-
-        $v = \validator($request->all(), [
-            'username'  => 'required|exists:users,username|max:180',
-//            'seedbonus' => 'required|numeric|min:0',
-//            'invites'   => 'required|numeric|min:0',
-//            'fl_tokens' => 'required|numeric|min:0',
-            'uploaded' => 'required|numeric|min:0',
-        ]);
-
-        if ($v->fails()) {
-            return \to_route('staff.gifts.index')
-                ->withErrors($v->errors());
-        }
-
-        $recipient = User::where('username', '=', $username)->first();
-        if (! $recipient) {
-            return \to_route('staff.gifts.index')
-                ->withErrors('Določenega uporabnika ni mogoče najti');
-        }
-
-//        $recipient->seedbonus += $seedbonus;
-//        $recipient->invites += $invites;
-//        $recipient->fl_tokens += $flTokens;
-        $recipient->uploaded += $uploaded;
+        //$recipient->seedbonus += $request->seedbonus;
+        //$recipient->invites += $request->invites;
+        //$recipient->fl_tokens += $request->fl_tokens;
+        $recipient->uploaded += $request->uploaded;
         $recipient->save();
-        // Send Private Message
-        $privateMessage = new PrivateMessage();
-        $privateMessage->sender_id = 1;
-        $privateMessage->receiver_id = $recipient->id;
-        $privateMessage->subject = 'Prejeli ste sistemsko ustvarjeno darilo';
-        $privateMessage->message = \sprintf('Želeli smo vas samo obvestiti o nagradi, %s prijeli ste na vaš račun %s (Bytes) Uploaded.
-                                [color=red][b]TO JE AVTOMATIZOVANO SISTEMSKO SPOROČILO, PROSIMO, NE ODGOVARAJTE![/b][/color]', $staff->username, $uploaded);
-        $privateMessage->save();
+
+        PrivateMessage::create([
+            'sender_id'   => 1,
+            'receiver_id' => $recipient->id,
+            'subject'     => 'Prejeli ste sistemsko ustvarjeno darilo',
+            'message'     => \sprintf('Želeli smo vas samo obvestiti o nagradi, %s, prijeli ste na vaš račun %s Bonus Points, %s (Bytes) Uploaded.
+            [color=red][b]TO JE AVTOMATIZOVANO SISTEMSKO SPOROČILO, PROSIMO, NE ODGOVARAJTE![/b][/color]', $staff->username, $request->uploaded)
+        ]);
 
         return \to_route('staff.gifts.index')
             ->withSuccess('Darilo poslano');

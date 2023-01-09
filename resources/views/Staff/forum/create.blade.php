@@ -40,8 +40,8 @@
                     <label class="form__label form__label--floating" for="forum_type">Vrsta Foruma</label>
                 </p>
                 <p class="form__group">
-                    <input id="title" class="form__text" type="text" name="title" required>
-                    <label class="form__label form__label--floating" for="title">Naslov</label>
+                    <input id="name" class="form__text" type="text" name="name" required>
+                    <label class="form__label form__label--floating" for="name">Naslov</label>
                 </p>
                 <p class="form__group">
                     <textarea id="description" class="form__textarea" name="description" placeholder=""></textarea>

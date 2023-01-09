@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Staff\StoreChatRoomRequest;
+use App\Http\Requests\Staff\UpdateChatRoomRequest;
 use App\Models\Chatroom;
 use App\Models\User;
 use App\Repositories\ChatRepository;
-use Illuminate\Http\Request;
 
 /**
  * @see \Tests\Feature\Http\Controllers\Staff\ChatRoomControllerTest
@@ -43,21 +44,9 @@ class ChatRoomController extends Controller
     /**
      * Store A New Chatroom.
      */
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(StoreChatRoomRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $chatroom = new Chatroom();
-        $chatroom->name = $request->input('name');
-
-        $v = \validator($chatroom->toArray(), [
-            'name' => 'required',
-        ]);
-
-        if ($v->fails()) {
-            return \to_route('staff.rooms.index')
-                ->withErrors($v->errors());
-        }
-
-        $chatroom->save();
+        Chatroom::create($request->validated());
 
         return \to_route('staff.rooms.index')
             ->withSuccess('Klepetalnica je bila uspešno dodana');
@@ -76,21 +65,9 @@ class ChatRoomController extends Controller
     /**
      * Update A Chatroom.
      */
-    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
+    public function update(UpdateChatRoomRequest $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        $chatroom = Chatroom::findOrFail($id);
-        $chatroom->name = $request->input('name');
-
-        $v = \validator($chatroom->toArray(), [
-            'name' => 'required',
-        ]);
-
-        if ($v->fails()) {
-            return \to_route('staff.rooms.index')
-                ->withErrors($v->errors());
-        }
-
-        $chatroom->save();
+        Chatroom::where('id', '=', $id)->update($request->validated());
 
         return \to_route('staff.rooms.index')
             ->withSuccess('Klepetalnica je bila uspešno spremenjena');
