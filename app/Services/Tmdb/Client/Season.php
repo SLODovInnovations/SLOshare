@@ -78,8 +78,4 @@ class Season
     {
         return $this->data['status'];
     }
-    public function get_crew()
-    {
-        return $this->data['credits']['crew'] ?? null;
-    }
 }
