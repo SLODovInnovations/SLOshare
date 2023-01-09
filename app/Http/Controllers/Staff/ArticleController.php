@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
-use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
 
 /**
