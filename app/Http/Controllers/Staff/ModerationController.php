@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Staff;
 
 use App\Helpers\TorrentHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Staff\UpdateModerationRequest;
 use App\Models\PrivateMessage;
 use App\Models\Torrent;
 use App\Repositories\ChatRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
 /**
@@ -43,7 +43,7 @@ class ModerationController extends Controller
     /**
      * Update a torrent's moderation status.
      */
-    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
+    public function update(UpdateModerationRequest $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $torrent = Torrent::withAnyStatus()->with('user')->findOrFail($id);
 
@@ -67,7 +67,7 @@ class ModerationController extends Controller
                 );
         }
 
-        $user = \auth()->user();
+        $staff = \auth()->user();
 
         switch ($request->status) {
             case 1: // Approve
@@ -76,61 +76,41 @@ class ModerationController extends Controller
                 // Announce To Shoutbox
                 if ($torrent->anon === 0) {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Uporabnik [url=%s/users/', $appurl).$torrent->user->username.']'.$torrent->user->username.\sprintf('[/url] je naložil '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
+                        \sprintf('Uporabnik [url=%s/users/', $appurl).$torrent->user->username.']'.$torrent->user->username.\sprintf('[/url] je naložil '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
                     );
                 } else {
                     $this->chatRepository->systemMessage(
-                        \sprintf('Anonimni uporabnik je naložil '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
+                        \sprintf('Anonimni uporabnik je naložil '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
                     );
                 }
 
-                TorrentHelper::approveHelper($torrent->id);
+                TorrentHelper::approveHelper($id);
 
                 return \to_route('staff.moderation.index')
                     ->withSuccess('Torrent je že odobren');
 
             case 2: // Reject
-                $v = \validator($request->all(), [
-                    'id'      => 'required|exists:torrents',
-                    'message' => 'required',
-                ]);
-
-                if ($v->fails()) {
-                    return \to_route('staff.moderation.index')
-                        ->withErrors($v->errors());
-                }
-
                 $torrent->markRejected();
 
-                $privateMessage = new PrivateMessage();
-                $privateMessage->sender_id = $user->id;
-                $privateMessage->receiver_id = $torrent->user_id;
-                $privateMessage->subject = \sprintf('Vaš naložen Torrent, %s ,je bil preložen z strani %s', $torrent->name, $user->username);
-                $privateMessage->message = \sprintf("Lep pozdrav, \n\nVaš naložen Torrent %s je bil preložen. Spodaj si oglejte sporočilo Osebja SLOshare.eu.\n\n%s", $torrent->name, $request->message);
-                $privateMessage->save();
+                PrivateMessage::create([
+                    'sender_id'   => $staff->id,
+                    'receiver_id' => $torrent->user_id,
+                    'subject'     => 'Vaš naložen Torrent, '.$torrent->name.' ,je bil preložen z strani '.$staff->username,
+                    'message'     => "Lep pozdrav, \n\nVaš naložen Torrent ".$torrent->name." je bil preložen. Spodaj si oglejte sporočilo Osebja SLOshare.eu.\n\n".$request->message,
+                ]);
 
                 return \to_route('staff.moderation.index')
                     ->withSuccess('Torrent preložen');
 
             case 3: // Postpone
-                $v = \validator($request->all(), [
-                    'id'      => 'required|exists:torrents',
-                    'message' => 'required',
-                ]);
-
-                if ($v->fails()) {
-                    return \to_route('staff.moderation.index')
-                        ->withErrors($v->errors());
-                }
-
                 $torrent->markPostponed();
 
-                $privateMessage = new PrivateMessage();
-                $privateMessage->sender_id = $user->id;
-                $privateMessage->receiver_id = $torrent->user_id;
-                $privateMessage->subject = \sprintf('Vaš naloženi Torrent, %s, je bil zavrnjen z strani %s', $torrent->name, $user->username);
-                $privateMessage->message = \sprintf("Lep pozdrav, \n\nVaš naloženi Torrent, %s, je bil zavrnjen. Spodaj si oglejte sporočilo Osebja SLOshare.eu.\n\n%s", $torrent->name, $request->message);
-                $privateMessage->save();
+                PrivateMessage::create([
+                    'sender_id'   => $staff->id,
+                    'receiver_id' => $torrent->user_id,
+                    'subject'     => 'Vaš naloženi Torrent, '.$torrent->name.' ,je bil zavrnjen z strani '.$staff->username,
+                    'message'     => "Lep pozdrav, \n\nVaš naloženi Torrent, ".$torrent->name." ,je bil zavrnjen. Spodaj si oglejte sporočilo Osebja SLOshare.eu.\n\n".$request->message,
+                ]);
 
                 return \to_route('staff.moderation.index')
                     ->withSuccess('Torrent zavrnjen');

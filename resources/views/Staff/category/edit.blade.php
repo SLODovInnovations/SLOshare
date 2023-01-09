@@ -85,87 +85,37 @@
                     >
                 </p>
                 <p class="form__group">
-                    <input type="hidden" name="movie_meta" value="0">
-                    <input
-                        id="movie_meta"
-                        class="form__checkbox"
-                        type="checkbox"
-                        name="movie_meta"
-                        value="1"
-                        @checked($category->movie_meta)
+                    <select
+                        name="meta"
+                        id="meta"
+                        class="form__select"
+                        required
                     >
-                    <label for="movie_meta">{{ __('staff.movie-meta-data') }}</label>
-                </p>
-                <p class="form__group">
-                    <input type="hidden" name="tv_meta" value="0">
-                    <input
-                        id="tv_meta"
-                        class="form__checkbox"
-                        type="checkbox"
-                        name="tv_meta"
-                        value="1"
-                        @checked($category->tv_meta)
-                    >
-                    <label for="tv_meta">{{ __('staff.tv-meta-data') }}</label>
-                </p>
-                <p class="form__group">
-                    <input type="hidden" name="cartoon_meta" value="0">
-                    <input
-                        id="cartoon_meta"
-                        class="form__checkbox"
-                        type="checkbox"
-                        name="cartoon_meta"
-                        value="1"
-                        @checked($category->cartoon_meta)
-                    >
-                    <label for="movie_meta">{{ __('staff.cartoons-meta-data') }}</label>
-                </p>
-                <p class="form__group">
-                    <input type="hidden" name="cartoontv_meta" value="0">
-                    <input
-                        id="cartoontv_meta"
-                        class="form__checkbox"
-                        type="checkbox"
-                        name="cartoontv_meta"
-                        value="1"
-                        @checked($category->cartoontv_meta)
-                    >
-                    <label for="movie_meta">{{ __('staff.cartoontvs-meta-data') }}</label>
-                </p>
-                <p class="form__group">
-                    <input type="hidden" name="game_meta" value="0">
-                    <input
-                        id="game_meta"
-                        class="form__checkbox"
-                        type="checkbox"
-                        name="game_meta"
-                        value="1"
-                        @checked($category->game_meta)
-                    >
-                    <label for="game_meta">{{ __('staff.game-meta-data') }}</label>
-                </p>
-                <p class="form__group">
-                    <input type="hidden" name="music_meta" value="0">
-                    <input
-                        id="music_meta"
-                        class="form__checkbox"
-                        type="checkbox"
-                        name="music_meta"
-                        value="1"
-                        @checked($category->music_meta)
-                    >
-                    <label for="music_meta">{{ __('staff.music-meta-data') }}</label>
-                </p>
-                <p class="form__group">
-                    <input type="hidden" name="no_meta" value="0">
-                    <input
-                        class="form__checkbox"
-                        type="checkbox"
-                        name="no_meta"
-                        value="1"
-                        @checked($category->no_meta)
-                    >
-                    <label for="no_meta">{{ __('staff.no-meta-data') }}</label>
+                        <option class="form__option" value="movie" @selected($category->movie_meta)>
+                            {{ __('staff.movie-meta-data') }}
+                        </option>
+                        <option class="form__option" value="cartoon" @selected($category->cartoon_meta)>
+                            {{ __('staff.cartoons-meta-data') }}
+                        </option>
+                        <option class="form__option" value="tv" @selected($category->tv_meta)>
+                            {{ __('staff.tv-meta-data') }}
+                        </option>
+                        <option class="form__option" value="cartoontv" @selected($category->cartoontv_meta)>
+                            {{ __('staff.cartoontvs-meta-data') }}
+                        </option>
+                        <option class="form__option" value="game" @selected($category->game_meta)>
+                            {{ __('staff.game-meta-data') }}
+                        </option>
+                        <option class="form__option" value="music" @selected($category->music_meta)>
+                            {{ __('staff.music-meta-data') }}
+                        </option>
+                        <option class="form__option" value="no" @selected($category->no_meta)>
+                            {{ __('staff.no-meta-data') }}
+                        </option>
+                    </select>
+                    <label class="form__label form__label--floating" for="meta">
+                        Meta
+                    </label>
                 </p>
                 <p class="form__group">
                     <button class="form__button form__button--filled">

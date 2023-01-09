@@ -221,6 +221,16 @@ class TorrentController extends Controller
             $seasonRule = 'required|numeric';
         }
 
+        $episodeRule = 'nullable|numeric';
+        if ($category->cartoontv_meta) {
+            $episodeRule = 'required|numeric';
+        }
+
+        $seasonRule = 'nullable|numeric';
+        if ($category->cartoontv_meta) {
+            $seasonRule = 'required|numeric';
+        }
+
         $v = \validator($torrent->toArray(), [
             'name'           => 'required',
             'description'    => 'required',
@@ -342,7 +352,7 @@ class TorrentController extends Controller
                 Subtitle::where('torrent_id', '=', $id)->delete();
                 Graveyard::where('torrent_id', '=', $id)->delete();
 
-                $freeleechTokens = $torrent->freeleechTokens;
+                $freeleechTokens = $torrent->freeleechTokens();
 
                 foreach ($freeleechTokens as $freeleechToken) {
                     \cache()->forget('freeleech_token:'.$freeleechToken->user_id.':'.$torrent->id);
