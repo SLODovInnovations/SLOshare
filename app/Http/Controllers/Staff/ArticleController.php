@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Staff\StoreArticleRequest;
+use App\Http\Requests\Staff\UpdateArticleRequest;
 use App\Models\Article;
 use Intervention\Image\Facades\Image;
 
