@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\PasswordSecurity;
 use PragmaRX\Recovery\Recovery;
 use Illuminate\Support\Facades\Crypt;
