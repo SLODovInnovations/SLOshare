@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\PasswordSecurity;
 use PragmaRX\Recovery\Recovery;
 use Illuminate\Support\Facades\Crypt;
@@ -51,7 +52,6 @@ class PasswordSecurityController extends Controller
         $user = \auth()->user();
         $google2fa = app('pragmarx.google2fa');
         $recovery = new Recovery();
-        ;
 
         // Encrypt Recovery Keys
         $recoveryCrypt = array();
@@ -79,7 +79,6 @@ class PasswordSecurityController extends Controller
         $user = \auth()->user();
         $google2fa = app('pragmarx.google2fa');
         $recovery = new Recovery();
-        ;
 
         $secret = $request->input('verify-code');
         $valid = $google2fa->verifyKey(Crypt::decrypt($user->passwordSecurity->google2fa_secret), $secret);
