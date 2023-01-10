@@ -3999,6 +3999,7 @@
             },
             "time": "2022-06-13T21:57:56+00:00"
         },
+        }
            "name": "pragmarx/google2fa-laravel",
             "version": "v2.0.2",
             "source": {
