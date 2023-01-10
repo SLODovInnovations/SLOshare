@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
 use App\Models\PasswordSecurity;
 use PragmaRX\Recovery\Recovery;
 use Illuminate\Support\Facades\Crypt;
@@ -22,7 +21,7 @@ class PasswordSecurityController extends Controller
         $google2fa_url = "";
         $google2fa_secret = "";
         $recovery = [];
-        if($user->passwordSecurity()->exists()){
+        if ($user->passwordSecurity()->exists()) {
             $google2fa = app('pragmarx.google2fa');
 
             $google2fa_secret = Crypt::decrypt($user->passwordSecurity->google2fa_secret);
@@ -51,11 +50,12 @@ class PasswordSecurityController extends Controller
     {
         $user = \auth()->user();
         $google2fa = app('pragmarx.google2fa');
-        $recovery = new Recovery();;
+        $recovery = new Recovery();
+        ;
 
         // Encrypt Recovery Keys
         $recoveryCrypt = array();
-        foreach($recovery->setCount(10)->toArray() as $key) {
+        foreach ($recovery->setCount(10)->toArray() as $key) {
             $recoveryCrypt[] = Crypt::encrypt($key);
         }
 
@@ -78,7 +78,8 @@ class PasswordSecurityController extends Controller
     {
         $user = \auth()->user();
         $google2fa = app('pragmarx.google2fa');
-        $recovery = new Recovery();;
+        $recovery = new Recovery();
+        ;
 
         $secret = $request->input('verify-code');
         $valid = $google2fa->verifyKey(Crypt::decrypt($user->passwordSecurity->google2fa_secret), $secret);
@@ -86,7 +87,7 @@ class PasswordSecurityController extends Controller
         if ($valid) {
             // Encrypt Recovery Keys
             $recoveryCrypt = array();
-            foreach($recovery->setCount(10)->toArray() as $key) {
+            foreach ($recovery->setCount(10)->toArray() as $key) {
                 $recoveryCrypt[] = Crypt::encrypt($key);
             }
 
@@ -163,7 +164,7 @@ class PasswordSecurityController extends Controller
         $recoveryCode = $request->input('one_time_recovery');
 
         $recovery = array();
-        foreach($user->passwordSecurity->recovery as $crypt) {
+        foreach ($user->passwordSecurity->recovery as $crypt) {
             $recovery[] = Crypt::decrypt($crypt);
         }
 
@@ -181,7 +182,7 @@ class PasswordSecurityController extends Controller
 
             // Encrypt Recovery Keys
             $recoveryCrypt = array();
-            foreach($recovery as $key) {
+            foreach ($recovery as $key) {
                 $recoveryCrypt[] = Crypt::encrypt($key);
             }
 
