@@ -34,7 +34,9 @@
                     <li><a href="#pid" data-toggle="tab">Pass Key (PID)</a></li>
                     <li><a href="#rid" data-toggle="tab">RSS Key (RID)</a></li>
                     <li><a href="#api" data-toggle="tab">API Token</a></li>
-                    <li><a href="{{ route('2fa') }}" target="_blank">Two Step Auth (TOTP)</a></li>
+                    @if (config('auth.TwoStepEnabled') == true)
+                        <li><a href="#twostep" data-toggle="tab">Avtorizacija v dveh korakih</a></li>
+                    @endif
                 </ul>
                 <div class="tab-content">
                     <br>
@@ -154,6 +156,35 @@
                             </div>
                         </form>
                     </div>
+
+                    @if (config('auth.TwoStepEnabled') == true)
+                        <div role="tabpanel" class="tab-pane" id="twostep">
+                            <form role="form" method="POST"
+                                  action="{{ route('change_twostep', ['username' => $user->username]) }}">
+                                @csrf
+                                <div class="well">
+                                    <h2 class="text-bold">Dvostopenjska avtentikacija</h2>
+                                    <hr>
+                                    <label for="twostep" class="control-label">Uporabite dvostopenjsko avtorizacijo?</label>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="twostep" @if ($user->twostep == 1) checked
+                                                      @endif
+                                                      value="1">{{ __('common.yes') }}</label>
+                                    </div>
+                                    <div class="radio-inline">
+                                        <label><input type="radio" name="twostep" @if ($user->twostep == 0) checked
+                                                      @endif value="0">{{ __('common.no') }}</label>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="well text-center">
+                                    <button type="submit" class="btn btn-primary">Shrani spremembe</button>
+                                </div>
+                            </form>
+                        </div>
+                </div>
+                @endif
+
             </div>
         </div>
     </div>
