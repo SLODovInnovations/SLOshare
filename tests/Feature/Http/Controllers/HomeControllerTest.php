@@ -54,4 +54,16 @@ class HomeControllerTest extends TestCase
             ->assertViewHas('freeleech_tokens')
             ->assertViewHas('bookmarks');
     }
+
+    /** @test */
+    public function whenAuthenticatedAndTwoStepRequiredHomepageRedirectsToTwoStep(): void
+    {
+        $user = User::factory()->create([
+            'twostep' => true,
+        ]);
+
+        $this->actingAs($user)
+            ->get(route('home.index'))
+            ->assertRedirect(route('verificationNeeded'));
+    }
 }

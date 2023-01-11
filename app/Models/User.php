@@ -750,12 +750,4 @@ class User extends Authenticatable
     {
         return \number_format($this->seedbonus, 0, '.', ',');
     }
-
-    /**
-     * TOTP 2FA.
-     */
-    public function passwordSecurity(): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        return $this->hasOne(PasswordSecurity::class);
-    }
 }
