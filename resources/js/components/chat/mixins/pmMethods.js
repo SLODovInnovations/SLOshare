@@ -18,7 +18,7 @@ export default {
                     '<input type="hidden" id="receiver-id" name="receiver-id" value="' +
                     user.id +
                     '">\n' +
-                    '<textarea id="chat-message-pm" name="message-pm" placeholder="Write your message..." cols="30" rows="5"></textarea>' +
+                    '<textarea id="chat-message-pm" name="message-pm" placeholder="Napišite svoje sporočilo..." cols="30" rows="5"></textarea>' +
                     '</div>',
                 showCancelButton: true,
                 confirmButtonText: 'Send',
@@ -33,7 +33,7 @@ export default {
                 },
                 preConfirm: (msg) => {
                     let target = this.target;
-                    msg = this.editor.bbcode().trim();
+                    msg = this.input.val().trim();
                     if (msg !== null && msg !== '') {
                         this.$emit('pm-sent', {
                             message: msg,
@@ -41,7 +41,7 @@ export default {
                             user_id: this.$parent.auth.id,
                             receiver_id: target,
                         });
-                        $('#chat-message-pm').html('');
+                        $('#chat-message-pm').val('');
                     }
                     return user;
                 },

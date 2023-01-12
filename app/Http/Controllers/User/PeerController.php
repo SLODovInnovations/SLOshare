@@ -44,29 +44,19 @@ class PeerController extends Controller
             return \redirect()->back()->withErrors('Izpirate lahko samo dvakrat na dan!');
         }
 
-        $carbon = new Carbon();
+        // Only peers older than 70 minutes are allowed to be flushed otherwise users could use this to exploit leech slots
+        $cutoff = (new Carbon())->copy()->subMinutes(70)->toDateTimeString();
 
-        // Get Peer List from User
-        $peers = $user->peers()
-            ->select(['id', 'torrent_id', 'user_id', 'updated_at'])
-            ->where('updated_at', '<', $carbon->copy()->subMinutes(70)->toDateTimeString())
-            ->get();
+        $user->peers()
+            ->where('updated_at', '<', $cutoff)
+            ->delete();
 
-        // Return with Error if no Peer exists
-        if ($peers->isEmpty()) {
-            return \redirect()->back()->withErrors('Ni vrstnikov! Počakajte vsaj 70 minut po zadnjem obvestilu stranke!');
-        }
+        $user->history()
+            ->where('updated_at', '<', $cutoff)
+            ->update(['active' => false]);
 
         $user->own_flushes--;
 
-        $peers->join(
-            'history',
-            fn ($join) => $join
-            ->on('peers.user_id', '=', 'history.user_id')
-            ->on('peers.torrent_id', '=', 'history.torrent_id')
-        )->update(['active' => false]);
-        $peers->delete();
-
-        return \redirect()->back()->withSuccess('Vrstnice so bile uspešno splaknjene!');
+        return \redirect()->back()->withSuccess('Vsi vrstniki, nazadnje najavljeni od odjemalca pred več kot 70 minutami, so bili uspešno spraznjeni!');
     }
 }
