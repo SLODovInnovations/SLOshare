@@ -101,7 +101,7 @@ class CategoryControllerTest extends TestCase
 
         $user = $this->createStaffUser();
         $category = Category::factory()->make();
-        $meta = ['movie', 'cartoon', 'tv', 'cartoontv', 'game', 'music', 'no'];
+        $meta = ['movie', 'tv', 'cartoon', 'cartoontv', 'game', 'music', 'no'];
 
         $response = $this->actingAs($user)->post(route('staff.categories.store'), [
             'name'       => $category->name,
@@ -123,7 +123,7 @@ class CategoryControllerTest extends TestCase
 
         $category = Category::factory()->create();
         $user = $this->createStaffUser();
-        $meta = ['movie', 'cartoon', 'tv', 'cartoontv', 'game', 'music', 'no'];
+        $meta = ['movie', 'tv', 'cartoon', 'cartoontv', 'game', 'music', 'no'];
 
         $response = $this->actingAs($user)->patch(route('staff.categories.update', ['id' => $category->id]), [
             'name'       => $category->name,
