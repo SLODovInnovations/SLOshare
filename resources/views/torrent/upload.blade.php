@@ -307,7 +307,7 @@
                                 class="form__text"
                                 placeholder=""
                             >
-                            <label class="form__label form__label--floating" for="automal">MAL ID ({{ __('torrent.required-anime') }})</label>
+                            <label class="form__label form__label--floating" for="automal">MAL ID <b>({{ __('torrent.required-anime') }})</b></label>
                         </p>-->
                         <input type="hidden" name="mal" value="0" />
 
