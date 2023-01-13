@@ -33,8 +33,7 @@ class NetworkSearch extends Component
             ->where('name', 'LIKE', '%'.$this->search.'%')
             ->oldest('name')
             ->paginate(30);
-    }
-    {
+
         return Network::withCount('cartoontv')
             ->where('name', 'LIKE', '%'.$this->search.'%')
             ->oldest('name')
