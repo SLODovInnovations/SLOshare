@@ -1,3 +1,13 @@
+// NOTICE OF LICENSE
+//
+// UNIT3D is open-sourced software licensed under the GNU Affero General Public License v3.0
+// The details is bundled with this project in the file LICENSE.txt.
+//
+// @project    UNIT3D
+//
+// @license    https://www.gnu.org/licenses/agpl-3.0.en.html/ GNU Affero General Public License v3.0
+// @author     HDVinnie, singularity43, MiM
+//
 // File Contents:
 //
 // uploadExtensionBuilder - To parse torrent files titles / Used: Upload
@@ -212,10 +222,6 @@ class uploadExtensionBuilder {
                 $('#autocat').val(1);
             } else if (release.type === 'TV Show') {
                 $('#autocat').val(2);
-            } else if (release.type === 'Cartoons') {
-                $('#autocat').val(3);
-            } else if (release.type === 'Cartoons TV') {
-                $('#autocat').val(4);
             }
 
             // Torrent Type
@@ -283,23 +289,6 @@ class uploadExtensionBuilder {
                     successCB,
                     errorCB
                 );
-            } else if (release.type === 'Cartoon') {
-                theMovieDb.search.getMovie(
-                    {
-                        query: release.title,
-                        year: release.year,
-                    },
-                    successCB,
-                    errorCB
-                );
-            } else if (release.type === 'Cartoon TV') {
-                theMovieDb.search.getTv(
-                    {
-                        query: release.title,
-                    },
-                    successCB,
-                    errorCB
-                );
             }
 
             function successCB(data) {
@@ -346,48 +335,6 @@ class uploadExtensionBuilder {
                             e
                         );
                     }
-                } else if (release.type === 'Cartoon') {
-                    if (data.results && data.results.length > 0) {
-                        $('#autotmdb').val(data.results[0].id);
-                        $('#apimatch').val(
-                            'Found Match: ' + data.results[0].name + ' (' + data.results[0].first_air_date + ')'
-                        );
-                        theMovieDb.tv.getKeywords(
-                            {
-                                id: data.results[0].id,
-                            },
-                            success,
-                            error
-                        );
-                        theMovieDb.tv.getExternalIds(
-                            {
-                                id: data.results[0].id,
-                            },
-                            s,
-                            e
-                        );
-                    }
-                } else if (release.type === 'Cartoon TV') {
-                    if (data.results && data.results.length > 0) {
-                        $('#autotmdb').val(data.results[0].id);
-                        $('#apimatch').val(
-                            'Found Match: ' + data.results[0].name + ' (' + data.results[0].first_air_date + ')'
-                        );
-                        theMovieDb.tv.getKeywords(
-                            {
-                                id: data.results[0].id,
-                            },
-                            success,
-                            error
-                        );
-                        theMovieDb.tv.getExternalIds(
-                            {
-                                id: data.results[0].id,
-                            },
-                            s,
-                            e
-                        );
-                    }
                 }
             }
 
@@ -402,12 +349,6 @@ class uploadExtensionBuilder {
                     let tags = data.keywords.map(({ name }) => name).join(', ');
                     $('#autokeywords').val(tags);
                 } else if (release.type === 'TV Show' && data?.results.length > 0) {
-                    let tags = data.results.map(({ name }) => name).join(', ');
-                    $('#autokeywords').val(tags);
-                } else if (release.type === 'Cartoon' && data?.results.length > 0) {
-                    let tags = data.results.map(({ name }) => name).join(', ');
-                    $('#autokeywords').val(tags);
-                } else if (release.type === 'Cartoon TV' && data?.results.length > 0) {
                     let tags = data.results.map(({ name }) => name).join(', ');
                     $('#autokeywords').val(tags);
                 }
@@ -425,11 +366,6 @@ class uploadExtensionBuilder {
                 if (release.type === 'Movie') {
                     $('#autoimdb').val(imdb);
                 } else if (release.type === 'TV Show') {
-                    $('#autoimdb').val(imdb);
-                    $('#autotvdb').val(data.tvdb_id ?? 0);
-                } else if (release.type === 'Cartoons') {
-                    $('#autoimdb').val(imdb);
-                } else if (release.type === 'Cartoons TV') {
                     $('#autoimdb').val(imdb);
                     $('#autotvdb').val(data.tvdb_id ?? 0);
                 }
