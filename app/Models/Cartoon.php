@@ -37,7 +37,7 @@ class Cartoon extends Model
 
     public function collection(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Collection::class)->take(2);
+        return $this->belongsToMany(Collection::class)->take(1);
     }
 
     public function recommendations(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -49,6 +49,13 @@ class Cartoon extends Model
     {
         return $this->hasMany(Torrent::class, 'tmdb', 'id')->whereHas('category', function ($q) {
             $q->where('cartoon_meta', '=', true);
+        });
+    }
+
+    public function requests(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(TorrentRequest::class, 'tmdb', 'id')->whereHas('category', function ($q) {
+            $q->where('cartoon_meta', '-', true);
         });
     }
 }

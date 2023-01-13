@@ -14,7 +14,7 @@ trait Encryptable
             try {
                 $decryptedValue = Crypt::decrypt($value);
             } catch (\Illuminate\Contracts\Encryption\DecryptException $decryptException) {
-                $decryptedValue = 'The value could not be decrypted.';
+                $decryptedValue = 'Vrednosti ni bilo mogoče dešifrirati.';
             }
             return $decryptedValue;
         }

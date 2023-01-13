@@ -47,7 +47,7 @@ class UserPreWarning extends Notification
     public function toArray(mixed $notifiable): array
     {
         return [
-            'title' => $this->torrent->name.' Pre Warning Recieved',
+            'title' => $this->torrent->name.' Prejeto predhodno opozorilo',
             'body'  => 'Od sistema ste prejeli samodejno PREDHODNO OPOZORILO, ker niste upoštevali pravil Hit in Run v zvezi s Torrentom '.$this->torrent->name,
             'url'   => \sprintf('/torrents/%s', $this->torrent->id),
         ];

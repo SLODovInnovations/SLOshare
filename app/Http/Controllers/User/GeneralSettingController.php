@@ -42,7 +42,7 @@ class GeneralSettingController extends Controller
         $user->save();
 
         return \to_route('users.general_settings.edit', ['user' => $user])
-            ->withSuccess('Your general settings have been successfully saved.');
+            ->withSuccess('Vaše splošne nastavitve so bile uspešno shranjene.');
     }
 
     /**

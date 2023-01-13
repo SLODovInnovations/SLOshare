@@ -22,18 +22,18 @@ class GenreController extends Controller
      */
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $genre = Genre::withCount(['tv', 'movie', 'cartoon', 'cartoontv'])->findOrFail($id);
+        $genre = Genre::withCount(['tv', 'movie'])->findOrFail($id);
         $shows = $genre->tv()->oldest('name')->paginate(25);
-        $cartoontvs = $genre->cartoontv()->oldest('name')->paginate(25);
+        $cartoontv = $genre->cartoontv()->oldest('name')->paginate(25);
         $movies = $genre->movie()->oldest('title')->paginate(25);
-        $cartoons = $genre->cartoon()->oldest('title')->paginate(25);
+        $cartoon = $genre->cartoon()->oldest('title')->paginate(25);
 
         return \view('mediahub.genre.show', [
-            'genre'       => $genre,
-            'shows'       => $shows,
-            'cartoontvs'  => $cartoontvs,
-            'movies'      => $movies,
-            'cartoons'    => $cartoons,
+            'genre'  => $genre,
+            'shows'  => $shows,
+            'cartoontv'  => $cartoontv,
+            'movies' => $movies,
+            'cartoon' => $cartoon,
         ]);
     }
 }

@@ -20,18 +20,18 @@ class CompanyController extends Controller
      */
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $company = Company::withCount('tv', 'movie', 'cartoon', 'cartoontv')->findOrFail($id);
+        $company = Company::withCount('tv', 'cartoontv', 'movie', 'cartoon')->findOrFail($id);
         $shows = $company->tv()->oldest('name')->paginate(25);
+        $cartoontv = $company->cartoontv()->oldest('name')->paginate(25);
         $movies = $company->movie()->oldest('title')->paginate(25);
-        $cartoons = $company->cartoon()->oldest('title')->paginate(25);
-        $cartoontvs = $company->cartoontv()->oldest('name')->paginate(25);
+        $cartoon = $company->cartoon()->oldest('title')->paginate(25);
 
         return \view('mediahub.company.show', [
             'company' => $company,
             'shows'   => $shows,
+            'cartoontv'   => $cartoontv,
             'movies'  => $movies,
-            'cartoons'=> $cartoons,
-            'cartoontvs'=> $cartoontvs,
+            'cartoon'  => $cartoon,
         ]);
     }
 }

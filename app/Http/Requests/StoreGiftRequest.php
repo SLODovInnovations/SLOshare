@@ -52,7 +52,7 @@ class StoreGiftRequest extends FormRequest
     {
         return [
             'to_username.exists'           => \trans('bon.failed-user-not-found'),
-            'to_username.not_in'           => 'You cannot gift yourself',
+            'to_username.not_in'           => 'Ne morete se obdarovati',
             'bonus_points.numeric|min|max' => \trans('bon.failed-amount-message'),
         ];
     }

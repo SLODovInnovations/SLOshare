@@ -53,6 +53,11 @@ class CartoonTv extends Model
         return $this->belongsToMany(Person::class);
     }
 
+    public function collection(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Collection::class)->take(1);
+    }
+
     public function networks(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Network::class);
@@ -61,11 +66,6 @@ class CartoonTv extends Model
     public function companies(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Company::class);
-    }
-
-    public function collection(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Collection::class)->take(1);
     }
 
     public function recommendations(): \Illuminate\Database\Eloquent\Relations\HasMany

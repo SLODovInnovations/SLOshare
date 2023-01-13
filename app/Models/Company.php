@@ -17,14 +17,14 @@ class Company extends Model
         return $this->belongsToMany(Movie::class);
     }
 
-    public function tv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Tv::class);
-    }
-
     public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Cartoon::class);
+    }
+
+    public function tv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Tv::class);
     }
 
     public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
