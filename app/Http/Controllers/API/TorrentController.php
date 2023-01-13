@@ -139,7 +139,7 @@ class TorrentController extends BaseController
         }
 
         $resolutionRule = 'nullable|exists:resolutions,id';
-        if ($category->movie_meta || $category->tv_meta || $category->cartoon_meta || $category->cartoontv_meta) {
+        if ($category->movie_meta || $category->cartoon_meta || $category->tv_meta || $category->cartoontv_meta) {
             $resolutionRule = 'required|exists:resolutions,id';
         }
 
@@ -148,14 +148,14 @@ class TorrentController extends BaseController
             $episodeRule = 'required|numeric';
         }
 
-        $seasonRule = 'nullable|numeric';
-        if ($category->tv_meta) {
-            $seasonRule = 'required|numeric';
-        }
-
         $episodeRule = 'nullable|numeric';
         if ($category->cartoontv_meta) {
             $episodeRule = 'required|numeric';
+        }
+
+        $seasonRule = 'nullable|numeric';
+        if ($category->tv_meta) {
+            $seasonRule = 'required|numeric';
         }
 
         $seasonRule = 'nullable|numeric';
@@ -237,16 +237,17 @@ class TorrentController extends BaseController
             $tmdbScraper->tv($torrent->tmdb);
         }
 
+        $tmdbScraper = new TMDBScraper();
+        if ($torrent->category->cartoontv_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
+            $tmdbScraper->cartoontv($torrent->tmdb);
+        }
+
         if ($torrent->category->movie_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
             $tmdbScraper->movie($torrent->tmdb);
         }
 
         if ($torrent->category->cartoon_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
             $tmdbScraper->cartoon($torrent->tmdb);
-        }
-
-        if ($torrent->category->cartoontv_meta && ($torrent->tmdb || $torrent->tmdb != 0)) {
-            $tmdbScraper->cartoontv($torrent->tmdb);
         }
 
         // Torrent Keywords System

@@ -17,6 +17,11 @@ class Crew extends Model
         return $this->belongsToMany(Tv::class, 'crew_tv', 'tv_id', 'person_id');
     }
 
+    public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Cartoon::class, 'cartoon_tv_crew', 'cartoon_tv_id', 'person_id');
+    }
+
     public function season(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Season::class, 'crew_season', 'season_id', 'person_id');
@@ -35,10 +40,5 @@ class Crew extends Model
     public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Cartoon::class, 'crew_cartoon', 'cartoon_id', 'person_id');
-    }
-
-    public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Cartoon::class, 'cartoon_tv_crew', 'cartoon_tv_id', 'person_id');
     }
 }

@@ -29,7 +29,7 @@ class CompanySearch extends Component
 
     final public function getCompaniesProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        return Company::withCount('tv', 'movie', 'cartoon', 'cartoontv')
+        return Company::withCount('tv', 'cartoon', 'movie', 'cartoontv')
             ->where('name', 'LIKE', '%'.$this->search.'%')
             ->oldest('name')
             ->paginate(30);

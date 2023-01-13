@@ -21,16 +21,16 @@ class TorrentResource extends JsonResource
             $meta = Tv::with(['genres:name'])->where('id', '=', $this->tmdb)->first();
         }
 
+        if ($this->category->cartoontv_meta && ($this->tmdb !== 0)) {
+            $meta = CartoonTv::with(['genres:name'])->where('id', '=', $this->tmdb)->first();
+        }
+
         if ($this->category->movie_meta && ($this->tmdb !== 0)) {
             $meta = Movie::with(['genres:name'])->where('id', '=', $this->tmdb)->first();
         }
 
         if ($this->category->cartoon_meta && ($this->tmdb !== 0)) {
             $meta = Cartoon::with(['genres:name'])->where('id', '=', $this->tmdb)->first();
-        }
-
-        if ($this->category->cartoontv_meta && ($this->tmdb !== 0)) {
-            $meta = CartoonTv::with(['genres:name'])->where('id', '=', $this->tmdb)->first();
         }
 
         return [

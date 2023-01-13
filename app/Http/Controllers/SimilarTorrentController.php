@@ -26,16 +26,16 @@ class SimilarTorrentController extends Controller
             $meta = Tv::with('genres', 'cast', 'networks', 'seasons')->where('id', '=', $tmdbId)->first();
         }
 
+        if ($torrent->category->cartoontv_meta) {
+            $meta = CartoonTv::with('genres', 'cast', 'networks', 'seasons')->where('id', '=', $tmdbId)->first();
+        }
+
         if ($torrent->category->movie_meta) {
             $meta = Movie::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $tmdbId)->first();
         }
 
         if ($torrent->category->cartoon_meta) {
             $meta = Cartoon::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $tmdbId)->first();
-        }
-
-        if ($torrent->category->cartoontv_meta) {
-            $meta = CartoonTv::with('genres', 'cast', 'companies', 'collection')->where('id', '=', $tmdbId)->first();
         }
 
         return \view('torrent.similar', [

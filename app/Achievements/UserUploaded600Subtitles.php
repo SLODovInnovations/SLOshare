@@ -9,7 +9,7 @@ class UserUploaded600Subtitles extends Achievement
     /*
      * The achievement name
      */
-    public $name = '600NalaganjPodnapisov';
+    public $name = 'UporabnikNalozil600Podnapisov';
 
     /*
      * A small description for the achievement

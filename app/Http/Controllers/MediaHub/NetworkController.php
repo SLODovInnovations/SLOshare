@@ -20,7 +20,7 @@ class NetworkController extends Controller
      */
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $network = Network::withCount('tv')->findOrFail($id);
+        $network = Network::withCount('tv', 'cartoontv')->findOrFail($id);
         $shows = $network->tv()->oldest('name')->paginate(25);
         $cartoontvs = $network->cartoontv()->oldest('name')->paginate(25);
 

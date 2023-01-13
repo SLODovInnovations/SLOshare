@@ -170,16 +170,16 @@ class RequestController extends Controller
             $tmdbScraper->tv($torrentRequest->tmdb);
         }
 
+        if ($torrentRequest->category->cartoontv_meta !== 0 && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
+            $tmdbScraper->cartoontv($torrentRequest->tmdb);
+        }
+
         if ($torrentRequest->category->movie_meta !== 0 && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
             $tmdbScraper->movie($torrentRequest->tmdb);
         }
 
         if ($torrentRequest->category->cartoon_meta !== 0 && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
             $tmdbScraper->cartoon($torrentRequest->tmdb);
-        }
-
-        if ($torrentRequest->category->cartoontv_meta !== 0 && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $tmdbScraper->cartoontv($torrentRequest->tmdb);
         }
 
         $torrentRequestBounty = new TorrentRequestBounty();
@@ -291,16 +291,16 @@ class RequestController extends Controller
             $tmdbScraper->tv($torrentRequest->tmdb);
         }
 
+        if ($torrentRequest->category->cartoontv_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
+            $tmdbScraper->cartoontv($torrentRequest->tmdb);
+        }
+
         if ($torrentRequest->category->movie_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
             $tmdbScraper->movie($torrentRequest->tmdb);
         }
 
         if ($torrentRequest->category->cartoon_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
             $tmdbScraper->cartoon($torrentRequest->tmdb);
-        }
-
-        if ($torrentRequest->category->cartoontv_meta && ($torrentRequest->tmdb || $torrentRequest->tmdb != 0)) {
-            $tmdbScraper->cartoontv($torrentRequest->tmdb);
         }
 
         return \to_route('request', ['id' => $torrentRequest->id])

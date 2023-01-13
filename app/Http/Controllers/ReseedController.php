@@ -37,14 +37,14 @@ class ReseedController extends Controller
             $torrentUrl = \href_torrent($torrent);
 
             $this->chatRepository->systemMessage(
-                \sprintf('Ladies and Gents, a reseed request was just placed on [url=%s]%s[/url] can you help out :question:', $torrentUrl, $torrent->name)
+                \sprintf('Dame in Gospodje, pravkar je bila vložena zahteva za ponovno vnos [url=%s]%s[/url] lahko pomagaš :question:', $torrentUrl, $torrent->name)
             );
 
             return \to_route('torrent', ['id' => $torrent->id])
-                ->withSuccess('A notification has been sent to all users that downloaded this torrent along with original uploader!');
+                ->withSuccess('Obvestilo je bilo poslano vsem uporabnikom, ki so prenesli ta Torrent skupaj s prvotnim nalagalcem!');
         }
 
         return \to_route('torrent', ['id' => $torrent->id])
-            ->withErrors('This torrent doesnt meet the rules for a reseed request.');
+            ->withErrors('Ta Torrent ne ustreza pravilom za zahtevo za ponovno sejanje.');
     }
 }

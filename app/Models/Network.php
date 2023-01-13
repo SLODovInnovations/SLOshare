@@ -17,6 +17,11 @@ class Network extends Model
         return $this->belongsToMany(Tv::class);
     }
 
+    public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(CartoonTv::class);
+    }
+
     public function movie(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Movie::class);
@@ -25,10 +30,5 @@ class Network extends Model
     public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Cartoon::class);
-    }
-
-    public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(CartoonTv::class);
     }
 }

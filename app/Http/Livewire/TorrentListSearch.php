@@ -169,7 +169,7 @@ class TorrentListSearch extends Component
             && \strlen($field) > 2
             && $field[0] === '/'
             && $field[-1] === '/'
-            && @\preg_match($field, 'Validate regex') !== false;
+            && @\preg_match($field, 'Preverjanje veljavnosti regexa') !== false;
 
         return Torrent::with(['user:id,username,group_id', 'user.group', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])

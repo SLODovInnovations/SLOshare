@@ -210,10 +210,10 @@ class uploadExtensionBuilder {
             // Torrent Category
             if (release.type === 'Movie') {
                 $('#autocat').val(1);
-            } else if (release.type === 'TV Show') {
-                $('#autocat').val(2);
             } else if (release.type === 'Cartoons') {
                 $('#autocat').val(3);
+            } else if (release.type === 'TV Show') {
+                $('#autocat').val(2);
             } else if (release.type === 'Cartoons TV') {
                 $('#autocat').val(4);
             }
@@ -275,14 +275,6 @@ class uploadExtensionBuilder {
                     successCB,
                     errorCB
                 );
-            } else if (release.type === 'TV Show') {
-                theMovieDb.search.getTv(
-                    {
-                        query: release.title,
-                    },
-                    successCB,
-                    errorCB
-                );
             } else if (release.type === 'Cartoon') {
                 theMovieDb.search.getMovie(
                     {
@@ -292,6 +284,15 @@ class uploadExtensionBuilder {
                     successCB,
                     errorCB
                 );
+            } else if (release.type === 'TV Show') {
+                theMovieDb.search.getTv(
+                    {
+                        query: release.title,
+                    },
+                    successCB,
+                    errorCB
+                );
+
             } else if (release.type === 'Cartoon TV') {
                 theMovieDb.search.getTv(
                     {
@@ -325,7 +326,7 @@ class uploadExtensionBuilder {
                             e
                         );
                     }
-                } else if (release.type === 'TV Show') {
+                } else if (release.type === 'Cartoon') {
                     if (data.results && data.results.length > 0) {
                         $('#autotmdb').val(data.results[0].id);
                         $('#apimatch').val(
@@ -346,7 +347,7 @@ class uploadExtensionBuilder {
                             e
                         );
                     }
-                } else if (release.type === 'Cartoon') {
+                } else if (release.type === 'TV Show') {
                     if (data.results && data.results.length > 0) {
                         $('#autotmdb').val(data.results[0].id);
                         $('#apimatch').val(
@@ -401,13 +402,13 @@ class uploadExtensionBuilder {
                 if (release.type === 'Movie') {
                     let tags = data.keywords.map(({ name }) => name).join(', ');
                     $('#autokeywords').val(tags);
-                } else if (release.type === 'TV Show' && data?.results.length > 0) {
-                    let tags = data.results.map(({ name }) => name).join(', ');
-                    $('#autokeywords').val(tags);
                 } else if (release.type === 'Cartoon' && data?.results.length > 0) {
                     let tags = data.results.map(({ name }) => name).join(', ');
                     $('#autokeywords').val(tags);
-                } else if (release.type === 'Cartoon TV' && data?.results.length > 0) {
+                } else if (release.type === 'TV Show' && data?.results.length > 0) {
+                    let tags = data.results.map(({ name }) => name).join(', ');
+                    $('#autokeywords').val(tags);
+               } else if (release.type === 'Cartoon TV' && data?.results.length > 0) {
                     let tags = data.results.map(({ name }) => name).join(', ');
                     $('#autokeywords').val(tags);
                 }
@@ -424,11 +425,11 @@ class uploadExtensionBuilder {
                 imdb = imdb.substring(2) ?? 0;
                 if (release.type === 'Movie') {
                     $('#autoimdb').val(imdb);
+                } else if (release.type === 'Cartoons') {
+                    $('#autoimdb').val(imdb);
                 } else if (release.type === 'TV Show') {
                     $('#autoimdb').val(imdb);
                     $('#autotvdb').val(data.tvdb_id ?? 0);
-                } else if (release.type === 'Cartoons') {
-                    $('#autoimdb').val(imdb);
                 } else if (release.type === 'Cartoons TV') {
                     $('#autoimdb').val(imdb);
                     $('#autotvdb').val(data.tvdb_id ?? 0);

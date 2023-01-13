@@ -162,7 +162,12 @@ class ProcessTvJob implements ShouldQueue
 
                 foreach ($season['credits']['crew'] as $crew) {
                     if (isset($crew['id'])) {
-                        Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))->season()->syncWithoutDetaching([$season['id']]);
+                        Crew::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))
+                            ->season()
+                            ->syncWithoutDetaching([$season['id'] => [
+                                'department' => $season['department'] ?? null,
+                                'job'        => $season['job'] ?? null,
+                            ]]);
                         Person::updateOrCreate(['id' => $crew['id']], $tmdb->person_array($crew))->tv()->syncWithoutDetaching([$this->id]);
                     }
                 }

@@ -34,6 +34,12 @@ class NetworkSearch extends Component
             ->oldest('name')
             ->paginate(30);
     }
+    {
+        return Network::withCount('cartoontv')
+            ->where('name', 'LIKE', '%'.$this->search.'%')
+            ->oldest('name')
+            ->paginate(30);
+    }
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {

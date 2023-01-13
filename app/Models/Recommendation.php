@@ -15,14 +15,14 @@ class Recommendation extends Model
         return $this->belongsTo(Movie::class);
     }
 
-    public function tv(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Tv::class);
-    }
-
     public function cartoon(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Cartoon::class);
+    }
+
+    public function tv(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Tv::class);
     }
 
     public function cartoontv(): \Illuminate\Database\Eloquent\Relations\BelongsTo

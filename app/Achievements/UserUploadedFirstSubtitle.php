@@ -9,7 +9,7 @@ class UserUploadedFirstSubtitle extends Achievement
     /*
      * The achievement name
      */
-    public $name = 'PrviPodnapis';
+    public $name = 'UporabnikNalozilPrviPodnapis';
 
     /*
      * A small description for the achievement

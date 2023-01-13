@@ -33,17 +33,17 @@ class ProcessCompanyJob implements ShouldQueue
             $metadata->movie($movie['id']);
         }
 
-        foreach ($this->company['tv'] as $tv) {
-            $metadata = new TMDBScraper();
-            $metadata->tv($tv['id']);
-        }
-
-        foreach ($this->company['cartoon'] as $cartoon) {
+       foreach ($this->company['cartoon'] as $cartoon) {
             $metadata = new TMDBScraper();
             $metadata->cartoon($cartoon['id']);
         }
 
-        foreach ($this->company['cartoontv'] as $cartoontv) {
+       foreach ($this->company['tv'] as $tv) {
+            $metadata = new TMDBScraper();
+            $metadata->tv($tv['id']);
+        }
+
+       foreach ($this->company['cartoontv'] as $cartoontv) {
             $metadata = new TMDBScraper();
             $metadata->cartoontv($cartoontv['id']);
         }
