@@ -232,8 +232,8 @@
                                         color: #FFB800;
                                     }
                                 </style>
-                                <span class="text-bold torrent-listings-freeleech"
-                                        title='{{ $torrent->free }}% {{ __('common.free') }}'>
+                                <span class="text-bold torrent-listings-freeleech"  data-toggle="tooltip"
+                                        title='' data-original-title='{{ $torrent->free }}% {{ __('common.free') }}'>
                                 <i class="star30 {{ config('other.font-awesome') }} fa-star"></i>
                             </span>
                             @endif
@@ -647,8 +647,8 @@
                                     color: #FFB800;
                                 }
                             </style>
-                                <span class="text-bold torrent-listings-freeleech"
-                                        title='{{ $torrent->free }}% {{ __('common.free') }}'>
+                                <span class="text-bold torrent-listings-freeleech" data-toggle="tooltip"
+                                        title='' data-original-title='{{ $torrent->free }}% {{ __('common.free') }}'>
                                 <i class="star30 {{ config('other.font-awesome') }} fa-star"></i>
                             </span>
                             @endif
@@ -1063,8 +1063,8 @@
                                     color: #FFB800;
                                 }
                             </style>
-                                <span class="text-bold torrent-listings-freeleech"
-                                        title='{{ $torrent->free }}% {{ __('common.free') }}'>
+                                <span class="text-bold torrent-listings-freeleech" data-toggle="tooltip"
+                                        title='' data-original-title='{{ $torrent->free }}% {{ __('common.free') }}'>
                                 <i class="star30 {{ config('other.font-awesome') }} fa-star"></i>
                             </span>
                             @endif
@@ -1479,8 +1479,8 @@
                                     color: #FFB800;
                                 }
                             </style>
-                                <span class="text-bold torrent-listings-freeleech"
-                                        title='{{ $torrent->free }}% {{ __('common.free') }}'>
+                                <span class="text-bold torrent-listings-freeleech" data-toggle="tooltip"
+                                        title='' data-original-title='{{ $torrent->free }}% {{ __('common.free') }}'>
                                 <i class="star30 {{ config('other.font-awesome') }} fa-star"></i>
                             </span>
                             @endif
@@ -1895,8 +1895,8 @@
                                     color: #FFB800;
                                 }
                             </style>
-                                <span class="text-bold torrent-listings-freeleech"
-                                        title='{{ $torrent->free }}% {{ __('common.free') }}'>
+                                <span class="text-bold torrent-listings-freeleech" data-toggle="tooltip"
+                                        title='title='' data-original-title='{{ $torrent->free }}% {{ __('common.free') }}'>
                                 <i class="star30 {{ config('other.font-awesome') }} fa-star"></i>
                             </span>
                             @endif
@@ -1980,10 +1980,10 @@
                                        data-toggle='tooltip'
                                        title='' data-original-title='{{ __('torrent.sd-content') }}'></i>
 								</span>
-                    @endif-->
+                        @endif
 
-                    <!--@if ($torrent->bumped_at != $torrent->created_at && $torrent->bumped_at < Illuminate\Support\Carbon::now()->addDay(2))
-                        <span class='badge-extra text-bold torrent-listings-bumped'>
+                        @if ($torrent->bumped_at != $torrent->created_at && $torrent->bumped_at < Illuminate\Support\Carbon::now()->addDay(2))
+                            <span class='badge-extra text-bold torrent-listings-bumped'>
                                     <i class='{{ config('other.font-awesome') }} fa-level-up-alt text-gold'
                                        data-toggle='tooltip'
                                        title='' data-original-title='{{ __('torrent.recent-bumped') }}'></i>
