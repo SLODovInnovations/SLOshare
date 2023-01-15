@@ -14,11 +14,11 @@
             <div class="mt-5">
                 <div class="row">
                     <div class="form-group col-xs-9">
-                        <input wire:model="name" type="search" class="form-control" placeholder="Name"/>
+                        <input wire:model="name" type="search" class="form-control" placeholder="Ime"/>
                     </div>
                     <div class="form-group col-xs-3">
                         <button class="btn btn-md btn-primary" @click="open = ! open"
-                                x-text="open ? 'Hide Advanced Search' : 'Advanced Search...'"></button>
+                                x-text="open ? 'Skrij napredno iskanje' : 'Napredno iskanje...'"></button>
                     </div>
                 </div>
                 <div x-show="open">
@@ -224,7 +224,7 @@
                 </thead>
                 <tbody>
                 @foreach($torrents as $torrent)
-                    @php $history = App\Models\History::where('info_hash', '=', $torrent->info_hash)->where('user_id', '=', $user->id)->first() @endphp
+                    @php $history = App\Models\History::where('torrent_id', '=', $torrent->id)->where('user_id', '=', $user->id)->first() @endphp
                     @php $meta = null @endphp
                     @if ($torrent->category->tv_meta)
                         @if ($torrent->tmdb || $torrent->tmdb != 0)

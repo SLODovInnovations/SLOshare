@@ -87,9 +87,11 @@
                             @endif
 
                             @if($seed->category->no_meta)
-                                style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');" class="show-poster" alt={{ $seed->name }}>
-                            @else
-                                style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $seed->name }}>
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');" class="show-poster" alt={{ $seed->name }}>
+                                @else
+                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $seed->name }}>
+                                @endif
                             @endif
 				            <div class="release-info">
 
@@ -201,9 +203,11 @@
                             @endif
 
                             @if($leech->category->no_meta)
-                                style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');" class="show-poster" alt={{ $leech->name }}>
-                            @else
-                                style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $leech->name }}>
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');" class="show-poster" alt={{ $leech->name }}>
+                                @else
+                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $leech->name }}>
+                                @endif
                             @endif
 				            <div class="release-info">
 
