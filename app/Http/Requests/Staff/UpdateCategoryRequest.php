@@ -23,7 +23,7 @@ class UpdateCategoryRequest extends FormRequest
             'name'       => 'required|string',
             'position'   => 'required|numeric',
             'icon'       => 'required|string',
-            'meta'       => 'required|string|in:movie,tv,game,music,no|exclude',
+            'meta'       => 'required|string|in:movie,cartoon,tv,cartoontv,game,music,no|exclude',
             'image'      => 'max:10240',
         ];
     }

@@ -31,7 +31,7 @@
             Skupine
         </a>
     </li>
-    <li class="nav-tab--active">
+    <li class="nav-tabV2--active">
         <a class="nav-tab--active__link" href="{{ route('top10.index') }}">
             Top 10
         </a>

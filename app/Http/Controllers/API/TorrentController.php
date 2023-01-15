@@ -148,14 +148,14 @@ class TorrentController extends BaseController
             $episodeRule = 'required|numeric';
         }
 
-        $episodeRule = 'nullable|numeric';
-        if ($category->cartoontv_meta) {
-            $episodeRule = 'required|numeric';
-        }
-
         $seasonRule = 'nullable|numeric';
         if ($category->tv_meta) {
             $seasonRule = 'required|numeric';
+        }
+
+        $episodeRule = 'nullable|numeric';
+        if ($category->cartoontv_meta) {
+            $episodeRule = 'required|numeric';
         }
 
         $seasonRule = 'nullable|numeric';
