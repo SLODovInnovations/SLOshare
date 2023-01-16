@@ -25,7 +25,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('categories.show', ['13']) }}">
+                    <a href="{{ route('categories.show', ['14']) }}">
                         <i class="{{ config('other.font-awesome') }} fa-heart"></i>
                         {{ __('torrent.xxx-18') }}
                     </a>

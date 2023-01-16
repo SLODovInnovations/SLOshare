@@ -156,9 +156,9 @@ trait TorrentFilter
             ->whereIn('tmdb', DB::table('cartoon_tv_collection')->select('cartoontv_id')->where('collection_id', '=', $collectionId));
     }
 
-    public function scopeOfFreeleech(Builder $query, array $free): Builder
+    public function scopeOfFreeleech(Builder $query, string|array $free): Builder
     {
-        return $query->whereIntegerInRaw('free', $free);
+        return $query->whereIntegerInRaw('free', (array) $free);
     }
 
     public function scopeDoubleup(Builder $query): Builder
