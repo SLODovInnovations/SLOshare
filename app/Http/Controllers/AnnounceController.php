@@ -301,11 +301,6 @@ class AnnounceController extends Controller
         $user = User::with('group')
             ->select(['id', 'group_id', 'can_download', 'uploaded', 'downloaded'])
             ->where('passkey', '=', $passkey)
-            ->first());
-
-        $group = \cache()->rememberForever('group:'.$user->group_id, fn () => Group::query()
-            ->select(['id', 'download_slots', 'is_immune', 'is_freeleech', 'is_double_upload'])
-            ->where('id', '=', $user->group_id)
             ->first();
 
         // If User Doesn't Exist Return Error to Client
