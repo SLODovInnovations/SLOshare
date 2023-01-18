@@ -295,7 +295,7 @@ class AnnounceController extends Controller
                 ->selectRaw("min(case when slug = 'validating' then id end) as validating_id")
                 ->selectRaw("min(case when slug = 'disabled' then id end) as disabled_id")
                 ->first();
-        };
+        });
 
         // Check Passkey Against Users Table
         $user = User::with('group')
