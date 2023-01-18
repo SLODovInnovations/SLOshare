@@ -295,8 +295,6 @@ class AnnounceController extends Controller
                 ->selectRaw("min(case when slug = 'banned' then id end) as banned_id")
                 ->selectRaw("min(case when slug = 'validating' then id end) as validating_id")
                 ->selectRaw("min(case when slug = 'disabled' then id end) as disabled_id")
-                ->first()
-        );
                 ->first();
         });
 
