@@ -285,6 +285,7 @@
                         >
                         <label class="form__label form__label--floating" for="mal">MAL ID <b>({{ __('torrent.required-anime') }})</b></label>
                     </p>-->
+                    <input type="hidden" name="mal" value="0">
                 </div>
                 <p class="form__group" x-show="cats[cat].type === 'game'">
                     <input type="hidden" name="igdb" value="0">
