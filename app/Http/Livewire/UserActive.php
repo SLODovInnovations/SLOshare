@@ -69,6 +69,7 @@ class UserActive extends Component
             ->join('torrents', 'peers.torrent_id', '=', 'torrents.id')
             ->select(
                 'peers.id',
+                'peers.ip',
                 'peers.port',
                 'peers.agent',
                 'peers.uploaded',
@@ -85,7 +86,6 @@ class UserActive extends Component
                 'torrents.leechers',
                 'torrents.times_completed',
             )
-            ->selectRaw('INET6_NTOA(ip) as ip')
             ->selectRaw('(1 - (peers.left / NULLIF(torrents.size, 0))) AS progress')
             ->where('peers.user_id', '=', $this->user->id)
             ->when(

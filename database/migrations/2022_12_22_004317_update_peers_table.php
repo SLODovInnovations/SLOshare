@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Peer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +12,6 @@ return new class () extends Migration {
      */
     public function up()
     {
-        Peer::truncate();
 
         Schema::disableForeignKeyConstraints();
 
@@ -31,7 +29,5 @@ return new class () extends Migration {
 
         Schema::enableForeignKeyConstraints();
 
-        DB::statement('ALTER TABLE `peers` MODIFY `peer_id` BINARY(20) NOT NULL');
-        DB::statement('ALTER TABLE `peers` MODIFY `ip` VARBINARY(16) NOT NULL');
     }
 };
