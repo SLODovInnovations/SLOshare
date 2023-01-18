@@ -12,7 +12,6 @@ return new class () extends Migration {
      */
     public function up()
     {
-
         Schema::disableForeignKeyConstraints();
 
         Schema::table('peers', function (Blueprint $table) {
@@ -28,6 +27,5 @@ return new class () extends Migration {
         });
 
         Schema::enableForeignKeyConstraints();
-
     }
 };
