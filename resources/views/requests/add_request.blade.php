@@ -131,7 +131,7 @@
                                 pattern="[0-9]*"
                                 placeholder=""
                                 type="text"
-                                x-bind:value="{{ old('tvdb') }}"
+                                x-bind:value="{{ $tvdb ?: old('tvdb') }}"
                             >
                             <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
                         </p>
@@ -160,7 +160,7 @@
                                 pattern="[0-9]*"
                                 placeholder
                                 type="text"
-                                x-bind:value="{{ old('igdb') }}"
+                                x-bind:value="{{ $igdb ?: old('igdb') }}"
                             >
                             <label class="form__label form__label--floating" for="igdb">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
                         </p>
