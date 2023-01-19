@@ -180,8 +180,8 @@
                                     </div>
                                     <div class="body_description">
                                         <h3 class="description_title">
-                                            <a href="{{ route('mediahub.cartoontvs.show', ['id' => $show->id]) }}">{{ $cartoontv->name }}
-                                                <span class="text-bold text-pink"> {{ substr($show->first_air_date, 0, 4) }}</span>
+                                            <a href="{{ route('mediahub.cartoontvs.show', ['id' => $cartoontv->id]) }}">{{ $cartoontv->name }}
+                                                <span class="text-bold text-pink"> {{ substr($cartoontv->first_air_date, 0, 4) }}</span>
                                             </a>
                                         </h3>
                                         @if ($cartoontv->genres)
