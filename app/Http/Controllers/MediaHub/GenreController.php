@@ -31,9 +31,9 @@ class GenreController extends Controller
         return \view('mediahub.genre.show', [
             'genre'  => $genre,
             'shows'  => $shows,
-            'cartoontvs'  => $cartoontv,
+            'cartoontvs'  => $cartoontvs,
             'movies' => $movies,
-            'cartoons' => $cartoon,
+            'cartoons' => $cartoons,
         ]);
     }
 }

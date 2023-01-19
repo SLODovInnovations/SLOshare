@@ -129,9 +129,9 @@
                                 inputmode="numeric"
                                 name="tvdb"
                                 pattern="[0-9]*"
-                                placeholder=""
+                                required
                                 type="text"
-                                x-bind:value="{{ $tvdb ?: old('tvdb') }}"
+                                x-bind:value="{{ old('tvdb') }}"
                             >
                             <label class="form__label form__label--floating" for="autotvdb">TVDB ID</label>
                         </p>
@@ -158,9 +158,9 @@
                                 inputmode="numeric"
                                 name="igdb"
                                 pattern="[0-9]*"
-                                placeholder
+                                required
                                 type="text"
-                                x-bind:value="{{ $igdb ?: old('igdb') }}"
+                                x-bind:value="{{ old('igdb') }}"
                             >
                             <label class="form__label form__label--floating" for="igdb">IGDB ID <b>({{ __('torrent.required-games') }})</b></label>
                         </p>

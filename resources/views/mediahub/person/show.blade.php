@@ -118,6 +118,7 @@
 
 <!-- Movie -->
         <div class="block">
+            <h2 class="panel__heading">Filmi</h2>
             <table class="table table-striped clearfix">
                 <tbody>
                 @if(! empty($credits->movie))
@@ -167,6 +168,7 @@
 
 <!-- Cartoon -->
         <div class="block">
+            <h2 class="panel__heading">Risanke</h2>
             <table class="table table-striped clearfix">
                 <tbody>
                 @if(! empty($credits->cartoon))
@@ -216,6 +218,7 @@
 
 <!-- Tv -->
         <div class="block">
+            <h2 class="panel__heading">TV Serije</h2>
             <table class="table table-striped clearfix">
                 <tbody>
                 @if(! empty($credits->tv))
@@ -265,6 +268,7 @@
 
 <!-- Cartoon Tv -->
         <div class="block">
+            <h2 class="panel__heading">Risanke TV</h2>
             <table class="table table-striped clearfix">
                 <tbody>
                 @if(! empty($credits->cartoontv))
