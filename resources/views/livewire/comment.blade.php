@@ -7,7 +7,7 @@
                     alt=""
             >
             <address class="comment__author">
-                <x-user_tag :user="$comment->user" :anon="false"/>
+                <x-user_tag :anon="false" :user="$comment->user"/>
             </address>
             <time
                     class="comment__timestamp"
@@ -84,9 +84,9 @@
             </form>
         @endif
         @else
-            <p class="comment__content">
+            <div class="comment__content">
                 @joypixels($comment->getContentHtml())
-            </p>
+            </div>
         @endif
     </article>
 
