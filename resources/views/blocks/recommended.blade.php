@@ -424,14 +424,14 @@
                                     </a>
                                     @if (config('torrent.download_check_page') == 1)
                                     <a href="{{ route('download_check', ['id' => $videorecommendeds->id]) }}">
-                                        <button class="btn btn-primary" type="button" data-toggle="tooltip"
+                                        <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
                                         </button>
                                     </a>
                                     @else
                                     <a href="{{ route('download', ['id' => $videorecommendeds->id]) }}">
-                                        <button class="btn btn-primary" type="button" data-toggle="tooltip"
+                                        <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
                                         </button>

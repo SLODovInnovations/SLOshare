@@ -381,9 +381,6 @@
                                         </button>
                                     </a>
                                 @endif
-
-                                @livewire('small-bookmark-button', ['torrent' => $torrent->id], key($torrent->id))
-
                             </td>
 
                             <td class="torrent-listings-tmdb text-center" style="vertical-align: middle;">
