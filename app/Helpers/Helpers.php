@@ -120,7 +120,7 @@ if (! function_exists('language_flag')) {
     function language_flag($language)
     {
         $flag = match ($language) {
-            'English', 'English (US)'                                                  						      => 'us',
+            'English', 'English (US)'                                                  						                          => 'us',
             'English (GB)'                                                                                                            => 'gb',
             'Arabic', 'Arabic (001)'                                                                                                  => 'ae',
             'Belarusian'                                                                                                              => 'by',
@@ -128,6 +128,7 @@ if (! function_exists('language_flag')) {
             'Bulgarian', 'Bulgarian (BG)'                                                                                             => 'bg',
             'Catalan'                                                                                                                 => 'ca',
             'Chinese', 'Mandarin (Hans)', 'Mandarin (Hant)', 'Cantonese (Hant)', 'Chinese (Simplied)', 'Chinese (Traditional)'        => 'cn',
+            'Chinese (HK)'                                                                                                            => 'hk',
             'Croatian', 'Croatian (HR)'                                                                                               => 'hr',
             'Czech', 'Czech (CZ)'                                                                                                     => 'cz',
             'Danish', 'Danish (DK)'                                                                                                   => 'dk',
@@ -150,6 +151,7 @@ if (! function_exists('language_flag')) {
             'Latvian', 'Latvian (LV)'                                                                                                 => 'lv',
             'Lithuanian', 'Lithuanian (LT)'                                                                                           => 'lt',
             'Malay', 'Malay (MY)'                                                                                                     => 'my',
+            'Macedonian', 'Macedonian (MK)'										                                                      => 'mk',
             'Norwegian', 'Norwegian Bokmal', 'Norwegian (NO)', 'Norwegian Bokmal (NO)'                                                => 'no',
             'Persian'                                                                                                                 => 'ir',
             'Polish', 'Polish (PL)'                                                                                                   => 'pl',
