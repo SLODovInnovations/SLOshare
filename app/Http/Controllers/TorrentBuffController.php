@@ -233,10 +233,7 @@ class TorrentBuffController extends Controller
         $user = $request->user();
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
 
-        $activeToken = \cache()->rememberForever(
-            'freeleech_token:'.$user->id.':'.$torrent->id,
-            fn () => $user->freeleechTokens()->where('torrent_id', '=', $torrent->id)->exists()
-        );
+        $activeToken = \cache()->get('freeleech_token:'.$user->id.':'.$torrent->id);
 
         if ($user->fl_tokens >= 1 && ! $activeToken) {
             $freeleechToken = new FreeleechToken();
@@ -246,6 +243,8 @@ class TorrentBuffController extends Controller
 
             $user->fl_tokens -= '1';
             $user->save();
+
+            \cache()->put('freeleech_token:'.$user->id.':'.$torrent->id, true);
 
             return \to_route('torrent', ['id' => $torrent->id])
                 ->withSuccess('Za ta torrent ste uspešno aktivirali žeton Freeleech!');
