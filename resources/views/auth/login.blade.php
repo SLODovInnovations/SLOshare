@@ -16,6 +16,7 @@
         <meta property="og:url" content="{{ url('/') }}">
         <meta property="og:locale" content="{{ config('app.locale') }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="cryptocoinsad" content="cryptocoinsad-69560" />
     @show
     <link rel="shortcut icon" href="{{ url('/favicon.png') }}" type="image/x-icon">
     <link rel="icon" href="{{ url('/favicon.png') }}" type="image/x-icon">
