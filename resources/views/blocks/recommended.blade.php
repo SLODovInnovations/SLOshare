@@ -12,12 +12,12 @@
                     <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ __('sloshare.home-movie-title') }}
                 </a>
             </li>
-            <!--<li class="">
-                <a href="#recommended-tvseries" role="tab" data-toggle="tab" aria-expanded="true">
-                    <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ __('sloshare.home-tvseries-title') }}
+            <li class="">
+                <a href="#recommended-cartoons" role="tab" data-toggle="tab" aria-expanded="true">
+                    <i class="{{ config('other.font-awesome') }} fa-baby"></i> {{ __('sloshare.home-cartoons-title') }}
                 </a>
             </li>
-            <li class="">
+            <!--<li class="">
                 <a href="#recommended-cartoones" role="tab" data-toggle="tab" aria-expanded="true">
                     <i class="{{ config('other.font-awesome') }} fa-baby"></i> {{ __('sloshare.home-cartoons-title') }}
                 </a>
@@ -596,6 +596,264 @@
                                     </td>
                                     <td>
                                         <span>{{ $videorecommendeds->times_completed }}</span>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+            </div>
+
+            <div class="tab-pane fade active in" id="recommended-cartoons">
+                <td class="table-responsive">
+                    <table class="table table-condensed table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>{{ __('torrent.category') }}</th>
+                                <th>{{ __('torrent.type') }}/{{ __('torrent.resolution') }}</th>
+                                <th class="torrents-filename">{{ __('torrent.name') }}</th>
+                                <th>{{ __('torrent.size') }}</th>
+                                <th>{{ __('torrent.short-seeds') }}</th>
+                                <th>{{ __('torrent.short-leechs') }}</th>
+                                <th>{{ __('torrent.short-completed') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($cartoonrecommended as $cartoonrecommendeds)
+
+                            @if ($cartoonrecommendeds->category->cartoon_meta)
+                                @if ($cartoonrecommendeds->tmdb || $cartoonrecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\Cartoon::where('id', '=', $cartoonrecommendeds->tmdb)->first(); @endphp
+                                @endif
+                            @endif
+                            @if ($cartoonrecommendeds->category->cartoontv_meta)
+                                @if ($cartoonrecommendeds->tmdb || $cartoonrecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\CartoonTv::where('id', '=', $cartoonrecommendeds->tmdb)->first(); @endphp
+                                @endif
+                            @endif
+
+                            <tr>
+							    <td class="torrent-listings-poster" style="width: 1%;">
+									<div class="torrent-poster pull-left">
+
+										@if ($cartoonrecommendeds->category->cartoon_meta)
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoonrecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $cartoonrecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+											@else
+											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
+											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+											@endif
+										@endif
+
+										@if ($cartoonrecommendeds->category->cartoontv_meta)
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoonrecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $cartoonrecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+											@else
+											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
+											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+											@endif
+										@endif
+
+                                        @if($cartoonrecommendeds->category->no_meta)
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoonrecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $cartoonrecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+											@else
+											    <img src="('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                            @endif
+                                        @endif
+                                </td>
+                                <td style="width: 1%;">
+                                    <div class="text-center" style="padding-top: 5px;">
+                                        <span class="label label-success" data-toggle="tooltip"
+                                            data-original-title="{{ __('torrent.type') }}">
+                                            {{ $cartoonrecommendeds->type->name }}
+                                         </span>
+                                    </div>
+                                    <div class="text-center" style="padding-top: 8px;">
+                                        <span class="label label-success" data-toggle="tooltip"
+                                            data-original-title="{{ __('torrent.resolution') }}">
+                                            {{ $cartoonrecommendeds->resolution->name ?? 'No Res' }}
+                                        </span>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <a class="text-bold" href="{{ route('torrent', ['id' => $cartoonrecommendeds->id]) }}">
+                                        {{ $cartoonrecommendeds->name }}
+                                    </a>
+                                    @if (config('torrent.download_check_page') == 1)
+                                    <a href="{{ route('download_check', ['id' => $cartoonrecommendeds->id]) }}">
+                                        <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
+                                            data-original-title="{{ __('torrent.download-torrent') }}">
+                                            <i class="{{ config('other.font-awesome') }} fa-download"></i>
+                                        </button>
+                                    </a>
+                                    @else
+                                    <a href="{{ route('download', ['id' => $cartoonrecommendeds->id]) }}">
+                                        <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
+                                            data-original-title="{{ __('torrent.download-torrent') }}">
+                                            <i class="{{ config('other.font-awesome') }} fa-download"></i>
+                                        </button>
+                                    </a>
+                                    @endif
+
+                                    <span data-toggle="tooltip" data-original-title="{{ __('torrent.bookmark') }}"
+                                        custom="newTorrentBookmark{{ $cartoonrecommendeds->id }}" id="newTorrentBookmark{{ $cartoonrecommendeds->id }}"
+                                        torrent="{{ $cartoonrecommendeds->id }}"
+                                        state="{{ $bookmarks->where('torrent_id', $cartoonrecommendeds->id)->count() ? 1 : 0 }}"
+                                        class="torrentBookmark">
+                                    </span>
+
+                                    <br>
+								    @if ($cartoonrecommendeds->anon === 0)
+								    <span class="torrent-listings-uploader">
+									    <i class="{{ config('other.font-awesome') }} {{ $cartoonrecommendeds->user->group->icon }}"></i>
+                                        <a href="{{ route('users.show', ['username' => $cartoonrecommendeds->user->username]) }}">
+                                            {{ $cartoonrecommendeds->user->username }}
+                                        </a>
+                                    </span> |
+								    @else
+								    <span class="torrent-listings-uploader">
+									    <i class="{{ config('other.font-awesome') }} fa-ghost"></i>
+									    {{ strtoupper(trans('common.anonymous')) }}
+								    @if ($user->group->is_modo || $cartoonrecommendeds->user->username === $user->username)
+									    <a href="{{ route('users.show', ['username' => $cartoonrecommendeds->user->username]) }}">
+                                            ({{ $cartoonrecommendeds->user->username }})
+                                        </a>
+								    @endif
+                                    </span> |
+								    @endif
+
+                                    <span class="text-pink">
+                                        <i class="{{ config('other.font-awesome') }} fa-heart" data-toggle="tooltip"></i>
+                                            {{ $cartoonrecommendeds->thanks_count }}
+                                    </span> |
+
+                                    <span class="text-green">
+                                        <i class="{{ config('other.font-awesome') }} fa-comment" data-toggle="tooltip"></i>
+                                            {{ $cartoonrecommendeds->comments_count }}
+                                    </span>
+
+                                    @if ($cartoonrecommendeds->internal == 1)
+                                    | <span class='text-bold'>
+                                        <i class='{{ config('other.font-awesome') }} fa-magic' data-toggle='tooltip'
+                                            title='' data-original-title='SLOshare' style="color: #baaf92;"></i>
+                                            Internal
+                                    </span>
+                                    @endif
+
+                                    @if ($cartoonrecommendeds->stream == 1)
+                                        | <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-play text-red'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('
+                                                torrent.stream-optimized') }}'></i> {{ __('torrent.stream-optimized') }}
+                                    </span>
+                                    @endif
+
+                                    @if ($cartoonrecommendeds->featured == 0)
+                                        @if ($cartoonrecommendeds->doubleup == 1)
+                                        | <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-gem text-green'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.double-upload') }}'></i>
+                                        </span>
+                                        @endif
+                                        @if ($cartoonrecommendeds->free == 1 || config('other.freeleech') == 1)
+                                        | <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-star text-gold'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.freeleech') }}'></i>
+                                        </span>
+                                        @endif
+                                    @endif
+
+                                    @if ($personal_freeleech)
+                                        | <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-id-badge text-orange'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.personal-freeleech') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if ($freeleech_tokens->where('torrent_id', $cartoonrecommendeds->id)->count())
+                                        | <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-star text-bold'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.freeleech-token') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if ($cartoonrecommendeds->featured == 1)
+                                        | <span class='text-bold'
+                                            style='background-image:url(/img/sparkels.gif);'>
+                                            <i class='{{ config('other.font-awesome') }} fa-certificate text-pink'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.feature') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if ($user->group->is_freeleech == 1)
+                                        | <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-trophy text-purple'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.special-freeleech') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if (config('other.doubleup') == 1)
+                                        <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-globe text-green'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.global-double-upload') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if ($user->group->is_double_upload == 1)
+                                        | <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-trophy text-purple'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.special-double_upload') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if ($cartoonrecommendeds->leechers >= 5)
+                                        <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-fire text-orange'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('common.hot') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if ($cartoonrecommendeds->sticky == 1)
+                                        <span class='text-bold'>
+                                            | <i class='{{ config('other.font-awesome') }} fa-thumbtack text-black'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.sticky') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if ($user->updated_at->getTimestamp() < $cartoonrecommendeds->created_at->getTimestamp())
+                                        |  <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-magic text-green'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('common.new') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if ($cartoonrecommendeds->highspeed == 1)
+                                        | <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-tachometer text-red'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('common.high-speeds') }}'></i>
+                                        </span>
+                                    @endif
+
+                                    @if ($cartoonrecommendeds->sd == 1)
+                                        | <span class='text-bold'>
+                                            <i class='{{ config('other.font-awesome') }} fa-ticket text-orange'
+                                                data-toggle='tooltip' title='' data-original-title='{{ __('torrent.sd-content') }}'></i>
+                                        </span>
+                                    @endif
+                                    </td>
+
+                                    <td>
+                                        <span>{{ $cartoonrecommendeds->getSize() }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ $cartoonrecommendeds->seeders }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ $cartoonrecommendeds->leechers }}</span>
+                                    </td>
+                                    <td>
+                                        <span>{{ $cartoonrecommendeds->times_completed }}</span>
                                     </td>
                                 </tr>
                             @endforeach

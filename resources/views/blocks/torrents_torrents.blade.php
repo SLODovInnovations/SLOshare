@@ -42,10 +42,13 @@
     <!-- Buttons -->
     <div class="tab-content">
 
-        <div class="tab-pane fade active in" id="new-sloshare">
-            <section class="recommendations" style="max-height: 330px !important;">
-                <div class="scroller" style="padding-bottom: 10px;">
-
+        <div class="panel panel-chat shoutbox tab-pane fade active in" id="new-sloshare">
+            <div x-data>
+                <ul
+                    class="featured-carousel"
+                    x-ref="featured"
+                    x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
+                >
                 @foreach($newsloshare as $newslo)
                     @php $meta = null @endphp
                     @if ($newslo->category->tv_meta)
@@ -157,13 +160,25 @@
 			            </div>
 		            </div>
                 @endforeach
-                </div>
-            </section>
+                </ul>
+                <nav class="featured-carousel__nav">
+                    <button class="featured-carousel__previous" x-on:click="$refs.featured.scrollLeft == 0 ? $refs.featured.scrollLeft = $refs.featured.scrollWidth : $refs.featured.scrollLeft -= (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-left"></i>
+                    </button>
+                    <button class="featured-carousel__next" x-on:click="$refs.featured.scrollLeft == ($refs.featured.scrollWidth - $refs.featured.offsetWidth) ? $refs.featured.scrollLeft = 0 : $refs.featured.scrollLeft += (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-right"></i>
+                    </button>
+                </nav>
+            </div>
         </div>
 
-        <div class="tab-pane fade" id="video">
-            <section class="recommendations" style="max-height: 330px !important;">
-                <div class="scroller" style="padding-bottom: 10px;">
+        <div class="panel panel-chat shoutbox tab-pane fade" id="video">
+            <div x-data>
+                <ul
+                    class="featured-carousel"
+                    x-ref="featured"
+                    x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
+                >
 
                 @foreach ($video as $videos)
                     @php $meta = null; @endphp
@@ -214,13 +229,25 @@
 			            </div>
 		            </div>
                 @endforeach
-                </div>
-            </section>
+                </ul>
+                <nav class="featured-carousel__nav">
+                    <button class="featured-carousel__previous" x-on:click="$refs.featured.scrollLeft == 0 ? $refs.featured.scrollLeft = $refs.featured.scrollWidth : $refs.featured.scrollLeft -= (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-left"></i>
+                    </button>
+                    <button class="featured-carousel__next" x-on:click="$refs.featured.scrollLeft == ($refs.featured.scrollWidth - $refs.featured.offsetWidth) ? $refs.featured.scrollLeft = 0 : $refs.featured.scrollLeft += (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-right"></i>
+                    </button>
+                </nav>
+            </div>
         </div>
 
-        <div class="tab-pane fade" id="tvseries">
-            <section class="recommendations" style="max-height: 330px !important;">
-                <div class="scroller" style="padding-bottom: 10px;">
+        <div class="panel panel-chat shoutbox tab-pane fade" id="tvseries">
+            <div x-data>
+                <ul
+                    class="featured-carousel"
+                    x-ref="featured"
+                    x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
+                >
 
                 @foreach ($tvserie as $tv)
                     @php $meta = null; @endphp
@@ -271,14 +298,25 @@
 			            </div>
 		            </div>
                 @endforeach
-                </div>
-            </section>
+                </ul>
+                <nav class="featured-carousel__nav">
+                    <button class="featured-carousel__previous" x-on:click="$refs.featured.scrollLeft == 0 ? $refs.featured.scrollLeft = $refs.featured.scrollWidth : $refs.featured.scrollLeft -= (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-left"></i>
+                    </button>
+                    <button class="featured-carousel__next" x-on:click="$refs.featured.scrollLeft == ($refs.featured.scrollWidth - $refs.featured.offsetWidth) ? $refs.featured.scrollLeft = 0 : $refs.featured.scrollLeft += (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-right"></i>
+                    </button>
+                </nav>
+            </div>
         </div>
 
-
-        <div class="tab-pane fade" id="games">
-            <section class="recommendations" style="max-height: 330px !important;">
-                <div class="scroller" style="padding-bottom: 10px;">
+        <div class="panel panel-chat shoutbox tab-pane fade" id="games">
+            <div x-data>
+                <ul
+                    class="featured-carousel"
+                    x-ref="featured"
+                    x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
+                >
 
                 @foreach ($game as $games)
     			    @php $meta = null; @endphp
@@ -322,14 +360,25 @@
 			            </div>
 		            </div>
                 @endforeach
-                </div>
-            </section>
+                </ul>
+                <nav class="featured-carousel__nav">
+                    <button class="featured-carousel__previous" x-on:click="$refs.featured.scrollLeft == 0 ? $refs.featured.scrollLeft = $refs.featured.scrollWidth : $refs.featured.scrollLeft -= (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-left"></i>
+                    </button>
+                    <button class="featured-carousel__next" x-on:click="$refs.featured.scrollLeft == ($refs.featured.scrollWidth - $refs.featured.offsetWidth) ? $refs.featured.scrollLeft = 0 : $refs.featured.scrollLeft += (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-right"></i>
+                    </button>
+                </nav>
+            </div>
         </div>
 
-
-        <div class="tab-pane fade" id="applications">
-            <section class="recommendations" style="max-height: 330px !important;">
-                <div class="scroller" style="padding-bottom: 10px;">
+        <div class="panel panel-chat shoutbox tab-pane fade" id="applications">
+            <div x-data>
+                <ul
+                    class="featured-carousel"
+                    x-ref="featured"
+                    x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
+                >
 
                 @foreach ($applications as $application)
                     <div class="item mini backdrop mini_card">
@@ -373,14 +422,25 @@
 			            </div>
 		            </div>
                 @endforeach
-                </div>
-            </section>
+                </ul>
+                <nav class="featured-carousel__nav">
+                    <button class="featured-carousel__previous" x-on:click="$refs.featured.scrollLeft == 0 ? $refs.featured.scrollLeft = $refs.featured.scrollWidth : $refs.featured.scrollLeft -= (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-left"></i>
+                    </button>
+                    <button class="featured-carousel__next" x-on:click="$refs.featured.scrollLeft == ($refs.featured.scrollWidth - $refs.featured.offsetWidth) ? $refs.featured.scrollLeft = 0 : $refs.featured.scrollLeft += (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-right"></i>
+                    </button>
+                </nav>
+            </div>
         </div>
 
-
-        <div class="tab-pane fade" id="cartoons">
-            <section class="recommendations" style="max-height: 330px !important;">
-                <div class="scroller" style="padding-bottom: 10px;">
+        <div class="panel panel-chat shoutbox tab-pane fade" id="cartoons">
+            <div x-data>
+                <ul
+                    class="featured-carousel"
+                    x-ref="featured"
+                    x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
+                >
 
                 @foreach ($cartoones as $cartoone)
                     @php $meta = null; @endphp
@@ -433,14 +493,25 @@
 			            </div>
 		            </div>
                 @endforeach
-                </div>
-            </section>
+                </ul>
+                <nav class="featured-carousel__nav">
+                    <button class="featured-carousel__previous" x-on:click="$refs.featured.scrollLeft == 0 ? $refs.featured.scrollLeft = $refs.featured.scrollWidth : $refs.featured.scrollLeft -= (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-left"></i>
+                    </button>
+                    <button class="featured-carousel__next" x-on:click="$refs.featured.scrollLeft == ($refs.featured.scrollWidth - $refs.featured.offsetWidth) ? $refs.featured.scrollLeft = 0 : $refs.featured.scrollLeft += (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-right"></i>
+                    </button>
+                </nav>
+            </div>
         </div>
 
-
-        <div class="tab-pane fade" id="xxx">
-            <section class="recommendations" style="max-height: 330px !important;">
-                <div class="scroller" style="padding-bottom: 10px;">
+        <div class="panel panel-chat shoutbox tab-pane fade" id="xxx">
+            <div x-data>
+                <ul
+                    class="featured-carousel"
+                    x-ref="featured"
+                    x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
+                >
 
                 @foreach ($xxx as $x)
                     <div class="item mini backdrop mini_card">
@@ -487,8 +558,16 @@
 			            </div>
 		            </div>
                 @endforeach
-                </div>
-            </section>
+                </ul>
+                <nav class="featured-carousel__nav">
+                    <button class="featured-carousel__previous" x-on:click="$refs.featured.scrollLeft == 0 ? $refs.featured.scrollLeft = $refs.featured.scrollWidth : $refs.featured.scrollLeft -= (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-left"></i>
+                    </button>
+                    <button class="featured-carousel__next" x-on:click="$refs.featured.scrollLeft == ($refs.featured.scrollWidth - $refs.featured.offsetWidth) ? $refs.featured.scrollLeft = 0 : $refs.featured.scrollLeft += (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-right"></i>
+                    </button>
+                </nav>
+            </div>
         </div>
 	</div>
 	</section>

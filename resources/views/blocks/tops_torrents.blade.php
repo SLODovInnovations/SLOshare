@@ -15,9 +15,13 @@
     <!-- Buttons -->
     <div class="tab-content">
 
-        <div class="tab-pane fade active in" id="seeders">
-            <section class="recommendations" style="max-height: 330px !important;">
-                <div class="scroller" style="padding-bottom: 10px;">
+        <div class="panel panel-chat shoutbox tab-pane fade active in" id="seeders">
+            <div x-data>
+                <ul
+                    class="featured-carousel"
+                    x-ref="featured"
+                    x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
+                >
 
                 @foreach ($seeded as $seed)
                     @php $meta = null; @endphp
@@ -129,13 +133,25 @@
 			            </div>
 		            </div>
                 @endforeach
-                </div>
-            </section>
+                </ul>
+                <nav class="featured-carousel__nav">
+                    <button class="featured-carousel__previous" x-on:click="$refs.featured.scrollLeft == 0 ? $refs.featured.scrollLeft = $refs.featured.scrollWidth : $refs.featured.scrollLeft -= (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-left"></i>
+                    </button>
+                    <button class="featured-carousel__next" x-on:click="$refs.featured.scrollLeft == ($refs.featured.scrollWidth - $refs.featured.offsetWidth) ? $refs.featured.scrollLeft = 0 : $refs.featured.scrollLeft += (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-right"></i>
+                    </button>
+                </nav>
+            </div>
         </div>
 
-        <div class="tab-pane fade" id="leechers">
-            <section class="recommendations" style="max-height: 330px !important;">
-                <div class="scroller" style="padding-bottom: 10px;">
+        <div class="panel panel-chat shoutbox tab-pane fade" id="leechers">
+            <div x-data>
+                <ul
+                    class="featured-carousel"
+                    x-ref="featured"
+                    x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
+                >
 
                 @foreach ($leeched as $leech)
                     @php $meta = null; @endphp
@@ -247,7 +263,15 @@
 			            </div>
 		            </div>
                 @endforeach
-                </div>
-            </section>
+                </ul>
+                <nav class="featured-carousel__nav">
+                    <button class="featured-carousel__previous" x-on:click="$refs.featured.scrollLeft == 0 ? $refs.featured.scrollLeft = $refs.featured.scrollWidth : $refs.featured.scrollLeft -= (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-left"></i>
+                    </button>
+                    <button class="featured-carousel__next" x-on:click="$refs.featured.scrollLeft == ($refs.featured.scrollWidth - $refs.featured.offsetWidth) ? $refs.featured.scrollLeft = 0 : $refs.featured.scrollLeft += (($refs.featured.children[0].offsetWidth + 16) / 2 + 1)">
+                        <i class="{{ \config('other.font-awesome') }} fa-angle-right"></i>
+                    </button>
+                </nav>
+            </div>
         </div>
 	</section>
