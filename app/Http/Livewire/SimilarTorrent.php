@@ -239,7 +239,10 @@ class SimilarTorrent extends Component
 
     final public function getPersonalFreeleechProperty()
     {
-        return \cache()->get('personal_freeleech:'.auth()->user()->id);
+        return \cache()->rememberForever(
+            'personal_freeleech:'.\auth()->user()->id,
+            fn () => \auth()->user()->personalFreeleeches()->exists()
+        );
     }
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application

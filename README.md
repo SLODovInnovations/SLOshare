@@ -51,7 +51,7 @@ composer dump-autoload -o
 ```
 v1.3.x -> V1.4.x
 ```
- php artisan migrate && sudo rm -rf node_modules && sudo npm cache clean --force && sudo npm install && sudo npx mix -p && php artisan optimize:clear && composer self-update && composer install && composer dump-autoload -o && php artisan optimize && sudo chown -R www-data: storage bootstrap public config && sudo find . -type d -exec chmod 0775 '{}' + -or -type f -exec chmod 0644 '{}' + && php artisan queue:restart && sudo supervisorctl reread && sudo supervisorctl update && sudo supervisorctl reload && sudo systemctl restart php8.1-fpm
+ php artisan migrate && sudo rm -rf node_modules && sudo npm cache clean --force && sudo npm install && sudo npx mix -p && php artisan optimize:clear && composer self-update && composer install && composer dump-autoload -o && php artisan optimize && sudo chown -R www-data: storage bootstrap public config && sudo find . -type d -exec chmod 0775 '{}' + -or -type f -exec chmod 0644 '{}' + && php artisan queue:restart && sudo supervisorctl reread && sudo supervisorctl update && sudo supervisorctl reload && sudo systemctl restart php8.2-fpm
 ```
 ## <a name="brisanje-polnilnika"></a> ✍️ Brisanje polnilnika
 ```

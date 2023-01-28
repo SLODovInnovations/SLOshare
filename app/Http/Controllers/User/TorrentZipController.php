@@ -44,7 +44,7 @@ class TorrentZipController extends Controller
             ->where('user_id', '=', $user->id)
             ->pluck('torrent_id');
 
-        if ($zipArchive->open($zipPath.'/'.$zipFileName, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
+        if ($zipArchive->open($zipPath.'/'.$zipFileName, ZipArchive::CREATE) === true) {
             // Match History Results To Torrents
             $failCSV = '"Name","URL","ID","info_hash"
 ';
@@ -56,7 +56,7 @@ class TorrentZipController extends Controller
                     ->first();
 
                 // Define The Torrent Filename
-                $tmpFileName = \sprintf('%s.torrent', Str::slug($torrent->name));
+                $tmpFileName = \sprintf('%s.torrent', Str::slug($torrent->title));
 
                 // The Torrent File Exist?
                 if (! \file_exists(\getcwd().'/files/torrents/'.$torrent->file_name)) {
