@@ -14,7 +14,7 @@ class TorrentPeerController extends Controller
     {
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
         $peers = Peer::query()
-            ->with('user')
+            ->with(['user'])
             ->where('torrent_id', '=', $id)
             ->latest('seeder')
             ->get()

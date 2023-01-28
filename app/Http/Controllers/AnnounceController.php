@@ -156,6 +156,8 @@ class AnnounceController extends Controller
             (string) $userAgent
         ), new TrackerException(121));
 
+        $clientBlacklist = \cache()->rememberForever('client_blacklist', fn () => BlacklistClient::all()->pluck('name')->toArray());
+
         // Block Blacklisted Clients
         $clientBlacklist = \cache()->rememberForever('client_blacklist', fn () => BlacklistClient::all()->pluck('name')->toArray());
         \throw_if(
@@ -184,7 +186,7 @@ class AnnounceController extends Controller
         // If Passkey Format Is Wrong
         \throw_if(
             \strspn(\strtolower($passkey), 'abcdef0123456789') !== 32,
-            new TrackerException(131, [':attribute' => 'passkey', ':reason' => 'Passkey format is incorrect'])
+            new TrackerException(131, [':attribute' => 'passkey', ':reason' => 'Oblika PASSKEY ni pravilna'])
         );
     }
 
@@ -264,8 +266,8 @@ class AnnounceController extends Controller
                 true
             ), new TrackerException(135, [':port' => $queries['port']]));
 
-        // Part.4 base64_encode binary ip for job
-        $queries['ip-address'] = \base64_encode(\inet_pton($request->getClientIp()));
+        // Part.4 Get User Ip Address
+        $queries['ip-address'] = $request->getClientIp();
 
         // Part.5 Get Users Agent
         $queries['user-agent'] = $request->headers->get('user-agent');
@@ -273,8 +275,8 @@ class AnnounceController extends Controller
         // Part.6 bin2hex info_hash
         $queries['info_hash'] = \bin2hex($queries['info_hash']);
 
-        // Part.7 base64_encode binary peer_id for job
-        $queries['peer_id'] = \base64_encode($queries['peer_id']);
+        // Part.7 bin2hex peer_id
+        $queries['peer_id'] = \bin2hex($queries['peer_id']);
 
         return $queries;
     }
@@ -343,13 +345,9 @@ class AnnounceController extends Controller
     protected function checkTorrent($infoHash): object
     {
         // Check Info Hash Against Torrents Table
-        $torrent = Torrent::withAnyStatus()
-            ->with([
-                'peers' => fn ($query) => $query
-                    ->select(['id', 'torrent_id', 'peer_id', 'user_id', 'left', 'seeder', 'port'])
-                    ->selectRaw('INET6_NTOA(ip) as ip')
-            ])
+        $torrent = Torrent::with('peers')
             ->select(['id', 'free', 'doubleup', 'seeders', 'leechers', 'times_completed', 'status'])
+            ->withAnyStatus()
             ->where('info_hash', '=', $infoHash)
             ->first();
 
@@ -388,7 +386,7 @@ class AnnounceController extends Controller
         \throw_if(
             \strtolower($queries['event']) === 'completed'
             && $torrent->peers
-                ->where('peer_id', '=', \base64_decode($queries['peer_id']))
+                ->where('peer_id', $queries['peer_id'])
                 ->where('user_id', '=', $user->id)
                 ->isEmpty(),
             new TrackerException(152)
@@ -405,7 +403,7 @@ class AnnounceController extends Controller
     private function checkMinInterval($torrent, $queries, $user): void
     {
         $prevAnnounce = $torrent->peers
-            ->where('peer_id', '=', \base64_decode($queries['peer_id']))
+            ->where('peer_id', '=', $queries['peer_id'])
             ->where('user_id', '=', $user->id)
             ->first();
         $setMin = \config('announce.min_interval.interval') ?? self::MIN;
@@ -450,7 +448,7 @@ class AnnounceController extends Controller
         if ($max !== null && $max >= 0 && $queries['left'] != 0) {
             $count = Peer::query()
                 ->where('user_id', '=', $user->id)
-                ->where('peer_id', '!=', \base64_decode($queries['peer_id']))
+                ->where('peer_id', '!=', $queries['peer_id'])
                 ->where('seeder', '=', 0)
                 ->count();
 

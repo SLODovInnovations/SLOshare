@@ -155,7 +155,10 @@ class TorrentListSearch extends Component
 
     final public function getPersonalFreeleechProperty()
     {
-        return \cache()->get('personal_freeleech:'.auth()->user()->id);
+        return \cache()->rememberForever(
+            'personal_freeleech:'.\auth()->user()->id,
+            fn () => \auth()->user()->personalFreeleeches()->exists()
+        );
     }
 
     final public function getTorrentsProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator

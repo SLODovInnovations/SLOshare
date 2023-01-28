@@ -47,12 +47,10 @@ class ProcessAnnounce implements ShouldQueue
         $realUploaded = $this->queries['uploaded'];
         $realDownloaded = $this->queries['downloaded'];
         $event = \strtolower($this->queries['event']);
-        $peerId = \base64_decode($this->queries['peer_id']);
-        $ipAddress = \base64_decode($this->queries['ip-address']);
 
         // Get The Current Peer
         $peer = $this->torrent->peers
-            ->where('peer_id', '=', $peerId)
+            ->where('peer_id', '=', $this->queries['peer_id'])
             ->where('user_id', '=', $this->user->id)
             ->first();
 
@@ -90,8 +88,15 @@ class ProcessAnnounce implements ShouldQueue
         $oldUpdate = $peer->updated_at->timestamp ?? \now()->timestamp;
 
         // Modification of Upload and Download
-        $personalFreeleech = \cache()->get('personal_freeleech:'.$this->user->id);
-        $freeleechToken = \cache()->get('freeleech_token:'.$this->user->id.':'.$this->torrent->id);
+        $personalFreeleech = \cache()->rememberForever(
+            'personal_freeleech:'.$this->user->id,
+            fn () => $this->user->personalFreeleeches()->exists()
+        );
+
+        $freeleechToken = \cache()->rememberForever(
+            'freeleech_token:'.$this->user->id.':'.$this->torrent->id,
+            fn () => $this->user->freeleechTokens()->where('torrent_id', '=', $this->torrent->id)->exists()
+        );
 
         if ($personalFreeleech ||
             $this->user->group->is_freeleech == 1 ||
@@ -116,8 +121,8 @@ class ProcessAnnounce implements ShouldQueue
         }
 
         // Common Parts Extracted From Switch
-        $peer->peer_id = $peerId;
-        $peer->ip = $ipAddress;
+        $peer->peer_id = $this->queries['peer_id'];
+        $peer->ip = $this->queries['ip-address'];
         $peer->port = $this->queries['port'];
         $peer->agent = $this->queries['user-agent'];
         $peer->uploaded = $realUploaded;
@@ -141,6 +146,7 @@ class ProcessAnnounce implements ShouldQueue
             case 'started':
 
                 $history->active = 1;
+                // Allow downgrading from `immune`, but never upgrade to it
                 $history->immune = (int) ($history->immune === null ? $this->user->group->is_immune : (bool) $history->immune && (bool) $this->user->group->is_immune);
                 $history->save();
                 break;
@@ -231,13 +237,13 @@ class ProcessAnnounce implements ShouldQueue
             ->torrent
             ->peers
             ->where('left', '=', 0)
-            ->where('peer_id', '!=', $peerId)
+            ->where('peer_id', '!=', $this->queries['peer_id'])
             ->count();
         $otherLeechers = $this
             ->torrent
             ->peers
             ->where('left', '>', 0)
-            ->where('peer_id', '!=', $peerId)
+            ->where('peer_id', '!=', $this->queries['peer_id'])
             ->count();
 
         $this->torrent->seeders = $otherSeeders + (int) ($this->queries['left'] == 0);
