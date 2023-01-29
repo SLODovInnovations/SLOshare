@@ -876,81 +876,81 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($flcommended as $flcommendeds)
+                            @foreach ($flrecommended as $flrecommendeds)
 
                             @php $meta = null; @endphp
-                            @if ($flcommendeds->category->tv_meta)
-                                @if ($flcommendeds->tmdb || $flcommendeds->tmdb != 0)
-                            	    @php $meta = App\Models\Tv::where('id', '=', $flcommendeds->tmdb)->first(); @endphp
+                            @if ($flrecommendeds->category->tv_meta)
+                                @if ($flrecommendeds->tmdb || $flrecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\Tv::where('id', '=', $flrecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
-                            @if ($flcommendeds->category->movie_meta)
-                                @if ($flcommendeds->tmdb || $flcommendeds->tmdb != 0)
-                            	    @php $meta = App\Models\Movie::where('id', '=', $flcommendeds->tmdb)->first(); @endphp
+                            @if ($flrecommendeds->category->movie_meta)
+                                @if ($flrecommendeds->tmdb || $flrecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\Movie::where('id', '=', $flrecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
-                            @if ($flcommendeds->category->cartoon_meta)
-                                @if ($flcommendeds->tmdb || $flcommendeds->tmdb != 0)
-                            	    @php $meta = App\Models\Cartoon::where('id', '=', $flcommendeds->tmdb)->first(); @endphp
+                            @if ($flrecommendeds->category->cartoon_meta)
+                                @if ($flrecommendeds->tmdb || $flrecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\Cartoon::where('id', '=', $flrecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
-                            @if ($flcommendeds->category->cartoontv_meta)
-                                @if ($flcommendeds->tmdb || $flcommendeds->tmdb != 0)
-                            	    @php $meta = App\Models\CartoonTv::where('id', '=', $flcommendeds->tmdb)->first(); @endphp
+                            @if ($flrecommendeds->category->cartoontv_meta)
+                                @if ($flrecommendeds->tmdb || $flrecommendeds->tmdb != 0)
+                            	    @php $meta = App\Models\CartoonTv::where('id', '=', $flrecommendeds->tmdb)->first(); @endphp
                                 @endif
                             @endif
-                            @if ($flcommendeds->category->game_meta)
-                                @if ($flcommendeds->igdb || $flcommendeds->igdb != 0)
-                            	    @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($flcommendeds->igdb); @endphp
+                            @if ($flrecommendeds->category->game_meta)
+                                @if ($flrecommendeds->igdb || $flrecommendeds->igdb != 0)
+                            	    @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($flrecommendeds->igdb); @endphp
                                 @endif
                             @endif
 
                             <tr>
 							    <td class="torrent-listings-poster" style="width: 1%;">
 									<div class="torrent-poster pull-left">
-										@if ($flcommendeds->category->movie_meta || $flcommendeds->category->tv_meta)
-										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flcommendeds->id.'.jpg'))
-                                                <img src="{{ url('files/img/torrent-cover_' . $flcommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+										@if ($flrecommendeds->category->movie_meta || $flrecommendeds->category->tv_meta)
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flrecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $flrecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else
 											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
 											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@endif
 										@endif
 
-										@if ($flcommendeds->category->cartoon_meta)
-										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flcommendeds->id.'.jpg'))
-                                                <img src="{{ url('files/img/torrent-cover_' . $flcommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+										@if ($flrecommendeds->category->cartoon_meta)
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flrecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $flrecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else
 											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
 											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@endif
 										@endif
 
-										@if ($flcommendeds->category->cartoontv_meta)
-										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flcommendeds->id.'.jpg'))
-                                                <img src="{{ url('files/img/torrent-cover_' . $flcommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+										@if ($flrecommendeds->category->cartoontv_meta)
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flrecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $flrecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else
 											    <img src="{{ isset($meta->poster) ? \tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
 											        class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@endif
 										@endif
 
-										@if ($flcommendeds->category->game_meta)
+										@if ($flrecommendeds->category->game_meta)
 											<img style="height: 80px;" src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}"
 											     class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 										@endif
 
-										@if ($flcommendeds->category->music_meta)
-										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flcommendeds->id.'.jpg'))
-                                                <img src="{{ url('files/img/torrent-cover_' . $flcommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+										@if ($flrecommendeds->category->music_meta)
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flrecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $flrecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else
 											    <img src="('/img/SLOshare/music_no_image_holder_400x600.jpg')" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                             @endif
                                         @endif
 
-                                        @if($flcommendeds->category->no_meta)
-										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flcommendeds->id.'.jpg'))
-                                                <img src="{{ url('files/img/torrent-cover_' . $flcommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
+                                        @if($flrecommendeds->category->no_meta)
+										    @if(file_exists(public_path().'/files/img/torrent-cover_'.$flrecommendeds->id.'.jpg'))
+                                                <img src="{{ url('files/img/torrent-cover_' . $flrecommendeds->id . '.jpg') }}" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
 											@else
 											    <img src="('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                             @endif
@@ -960,30 +960,30 @@
                                     <div class="text-center" style="padding-top: 5px;">
                                         <span class="label label-success" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.type') }}">
-                                            {{ $flcommendeds->type->name }}
+                                            {{ $flrecommendeds->type->name }}
                                          </span>
                                     </div>
                                     <div class="text-center" style="padding-top: 8px;">
                                         <span class="label label-success" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.resolution') }}">
-                                            {{ $flcommendeds->resolution->name ?? 'No Res' }}
+                                            {{ $flrecommendeds->resolution->name ?? 'No Res' }}
                                         </span>
                                     </div>
                                 </td>
 
                                 <td>
-                                    <a class="text-bold" href="{{ route('torrent', ['id' => $flcommendeds->id]) }}">
-                                        {{ $flcommendeds->name }}
+                                    <a class="text-bold" href="{{ route('torrent', ['id' => $flrecommendeds->id]) }}">
+                                        {{ $flrecommendeds->name }}
                                     </a>
                                     @if (config('torrent.download_check_page') == 1)
-                                    <a href="{{ route('download_check', ['id' => $flcommendeds->id]) }}">
+                                    <a href="{{ route('download_check', ['id' => $flrecommendeds->id]) }}">
                                         <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
                                         </button>
                                     </a>
                                     @else
-                                    <a href="{{ route('download', ['id' => $flcommendeds->id]) }}">
+                                    <a href="{{ route('download', ['id' => $flrecommendeds->id]) }}">
                                         <button class="btn btn-primary btn-circle" type="button" data-toggle="tooltip"
                                             data-original-title="{{ __('torrent.download-torrent') }}">
                                             <i class="{{ config('other.font-awesome') }} fa-download"></i>
@@ -992,27 +992,27 @@
                                     @endif
 
                                     <span data-toggle="tooltip" data-original-title="{{ __('torrent.bookmark') }}"
-                                        custom="newTorrentBookmark{{ $flcommendeds->id }}" id="newTorrentBookmark{{ $flcommendeds->id }}"
-                                        torrent="{{ $flcommendeds->id }}"
-                                        state="{{ $bookmarks->where('torrent_id', $flcommendeds->id)->count() ? 1 : 0 }}"
+                                        custom="newTorrentBookmark{{ $flrecommendeds->id }}" id="newTorrentBookmark{{ $flrecommendeds->id }}"
+                                        torrent="{{ $flrecommendeds->id }}"
+                                        state="{{ $bookmarks->where('torrent_id', $flrecommendeds->id)->count() ? 1 : 0 }}"
                                         class="torrentBookmark">
                                     </span>
 
                                     <br>
-								    @if ($flcommendeds->anon === 0)
+								    @if ($flrecommendeds->anon === 0)
 								    <span class="torrent-listings-uploader">
-									    <i class="{{ config('other.font-awesome') }} {{ $flcommendeds->user->group->icon }}"></i>
-                                        <a href="{{ route('users.show', ['username' => $flcommendeds->user->username]) }}">
-                                            {{ $flcommendeds->user->username }}
+									    <i class="{{ config('other.font-awesome') }} {{ $flrecommendeds->user->group->icon }}"></i>
+                                        <a href="{{ route('users.show', ['username' => $flrecommendeds->user->username]) }}">
+                                            {{ $flrecommendeds->user->username }}
                                         </a>
                                     </span> |
 								    @else
 								    <span class="torrent-listings-uploader">
 									    <i class="{{ config('other.font-awesome') }} fa-ghost"></i>
 									    {{ strtoupper(trans('common.anonymous')) }}
-								    @if ($user->group->is_modo || $flcommendeds->user->username === $user->username)
-									    <a href="{{ route('users.show', ['username' => $flcommendeds->user->username]) }}">
-                                            ({{ $flcommendeds->user->username }})
+								    @if ($user->group->is_modo || $flrecommendeds->user->username === $user->username)
+									    <a href="{{ route('users.show', ['username' => $flrecommendeds->user->username]) }}">
+                                            ({{ $flrecommendeds->user->username }})
                                         </a>
 								    @endif
                                     </span> |
@@ -1020,15 +1020,15 @@
 
                                     <span class="text-pink">
                                         <i class="{{ config('other.font-awesome') }} fa-heart" data-toggle="tooltip"></i>
-                                            {{ $flcommendeds->thanks_count }}
+                                            {{ $flrecommendeds->thanks_count }}
                                     </span> |
 
                                     <span class="text-green">
                                         <i class="{{ config('other.font-awesome') }} fa-comment" data-toggle="tooltip"></i>
-                                            {{ $flcommendeds->comments_count }}
+                                            {{ $flrecommendeds->comments_count }}
                                     </span>
 
-                                    @if ($flcommendeds->internal == 1)
+                                    @if ($flrecommendeds->internal == 1)
                                     | <span class='text-bold'>
                                         <i class='{{ config('other.font-awesome') }} fa-magic' data-toggle='tooltip'
                                             title='' data-original-title='SLOshare' style="color: #baaf92;"></i>
@@ -1036,7 +1036,7 @@
                                     </span>
                                     @endif
 
-                                    @if ($flcommendeds->stream == 1)
+                                    @if ($flrecommendeds->stream == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-play text-red'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('
@@ -1044,14 +1044,14 @@
                                     </span>
                                     @endif
 
-                                    @if ($flcommendeds->featured == 0)
-                                        @if ($flcommendeds->doubleup == 1)
+                                    @if ($flrecommendeds->featured == 0)
+                                        @if ($flrecommendeds->doubleup == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-gem text-green'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.double-upload') }}'></i>
                                         </span>
                                         @endif
-                                        @if ($flcommendeds->free == 1 || config('other.freeleech') == 1)
+                                        @if ($flrecommendeds->free == 1 || config('other.freeleech') == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-star text-gold'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.freeleech') }}'></i>
@@ -1066,14 +1066,14 @@
                                         </span>
                                     @endif
 
-                                    @if ($freeleech_tokens->where('torrent_id', $flcommendeds->id)->count())
+                                    @if ($freeleech_tokens->where('torrent_id', $flrecommendeds->id)->count())
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-star text-bold'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.freeleech-token') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($flcommendeds->featured == 1)
+                                    @if ($flrecommendeds->featured == 1)
                                         | <span class='text-bold'
                                             style='background-image:url(/img/sparkels.gif);'>
                                             <i class='{{ config('other.font-awesome') }} fa-certificate text-pink'
@@ -1102,35 +1102,35 @@
                                         </span>
                                     @endif
 
-                                    @if ($flcommendeds->leechers >= 5)
+                                    @if ($flrecommendeds->leechers >= 5)
                                         <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-fire text-orange'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('common.hot') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($flcommendeds->sticky == 1)
+                                    @if ($flrecommendeds->sticky == 1)
                                         <span class='text-bold'>
                                             | <i class='{{ config('other.font-awesome') }} fa-thumbtack text-black'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.sticky') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($user->updated_at->getTimestamp() < $flcommendeds->created_at->getTimestamp())
+                                    @if ($user->updated_at->getTimestamp() < $flrecommendeds->created_at->getTimestamp())
                                         |  <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-magic text-green'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('common.new') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($flcommendeds->highspeed == 1)
+                                    @if ($flrecommendeds->highspeed == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-tachometer text-red'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('common.high-speeds') }}'></i>
                                         </span>
                                     @endif
 
-                                    @if ($flcommendeds->sd == 1)
+                                    @if ($flrecommendeds->sd == 1)
                                         | <span class='text-bold'>
                                             <i class='{{ config('other.font-awesome') }} fa-ticket text-orange'
                                                 data-toggle='tooltip' title='' data-original-title='{{ __('torrent.sd-content') }}'></i>
@@ -1139,16 +1139,16 @@
                                     </td>
 
                                     <td>
-                                        <span>{{ $flcommendeds->getSize() }}</span>
+                                        <span>{{ $flrecommendeds->getSize() }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $flcommendeds->seeders }}</span>
+                                        <span>{{ $flrecommendeds->seeders }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $flcommendeds->leechers }}</span>
+                                        <span>{{ $flrecommendeds->leechers }}</span>
                                     </td>
                                     <td>
-                                        <span>{{ $flcommendeds->times_completed }}</span>
+                                        <span>{{ $flrecommendeds->times_completed }}</span>
                                     </td>
                                 </tr>
                             @endforeach
