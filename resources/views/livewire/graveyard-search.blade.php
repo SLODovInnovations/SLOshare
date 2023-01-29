@@ -184,6 +184,7 @@
                 <thead>
                 <tr>
                     <th style="width: 1%;"></th>
+                    <th style="width: 1%;"></th>
                     <th class="torrents-filename">
                         <div sortable wire:click="sortBy('name')"
                              :direction="$sortField === 'name' ? $sortDirection : null" role="button">
