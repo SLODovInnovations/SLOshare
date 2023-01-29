@@ -485,10 +485,14 @@
             </dl>
         </section>
         <section class="panelV2 panel--grid-item">
-            <h2 class="panel__heading">Obremenitev</h2>
+            <h2 class="panel__heading">Obremenitev Povprečja</h2>
             <dl class="key-value">
-                <dt>Povprečje</dt>
-                <dd>{{ $avg }}</dd>
+                <dt>1 minuta</dt>
+                <dd>{{ $avg['1-minute'] }}</dd>
+                <dt>5 minut</dt>
+                <dd>{{ $avg['5-minute'] }}</dd>
+                <dt>15 minut</dt>
+                <dd>{{ $avg['15-minute'] }}</dd>
             </dl>
         </section>
     </div>

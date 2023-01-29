@@ -11,6 +11,7 @@ return [
     'home-seeders-title'        => 'NAJVEČJE ŠTEVILO SEJALCEV',
     'home-leechers-title'       => 'NAJVEČJE ŠTEVILO ODJEMALCEV',
     'home-recommended-title'    => 'SLOshare.eu PRIPOROČA',
+    'home-freeleech-title'      => 'Freeleech',
 
     'freeleech'                 => 'FREELEECH',
     'fl'                        => 'FL',

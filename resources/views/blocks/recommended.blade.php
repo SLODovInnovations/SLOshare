@@ -19,7 +19,7 @@
             </li>
             <li class="">
                 <a href="#recommended-fl" role="tab" data-toggle="tab" aria-expanded="true">
-                    <i class="{{ config('other.font-awesome') }} fa-baby"></i> {{ __('sloshare.home-cartoons-title') }}
+                    <i class="{{ config('other.font-awesome') }} fa-star"></i> {{ __('sloshare.home-freeleech-title') }}
                 </a>
             </li>
             <!--<li class="">
@@ -144,7 +144,7 @@
 
                                 <td>
                                     <a class="text-bold" href="{{ route('torrent', ['id' => $slorecommendeds->id]) }}">
-                                        {{ $slorecommendeds->name }}
+                                        @joypixels(Str::limit($slorecommendeds->name, 50))
                                     </a>
                                     @if (config('torrent.download_check_page') == 1)
                                     <a href="{{ route('download_check', ['id' => $slorecommendeds->id]) }}">
@@ -420,7 +420,7 @@
 
                                 <td>
                                     <a class="text-bold" href="{{ route('torrent', ['id' => $videorecommendeds->id]) }}">
-                                        {{ $videorecommendeds->name }}
+                                        @joypixels(Str::limit($videorecommendeds->name, 50))
                                     </a>
                                     @if (config('torrent.download_check_page') == 1)
                                     <a href="{{ route('download_check', ['id' => $videorecommendeds->id]) }}">
@@ -678,7 +678,7 @@
 
                                 <td>
                                     <a class="text-bold" href="{{ route('torrent', ['id' => $cartoonrecommendeds->id]) }}">
-                                        {{ $cartoonrecommendeds->name }}
+                                        @joypixels(Str::limit($cartoonrecommendeds->name, 50))
                                     </a>
                                     @if (config('torrent.download_check_page') == 1)
                                     <a href="{{ route('download_check', ['id' => $cartoonrecommendeds->id]) }}">
@@ -973,7 +973,7 @@
 
                                 <td>
                                     <a class="text-bold" href="{{ route('torrent', ['id' => $flrecommendeds->id]) }}">
-                                        {{ $flrecommendeds->name }}
+                                        @joypixels(Str::limit($flrecommendeds->name, 50))
                                     </a>
                                     @if (config('torrent.download_check_page') == 1)
                                     <a href="{{ route('download_check', ['id' => $flrecommendeds->id]) }}">
