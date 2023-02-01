@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6652468db9e4cf94c4cee22fef113250",
+    "content-hash": "66ce9ee32c093e6db1415a0eb74b1b43",
     "packages": [
         {
             "name": "appstract/laravel-opcache",
@@ -1601,225 +1601,6 @@
                 }
             ],
             "time": "2022-10-26T14:07:24+00:00"
-        },
-        {
-            "name": "sloyakuza/laravel-html-purifier",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SLOYakuza/laravel-html-purifier.git",
-                "reference": "18a7b5cbb590be9837fbbfcc757dc5190e559a24"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SLOYakuza/laravel-html-purifier/zipball/18a7b5cbb590be9837fbbfcc757dc5190e559a24",
-                "reference": "18a7b5cbb590be9837fbbfcc757dc5190e559a24",
-                "shasum": ""
-            },
-            "require": {
-                "ezyang/htmlpurifier": "4.13.*",
-                "illuminate/config": "^5.8|^6.0|^7.0|^8.0|^9.0",
-                "illuminate/filesystem": "^5.8|^6.0|^7.0|^8.0|^9.0",
-                "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0",
-                "php": "^7.2|^8.0"
-            },
-            "require-dev": {
-                "graham-campbell/testbench": "^3.2|^5.5.1",
-                "mockery/mockery": "^1.3.3",
-                "phpunit/phpunit": "^8.0|^9.0"
-            },
-            "suggest": {
-                "laravel/framework": "To test the Laravel bindings",
-                "laravel/lumen-framework": "To test the Lumen bindings"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "SLOYakuza\\Purifier\\PurifierServiceProvider"
-                    ],
-                    "aliases": {
-                        "Purifier": "SLOYakuza\\Purifier\\Facades\\Purifier"
-                    }
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "SLOYakuza\\Purifier\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "SLOYakuza",
-                    "email": "yakuza@rm-net.si",
-                    "homepage": "https://github.com/SLOYakuza",
-                    "role": "Developer"
-                }
-            ],
-            "description": "An HTML Purifier for Laravel",
-            "homepage": "https://github.com/SLOYakuza/laravel-html-purifier",
-            "keywords": [
-                "SLOYakuza",
-                "Purifier",
-                "html",
-                "laravel",
-                "security",
-                "xss"
-            ],
-            "support": {
-                "issues": "https://github.com/SLOYakuza/laravel-html-purifier/issues",
-                "source": "https://github.com/SLOYakuza/laravel-html-purifier/tree/v1.0.2"
-            },
-            "time": "2022-03-26T15:35:08+00:00"
-        },
-        {
-            "name": "sloyakuza/laravel-joypixel-emojis",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SLOYakuza/laravel-joypixel-emojis.git",
-                "reference": "b343b916d9fed1d815b37c756aedd3b5357ed32d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SLOYakuza/laravel-joypixel-emojis/zipball/b343b916d9fed1d815b37c756aedd3b5357ed32d",
-                "reference": "b343b916d9fed1d815b37c756aedd3b5357ed32d",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^6|^7|^8|^9",
-                "joypixels/emoji-toolkit": "^6",
-                "php": "^7.4|^8.0"
-            },
-            "suggest": {
-                "joypixels/assets": "If you want to serve the emojione assets yourself"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "sloyakuza\\LaravelJoyPixels\\LaravelJoyPixelsServiceProvider"
-                    ],
-                    "aliases": {
-                        "LaravelJoyPixels": "sloyakuza\\LaravelJoyPixels\\LaravelJoyPixelsFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "sloyakuza\\LaravelJoyPixels\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "SLOYakuza",
-                    "email": "yakuza@rm-net.si",
-                    "homepage": "https://github.com/SLOYakuza",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel helper for Joypixels emojis",
-            "homepage": "https://github.com/SLOYakuza/laravel-joypixel-emojis",
-            "keywords": [
-                "SLOYakuza",
-                "JoyPixels",
-                "emoji",
-                "emojione",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/SLOYakuza/laravel-joypixel-emojis/issues",
-                "source": "https://github.com/SLOYakuza/laravel-joypixel-emojis/tree/v1.0.1"
-            },
-            "time": "2022-03-26T16:26:40+00:00"
-        },
-        {
-            "name": "sloyakuza/laravel-security-headers",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SLOYakuza/laravel-security-headers.git",
-                "reference": "24c3242f5ab02377560d91678b8b76fbedadbbef"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SLOYakuza/laravel-security-headers/zipball/24c3242f5ab02377560d91678b8b76fbedadbbef",
-                "reference": "24c3242f5ab02377560d91678b8b76fbedadbbef",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^6|^7|^8|^9",
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "ext-json": "*",
-                "ext-xdebug": "*",
-                "orchestra/testbench": "^3.1|^4.0|^5.0|^6.0"
-            },
-            "suggest": {
-                "friendsofphp/php-cs-fixer": "Coding style fixer",
-                "phpstan/phpstan": "Static analysis tool",
-                "phpunit/phpunit": "PHP unit testing framework"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "SLOYakuza\\SecureHeaders\\SecureHeadersServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "SLOYakuza\\SecureHeaders\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "SLOYakuza",
-                    "email": "yakuza@rm-net.si",
-                    "homepage": "https://github.com/SLOYakuza",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Adds security related headers to HTTP response.",
-            "homepage": "https://github.com/SLOYakuza/laravel-security-headers",
-            "keywords": [
-                "SLOYakuza",
-                "clear-site-data",
-                "content-security-policy",
-                "csp",
-                "except-ct",
-                "feature-policy",
-                "header",
-                "hsts",
-                "https",
-                "laravel",
-                "referrer-policy"
-            ],
-            "support": {
-                "issues": "https://github.com/SLOYakuza/laravel-security-headers/issues",
-                "source": "https://github.com/SLOYakuza/laravel-security-headers/tree/v1.0.1"
-            },
-            "time": "2022-03-26T15:36:19+00:00"
         },
         {
             "name": "hootlex/laravel-moderation",
@@ -4634,6 +4415,225 @@
             "time": "2023-01-12T18:13:24+00:00"
         },
         {
+            "name": "sloyakuza/laravel-html-purifier",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SLOYakuza/laravel-html-purifier.git",
+                "reference": "18a7b5cbb590be9837fbbfcc757dc5190e559a24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SLOYakuza/laravel-html-purifier/zipball/18a7b5cbb590be9837fbbfcc757dc5190e559a24",
+                "reference": "18a7b5cbb590be9837fbbfcc757dc5190e559a24",
+                "shasum": ""
+            },
+            "require": {
+                "ezyang/htmlpurifier": "4.13.*",
+                "illuminate/config": "^5.8|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/filesystem": "^5.8|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^3.2|^5.5.1",
+                "mockery/mockery": "^1.3.3",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "suggest": {
+                "laravel/framework": "To test the Laravel bindings",
+                "laravel/lumen-framework": "To test the Lumen bindings"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SLOYakuza\\Purifier\\PurifierServiceProvider"
+                    ],
+                    "aliases": {
+                        "Purifier": "SLOYakuza\\Purifier\\Facades\\Purifier"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "SLOYakuza\\Purifier\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SLOYakuza",
+                    "email": "yakuza@rm-net.si",
+                    "homepage": "https://github.com/SLOYakuza",
+                    "role": "Developer"
+                }
+            ],
+            "description": "An HTML Purifier for Laravel",
+            "homepage": "https://github.com/SLOYakuza/laravel-html-purifier",
+            "keywords": [
+                "Purifier",
+                "SLOYakuza",
+                "html",
+                "laravel",
+                "security",
+                "xss"
+            ],
+            "support": {
+                "issues": "https://github.com/SLOYakuza/laravel-html-purifier/issues",
+                "source": "https://github.com/SLOYakuza/laravel-html-purifier/tree/v1.0.2"
+            },
+            "time": "2022-03-26T15:35:08+00:00"
+        },
+        {
+            "name": "sloyakuza/laravel-joypixel-emojis",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SLOYakuza/laravel-joypixel-emojis.git",
+                "reference": "b343b916d9fed1d815b37c756aedd3b5357ed32d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SLOYakuza/laravel-joypixel-emojis/zipball/b343b916d9fed1d815b37c756aedd3b5357ed32d",
+                "reference": "b343b916d9fed1d815b37c756aedd3b5357ed32d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6|^7|^8|^9",
+                "joypixels/emoji-toolkit": "^6",
+                "php": "^7.4|^8.0"
+            },
+            "suggest": {
+                "joypixels/assets": "If you want to serve the emojione assets yourself"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "sloyakuza\\LaravelJoyPixels\\LaravelJoyPixelsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelJoyPixels": "sloyakuza\\LaravelJoyPixels\\LaravelJoyPixelsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "sloyakuza\\LaravelJoyPixels\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SLOYakuza",
+                    "email": "yakuza@rm-net.si",
+                    "homepage": "https://github.com/SLOYakuza",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel helper for Joypixels emojis",
+            "homepage": "https://github.com/SLOYakuza/laravel-joypixel-emojis",
+            "keywords": [
+                "JoyPixels",
+                "SLOYakuza",
+                "emoji",
+                "emojione",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/SLOYakuza/laravel-joypixel-emojis/issues",
+                "source": "https://github.com/SLOYakuza/laravel-joypixel-emojis/tree/v1.0.1"
+            },
+            "time": "2022-03-26T16:26:40+00:00"
+        },
+        {
+            "name": "sloyakuza/laravel-security-headers",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SLOYakuza/laravel-security-headers.git",
+                "reference": "24c3242f5ab02377560d91678b8b76fbedadbbef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SLOYakuza/laravel-security-headers/zipball/24c3242f5ab02377560d91678b8b76fbedadbbef",
+                "reference": "24c3242f5ab02377560d91678b8b76fbedadbbef",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6|^7|^8|^9",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "ext-xdebug": "*",
+                "orchestra/testbench": "^3.1|^4.0|^5.0|^6.0"
+            },
+            "suggest": {
+                "friendsofphp/php-cs-fixer": "Coding style fixer",
+                "phpstan/phpstan": "Static analysis tool",
+                "phpunit/phpunit": "PHP unit testing framework"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SLOYakuza\\SecureHeaders\\SecureHeadersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "SLOYakuza\\SecureHeaders\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SLOYakuza",
+                    "email": "yakuza@rm-net.si",
+                    "homepage": "https://github.com/SLOYakuza",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Adds security related headers to HTTP response.",
+            "homepage": "https://github.com/SLOYakuza/laravel-security-headers",
+            "keywords": [
+                "SLOYakuza",
+                "clear-site-data",
+                "content-security-policy",
+                "csp",
+                "except-ct",
+                "feature-policy",
+                "header",
+                "hsts",
+                "https",
+                "laravel",
+                "referrer-policy"
+            ],
+            "support": {
+                "issues": "https://github.com/SLOYakuza/laravel-security-headers/issues",
+                "source": "https://github.com/SLOYakuza/laravel-security-headers/tree/v1.0.1"
+            },
+            "time": "2022-03-26T15:36:19+00:00"
+        },
+        {
             "name": "spatie/db-dumper",
             "version": "3.3.0",
             "source": {
@@ -5609,16 +5609,16 @@
         },
         {
             "name": "symfony/error-handler",
-            "version": "v6.2.3",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/error-handler.git",
-                "reference": "0926124c95d220499e2baf0fb465772af3a4eddb"
+                "reference": "0092696af0be8e6124b042fbe2890ca1788d7b28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/error-handler/zipball/0926124c95d220499e2baf0fb465772af3a4eddb",
-                "reference": "0926124c95d220499e2baf0fb465772af3a4eddb",
+                "url": "https://api.github.com/repos/symfony/error-handler/zipball/0092696af0be8e6124b042fbe2890ca1788d7b28",
+                "reference": "0092696af0be8e6124b042fbe2890ca1788d7b28",
                 "shasum": ""
             },
             "require": {
@@ -5660,7 +5660,7 @@
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/error-handler/tree/v6.2.3"
+                "source": "https://github.com/symfony/error-handler/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -5676,20 +5676,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-19T14:33:49+00:00"
+            "time": "2023-01-01T08:38:09+00:00"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v6.2.2",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "3ffeb31139b49bf6ef0bc09d1db95eac053388d1"
+                "reference": "f02d108b5e9fd4a6245aa73a9d2df2ec060c3e68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/3ffeb31139b49bf6ef0bc09d1db95eac053388d1",
-                "reference": "3ffeb31139b49bf6ef0bc09d1db95eac053388d1",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/f02d108b5e9fd4a6245aa73a9d2df2ec060c3e68",
+                "reference": "f02d108b5e9fd4a6245aa73a9d2df2ec060c3e68",
                 "shasum": ""
             },
             "require": {
@@ -5743,7 +5743,7 @@
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/event-dispatcher/tree/v6.2.2"
+                "source": "https://github.com/symfony/event-dispatcher/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -5759,7 +5759,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-14T16:11:27+00:00"
+            "time": "2023-01-01T08:38:09+00:00"
         },
         {
             "name": "symfony/event-dispatcher-contracts",
@@ -5906,16 +5906,16 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v6.2.2",
+            "version": "v6.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "ddf4dd35de1623e7c02013523e6c2137b67b636f"
+                "reference": "e8dd1f502bc2b3371d05092aa233b064b03ce7ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/ddf4dd35de1623e7c02013523e6c2137b67b636f",
-                "reference": "ddf4dd35de1623e7c02013523e6c2137b67b636f",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/e8dd1f502bc2b3371d05092aa233b064b03ce7ed",
+                "reference": "e8dd1f502bc2b3371d05092aa233b064b03ce7ed",
                 "shasum": ""
             },
             "require": {
@@ -5964,7 +5964,7 @@
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-foundation/tree/v6.2.2"
+                "source": "https://github.com/symfony/http-foundation/tree/v6.2.6"
             },
             "funding": [
                 {
@@ -5980,20 +5980,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-14T16:11:27+00:00"
+            "time": "2023-01-30T15:46:28+00:00"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v6.2.4",
+            "version": "v6.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "74f2e638ec3fa0315443bd85fab7fc8066b77f83"
+                "reference": "7122db07b0d8dbf0de682267c84217573aee3ea7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/74f2e638ec3fa0315443bd85fab7fc8066b77f83",
-                "reference": "74f2e638ec3fa0315443bd85fab7fc8066b77f83",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/7122db07b0d8dbf0de682267c84217573aee3ea7",
+                "reference": "7122db07b0d8dbf0de682267c84217573aee3ea7",
                 "shasum": ""
             },
             "require": {
@@ -6075,7 +6075,7 @@
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/http-kernel/tree/v6.2.4"
+                "source": "https://github.com/symfony/http-kernel/tree/v6.2.6"
             },
             "funding": [
                 {
@@ -6091,7 +6091,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-29T19:05:08+00:00"
+            "time": "2023-02-01T08:32:25+00:00"
         },
         {
             "name": "symfony/mailer",
@@ -6174,16 +6174,16 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v6.2.2",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "8c98bf40406e791043890a163f6f6599b9cfa1ed"
+                "reference": "4b7b349f67d15cd0639955c8179a76c89f6fd610"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/8c98bf40406e791043890a163f6f6599b9cfa1ed",
-                "reference": "8c98bf40406e791043890a163f6f6599b9cfa1ed",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/4b7b349f67d15cd0639955c8179a76c89f6fd610",
+                "reference": "4b7b349f67d15cd0639955c8179a76c89f6fd610",
                 "shasum": ""
             },
             "require": {
@@ -6199,7 +6199,7 @@
                 "symfony/serializer": "<6.2"
             },
             "require-dev": {
-                "egulias/email-validator": "^2.1.10|^3.1",
+                "egulias/email-validator": "^2.1.10|^3.1|^4",
                 "league/html-to-markdown": "^5.0",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0|^5.0",
                 "symfony/dependency-injection": "^5.4|^6.0",
@@ -6237,7 +6237,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v6.2.2"
+                "source": "https://github.com/symfony/mime/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -6253,7 +6253,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-14T16:38:10+00:00"
+            "time": "2023-01-10T18:53:53+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -7571,16 +7571,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v6.2.3",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "fdbadd4803bc3c96ef89238c9c9e2ebe424ec2e0"
+                "reference": "44b7b81749fd20c1bdf4946c041050e22bc8da27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/fdbadd4803bc3c96ef89238c9c9e2ebe424ec2e0",
-                "reference": "fdbadd4803bc3c96ef89238c9c9e2ebe424ec2e0",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/44b7b81749fd20c1bdf4946c041050e22bc8da27",
+                "reference": "44b7b81749fd20c1bdf4946c041050e22bc8da27",
                 "shasum": ""
             },
             "require": {
@@ -7639,7 +7639,7 @@
                 "dump"
             ],
             "support": {
-                "source": "https://github.com/symfony/var-dumper/tree/v6.2.3"
+                "source": "https://github.com/symfony/var-dumper/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -7655,7 +7655,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-22T17:55:15+00:00"
+            "time": "2023-01-20T17:45:48+00:00"
         },
         {
             "name": "theodorejb/polycast",
