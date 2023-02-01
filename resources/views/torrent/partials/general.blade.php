@@ -40,7 +40,7 @@
                     <strong>{{ __('torrent.category') }}:</strong>
                 </td>
                 <td class="col-sm-9 torrentinforight">
-                    <i class="{{ $torrent->category->icon }} torrent-icon torrent-icon-small" data-toggle="tooltip" data-original-title="{{ $torrent->category->name }} {{ __('torrent.torrent') }}"></i> {{ $torrent->category->name }}
+                    <i class="{{ $torrent->category->icon }} torrent-icon torrent-icon-small" title="{{ $torrent->category->name }} {{ __('torrent.torrent') }}"></i> {{ $torrent->category->name }}
                 </td>
             </tr>
 

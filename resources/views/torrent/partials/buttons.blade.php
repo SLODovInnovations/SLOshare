@@ -15,13 +15,12 @@
                     <form action="{{ route('freeleech_token', ['id' => $torrent->id]) }}" method="POST"
                           style="display: inline;">
                         @csrf
-                        <button type="submit" class="btn btn-primary btn-sm torrent-freeleech-token"
-                                data-toggle=tooltip
-                                data-html="true"
-                                title='{!! __('torrent.fl-tokens-left', ['tokens' => $user->fl_tokens]) !!}!'>
-                            {{ __('torrent.use-fl-token') }}
-                        </button>
-                    </form>
+                    <button type="submit" class="btn btn-primary btn-sm torrent-freeleech-token"
+                            data-html="true"
+                            title='{!! __('torrent.fl-tokens-left', ['tokens' => $user->fl_tokens]) !!}!'>
+                        {{ __('torrent.use-fl-token') }}
+                    </button>
+                </form>
                 @endif-->
             @endif
         @else
