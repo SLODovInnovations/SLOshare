@@ -45,7 +45,9 @@
                         <th>{{ __('torrent.client') }}</th>
                         <th>{{ __('common.ip') }}</th>
                         <th>{{ __('common.port') }}</th>
-                        {{--<th>Connectable</th>--}}
+                        @if (\config('announce.connectable_check') == true)
+                        <th>Connectable</th>
+                        @endif
                         <th>{{ __('torrent.started') }}</th>
                         <th>{{ __('torrent.last-update') }}</th>
                         <th>{{ __('common.status') }}</th>
@@ -55,12 +57,13 @@
                     @foreach ($peers as $p)
                         <tr>
                             @if ($p->user->hidden == 1 || $p->user->peer_hidden == 1 ||
-                                !auth()->user()->isAllowed($p->user,'torrent','show_peer'))
+                                !auth()->user()->isAllowed($p->user,'torrent','show_peer') ||
+                                ($p->user->id == $torrent->user->id && $torrent->anon == 1))
                                 <td>
                                         <span class="badge-user text-orange text-bold"><i
                                                     class="{{ config('other.font-awesome') }} fa-eye-slash"
                                                     aria-hidden="true"></i>{{ strtoupper(__('common.anonymous')) }}</span>
-                                    @if (auth()->user()->id == $p->id || auth()->user()->group->is_modo)
+                                    @if (auth()->user()->id == $p->user->id || auth()->user()->group->is_modo)
                                         <a href="{{ route('users.show', ['username' => $p->user->username]) }}"><span
                                                     class="badge-user text-bold"
                                                     style="color:{{ $p->user->group->color }};">({{ $p->user->username }}
@@ -75,8 +78,7 @@
                                     <a href="{{ route('users.show', ['username' => $p->user->username]) }}"><span
                                                 class="badge-user text-bold"
                                                 style="color:{{ $p->user->group->color }}; background-image:{{ $p->user->group->effect }};"><i
-                                                    class="{{ $p->user->group->icon }}" data-toggle="tooltip"
-                                                    data-original-title="{{ $p->user->group->name }}"></i>
+                                                    class="{{ $p->user->group->icon }}" title="{{ $p->user->group->name }}"></i>
                                                 {{ $p->user->username }}</span></a>
                                 </td>
                             @endif
@@ -111,7 +113,15 @@
                                 <td> ---</td>
                                 <td> ---</td>
                             @endif
-                            {{--<td><span class="badge-extra text-bold {{ $p->connectable ? 'text-success' : 'text-danger' }}">{{ $p->connectable ? 'Yes' : 'No' }}</span></td>--}}
+                            @if (\config('announce.connectable_check') == true)
+                                @php
+                                    $connectable = false;
+                                    if (cache()->has('peers:connectable:'.$p->ip.'-'.$p->port.'-'.$p->agent)) {
+                                        $connectable = cache()->get('peers:connectable:'.$p->ip.'-'.$p->port.'-'.$p->agent);
+                                    }
+                                @endphp
+                                <td><span class="badge-extra text-bold {{ $connectable ? 'text-success' : 'text-danger' }}">@choice('user.client-connectable-state', $connectable)</span></td>
+                            @endif
                             <td>{{ $p->created_at ? $p->created_at->diffForHumans() : 'N/A' }}</td>
                             <td>{{ $p->updated_at ? $p->updated_at->diffForHumans() : 'N/A' }}</td>
                             <td> @if ($p->seeder == 0)

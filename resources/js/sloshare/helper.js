@@ -1,10 +1,3 @@
-// File Contents:
-//
-// uploadExtensionBuilder - To parse torrent files titles / Used: Upload
-// userFilterBuilder - To add filters for user search / Used: All User Histories
-// forumTipBuilder - To add tip buttons for forum / Used: Topics
-//
-// After classes, event attachments then globals.
 class uploadExtensionBuilder {
     removeDots(title) {
         // Remove extensions
@@ -447,21 +440,5 @@ class uploadExtensionBuilder {
     }
 }
 
-// Global attachments.
-// Attach to events using jQuery.
-
-$(document).ajaxComplete(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-});
-$(document).mousedown(function () {
-    if (audioLoaded == 0) {
-        window.sounds = {};
-        const sound = new Audio('/sounds/alert.mp3');
-        sound.load();
-        window.sounds['alert.mp3'] = sound;
-    }
-    audioLoaded = 1;
-});
 // Globals
 const uploadExtension = new uploadExtensionBuilder();
-var audioLoaded = 0;
