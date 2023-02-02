@@ -1,11 +1,9 @@
-<div class="col-md-10 col-sm-10 col-md-offset-1">
-    <div class="clearfix visible-sm-block"></div>
-    <div class="panel panel-chat shoutbox">
-        <div class="panel-heading">
-            <h4><i class="{{ config('other.font-awesome') }} fa-users"></i> {{ __('blocks.users-online') }}
+	<section class="panelV2">
+        <div class="clearfix visible-sm-block"></div>
+        <div class="panel panel-chat shoutbox">
+            <h4 class="panel__heading"><i class="{{ config('other.font-awesome') }} fa-users"></i> {{ __('blocks.users-online') }}
                 <span class="label label-default">{{ $users->count() }}</span>
             </h4>
-        </div>
 
         <div class="panel-body">
             @foreach ($users as $user)
@@ -56,5 +54,5 @@
                 </div>
             </div>
         </div>
-    </div>
+	</section>
 </div>
