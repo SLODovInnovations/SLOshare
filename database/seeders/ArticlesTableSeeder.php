@@ -29,8 +29,8 @@ class ArticlesTableSeeder extends Seeder
         return [
             [
                 'id'         => 1,
-                'title'      => 'Welcome To '.config('other.title').' .',
-                'content'    => 'Welcome to '.config('other.title').'. Powered By '.config('other.codebase').'.',
+                'title'      => 'Dobrodošli v '.config('other.title').' .',
+                'content'    => 'Dobrodošli v '.config('other.title').'. Poganja ga '.config('other.codebase').'.',
                 'user_id'    => 3,
                 'created_at' => '2017-02-28 17:22:37',
                 'updated_at' => '2017-04-21 12:21:06',

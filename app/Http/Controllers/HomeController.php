@@ -43,12 +43,12 @@ class HomeController extends Controller
 
         // Latest Articles/News Block
         $articles = \cache()->remember('latest_article', $expiresAt, fn () => Article::latest()->take(5)->get());
+        foreach ($articles as $article) {
+            $article->newNews = ($user->updated_at->subDays(3)->getTimestamp() < $article->created_at->getTimestamp()) ? 1 : 0;
+        }
 
         // Latest Torrents Block
-        $personalFreeleech = \cache()->rememberForever(
-            'personal_freeleech:'.$user->id,
-            fn () => $user->personalFreeleeches()->exists()
-        );
+        $personalFreeleech = \cache()->get('personal_freeleech:'.$user->id);
 
         $newest = \cache()->remember('newest_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
