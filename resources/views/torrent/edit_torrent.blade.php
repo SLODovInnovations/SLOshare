@@ -230,7 +230,6 @@
                             inputmode="numeric"
                             name="tmdb"
                             pattern="[0-9]*"
-                            required
                             type="text"
                             value="{{ old('tmdb') ?? $torrent->tmdb }}"
                             x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'cartoon' || cats[cat].type === 'tv' || cats[cat].type === 'cartoontv') ? '{{ old('tmdb') ?? $torrent->tmdb }}' : '0'"
@@ -246,7 +245,6 @@
                             inputmode="numeric"
                             name="imdb"
                             pattern="[0-9]*"
-                            required
                             type="text"
                             value="{{ old('imdb') ?? $torrent->imdb }}"
                             x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'cartoon' || cats[cat].type === 'tv' || cats[cat].type === 'cartoontv') ? '{{ old('imdb') ?? $torrent->imdb }}' : '0'"
@@ -262,7 +260,6 @@
                             inputmode="numeric"
                             name="tvdb"
                             pattern="[0-9]*"
-                            required
                             type="text"
                             value="{{ old('tvdb') ?? $torrent->tvdb }}"
                             x-bind:value="(cats[cat].type === 'tv' || cats[cat].type === 'cartoontv') ? '{{ old('tvdb') ?? $torrent->tvdb }}' : '0'"
@@ -278,10 +275,10 @@
                             inputmode="numeric"
                             name="mal"
                             pattern="[0-9]*"
-                            required
                             type="text"
                             value="{{ old('mal') ?? $torrent->mal }}"
                             x-bind:value="(cats[cat].type === 'movie' || cats[cat].type === 'cartoon' || cats[cat].type === 'tv' || cats[cat].type === 'cartoontv') ? '{{ old('mal') ?? $torrent->mal }}' : '0'"
+                            x-bind:required="cats[cat].type === 'movie' || cats[cat].type === 'cartoon' || cats[cat].type === 'tv' || cats[cat].type === 'cartoontv'"
                         >
                         <label class="form__label form__label--floating" for="mal">MAL ID <b>({{ __('torrent.required-anime') }})</b></label>
                     </p>-->
@@ -293,7 +290,6 @@
                         id="igdb"
                         class="form__text"
                         name="igdb"
-                        required
                         type="text"
                         value="{{ old('igdb') ?? $torrent->igdb }}"
                         inputmode="numeric"
