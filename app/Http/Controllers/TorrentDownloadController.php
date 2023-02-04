@@ -24,14 +24,14 @@ class TorrentDownloadController extends Controller
     /**
      * Download A Torrent.
      */
-    public function store(Request $request, int $id, $rsskey = null): \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
+    public function store(Request $request, int $id, $rsskey = null): \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\StreamedResponse
     {
         $user = $request->user();
         if (! $user && $rsskey) {
             $user = User::where('rsskey', '=', $rsskey)->firstOrFail();
         }
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
-        $hasHistory = $user->history()->where([['torrent_id', '=', $torrent->id], ['seeder', '=', 1]])->count();
+        $hasHistory = $user->history()->where([['torrent_id', '=', $torrent->id], ['seeder', '=', 1]])->exists();
         // User's ratio is too low
         if ($user->getRatio() < \config('other.ratio') && ! ($torrent->user_id === $user->id || $hasHistory)) {
             return \to_route('torrent', ['id' => $torrent->id])
@@ -50,39 +50,15 @@ class TorrentDownloadController extends Controller
                 ->withErrors('To Torrent je bil zavrnjen s strani osebja');
         }
 
-        // Define the filename for the download
-        $tmpFileName = \str_replace([' ', '/', '\\'], ['.', '-', '-'], '['.\config('torrent.source').']['.$user->id.']'.$torrent->name.'.torrent');
-
         // The torrent file exist ?
         if (! \file_exists(\getcwd().'/files/torrents/'.$torrent->file_name)) {
             return \to_route('torrent', ['id' => $torrent->id])
                 ->withErrors('Torrent datoteka ni najdena! Prosimo, poročajte o napaki tega Torrent!');
         }
 
-        // Delete the last torrent tmp file
-        if (\file_exists(\getcwd().'/files/tmp/'.$tmpFileName)) {
-            \unlink(\getcwd().'/files/tmp/'.$tmpFileName);
+        if (! $request->user() && !($rsskey && $user)) {
+            return ro_route('login');
         }
-
-        // Get the content of the torrent
-        $dict = Bencode::bdecode(\file_get_contents(\getcwd().'/files/torrents/'.$torrent->file_name));
-        if ($request->user() || ($rsskey && $user)) {
-            // Set the announce key and add the user passkey
-            $dict['announce'] = \route('announce', ['passkey' => $user->passkey]);
-            // Remove Other announce url
-            unset($dict['announce-list']);
-            // Set link to torrent as the comment
-            if (config('torrent.comment')) {
-                $dict['comment'] = \config('torrent.comment').'. '.\route('torrent', ['id' => $id]);
-            } else {
-                $dict['comment'] = \route('torrent', ['id' => $id]);
-            }
-        } else {
-            return \to_route('login');
-        }
-
-        $fileToDownload = Bencode::bencode($dict);
-        \file_put_contents(\getcwd().'/files/tmp/'.$tmpFileName, $fileToDownload);
 
         $torrentDownload = new TorrentDownload();
         $torrentDownload->user_id = $user->id;
@@ -90,6 +66,27 @@ class TorrentDownloadController extends Controller
         $torrentDownload->type = $rsskey ? 'Uporaba RSS/API '.$request->header('User-Agent') : 'Uporaba spletnega mesta '.$request->header('User-Agent');
         $torrentDownload->save();
 
-        return \response()->download(\getcwd().'/files/tmp/'.$tmpFileName, null, ['Vrsta vsebine' => 'application/x-bittorrent'])->deleteFileAfterSend(true);
+        return response()->streamDownload(
+            function () use ($id, $user, $torrent) {
+                $dict = Bencode::bdecode(\file_get_contents(\getcwd().'/files/torrents/'.$torrent->file_name));
+
+                // Set the announce key and add the user passkey
+                $dict['announce'] = \route('announce', ['passkey' => $user->passkey]);
+
+                // Remove multi-tracker announce url possibly still stored by legacy upload system
+                unset($dict['announce-list']);
+
+                // Set link to torrent as the comment
+                if (config('torrent.comment')) {
+                    $dict['comment'] = \config('torrent.comment').'. '.\route('torrent', ['id' => $id]);
+                } else {
+                    $dict['comment'] = \route('torrent', ['id' => $id]);
+                }
+
+                echo Bencode::bencode($dict);
+            },
+            \str_replace([' ', '/', '\\'], ['.', '-', '-'], '['.\config('torrent.source').']'.$torrent->name.'.torrent'),
+            ['Content-Type' => 'application/x-bittorrent']
+        );
     }
 }
