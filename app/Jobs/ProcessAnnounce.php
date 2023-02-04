@@ -13,7 +13,6 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redis;
 
 class ProcessAnnounce implements ShouldQueue
 {
@@ -144,8 +143,7 @@ class ProcessAnnounce implements ShouldQueue
         $peer->user_id = $this->user->id;
         $peer->updateConnectableStateIfNeeded();
         $peer->updated_at = \now();
-        Redis::connection('peer')->command('LPUSH', [config('cache.prefix').':peers:batch', \serialize($peer)]);
-        //$peer->save();
+        $peer->save();
 
         $history->user_id = $this->user->id;
         $history->torrent_id = $this->torrent->id;
