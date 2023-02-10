@@ -79,16 +79,16 @@ return [
     | SLOshare
     |--------------------------------------------------------------------------
     */
-    'info-message'              => 'Sprememba oznake je bila uporabljena',
-    'error'                     => 'Nimaš dostopa do te kategorije!',
-    'error-read'                => 'Nimaš dostopa do branja te teme!',
-    'error-new'                 => 'Tukaj ni mogoče odpreti nove teme!',
-    'success-new'               => 'Tema je bila uspešno ustvarjena!',
-    'success-edit'              => 'Tema je bila uspešno urejena!',
-    'success-closed'            => 'Ta tema je zdaj zaprta!',
-    'success-open'              => 'Ta tema je zdaj odprta!',
-    'success-deleted'           => 'Ta tema je zdaj izbrisana!',
-    'success-pinned'            => 'Ta tema je zdaj pripeta!',
-    'success-unpinned'          => 'Ta tema je zdaj odpeta!',
-    'quote-bbcode'              => 'Citiranje',
+    'info-message'     => 'Sprememba oznake je bila uporabljena',
+    'error'            => 'Nimaš dostopa do te kategorije!',
+    'error-read'       => 'Nimaš dostopa do branja te teme!',
+    'error-new'        => 'Tukaj ni mogoče odpreti nove teme!',
+    'success-new'      => 'Tema je bila uspešno ustvarjena!',
+    'success-edit'     => 'Tema je bila uspešno urejena!',
+    'success-closed'   => 'Ta tema je zdaj zaprta!',
+    'success-open'     => 'Ta tema je zdaj odprta!',
+    'success-deleted'  => 'Ta tema je zdaj izbrisana!',
+    'success-pinned'   => 'Ta tema je zdaj pripeta!',
+    'success-unpinned' => 'Ta tema je zdaj odpeta!',
+    'quote-bbcode'     => 'Citiranje',
 ];

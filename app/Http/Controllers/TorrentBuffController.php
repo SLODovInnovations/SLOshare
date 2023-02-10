@@ -48,7 +48,7 @@ class TorrentBuffController extends Controller
             $ircAnnounceBot = new IRCAnnounceBot();
             $ircAnnounceBot->message(config('irc-bot.channel'), '['.$appname.'] Uporabnik '.$user->username.' je udaril '.$torrent->name.' , lahko bi porabil več semen!');
             $ircAnnounceBot->message(config('irc-bot.channel'), '[Kategorija: '.$torrent->category->name.'] [Vrsta: '.$torrent->type->name.'] [Velikost:'.$torrent->getSize().']');
-            $ircAnnounceBot->message(config('irc-bot.channel'), \sprintf('[Povezava: %s]', $torrentUrl));
+            $ircAnnounceBot->message(config('irc-bot.channel'), sprintf('[Povezava: %s]', $torrentUrl));
         }
 
         return to_route('torrent', ['id' => $torrent->id])

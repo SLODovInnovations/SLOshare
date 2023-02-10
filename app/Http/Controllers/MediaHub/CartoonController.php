@@ -22,7 +22,7 @@ class CartoonController extends Controller
     public function show(Request $request, int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         $user = $request->user();
-        $personalFreeleech = \cache()->get('personal_freeleech:'.$user->id);
+        $personalFreeleech = cache()->get('personal_freeleech:'.$user->id);
         $cartoon = Cartoon::with(['cast', 'collection', 'genres', 'companies'])->findOrFail($id);
 
         return view('mediahub.cartoon.show', [

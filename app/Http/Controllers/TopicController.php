@@ -181,7 +181,7 @@ class TopicController extends Controller
 //        $user->addProgress(new UserMade900Posts(), 1);
 
         return to_route('forum_topic', ['id' => $topic->id])
-                ->withSuccess(trans('forum.success-new'));
+            ->withSuccess(trans('forum.success-new'));
     }
 
     /**

@@ -79,16 +79,16 @@ return [
     | SLOshare
     |--------------------------------------------------------------------------
     */
-    'info-message'              => 'Label Change Has Been Applied',
-    'error'                     => 'You Do Not Have Access To This Forum',
-    'error-read'                => 'You Do Not Have Access To Read This Topic!',
-    'error-new'                 => 'You Cannot Start A New Topic Here!',
-    'success-new'               => 'Topic Created Successfully!',
-    'success-edit'              => 'Topic Successfully Edited!',
-    'success-closed'            => 'This Topic Is Now Closed!',
-    'success-open'              => 'This Topic Is Now Open!',
-    'success-deleted'           => 'This Topic Is Now Deleted!',
-    'success-pinned'            => 'This Topic Is Now Pinned!',
-    'success-unpinned'          => 'This Topic Is Now Unpinned!',
-    'quote-bbcode'              => 'Quoting',
+    'info-message'     => 'Label Change Has Been Applied',
+    'error'            => 'You Do Not Have Access To This Forum',
+    'error-read'       => 'You Do Not Have Access To Read This Topic!',
+    'error-new'        => 'You Cannot Start A New Topic Here!',
+    'success-new'      => 'Topic Created Successfully!',
+    'success-edit'     => 'Topic Successfully Edited!',
+    'success-closed'   => 'This Topic Is Now Closed!',
+    'success-open'     => 'This Topic Is Now Open!',
+    'success-deleted'  => 'This Topic Is Now Deleted!',
+    'success-pinned'   => 'This Topic Is Now Pinned!',
+    'success-unpinned' => 'This Topic Is Now Unpinned!',
+    'quote-bbcode'     => 'Quoting',
 ];

@@ -45,14 +45,14 @@ class CategoryController extends Controller
         }
 
         Category::create([
-            'image'      => $filename ?? null,
-            'no_meta'    => $request->meta === 'no',
-            'music_meta' => $request->meta === 'music',
-            'game_meta'  => $request->meta === 'game',
-            'tv_meta'    => $request->meta === 'tv',
-            'cartoontv_meta'  => $request->meta === 'cartoontv',
-            'movie_meta' => $request->meta === 'movie',
-            'cartoon_meta'  => $request->meta === 'cartoon',
+            'image'          => $filename ?? null,
+            'no_meta'        => $request->meta === 'no',
+            'music_meta'     => $request->meta === 'music',
+            'game_meta'      => $request->meta === 'game',
+            'tv_meta'        => $request->meta === 'tv',
+            'cartoontv_meta' => $request->meta === 'cartoontv',
+            'movie_meta'     => $request->meta === 'movie',
+            'cartoon_meta'   => $request->meta === 'cartoon',
         ] + $request->validated());
 
         return to_route('staff.categories.index')
@@ -82,14 +82,14 @@ class CategoryController extends Controller
         }
 
         Category::where('id', '=', $id)->update([
-            'image'      => $filename ?? null,
-            'no_meta'    => $request->meta === 'no',
-            'music_meta' => $request->meta === 'music',
-            'game_meta'  => $request->meta === 'game',
-            'tv_meta'    => $request->meta === 'tv',
-            'cartoontv_meta'    => $request->meta === 'cartoontv',
-            'movie_meta' => $request->meta === 'movie',
-            'cartoon_meta' => $request->meta === 'cartoon',
+            'image'          => $filename ?? null,
+            'no_meta'        => $request->meta === 'no',
+            'music_meta'     => $request->meta === 'music',
+            'game_meta'      => $request->meta === 'game',
+            'tv_meta'        => $request->meta === 'tv',
+            'cartoontv_meta' => $request->meta === 'cartoontv',
+            'movie_meta'     => $request->meta === 'movie',
+            'cartoon_meta'   => $request->meta === 'cartoon',
         ] + $request->validated());
 
         return to_route('staff.categories.index')

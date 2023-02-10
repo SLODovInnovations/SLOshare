@@ -26,8 +26,8 @@ return [
     | SLOshare
     |--------------------------------------------------------------------------
     */
-    'no-external'         => 'No External Subtitles Available',
-    'upload'              => 'Download Torrent subtitles',
-    'ul'                  => 'Upload subtitles',
-    'dl'                  => 'Download',
+    'no-external' => 'No External Subtitles Available',
+    'upload'      => 'Download Torrent subtitles',
+    'ul'          => 'Upload subtitles',
+    'dl'          => 'Download',
 ];

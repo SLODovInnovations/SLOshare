@@ -145,7 +145,7 @@ class RegisterController extends Controller
         // Select A Random Welcome Message
         $profileUrl = href_profile($user);
         $welcomeArray = [
-            sprintf('[url=%s]%s[/url], Dobrodošli v ', $profileUrl, $user->username).\config('other.title').'! Upam, da uživaš v skupnosti. :rocket:',
+            sprintf('[url=%s]%s[/url], Dobrodošli v ', $profileUrl, $user->username).config('other.title').'! Upam, da uživaš v skupnosti. :rocket:',
             sprintf("[url=%s]%s[/url], Pričakovali smo vas. :space_invader:", $profileUrl, $user->username),
             sprintf("[url=%s]%s[/url] je prispela. Zabava je končana.. :cry:", $profileUrl, $user->username),
             sprintf("To je ptica! To je letalo! Nevermind, samo [url=%s]%s[/url].", $profileUrl, $user->username),

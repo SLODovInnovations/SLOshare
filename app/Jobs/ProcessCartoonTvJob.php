@@ -115,7 +115,7 @@ class ProcessCartoonTvJob implements ShouldQueue
                     'name'          => $tmdb->ifExists('name', $season),
                     'overview'      => $tmdb->ifExists('overview', $season),
                     'season_number' => sprintf('%02d', $season['season_number']),
-                    'cartoon_tv_id'  => $this->id,
+                    'cartoon_tv_id' => $this->id,
                 ];
 
                 Season::updateOrCreate(['id' => $season['id']], $seasonArray)->cartoontv();
@@ -125,7 +125,7 @@ class ProcessCartoonTvJob implements ShouldQueue
                     $episode = $client->getData();
                     if (isset($episode['episode_number'])) {
                         $episodeArray = [
-                            'cartoon_tv_id'    => $this->id,
+                            'cartoon_tv_id'   => $this->id,
                             'air_date'        => $tmdb->ifExists('air_date', $episode),
                             'name'            => Str::limit($tmdb->ifExists('name', $episode), 200),
                             'episode_number'  => sprintf('%02d', $episode['episode_number']),

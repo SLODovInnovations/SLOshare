@@ -254,13 +254,13 @@ class HomeController extends Controller
             'freeleech_tokens'   => $freeleechTokens,
             'bookmarks'          => $bookmarks,
             //SLOshare
-            'all_user'           => $allUser,
-            'num_torrent'        => $numTorrent,
-            'num_seeders'        => $numSeeders,
-            'num_leechers'       => $numLeechers,
-            'credited_upload'    => $creditedUpload,
-            'credited_download'  => $creditedDownload,
-            'clients'            => $clients,
+            'all_user'          => $allUser,
+            'num_torrent'       => $numTorrent,
+            'num_seeders'       => $numSeeders,
+            'num_leechers'      => $numLeechers,
+            'credited_upload'   => $creditedUpload,
+            'credited_download' => $creditedDownload,
+            'clients'           => $clients,
             //SLOshare
         ]);
     }

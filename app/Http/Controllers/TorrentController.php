@@ -409,14 +409,14 @@ class TorrentController extends Controller
                 'name' => $cat->name,
             ];
             $temp['type'] = match (1) {
-                $cat->movie_meta        => 'movie',
-                $cat->cartoon_meta      => 'cartoon',
-                $cat->tv_meta           => 'tv',
-                $cat->cartoontv_meta    => 'cartoontv',
-                $cat->game_meta         => 'game',
-                $cat->music_meta        => 'music',
-                $cat->no_meta           => 'no',
-                default                 => 'no',
+                $cat->movie_meta     => 'movie',
+                $cat->cartoon_meta   => 'cartoon',
+                $cat->tv_meta        => 'tv',
+                $cat->cartoontv_meta => 'cartoontv',
+                $cat->game_meta      => 'game',
+                $cat->music_meta     => 'music',
+                $cat->no_meta        => 'no',
+                default              => 'no',
             };
             $categories[(int) $cat->id] = $temp;
         }
