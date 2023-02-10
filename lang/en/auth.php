@@ -98,6 +98,6 @@ return [
     | SLOshare
     |--------------------------------------------------------------------------
     */
-    'title-login'            => 'Login',
-    'title-register'         => 'Registration',
+    'title-login'    => 'Login',
+    'title-register' => 'Registration',
 ];

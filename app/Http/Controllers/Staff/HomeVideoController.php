@@ -17,7 +17,6 @@ class HomeVideoController extends Controller
      */
     public function index(Request $request): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-
         $clients = HomeVideo::latest()->get();
 
         return view('Staff.home.videos.index', ['clients' => $clients]);
@@ -28,7 +27,6 @@ class HomeVideoController extends Controller
      */
     public function edit(Request $request, int $id): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-
         $client = HomeVideo::findOrFail($id);
 
         return view('Staff.home.videos.edit', ['client' => $client]);
@@ -43,7 +41,7 @@ class HomeVideoController extends Controller
 
         cache()->forget('home_video');
 
-        return \to_route('staff.homes.videos.index')
+        return to_route('staff.homes.videos.index')
             ->withSuccess('Odjemalec na črnem seznamu je bil uspešno posodobljen!');
     }
 
@@ -77,7 +75,7 @@ class HomeVideoController extends Controller
 
          cache()->forget('home_video');
 
-        return to_route('staff.homes.videos.index')
-            ->withSuccess('Video na domači strani je bil uspešno odstranjen!');
-    }
+         return to_route('staff.homes.videos.index')
+             ->withSuccess('Video na domači strani je bil uspešno odstranjen!');
+     }
 }

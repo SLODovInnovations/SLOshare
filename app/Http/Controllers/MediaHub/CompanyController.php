@@ -27,11 +27,11 @@ class CompanyController extends Controller
         $cartoons = $company->cartoon()->has('torrents')->oldest('title')->paginate(25, ['*'], 'cartoonsPage');
 
         return view('mediahub.company.show', [
-            'company' => $company,
-            'shows'   => $shows,
-            'cartoontvs'   => $cartoontv,
-            'movies'  => $movies,
-            'cartoons'  => $cartoon,
+            'company'    => $company,
+            'shows'      => $shows,
+            'cartoontvs' => $cartoontv,
+            'movies'     => $movies,
+            'cartoons'   => $cartoon,
         ]);
     }
 }

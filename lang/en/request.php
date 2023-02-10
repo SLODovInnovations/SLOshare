@@ -93,10 +93,10 @@ return [
     | SLOshare
     |--------------------------------------------------------------------------
     */
-    'select-category'          => '-- Select Category --',
-    'select-type'              => '-- Select Type --',
-    'select-resolution'        => '-- Select Resolution --',
-    'filled-slo'               => 'Completed',
-    'unfilled-slo'             => 'No Completed',
-    'requests-slo'             => 'Requests',
+    'select-category'   => '-- Select Category --',
+    'select-type'       => '-- Select Type --',
+    'select-resolution' => '-- Select Resolution --',
+    'filled-slo'        => 'Completed',
+    'unfilled-slo'      => 'No Completed',
+    'requests-slo'      => 'Requests',
 ];

@@ -44,7 +44,7 @@ class NewPost extends Notification implements ShouldQueue
             return [
                 'title' => $this->user->username.' Je objavil v temi foruma za osebje',
                 'body'  => $this->user->username.' je napisal novo objavo v temi osebja '.$this->post->topic->name,
-                'url'   => sprintf('%s?page=%s#post-%s', \route('forum_topic', ['id' => $this->post->topic->id]), $this->post->getPageNumber(), $this->post->id),
+                'url'   => sprintf('%s?page=%s#post-%s', route('forum_topic', ['id' => $this->post->topic->id]), $this->post->getPageNumber(), $this->post->id),
             ];
         }
 

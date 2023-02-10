@@ -21,7 +21,7 @@ class HomeController extends Controller
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         $tv = Tv::count();
-        $cartoontvs  = CartoonTv::count();
+        $cartoontvs = CartoonTv::count();
         $movies = Movie::count();
         $cartoons = Cartoon::count();
         $collections = Collection::count();
@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         return view('mediahub.index', [
             'tv'          => $tv,
-            'cartoontvs'   => $cartoontvs,
+            'cartoontvs'  => $cartoontvs,
             'movies'      => $movies,
             'cartoons'    => $cartoons,
             'collections' => $collections,

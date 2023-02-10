@@ -93,10 +93,10 @@ return [
     | SLOshare
     |--------------------------------------------------------------------------
     */
-    'select-category'          => '-- Izberite Kategorijo --',
-    'select-type'              => '-- Izberite Vrsto --',
-    'select-resolution'        => '-- Izberite Resolucijo --',
-    'filled-slo'               => 'Izpolnjene',
-    'unfilled-slo'             => 'Ne Izpolnjene',
-    'requests-slo'             => 'Prošnje',
+    'select-category'   => '-- Izberite Kategorijo --',
+    'select-type'       => '-- Izberite Vrsto --',
+    'select-resolution' => '-- Izberite Resolucijo --',
+    'filled-slo'        => 'Izpolnjene',
+    'unfilled-slo'      => 'Ne Izpolnjene',
+    'requests-slo'      => 'Prošnje',
 ];

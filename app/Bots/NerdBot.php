@@ -293,7 +293,7 @@ class NerdBot
             $i++;
         }
 
-        return "Najnovejše donacije vsem botom so naslednje:\n\n".\trim($donationDump);
+        return "Najnovejše donacije vsem botom so naslednje:\n\n".trim($donationDump);
     }
 
     /**
@@ -309,7 +309,7 @@ class NerdBot
      */
     public function getKing()
     {
-        return \config('other.title').' Je Kralj!';
+        return config('other.title').' Je Kralj!';
     }
 
     /**

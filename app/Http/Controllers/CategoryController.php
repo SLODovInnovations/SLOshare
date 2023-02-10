@@ -20,7 +20,7 @@ class CategoryController extends Controller
     {
         $categories = Category::withCount('torrents')->get()->sortBy('position');
 
-        return \view('category.index', ['categories' => $categories]);
+        return view('category.index', ['categories' => $categories]);
     }
 
     /**
@@ -36,7 +36,7 @@ class CategoryController extends Controller
         $personalFreeleech = PersonalFreeleech::where('user_id', '=', $user->id)->first();
         $bookmarks = Bookmark::where('user_id', $user->id)->get();
 
-        return \view('category.show', [
+        return view('category.show', [
             'torrents'           => $torrents,
             'user'               => $user,
             'category'           => $category,

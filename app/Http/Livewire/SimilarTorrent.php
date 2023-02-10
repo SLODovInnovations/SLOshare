@@ -74,7 +74,7 @@ class SimilarTorrent extends Component
         }
 
         if ($category->cartoon_meta) {
-            $query = $query->whereHas('category', function ($q): void  {
+            $query = $query->whereHas('category', function ($q): void {
                 $q->where('cartoon_meta', '=', true);
             });
         }
@@ -86,7 +86,7 @@ class SimilarTorrent extends Component
         }
 
         if ($category->cartoontv_meta) {
-            $query = $query->whereHas('category', function ($q): void  {
+            $query = $query->whereHas('category', function ($q): void {
                 $q->where('cartoontv_meta', '=', true);
             });
         }

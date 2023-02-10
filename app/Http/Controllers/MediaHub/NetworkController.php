@@ -25,9 +25,9 @@ class NetworkController extends Controller
         $cartoontvs = $network->cartoontv()->has('torrents')->oldest('name')->paginate(25);
 
         return view('mediahub.network.show', [
-            'network' => $network,
-            'shows'   => $shows,
-            'cartoontvs'   => $cartoontvs,
+            'network'    => $network,
+            'shows'      => $shows,
+            'cartoontvs' => $cartoontvs,
         ]);
     }
 }

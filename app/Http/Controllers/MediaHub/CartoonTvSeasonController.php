@@ -17,8 +17,8 @@ class CartoonTvSeasonController extends Controller
         $cartoontv = CartoonTv::where('id', '=', $season->cartoontv_id)->first();
 
         return view('mediahub.cartoontv.season.show', [
-            'season'      => $season,
-            'cartoontv'   => $cartoontv,
+            'season'    => $season,
+            'cartoontv' => $cartoontv,
         ]);
     }
 }

@@ -29,11 +29,11 @@ class GenreController extends Controller
         $cartoons = $genre->cartoon()->has('torrents')->oldest('title')->paginate(25, ['*'], 'cartoonsPage');
 
         return view('mediahub.genre.show', [
-            'genre'       => $genre,
-            'shows'       => $shows,
-            'cartoontvs'  => $cartoontvs,
-            'movies'      => $movies,
-            'cartoons'    => $cartoons,
+            'genre'      => $genre,
+            'shows'      => $shows,
+            'cartoontvs' => $cartoontvs,
+            'movies'     => $movies,
+            'cartoons'   => $cartoons,
         ]);
     }
 }

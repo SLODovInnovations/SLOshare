@@ -96,8 +96,8 @@ Route::group(['middleware' => 'language'], function (): void {
         });
 
         // Categories System
-        Route::group(['prefix' => 'categories'], function () {
-            Route::name('categories.')->group(function () {
+        Route::group(['prefix' => 'categories'], function (): void {
+            Route::name('categories.')->group(function (): void {
                 Route::get('/', [App\Http\Controllers\CategoryController::class, 'index'])->name('index');
                 Route::get('/{id}', [App\Http\Controllers\CategoryController::class, 'show'])->name('show');
             });
@@ -105,7 +105,7 @@ Route::group(['middleware' => 'language'], function (): void {
 
         // Contact Us System
         Route::group(['prefix' => 'contact'], function (): void {
-            Route::name('contact.')->group(function () {
+            Route::name('contact.')->group(function (): void {
                 Route::get('/', [App\Http\Controllers\ContactController::class, 'index'])->name('index');
                 Route::post('/store', [App\Http\Controllers\ContactController::class, 'store'])->name('store');
             });
@@ -225,8 +225,8 @@ Route::group(['middleware' => 'language'], function (): void {
         });
 
         // Graveyard System
-        Route::group(['prefix' => 'graveyard'], function () {
-            Route::name('graveyard.')->group(function () {
+        Route::group(['prefix' => 'graveyard'], function (): void {
+            Route::name('graveyard.')->group(function (): void {
                 Route::get('/', [App\Http\Controllers\GraveyardController::class, 'index'])->name('index');
                 Route::post('/{id}/store', [App\Http\Controllers\GraveyardController::class, 'store'])->name('store');
                 Route::delete('/{id}/destroy', [App\Http\Controllers\GraveyardController::class, 'destroy'])->name('destroy');
