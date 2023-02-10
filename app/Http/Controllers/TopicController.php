@@ -75,7 +75,7 @@ class TopicController extends Controller
                 ->withErrors(trans('forum.error-new'));
         }
 
-        return view('forum.topic.create', [
+        return view('forum.forum_topic.create', [
             'forum'    => $forum,
             'category' => $category,
             'title'    => $request->input('title'),
