@@ -29,9 +29,9 @@ class CompanyController extends Controller
         return view('mediahub.company.show', [
             'company'    => $company,
             'shows'      => $shows,
-            'cartoontvs' => $cartoontv,
+            'cartoontvs' => $cartoontvs,
             'movies'     => $movies,
-            'cartoons'   => $cartoon,
+            'cartoons'   => $cartoons,
         ]);
     }
 }

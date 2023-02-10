@@ -17,7 +17,7 @@
             </div>
         </div>
     </header>
-    {{ $movies->links('partials.pagination') }}
+    {{ $cartoons->links('partials.pagination') }}
     <div class="panel__body">
         @forelse($cartoons as $cartoon)
             <div class="col-md-12">
