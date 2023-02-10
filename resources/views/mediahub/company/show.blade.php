@@ -119,7 +119,7 @@
                     </div>
                 </div>
             @empty
-                No {{ __('mediahub.cartoontvs') }}
+                Ni {{ __('mediahub.cartoontvs') }}
             @endforelse
         </div>
         {{ $movies->links('partials.pagination') }}

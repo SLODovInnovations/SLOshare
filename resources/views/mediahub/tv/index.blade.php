@@ -15,7 +15,7 @@
         </a>
     </li>
     <li class="breadcrumb--active">
-        TV Show
+        TV Serije
     </li>
 @endsection
 

@@ -69,7 +69,7 @@
                     </div>
                 </div>
             @empty
-                No {{ __('mediahub.shows') }}
+                Ni {{ __('mediahub.shows') }}
             @endforelse
         </div>
         {{ $shows->links('partials.pagination') }}

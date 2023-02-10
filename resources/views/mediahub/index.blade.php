@@ -29,7 +29,7 @@
                 <div class="movie media_blocks" style="background-color: rgba(0, 0, 0, 0.33);">
                     <h2>{{ __('mediahub.cartoontvs') }}</h2>
                     <span style="background-color: #01d277;"></span>
-                    <h2 style="font-size: 12px;">{{ $cartoontv }} {{ __('mediahub.cartoontvs') }}</h2>
+                    <h2 style="font-size: 12px;">{{ $cartoontvs }} {{ __('mediahub.cartoontvs') }}</h2>
                 </div>
             </a>
             <a href="{{ route('mediahub.movies.index') }}" class="">
