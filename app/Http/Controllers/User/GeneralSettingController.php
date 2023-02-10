@@ -15,12 +15,12 @@ class GeneralSettingController extends Controller
      */
     public function update(Request $request, User $user): \Illuminate\Http\RedirectResponse
     {
-        \abort_unless($request->user()->id == $user->id, 403);
+        abort_unless($request->user()->id == $user->id, 403);
 
         $request->validate([
             'censor'         => 'required|boolean',
             'chat_hidden'    => 'required|boolean',
-            'locale'         => ['required', Rule::in(\array_keys(Language::allowed()))],
+            'locale'         => ['required', Rule::in(array_keys(Language::allowed()))],
             'style'          => 'required|numeric',
             'custom_css'     => 'nullable|url',
             'standalone_css' => 'nullable|url',
@@ -41,7 +41,7 @@ class GeneralSettingController extends Controller
         $user->ratings = $request->ratings;
         $user->save();
 
-        return \to_route('users.general_settings.edit', ['user' => $user])
+        return to_route('users.general_settings.edit', ['user' => $user])
             ->withSuccess('Vaše splošne nastavitve so bile uspešno shranjene.');
     }
 
@@ -50,8 +50,8 @@ class GeneralSettingController extends Controller
      */
     public function edit(Request $request, User $user): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        \abort_unless($request->user()->id == $user->id, 403);
+        abort_unless($request->user()->id == $user->id, 403);
 
-        return \view('user.general_setting.edit', ['user' => $user]);
+        return view('user.general_setting.edit', ['user' => $user]);
     }
 }

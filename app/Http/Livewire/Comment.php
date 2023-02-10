@@ -51,12 +51,12 @@ class Comment extends Component
 
     final public function mount(): void
     {
-        $this->user = \auth()->user();
+        $this->user = auth()->user();
     }
 
     final public function taggedUsers(): array
     {
-        \preg_match_all('/@([\w\-]+)/', \implode('', $this->editState), $matches);
+        preg_match_all('/@([\w\-]+)/', implode('', $this->editState), $matches);
 
         return $matches[1];
     }
@@ -74,7 +74,7 @@ class Comment extends Component
 
     final public function editComment(): void
     {
-        if (\auth()->user()->id == $this->comment->user_id || \auth()->user()->group->is_modo) {
+        if (auth()->user()->id == $this->comment->user_id || auth()->user()->group->is_modo) {
             $this->comment->update((new AntiXSS())->xss_clean($this->editState));
             $this->isEditing = false;
         } else {
@@ -84,7 +84,7 @@ class Comment extends Component
 
     final public function deleteComment(): void
     {
-        if (\auth()->user()->id == $this->comment->user_id || \auth()->user()->group->is_modo) {
+        if (auth()->user()->id == $this->comment->user_id || auth()->user()->group->is_modo) {
             $this->comment->delete();
             $this->emitUp('refresh');
         } else {
@@ -94,8 +94,8 @@ class Comment extends Component
 
     final public function postReply(): void
     {
-        if (\auth()->user()->can_comment === 0) {
-            $this->dispatchBrowserEvent('error', ['type' => 'error',  'message' => \trans('comment.rights-revoked')]);
+        if (auth()->user()->can_comment === 0) {
+            $this->dispatchBrowserEvent('error', ['type' => 'error',  'message' => trans('comment.rights-revoked')]);
 
             return;
         }
@@ -109,7 +109,7 @@ class Comment extends Component
         ]);
 
         $reply = $this->comment->children()->make((new AntiXSS())->xss_clean($this->replyState));
-        $reply->user()->associate(\auth()->user());
+        $reply->user()->associate(auth()->user());
         $reply->commentable()->associate($this->comment->commentable);
         $reply->anon = $this->anon;
         $reply->save();
@@ -132,13 +132,13 @@ class Comment extends Component
 
         // New Comment Notification
         if ($this->user->id !== $this->comment->user_id) {
-            User::find($this->comment->user_id)->notify(new NewComment(\strtolower(\class_basename($this->comment->commentable_type)), $reply));
+            User::find($this->comment->user_id)->notify(new NewComment(strtolower(class_basename($this->comment->commentable_type)), $reply));
         }
 
         // User Tagged Notification
         if ($this->user->id !== $this->comment->user_id) {
             $users = User::whereIn('username', $this->taggedUsers())->get();
-            Notification::sendNow($users, new NewCommentTag(\strtolower(\class_basename($this->comment->commentable_type)), $reply));
+            Notification::sendNow($users, new NewCommentTag(strtolower(class_basename($this->comment->commentable_type)), $reply));
         }
 
         $this->replyState = [
@@ -152,6 +152,6 @@ class Comment extends Component
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return \view('livewire.comment');
+        return view('livewire.comment');
     }
 }

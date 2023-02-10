@@ -30,15 +30,15 @@ class UserWarningExpire extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): \Illuminate\Notifications\Messages\MailMessage
+    public function toMail(mixed $notifiable): MailMessage
     {
-        $profileUrl = \href_profile($this->user);
+        $profileUrl = href_profile($this->user);
 
         return (new MailMessage())
             ->greeting('Opozorilo Hit in Run je poteklo!')
             ->line('Vaše opozorilo Hit in Run je poteklo ali je bilo izločeno!')
             ->action('Poglej profil!', $profileUrl)
-            ->line('Hvala za uporabo 🚀'.\config('other.title'));
+            ->line('Hvala za uporabo 🚀'.config('other.title'));
     }
 
     /**
@@ -49,7 +49,7 @@ class UserWarningExpire extends Notification
         return [
             'title' => $this->torrent->name.' Opozorilo Hit in Run je poteklo',
             'body'  => 'Vaše opozorilo Hit in Run je poteklo ali pa je bilo izključeno '.$this->torrent->name,
-            'url'   => \sprintf('/torrents/%s', $this->torrent->id),
+            'url'   => sprintf('/torrents/%s', $this->torrent->id),
         ];
     }
 }

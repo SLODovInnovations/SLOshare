@@ -34,7 +34,7 @@ class NewUploadTip extends Notification implements ShouldQueue
         return [
             'title' => $this->tipper.' Dal vam je nagrado '.$this->amount.' BON za naloženi Torrent',
             'body'  => $this->tipper.' je dal nagrado enemu od vaših naloženih Torrentov '.$this->torrent->name,
-            'url'   => \sprintf('/torrents/%s', $this->torrent->id),
+            'url'   => sprintf('/torrents/%s', $this->torrent->id),
         ];
     }
 }

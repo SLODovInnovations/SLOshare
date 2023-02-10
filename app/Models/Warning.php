@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Warning extends Model
 {
+    use Auditable;
     use HasFactory;
     use SoftDeletes;
-    use Auditable;
 
     /**
      * Belongs To A Torrent.
@@ -56,7 +56,7 @@ class Warning extends Model
     }
 
     /**
-     * Active Warnings
+     * Active Warnings.
      */
     public function scopeActive($query): Builder
     {

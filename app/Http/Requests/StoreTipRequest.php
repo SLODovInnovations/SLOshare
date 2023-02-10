@@ -33,9 +33,9 @@ class StoreTipRequest extends FormRequest
                 'prohibits:post',
                 'required_without:post',
                 'exists:torrents,id',
-                function ($attribute, $value, $fail) use ($user) {
+                function ($attribute, $value, $fail) use ($user): void {
                     if (Torrent::find($value)->user->id === $user->id) {
-                        $fail(\trans('bon.failed-yourself'));
+                        $fail(trans('bon.failed-yourself'));
                     }
                 },
             ],
@@ -44,9 +44,9 @@ class StoreTipRequest extends FormRequest
                 'prohibits:torrent',
                 'required_without:torrent',
                 'exists:posts,id',
-                function ($attribute, $value, $fail) use ($user) {
+                function ($attribute, $value, $fail) use ($user): void {
                     if (Post::find($value)->user->id === $user->id) {
-                        $fail(\trans('bon.failed-yourself'));
+                        $fail(trans('bon.failed-yourself'));
                     }
                 },
             ],
@@ -65,8 +65,8 @@ class StoreTipRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'tip.min' => \trans('bon.failed-negative'),
-            'tip.max' => \trans('bon.failed-funds-poster'),
+            'tip.min' => trans('bon.failed-negative'),
+            'tip.max' => trans('bon.failed-funds-poster'),
         ];
     }
 }

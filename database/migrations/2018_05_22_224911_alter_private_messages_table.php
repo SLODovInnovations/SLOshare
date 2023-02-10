@@ -9,7 +9,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::table('private_messages', function ($table) {
+        Schema::table('private_messages', function ($table): void {
             $table->renameColumn('reciever_id', 'receiver_id');
         });
     }

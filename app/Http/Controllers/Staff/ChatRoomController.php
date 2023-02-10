@@ -8,6 +8,7 @@ use App\Http\Requests\Staff\UpdateChatRoomRequest;
 use App\Models\Chatroom;
 use App\Models\User;
 use App\Repositories\ChatRepository;
+use Exception;
 
 /**
  * @see \Tests\Feature\Http\Controllers\Staff\ChatRoomControllerTest
@@ -28,8 +29,8 @@ class ChatRoomController extends Controller
     {
         $chatrooms = $this->chatRepository->rooms();
 
-        return \view('Staff.chat.room.index', [
-            'chatrooms'    => $chatrooms,
+        return view('Staff.chat.room.index', [
+            'chatrooms' => $chatrooms,
         ]);
     }
 
@@ -38,7 +39,7 @@ class ChatRoomController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.chat.room.create');
+        return view('Staff.chat.room.create');
     }
 
     /**
@@ -48,7 +49,7 @@ class ChatRoomController extends Controller
     {
         Chatroom::create($request->validated());
 
-        return \to_route('staff.rooms.index')
+        return to_route('staff.rooms.index')
             ->withSuccess('Klepetalnica je bila uspešno dodana');
     }
 
@@ -59,7 +60,7 @@ class ChatRoomController extends Controller
     {
         $chatroom = Chatroom::findOrFail($id);
 
-        return \view('Staff.chat.room.edit', ['chatroom' => $chatroom]);
+        return view('Staff.chat.room.edit', ['chatroom' => $chatroom]);
     }
 
     /**
@@ -69,20 +70,20 @@ class ChatRoomController extends Controller
     {
         Chatroom::where('id', '=', $id)->update($request->validated());
 
-        return \to_route('staff.rooms.index')
+        return to_route('staff.rooms.index')
             ->withSuccess('Klepetalnica je bila uspešno spremenjena');
     }
 
     /**
      * Delete A Chatroom.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
         $chatroom = Chatroom::findOrFail($id);
         $users = User::where('chatroom_id', '=', $id)->get();
-        $default = Chatroom::where('name', '=', \config('chat.system_chatroom'))->pluck('id');
+        $default = Chatroom::where('name', '=', config('chat.system_chatroom'))->pluck('id');
         foreach ($users as $user) {
             $user->chatroom_id = $default[0];
             $user->save();
@@ -90,7 +91,7 @@ class ChatRoomController extends Controller
 
         $chatroom->delete();
 
-        return \to_route('staff.rooms.index')
+        return to_route('staff.rooms.index')
             ->withSuccess('Klepetalnica je bila uspešno izbrisana');
     }
 }

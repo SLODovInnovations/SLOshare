@@ -16,6 +16,7 @@ use App\Models\UserEcho;
 use App\Models\Warning;
 use App\Repositories\ChatRepository;
 use Illuminate\Support\Carbon;
+use Exception;
 
 class NerdBot
 {
@@ -53,15 +54,15 @@ class NerdBot
      */
     public function replaceVars($output)
     {
-        $output = \str_replace(['{me}', '{command}'], [$this->bot->name, $this->bot->command], $output);
-        if (\str_contains((string) $output, '{bots}')) {
+        $output = str_replace(['{me}', '{command}'], [$this->bot->name, $this->bot->command], $output);
+        if (str_contains((string) $output, '{bots}')) {
             $botHelp = '';
             $bots = Bot::where('active', '=', 1)->where('id', '!=', $this->bot->id)->oldest('position')->get();
             foreach ($bots as $bot) {
                 $botHelp .= '( ! | / | @)'.$bot->command.' pomoč sproži datoteko pomoči za '.$bot->name."\n";
             }
 
-            $output = \str_replace('{bots}', $botHelp, $output);
+            $output = str_replace('{bots}', $botHelp, $output);
         }
 
         return $output;
@@ -75,13 +76,13 @@ class NerdBot
      */
     public function getBanker($duration = 'default')
     {
-        $banker = \cache()->get('nerdbot-banker');
+        $banker = cache()->get('nerdbot-banker');
         if (! $banker) {
             $banker = User::latest('seedbonus')->first();
-            \cache()->put('nerdbot-banker', $banker, $this->expiresAt);
+            cache()->put('nerdbot-banker', $banker, $this->expiresAt);
         }
 
-        return \sprintf('Trenutno [url=/users/%s]%s[/url] Je zgornji nosilec BON ', $banker->username, $banker->username).\config('other.title').'!';
+        return sprintf('Trenutno [url=/users/%s]%s[/url] Je zgornji nosilec BON ', $banker->username, $banker->username).config('other.title').'!';
     }
 
     /**
@@ -92,13 +93,13 @@ class NerdBot
      */
     public function getSnatched($duration = 'default')
     {
-        $snatched = \cache()->get('nerdbot-snatched');
+        $snatched = cache()->get('nerdbot-snatched');
         if (! $snatched) {
             $snatched = Torrent::latest('times_completed')->first();
-            \cache()->put('nerdbot-snatched', $snatched, $this->expiresAt);
+            cache()->put('nerdbot-snatched', $snatched, $this->expiresAt);
         }
 
-        return \sprintf('Trenutno [url=/torrents/%s]%s[/url] Je najbolj ugrabljen torrent ', $snatched->id, $snatched->name).\config('other.title').'!';
+        return sprintf('Trenutno [url=/torrents/%s]%s[/url] Je najbolj ugrabljen torrent ', $snatched->id, $snatched->name).config('other.title').'!';
     }
 
     /**
@@ -109,13 +110,13 @@ class NerdBot
      */
     public function getLeeched($duration = 'default')
     {
-        $leeched = \cache()->get('nerdbot-leeched');
+        $leeched = cache()->get('nerdbot-leeched');
         if (! $leeched) {
             $leeched = Torrent::latest('leechers')->first();
-            \cache()->put('nerdbot-leeched', $leeched, $this->expiresAt);
+            cache()->put('nerdbot-leeched', $leeched, $this->expiresAt);
         }
 
-        return \sprintf('Trenutno [url=/torrents/%s]%s[/url] Torent je najbolj zajeban ', $leeched->id, $leeched->name).\config('other.title').'!';
+        return sprintf('Trenutno [url=/torrents/%s]%s[/url] Torent je najbolj zajeban ', $leeched->id, $leeched->name).config('other.title').'!';
     }
 
     /**
@@ -126,13 +127,13 @@ class NerdBot
      */
     public function getSeeded($duration = 'default')
     {
-        $seeded = \cache()->get('nerdbot-seeded');
+        $seeded = cache()->get('nerdbot-seeded');
         if (! $seeded) {
             $seeded = Torrent::latest('seeders')->first();
-            \cache()->put('nerdbot-seeded', $seeded, $this->expiresAt);
+            cache()->put('nerdbot-seeded', $seeded, $this->expiresAt);
         }
 
-        return \sprintf('Trenutno [url=/torrents/%s]%s[/url] Je najbolj zasejan torrent ', $seeded->id, $seeded->name).\config('other.title').'!';
+        return sprintf('Trenutno [url=/torrents/%s]%s[/url] Je najbolj zasejan torrent ', $seeded->id, $seeded->name).config('other.title').'!';
     }
 
     /**
@@ -143,13 +144,13 @@ class NerdBot
      */
     public function getFreeleech($duration = 'default')
     {
-        $fl = \cache()->get('nerdbot-fl');
+        $fl = cache()->get('nerdbot-fl');
         if (! $fl) {
             $fl = Torrent::where('free', '=', 1)->count();
-            \cache()->put('nerdbot-fl', $fl, $this->expiresAt);
+            cache()->put('nerdbot-fl', $fl, $this->expiresAt);
         }
 
-        return \sprintf('Trenutno obstajajo %s Torrenti Freeleech so vklopljeni  ', $fl).\config('other.title').'!';
+        return sprintf('Trenutno obstajajo %s Torrenti Freeleech so vklopljeni ', $fl).config('other.title').'!';
     }
 
     /**
@@ -160,13 +161,13 @@ class NerdBot
      */
     public function getDoubleUpload($duration = 'default')
     {
-        $du = \cache()->get('nerdbot-doubleup');
+        $du = cache()->get('nerdbot-doubleup');
         if (! $du) {
             $du = Torrent::where('doubleup', '=', 1)->count();
-            \cache()->put('nerdbot-doubleup', $du, $this->expiresAt);
+            cache()->put('nerdbot-doubleup', $du, $this->expiresAt);
         }
 
-        return \sprintf('Trenutno obstajajo %s Vklopljeni torrenti za dvojno nalaganje ', $du).\config('other.title').'!';
+        return sprintf('Trenutno obstajajo %s Vklopljeni torrenti za dvojno nalaganje ', $du).config('other.title').'!';
     }
 
     /**
@@ -177,13 +178,13 @@ class NerdBot
      */
     public function getPeers($duration = 'default')
     {
-        $peers = \cache()->get('nerdbot-peers');
+        $peers = cache()->get('nerdbot-peers');
         if (! $peers) {
             $peers = Peer::count();
-            \cache()->put('nerdbot-peers', $peers, $this->expiresAt);
+            cache()->put('nerdbot-peers', $peers, $this->expiresAt);
         }
 
-        return \sprintf('Trenutno obstajajo %s Peers On ', $peers).\config('other.title').'!';
+        return sprintf('Trenutno obstajajo %s Peers On ', $peers).config('other.title').'!';
     }
 
     /**
@@ -194,13 +195,13 @@ class NerdBot
      */
     public function getBans($duration = 'default')
     {
-        $bans = \cache()->get('nerdbot-bans');
+        $bans = cache()->get('nerdbot-bans');
         if (! $bans) {
             $bans = Ban::whereNull('unban_reason')->whereNull('removed_at')->where('created_at', '>', $this->current->subDay())->count();
-            \cache()->put('nerdbot-bans', $bans, $this->expiresAt);
+            cache()->put('nerdbot-bans', $bans, $this->expiresAt);
         }
 
-        return \sprintf('V zadnjih 24 urah %s Uporabniki so bili prepovedani ', $bans).\config('other.title').'!';
+        return sprintf('V zadnjih 24 urah %s Uporabniki so bili prepovedani ', $bans).config('other.title').'!';
     }
 
     /**
@@ -211,13 +212,13 @@ class NerdBot
      */
     public function getWarnings($duration = 'default')
     {
-        $warnings = \cache()->get('nerdbot-warnings');
+        $warnings = cache()->get('nerdbot-warnings');
         if (! $warnings) {
             $warnings = Warning::where('created_at', '>', $this->current->subDay())->count();
-            \cache()->put('nerdbot-warnings', $warnings, $this->expiresAt);
+            cache()->put('nerdbot-warnings', $warnings, $this->expiresAt);
         }
 
-        return \sprintf('V zadnjih 24 urah %s Hit in Run opozorila je bil izdan dne ', $warnings).\config('other.title').'!';
+        return sprintf('V zadnjih 24 urah %s Hit in Run opozorila je bil izdan dne ', $warnings).config('other.title').'!';
     }
 
     /**
@@ -228,13 +229,13 @@ class NerdBot
      */
     public function getUploads($duration = 'default')
     {
-        $uploads = \cache()->get('nerdbot-uploads');
+        $uploads = cache()->get('nerdbot-uploads');
         if (! $uploads) {
             $uploads = Torrent::where('created_at', '>', $this->current->subDay())->count();
-            \cache()->put('nerdbot-uploads', $uploads, $this->expiresAt);
+            cache()->put('nerdbot-uploads', $uploads, $this->expiresAt);
         }
 
-        return \sprintf('V zadnjih 24 urah %s Torrenti so bili naloženi na ', $uploads).\config('other.title').'!';
+        return sprintf('V zadnjih 24 urah %s Torrenti so bili naloženi na ', $uploads).config('other.title').'!';
     }
 
     /**
@@ -245,13 +246,13 @@ class NerdBot
      */
     public function getLogins($duration = 'default')
     {
-        $logins = \cache()->get('nerdbot-logins');
+        $logins = cache()->get('nerdbot-logins');
         if (! $logins) {
             $logins = User::whereNotNull('last_login')->where('last_login', '>', $this->current->subDay())->count();
-            \cache()->put('nerdbot-logins', $logins, $this->expiresAt);
+            cache()->put('nerdbot-logins', $logins, $this->expiresAt);
         }
 
-        return \sprintf('V zadnjih 24 urah %s Edinstveni uporabniki so se prijavili ', $logins).\config('other.title').'!';
+        return sprintf('V zadnjih 24 urah %s Edinstveni uporabniki so se prijavili ', $logins).config('other.title').'!';
     }
 
     /**
@@ -262,13 +263,13 @@ class NerdBot
      */
     public function getRegistrations($duration = 'default')
     {
-        $registrations = \cache()->get('nerdbot-users');
+        $registrations = cache()->get('nerdbot-users');
         if (! $registrations) {
             $registrations = User::where('created_at', '>', $this->current->subDay())->count();
-            \cache()->put('nerdbot-users', $registrations, $this->expiresAt);
+            cache()->put('nerdbot-users', $registrations, $this->expiresAt);
         }
 
-        return \sprintf('V zadnjih 24 urah %s Uporabniki so se registrirali na ', $registrations).\config('other.title').'!';
+        return sprintf('V zadnjih 24 urah %s Uporabniki so se registrirali na ', $registrations).config('other.title').'!';
     }
 
     /**
@@ -279,10 +280,10 @@ class NerdBot
      */
     public function getDonations($duration = 'default')
     {
-        $donations = \cache()->get('nerdbot-donations');
+        $donations = cache()->get('nerdbot-donations');
         if (! $donations) {
             $donations = BotTransaction::with('user', 'bot')->where('to_bot', '=', 1)->latest()->limit(10)->get();
-            \cache()->put('nerdbot-donations', $donations, $this->expiresAt);
+            cache()->put('nerdbot-donations', $donations, $this->expiresAt);
         }
 
         $donationDump = '';
@@ -314,15 +315,15 @@ class NerdBot
     /**
      * Send Bot Donation.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function putDonate($amount = 0, $note = '')
     {
-        $output = \implode(' ', $note);
-        $v = \validator(['bot_id' => $this->bot->id, 'amount'=> $amount, 'note'=> $output], [
-            'bot_id'   => 'required|exists:bots,id|max:999',
-            'amount'   => \sprintf('required|numeric|min:1|max:%s', $this->target->seedbonus),
-            'note'     => 'required|string',
+        $output = implode(' ', $note);
+        $v = validator(['bot_id' => $this->bot->id, 'amount' => $amount, 'note' => $output], [
+            'bot_id' => 'required|exists:bots,id|max:999',
+            'amount' => sprintf('required|numeric|min:1|max:%s', $this->target->seedbonus),
+            'note'   => 'required|string',
         ]);
         if ($v->passes()) {
             $value = $amount;
@@ -342,7 +343,7 @@ class NerdBot
             $botTransaction->save();
 
             $donations = BotTransaction::with('user', 'bot')->where('bot_id', '=', $this->bot->id)->where('to_bot', '=', 1)->latest()->limit(10)->get();
-            \cache()->put('casinobot-donations', $donations, $this->expiresAt);
+            cache()->put('casinobot-donations', $donations, $this->expiresAt);
 
             return 'Vaša donacija za '.$this->bot->name.' za '.$amount.' BON je bil poslan!';
         }
@@ -375,16 +376,16 @@ class NerdBot
             $log = 'Vsi '.$this->bot->name.' ukazi morajo biti zasebno sporočilo ali začeti z /'.$this->bot->command.' za !'.$this->bot->command.'. Rabim pomoč? Vrsta /'.$this->bot->command.' pomagaj in pomagali ti bodo.';
         }
 
-        $command = @\explode(' ', (string) $message);
+        $command = @explode(' ', (string) $message);
 
         $wildcard = null;
         $params = $command[$y] ?? null;
 
         if ($params != null) {
             $clone = $command;
-            \array_shift($clone);
-            \array_shift($clone);
-            \array_shift($clone);
+            array_shift($clone);
+            array_shift($clone);
+            array_shift($clone);
             $wildcard = $clone;
         }
 
@@ -475,7 +476,7 @@ class NerdBot
 
         if ($type == 'message' || $type == 'private') {
             $receiverDirty = 0;
-            $receiverEchoes = \cache()->get('user-echoes'.$target->id);
+            $receiverEchoes = cache()->get('user-echoes'.$target->id);
             if (! $receiverEchoes || ! \is_array($receiverEchoes) || \count($receiverEchoes) < 1) {
                 $receiverEchoes = UserEcho::with(['room', 'target', 'bot'])->whereRaw('user_id = ?', [$target->id])->get();
             }
@@ -498,12 +499,12 @@ class NerdBot
 
             if ($receiverDirty == 1) {
                 $expiresAt = Carbon::now()->addMinutes(60);
-                \cache()->put('user-echoes'.$target->id, $receiverEchoes, $expiresAt);
-                \event(new Chatter('echo', $target->id, UserEchoResource::collection($receiverEchoes)));
+                cache()->put('user-echoes'.$target->id, $receiverEchoes, $expiresAt);
+                event(new Chatter('echo', $target->id, UserEchoResource::collection($receiverEchoes)));
             }
 
             $receiverDirty = 0;
-            $receiverAudibles = \cache()->get('user-audibles'.$target->id);
+            $receiverAudibles = cache()->get('user-audibles'.$target->id);
             if (! $receiverAudibles || ! \is_array($receiverAudibles) || \count($receiverAudibles) < 1) {
                 $receiverAudibles = UserAudible::with(['room', 'target', 'bot'])->whereRaw('user_id = ?', [$target->id])->get();
             }
@@ -526,8 +527,8 @@ class NerdBot
 
             if ($receiverDirty == 1) {
                 $expiresAt = Carbon::now()->addMinutes(60);
-                \cache()->put('user-audibles'.$target->id, $receiverAudibles, $expiresAt);
-                \event(new Chatter('audible', $target->id, UserAudibleResource::collection($receiverAudibles)));
+                cache()->put('user-audibles'.$target->id, $receiverAudibles, $expiresAt);
+                event(new Chatter('audible', $target->id, UserAudibleResource::collection($receiverAudibles)));
             }
 
             if ($txt != '') {
@@ -536,7 +537,7 @@ class NerdBot
                 $message = $this->chatRepository->privateMessage(1, $roomId, $txt, $target->id, $this->bot->id);
             }
 
-            return \response('success');
+            return response('success');
         }
 
         if ($type == 'echo') {
@@ -545,7 +546,7 @@ class NerdBot
                 $message = $this->chatRepository->botMessage($this->bot->id, $roomId, $txt, $target->id);
             }
 
-            return \response('success');
+            return response('success');
         }
 
         if ($type == 'public') {
@@ -554,7 +555,7 @@ class NerdBot
                 $dumproom = $this->chatRepository->message(1, $target->chatroom->id, $txt, null, $this->bot->id);
             }
 
-            return \response('success');
+            return response('success');
         }
 
         return true;

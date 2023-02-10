@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Ramsey\Uuid\Uuid;
+use Exception;
 
 /**
  * @see \Tests\Todo\Feature\Http\Controllers\InviteControllerTest
@@ -24,11 +25,11 @@ class InviteController extends Controller
     {
         $user = $request->user();
         $owner = User::where('username', '=', $username)->firstOrFail();
-        \abort_unless($user->group->is_modo || $user->id === $owner->id, 403);
+        abort_unless($user->group->is_modo || $user->id === $owner->id, 403);
 
         $invites = Invite::with(['sender', 'receiver'])->where('user_id', '=', $owner->id)->latest()->paginate(25);
 
-        return \view('user.invite.index', ['user' => $owner, 'invites' => $invites, 'route' => 'invite']);
+        return view('user.invite.index', ['user' => $owner, 'invites' => $invites, 'route' => 'invite']);
     }
 
     /**
@@ -38,49 +39,49 @@ class InviteController extends Controller
     {
         $user = $request->user();
 
-        if (! \config('other.invite-only')) {
-            return \to_route('home.index')
-            ->withErrors(\trans('user.invites-disabled'));
+        if (! config('other.invite-only')) {
+            return to_route('home.index')
+                ->withErrors(trans('user.invites-disabled'));
         }
 
         if ($user->can_invite == 0) {
-            return \to_route('home.index')
-            ->withErrors(\trans('user.invites-banned'));
+            return to_route('home.index')
+                ->withErrors(trans('user.invites-banned'));
         }
 
-        if (\config('other.invites_restriced') && ! \in_array($user->group->name, \config('other.invite_groups'), true)) {
-            return \to_route('home.index')
-                ->withErrors(\trans('user.invites-disabled-group'));
+        if (config('other.invites_restriced') && ! \in_array($user->group->name, config('other.invite_groups'), true)) {
+            return to_route('home.index')
+                ->withErrors(trans('user.invites-disabled-group'));
         }
 
-        return \view('user.invite.create', ['user' => $user, 'route' => 'invite']);
+        return view('user.invite.create', ['user' => $user, 'route' => 'invite']);
     }
 
     /**
      * Send Invite.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         $carbon = new Carbon();
         $user = $request->user();
 
-        if (\config('other.invites_restriced') && ! \in_array($user->group->name, \config('other.invite_groups'), true)) {
-            return \to_route('home.index')
-                ->withErrors(\trans('user.invites-disabled-group'));
+        if (config('other.invites_restriced') && ! \in_array($user->group->name, config('other.invite_groups'), true)) {
+            return to_route('home.index')
+                ->withErrors(trans('user.invites-disabled-group'));
         }
 
         if ($user->invites <= 0) {
-            return \to_route('invites.create')
-                ->withErrors(\trans('user.not-enough-invites'));
+            return to_route('invites.create')
+                ->withErrors(trans('user.not-enough-invites'));
         }
 
         $exist = Invite::where('email', '=', $request->input('email'))->first();
 
         if ($exist) {
-            return \to_route('invites.create')
-                ->withErrors(\trans('user.invite-already-sent'));
+            return to_route('invites.create')
+                ->withErrors(trans('user.invite-already-sent'));
         }
 
         $code = Uuid::uuid4()->toString();
@@ -88,11 +89,11 @@ class InviteController extends Controller
         $invite->user_id = $user->id;
         $invite->email = $request->input('email');
         $invite->code = $code;
-        $invite->expires_on = $carbon->copy()->addDays(\config('other.invite_expire'));
+        $invite->expires_on = $carbon->copy()->addDays(config('other.invite_expire'));
         $invite->custom = $request->input('message');
 
-        if (\config('email-blacklist.enabled')) {
-            $v = \validator($invite->toArray(), [
+        if (config('email-blacklist.enabled')) {
+            $v = validator($invite->toArray(), [
                 'email' => [
                     'required',
                     'string',
@@ -106,14 +107,14 @@ class InviteController extends Controller
                 'custom' => 'required',
             ]);
         } else {
-            $v = \validator($invite->toArray(), [
+            $v = validator($invite->toArray(), [
                 'email'  => 'required|string|email|max:70|unique:users',
                 'custom' => 'required',
             ]);
         }
 
         if ($v->fails()) {
-            return \to_route('invites.create')
+            return to_route('invites.create')
                 ->withErrors($v->errors());
         }
 
@@ -122,8 +123,8 @@ class InviteController extends Controller
         $user->invites--;
         $user->save();
 
-        return \to_route('invites.create')
-            ->withSuccess(\trans('user.invite-sent-success'));
+        return to_route('invites.create')
+            ->withSuccess(trans('user.invite-sent-success'));
     }
 
     /**
@@ -134,16 +135,16 @@ class InviteController extends Controller
         $user = $request->user();
         $invite = Invite::findOrFail($id);
 
-        \abort_unless($invite->user_id === $user->id, 403);
+        abort_unless($invite->user_id === $user->id, 403);
 
         if ($invite->accepted_by !== null) {
-            return \to_route('invites.index', ['username' => $user->username])
-                ->withErrors(\trans('user.invite-already-used'));
+            return to_route('invites.index', ['username' => $user->username])
+                ->withErrors(trans('user.invite-already-used'));
         }
 
         Mail::to($invite->email)->send(new InviteUser($invite));
 
-        return \to_route('invites.index', ['username' => $user->username])
-            ->withSuccess(\trans('user.invite-resent-success'));
+        return to_route('invites.index', ['username' => $user->username])
+            ->withSuccess(trans('user.invite-resent-success'));
     }
 }

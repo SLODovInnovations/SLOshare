@@ -29,29 +29,29 @@ class TorrentBuffController extends Controller
     {
         $user = $request->user();
 
-        \abort_unless($user->group->is_modo || $user->group->is_internal, 403);
+        abort_unless($user->group->is_modo || $user->group->is_internal, 403);
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
         $torrent->bumped_at = Carbon::now();
         $torrent->save();
 
         // Announce To Chat
-        $torrentUrl = \href_torrent($torrent);
-        $profileUrl = \href_profile($user);
+        $torrentUrl = href_torrent($torrent);
+        $profileUrl = href_profile($user);
 
         $this->chatRepository->systemMessage(
-            \sprintf('OPOZORILO, [url=%s]%s[/url] je naletel na vrh [url=%s]%s[/url]! Uporabilo bi lahko več semen!', $torrentUrl, $torrent->name, $profileUrl, $user->username)
+            sprintf('OPOZORILO, [url=%s]%s[/url] je naletel na vrh [url=%s]%s[/url]! Uporabilo bi lahko več semen!', $torrentUrl, $torrent->name, $profileUrl, $user->username)
         );
 
         // Announce To IRC
-        if (\config('irc-bot.enabled')) {
-            $appname = \config('app.name');
+        if (config('irc-bot.enabled')) {
+            $appname = config('app.name');
             $ircAnnounceBot = new IRCAnnounceBot();
-            $ircAnnounceBot->message(\config('irc-bot.channel'), '['.$appname.'] Uporabnik '.$user->username.' je udaril '.$torrent->name.' , lahko bi porabil več semen!');
-            $ircAnnounceBot->message(\config('irc-bot.channel'), '[Kategorija: '.$torrent->category->name.'] [Vrsta: '.$torrent->type->name.'] [Velikost:'.$torrent->getSize().']');
-            $ircAnnounceBot->message(\config('irc-bot.channel'), \sprintf('[Povezava: %s]', $torrentUrl));
+            $ircAnnounceBot->message(config('irc-bot.channel'), '['.$appname.'] Uporabnik '.$user->username.' je udaril '.$torrent->name.' , lahko bi porabil več semen!');
+            $ircAnnounceBot->message(config('irc-bot.channel'), '[Kategorija: '.$torrent->category->name.'] [Vrsta: '.$torrent->type->name.'] [Velikost:'.$torrent->getSize().']');
+            $ircAnnounceBot->message(config('irc-bot.channel'), \sprintf('[Povezava: %s]', $torrentUrl));
         }
 
-        return \to_route('torrent', ['id' => $torrent->id])
+        return to_route('torrent', ['id' => $torrent->id])
             ->withSuccess('Torrent je bil uspešno dvignjen na vrh!');
     }
 
@@ -62,12 +62,12 @@ class TorrentBuffController extends Controller
     {
         $user = $request->user();
 
-        \abort_unless($user->group->is_modo || $user->group->is_internal, 403);
+        abort_unless($user->group->is_modo || $user->group->is_internal, 403);
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
         $torrent->sticky = $torrent->sticky == 0 ? '1' : '0';
         $torrent->save();
 
-        return \to_route('torrent', ['id' => $torrent->id])
+        return to_route('torrent', ['id' => $torrent->id])
             ->withSuccess('Stanje torrenta je bilo prilagojeno!');
     }
 
@@ -78,17 +78,17 @@ class TorrentBuffController extends Controller
     {
         $user = $request->user();
 
-        \abort_unless($user->group->is_modo || $user->group->is_internal, 403);
+        abort_unless($user->group->is_modo || $user->group->is_internal, 403);
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
-        $torrentUrl = \href_torrent($torrent);
+        $torrentUrl = href_torrent($torrent);
         $torrentFlAmount = $request->input('freeleech');
 
-        $v = \validator($request->input(), [
+        $v = validator($request->input(), [
             'freeleech' => 'numeric|not_in:0',
         ]);
 
         if ($v->fails()) {
-            return \to_route('torrent', ['id' => $torrent->id])
+            return to_route('torrent', ['id' => $torrent->id])
                 ->withErrors($v->errors());
         }
 
@@ -98,11 +98,11 @@ class TorrentBuffController extends Controller
             if ($fl_until !== null) {
                 $torrent->fl_until = Carbon::now()->addDays($request->input('fl_until'));
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s]%s[/url] je bilo odobreno %s%% Freeleech za '.$request->input('fl_until').' dni. :stopwatch:', $torrentUrl, $torrent->name, $torrentFlAmount)
+                    sprintf('Dame in Gospodje, [url=%s]%s[/url] je bilo odobreno %s%% Freeleech za '.$request->input('fl_until').' dni. :stopwatch:', $torrentUrl, $torrent->name, $torrentFlAmount)
                 );
             } else {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s]%s[/url] je bilo odobreno %s%% Freeleech! Prenesi, dokler lahko! :fire:', $torrentUrl, $torrent->name, $torrentFlAmount)
+                    sprintf('Dame in Gospodje, [url=%s]%s[/url] je bilo odobreno %s%% Freeleech! Prenesi, dokler lahko! :fire:', $torrentUrl, $torrent->name, $torrentFlAmount)
                 );
             }
         } else {
@@ -111,13 +111,13 @@ class TorrentBuffController extends Controller
             $torrent->free = '0';
 
             $this->chatRepository->systemMessage(
-                \sprintf('Dame in Gospodje, [url=%s]%s[/url] je bil preklican %s%% Freeleech! :poop:', $torrentUrl, $torrent->name, $torrentFlAmount)
+                sprintf('Dame in Gospodje, [url=%s]%s[/url] je bil preklican %s%% Freeleech! :poop:', $torrentUrl, $torrent->name, $torrentFlAmount)
             );
         }
 
         $torrent->save();
 
-        return \to_route('torrent', ['id' => $torrent->id])
+        return to_route('torrent', ['id' => $torrent->id])
             ->withSuccess('Torrent FL je bil prilagojen!');
     }
 
@@ -128,7 +128,7 @@ class TorrentBuffController extends Controller
     {
         $user = $request->user();
 
-        \abort_unless($user->group->is_modo || $user->group->is_internal, 403);
+        abort_unless($user->group->is_modo || $user->group->is_internal, 403);
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
 
         if ($torrent->featured == 0) {
@@ -142,17 +142,17 @@ class TorrentBuffController extends Controller
             $featured->torrent_id = $torrent->id;
             $featured->save();
 
-            $torrentUrl = \href_torrent($torrent);
-            $profileUrl = \href_profile($user);
+            $torrentUrl = href_torrent($torrent);
+            $profileUrl = href_profile($user);
             $this->chatRepository->systemMessage(
-                \sprintf('Dame in Gospodje, [url=%s]%s[/url] je na drsnik za predstavljene torrente dodal [url=%s]%s[/url]! Prenesi, dokler lahko! :fire:', $torrentUrl, $torrent->name, $profileUrl, $user->username)
+                sprintf('Dame in Gospodje, [url=%s]%s[/url] je na drsnik za predstavljene torrente dodal [url=%s]%s[/url]! Prenesi, dokler lahko! :fire:', $torrentUrl, $torrent->name, $profileUrl, $user->username)
             );
 
-            return \to_route('torrent', ['id' => $torrent->id])
+            return to_route('torrent', ['id' => $torrent->id])
                 ->withSuccess('Torrent je zdaj predstavljen!');
         }
 
-        return \to_route('torrent', ['id' => $torrent->id])
+        return to_route('torrent', ['id' => $torrent->id])
             ->withErrors('Torrent je že predstavljen!');
     }
 
@@ -163,7 +163,7 @@ class TorrentBuffController extends Controller
     {
         $user = $request->user();
 
-        \abort_unless($user->group->is_modo, 403);
+        abort_unless($user->group->is_modo, 403);
 
         $featured_torrent = FeaturedTorrent::where('torrent_id', '=', $id)->firstOrFail();
 
@@ -175,16 +175,16 @@ class TorrentBuffController extends Controller
             $torrent->featured = '0';
             $torrent->save();
 
-            $appurl = \config('app.url');
+            $appurl = config('app.url');
 
             $this->chatRepository->systemMessage(
-                \sprintf('Dame in Gospodje, [url=%s/torrents/%s]%s[/url] ni več predstavljen. :poop:', $appurl, $torrent->id, $torrent->name)
+                sprintf('Dame in Gospodje, [url=%s/torrents/%s]%s[/url] ni več predstavljen. :poop:', $appurl, $torrent->id, $torrent->name)
             );
         }
 
         $featured_torrent->delete();
 
-        return \to_route('torrent', ['id' => $torrent->id])
+        return to_route('torrent', ['id' => $torrent->id])
             ->withSuccess('Preklicano predstavljeno iz Torrenta!');
     }
 
@@ -195,9 +195,9 @@ class TorrentBuffController extends Controller
     {
         $user = $request->user();
 
-        \abort_unless($user->group->is_modo || $user->group->is_internal, 403);
+        abort_unless($user->group->is_modo || $user->group->is_internal, 403);
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
-        $torrentUrl = \href_torrent($torrent);
+        $torrentUrl = href_torrent($torrent);
 
         if ($torrent->doubleup == 0) {
             $torrent->doubleup = '1';
@@ -205,23 +205,23 @@ class TorrentBuffController extends Controller
             if ($du_until !== null) {
                 $torrent->du_until = Carbon::now()->addDays($request->input('du_until'));
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s]%s[/url] je bila odobreno dvojno nalaganje za '.$request->input('du_until').' dni. :stopwatch:', $torrentUrl, $torrent->name)
+                    sprintf('Dame in Gospodje, [url=%s]%s[/url] je bila odobreno dvojno nalaganje za '.$request->input('du_until').' dni. :stopwatch:', $torrentUrl, $torrent->name)
                 );
             } else {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s]%s[/url] je bila odobreno dvojno nalaganje! Prenesi, dokler lahko! :fire:', $torrentUrl, $torrent->name)
+                    sprintf('Dame in Gospodje, [url=%s]%s[/url] je bila odobreno dvojno nalaganje! Prenesi, dokler lahko! :fire:', $torrentUrl, $torrent->name)
                 );
             }
         } else {
             $torrent->doubleup = '0';
             $this->chatRepository->systemMessage(
-                \sprintf('Dame in Gospodje, [url=%s]%s[/url] je bil preklican za dvojno nalaganje! :poop:', $torrentUrl, $torrent->name)
+                sprintf('Dame in Gospodje, [url=%s]%s[/url] je bil preklican za dvojno nalaganje! :poop:', $torrentUrl, $torrent->name)
             );
         }
 
         $torrent->save();
 
-        return \to_route('torrent', ['id' => $torrent->id])
+        return to_route('torrent', ['id' => $torrent->id])
             ->withSuccess('Torrent dvojno nalaganje je bil prilagojen!');
     }
 
@@ -233,7 +233,7 @@ class TorrentBuffController extends Controller
         $user = $request->user();
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
 
-        $activeToken = \cache()->get('freeleech_token:'.$user->id.':'.$torrent->id);
+        $activeToken = cache()->get('freeleech_token:'.$user->id.':'.$torrent->id);
 
         if ($user->fl_tokens >= 1 && ! $activeToken) {
             $freeleechToken = new FreeleechToken();
@@ -244,13 +244,13 @@ class TorrentBuffController extends Controller
             $user->fl_tokens -= '1';
             $user->save();
 
-            \cache()->put('freeleech_token:'.$user->id.':'.$torrent->id, true);
+            cache()->put('freeleech_token:'.$user->id.':'.$torrent->id, true);
 
-            return \to_route('torrent', ['id' => $torrent->id])
+            return to_route('torrent', ['id' => $torrent->id])
                 ->withSuccess('Za ta torrent ste uspešno aktivirali žeton Freeleech!');
         }
 
-        return \to_route('torrent', ['id' => $torrent->id])
+        return to_route('torrent', ['id' => $torrent->id])
             ->withErrors('Nimate dovolj žetonov Freeleech ali pa imate enega že aktiviranega na tem torrentu.');
     }
 }

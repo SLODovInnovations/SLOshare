@@ -59,23 +59,23 @@ class AutoGraveyard extends Command
                 $reward->rewarded = 1;
                 $reward->save();
 
-                $user->fl_tokens += \config('graveyard.reward');
+                $user->fl_tokens += config('graveyard.reward');
                 $user->save();
 
                 // Auto Shout
-                $appurl = \config('app.url');
+                $appurl = config('app.url');
 
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s/users/%s]%s[/url] je uspešno vstal [url=%s/torrents/%s]%s[/url]. :zombie:', $appurl, $user->username, $user->username, $appurl, $torrent->id, $torrent->name)
+                    sprintf('Dame in Gospodje, [url=%s/users/%s]%s[/url] je uspešno vstal [url=%s/torrents/%s]%s[/url]. :zombie:', $appurl, $user->username, $user->username, $appurl, $torrent->id, $torrent->name)
                 );
 
                 // Bump Torrent With FL
-                $torrentUrl = \href_torrent($torrent);
+                $torrentUrl = href_torrent($torrent);
                 $torrent->bumped_at = Carbon::now();
                 $torrent->free = 100;
                 $torrent->fl_until = Carbon::now()->addDays(3);
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s]%s[/url] je bila odobrena 100%% Freeleech za 3 dni in je bil prilepljen na vrh. :stopwatch:', $torrentUrl, $torrent->name)
+                    sprintf('Dame in Gospodje, [url=%s]%s[/url] je bila odobrena 100%% Freeleech za 3 dni in je bil prilepljen na vrh. :stopwatch:', $torrentUrl, $torrent->name)
                 );
                 $torrent->save();
 
@@ -84,7 +84,7 @@ class AutoGraveyard extends Command
                 $pm->sender_id = 1;
                 $pm->receiver_id = $user->id;
                 $pm->subject = 'Uspešno vstajenje pokopališča';
-                $pm->message = \sprintf('Uspešno je vstal [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] :zombie: ! Hvala, ker ste torrent vrnili od mrtvih! Uživajte v žetonih freeleech!
+                $pm->message = sprintf('Uspešno je vstal [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] :zombie: ! Hvala, ker ste torrent vrnili od mrtvih! Uživajte v žetonih freeleech!
                 [color=red][b]TO JE AVTOMATIZOVANO SISTEMSKO SPOROČILO, PROSIMO, NE ODGOVARAJTE![/b][/color]';
                 $pm->save();
             }

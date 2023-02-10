@@ -34,7 +34,7 @@ class StaffTicketCreated extends Notification
         return (new MailMessage())
             ->subject('Napaka je bila ustvarjena (Napaka # '.$this->ticket->id.')')
             ->line('Napaka je bila ustvarjena.')
-            ->action('Ogled napake', \route('tickets.show', ['id' => $this->ticket->id]));
+            ->action('Ogled napake', route('tickets.show', ['id' => $this->ticket->id]));
     }
 
     /**

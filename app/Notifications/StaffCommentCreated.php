@@ -32,9 +32,9 @@ class StaffCommentCreated extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage())
-                    ->subject('Dodan je bil komentar (OSEBJU)')
-                    ->line('Dodan je bil komentar')
-                    ->action('Ogled napake', \route('tickets.show', ['id' => $this->comment->ticket->id]));
+            ->subject('Dodan je bil komentar (OSEBJU)')
+            ->line('Dodan je bil komentar')
+            ->action('Ogled napake', route('tickets.show', ['id' => $this->comment->ticket->id]));
     }
 
     /**

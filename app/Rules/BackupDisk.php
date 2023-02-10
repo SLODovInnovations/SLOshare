@@ -10,7 +10,7 @@ class BackupDisk implements Rule
     {
         $configuredBackupDisks = config('backup.backup.destination.disks');
 
-        return in_array($value, $configuredBackupDisks);
+        return \in_array($value, $configuredBackupDisks);
     }
 
     public function message(): string

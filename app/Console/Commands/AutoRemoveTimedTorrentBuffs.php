@@ -39,7 +39,7 @@ class AutoRemoveTimedTorrentBuffs extends Command
      */
     public function handle(): void
     {
-        $appurl = \config('app.url');
+        $appurl = config('app.url');
 
         $flTorrents = Torrent::whereNotNull('fl_until')->where('fl_until', '<', Carbon::now()->toDateTimeString())->get();
 
@@ -51,7 +51,7 @@ class AutoRemoveTimedTorrentBuffs extends Command
 
                 // Announce To Chat
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s/torrents/%s]%s[/url] čas Freeleech buff je potekel.', $appurl, $torrent->id, $torrent->name)
+                    sprintf('Dame in Gospodje, [url=%s/torrents/%s]%s[/url] čas Freeleech buff je potekel.', $appurl, $torrent->id, $torrent->name)
                 );
             }
         }
@@ -66,7 +66,7 @@ class AutoRemoveTimedTorrentBuffs extends Command
 
                 // Announce To Chat
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s/torrents/%s]%s[/url] časovno dvojno nalaganje buff je poteklo.', $appurl, $torrent->id, $torrent->name)
+                    sprintf('Dame in Gospodje, [url=%s/torrents/%s]%s[/url] časovno dvojno nalaganje buff je poteklo.', $appurl, $torrent->id, $torrent->name)
                 );
             }
         }

@@ -20,9 +20,9 @@ class StoreInternalRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'      => 'required',
-            'icon'      => 'required',
-            'effect'    => 'required',
+            'name'   => 'required',
+            'icon'   => 'required',
+            'effect' => 'required',
         ];
     }
 }

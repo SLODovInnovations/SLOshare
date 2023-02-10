@@ -34,7 +34,7 @@ class UserTicketAssigned extends Notification
         return (new MailMessage())
             ->subject('Vaša napaka je bila dodeljena (Napaka # '.$this->ticket->id.')')
             ->line('Vaša napaka je bila ustvarjena '.$this->ticket->user->username)
-            ->action('Ogled napake', \route('tickets.show', ['id' => $this->ticket->id]));
+            ->action('Ogled napake', route('tickets.show', ['id' => $this->ticket->id]));
     }
 
     /**

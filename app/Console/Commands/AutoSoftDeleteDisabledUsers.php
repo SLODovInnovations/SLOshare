@@ -20,6 +20,7 @@ use App\Models\Torrent;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
+use Exception;
 
 /**
  * @see \Tests\Unit\Console\Commands\AutoSoftDeleteDisabledUsersTest
@@ -43,17 +44,17 @@ class AutoSoftDeleteDisabledUsers extends Command
     /**
      * Execute the console command.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle(): void
     {
-        if (\config('pruning.user_pruning')) {
-            $disabledGroup = \cache()->rememberForever('disabled_group', fn () => Group::where('slug', '=', 'disabled')->pluck('id'));
-            $prunedGroup = \cache()->rememberForever('pruned_group', fn () => Group::where('slug', '=', 'pruned')->pluck('id'));
+        if (config('pruning.user_pruning')) {
+            $disabledGroup = cache()->rememberForever('disabled_group', fn () => Group::where('slug', '=', 'disabled')->pluck('id'));
+            $prunedGroup = cache()->rememberForever('pruned_group', fn () => Group::where('slug', '=', 'pruned')->pluck('id'));
 
             $current = Carbon::now();
             $users = User::where('group_id', '=', $disabledGroup[0])
-                ->where('disabled_at', '<', $current->copy()->subDays(\config('pruning.soft_delete'))->toDateTimeString())
+                ->where('disabled_at', '<', $current->copy()->subDays(config('pruning.soft_delete'))->toDateTimeString())
                 ->get();
 
             foreach ($users as $user) {
@@ -70,7 +71,7 @@ class AutoSoftDeleteDisabledUsers extends Command
                 $user->deleted_by = 1;
                 $user->save();
 
-                \cache()->forget('user:'.$user->passkey);
+                cache()->forget('user:'.$user->passkey);
 
                 // Removes UserID from Torrents if any and replaces with System UserID (1)
                 foreach (Torrent::withAnyStatus()->where('user_id', '=', $user->id)->get() as $tor) {
@@ -164,7 +165,7 @@ class AutoSoftDeleteDisabledUsers extends Command
                 foreach (FreeleechToken::where('user_id', '=', $user->id)->get() as $token) {
                     $token->delete();
 
-                    \cache()->forget('freeleech_token:'.$token->user_id.':'.$token->torrent_id);
+                    cache()->forget('freeleech_token:'.$token->user_id.':'.$token->torrent_id);
                 }
 
                 $user->delete();

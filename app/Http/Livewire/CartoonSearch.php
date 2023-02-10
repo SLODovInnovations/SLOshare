@@ -38,7 +38,7 @@ class CartoonSearch extends Component
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return \view('livewire.cartoon-search', [
+        return view('livewire.cartoon-search', [
             'cartoons' => $this->cartoons,
         ]);
     }

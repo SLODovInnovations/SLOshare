@@ -28,7 +28,7 @@ class EarningController extends Controller
     {
         $user = User::where('username', '=', $username)->sole();
 
-        \abort_unless($request->user()->id == $user->id || $request->user()->group->is_modo, 403);
+        abort_unless($request->user()->id == $user->id || $request->user()->group->is_modo, 403);
 
         $userbon = $user->getSeedbonus();
 
@@ -51,8 +51,8 @@ class EarningController extends Controller
             ->whereHas(
                 'torrent',
                 fn ($query) => $query
-                ->where('seeders', '=', 1)
-                ->where('times_completed', '>=', 3)
+                    ->where('seeders', '=', 1)
+                    ->where('times_completed', '>=', 3)
             )
             ->count();
 
@@ -66,8 +66,8 @@ class EarningController extends Controller
             ->whereHas(
                 'torrent',
                 fn ($query) => $query
-                ->where('created_at', '<', Carbon::now()->subMonths(6)->toDateTimeString())
-                ->where('created_at', '>', Carbon::now()->subYear()->toDateTimeString()),
+                    ->where('created_at', '<', Carbon::now()->subMonths(6)->toDateTimeString())
+                    ->where('created_at', '>', Carbon::now()->subYear()->toDateTimeString()),
             )
             ->count();
 
@@ -81,8 +81,8 @@ class EarningController extends Controller
             ->whereHas(
                 'torrent',
                 fn ($query) => $query
-                ->where('size', '>=', $this->byteUnits->bytesFromUnit('25GiB'))
-                ->where('size', '<', $this->byteUnits->bytesFromUnit('100GiB'))
+                    ->where('size', '>=', $this->byteUnits->bytesFromUnit('25GiB'))
+                    ->where('size', '<', $this->byteUnits->bytesFromUnit('100GiB'))
             )
             ->count();
 
@@ -91,8 +91,8 @@ class EarningController extends Controller
             ->whereHas(
                 'torrent',
                 fn ($query) => $query
-                ->where('size', '>=', $this->byteUnits->bytesFromUnit('1GiB'))
-                ->where('size', '<', $this->byteUnits->bytesFromUnit('25GiB'))
+                    ->where('size', '>=', $this->byteUnits->bytesFromUnit('1GiB'))
+                    ->where('size', '<', $this->byteUnits->bytesFromUnit('25GiB'))
             )
             ->count();
 
@@ -138,22 +138,22 @@ class EarningController extends Controller
             + 1.00 * $mvp
             + 2.00 * $legend;
 
-        return \view('user.earning.index', [
-            'user'              => $user,
-            'userbon'           => $userbon,
-            'dying'             => $dying,
-            'legendary'         => $legendary,
-            'old'               => $old,
-            'huge'              => $huge,
-            'large'             => $large,
-            'regular'           => $regular,
-            'participant'       => $participant,
-            'teamplayer'        => $teamplayer,
-            'committed'         => $committed,
-            'mvp'               => $mvp,
-            'legend'            => $legend,
-            'total'             => $total,
-            'username'          => $username,
+        return view('user.earning.index', [
+            'user'        => $user,
+            'userbon'     => $userbon,
+            'dying'       => $dying,
+            'legendary'   => $legendary,
+            'old'         => $old,
+            'huge'        => $huge,
+            'large'       => $large,
+            'regular'     => $regular,
+            'participant' => $participant,
+            'teamplayer'  => $teamplayer,
+            'committed'   => $committed,
+            'mvp'         => $mvp,
+            'legend'      => $legend,
+            'total'       => $total,
+            'username'    => $username,
         ]);
     }
 }

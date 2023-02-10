@@ -11,9 +11,9 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('cartoon_tv_crew', function (Blueprint $table) {
+        Schema::table('cartoon_tv_crew', function (Blueprint $table): void {
             $table->string('department')->nullable();
             $table->string('job')->nullable();
         });

@@ -22,18 +22,18 @@ class BackupPassword
      */
     public function __construct(string $path)
     {
-        $this->password = \config('backup.security.password');
+        $this->password = config('backup.security.password');
 
         // If no password is set, just return the backup-path
         if (! $this->password) {
             return $this->path = $path;
         }
 
-        \consoleOutput()->info('Uporaba gesla in šifriranja za zip z uporabo ZipArchive...');
+        consoleOutput()->info('Uporaba gesla in šifriranja za zip z uporabo ZipArchive...');
 
         $this->makeZip($path);
 
-        \consoleOutput()->info('Uspešno uporabljeno geslo in šifriranje za zip.');
+        consoleOutput()->info('Uspešno uporabljeno geslo in šifriranje za zip.');
     }
 
     /**
@@ -41,7 +41,7 @@ class BackupPassword
      */
     protected function makeZip(string $path): void
     {
-        $encryption = \config('backup.security.encryption');
+        $encryption = config('backup.security.encryption');
 
         $zipArchive = new ZipArchive();
 

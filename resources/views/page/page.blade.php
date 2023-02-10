@@ -16,7 +16,7 @@
 @section('main')
     <section class="panelV2">
         <h2 class="panel__heading">{{ $page->name }}</h2>
-        <div class="panel__body">
+        <div class="panel__body bbcode-rendered">
             @joypixels($page->getContentHtml())
         </div>
     </section>
@@ -30,16 +30,17 @@
             <dd>{{ $page->created_at }}</dd>
             <dt>{{ __('torrent.updated_at') }}</dt>
             <dd>{{ $page->updated_at }}</dd>
+        </dl>
     </section>
 @endsection
 
 @section('javascripts')
-    @if(request()->url() === config('other.rules_url') && auth()->user()->read_rules == 0)
+    @if(parse_url(request()->url(), PHP_URL_PATH) === parse_url(config('other.rules_url'), PHP_URL_PATH) && auth()->user()->read_rules == 0)
         <script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce('script') }}">
-          window.onscroll = function () {
+          confirmRules = function () {
             let scrollHeight, totalHeight
             scrollHeight = document.body.scrollHeight
-            totalHeight = window.scrollY + window.innerHeight
+            totalHeight = Math.ceil(window.scrollY + window.innerHeight)
 
             if (totalHeight >= scrollHeight) {
               Swal.fire({
@@ -48,44 +49,38 @@
                 text: 'Če jih ne nam pišite!',
                 icon: 'question',
                 confirmButtonText: '<i class="fa fa-thumbs-up"></i> SEM SEZNANJEN Z PRAVILI!',
-              }).then(function () {
-                $.ajax({
-                  url: '/users/accept-rules',
-                  type: 'post',
-                  data: {
-                    _token: '{{ csrf_token() }}'
-                  },
-                  success: function (response) {
-                    const Toast = Swal.mixin({
-                      toast: true,
-                      position: 'top-end',
-                      showConfirmButton: false,
-                      timer: 3000
-                    })
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  axios.post('/users/accept-rules')
+                  const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                  })
 
-                    Toast.fire({
-                      icon: 'success',
-                      title: 'Hvala! Za razumevanje naših SLOshare pravil!'
-                    })
-                  },
-                  failure: function (response) {
-                    const Toast = Swal.mixin({
-                      toast: true,
-                      position: 'top-end',
-                      showConfirmButton: false,
-                      timer: 3000
-                    })
+                  Toast.fire({
+                    icon: 'success',
+                    title: 'Hvala! Za razumevanje naših SLOshare pravil!'
+                  })
+                } else {
+                  const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000
+                  })
 
-                    Toast.fire({
-                      icon: 'error',
-                      title: 'Nekaj je šlo narobe!'
-                    })
-                  }
-                })
+                  Toast.fire({
+                    icon: 'error',
+                    title: 'Nekaj je šlo narobe!'
+                  })
+                }
               })
             }
           }
-
+          window.onscroll = confirmRules
+          window.onload = confirmRules
         </script>
     @endif
 @endsection

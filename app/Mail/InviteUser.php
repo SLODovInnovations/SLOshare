@@ -25,6 +25,6 @@ class InviteUser extends Mailable
     public function build(): static
     {
         return $this->markdown('emails.invite')
-            ->subject('Povabilo je bilo prejeto '.\config('other.title'));
+            ->subject('Povabilo je bilo prejeto '.config('other.title'));
     }
 }

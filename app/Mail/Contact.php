@@ -24,7 +24,7 @@ class Contact extends Mailable
     public function build(): static
     {
         return $this->markdown('emails.contact')
-            ->from($this->input['email'], \config('other.title'))
+            ->from($this->input['email'], config('other.title'))
             ->subject('Novi kontaktni E-Mail');
     }
 }

@@ -7,6 +7,7 @@ use App\Models\TorrentRequestClaim;
 use App\Repositories\ChatRepository;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
+use Exception;
 
 /**
  * @see \Tests\Unit\Console\Commands\AutoRecycleClaimedTorrentRequestsTest
@@ -38,7 +39,7 @@ class AutoRecycleClaimedTorrentRequests extends Command
     /**
      * Execute the console command.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle(): void
     {
@@ -54,9 +55,9 @@ class AutoRecycleClaimedTorrentRequests extends Command
                 ->where('created_at', '<', $current->copy()->subDays(7)->toDateTimeString())
                 ->first();
             if ($requestClaim) {
-                $trUrl = \href_request($torrentRequest);
+                $trUrl = href_request($torrentRequest);
                 $this->chatRepository->systemMessage(
-                    \sprintf('[url=%s]%s[/url] Zahtevek je bil ponastavljen, ker ni bil izpolnjen v 7 dneh.', $trUrl, $torrentRequest->name)
+                    sprintf('[url=%s]%s[/url] Zahtevek je bil ponastavljen, ker ni bil izpolnjen v 7 dneh.', $trUrl, $torrentRequest->name)
                 );
 
                 $requestClaim->delete();

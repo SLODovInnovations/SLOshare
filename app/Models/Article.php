@@ -11,8 +11,8 @@ use voku\helper\AntiXSS;
 
 class Article extends Model
 {
-    use HasFactory;
     use Auditable;
+    use HasFactory;
 
     /**
      * The attributes that aren't mass assignable.
@@ -45,7 +45,7 @@ class Article extends Model
         $input = $this->content;
         //strip tags, if desired
         if ($stripHtml) {
-            $input = \strip_tags($input);
+            $input = strip_tags($input);
         }
 
         //no need to trim, already shorter than trim length
@@ -54,8 +54,8 @@ class Article extends Model
         }
 
         //find last space within length
-        $lastSpace = \strrpos(\substr($input, 0, $length), ' ');
-        $trimmedText = \substr($input, 0, $lastSpace);
+        $lastSpace = strrpos(substr($input, 0, $length), ' ');
+        $trimmedText = substr($input, 0, $lastSpace);
 
         //add ellipses (...)
         if ($ellipses) {
@@ -70,7 +70,7 @@ class Article extends Model
      */
     public function setContentAttribute(?string $value): void
     {
-        $this->attributes['content'] = \htmlspecialchars((new AntiXSS())->xss_clean($value), ENT_NOQUOTES);
+        $this->attributes['content'] = htmlspecialchars((new AntiXSS())->xss_clean($value), ENT_NOQUOTES);
     }
 
     /**
@@ -80,6 +80,6 @@ class Article extends Model
     {
         $bbcode = new Bbcode();
 
-        return (new Linkify())->linky($bbcode->parse($this->content, true));
+        return (new Linkify())->linky($bbcode->parse($this->content));
     }
 }

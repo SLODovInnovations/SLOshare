@@ -19,7 +19,7 @@ class PageController extends Controller
     {
         $pages = Page::all();
 
-        return \view('page.index', ['pages' => $pages]);
+        return view('page.index', ['pages' => $pages]);
     }
 
     /**
@@ -29,7 +29,7 @@ class PageController extends Controller
     {
         $page = Page::findOrFail($id);
 
-        return \view('page.page', ['page' => $page]);
+        return view('page.page', ['page' => $page]);
     }
 
     /**
@@ -39,22 +39,12 @@ class PageController extends Controller
     {
         $staff = Group::query()
             ->with('users:id,username,group_id,title')
-            ->where('is_modo', '=', 2)
+            ->where('is_modo', '=', 1)
             ->orWhere('is_admin', '=', 1)
             ->get()
             ->sortByDesc('position');
 
-        return \view('page.staff', ['staff' => $staff]);
-    }
-
-    /**
-     * Show User Page.
-     */
-    public function users(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        $users = Group::with('users:id,username,group_id,title')->where('id', '=', 5)->get()->sortByDesc('position');
-
-        return \view('page.users', ['users' => $users]);
+        return view('page.staff', ['staff' => $staff]);
     }
 
     /**
@@ -67,7 +57,7 @@ class PageController extends Controller
             ->get()
             ->sortBy('name');
 
-        return \view('page.internal', ['internals' => $internals]);
+        return view('page.internal', ['internals' => $internals]);
     }
 
     /**
@@ -77,7 +67,7 @@ class PageController extends Controller
     {
         $clients = BlacklistClient::all();
 
-        return \view('page.blacklist.client', ['clients' => $clients]);
+        return view('page.blacklist.client', ['clients' => $clients]);
     }
 
     /**
@@ -85,62 +75,6 @@ class PageController extends Controller
      */
     public function about(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.aboutus');
-    }
-
-    /**
-     * Show About FAQ.
-     */
-    public function faqs(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        return \view('page.faq');
-    }
-
-    /**
-     * Show About Pravilnik.
-     */
-    public function policys(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        return \view('page.policy');
-    }
-
-    /**
-     * Show About Navodila za nalaganje.
-     */
-    public function instructions(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        return \view('page.instruction');
-    }
-
-    /**
-     * Show About Pravni Pouk.
-     */
-    public function legals(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        return \view('page.legal');
-    }
-
-    /**
-     * Show About Pogoji Uporabe.
-     */
-    public function conditionsofuses(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        return \view('page.conditionsofuse');
-    }
-
-    /**
-     * Show About Donacije.
-     */
-    public function donationslos(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        return \view('page.donationslo');
-    }
-
-    /**
-     * Show About Chat.
-     */
-    public function chat(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        return \view('page.chat');
+        return view('page.aboutus');
     }
 }

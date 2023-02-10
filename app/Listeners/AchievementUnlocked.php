@@ -26,10 +26,10 @@ class AchievementUnlocked
         Session::flash('achievement', $unlocked->progress->details->name);
 
         if ($user->private_profile == 0) {
-            $profileUrl = \href_profile($user);
+            $profileUrl = href_profile($user);
 
             $this->chatRepository->systemMessage(
-                \sprintf('Uporabnik [url=%s]%s[/url] je odklenil %s dosežek :medal:', $profileUrl, $user->username, $unlocked->progress->details->name)
+                sprintf('Uporabnik [url=%s]%s[/url] je odklenil %s dosežek :medal:', $profileUrl, $user->username, $unlocked->progress->details->name)
             );
         }
     }

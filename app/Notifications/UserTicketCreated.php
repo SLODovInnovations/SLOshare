@@ -32,9 +32,9 @@ class UserTicketCreated extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage())
-                    ->subject('Vaša napaka je bila ustvarjena (Napaka # '.$this->ticket->id.')')
-                    ->line('Vaša napaka je bila ustvarjena.')
-                    ->action('Ogled napaka', \route('tickets.show', ['id' => $this->ticket->id]));
+            ->subject('Vaša napaka je bila ustvarjena (Napaka # '.$this->ticket->id.')')
+            ->line('Vaša napaka je bila ustvarjena.')
+            ->action('Ogled napaka', route('tickets.show', ['id' => $this->ticket->id]));
     }
 
     /**

@@ -27,12 +27,12 @@ class StoreGiftRequest extends FormRequest
         $user = $request->user();
 
         return [
-            'to_username'   => [
+            'to_username' => [
                 'required',
                 'exists:users,username',
                 Rule::notIn([$user->username]),
             ],
-            'bonus_points'  => [
+            'bonus_points' => [
                 'required',
                 'numeric',
                 'min:1',
@@ -51,9 +51,9 @@ class StoreGiftRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'to_username.exists'           => \trans('bon.failed-user-not-found'),
+            'to_username.exists'           => trans('bon.failed-user-not-found'),
             'to_username.not_in'           => 'Ne morete se obdarovati',
-            'bonus_points.numeric|min|max' => \trans('bon.failed-amount-message'),
+            'bonus_points.numeric|min|max' => trans('bon.failed-amount-message'),
         ];
     }
 }

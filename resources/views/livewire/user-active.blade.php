@@ -30,7 +30,7 @@
                     <span class="badge-user">
                         <label class="inline">
                             <input type="checkbox" class="user-active__checkbox" wire:model="showMorePrecision">
-                            Show more precision
+                            Pokaži več natančnosti
                         </label>
                     </span>
                 </div>
@@ -214,9 +214,7 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="text-center">
-                {{ $actives->links() }}
-            </div>
+            {{ $actives->links('partials.pagination') }}
         </div>
     </div>
     <script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce('script') }}">

@@ -30,15 +30,15 @@ class UserManualWarningExpire extends Notification
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): \Illuminate\Notifications\Messages\MailMessage
+    public function toMail(mixed $notifiable): MailMessage
     {
-        $profileUrl = \href_profile($this->user);
+        $profileUrl = href_profile($this->user);
 
         return (new MailMessage())
             ->greeting('Ročno opozorilo je poteklo!')
             ->line('Vaše opozorilo je poteklo!')
             ->action('Poglej profil!', $profileUrl)
-            ->line('Hvala za uporabo 🚀'.\config('other.title'));
+            ->line('Hvala za uporabo 🚀'.config('other.title'));
     }
 
     /**
@@ -49,7 +49,7 @@ class UserManualWarningExpire extends Notification
         return [
             'title' => 'Ročno opozorilo je poteklo',
             'body'  => 'Opozorjeni ste bili zaradi '.$this->warning->reason.'. To opozorilo je zdaj poteklo.',
-            'url'   => \sprintf('/users/%s', $this->user->usernamme),
+            'url'   => sprintf('/users/%s', $this->user->usernamme),
         ];
     }
 }

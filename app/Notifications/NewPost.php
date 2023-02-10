@@ -36,7 +36,7 @@ class NewPost extends Notification implements ShouldQueue
             return [
                 'title' => $this->user->username.' Je objavil v naročeni temi',
                 'body'  => $this->user->username.' je napisal novo objavo v naročeni temi '.$this->post->topic->name,
-                'url'   => \sprintf('/forums/topics/%s?page=%s#post-%s', $this->post->topic->id, $this->post->getPageNumber(), $this->post->id),
+                'url'   => sprintf('/forums/topics/%s?page=%s#post-%s', $this->post->topic->id, $this->post->getPageNumber(), $this->post->id),
             ];
         }
 
@@ -44,14 +44,14 @@ class NewPost extends Notification implements ShouldQueue
             return [
                 'title' => $this->user->username.' Je objavil v temi foruma za osebje',
                 'body'  => $this->user->username.' je napisal novo objavo v temi osebja '.$this->post->topic->name,
-                'url'   => \sprintf('%s?page=%s#post-%s', \route('forum_topic', ['id' => $this->post->topic->id]), $this->post->getPageNumber(), $this->post->id),
+                'url'   => sprintf('%s?page=%s#post-%s', \route('forum_topic', ['id' => $this->post->topic->id]), $this->post->getPageNumber(), $this->post->id),
             ];
         }
 
         return [
             'title' => $this->user->username.' Je objavil v temi, ki ste jo objavili',
             'body'  => $this->user->username.' je napisal novo objavo v vaši temi '.$this->post->topic->name,
-            'url'   => \sprintf('/forums/topics/%s?page=%s#post-%s', $this->post->topic->id, $this->post->getPageNumber(), $this->post->id),
+            'url'   => sprintf('/forums/topics/%s?page=%s#post-%s', $this->post->topic->id, $this->post->getPageNumber(), $this->post->id),
         ];
     }
 }

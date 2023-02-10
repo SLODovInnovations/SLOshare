@@ -19,7 +19,7 @@ class BlacklistClientController extends Controller
     {
         $clients = BlacklistClient::latest()->get();
 
-        return \view('Staff.blacklist.clients.index', ['clients' => $clients]);
+        return view('Staff.blacklist.clients.index', ['clients' => $clients]);
     }
 
     /**
@@ -29,7 +29,7 @@ class BlacklistClientController extends Controller
     {
         $client = BlacklistClient::findOrFail($id);
 
-        return \view('Staff.blacklist.clients.edit', ['client' => $client]);
+        return view('Staff.blacklist.clients.edit', ['client' => $client]);
     }
 
     /**
@@ -39,9 +39,9 @@ class BlacklistClientController extends Controller
     {
         BlacklistClient::where('id', '=', $id)->update($request->validated());
 
-        \cache()->forget('client_blacklist');
+        cache()->forget('client_blacklist');
 
-        return \to_route('staff.blacklists.clients.index')
+        return to_route('staff.blacklists.clients.index')
             ->withSuccess('Odjemalec na črnem seznamu je bil uspešno posodobljen!');
     }
 
@@ -50,7 +50,7 @@ class BlacklistClientController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.blacklist.clients.create');
+        return view('Staff.blacklist.clients.create');
     }
 
     /**
@@ -60,9 +60,9 @@ class BlacklistClientController extends Controller
     {
         BlacklistClient::create($request->validated());
 
-        \cache()->forget('client_blacklist');
+        cache()->forget('client_blacklist');
 
-        return \to_route('staff.blacklists.clients.index')
+        return to_route('staff.blacklists.clients.index')
             ->withSuccess('Odjemalec na črnem seznamu je bil uspešno shranjen!');
     }
 
@@ -73,9 +73,9 @@ class BlacklistClientController extends Controller
     {
         BlacklistClient::findOrFail($id)->delete();
 
-        \cache()->forget('client_blacklist');
+        cache()->forget('client_blacklist');
 
-        return \to_route('staff.blacklists.clients.index')
+        return to_route('staff.blacklists.clients.index')
             ->withSuccess('Odjemalec na črnem seznamu je bil uspešno uničen!');
     }
 }

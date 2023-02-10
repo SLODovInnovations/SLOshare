@@ -29,7 +29,7 @@ class TicketSearch extends Component
 
     final public function mount(): void
     {
-        $this->user = \auth()->user();
+        $this->user = auth()->user();
     }
 
     final public function paginationView(): string
@@ -94,7 +94,7 @@ class TicketSearch extends Component
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return \view('livewire.ticket-search', [
+        return view('livewire.ticket-search', [
             'tickets' => $this->tickets,
         ]);
     }

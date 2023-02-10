@@ -22,7 +22,7 @@ class GroupController extends Controller
     {
         $groups = Group::all()->sortBy('position');
 
-        return \view('Staff.group.index', ['groups' => $groups]);
+        return view('Staff.group.index', ['groups' => $groups]);
     }
 
     /**
@@ -30,7 +30,7 @@ class GroupController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.group.create');
+        return view('Staff.group.create');
     }
 
     /**
@@ -51,7 +51,7 @@ class GroupController extends Controller
             $permission->save();
         }
 
-        return \to_route('staff.groups.index')
+        return to_route('staff.groups.index')
             ->withSuccess('Skupina je bila uspešno ustvarjena!');
     }
 
@@ -62,7 +62,7 @@ class GroupController extends Controller
     {
         $group = Group::findOrFail($id);
 
-        return \view('Staff.group.edit', ['group' => $group]);
+        return view('Staff.group.edit', ['group' => $group]);
     }
 
     /**
@@ -72,9 +72,9 @@ class GroupController extends Controller
     {
         Group::where('id', '=', $id)->update(['slug' => Str::slug($request->name)] + $request->validated());
 
-        \cache()->forget('group:'.$id);
+        cache()->forget('group:'.$id);
 
-        return \to_route('staff.groups.index')
+        return to_route('staff.groups.index')
             ->withSuccess('Skupina je bila uspešno posodobljena!');
     }
 }

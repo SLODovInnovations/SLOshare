@@ -22,6 +22,6 @@ class ActivateUser extends Mailable
     public function build(): static
     {
         return $this->markdown('emails.activate')
-            ->subject('Zahtevana je aktivacija '.\config('other.title'));
+            ->subject('Zahtevana je aktivacija '.config('other.title'));
     }
 }

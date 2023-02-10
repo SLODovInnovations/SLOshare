@@ -17,11 +17,11 @@ class Season extends Model
      */
     public function torrents(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Torrent::class, 'tmdb', 'tv_id')->whereHas('category', function ($q) {
+        return $this->hasMany(Torrent::class, 'tmdb', 'tv_id')->whereHas('category', function ($q): void {
             $q->where('tv_meta', '=', true);
         });
 
-        return $this->hasMany(Torrent::class, 'tmdb', 'cartoon_tv_id')->whereHas('category', function ($q) {
+        return $this->hasMany(Torrent::class, 'tmdb', 'cartoon_tv_id')->whereHas('category', function ($q): void {
             $q->where('cartoontv_meta', '=', true);
         });
     }

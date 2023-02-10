@@ -12,7 +12,7 @@ class CollectionController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('mediahub.collection.index');
+        return view('mediahub.collection.index');
     }
 
     /**
@@ -20,9 +20,9 @@ class CollectionController extends Controller
      */
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $collection = Collection::with(['movie', 'cartoon', 'comments'])->findOrFail($id);
+        $collection = Collection::with(['movie' => fn ($query) => $query->has('torrents'), 'cartoon' => fn ($query) => $query->has('torrents'), 'comments'])->findOrFail($id);
 
-        return \view('mediahub.collection.show', [
+        return view('mediahub.collection.show', [
             'collection' => $collection,
         ]);
     }

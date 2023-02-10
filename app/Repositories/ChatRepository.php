@@ -27,7 +27,7 @@ class ChatRepository
 
     public function config()
     {
-        return \config('chat');
+        return config('chat');
     }
 
     public function bots()
@@ -42,7 +42,7 @@ class ChatRepository
             'user',
             'target',
             'room',
-        ])->where(function ($query) use ($userId) {
+        ])->where(function ($query) use ($userId): void {
             $query->where('user_id', '=', $userId);
         })
             ->oldest('id')
@@ -56,7 +56,7 @@ class ChatRepository
             'user',
             'target',
             'room',
-        ])->where(function ($query) use ($userId) {
+        ])->where(function ($query) use ($userId): void {
             $query->where('user_id', '=', $userId);
         })
             ->latest()
@@ -77,7 +77,7 @@ class ChatRepository
     {
         if ($type == 'room') {
             foreach (Chatroom::where('id', '>', 0)->get() as $room) {
-                \broadcast(new Ping($room->id, $id));
+                broadcast(new Ping($room->id, $id));
             }
         }
 
@@ -102,7 +102,7 @@ class ChatRepository
 
         $this->checkMessageLimits($roomId);
 
-        \broadcast(new MessageSent($message));
+        broadcast(new MessageSent($message));
 
         return $message;
     }
@@ -131,8 +131,8 @@ class ChatRepository
             'receiver.chatStatus',
         ])->find($save->id);
 
-        \event(new Chatter('new.bot', $receiver, new ChatMessageResource($message)));
-        \event(new Chatter('new.ping', $receiver, ['type' => 'bot', 'id' => $botId]));
+        event(new Chatter('new.bot', $receiver, new ChatMessageResource($message)));
+        event(new Chatter('new.ping', $receiver, ['type' => 'bot', 'id' => $botId]));
         $message->delete();
     }
 
@@ -161,13 +161,13 @@ class ChatRepository
         ])->find($save->id);
 
         if ($ignore != null) {
-            \event(new Chatter('new.message', $userId, new ChatMessageResource($message)));
+            event(new Chatter('new.message', $userId, new ChatMessageResource($message)));
         }
 
-        \event(new Chatter('new.message', $receiver, new ChatMessageResource($message)));
+        event(new Chatter('new.message', $receiver, new ChatMessageResource($message)));
 
         if ($receiver != 1) {
-            \event(new Chatter('new.ping', $receiver, ['type' => 'target', 'id' => $userId]));
+            event(new Chatter('new.ping', $receiver, ['type' => 'target', 'id' => $userId]));
         }
 
         return $message;
@@ -178,7 +178,7 @@ class ChatRepository
         $message = $this->message->find($id);
 
         if ($message) {
-            \broadcast(new MessageDeleted($message));
+            broadcast(new MessageDeleted($message));
 
             return $message->delete();
         }
@@ -193,11 +193,11 @@ class ChatRepository
             'user.chatStatus',
             'receiver.group',
             'receiver.chatStatus',
-        ])->where(function ($query) use ($roomId) {
+        ])->where(function ($query) use ($roomId): void {
             $query->where('chatroom_id', '=', $roomId);
         })
             ->latest('id')
-            ->limit(\config('chat.message_limit'))
+            ->limit(config('chat.message_limit'))
             ->get();
     }
 
@@ -212,11 +212,11 @@ class ChatRepository
             'user.chatStatus',
             'receiver.group',
             'receiver.chatStatus',
-        ])->where(function ($query) use ($senderId, $systemUserId) {
+        ])->where(function ($query) use ($senderId, $systemUserId): void {
             $query->whereRaw('(user_id = ? and receiver_id = ?)', [$senderId, $systemUserId])->orWhereRaw('(user_id = ? and receiver_id = ?)', [$systemUserId, $senderId]);
         })->where('bot_id', '=', $botId)
             ->latest('id')
-            ->limit(\config('chat.message_limit'))
+            ->limit(config('chat.message_limit'))
             ->get();
     }
 
@@ -229,24 +229,24 @@ class ChatRepository
             'user.chatStatus',
             'receiver.group',
             'receiver.chatStatus',
-        ])->where(function ($query) use ($senderId, $targetId) {
+        ])->where(function ($query) use ($senderId, $targetId): void {
             $query->whereRaw('(user_id = ? and receiver_id = ?)', [$senderId, $targetId])->orWhereRaw('(user_id = ? and receiver_id = ?)', [$targetId, $senderId]);
         })
             ->latest('id')
-            ->limit(\config('chat.message_limit'))
+            ->limit(config('chat.message_limit'))
             ->get();
     }
 
     public function checkMessageLimits($roomId): void
     {
         $messages = $this->messages($roomId)->toArray();
-        $limit = \config('chat.message_limit');
-        $count = \is_countable($messages) ? \count($messages) : 0;
+        $limit = config('chat.message_limit');
+        $count = is_countable($messages) ? \count($messages) : 0;
 
         // Lets purge all old messages and keep the database to the limit settings
         if ($count > $limit) {
             for ($x = 1; $x <= $count - $limit; $x++) {
-                $message = \array_pop($messages);
+                $message = array_pop($messages);
                 echo $message['id']."\n";
 
                 $message = $this->message->find($message['id']);
@@ -275,7 +275,7 @@ class ChatRepository
 
     public function systemChatroom($room = null)
     {
-        $config = \config('chat.system_chatroom');
+        $config = config('chat.system_chatroom');
 
         if ($room !== null) {
             if ($room instanceof Chatroom) {
@@ -322,15 +322,15 @@ class ChatRepository
 
     protected function censorMessage($message): string
     {
-        foreach (\config('censor.redact') as $word) {
-            if (\preg_match(\sprintf('/\b%s(?=[.,]|$|\s)/mi', $word), (string) $message)) {
-                $message = \str_replace($word, \sprintf("<span class='censor'>%s</span>", $word), $message);
+        foreach (config('censor.redact') as $word) {
+            if (preg_match(sprintf('/\b%s(?=[.,]|$|\s)/mi', $word), (string) $message)) {
+                $message = str_replace($word, sprintf("<span class='censor'>%s</span>", $word), $message);
             }
         }
 
-        foreach (\config('censor.replace') as $word => $rword) {
+        foreach (config('censor.replace') as $word => $rword) {
             if (Str::contains($message, $word)) {
-                $message = \str_replace($word, $rword, $message);
+                $message = str_replace($word, $rword, $message);
             }
         }
 

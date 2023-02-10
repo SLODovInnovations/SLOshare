@@ -1,6 +1,6 @@
 <?php
 
-if (! function_exists('language')) {
+if (! \function_exists('language')) {
     /**
      * Get the language instance.
      */

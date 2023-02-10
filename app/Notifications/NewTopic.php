@@ -36,14 +36,14 @@ class NewTopic extends Notification implements ShouldQueue
             return [
                 'title' => $this->user->username.' Je objavil na forumu osebja',
                 'body'  => $this->user->username.' je začel novo kadrovsko temo v '.$this->topic->forum->name,
-                'url'   => \route('forum_topic', ['id' => $this->topic->id]),
+                'url'   => route('forum_topic', ['id' => $this->topic->id]),
             ];
         }
 
         return [
             'title' => $this->user->username.' Objavil je na naročenem forumu',
             'body'  => $this->user->username.' je odprl novo temo v '.$this->topic->forum->name,
-            'url'   => \sprintf('/forums/topics/%s', $this->topic->id),
+            'url'   => sprintf('/forums/topics/%s', $this->topic->id),
         ];
     }
 }

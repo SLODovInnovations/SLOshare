@@ -35,7 +35,7 @@ class DemoSeed extends Command
         $this->warn('*** Njegov postopek lahko traja nekaj minut ***');
         $this->warn('Pritisnite CTRL + C za prekinitev');
 
-        \sleep(5);
+        sleep(5);
 
         $abort = false;
 
@@ -63,11 +63,11 @@ class DemoSeed extends Command
                     $year = 2021;
 
                     if (\array_key_exists('release_date', $movie)) {
-                        $year = (int) \substr($movie['release_date'], 0, 4);
+                        $year = (int) substr($movie['release_date'], 0, 4);
                     }
 
                     $freeleech = ['0', '25', '50', '75', '100'];
-                    $selected = \random_int(0, \count($freeleech) - 1);
+                    $selected = random_int(0, \count($freeleech) - 1);
 
                     Torrent::factory()->create([
                         'user_id'        => $uid,
@@ -230,9 +230,9 @@ Menu
 01:34:15.858                             : en:Who Gets Away?
 01:44:15.249                             : en:End Credits
                         ',
-                        'created_at' => \now(),
-                        'bumped_at'  => \now(),
-                        'updated_at' => \now(),
+                        'created_at' => now(),
+                        'bumped_at'  => now(),
+                        'updated_at' => now(),
                     ]);
                 } catch (Exception $exception) {
                     $abort = true;
@@ -272,11 +272,11 @@ Menu
                     $year = 2021;
 
                     if (\array_key_exists('first_air_date', $tv)) {
-                        $year = (int) \substr($tv['first_air_date'], 0, 4);
+                        $year = (int) substr($tv['first_air_date'], 0, 4);
                     }
 
                     $freeleech = ['0', '25', '50', '75', '100'];
-                    $selected = \random_int(0, \count($freeleech) - 1);
+                    $selected = random_int(0, \count($freeleech) - 1);
 
                     Torrent::factory()->create([
                         'user_id'        => $uid,
@@ -439,9 +439,9 @@ Menu
 01:34:15.858                             : en:Who Gets Away?
 01:44:15.249                             : en:End Credits
                         ',
-                        'created_at' => \now(),
-                        'bumped_at'  => \now(),
-                        'updated_at' => \now(),
+                        'created_at' => now(),
+                        'bumped_at'  => now(),
+                        'updated_at' => now(),
                     ]);
                 } catch (Exception $exception) {
                     $abort = true;
@@ -468,7 +468,7 @@ Menu
 
     private function fetchMovie($id)
     {
-        \sleep(2);
+        sleep(2);
         $tmdbScraper = new TMDBScraper();
         $tmdbScraper->movie($id);
 
@@ -477,7 +477,7 @@ Menu
 
     private function fetchTv($id)
     {
-        \sleep(2);
+        sleep(2);
         $tmdbScraper = new TMDBScraper();
         $tmdbScraper->tv($id);
 

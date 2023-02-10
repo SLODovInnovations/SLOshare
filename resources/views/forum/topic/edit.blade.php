@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('forum.create-new-topic') }}</title>
+    <title>{{ __('forum.create-new-topic') }} - {{ config('other.title') }}</title>
 @endsection
 
 @section('meta')
@@ -25,7 +25,7 @@
 @endsection
 
 @section('nav-tabs')
-    @include('forum.buttons')
+    @include('forum.partials.buttons')
 @endsection
 
 @section('main')

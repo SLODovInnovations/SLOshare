@@ -10,7 +10,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::table('requests', function (Blueprint $table) {
+        Schema::table('requests', function (Blueprint $table): void {
             $table->string('igdb')->default(0)->index()->after('mal');
         });
     }

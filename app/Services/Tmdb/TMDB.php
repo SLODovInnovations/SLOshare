@@ -33,7 +33,7 @@ class TMDB
             return $array[$type];
         }
 
-        return null;
+        return;
     }
 
     public function cast_array($cast): array

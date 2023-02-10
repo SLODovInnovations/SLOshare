@@ -14,7 +14,7 @@ class ThankButton extends Component
 
     final public function mount($torrent): void
     {
-        $this->user = \auth()->user();
+        $this->user = auth()->user();
         $this->torrent = Torrent::withAnyStatus()->findOrFail($torrent);
     }
 
@@ -48,6 +48,6 @@ class ThankButton extends Component
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return \view('livewire.thank-button');
+        return view('livewire.thank-button');
     }
 }

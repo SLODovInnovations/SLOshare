@@ -25,11 +25,11 @@ class StoreTransactionRequest extends FormRequest
     public function rules(Request $request): array
     {
         return [
-            'exchange'   => [
+            'exchange' => [
                 'bail',
                 'required',
                 'exists:bon_exchange,id',
-                function ($attribute, $value, $fail) use ($request) {
+                function ($attribute, $value, $fail) use ($request): void {
                     $user = $request->user();
                     $item = BonExchange::findOrFail($value);
 
@@ -40,7 +40,7 @@ class StoreTransactionRequest extends FormRequest
                         case $item->download && $user->downloaded < $item->value:
                             $fail('Ni dovolj prenosa.');
                             break;
-                        case $item->personal_freeleech && \cache()->get('personal_freeleech:'.$user->id):
+                        case $item->personal_freeleech && cache()->get('personal_freeleech:'.$user->id):
                             $fail('Vaš prejšnji osebni freeleech je še vedno aktiven.');
                             break;
                     }

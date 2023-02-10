@@ -14,7 +14,7 @@ class GenreController extends Controller
     {
         $genres = Genre::paginate(25);
 
-        return \view('mediahub.genre.index', ['genres' => $genres]);
+        return view('mediahub.genre.index', ['genres' => $genres]);
     }
 
     /**
@@ -23,17 +23,17 @@ class GenreController extends Controller
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         $genre = Genre::withCount(['tv', 'movie'])->findOrFail($id);
-        $shows = $genre->tv()->oldest('name')->paginate(25);
-        $cartoontvs = $genre->cartoontv()->oldest('name')->paginate(25);
-        $movies = $genre->movie()->oldest('title')->paginate(25);
-        $cartoons = $genre->cartoon()->oldest('title')->paginate(25);
+        $shows = $genre->tv()->has('torrents')->oldest('name')->paginate(25, ['*'], 'showsPage');
+        $cartoontvs = $genre->cartoontv()->has('torrents')->oldest('name')->paginate(25, ['*'], 'cartoontvsPage');
+        $movies = $genre->movie()->has('torrents')->oldest('title')->paginate(25, ['*'], 'moviesPage');
+        $cartoons = $genre->cartoon()->has('torrents')->oldest('title')->paginate(25, ['*'], 'cartoonsPage');
 
-        return \view('mediahub.genre.show', [
-            'genre'  => $genre,
-            'shows'  => $shows,
+        return view('mediahub.genre.show', [
+            'genre'       => $genre,
+            'shows'       => $shows,
             'cartoontvs'  => $cartoontvs,
-            'movies' => $movies,
-            'cartoons' => $cartoons,
+            'movies'      => $movies,
+            'cartoons'    => $cartoons,
         ]);
     }
 }

@@ -4,20 +4,23 @@ namespace App\Traits;
 
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use ArgumentCountError;
+use InvalidArgumentException;
+use JsonException;
 
 trait Auditable
 {
     public static function bootAuditable(): void
     {
-        static::created(function ($model) {
+        static::created(function ($model): void {
             self::registerCreate($model);
         });
 
-        static::updated(function ($model) {
+        static::updated(function ($model): void {
             self::registerUpdate($model);
         });
 
-        static::deleted(function ($model) {
+        static::deleted(function ($model): void {
             self::registerDelete($model);
         });
     }
@@ -32,9 +35,9 @@ trait Auditable
         // Convert the data to an array
         $data = (array) $data;
         // Start stripping
-        $globalDiscards = (empty(\config('audit.global_discards'))) ? [] : \config('audit.global_discards');
+        $globalDiscards = (empty(config('audit.global_discards'))) ? [] : config('audit.global_discards');
         $modelDiscards = (empty($instance->discarded)) ? [] : $instance->discarded;
-        foreach (\array_keys($data) as $key) {
+        foreach (array_keys($data) as $key) {
             // Check the model-specific discards
             if (\in_array($key, $modelDiscards, true)) {
                 unset($data[$key]);
@@ -53,7 +56,7 @@ trait Auditable
     /**
      * Generates the data to store.
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     protected static function generate($action, array $old = [], array $new = []): false|string
     {
@@ -61,7 +64,7 @@ trait Auditable
         switch ($action) {
             case 'create':
                 // Expect new data to be filled
-                \throw_if(empty($new), new \ArgumentCountError('Ukrep `create` pričakuje nove podatke.'));
+                throw_if(empty($new), new ArgumentCountError('Ukrep `create` pričakuje nove podatke.'));
 
                 // Process
                 foreach ($new as $key => $value) {
@@ -88,7 +91,7 @@ trait Auditable
                 break;
             case 'delete':
                 // Expect new data to be filled
-                \throw_if(empty($old), new \ArgumentCountError('Dejanje `delete` pričakuje nove podatke.'));
+                throw_if(empty($old), new ArgumentCountError('Dejanje `delete` pričakuje nove podatke.'));
 
                 // Process
                 foreach ($old as $key => $value) {
@@ -100,12 +103,12 @@ trait Auditable
 
                 break;
             default:
-                throw new \InvalidArgumentException(\sprintf('Neznano dejanje `%s`.', $action));
+                throw new InvalidArgumentException(sprintf('Neznano dejanje `%s`.', $action));
         }
 
-        $clean = \array_filter($data);
+        $clean = array_filter($data);
 
-        return \json_encode($clean, JSON_THROW_ON_ERROR);
+        return json_encode($clean, JSON_THROW_ON_ERROR);
     }
 
     /**
@@ -113,17 +116,17 @@ trait Auditable
      */
     public static function getUserId()
     {
-        if (\auth()->guest()) {
-            return null;
+        if (auth()->guest()) {
+            return;
         }
 
-        return \auth()->user()->id;
+        return auth()->user()->id;
     }
 
     /**
      * Logs a record creation.
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     protected static function registerCreate($model): void
     {
@@ -133,12 +136,12 @@ trait Auditable
         // Generate the JSON to store
         $data = self::generate('create', [], self::strip($model, $model->getAttributes()));
 
-        if (! \is_null($userId) && ! empty($data)) {
+        if (null !== $userId && ! empty($data)) {
             // Store record
             $now = Carbon::now()->format('Y-m-d H:i:s');
             DB::table('audits')->insert([
                 'user_id'        => $userId,
-                'model_name'     => \class_basename($model),
+                'model_name'     => class_basename($model),
                 'model_entry_id' => $model->{$model->getKeyName()},
                 'action'         => 'create',
                 'record'         => $data,
@@ -151,7 +154,7 @@ trait Auditable
     /**
      * Logs a record update.
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     protected static function registerUpdate($model): void
     {
@@ -161,12 +164,12 @@ trait Auditable
         // Generate the JSON to store
         $data = self::generate('update', self::strip($model, $model->getOriginal()), self::strip($model, $model->getChanges()));
 
-        if (! \is_null($userId) && ! empty(\json_decode($data, true, 512, JSON_THROW_ON_ERROR))) {
+        if (null !== $userId && ! empty(json_decode($data, true, 512, JSON_THROW_ON_ERROR))) {
             // Store record
             $now = Carbon::now()->format('Y-m-d H:i:s');
             DB::table('audits')->insert([
                 'user_id'        => $userId,
-                'model_name'     => \class_basename($model),
+                'model_name'     => class_basename($model),
                 'model_entry_id' => $model->{$model->getKeyName()},
                 'action'         => 'update',
                 'record'         => $data,
@@ -179,7 +182,7 @@ trait Auditable
     /**
      * Logs a record deletion.
      *
-     * @throws \JsonException
+     * @throws JsonException
      */
     protected static function registerDelete($model): void
     {
@@ -189,12 +192,12 @@ trait Auditable
         // Generate the JSON to store
         $data = self::generate('delete', self::strip($model, $model->getAttributes()));
 
-        if (! \is_null($userId) && ! empty($data)) {
+        if (null !== $userId && ! empty($data)) {
             // Store record
             $now = Carbon::now()->format('Y-m-d H:i:s');
             DB::table('audits')->insert([
                 'user_id'        => $userId,
-                'model_name'     => \class_basename($model),
+                'model_name'     => class_basename($model),
                 'model_entry_id' => $model->{$model->getKeyName()},
                 'action'         => 'delete',
                 'record'         => $data,

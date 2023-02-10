@@ -44,15 +44,15 @@ class SystemBot
      */
     public function replaceVars($output): array|string
     {
-        $output = \str_replace(['{me}', '{command}'], [$this->bot->name, $this->bot->command], $output);
-        if (\str_contains((string) $output, '{bots}')) {
+        $output = str_replace(['{me}', '{command}'], [$this->bot->name, $this->bot->command], $output);
+        if (str_contains((string) $output, '{bots}')) {
             $botHelp = '';
             $bots = Bot::where('active', '=', 1)->where('id', '!=', $this->bot->id)->oldest('position')->get();
             foreach ($bots as $bot) {
                 $botHelp .= '( ! | / | @)'.$bot->command.' pomoč sproži datoteko pomoči za '.$bot->name."\n";
             }
 
-            $output = \str_replace('{bots}', $botHelp, $output);
+            $output = str_replace('{bots}', $botHelp, $output);
         }
 
         return $output;
@@ -71,11 +71,11 @@ class SystemBot
      */
     public function putGift($receiver = '', $amount = 0, $note = ''): string
     {
-        $output = \implode(' ', $note);
-        $v = \validator(['receiver' => $receiver, 'amount'=> $amount, 'note'=> $output], [
-            'receiver'   => 'required|string|exists:users,username',
-            'amount'     => \sprintf('required|numeric|min:1|max:%s', $this->target->seedbonus),
-            'note'       => 'required|string',
+        $output = implode(' ', $note);
+        $v = validator(['receiver' => $receiver, 'amount' => $amount, 'note' => $output], [
+            'receiver' => 'required|string|exists:users,username',
+            'amount'   => sprintf('required|numeric|min:1|max:%s', $this->target->seedbonus),
+            'note'     => 'required|string',
         ]);
         if ($v->passes()) {
             $recipient = User::where('username', 'LIKE', $receiver)->first();
@@ -105,11 +105,11 @@ class SystemBot
                 $recipient->notify(new NewBon('gift', $this->target->username, $bonTransactions));
             }
 
-            $profileUrl = \href_profile($this->target);
-            $recipientUrl = \href_profile($recipient);
+            $profileUrl = href_profile($this->target);
+            $recipientUrl = href_profile($recipient);
 
             $this->chatRepository->systemMessage(
-                \sprintf('[url=%s]%s[/url] je podaril %s BON [url=%s]%s[/url]', $profileUrl, $this->target->username, $value, $recipientUrl, $recipient->username)
+                sprintf('[url=%s]%s[/url] je podaril %s BON [url=%s]%s[/url]', $profileUrl, $this->target->username, $value, $recipientUrl, $recipient->username)
             );
 
             return 'Vaše darilo za '.$recipient->username.' za '.$amount.' BON je bil poslan!';
@@ -135,14 +135,14 @@ class SystemBot
             $log = 'Vsi '.$this->bot->name.' ukazi morajo biti zasebno sporočilo ali začeti z /'.$this->bot->command.' za !'.$this->bot->command.'. Rabim pomoč? Vrsta /'.$this->bot->command.' pomagaj in pomagali ti bodo.';
         }
 
-        $command = @\explode(' ', (string) $message);
+        $command = @explode(' ', (string) $message);
         if (\array_key_exists($x, $command)) {
             if ($command[$x] === 'gift' && \array_key_exists($y, $command) && \array_key_exists($z, $command) && \array_key_exists($z + 1, $command)) {
                 $clone = $command;
-                \array_shift($clone);
-                \array_shift($clone);
-                \array_shift($clone);
-                \array_shift($clone);
+                array_shift($clone);
+                array_shift($clone);
+                array_shift($clone);
+                array_shift($clone);
                 $log = $this->putGift($command[$y], $command[$z], $clone);
             }
 
@@ -172,7 +172,7 @@ class SystemBot
 
         if ($type == 'message' || $type == 'private') {
             $receiverDirty = 0;
-            $receiverEchoes = \cache()->get('user-echoes'.$target->id);
+            $receiverEchoes = cache()->get('user-echoes'.$target->id);
             if (! $receiverEchoes || ! \is_array($receiverEchoes) || \count($receiverEchoes) < 1) {
                 $receiverEchoes = UserEcho::with(['room', 'target', 'bot'])->whereRaw('user_id = ?', [$target->id])->get();
             }
@@ -195,12 +195,12 @@ class SystemBot
 
             if ($receiverDirty == 1) {
                 $expiresAt = Carbon::now()->addMinutes(60);
-                \cache()->put('user-echoes'.$target->id, $receiverEchoes, $expiresAt);
-                \event(new Chatter('echo', $target->id, UserEchoResource::collection($receiverEchoes)));
+                cache()->put('user-echoes'.$target->id, $receiverEchoes, $expiresAt);
+                event(new Chatter('echo', $target->id, UserEchoResource::collection($receiverEchoes)));
             }
 
             $receiverDirty = 0;
-            $receiverAudibles = \cache()->get('user-audibles'.$target->id);
+            $receiverAudibles = cache()->get('user-audibles'.$target->id);
             if (! $receiverAudibles || ! \is_array($receiverAudibles) || \count($receiverAudibles) < 1) {
                 $receiverAudibles = UserAudible::with(['room', 'target', 'bot'])->whereRaw('user_id = ?', [$target->id])->get();
             }
@@ -223,8 +223,8 @@ class SystemBot
 
             if ($receiverDirty == 1) {
                 $expiresAt = Carbon::now()->addMinutes(60);
-                \cache()->put('user-audibles'.$target->id, $receiverAudibles, $expiresAt);
-                \event(new Chatter('audible', $target->id, UserAudibleResource::collection($receiverAudibles)));
+                cache()->put('user-audibles'.$target->id, $receiverAudibles, $expiresAt);
+                event(new Chatter('audible', $target->id, UserAudibleResource::collection($receiverAudibles)));
             }
 
             if ($txt != '') {
@@ -233,7 +233,7 @@ class SystemBot
                 $message = $this->chatRepository->privateMessage(1, $roomId, $txt, $target->id, $this->bot->id);
             }
 
-            return \response('success');
+            return response('success');
         }
 
         if ($type == 'echo') {
@@ -242,7 +242,7 @@ class SystemBot
                 $message = $this->chatRepository->botMessage($this->bot->id, $roomId, $txt, $target->id);
             }
 
-            return \response('success');
+            return response('success');
         }
 
         if ($type == 'public') {
@@ -251,7 +251,7 @@ class SystemBot
                 $dumproom = $this->chatRepository->message(1, $target->chatroom->id, $txt, null, $this->bot->id);
             }
 
-            return \response('success');
+            return response('success');
         }
 
         return true;

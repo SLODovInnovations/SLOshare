@@ -8,6 +8,7 @@ use App\Notifications\UserWarning;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 /**
  * @see \Tests\Unit\Console\Commands\AutoWarningTest

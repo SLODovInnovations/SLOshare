@@ -7,6 +7,7 @@ use App\Http\Requests\Staff\StoreCategoryRequest;
 use App\Http\Requests\Staff\UpdateCategoryRequest;
 use App\Models\Category;
 use Intervention\Image\Facades\Image;
+use Exception;
 
 /**
  * @see \Tests\Feature\Http\Controllers\CategoryControllerTest
@@ -20,7 +21,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all()->sortBy('position');
 
-        return \view('Staff.category.index', ['categories' => $categories]);
+        return view('Staff.category.index', ['categories' => $categories]);
     }
 
     /**
@@ -28,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.category.create');
+        return view('Staff.category.create');
     }
 
     /**
@@ -38,8 +39,8 @@ class CategoryController extends Controller
     {
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = 'category-'.\uniqid('', true).'.'.$image->getClientOriginalExtension();
-            $path = \public_path('/files/img/'.$filename);
+            $filename = 'category-'.uniqid('', true).'.'.$image->getClientOriginalExtension();
+            $path = public_path('/files/img/'.$filename);
             Image::make($image->getRealPath())->fit(50, 50)->encode('png', 100)->save($path);
         }
 
@@ -54,7 +55,7 @@ class CategoryController extends Controller
             'cartoon_meta'  => $request->meta === 'cartoon',
         ] + $request->validated());
 
-        return \to_route('staff.categories.index')
+        return to_route('staff.categories.index')
             ->withSuccess('Kategorija uspešno dodana');
     }
 
@@ -65,7 +66,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
 
-        return \view('Staff.category.edit', ['category' => $category]);
+        return view('Staff.category.edit', ['category' => $category]);
     }
 
     /**
@@ -75,8 +76,8 @@ class CategoryController extends Controller
     {
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = 'category-'.\uniqid('', true).'.'.$image->getClientOriginalExtension();
-            $path = \public_path('/files/img/'.$filename);
+            $filename = 'category-'.uniqid('', true).'.'.$image->getClientOriginalExtension();
+            $path = public_path('/files/img/'.$filename);
             Image::make($image->getRealPath())->fit(50, 50)->encode('png', 100)->save($path);
         }
 
@@ -91,21 +92,21 @@ class CategoryController extends Controller
             'cartoon_meta' => $request->meta === 'cartoon',
         ] + $request->validated());
 
-        return \to_route('staff.categories.index')
+        return to_route('staff.categories.index')
             ->withSuccess('Kategorija uspešno spremenjena');
     }
 
     /**
      * Destroy A Category.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return \to_route('staff.categories.index')
+        return to_route('staff.categories.index')
             ->withSuccess('Kategorija uspešno izbrisana');
     }
 }

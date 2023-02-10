@@ -8,6 +8,7 @@ use App\Http\Requests\Staff\UpdateDistributorRequest;
 use App\Models\Distributor;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Exception;
 
 class DistributorController extends Controller
 {
@@ -18,7 +19,7 @@ class DistributorController extends Controller
     {
         $distributors = Distributor::all()->sortBy('position');
 
-        return \view('Staff.distributor.index', ['distributors' => $distributors]);
+        return view('Staff.distributor.index', ['distributors' => $distributors]);
     }
 
     /**
@@ -26,7 +27,7 @@ class DistributorController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.distributor.create');
+        return view('Staff.distributor.create');
     }
 
     /**
@@ -36,8 +37,8 @@ class DistributorController extends Controller
     {
         Distributor::create($request->validated());
 
-        return \to_route('staff.distributors.index')
-                ->withSuccess('Distributer je bil uspešno dodan');
+        return to_route('staff.distributors.index')
+            ->withSuccess('Distributer je bil uspešno dodan');
     }
 
     /**
@@ -47,7 +48,7 @@ class DistributorController extends Controller
     {
         $distributor = Distributor::findOrFail($id);
 
-        return \view('Staff.distributor.edit', ['distributor' => $distributor]);
+        return view('Staff.distributor.edit', ['distributor' => $distributor]);
     }
 
     /**
@@ -57,8 +58,8 @@ class DistributorController extends Controller
     {
         Distributor::where('id', '=', $id)->update($request->validated());
 
-        return \to_route('staff.distributors.index')
-                ->withSuccess('Distributer je bil uspešno spremenjen');
+        return to_route('staff.distributors.index')
+            ->withSuccess('Distributer je bil uspešno spremenjen');
     }
 
     /**
@@ -69,13 +70,13 @@ class DistributorController extends Controller
         $distributors = Distributor::all()->sortBy('position');
         $distributor = Distributor::findOrFail($id);
 
-        return \view('Staff.distributor.delete', ['distributors' => $distributors, 'distributor' => $distributor]);
+        return view('Staff.distributor.delete', ['distributors' => $distributors, 'distributor' => $distributor]);
     }
 
     /**
      * Destroy A Distributor.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
@@ -91,7 +92,7 @@ class DistributorController extends Controller
         $distributor->torrents()->update($validated);
         $distributor->delete();
 
-        return \to_route('staff.distributors.index')
+        return to_route('staff.distributors.index')
             ->withSuccess('Distributer je bil uspešno izbrisan');
     }
 }

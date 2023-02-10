@@ -10,7 +10,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::table('requests', function (Blueprint $table) {
+        Schema::table('requests', function (Blueprint $table): void {
             $table->boolean('anon')->default(0)->after('claimed');
             $table->boolean('filled_anon')->default(0)->after('filled_when');
         });

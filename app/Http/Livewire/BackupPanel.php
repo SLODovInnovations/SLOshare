@@ -41,13 +41,13 @@ class BackupPanel extends Component
                 'amount'    => $backupDestinationStatus->backupDestination()->backups()->count(),
                 'newest'    => $backupDestinationStatus->backupDestination()->newestBackup() !== null
                     ? $backupDestinationStatus->backupDestination()->newestBackup()->date()->diffForHumans()
-                    : 'No backups present',
+                    : 'Ni varnostnih kopij',
                 'usedStorage' => Format::humanReadableSize($backupDestinationStatus->backupDestination()->usedStorage()),
             ])
             ->values()
             ->toArray());
 
-        if (! $this->activeDisk && count($this->backupStatuses)) {
+        if (! $this->activeDisk && \count($this->backupStatuses)) {
             $this->activeDisk = $this->backupStatuses[0]['disk'];
         }
 
@@ -150,12 +150,12 @@ class BackupPanel extends Component
             'Pragma'              => 'public',
         ];
 
-        return response()->stream(function () use ($backup) {
+        return response()->stream(function () use ($backup): void {
             $stream = $backup->stream();
 
             fpassthru($stream);
 
-            if (is_resource($stream)) {
+            if (\is_resource($stream)) {
                 fclose($stream);
             }
         }, 200, $downloadHeaders);
@@ -183,7 +183,7 @@ class BackupPanel extends Component
                     'activeDisk' => ['required', new BackupDisk()],
                 ],
                 [
-                    'activeDisk.required' => 'Izberite disk',
+                    'activeDisk.required' => 'Select a disk',
                 ]
             )->validate();
         } catch (ValidationException $e) {

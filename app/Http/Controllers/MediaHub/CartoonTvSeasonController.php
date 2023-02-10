@@ -16,7 +16,7 @@ class CartoonTvSeasonController extends Controller
         $season = Season::with(['episodes', 'torrents'])->findOrFail($id);
         $cartoontv = CartoonTv::where('id', '=', $season->cartoontv_id)->first();
 
-        return \view('mediahub.cartoontv.season.show', [
+        return view('mediahub.cartoontv.season.show', [
             'season'      => $season,
             'cartoontv'   => $cartoontv,
         ]);

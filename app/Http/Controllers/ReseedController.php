@@ -34,17 +34,17 @@ class ReseedController extends Controller
                 User::find($r->user_id)->notify(new NewReseedRequest($torrent));
             }
 
-            $torrentUrl = \href_torrent($torrent);
+            $torrentUrl = href_torrent($torrent);
 
             $this->chatRepository->systemMessage(
-                \sprintf('Dame in Gospodje, pravkar je bila vložena zahteva za ponovno vnos [url=%s]%s[/url] lahko pomagaš :question:', $torrentUrl, $torrent->name)
+                sprintf('Dame in Gospodje, pravkar je bila vložena zahteva za ponovno vnos [url=%s]%s[/url] lahko pomagaš :question:', $torrentUrl, $torrent->name)
             );
 
-            return \to_route('torrent', ['id' => $torrent->id])
+            return to_route('torrent', ['id' => $torrent->id])
                 ->withSuccess('Obvestilo je bilo poslano vsem uporabnikom, ki so prenesli ta Torrent skupaj s prvotnim nalagalcem!');
         }
 
-        return \to_route('torrent', ['id' => $torrent->id])
+        return to_route('torrent', ['id' => $torrent->id])
             ->withErrors('Ta Torrent ne ustreza pravilom za zahtevo za ponovno sejanje.');
     }
 }
