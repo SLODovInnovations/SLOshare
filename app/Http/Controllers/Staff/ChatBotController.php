@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\UpdateChatBotRequest;
 use App\Models\Bot;
 use Illuminate\Http\Request;
+use Exception;
 
 /**
  * @see \Tests\Feature\Http\Controllers\Staff\ChatBotControllerTest
@@ -19,7 +20,7 @@ class ChatBotController extends Controller
     {
         $bots = Bot::oldest('position')->get();
 
-        return \view('Staff.chat.bot.index', [
+        return view('Staff.chat.bot.index', [
             'bots' => $bots,
         ]);
     }
@@ -32,9 +33,9 @@ class ChatBotController extends Controller
         $user = $request->user();
         $bot = Bot::findOrFail($id);
 
-        return \view('Staff.chat.bot.edit', [
-            'user'           => $user,
-            'bot'            => $bot,
+        return view('Staff.chat.bot.edit', [
+            'user' => $user,
+            'bot'  => $bot,
         ]);
     }
 
@@ -45,21 +46,21 @@ class ChatBotController extends Controller
     {
         Bot::where('id', '=', $id)->update($request->validated());
 
-        return \to_route('staff.bots.edit', ['id' => $id])
+        return to_route('staff.bots.edit', ['id' => $id])
             ->withSuccess("Bot je bil posodobljen");
     }
 
     /**
      * Remove the specified Bot resource from storage.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
         $bot = Bot::where('is_protected', '=', 0)->findOrFail($id);
         $bot->delete();
 
-        return \to_route('staff.bots.index')
+        return to_route('staff.bots.index')
             ->withSuccess('Začela se je vojna med ljudmi proti strojem! Ljudje: 1 in Boti: 0');
     }
 
@@ -72,7 +73,7 @@ class ChatBotController extends Controller
         $bot->active = 0;
         $bot->save();
 
-        return \to_route('staff.bots.index')
+        return to_route('staff.bots.index')
             ->withSuccess('Bot je onemogočen');
     }
 
@@ -85,7 +86,7 @@ class ChatBotController extends Controller
         $bot->active = 1;
         $bot->save();
 
-        return \to_route('staff.bots.index')
+        return to_route('staff.bots.index')
             ->withSuccess('Bot je omogočen');
     }
 }

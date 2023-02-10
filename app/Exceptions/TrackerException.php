@@ -3,8 +3,9 @@
 namespace App\Exceptions;
 
 use Throwable;
+use Exception;
 
-class TrackerException extends \Exception
+class TrackerException extends Exception
 {
     protected const ERROR_MSG = [
         // Error message of base Tracker system
@@ -70,7 +71,7 @@ class TrackerException extends \Exception
         $message = self::ERROR_MSG[$code];
         if ($replace) {
             foreach ($replace as $key => $value) {
-                $message = \str_replace($key, $value, $message);
+                $message = str_replace($key, $value, $message);
             }
         }
 

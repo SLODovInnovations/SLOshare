@@ -25,8 +25,8 @@ class TorrentHelper
 {
     public static function approveHelper($id): void
     {
-        $appurl = \config('app.url');
-        $appname = \config('app.name');
+        $appurl = config('app.url');
+        $appname = config('app.name');
 
         Torrent::approve($id);
         $torrent = Torrent::with('user')->withAnyStatus()->where('id', '=', $id)->first();
@@ -39,7 +39,7 @@ class TorrentHelper
         $wishes = Wish::where('tmdb', '=', $torrent->tmdb)->whereNull('source')->get();
         if ($wishes) {
             foreach ($wishes as $wish) {
-                $wish->source = \sprintf('%s/torrents/%s', $appurl, $torrent->id);
+                $wish->source = sprintf('%s/torrents/%s', $appurl, $torrent->id);
                 $wish->save();
 
                 // Send Private Message
@@ -47,7 +47,7 @@ class TorrentHelper
                 $pm->sender_id = 1;
                 $pm->receiver_id = $wish->user_id;
                 $pm->subject = 'Obvestilo o seznamu želja!';
-                $pm->message = \sprintf('Naslednji element, %s, seznama želja je bil naložen na %s! Lahko si ga ogledate [url=%s/torrents/', $wish->title, $appname, $appurl).$torrent->id.'] TUKAJ [/url]
+                $pm->message = sprintf('Naslednji element, %s, seznama želja je bil naložen na %s! Lahko si ga ogledate [url=%s/torrents/', $wish->title, $appname, $appurl).$torrent->id.'] TUKAJ [/url]
                                 [color=red][b]TO JE AVTOMATIZOVANO SISTEMSKO SPOROČILO, PROSIMO, NE ODGOVARAJTE![/b][/color]';
                 $pm->save();
             }
@@ -82,17 +82,17 @@ class TorrentHelper
 //        }
 
         // Announce To IRC
-        if (\config('irc-bot.enabled')) {
-            $appname = \config('app.name');
+        if (config('irc-bot.enabled')) {
+            $appname = config('app.name');
             $ircAnnounceBot = new IRCAnnounceBot();
             if ($anon == 0) {
-                $ircAnnounceBot->message(\config('irc-bot.channel'), '['.$appname.'] Uporabnik '.$username.' je naložilo '.$torrent->name.' zgrabi ga zdaj!');
-                $ircAnnounceBot->message(\config('irc-bot.channel'), '[Kategorija: '.$torrent->category->name.'] [Vrsta: '.$torrent->type->name.'] [Velikost:'.$torrent->getSize().']');
+                $ircAnnounceBot->message(config('irc-bot.channel'), '['.$appname.'] Uporabnik '.$username.' je naložilo '.$torrent->name.' zgrabi ga zdaj!');
+                $ircAnnounceBot->message(config('irc-bot.channel'), '[Kategorija: '.$torrent->category->name.'] [Vrsta: '.$torrent->type->name.'] [Velikost:'.$torrent->getSize().']');
             } else {
-                $ircAnnounceBot->message(\config('irc-bot.channel'), '['.$appname.'] Anonimni uporabnik je naložil '.$torrent->name.' prenesite ga zdaj!');
-                $ircAnnounceBot->message(\config('irc-bot.channel'), '[Kategorija: '.$torrent->category->name.'] [Vrsta: '.$torrent->type->name.'] [Velikost: '.$torrent->getSize().']');
+                $ircAnnounceBot->message(config('irc-bot.channel'), '['.$appname.'] Anonimni uporabnik je naložil '.$torrent->name.' prenesite ga zdaj!');
+                $ircAnnounceBot->message(config('irc-bot.channel'), '[Kategorija: '.$torrent->category->name.'] [Vrsta: '.$torrent->type->name.'] [Velikost: '.$torrent->getSize().']');
             }
-            $ircAnnounceBot->message(\config('irc-bot.channel'), \sprintf('[Povezava: %s/torrents/', $appurl).$id.']');
+            $ircAnnounceBot->message(config('irc-bot.channel'), sprintf('[Povezava: %s/torrents/', $appurl).$id.']');
         }
     }
 }

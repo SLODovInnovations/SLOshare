@@ -106,7 +106,7 @@ class ProcessCartoonTvJob implements ShouldQueue
         }
 
         foreach ($this->cartoontv['seasons'] as $season) {
-            $client = new Client\Season($this->id, \sprintf('%02d', $season['season_number']));
+            $client = new Client\Season($this->id, sprintf('%02d', $season['season_number']));
             $season = $client->getData();
             if (isset($season['season_number'])) {
                 $seasonArray = [
@@ -114,25 +114,25 @@ class ProcessCartoonTvJob implements ShouldQueue
                     'poster'        => $tmdb->image('poster', $season),
                     'name'          => $tmdb->ifExists('name', $season),
                     'overview'      => $tmdb->ifExists('overview', $season),
-                    'season_number' => \sprintf('%02d', $season['season_number']),
-                    'cartoon_tv_id'  => $this->id,
+                    'season_number' => sprintf('%02d', $season['season_number']),
+                    'cartoon_tv_id' => $this->id,
                 ];
 
                 Season::updateOrCreate(['id' => $season['id']], $seasonArray)->cartoontv();
 
                 foreach ($season['episodes'] as $episode) {
-                    $client = new Client\Episode($this->id, \sprintf('%02d', $season['season_number']), $episode['episode_number']);
+                    $client = new Client\Episode($this->id, sprintf('%02d', $season['season_number']), $episode['episode_number']);
                     $episode = $client->getData();
                     if (isset($episode['episode_number'])) {
                         $episodeArray = [
-                            'cartoon_tv_id'    => $this->id,
+                            'cartoon_tv_id'   => $this->id,
                             'air_date'        => $tmdb->ifExists('air_date', $episode),
                             'name'            => Str::limit($tmdb->ifExists('name', $episode), 200),
-                            'episode_number'  => \sprintf('%02d', $episode['episode_number']),
+                            'episode_number'  => sprintf('%02d', $episode['episode_number']),
                             'overview'        => $tmdb->ifExists('overview', $episode),
                             'still'           => $tmdb->image('still', $episode),
                             'production_code' => $episode['production_code'],
-                            'season_number'   => \sprintf('%02d', $episode['season_number']),
+                            'season_number'   => sprintf('%02d', $episode['season_number']),
                             'vote_average'    => $episode['vote_average'],
                             'vote_count'      => $episode['vote_count'],
                             'season_id'       => $season['id'],

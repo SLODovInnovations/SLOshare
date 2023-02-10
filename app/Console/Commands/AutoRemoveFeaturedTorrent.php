@@ -53,10 +53,10 @@ class AutoRemoveFeaturedTorrent extends Command
                 $torrent->save();
 
                 // Auto Announce Featured Expired
-                $appurl = \config('app.url');
+                $appurl = config('app.url');
 
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in gospodje, [url=%s/torrents/%s]%s[/url] ni več predstavljen. :poop:', $appurl, $torrent->id, $torrent->name)
+                    sprintf('Dame in gospodje, [url=%s/torrents/%s]%s[/url] ni več predstavljen. :poop:', $appurl, $torrent->id, $torrent->name)
                 );
             }
 

@@ -12,7 +12,7 @@ class CompanyController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('mediahub.company.index');
+        return view('mediahub.company.index');
     }
 
     /**
@@ -21,17 +21,17 @@ class CompanyController extends Controller
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         $company = Company::withCount('tv', 'cartoontv', 'movie', 'cartoon')->findOrFail($id);
-        $shows = $company->tv()->oldest('name')->paginate(25);
-        $cartoontvs = $company->cartoontv()->oldest('name')->paginate(25);
-        $movies = $company->movie()->oldest('title')->paginate(25);
-        $cartoons = $company->cartoon()->oldest('title')->paginate(25);
+        $shows = $company->tv()->has('torrents')->oldest('name')->paginate(25, ['*'], 'showsPage');
+        $cartoontvs = $company->cartoontv()->has('torrents')->oldest('name')->paginate(25, ['*'], 'cartoontvsPage');
+        $movies = $company->movie()->has('torrents')->oldest('title')->paginate(25, ['*'], 'moviesPage');
+        $cartoons = $company->cartoon()->has('torrents')->oldest('title')->paginate(25, ['*'], 'cartoonsPage');
 
-        return \view('mediahub.company.show', [
-            'company' => $company,
-            'shows'   => $shows,
-            'cartoontvs'   => $cartoontv,
-            'movies'  => $movies,
-            'cartoons'  => $cartoon,
+        return view('mediahub.company.show', [
+            'company'    => $company,
+            'shows'      => $shows,
+            'cartoontvs' => $cartoontv,
+            'movies'     => $movies,
+            'cartoons'   => $cartoon,
         ]);
     }
 }

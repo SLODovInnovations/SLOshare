@@ -15,7 +15,7 @@ class PeerController extends Controller
      */
     public function index(Request $request, User $user): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        \abort_unless($request->user()->group->is_modo || $request->user()->id == $user->id, 403);
+        abort_unless($request->user()->group->is_modo || $request->user()->id == $user->id, 403);
 
         $history = DB::table('history')
             ->where('user_id', '=', $user->id)
@@ -26,7 +26,7 @@ class PeerController extends Controller
             ->selectRaw('sum(downloaded) as credited_download')
             ->first();
 
-        return \view('user.peer.index', [
+        return view('user.peer.index', [
             'user'    => $user,
             'history' => $history,
         ]);
@@ -37,11 +37,11 @@ class PeerController extends Controller
      */
     public function massDestroy(Request $request, User $user): \Illuminate\Http\RedirectResponse
     {
-        \abort_unless($request->user()->id == $user->id, 403);
+        abort_unless($request->user()->id == $user->id, 403);
 
         // Check if User can flush
         if ($request->user()->own_flushes == 0) {
-            return \redirect()->back()->withErrors('Izpirate lahko samo dvakrat na dan!');
+            return redirect()->back()->withErrors('Izpirate lahko samo dvakrat na dan!');
         }
 
         // Only peers older than 70 minutes are allowed to be flushed otherwise users could use this to exploit leech slots
@@ -57,6 +57,6 @@ class PeerController extends Controller
 
         $user->own_flushes--;
 
-        return \redirect()->back()->withSuccess('Vsi vrstniki, nazadnje najavljeni od odjemalca pred več kot 70 minutami, so bili uspešno spraznjeni!');
+        return redirect()->back()->withSuccess('Vsi vrstniki, nazadnje najavljeni od odjemalca pred več kot 70 minutami, so bili uspešno spraznjeni!');
     }
 }

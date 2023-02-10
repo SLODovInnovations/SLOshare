@@ -9,7 +9,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table): void {
             $table->integer('id', true);
             $table->string('username');
             $table->string('email');

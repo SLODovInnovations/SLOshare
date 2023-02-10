@@ -34,7 +34,7 @@ class NewRequestUnclaim extends Notification implements ShouldQueue
         return [
             'title' => $this->sender.' Zahteva za vaš Torrent je bila zavrnjena',
             'body'  => $this->sender.' je preklical vaš zahtevani Torrent '.$this->torrentRequest->name,
-            'url'   => \sprintf('/requests/%s', $this->torrentRequest->id),
+            'url'   => sprintf('/requests/%s', $this->torrentRequest->id),
         ];
     }
 }

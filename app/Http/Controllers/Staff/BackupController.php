@@ -14,6 +14,6 @@ class BackupController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.backup.index');
+        return view('Staff.backup.index');
     }
 }

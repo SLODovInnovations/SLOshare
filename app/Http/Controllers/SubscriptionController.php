@@ -34,11 +34,11 @@ class SubscriptionController extends Controller
             $subscription->topic_id = $topic->id;
             $subscription->save();
 
-            return \to_route($logger, $params)
+            return to_route($logger, $params)
                 ->withSuccess('Zdaj ste naročeni na temo, '.$topic->name.'. Zdaj boste prejemali obvestila spletnega mesta, ko boste prejeli odgovor.');
         }
 
-        return \to_route($logger, $params)
+        return to_route($logger, $params)
             ->withErrors('Na to temo ste že naročeni');
     }
 
@@ -62,11 +62,11 @@ class SubscriptionController extends Controller
             $subscription = $request->user()->subscriptions()->ofTopic($topic->id)->first();
             $subscription->delete();
 
-            return \to_route($logger, $params)
+            return to_route($logger, $params)
                 ->withSuccess('Niste več naročeni na temo, '.$topic->name.'. Ko boste prejeli odgovor, ne boste več prejemali obvestil spletnega mesta.');
         }
 
-        return \to_route($logger, $params)
+        return to_route($logger, $params)
             ->withErrors('Za začetek niste naročeni na to temo...');
     }
 
@@ -92,11 +92,11 @@ class SubscriptionController extends Controller
             $subscription->forum_id = $forum->id;
             $subscription->save();
 
-            return \to_route($logger, $params)
+            return to_route($logger, $params)
                 ->withSuccess('Zdaj ste naročeni na forum, '.$forum->name.'. Zdaj boste prejemali obvestila spletnega mesta, ko se odpre tema.');
         }
 
-        return \to_route($logger, $params)
+        return to_route($logger, $params)
             ->withErrors('Na ta forum ste že prijavljeni');
     }
 
@@ -120,11 +120,11 @@ class SubscriptionController extends Controller
             $subscription = $request->user()->subscriptions()->ofForum($forum->id)->first();
             $subscription->delete();
 
-            return \to_route($logger, $params)
+            return to_route($logger, $params)
                 ->withSuccess('Niste več naročeni na forum, '.$forum->name.'. Ob zagonu teme ne boste več prejemali obvestil spletnega mesta.');
         }
 
-        return \to_route($logger, $params)
+        return to_route($logger, $params)
             ->withErrors('Za začetek niste prijavljeni na ta forum...');
     }
 }

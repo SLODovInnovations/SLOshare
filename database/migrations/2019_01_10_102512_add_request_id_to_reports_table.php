@@ -10,7 +10,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::table('reports', function (Blueprint $table) {
+        Schema::table('reports', function (Blueprint $table): void {
             $table->integer('request_id')->unsigned()->default(0)->after('torrent_id');
             $table->integer('torrent_id')->unsigned()->default(0)->change();
         });

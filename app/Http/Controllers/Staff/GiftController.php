@@ -17,7 +17,7 @@ class GiftController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.gift.index');
+        return view('Staff.gift.index');
     }
 
     /**
@@ -38,11 +38,11 @@ class GiftController extends Controller
             'sender_id'   => 1,
             'receiver_id' => $recipient->id,
             'subject'     => 'Prejeli ste sistemsko ustvarjeno darilo',
-            'message'     => \sprintf('Želeli smo vas samo obvestiti o nagradi, %s, prijeli ste na vaš račun %s Bonus Points, %s (Bytes) Uploaded.
+            'message'     => sprintf('Želeli smo vas samo obvestiti o nagradi, %s, prijeli ste na vaš račun %s Bonus Points, %s (Bytes) Uploaded.
             [color=red][b]TO JE AVTOMATIZOVANO SISTEMSKO SPOROČILO, PROSIMO, NE ODGOVARAJTE![/b][/color]', $staff->username, $request->uploaded)
         ]);
 
-        return \to_route('staff.gifts.index')
+        return to_route('staff.gifts.index')
             ->withSuccess('Darilo poslano');
     }
 }

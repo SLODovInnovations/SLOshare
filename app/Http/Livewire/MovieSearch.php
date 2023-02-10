@@ -38,7 +38,7 @@ class MovieSearch extends Component
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return \view('livewire.movie-search', [
+        return view('livewire.movie-search', [
             'movies' => $this->movies,
         ]);
     }

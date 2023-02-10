@@ -14,13 +14,13 @@ class Language
     public static function flag(string $code = 'default'): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         if ($code === 'default') {
-            $code = \app()->getLocale();
+            $code = app()->getLocale();
         }
 
         $name = self::getName($code);
         $code = self::country($code);
 
-        return \view('vendor.language.flag', ['code' => $code, 'name' => $name]);
+        return view('vendor.language.flag', ['code' => $code, 'name' => $name]);
     }
 
     /**
@@ -29,14 +29,14 @@ class Language
     public static function country(string $locale = 'default'): string
     {
         if ($locale === 'default') {
-            $locale = \app()->getLocale();
+            $locale = app()->getLocale();
         }
 
-        if (\config('language.mode.code', 'short') == 'short') {
-            return \strtolower(\substr(self::getLongCode($locale), 3));
+        if (config('language.mode.code', 'short') == 'short') {
+            return strtolower(substr(self::getLongCode($locale), 3));
         }
 
-        return \strtolower(\substr($locale, 3));
+        return strtolower(substr($locale, 3));
     }
 
     /**
@@ -44,7 +44,7 @@ class Language
      */
     public static function flags(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
-        return \view('vendor.language.flags');
+        return view('vendor.language.flags');
     }
 
     /**
@@ -57,11 +57,11 @@ class Language
             return \array_key_exists($locale, self::allowed());
         }
 
-        if (\config('language.allowed')) {
-            return self::names(\array_merge(\config('language.allowed'), [\config('app.locale')]));
+        if (config('language.allowed')) {
+            return self::names(array_merge(config('language.allowed'), [config('app.locale')]));
         }
 
-        return self::names([\config('app.locale')]);
+        return self::names([config('app.locale')]);
     }
 
     /**
@@ -70,10 +70,10 @@ class Language
     public static function names(array $codes): array
     {
         // Get mode
-        $mode = \config('language.mode');
+        $mode = config('language.mode');
 
         // Get languages from config
-        $languages = \config('language.all');
+        $languages = config('language.all');
 
         $array = [];
 
@@ -99,10 +99,10 @@ class Language
     public static function codes(array $langs): array
     {
         // Get mode
-        $mode = \config('language.mode');
+        $mode = config('language.mode');
 
         // Get languages from config
-        $languages = \config('language.all');
+        $languages = config('language.all');
 
         $array = [];
 
@@ -127,7 +127,7 @@ class Language
      */
     public static function back(string $code): string
     {
-        return \route('back', ['locale' => $code]);
+        return route('back', ['locale' => $code]);
     }
 
     /**
@@ -135,7 +135,7 @@ class Language
      */
     public static function home(string $code): string
     {
-        return \route('home', ['locale' => $code]);
+        return route('home', ['locale' => $code]);
     }
 
     /**
@@ -156,13 +156,13 @@ class Language
     public static function getLongCode(string $short = 'default'): string
     {
         if ($short === 'default') {
-            $short = \app()->getLocale();
+            $short = app()->getLocale();
         }
 
         $long = 'en-GB';
 
         // Get languages from config
-        foreach (\config('language.all') as $language) {
+        foreach (config('language.all') as $language) {
             if ($language['short'] != $short) {
                 continue;
             }
@@ -179,13 +179,13 @@ class Language
     public static function getShortCode(string $long = 'default'): string
     {
         if ($long === 'default') {
-            $long = \app()->getLocale();
+            $long = app()->getLocale();
         }
 
         $short = 'en';
 
         // Get languages from config
-        $languages = \config('language.all');
+        $languages = config('language.all');
 
         foreach ($languages as $language) {
             if ($language['long'] != $long) {
@@ -204,7 +204,7 @@ class Language
     public static function getName(string $code = 'default'): string
     {
         if ($code === 'default') {
-            $code = \app()->getLocale();
+            $code = app()->getLocale();
         }
 
         return self::names([$code])[$code];

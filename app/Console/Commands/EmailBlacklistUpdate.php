@@ -40,6 +40,6 @@ class EmailBlacklistUpdate extends Command
             return;
         }
 
-        $this->info(\sprintf('%s domene pridobljene. Predpomnilnik posodobljen. Pripravljeni ste.', $count));
+        $this->info(sprintf('%s domene pridobljene. Predpomnilnik posodobljen. Pripravljeni ste.', $count));
     }
 }

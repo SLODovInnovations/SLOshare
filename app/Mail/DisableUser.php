@@ -24,6 +24,6 @@ class DisableUser extends Mailable
     public function build(): static
     {
         return $this->markdown('emails.disabled')
-            ->subject('Vaš račun je ONEMOGOČEN - '.\config('other.title'));
+            ->subject('Vaš račun je ONEMOGOČEN - '.config('other.title'));
     }
 }

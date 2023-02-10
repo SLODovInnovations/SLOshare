@@ -24,6 +24,6 @@ class DeleteUser extends Mailable
     public function build(): static
     {
         return $this->markdown('emails.pruned')
-            ->subject('Vaš račun je bil ODSTRANJEN - '.\config('other.title'));
+            ->subject('Vaš račun je bil ODSTRANJEN - '.config('other.title'));
     }
 }

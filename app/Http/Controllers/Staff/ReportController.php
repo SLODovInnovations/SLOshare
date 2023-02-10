@@ -19,7 +19,7 @@ class ReportController extends Controller
     {
         $reports = Report::orderBy('solved')->latest()->paginate(25);
 
-        return \view('Staff.report.index', ['reports' => $reports]);
+        return view('Staff.report.index', ['reports' => $reports]);
     }
 
     /**
@@ -29,9 +29,9 @@ class ReportController extends Controller
     {
         $report = Report::findOrFail($id);
 
-        \preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', (string) $report->message, $match);
+        preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', (string) $report->message, $match);
 
-        return \view('Staff.report.show', ['report' => $report, 'urls' => $match[0]]);
+        return view('Staff.report.show', ['report' => $report, 'urls' => $match[0]]);
     }
 
     /**
@@ -39,11 +39,11 @@ class ReportController extends Controller
      */
     public function update(UpdateReportRequest $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        $staff = \auth()->user();
+        $staff = auth()->user();
         $report = Report::findOrFail($id);
 
         if ($report->solved == 1) {
-            return \to_route('staff.reports.index')
+            return to_route('staff.reports.index')
                 ->withErrors('To poročilo je že rešeno');
         }
 
@@ -57,7 +57,7 @@ class ReportController extends Controller
             'message'     => '[b]NASLOV POROČILA:[/b] '.$report->title."\n\n[b]ORIGINALNO SPOROČILO:[/b] ".$report->message."\n\n[b]SODBA:[/b] ".$report->verdict,
         ]);
 
-        return \to_route('staff.reports.index')
+        return to_route('staff.reports.index')
             ->withSuccess('Poročilo je bilo uspešno rešen');
     }
 }

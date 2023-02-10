@@ -7,6 +7,7 @@ use App\Http\Requests\Staff\StoreArticleRequest;
 use App\Http\Requests\Staff\UpdateArticleRequest;
 use App\Models\Article;
 use Intervention\Image\Facades\Image;
+use Exception;
 
 /**
  * @see \Tests\Feature\Http\Controllers\ArticleControllerTest
@@ -20,7 +21,7 @@ class ArticleController extends Controller
     {
         $articles = Article::latest()->paginate(25);
 
-        return \view('Staff.article.index', ['articles' => $articles]);
+        return view('Staff.article.index', ['articles' => $articles]);
     }
 
     /**
@@ -28,7 +29,7 @@ class ArticleController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.article.create');
+        return view('Staff.article.create');
     }
 
     /**
@@ -38,14 +39,14 @@ class ArticleController extends Controller
     {
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = 'article-'.\uniqid('', true).'.'.$image->getClientOriginalExtension();
-            $path = \public_path('/files/img/'.$filename);
+            $filename = 'article-'.uniqid('', true).'.'.$image->getClientOriginalExtension();
+            $path = public_path('/files/img/'.$filename);
             Image::make($image->getRealPath())->fit(75, 75)->encode('png', 100)->save($path);
         }
 
         Article::create(['user_id' => $request->user()->id, 'image' => $filename ?? null] + $request->validated());
 
-        return \to_route('staff.articles.index')
+        return to_route('staff.articles.index')
             ->withSuccess('Vaš članek je bil uspešno objavljen!');
     }
 
@@ -56,7 +57,7 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($id);
 
-        return \view('Staff.article.edit', ['article' => $article]);
+        return view('Staff.article.edit', ['article' => $article]);
     }
 
     /**
@@ -66,21 +67,21 @@ class ArticleController extends Controller
     {
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = 'article-'.\uniqid('', true).'.'.$image->getClientOriginalExtension();
-            $path = \public_path('/files/img/'.$filename);
+            $filename = 'article-'.uniqid('', true).'.'.$image->getClientOriginalExtension();
+            $path = public_path('/files/img/'.$filename);
             Image::make($image->getRealPath())->fit(75, 75)->encode('png', 100)->save($path);
         }
 
         Article::where('id', '=', $id)->update(['image' => $filename ?? null,] + $request->validated());
 
-        return \to_route('staff.articles.index')
+        return to_route('staff.articles.index')
             ->withSuccess('Spremembe vašega članka so uspešno objavljene!');
     }
 
     /**
      * Delete A Article.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
@@ -90,7 +91,7 @@ class ArticleController extends Controller
         }
         $article->delete();
 
-        return \to_route('staff.articles.index')
+        return to_route('staff.articles.index')
             ->withSuccess('Članek je bil uspešno izbrisan');
     }
 }

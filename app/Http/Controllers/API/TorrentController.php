@@ -81,14 +81,14 @@ class TorrentController extends BaseController
             }
         }
 
-        $fileName = \sprintf('%s.torrent', \uniqid('', true)); // Generate a unique name
+        $fileName = sprintf('%s.torrent', uniqid('', true)); // Generate a unique name
         Storage::disk('torrents')->put($fileName, Bencode::bencode($decodedTorrent));
 
         // Find the right category
         $category = Category::withCount('torrents')->findOrFail($request->input('category_id'));
 
         // Create the torrent (DB)
-        $torrent = \app()->make(Torrent::class);
+        $torrent = app()->make(Torrent::class);
         $torrent->name = $request->input('name');
         $torrent->description = $request->input('description');
         $torrent->mediainfo = TorrentTools::anonymizeMediainfo($request->input('mediainfo'));
@@ -164,36 +164,36 @@ class TorrentController extends BaseController
         }
 
         // Validation
-        $v = \validator($torrent->toArray(), [
-            'name'              => 'required|unique:torrents',
-            'description'       => 'required',
-            'info_hash'         => 'required|unique:torrents',
-            'file_name'         => 'required',
-            'num_file'          => 'required|numeric',
-            'announce'          => 'required',
-            'size'              => 'required',
-            'category_id'       => 'required|exists:categories,id',
-            'type_id'           => 'required|exists:types,id',
-            'resolution_id'     => $resolutionRule,
-            'region_id'         => 'nullable|exists:regions,id',
-            'distributor_id'    => 'nullable|exists:distributors,id',
-            'user_id'           => 'required|exists:users,id',
-            'imdb'              => 'required|numeric',
-            'tvdb'              => 'required|numeric',
-            'tmdb'              => 'required|numeric',
-            'mal'               => 'required|numeric',
-            'igdb'              => 'required|numeric',
-            'season_number'     => $seasonRule,
-            'episode_number'    => $episodeRule,
-            'anon'              => 'required',
-            'stream'            => 'required',
-            'sd'                => 'required',
-            'personal_release'  => 'nullable',
-            'internal'          => 'required',
-            'featured'          => 'required',
-            'free'              => 'required|between:0,100',
-            'doubleup'          => 'required',
-            'sticky'            => 'required',
+        $v = validator($torrent->toArray(), [
+            'name'             => 'required|unique:torrents',
+            'description'      => 'required',
+            'info_hash'        => 'required|unique:torrents',
+            'file_name'        => 'required',
+            'num_file'         => 'required|numeric',
+            'announce'         => 'required',
+            'size'             => 'required',
+            'category_id'      => 'required|exists:categories,id',
+            'type_id'          => 'required|exists:types,id',
+            'resolution_id'    => $resolutionRule,
+            'region_id'        => 'nullable|exists:regions,id',
+            'distributor_id'   => 'nullable|exists:distributors,id',
+            'user_id'          => 'required|exists:users,id',
+            'imdb'             => 'required|numeric',
+            'tvdb'             => 'required|numeric',
+            'tmdb'             => 'required|numeric',
+            'mal'              => 'required|numeric',
+            'igdb'             => 'required|numeric',
+            'season_number'    => $seasonRule,
+            'episode_number'   => $episodeRule,
+            'anon'             => 'required',
+            'stream'           => 'required',
+            'sd'               => 'required',
+            'personal_release' => 'nullable',
+            'internal'         => 'required',
+            'featured'         => 'required',
+            'free'             => 'required|between:0,100',
+            'doubleup'         => 'required',
+            'sticky'           => 'required',
         ]);
 
         if ($v->fails()) {
@@ -205,7 +205,7 @@ class TorrentController extends BaseController
         }
 
         // Torrent FL 100%
-        if (config('torrent.size_freeleech') == true && $torrent->size >= \config('torrent.size_threshold')) {
+        if (config('torrent.size_freeleech') == true && $torrent->size >= config('torrent.size_threshold')) {
             $torrent->free = 100;
         }
 
@@ -260,7 +260,7 @@ class TorrentController extends BaseController
 
         // check for trusted user and update torrent
         if ($user->group->is_trusted) {
-            $appurl = \config('app.url');
+            $appurl = config('app.url');
             $user = $torrent->user;
             $username = $user->username;
             $anon = $torrent->anon;
@@ -271,35 +271,35 @@ class TorrentController extends BaseController
             // Announce To Shoutbox
             if ($anon == 0) {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Uporabnik [url=%s/users/', $appurl).$username.']'.$username.\sprintf('[/url] je naložil novo '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
+                    sprintf('Uporabnik [url=%s/users/', $appurl).$username.']'.$username.sprintf('[/url] je naložil novo '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
                 );
             } else {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Anonimni uporabnik je naložil novo '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
+                    sprintf('Anonimni uporabnik je naložil novo '.$torrent->category->name.'. [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url], prenesi ga zdaj! :slight_smile:'
                 );
             }
 
             if ($anon == 1 && $featured == 1) {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] je anonimni uporabnik dodal na drsnik za predstavljene torrente! Prenesi ga zdaj! :fire:'
+                    sprintf('Dame in Gospodje, [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.'[/url] je anonimni uporabnik dodal na drsnik za predstavljene torrente! Prenesi ga zdaj! :fire:'
                 );
             } elseif ($anon == 0 && $featured == 1) {
                 $this->chatRepository->systemMessage(
-                    \sprintf('Dame in Gospodje, [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.\sprintf('[/url] je na drsnik za predstavljene torrente dodal [url=%s/users/', $appurl).$username.']'.$username.'[/url]! Prenesi ga zdaj! :fire:'
+                    sprintf('Dame in Gospodje, [url=%s/torrents/', $appurl).$torrent->id.']'.$torrent->name.sprintf('[/url] je na drsnik za predstavljene torrente dodal [url=%s/users/', $appurl).$username.']'.$username.'[/url]! Prenesi ga zdaj! :fire:'
                 );
             }
 
             if ($free >= 1 && $featured == 0) {
                 if ($torrent->fl_until === null) {
                     $this->chatRepository->systemMessage(
-                        \sprintf(
+                        sprintf(
                             'Dame in Gospodje, [url=%s/torrents/',
                             $appurl
                         ).$torrent->id.']'.$torrent->name.'[/url] je bilo odobreno '.$free.'% Freeleech! Prenesi ga zdajn! :fire:'
                     );
                 } else {
                     $this->chatRepository->systemMessage(
-                        \sprintf(
+                        sprintf(
                             'Dame in Gospodje, [url=%s/torrents/',
                             $appurl
                         ).$torrent->id.']'.$torrent->name.'[/url] je bila odobrena '.$free.'% Freeleech za '.$request->input('fl_until').' dni. :stopwatch:'
@@ -310,14 +310,14 @@ class TorrentController extends BaseController
             if ($doubleup == 1 && $featured == 0) {
                 if ($torrent->du_until === null) {
                     $this->chatRepository->systemMessage(
-                        \sprintf(
+                        sprintf(
                             'Dame in Gospodj, [url=%s/torrents/',
                             $appurl
                         ).$torrent->id.']'.$torrent->name.'[/url] je bil odobren dvojni prenos! Prenesi, dokler lahko! :fire:'
                     );
                 } else {
                     $this->chatRepository->systemMessage(
-                        \sprintf(
+                        sprintf(
                             'Dame in Gospodj, [url=%s/torrents/',
                             $appurl
                         ).$torrent->id.']'.$torrent->name.'[/url] je bila odobrena dvojna nalaganja za '.$request->input('du_until').' dni. :stopwatch:'
@@ -328,7 +328,7 @@ class TorrentController extends BaseController
             TorrentHelper::approveHelper($torrent->id);
         }
 
-        return $this->sendResponse(\route('torrent.download.rsskey', ['id' => $torrent->id, 'rsskey' => \auth('api')->user()->rsskey]), 'Torrent je bil uspešno naložen.');
+        return $this->sendResponse(route('torrent.download.rsskey', ['id' => $torrent->id, 'rsskey' => auth('api')->user()->rsskey]), 'Torrent je bil uspešno naložen.');
     }
 
     /**
@@ -348,13 +348,13 @@ class TorrentController extends BaseController
      */
     public function filter(Request $request): TorrentsResource|\Illuminate\Http\JsonResponse
     {
-        $user = \auth()->user();
+        $user = auth()->user();
         $isRegexAllowed = $user->group->is_modo;
         $isRegex = fn ($field) => $isRegexAllowed
             && \strlen($field) > 2
             && $field[0] === '/'
             && $field[-1] === '/'
-            && @\preg_match($field, 'Preverjanje veljavnosti regexa') !== false;
+            && @preg_match($field, 'Preverjanje veljavnosti regexa') !== false;
 
         $torrents = Torrent::with(['user:id,username,group_id', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
@@ -362,7 +362,7 @@ class TorrentController extends BaseController
             ->when($request->filled('description'), fn ($query) => $query->ofDescription($request->description, $isRegex($request->description)))
             ->when($request->filled('mediainfo'), fn ($query) => $query->ofMediainfo($request->mediainfo, $isRegex($request->mediainfo)))
             ->when($request->filled('uploader'), fn ($query) => $query->ofUploader($request->uploader))
-            ->when($request->filled('keywords'), fn ($query) => $query->ofKeyword(\array_map('trim', explode(',', $request->keywords))))
+            ->when($request->filled('keywords'), fn ($query) => $query->ofKeyword(array_map('trim', explode(',', $request->keywords))))
             ->when($request->filled('startYear'), fn ($query) => $query->releasedAfterOrIn((int) $request->startYear))
             ->when($request->filled('endYear'), fn ($query) => $query->releasedBeforeOrIn((int) $request->endYear))
             ->when($request->filled('categories'), fn ($query) => $query->ofCategory($request->categories))

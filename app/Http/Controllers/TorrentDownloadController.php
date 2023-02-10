@@ -18,7 +18,7 @@ class TorrentDownloadController extends Controller
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
         $user = $request->user();
 
-        return \view('torrent.download_check', ['torrent' => $torrent, 'user' => $user]);
+        return view('torrent.download_check', ['torrent' => $torrent, 'user' => $user]);
     }
 
     /**
@@ -33,31 +33,31 @@ class TorrentDownloadController extends Controller
         $torrent = Torrent::withAnyStatus()->findOrFail($id);
         $hasHistory = $user->history()->where([['torrent_id', '=', $torrent->id], ['seeder', '=', 1]])->exists();
         // User's ratio is too low
-        if ($user->getRatio() < \config('other.ratio') && ! ($torrent->user_id === $user->id || $hasHistory)) {
-            return \to_route('torrent', ['id' => $torrent->id])
+        if ($user->getRatio() < config('other.ratio') && ! ($torrent->user_id === $user->id || $hasHistory)) {
+            return to_route('torrent', ['id' => $torrent->id])
                 ->withErrors('Vaše razmerje je prenisko za prenos!');
         }
 
         // User's download rights are revoked
         if ($user->can_download == 0 && ! ($torrent->user_id === $user->id || $hasHistory)) {
-            return \to_route('torrent', ['id' => $torrent->id])
+            return to_route('torrent', ['id' => $torrent->id])
                 ->withErrors('Vaše pravice za prenos so bile onemogočene!');
         }
 
         // Torrent Status Is Rejected
         if ($torrent->isRejected()) {
-            return \to_route('torrent', ['id' => $torrent->id])
+            return to_route('torrent', ['id' => $torrent->id])
                 ->withErrors('To Torrent je bil zavrnjen s strani osebja');
         }
 
         // The torrent file exist ?
-        if (! \file_exists(\getcwd().'/files/torrents/'.$torrent->file_name)) {
-            return \to_route('torrent', ['id' => $torrent->id])
+        if (! file_exists(getcwd().'/files/torrents/'.$torrent->file_name)) {
+            return to_route('torrent', ['id' => $torrent->id])
                 ->withErrors('Torrent datoteka ni najdena! Prosimo, poročajte o napaki tega Torrent!');
         }
 
         if (! $request->user() && !($rsskey && $user)) {
-            return ro_route('login');
+            return to_route('login');
         }
 
         $torrentDownload = new TorrentDownload();
@@ -67,25 +67,22 @@ class TorrentDownloadController extends Controller
         $torrentDownload->save();
 
         return response()->streamDownload(
-            function () use ($id, $user, $torrent) {
-                $dict = Bencode::bdecode(\file_get_contents(\getcwd().'/files/torrents/'.$torrent->file_name));
+            function () use ($id, $user, $torrent): void {
+                $dict = Bencode::bdecode(file_get_contents(getcwd().'/files/torrents/'.$torrent->file_name));
 
                 // Set the announce key and add the user passkey
-                $dict['announce'] = \route('announce', ['passkey' => $user->passkey]);
-
-                // Remove multi-tracker announce url possibly still stored by legacy upload system
-                unset($dict['announce-list']);
+                $dict['announce'] = route('announce', ['passkey' => $user->passkey]);
 
                 // Set link to torrent as the comment
                 if (config('torrent.comment')) {
-                    $dict['comment'] = \config('torrent.comment').'. '.\route('torrent', ['id' => $id]);
+                    $dict['comment'] = config('torrent.comment').'. '.route('torrent', ['id' => $id]);
                 } else {
-                    $dict['comment'] = \route('torrent', ['id' => $id]);
+                    $dict['comment'] = route('torrent', ['id' => $id]);
                 }
 
                 echo Bencode::bencode($dict);
             },
-            \str_replace([' ', '/', '\\'], ['.', '-', '-'], '['.\config('torrent.source').']'.$torrent->name.'.torrent'),
+            str_replace([' ', '/', '\\'], ['.', '-', '-'], '['.config('torrent.source').']'.$torrent->name.'.torrent'),
             ['Content-Type' => 'application/x-bittorrent']
         );
     }

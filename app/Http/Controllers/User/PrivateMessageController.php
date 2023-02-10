@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PrivateMessage;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Exception;
 
 /**
  * @see \Tests\Todo\Feature\Http\Controllers\PrivateMessageControllerTest
@@ -22,7 +23,7 @@ class PrivateMessageController extends Controller
             ['subject', 'like', '%'.$request->input('subject').'%'],
         ])->latest()->paginate(20);
 
-        return \view('user.pm.index', ['pms' => $pms, 'user' => $user]);
+        return view('user.pm.index', ['pms' => $pms, 'user' => $user]);
     }
 
     /**
@@ -35,7 +36,7 @@ class PrivateMessageController extends Controller
             ['subject', 'like', '%'.$request->input('subject').'%'],
         ])->latest()->paginate(20);
 
-        return \view('user.pm.outbox', ['pms' => $pms, 'user' => $user]);
+        return view('user.pm.outbox', ['pms' => $pms, 'user' => $user]);
     }
 
     /**
@@ -46,7 +47,7 @@ class PrivateMessageController extends Controller
         $user = $request->user();
         $pms = PrivateMessage::where('receiver_id', '=', $user->id)->latest()->paginate(25);
 
-        return \view('user.pm.index', ['pms' => $pms, 'user' => $user]);
+        return view('user.pm.index', ['pms' => $pms, 'user' => $user]);
     }
 
     /**
@@ -57,7 +58,7 @@ class PrivateMessageController extends Controller
         $user = $request->user();
         $pms = PrivateMessage::where('sender_id', '=', $user->id)->latest()->paginate(20);
 
-        return \view('user.pm.outbox', ['pms' => $pms, 'user' => $user]);
+        return view('user.pm.outbox', ['pms' => $pms, 'user' => $user]);
     }
 
     /**
@@ -74,11 +75,11 @@ class PrivateMessageController extends Controller
                 $pm->save();
             }
 
-            return \view('user.pm.show', ['pm' => $pm, 'user' => $user]);
+            return view('user.pm.show', ['pm' => $pm, 'user' => $user]);
         }
 
-        return \to_route('inbox')
-            ->withErrors(\trans('pm.error'));
+        return to_route('inbox')
+            ->withErrors(trans('pm.error'));
     }
 
     /**
@@ -88,7 +89,7 @@ class PrivateMessageController extends Controller
     {
         $user = $request->user();
 
-        return \view('user.pm.create', ['user' => $user, 'receiver_id' => $receiverId, 'username' => $username]);
+        return view('user.pm.create', ['user' => $user, 'receiver_id' => $receiverId, 'username' => $username]);
     }
 
     /**
@@ -107,7 +108,7 @@ class PrivateMessageController extends Controller
         if ($request->has('receiver_id')) {
             $recipient = User::where('username', '=', $request->input('receiver_id'))->firstOrFail();
         } else {
-            return \to_route('create', ['username' => $request->user()->username, 'id' => $request->user()->id])
+            return to_route('create', ['username' => $request->user()->username, 'id' => $request->user()->id])
                 ->withErrors($v->errors());
         }
 
@@ -118,7 +119,7 @@ class PrivateMessageController extends Controller
         $privateMessage->message = $request->input('message');
         $privateMessage->read = 0;
 
-        $v = \validator($privateMessage->toArray(), [
+        $v = validator($privateMessage->toArray(), [
             'sender_id'   => 'required',
             'receiver_id' => 'required',
             'subject'     => 'required',
@@ -128,22 +129,22 @@ class PrivateMessageController extends Controller
 
         if ($v->fails()) {
             if ($dest == 'profile') {
-                return \to_route('users.show', ['username' => $recipient->username])
+                return to_route('users.show', ['username' => $recipient->username])
                     ->withErrors($v->errors());
             }
 
-            return \to_route('create', ['username' => $request->user()->username, 'id' => $request->user()->id])
+            return to_route('create', ['username' => $request->user()->username, 'id' => $request->user()->id])
                 ->withErrors($v->errors());
         }
 
         $privateMessage->save();
         if ($dest == 'profile') {
-            return \to_route('users.show', ['username' => $recipient->username])
-                ->withSuccess(\trans('pm.sent-success'));
+            return to_route('users.show', ['username' => $recipient->username])
+                ->withSuccess(trans('pm.sent-success'));
         }
 
-        return \to_route('inbox')
-            ->withSuccess(\trans('pm.sent-success'));
+        return to_route('inbox')
+            ->withSuccess(trans('pm.sent-success'));
     }
 
     /**
@@ -163,7 +164,7 @@ class PrivateMessageController extends Controller
         $privateMessage->related_to = $message->id;
         $privateMessage->read = 0;
 
-        $v = \validator($privateMessage->toArray(), [
+        $v = validator($privateMessage->toArray(), [
             'sender_id'   => 'required',
             'receiver_id' => 'required',
             'subject'     => 'required',
@@ -173,20 +174,20 @@ class PrivateMessageController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \to_route('inbox')
+            return to_route('inbox')
                 ->withErrors($v->errors());
         }
 
         $privateMessage->save();
 
-        return \to_route('inbox')
-            ->withSuccess(\trans('pm.sent-success'));
+        return to_route('inbox')
+            ->withSuccess(trans('pm.sent-success'));
     }
 
     /**
      * Delete A Message.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function deletePrivateMessage(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
@@ -202,15 +203,15 @@ class PrivateMessageController extends Controller
             $pm->delete();
 
             if ($dest == 'outbox') {
-                return \to_route('outbox')->withSuccess(\trans('pm.delete-success'));
+                return to_route('outbox')->withSuccess(trans('pm.delete-success'));
             }
 
-            return \to_route('inbox')
-                ->withSuccess(\trans('pm.delete-success'));
+            return to_route('inbox')
+                ->withSuccess(trans('pm.delete-success'));
         }
 
-        return \to_route('inbox')
-                ->withErrors(\trans('pm.error'));
+        return to_route('inbox')
+            ->withErrors(trans('pm.error'));
     }
 
     /**
@@ -221,8 +222,8 @@ class PrivateMessageController extends Controller
         $user = $request->user();
         PrivateMessage::where('receiver_id', '=', $user->id)->delete();
 
-        return \to_route('inbox')
-                ->withSuccess(\trans('pm.delete-success'));
+        return to_route('inbox')
+            ->withSuccess(trans('pm.delete-success'));
     }
 
     /**
@@ -236,7 +237,7 @@ class PrivateMessageController extends Controller
             $pm->save();
         }
 
-        return \to_route('inbox')
-            ->withSuccess(\trans('pm.all-marked-read'));
+        return to_route('inbox')
+            ->withSuccess(trans('pm.all-marked-read'));
     }
 }

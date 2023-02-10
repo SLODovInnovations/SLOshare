@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Wish extends Model
 {
-    use HasFactory;
     use Auditable;
+    use HasFactory;
 
     /**
      * The Attributes That Aren't Mass Assignable.

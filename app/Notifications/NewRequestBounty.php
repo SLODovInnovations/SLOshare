@@ -34,7 +34,7 @@ class NewRequestBounty extends Notification implements ShouldQueue
         return [
             'title' => $this->sender.' Dal vam je darilo '.$this->amount.' Na zahtevani Torrent',
             'body'  => $this->sender.' je dodal nagrado enemu od vaših zahtevanih Torrentov '.$this->torrentRequest->name,
-            'url'   => \sprintf('/requests/%s', $this->torrentRequest->id),
+            'url'   => sprintf('/requests/%s', $this->torrentRequest->id),
         ];
     }
 }

@@ -35,14 +35,14 @@ class NewRequestFillApprove extends Notification implements ShouldQueue
             return [
                 'title' => $this->sender.' Je odobril vaše polnjenje zahtevanega Torrenta',
                 'body'  => $this->sender.' je odobril vaše polnjenje zahtevanega Torrenta '.$this->torrentRequest->name,
-                'url'   => \sprintf('/requests/%s', $this->torrentRequest->id),
+                'url'   => sprintf('/requests/%s', $this->torrentRequest->id),
             ];
         }
 
         return [
             'title' => 'Anonimni uporabnik je odobril vaše polnjenje zahtevanega Torrenta',
             'body'  => 'Anonimni uporabnik je odobril vaše polnjenje zahtevanega Torrenta '.$this->torrentRequest->name,
-            'url'   => \sprintf('/requests/%s', $this->torrentRequest->id),
+            'url'   => sprintf('/requests/%s', $this->torrentRequest->id),
         ];
     }
 }

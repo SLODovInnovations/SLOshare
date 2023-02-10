@@ -17,7 +17,7 @@ class ContactController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('contact.index');
+        return view('contact.index');
     }
 
     /**
@@ -26,12 +26,12 @@ class ContactController extends Controller
     public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
         // Fetch owner account
-        $user = User::where('username', \config('sloshare.owner-username'))->first();
+        $user = User::where('username', config('sloshare.owner-username'))->first();
 
         $input = $request->all();
         Mail::to($user->email)->send(new Contact($input));
 
-        return \to_route('home.index')
-            ->withSuccess(\trans('sloshare.success'));
+        return to_route('home.index')
+            ->withSuccess(trans('sloshare.success'));
     }
 }

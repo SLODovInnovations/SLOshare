@@ -32,9 +32,9 @@ class StaffTicketAssigned extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage())
-                    ->subject('Napaka je bila dodeljena (Napaka # '.$this->ticket->id.')')
-                    ->line('Napaka je bila dodeljena '.$this->ticket->staff->username)
-                    ->action('Ogled napake', \route('tickets.show', ['id' => $this->ticket->id]));
+            ->subject('Napaka je bila dodeljena (Napaka # '.$this->ticket->id.')')
+            ->line('Napaka je bila dodeljena '.$this->ticket->staff->username)
+            ->action('Ogled napake', route('tickets.show', ['id' => $this->ticket->id]));
     }
 
     /**

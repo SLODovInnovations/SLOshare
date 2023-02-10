@@ -9,6 +9,6 @@ class TorrentCardController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return \view('torrent.cards');
+        return view('torrent.cards');
     }
 }

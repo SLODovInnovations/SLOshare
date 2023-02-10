@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Warning;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Exception;
 
 /**
  * @see \Tests\Todo\Feature\Http\Controllers\WarningControllerTest
@@ -19,7 +20,7 @@ class WarningController extends Controller
      */
     public function show(Request $request, string $username): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        \abort_unless($request->user()->group->is_modo, 403);
+        abort_unless($request->user()->group->is_modo, 403);
 
         $user = User::where('username', '=', $username)->firstOrFail();
 
@@ -29,7 +30,7 @@ class WarningController extends Controller
         $softDeletedWarnings = Warning::where('user_id', '=', $user->id)->with(['torrenttitle', 'warneduser'])->latest('created_at')->onlyTrashed()->paginate(25);
         $softDeletedWarningCount = Warning::where('user_id', '=', $user->id)->onlyTrashed()->count();
 
-        return \view('user.warning.index', [
+        return view('user.warning.index', [
             'warnings'                => $warnings,
             'warningcount'            => $warningcount,
             'softDeletedWarnings'     => $softDeletedWarnings,
@@ -43,7 +44,7 @@ class WarningController extends Controller
      */
     public function deactivate(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        \abort_unless($request->user()->group->is_modo, 403);
+        abort_unless($request->user()->group->is_modo, 403);
         $staff = $request->user();
         $warning = Warning::findOrFail($id);
         $warning->expires_on = Carbon::now();
@@ -58,7 +59,7 @@ class WarningController extends Controller
         $privateMessage->message = $staff->username.' se je odločil deaktivirati vaše aktivno opozorilo za torrent '.$warning->torrent.' Imeli si srečo! [color=red][b]TO JE SPOROČILO SAMODEJNEGA SISTEMA, PROSIMO, NE ODGOVARJAJTE![/b][/color]';
         $privateMessage->save();
 
-        return \to_route('warnings.show', ['username' => $warning->warneduser->username])
+        return to_route('warnings.show', ['username' => $warning->warneduser->username])
             ->withSuccess('Opozorilo je bilo uspešno deaktivirano');
     }
 
@@ -67,7 +68,7 @@ class WarningController extends Controller
      */
     public function deactivateAllWarnings(Request $request, string $username): \Illuminate\Http\RedirectResponse
     {
-        \abort_unless($request->user()->group->is_modo, 403);
+        abort_unless($request->user()->group->is_modo, 403);
         $staff = $request->user();
         $user = User::where('username', '=', $username)->firstOrFail();
 
@@ -85,7 +86,7 @@ class WarningController extends Controller
         $privateMessage->message = $staff->username.' se je odločil deaktivirati vsa vaša aktivna opozorila o zadetkih in tekih. Imel si srečo! [color=red][b]TO JE SPOROČILO SAMODEJNEGA SISTEMA, PROSIMO, NE ODGOVARJAJTE![/b][/color]';
         $privateMessage->save();
 
-        return \to_route('warnings.show', ['username' => $user->username])
+        return to_route('warnings.show', ['username' => $user->username])
             ->withSuccess('Vsa opozorila so bila uspešno deaktivirana');
     }
 
@@ -93,11 +94,11 @@ class WarningController extends Controller
      * Delete A Warning.
      *
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function deleteWarning(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        \abort_unless($request->user()->group->is_modo, 403);
+        abort_unless($request->user()->group->is_modo, 403);
 
         $staff = $request->user();
         $warning = Warning::findOrFail($id);
@@ -114,7 +115,7 @@ class WarningController extends Controller
         $warning->save();
         $warning->delete();
 
-        return \to_route('warnings.show', ['username' => $warning->warneduser->username])
+        return to_route('warnings.show', ['username' => $warning->warneduser->username])
             ->withSuccess('Opozorilo je bilo uspešno izbrisano');
     }
 
@@ -123,7 +124,7 @@ class WarningController extends Controller
      */
     public function deleteAllWarnings(Request $request, string $username): \Illuminate\Http\RedirectResponse
     {
-        \abort_unless($request->user()->group->is_modo, 403);
+        abort_unless($request->user()->group->is_modo, 403);
 
         $staff = $request->user();
         $user = User::where('username', '=', $username)->firstOrFail();
@@ -142,7 +143,7 @@ class WarningController extends Controller
         $privateMessage->message = $staff->username.' se je odločil izbrisati vsa vaša opozorila. Imel si srečo! [color=red][b]TO JE SPOROČILO SAMODEJNEGA SISTEMA, PROSIMO, NE ODGOVARJAJTE![/b][/color]';
         $privateMessage->save();
 
-        return \to_route('warnings.show', ['username' => $user->username])
+        return to_route('warnings.show', ['username' => $user->username])
             ->withSuccess('Vsa opozorila so bila uspešno izbrisana');
     }
 
@@ -151,12 +152,12 @@ class WarningController extends Controller
      */
     public function restoreWarning(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        \abort_unless($request->user()->group->is_modo, 403);
+        abort_unless($request->user()->group->is_modo, 403);
 
         $warning = Warning::withTrashed()->findOrFail($id);
         $warning->restore();
 
-        return \to_route('warnings.show', ['username' => $warning->warneduser->username])
+        return to_route('warnings.show', ['username' => $warning->warneduser->username])
             ->withSuccess('Opozorilo je bilo uspešno obnovljeno');
     }
 }

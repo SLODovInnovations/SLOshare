@@ -9,7 +9,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::table('users', function ($table) {
+        Schema::table('users', function ($table): void {
             $table->string('locale')->default(config('app.locale'));
         });
     }

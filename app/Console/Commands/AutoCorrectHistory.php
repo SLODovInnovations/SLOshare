@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\History;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
+use Exception;
 
 /**
  * @see \Tests\Unit\Console\Commands\AutoCorrectHistoryTest
@@ -28,7 +29,7 @@ class AutoCorrectHistory extends Command
     /**
      * Execute the console command.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle(): void
     {

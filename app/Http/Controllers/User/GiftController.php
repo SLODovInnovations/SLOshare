@@ -26,7 +26,7 @@ class GiftController extends Controller
     {
         $user = User::where('username', '=', $username)->sole();
 
-        \abort_unless($request->user()->id === $user->id || $request->user()->group->is_modo, 403);
+        abort_unless($request->user()->id === $user->id || $request->user()->group->is_modo, 403);
 
         $userbon = $user->getSeedbonus();
 
@@ -34,8 +34,8 @@ class GiftController extends Controller
             ->with(['senderObj', 'receiverObj'])
             ->where(
                 fn ($query) => $query
-                ->where('sender', '=', $user->id)
-                ->orwhere('receiver', '=', $user->id)
+                    ->where('sender', '=', $user->id)
+                    ->orwhere('receiver', '=', $user->id)
             )
             ->where('name', '=', 'gift')
             ->latest('date_actioned')
@@ -51,12 +51,12 @@ class GiftController extends Controller
             ->where('name', '=', 'gift')
             ->sum('cost');
 
-        return \view('user.gift.index', [
-            'user'              => $user,
-            'gifttransactions'  => $gifttransactions,
-            'userbon'           => $userbon,
-            'gifts_sent'        => $giftsSent,
-            'gifts_received'    => $giftsReceived,
+        return view('user.gift.index', [
+            'user'             => $user,
+            'gifttransactions' => $gifttransactions,
+            'userbon'          => $userbon,
+            'gifts_sent'       => $giftsSent,
+            'gifts_received'   => $giftsReceived,
         ]);
     }
 
@@ -67,13 +67,13 @@ class GiftController extends Controller
     {
         $user = User::where('username', '=', $username)->sole();
 
-        \abort_unless($request->user()->id === $user->id, 403);
+        abort_unless($request->user()->id === $user->id, 403);
 
         $userbon = $user->getSeedbonus();
 
-        return \view('user.gift.create', [
-            'user'              => $user,
-            'userbon'           => $userbon,
+        return view('user.gift.create', [
+            'user'    => $user,
+            'userbon' => $userbon,
         ]);
     }
 
@@ -84,7 +84,7 @@ class GiftController extends Controller
     {
         $user = User::where('username', '=', $username)->sole();
 
-        \abort_unless($request->user()->id === $user->id, 403);
+        abort_unless($request->user()->id === $user->id, 403);
 
         $request = (object) $request->validated();
         $recipient = User::where('username', '=', $request->to_username)->sole();
@@ -109,16 +109,16 @@ class GiftController extends Controller
         }
 
         $this->chatRepository->systemMessage(
-            \sprintf(
+            sprintf(
                 '[url=%s]%s[/url] je podaril %s BON do [url=%s]%s[/url]',
-                \href_profile($user),
+                href_profile($user),
                 $user->username,
                 $value,
-                \href_profile($recipient),
+                href_profile($recipient),
                 $recipient->username
             )
         );
 
-        return \redirect()->back()->withSuccess(\trans('bon.gift-sent'));
+        return redirect()->back()->withSuccess(trans('bon.gift-sent'));
     }
 }

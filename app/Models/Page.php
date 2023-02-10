@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Helpers\BBCodeConverter;
+use App\Helpers\Bbcode;
 use App\Helpers\MarkdownExtra;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
-    use HasFactory;
     use Auditable;
+    use HasFactory;
 
     /**
      * The attributes that aren't mass assignable.
@@ -33,8 +33,6 @@ class Page extends Model
      */
     public function getContentHtml(): ?string
     {
-        $content = (new BBCodeConverter($this->content))->toMarkdown();
-
-        return (new MarkdownExtra())->text($content);
+        return (new MarkdownExtra())->text((new Bbcode())->parse($this->content, false));
     }
 }

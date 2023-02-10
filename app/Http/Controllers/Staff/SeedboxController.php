@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Staff;
 
 use App\Http\Controllers\Controller;
 use App\Models\Seedbox;
+use Exception;
 
 /**
  * @see \Tests\Todo\Feature\Http\Controllers\SeedboxControllerTest
@@ -17,19 +18,19 @@ class SeedboxController extends Controller
     {
         $seedboxes = Seedbox::with('user')->latest()->paginate(50);
 
-        return \view('Staff.seedbox.index', ['seedboxes' => $seedboxes]);
+        return view('Staff.seedbox.index', ['seedboxes' => $seedboxes]);
     }
 
     /**
      * Delete A Registered Seedbox.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
         Seedbox::findOrFail($id)->delete();
 
-        return \to_route('staff.seedboxes.index')
+        return to_route('staff.seedboxes.index')
             ->withSuccess('Seedbox zapis je bil uspešno izbrisan');
     }
 }

@@ -444,9 +444,7 @@
                 @endforeach
                 </tbody>
             </table>
-            <div class="text-center">
-                {{ $histories->links() }}
-            </div>
+            {{ $histories->links('partials.pagination') }}
         </div>
     </div>
     <script nonce="{{ SLOYakuza\SecureHeaders\SecureHeaders::nonce('script') }}">

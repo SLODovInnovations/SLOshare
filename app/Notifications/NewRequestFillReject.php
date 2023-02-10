@@ -34,7 +34,7 @@ class NewRequestFillReject extends Notification implements ShouldQueue
         return [
             'title' => $this->sender.' Je zavrnil vaše polnjenje zahtevanega Torrenta',
             'body'  => $this->sender.' je zavrnil vaš poln zahtevanega Torrenta '.$this->torrentRequest->name,
-            'url'   => \sprintf('/requests/%s', $this->torrentRequest->id),
+            'url'   => sprintf('/requests/%s', $this->torrentRequest->id),
         ];
     }
 }

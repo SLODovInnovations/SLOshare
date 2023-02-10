@@ -742,7 +742,7 @@
                             @endforeach
                             </tbody>
                         </table>
-                            {{ $hitrun->links() }}
+                            {{ $hitrun->links('partials.pagination') }}
                         </div>
                         <!--Important Info-->
 

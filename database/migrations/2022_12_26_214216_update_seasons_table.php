@@ -10,9 +10,9 @@ return new class () extends Migration {
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('seasons', function (Blueprint $table) {
+        Schema::table('seasons', function (Blueprint $table): void {
             $table->integer('cartoon_tv_id');
         });
     }

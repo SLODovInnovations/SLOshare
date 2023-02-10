@@ -31,7 +31,7 @@ class CheatedTorrentController extends Controller
             ->orderByDesc('times_cheated')
             ->paginate(25);
 
-        return \view('Staff.cheated_torrent.index', ['torrents' => $cheatedTorrents]);
+        return view('Staff.cheated_torrent.index', ['torrents' => $cheatedTorrents]);
     }
 
     /**
@@ -41,7 +41,7 @@ class CheatedTorrentController extends Controller
     {
         Torrent::where('id', '=', $id)->update(['balance_offset' => DB::raw('balance * -1')]);
 
-        return \to_route('staff.cheated_torrents.index')
+        return to_route('staff.cheated_torrents.index')
             ->withSuccess('Stanje je uspešno ponastavljeno');
     }
 
@@ -52,7 +52,7 @@ class CheatedTorrentController extends Controller
     {
         Torrent::query()->update(['balance_offset' => DB::raw('balance * -1')]);
 
-        return \to_route('staff.cheated_torrents.index')
+        return to_route('staff.cheated_torrents.index')
             ->withSuccess('Vsa stanja so bila uspešno ponastavljena');
     }
 }

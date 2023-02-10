@@ -33,8 +33,8 @@ class NewUpload extends Notification implements ShouldQueue
     {
         return [
             'title' => $this->torrent->user->username.' Naložil je nov Torrent',
-            'body'  => \sprintf('%s, ki ga spremljate je naložil Torrent %s', $this->torrent->user->username, $this->torrent->name),
-            'url'   => \sprintf('/torrents/%s', $this->torrent->id),
+            'body'  => sprintf('%s, ki ga spremljate je naložil Torrent %s', $this->torrent->user->username, $this->torrent->name),
+            'url'   => sprintf('/torrents/%s', $this->torrent->id),
         ];
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\Staff\UpdateRegionRequest;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Exception;
 
 class RegionController extends Controller
 {
@@ -18,7 +19,7 @@ class RegionController extends Controller
     {
         $regions = Region::all()->sortBy('position');
 
-        return \view('Staff.region.index', ['regions' => $regions]);
+        return view('Staff.region.index', ['regions' => $regions]);
     }
 
     /**
@@ -26,7 +27,7 @@ class RegionController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.region.create');
+        return view('Staff.region.create');
     }
 
     /**
@@ -36,8 +37,8 @@ class RegionController extends Controller
     {
         Region::create($request->validated());
 
-        return \to_route('staff.regions.index')
-                ->withSuccess('Regija je bila uspešno dodana');
+        return to_route('staff.regions.index')
+            ->withSuccess('Regija je bila uspešno dodana');
     }
 
     /**
@@ -47,7 +48,7 @@ class RegionController extends Controller
     {
         $region = Region::findOrFail($id);
 
-        return \view('Staff.region.edit', ['region' => $region]);
+        return view('Staff.region.edit', ['region' => $region]);
     }
 
     /**
@@ -57,14 +58,14 @@ class RegionController extends Controller
     {
         Region::where('id', '=', $id)->update($request->validated());
 
-        return \to_route('staff.regions.index')
-                ->withSuccess('Regija je bila uspešno spremenjena');
+        return to_route('staff.regions.index')
+            ->withSuccess('Regija je bila uspešno spremenjena');
     }
 
     /**
      * Delete A Region.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
@@ -80,7 +81,7 @@ class RegionController extends Controller
         $region->torrents()->update($validated);
         $region->delete();
 
-        return \to_route('staff.regions.index')
+        return to_route('staff.regions.index')
             ->withSuccess('Regija je bila uspešno izbrisana');
     }
 }

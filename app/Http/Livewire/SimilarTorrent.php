@@ -57,7 +57,7 @@ class SimilarTorrent extends Component
 
     final public function isChecked($torrentId): bool
     {
-        return in_array($torrentId, $this->checked);
+        return \in_array($torrentId, $this->checked);
     }
 
     final public function getTorrentsProperty(): \Illuminate\Support\Collection
@@ -68,25 +68,25 @@ class SimilarTorrent extends Component
         $query = $query->with(['user:id,username,group_id', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments']);
         if ($category->movie_meta) {
-            $query = $query->whereHas('category', function ($q) {
+            $query = $query->whereHas('category', function ($q): void {
                 $q->where('movie_meta', '=', true);
             });
         }
 
         if ($category->cartoon_meta) {
-            $query = $query->whereHas('category', function ($q) {
+            $query = $query->whereHas('category', function ($q): void {
                 $q->where('cartoon_meta', '=', true);
             });
         }
 
         if ($category->tv_meta) {
-            $query = $query->whereHas('category', function ($q) {
+            $query = $query->whereHas('category', function ($q): void {
                 $q->where('tv_meta', '=', true);
             });
         }
 
         if ($category->cartoontv_meta) {
-            $query = $query->whereHas('category', function ($q) {
+            $query = $query->whereHas('category', function ($q): void {
                 $q->where('cartoontv_meta', '=', true);
             });
         }
@@ -115,8 +115,8 @@ class SimilarTorrent extends Component
         $this->dispatchBrowserEvent('swal:confirm', [
             'type'    => 'OPOZORILO',
             'message' => 'Ali si prepričan?',
-            'body'    => 'Če jih izbrišete, ne boste mogli obnoviti naslednjih datotek!'.\nl2br("\n")
-                        .\nl2br(\implode("\n", $names)),
+            'body'    => 'Če jih izbrišete, ne boste mogli obnoviti naslednjih datotek!'.nl2br("\n")
+                        .nl2br(implode("\n", $names)),
         ]);
     }
 
@@ -130,12 +130,12 @@ class SimilarTorrent extends Component
         foreach ($torrents as $torrent) {
             $names[] = $torrent->name;
             foreach (History::where('torrent_id', '=', $torrent->id)->get() as $pm) {
-                if (! in_array($pm->user_id, $users)) {
+                if (! \in_array($pm->user_id, $users)) {
                     $users[] = $pm->user_id;
                 }
             }
 
-            if (! in_array($torrent->tmdb, $titleids)) {
+            if (! \in_array($torrent->tmdb, $titleids)) {
                 $titleids[] = $torrent->tmdb;
                 $title = null;
                 $cat = $torrent->category;
@@ -183,7 +183,7 @@ class SimilarTorrent extends Component
             ]);
 
             //Remove Torrent related info
-            \cache()->forget(\sprintf('torrent:%s', $torrent->info_hash));
+            cache()->forget(sprintf('torrent:%s', $torrent->info_hash));
             Peer::where('torrent_id', '=', $torrent->id)->delete();
             History::where('torrent_id', '=', $torrent->id)->delete();
             Warning::where('torrent', '=', $torrent->id)->delete();
@@ -202,10 +202,10 @@ class SimilarTorrent extends Component
             $pmuser = new PrivateMessage();
             $pmuser->sender_id = 1;
             $pmuser->receiver_id = $user;
-            $pmuser->subject = 'Torrenti v velikem obsegu izbrisani - '.\implode(', ', $titles).'! ';
+            $pmuser->subject = 'Torrenti v velikem obsegu izbrisani - '.implode(', ', $titles).'! ';
             $pmuser->message = '[b]POZOR: [/b] Naslednji torrenti so bili odstranjeni z našega spletnega mesta.
             [list]
-                [*]'.\implode(' [*]', $names).'
+                [*]'.implode(' [*]', $names).'
             [/list]
             Naš sistem kaže, da ste bili na omenjenem hudourniku bodisi nalagalec, sejalec ali leecher. Želeli smo vas samo obvestiti, da ga lahko varno odstranite iz svoje stranke.
                                     [b]Razlog za odstranitev: [/b] '.$this->reason.'
@@ -239,13 +239,13 @@ class SimilarTorrent extends Component
 
     final public function getPersonalFreeleechProperty()
     {
-        return \cache()->get('personal_freeleech:'.auth()->user()->id);
+        return cache()->get('personal_freeleech:'.auth()->user()->id);
     }
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return \view('livewire.similar-torrent', [
-            'user'              => \auth()->user(),
+        return view('livewire.similar-torrent', [
+            'user'              => auth()->user(),
             'torrents'          => $this->torrents,
             'personalFreeleech' => $this->personalFreeleech,
         ]);

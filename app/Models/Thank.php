@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Thank extends Model
 {
-    use HasFactory;
     use Auditable;
+    use HasFactory;
 
     /**
      * Belongs To A Torrent.

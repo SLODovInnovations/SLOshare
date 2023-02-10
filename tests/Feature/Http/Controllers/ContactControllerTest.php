@@ -41,6 +41,6 @@ class ContactControllerTest extends TestCase
         ]);
 
         $response->assertRedirect(route('home.index'))
-            ->assertSessionHas('success', \trans('sloshare.success'));
+            ->assertSessionHas('success', trans('sloshare.success'));
     }
 }

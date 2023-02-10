@@ -18,8 +18,8 @@ use App\Models\Forum;
 use App\Models\Post;
 use App\Models\Topic;
 use App\Repositories\ChatRepository;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Exception;
 
 /**
  * @see \Tests\Todo\Feature\Http\Controllers\TopicControllerTest
@@ -36,7 +36,7 @@ class TopicController extends Controller
     /**
      * Show The Topic.
      */
-    public function topic(int $id, string $page = '', string $post = ''): \Illuminate\Contracts\View\Factory|\Illuminate\View\View|\Illuminate\Http\RedirectResponse
+    public function topic(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View|\Illuminate\Http\RedirectResponse
     {
         // Find the topic
         $topic = Topic::findOrFail($id);
@@ -44,37 +44,20 @@ class TopicController extends Controller
         // Get the forum of the topic
         $forum = $topic->forum;
 
-        // Get The category of the forum
-        $category = Forum::findOrFail($forum->id);
-
-        // Get all posts
-        $posts = $topic->posts()->with(['user', 'user.group', 'user.topics', 'user.posts', 'topic', 'tips'])
-            ->withCount(['likes' => function (Builder $query) {
-                $query->where('like', '=', 1);
-            }, 'likes as dislikes_count' => function (Builder $query) {
-                $query->where('dislike', '=', 1);
-            }])->paginate(25);
-
-        // First post
-        $firstPost = Post::with('tips')->where('topic_id', '=', $topic->id)->first();
-
         // The user can post a topic here ?
-        if (! $category->getPermission()->read_topic) {
+        if (! $forum->getPermission()->read_topic) {
             // Redirect him to the forum index
-            return \to_route('forums.index')
-                ->withErrors(\trans('forum.error-read'));
+            return to_route('forums.index')
+                ->withErrors(trans('forum.error-read'));
         }
 
         // Increment view
         $topic->views++;
         $topic->save();
 
-        return \view('forum.topic', [
-            'topic'     => $topic,
-            'forum'     => $forum,
-            'category'  => $category,
-            'posts'     => $posts,
-            'firstPost' => $firstPost,
+        return view('forum.topic.show', [
+            'topic' => $topic,
+            'forum' => $forum,
         ]);
     }
 
@@ -88,11 +71,11 @@ class TopicController extends Controller
 
         // The user has the right to create a topic here?
         if (! $category->getPermission()->start_topic) {
-            return \to_route('forums.index')
-                ->withErrors(\trans('forum.error-new'));
+            return to_route('forums.index')
+                ->withErrors(trans('forum.error-new'));
         }
 
-        return \view('forum.new_topic', [
+        return view('forum.forum_topic.create', [
             'forum'    => $forum,
             'category' => $category,
             'title'    => $request->input('title'),
@@ -110,8 +93,8 @@ class TopicController extends Controller
 
         // The user has the right to create a topic here?
         if (! $category->getPermission()->start_topic) {
-            return \to_route('forums.index')
-                ->withErrors(\trans('forum.error-new'));
+            return to_route('forums.index')
+                ->withErrors(trans('forum.error-new'));
         }
 
         // Create The Topic
@@ -126,7 +109,7 @@ class TopicController extends Controller
         $topic->pinned = false;
         $topic->forum_id = $forum->id;
 
-        $v = \validator($topic->toArray(), [
+        $v = validator($topic->toArray(), [
             'name'                     => 'required',
             'state'                    => 'required',
             'num_post'                 => '',
@@ -140,7 +123,7 @@ class TopicController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \to_route('forums.index')
+            return to_route('forums.index')
                 ->withErrors($v->errors());
         }
 
@@ -149,13 +132,13 @@ class TopicController extends Controller
         $post->content = $request->input('content');
         $post->user_id = $user->id;
         $post->topic_id = $topic->id;
-        $v = \validator($post->toArray(), [
+        $v = validator($post->toArray(), [
             'content'  => 'required',
             'user_id'  => 'required',
             'topic_id' => 'required',
         ]);
         if ($v->fails()) {
-            return \to_route('forums.index')
+            return to_route('forums.index')
                 ->withErrors($v->errors());
         }
 
@@ -172,14 +155,14 @@ class TopicController extends Controller
         $forum->save();
 
         // Post To ShoutBox
-        $appurl = \config('app.url');
-        $topicUrl = \sprintf('%s/forums/topics/%s', $appurl, $topic->id);
-        $profileUrl = \sprintf('%s/users/%s', $appurl, $user->username);
+        $appurl = config('app.url');
+        $topicUrl = sprintf('%s/forums/topics/%s', $appurl, $topic->id);
+        $profileUrl = sprintf('%s/users/%s', $appurl, $user->username);
 
-        if (\config('other.staff-forum-notify') && ($forum->id == \config('other.staff-forum-id') || $forum->parent_id == \config('other.staff-forum-id'))) {
+        if (config('other.staff-forum-notify') && ($forum->id == config('other.staff-forum-id') || $forum->parent_id == config('other.staff-forum-id'))) {
             $forum->notifyStaffers($user, $topic);
         } else {
-            $this->chatRepository->systemMessage(\sprintf('[url=%s]%s[/url] je ustvaril novo temo [url=%s]%s[/url]', $profileUrl, $user->username, $topicUrl, $topic->name));
+            $this->chatRepository->systemMessage(sprintf('[url=%s]%s[/url] je ustvaril novo temo [url=%s]%s[/url]', $profileUrl, $user->username, $topicUrl, $topic->name));
             $forum->notifySubscribers($user, $topic);
         }
 
@@ -197,8 +180,8 @@ class TopicController extends Controller
 //        $user->addProgress(new UserMade800Posts(), 1);
 //        $user->addProgress(new UserMade900Posts(), 1);
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-                ->withSuccess(\trans('forum.success-new'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withSuccess(trans('forum.success-new'));
     }
 
     /**
@@ -209,7 +192,7 @@ class TopicController extends Controller
         $topic = Topic::findOrFail($id);
         $categories = Forum::where('parent_id', '!=', 0)->get();
 
-        return \view('forum.edit_topic', ['topic' => $topic, 'categories' => $categories]);
+        return view('forum.topic.edit', ['topic' => $topic, 'categories' => $categories]);
     }
 
     /**
@@ -220,15 +203,15 @@ class TopicController extends Controller
         $user = $request->user();
         $topic = Topic::findOrFail($id);
 
-        \abort_unless($user->group->is_modo || $user->id === $topic->first_post_user_id, 403);
+        abort_unless($user->group->is_modo || $user->id === $topic->first_post_user_id, 403);
         $name = $request->input('name');
         $forumId = $request->input('forum_id');
         $topic->name = $name;
         $topic->forum_id = $forumId;
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withSuccess(\trans('forum.success-edit'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withSuccess(trans('forum.success-edit'));
     }
 
     /**
@@ -239,12 +222,12 @@ class TopicController extends Controller
         $user = $request->user();
         $topic = Topic::findOrFail($id);
 
-        \abort_unless($user->group->is_modo || $user->id === $topic->first_post_user_id, 403);
+        abort_unless($user->group->is_modo || $user->id === $topic->first_post_user_id, 403);
         $topic->state = 'close';
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withSuccess(\trans('forum.success-closed'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withSuccess(trans('forum.success-closed'));
     }
 
     /**
@@ -255,31 +238,31 @@ class TopicController extends Controller
         $user = $request->user();
         $topic = Topic::findOrFail($id);
 
-        \abort_unless($user->group->is_modo || $user->id === $topic->first_post_user_id, 403);
+        abort_unless($user->group->is_modo || $user->id === $topic->first_post_user_id, 403);
         $topic->state = 'open';
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withSuccess(\trans('forum.success-open'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withSuccess(trans('forum.success-open'));
     }
 
     /**
      * Delete The Topic and The Posts.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function deleteTopic(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $user = $request->user();
         $topic = Topic::findOrFail($id);
 
-        \abort_unless($user->group->is_modo || ($user->id === $topic->first_post_user_id && $topic->num_post <= 1 && $topic->created_at->greaterThan(now()->subDay())), 403);
+        abort_unless($user->group->is_modo || ($user->id === $topic->first_post_user_id && $topic->num_post <= 1 && $topic->created_at->greaterThan(now()->subDay())), 403);
         $posts = $topic->posts();
         $posts->delete();
         $topic->delete();
 
-        return \to_route('forums.show', ['id' => $topic->forum->id])
-            ->withSuccess(\trans('forum.success-deleted'));
+        return to_route('forums.show', ['id' => $topic->forum->id])
+            ->withSuccess(trans('forum.success-deleted'));
     }
 
     /**
@@ -291,8 +274,8 @@ class TopicController extends Controller
         $topic->pinned = 1;
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withSuccess(\trans('forum.success-pinned'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withSuccess(trans('forum.success-pinned'));
     }
 
     /**
@@ -304,7 +287,7 @@ class TopicController extends Controller
         $topic->pinned = 0;
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withSuccess(\trans('forum.success-unpinned'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withSuccess(trans('forum.success-unpinned'));
     }
 }

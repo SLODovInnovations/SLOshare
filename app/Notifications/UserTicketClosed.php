@@ -32,9 +32,9 @@ class UserTicketClosed extends Notification
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage())
-                    ->subject('Vaša napaka je bila zaprta (UPORABNIK)')
-                    ->line('Vaša napaka je bila zaprta')
-                    ->action('Ogled napake', \route('tickets.show', ['id' => $this->ticket->id]));
+            ->subject('Vaša napaka je bila zaprta (UPORABNIK)')
+            ->line('Vaša napaka je bila zaprta')
+            ->action('Ogled napake', route('tickets.show', ['id' => $this->ticket->id]));
     }
 
     /**

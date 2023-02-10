@@ -17,7 +17,7 @@ class Tv extends Model
      */
     public function torrents(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Torrent::class, 'tmdb', 'id')->whereHas('category', function ($q) {
+        return $this->hasMany(Torrent::class, 'tmdb', 'id')->whereHas('category', function ($q): void {
             $q->where('tv_meta', '=', true);
         });
     }
@@ -51,11 +51,6 @@ class Tv extends Model
     public function creators(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Person::class);
-    }
-
-    public function collection(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Collection::class)->take(1);
     }
 
     public function networks(): \Illuminate\Database\Eloquent\Relations\BelongsToMany

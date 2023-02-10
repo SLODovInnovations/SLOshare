@@ -21,6 +21,7 @@ use App\Models\Torrent;
 use App\Repositories\ChatRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Exception;
 
 class SubtitleController extends Controller
 {
@@ -36,7 +37,7 @@ class SubtitleController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('subtitle.index');
+        return view('subtitle.index');
     }
 
     /**
@@ -47,7 +48,7 @@ class SubtitleController extends Controller
         $torrent = Torrent::withAnyStatus()->findOrFail($torrentId);
         $mediaLanguages = MediaLanguage::all()->sortBy('name');
 
-        return \view('subtitle.create', ['torrent' => $torrent, 'media_languages' => $mediaLanguages]);
+        return view('subtitle.create', ['torrent' => $torrent, 'media_languages' => $mediaLanguages]);
     }
 
     /**
@@ -57,7 +58,7 @@ class SubtitleController extends Controller
     {
         $user = $request->user();
         $subtitleFile = $request->file('subtitle_file');
-        $filename = \uniqid('', true).'.'.$subtitleFile->getClientOriginalExtension();
+        $filename = uniqid('', true).'.'.$subtitleFile->getClientOriginalExtension();
 
         $subtitle = new Subtitle();
         $subtitle->title = $request->input('torrent_name');
@@ -72,10 +73,10 @@ class SubtitleController extends Controller
         $subtitle->anon = $request->input('anonymous');
         $subtitle->torrent_id = $request->input('torrent_id');
         $subtitle->status = 1;
-        $subtitle->moderated_at = \now();
+        $subtitle->moderated_at = now();
         $subtitle->moderated_by = 1;
 
-        $v = \validator($subtitle->toArray(), [
+        $v = validator($subtitle->toArray(), [
             'title'       => 'required',
             'file_name'   => 'required',
             'file_size'   => 'required',
@@ -86,24 +87,24 @@ class SubtitleController extends Controller
         ]);
 
         if ($v->fails()) {
-            return \to_route('subtitles.create', ['torrent_id' => $request->input('torrent_id')])
+            return to_route('subtitles.create', ['torrent_id' => $request->input('torrent_id')])
                 ->withErrors($v->errors());
         }
 
         // Save Subtitle
-        Storage::disk('subtitles')->put($filename, \file_get_contents($subtitleFile));
+        Storage::disk('subtitles')->put($filename, file_get_contents($subtitleFile));
         $subtitle->save();
 
         // Announce To Shoutbox
-        $torrentUrl = \href_torrent($subtitle->torrent);
-        $profileUrl = \href_profile($user);
+        $torrentUrl = href_torrent($subtitle->torrent);
+        $profileUrl = href_profile($user);
         if (! $subtitle->anon) {
             $this->chatRepository->systemMessage(
-                \sprintf('[url=%s]%s[/url] je naložil novo %s podnaslov za [url=%s]%s[/url]', $profileUrl, $user->username, $subtitle->language->name, $torrentUrl, $subtitle->torrent->name)
+                sprintf('[url=%s]%s[/url] je naložil novo %s podnaslov za [url=%s]%s[/url]', $profileUrl, $user->username, $subtitle->language->name, $torrentUrl, $subtitle->torrent->name)
             );
         } else {
             $this->chatRepository->systemMessage(
-                \sprintf('Anonimni uporabnik je naložil novo %s podnaslov za [url=%s]%s[/url]', $subtitle->language->name, $torrentUrl, $subtitle->torrent->name)
+                sprintf('Anonimni uporabnik je naložil novo %s podnaslov za [url=%s]%s[/url]', $subtitle->language->name, $torrentUrl, $subtitle->torrent->name)
             );
         }
 
@@ -122,7 +123,7 @@ class SubtitleController extends Controller
 //        $user->addProgress(new UserUploaded900Subtitles(), 1);
 //        $user->addProgress(new UserUploaded1000Subtitles(), 1);
 
-        return \to_route('torrent', ['id' => $request->input('torrent_id')])
+        return to_route('torrent', ['id' => $request->input('torrent_id')])
             ->withSuccess('Podnapis je bil uspešno posodobljen');
     }
 
@@ -134,37 +135,37 @@ class SubtitleController extends Controller
         $subtitle = Subtitle::findOrFail($id);
 
         $user = $request->user();
-        \abort_unless($user->group->is_modo || $user->id == $subtitle->user_id, 403);
+        abort_unless($user->group->is_modo || $user->id == $subtitle->user_id, 403);
 
         $subtitle->language_id = $request->input('language_id');
         $subtitle->note = $request->input('note');
 
-        $v = \validator($subtitle->toArray(), [
+        $v = validator($subtitle->toArray(), [
             'language_id' => 'required',
         ]);
 
         if ($v->fails()) {
-            return \to_route('torrent', ['id' => $request->input('torrent_id')])
+            return to_route('torrent', ['id' => $request->input('torrent_id')])
                 ->withErrors($v->errors());
         }
 
         $subtitle->save();
 
-        return \to_route('torrent', ['id' => $request->input('torrent_id')])
+        return to_route('torrent', ['id' => $request->input('torrent_id')])
             ->withSuccess('Podnapis je bil uspešno dodan');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $subtitle = Subtitle::findOrFail($id);
 
         $user = $request->user();
-        \abort_unless($user->group->is_modo || $user->id == $subtitle->user_id, 403);
+        abort_unless($user->group->is_modo || $user->id == $subtitle->user_id, 403);
 
         if (Storage::disk('subtitles')->exists($subtitle->file_name)) {
             Storage::disk('subtitles')->delete($subtitle->file_name);
@@ -172,7 +173,7 @@ class SubtitleController extends Controller
 
         $subtitle->delete();
 
-        return \to_route('torrent', ['id' => $request->input('torrent_id')])
+        return to_route('torrent', ['id' => $request->input('torrent_id')])
             ->withSuccess('Podnapis je bil uspešno izbrisan');
     }
 
@@ -186,7 +187,7 @@ class SubtitleController extends Controller
 
         // User's download rights are revoked
         if ($user->can_download == 0 && $subtitle->user_id != $user->id) {
-            return \to_route('torrent', ['id' => $subtitle->torrent->id])
+            return to_route('torrent', ['id' => $subtitle->torrent->id])
                 ->withErrors('Vaše pravice do prenosa so bile preklicane!');
         }
 

@@ -31,13 +31,13 @@ class UserMaxWarningsReached extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        $profileUrl = \href_profile($this->user);
+        $profileUrl = href_profile($this->user);
 
         return (new MailMessage())
             ->greeting('Hit in Run Maksimalna dosežena opozorila!')
             ->line('Dosegli ste omejitev aktivnih Hit in Run Opozoril! Vaše pravice do prenosa so onemogočene!')
             ->action('Oglejte si nezadovoljene torrente, da odstranite svoja opozorila ali počakajte, da potečejo!', $profileUrl)
-            ->line('Hvala za uporabo 🚀'.\config('other.title'));
+            ->line('Hvala za uporabo 🚀'.config('other.title'));
     }
 
     /**
@@ -48,7 +48,7 @@ class UserMaxWarningsReached extends Notification
         return [
             'title' => 'Hit in Run Maksimalna Dosežena opozorila!',
             'body'  => 'Dosegli ste omejitev aktivnih Hit in Run Opozoril! Vaše pravice do prenosa so onemogočene!',
-            'url'   => \sprintf('/users/%s', $this->user->username),
+            'url'   => sprintf('/users/%s', $this->user->username),
         ];
     }
 }

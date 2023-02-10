@@ -12,7 +12,7 @@ class PersonController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('mediahub.person.index');
+        return view('mediahub.person.index');
     }
 
     /**
@@ -20,9 +20,17 @@ class PersonController extends Controller
      */
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $details = Person::findOrFail($id);
-        $credits = Person::with(['tv', 'cartoontv', 'season', 'episode', 'movie', 'cartoon'])->findOrFail($id);
+        $person = Person::with([
+            'tv' => fn ($query) => $query->has('torrents'),
+            'tv.genres',
+            'cartoontv' => fn ($query) => $query->has('torrents'),
+            'cartoontv.genres',
+            'movie' => fn ($query) => $query->has('torrents'),
+            'movie.genres',
+            'cartoon' => fn ($query) => $query->has('torrents'),
+            'cartoon.genres'
+        ])->findOrFail($id);
 
-        return \view('mediahub.person.show', ['credits' => $credits, 'details' => $details]);
+        return view('mediahub.person.show', ['person' => $person]);
     }
 }

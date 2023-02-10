@@ -29,7 +29,7 @@ class CompanySearch extends Component
 
     final public function getCompaniesProperty(): \Illuminate\Contracts\Pagination\LengthAwarePaginator
     {
-        return Company::withCount('tv', 'cartoon', 'movie', 'cartoontv')
+        return Company::withCount('tv', 'movie')
             ->where('name', 'LIKE', '%'.$this->search.'%')
             ->oldest('name')
             ->paginate(30);
@@ -37,7 +37,7 @@ class CompanySearch extends Component
 
     final public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return \view('livewire.company-search', [
+        return view('livewire.company-search', [
             'companies' => $this->companies,
         ]);
     }

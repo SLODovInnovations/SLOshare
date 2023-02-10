@@ -30,10 +30,10 @@ class TestMailSettings extends Command
      */
     public function handle(): void
     {
-        $sysop = \config('other.email');
+        $sysop = config('other.email');
 
         $this->info('Pošiljanje testnega E-Mail na '.$sysop);
-        \sleep(5);
+        sleep(5);
 
         try {
             Mail::to($sysop)->send(new TestEmail());

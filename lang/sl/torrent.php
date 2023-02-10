@@ -180,7 +180,7 @@ return [
     'special-double_upload'    => 'Poseben dvojni prenos',
     'special-freeleech'        => 'Posebni freeleech',
     'staff-tools'              => 'Orodja za osebje',
-    'start-year'	           => 'Začetno leto',
+    'start-year'               => 'Začetno leto',
     'started'                  => 'Začelo se je',
     'status'                   => 'Stanje',
     'statistics'               => 'Statistika',

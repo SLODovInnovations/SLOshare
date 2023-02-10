@@ -34,7 +34,7 @@ class NewPostTag extends Notification implements ShouldQueue
         return [
             'title' => $this->post->user->username.' Vas je označil v objavi',
             'body'  => $this->post->user->username.' vas je označil v objavi v temi '.$this->post->topic->name,
-            'url'   => \sprintf('/forums/topics/%s?page=%s#post-%s', $this->post->topic->id, $this->post->getPageNumber(), $this->post->id),
+            'url'   => sprintf('/forums/topics/%s?page=%s#post-%s', $this->post->topic->id, $this->post->getPageNumber(), $this->post->id),
         ];
     }
 }

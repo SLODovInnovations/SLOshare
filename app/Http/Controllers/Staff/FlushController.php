@@ -9,6 +9,7 @@ use App\Models\Message;
 use App\Models\Peer;
 use App\Repositories\ChatRepository;
 use Illuminate\Support\Carbon;
+use Exception;
 
 /**
  * @see \Tests\Todo\Feature\Http\Controllers\Staff\FlushControllerTest
@@ -25,7 +26,7 @@ class FlushController extends Controller
     /**
      * Flsuh All Old Peers From Database.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function peers(): \Illuminate\Http\RedirectResponse
     {
@@ -42,19 +43,19 @@ class FlushController extends Controller
             $peer->delete();
         }
 
-        return \to_route('staff.dashboard.index')
+        return to_route('staff.dashboard.index')
             ->withSuccess('Ghost Peers so bili odplaknjeni');
     }
 
     /**
      * Flush All Chat Messages.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function chat(): \Illuminate\Http\RedirectResponse
     {
         foreach (Message::all() as $message) {
-            \broadcast(new MessageDeleted($message));
+            broadcast(new MessageDeleted($message));
             $message->delete();
         }
 
@@ -62,7 +63,7 @@ class FlushController extends Controller
             'Klepetalnica je bila odplaknjena! :broom:'
         );
 
-        return \to_route('staff.dashboard.index')
+        return to_route('staff.dashboard.index')
             ->withSuccess('Klepetalnica je bila odplaknjena');
     }
 }

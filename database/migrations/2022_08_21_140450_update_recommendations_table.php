@@ -10,7 +10,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::table('recommendations', function (Blueprint $table) {
+        Schema::table('recommendations', function (Blueprint $table): void {
             $table->unsignedBigInteger('cartoon_id')->nullable()->index();
             $table->foreign('cartoon_id')->references('id')->on('cartoon')->onDelete('cascade');
 

@@ -34,7 +34,7 @@ class NewPostTip extends Notification implements ShouldQueue
         return [
             'title' => $this->tipper.' Dal vam je darilo '.$this->amount.' BON za objavo na forumu',
             'body'  => $this->tipper.' je nakazal eno od vaših objav na forumu '.$this->post->topic->name,
-            'url'   => \sprintf('/forums/topics/%s?page=%s#post-%s', $this->post->topic->id, $this->post->getPageNumber(), $this->post->id),
+            'url'   => sprintf('/forums/topics/%s?page=%s#post-%s', $this->post->topic->id, $this->post->getPageNumber(), $this->post->id),
         ];
     }
 }

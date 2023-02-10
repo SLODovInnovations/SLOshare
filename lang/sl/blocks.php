@@ -2,9 +2,9 @@
 
 return [
     // Chat
-    'chatbox'                 => 'Okno za klepet',
-    'click'                   => 'Kliknite',
-    'to-enable-editor'        => ', da omogočite urejevalnik',
+    'chatbox'          => 'Okno za klepet',
+    'click'            => 'Kliknite',
+    'to-enable-editor' => ', da omogočite urejevalnik',
 
     // Featured Torrents
     'featured-by'             => 'Predstavlja ga',
@@ -13,22 +13,22 @@ return [
     'featured-until'          => 'To je predstavljen torrent do',
 
     // Latest Torrents
-    'top-torrents'            => 'Najbolj priljubljeni torenti',
+    'top-torrents' => 'Najbolj priljubljeni torenti',
 
     // Latest Posts
-    'latest-posts'            => 'Najnovejše objave',
+    'latest-posts' => 'Najnovejše objave',
 
     // Latest Topics
-    'latest-topics'           => 'Zadnje teme',
+    'latest-topics' => 'Zadnje teme',
 
     // Users Online
-    'active-in-last'          => 'Aktivna zadnja',
-    'users-online'            => 'Uporabniki na spletu',
+    'active-in-last' => 'Aktivna zadnja',
+    'users-online'   => 'Uporabniki na spletu',
 
     // News/Articles
-    'check-news'              => 'Novice (preverite dnevno)',
-    'new-news'                => 'Nove novice',
+    'check-news' => 'Novice (preverite dnevno)',
+    'new-news'   => 'Nove novice',
 
     // Top Torrents
-    'new-torrents'            => 'Novi Torrenti',
+    'new-torrents' => 'Novi Torrenti',
 ];

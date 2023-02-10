@@ -33,7 +33,7 @@ class FetchReleaseYears extends Command
      */
     public function handle(): void
     {
-        $appurl = \config('app.url');
+        $appurl = config('app.url');
 
         $torrents = Torrent::withAnyStatus()
             ->with(['category'])
@@ -49,52 +49,52 @@ class FetchReleaseYears extends Command
             ->whereNull('release_year')
             ->count();
 
-        $this->alert(\sprintf('%s Torrenti že imajo vrednost leta izdaj!', $withyear));
-        $this->alert(\sprintf('%s Torrentom manjka vrednost leta izdaje!', $withoutyear));
+        $this->alert(sprintf('%s Torrenti že imajo vrednost leta izdaj!', $withyear));
+        $this->alert(sprintf('%s Torrentom manjka vrednost leta izdaje!', $withoutyear));
 
         foreach ($torrents as $torrent) {
             $meta = null;
             if ($torrent->category->tv_meta && $torrent->tmdb && $torrent->tmdb != 0) {
                 $meta = Tv::where('id', '=', $torrent->tmdb)->first();
-                if (isset($meta->first_air_date) && \substr($meta->first_air_date, 0, 4) > '1900') {
-                    $torrent->release_year = \substr($meta->first_air_date, 0, 4);
+                if (isset($meta->first_air_date) && substr($meta->first_air_date, 0, 4) > '1900') {
+                    $torrent->release_year = substr($meta->first_air_date, 0, 4);
                     $torrent->save();
-                    $this->info(\sprintf('(%s) Leto izdaje pridobljeno za Torrent %s ', $torrent->category->name, $torrent->name));
+                    $this->info(sprintf('(%s) Leto izdaje pridobljeno za Torrent %s ', $torrent->category->name, $torrent->name));
                 } else {
-                    $this->warn(\sprintf('(%s) Za Torrent ni bilo najdenega leta izdaje %s %s/torrents/%s', $torrent->category->name, $torrent->name, $appurl, $torrent->id));
+                    $this->warn(sprintf('(%s) Za Torrent ni bilo najdenega leta izdaje %s %s/torrents/%s', $torrent->category->name, $torrent->name, $appurl, $torrent->id));
                 }
             }
 
             if ($torrent->category->cartoontv_meta && $torrent->tmdb && $torrent->tmdb != 0) {
                 $meta = CartoonTv::where('id', '=', $torrent->tmdb)->first();
-                if (isset($meta->first_air_date) && \substr($meta->first_air_date, 0, 4) > '1900') {
-                    $torrent->release_year = \substr($meta->first_air_date, 0, 4);
+                if (isset($meta->first_air_date) && substr($meta->first_air_date, 0, 4) > '1900') {
+                    $torrent->release_year = substr($meta->first_air_date, 0, 4);
                     $torrent->save();
-                    $this->info(\sprintf('(%s) Leto izdaje pridobljeno za Torrent %s ', $torrent->category->name, $torrent->name));
+                    $this->info(sprintf('(%s) Leto izdaje pridobljeno za Torrent %s ', $torrent->category->name, $torrent->name));
                 } else {
-                    $this->warn(\sprintf('(%s) Za Torrent ni bilo najdenega leta izdaje %s %s/torrents/%s', $torrent->category->name, $torrent->name, $appurl, $torrent->id));
+                    $this->warn(sprintf('(%s) Za Torrent ni bilo najdenega leta izdaje %s %s/torrents/%s', $torrent->category->name, $torrent->name, $appurl, $torrent->id));
                 }
             }
 
             if ($torrent->category->movie_meta && $torrent->tmdb && $torrent->tmdb != 0) {
                 $meta = Movie::where('id', '=', $torrent->tmdb)->first();
-                if (isset($meta->release_date) && \substr($meta->release_date, 0, 4) > '1900') {
-                    $torrent->release_year = \substr($meta->release_date, 0, 4);
+                if (isset($meta->release_date) && substr($meta->release_date, 0, 4) > '1900') {
+                    $torrent->release_year = substr($meta->release_date, 0, 4);
                     $torrent->save();
-                    $this->info(\sprintf('(%s) Leto izdaje pridobljeno za Torrent %s ', $torrent->category->name, $torrent->name));
+                    $this->info(sprintf('(%s) Leto izdaje pridobljeno za Torrent %s ', $torrent->category->name, $torrent->name));
                 } else {
-                    $this->warn(\sprintf('(%s) Za Torrent ni bilo najdenega leta izdaje %s %s/torrents/%s', $torrent->category->name, $torrent->name, $appurl, $torrent->id));
+                    $this->warn(sprintf('(%s) Za Torrent ni bilo najdenega leta izdaje %s %s/torrents/%s', $torrent->category->name, $torrent->name, $appurl, $torrent->id));
                 }
             }
 
             if ($torrent->category->cartoon_meta && $torrent->tmdb && $torrent->tmdb != 0) {
                 $meta = Cartoon::where('id', '=', $torrent->tmdb)->first();
-                if (isset($meta->release_date) && \substr($meta->release_date, 0, 4) > '1900') {
-                    $torrent->release_year = \substr($meta->release_date, 0, 4);
+                if (isset($meta->release_date) && substr($meta->release_date, 0, 4) > '1900') {
+                    $torrent->release_year = substr($meta->release_date, 0, 4);
                     $torrent->save();
-                    $this->info(\sprintf('(%s) Leto izdaje pridobljeno za Torrent %s ', $torrent->category->name, $torrent->name));
+                    $this->info(sprintf('(%s) Leto izdaje pridobljeno za Torrent %s ', $torrent->category->name, $torrent->name));
                 } else {
-                    $this->warn(\sprintf('(%s) Za Torrent ni bilo najdenega leta izdaje %s %s/torrents/%s', $torrent->category->name, $torrent->name, $appurl, $torrent->id));
+                    $this->warn(sprintf('(%s) Za Torrent ni bilo najdenega leta izdaje %s %s/torrents/%s', $torrent->category->name, $torrent->name, $appurl, $torrent->id));
                 }
             }
         }

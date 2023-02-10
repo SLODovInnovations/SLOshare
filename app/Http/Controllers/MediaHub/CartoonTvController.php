@@ -12,7 +12,7 @@ class CartoonTvController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('mediahub.cartoontv.index');
+        return view('mediahub.cartoontv.index');
     }
 
     /**
@@ -22,7 +22,7 @@ class CartoonTvController extends Controller
     {
         $cartoontv = CartoonTv::with(['seasons', 'genres', 'networks', 'companies', 'torrents'])->withCount('torrents')->findOrFail($id);
 
-        return \view('mediahub.cartoontv.show', [
+        return view('mediahub.cartoontv.show', [
             'cartoontv' => $cartoontv,
         ]);
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\StoreNoteRequest;
 use App\Models\Note;
 use App\Models\User;
+use Exception;
 
 /**
  * @see \Tests\Feature\Http\Controllers\Staff\NoteControllerTest
@@ -17,7 +18,7 @@ class NoteController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.note.index');
+        return view('Staff.note.index');
     }
 
     /**
@@ -31,14 +32,14 @@ class NoteController extends Controller
             'message'  => $request->message,
         ]);
 
-        return \to_route('users.show', ['username' => $username])
+        return to_route('users.show', ['username' => $username])
             ->withSuccess('Opomba je bila uspešno objavljena');
     }
 
     /**
      * Delete A User Note.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
@@ -46,7 +47,7 @@ class NoteController extends Controller
         $user = User::findOrFail($note->user_id);
         $note->delete();
 
-        return \to_route('users.show', ['username' => $user->username])
+        return to_route('users.show', ['username' => $user->username])
             ->withSuccess('Opomba je bila uspešno izbrisana');
     }
 }

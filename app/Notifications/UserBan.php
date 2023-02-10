@@ -31,12 +31,12 @@ class UserBan extends Notification
      */
     public function toMail($notifiable): MailMessage
     {
-        $chatdUrl = \config('sloshare.chat-link-url');
+        $chatdUrl = config('sloshare.chat-link-url');
 
         return (new MailMessage())
             ->greeting('Prepovedani ste bili 😭')
-            ->line('Prepovedali ste dostop '.\config('other.title').' za '.$this->ban->ban_reason)
+            ->line('Prepovedali ste dostop '.config('other.title').' za '.$this->ban->ban_reason)
             ->action('Potrebujem podporo?', $chatdUrl)
-            ->line('Hvala za uporabo 🚀'.\config('other.title'));
+            ->line('Hvala za uporabo 🚀'.config('other.title'));
     }
 }

@@ -31,12 +31,12 @@ class NewReseedRequest extends Notification implements ShouldQueue
      */
     public function toArray($notifiable): array
     {
-        $appurl = \config('app.url');
+        $appurl = config('app.url');
 
         return [
             'title' => 'Nova zahteva za ponovno nalaganje',
-            'body'  => \sprintf('Pred časom ste prenesli: %s. Zdaj je mrtev in nekdo je zahteval ponovno sejanje. Če imate ta Torrent še vedno v shrambi, razmislite o ponovni uporabi!', $this->torrent->name),
-            'url'   => \sprintf('%s/torrents/%s', $appurl, $this->torrent->id),
+            'body'  => sprintf('Pred časom ste prenesli: %s. Zdaj je mrtev in nekdo je zahteval ponovno sejanje. Če imate ta Torrent še vedno v shrambi, razmislite o ponovni uporabi!', $this->torrent->name),
+            'url'   => sprintf('%s/torrents/%s', $appurl, $this->torrent->id),
         ];
     }
 }

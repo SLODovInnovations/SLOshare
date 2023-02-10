@@ -19,7 +19,7 @@ class InternalController extends Controller
     {
         $internals = Internal::all()->sortBy('name');
 
-        return \view('Staff.internals.index', ['internals' => $internals]);
+        return view('Staff.internals.index', ['internals' => $internals]);
     }
 
     /**
@@ -29,7 +29,7 @@ class InternalController extends Controller
     {
         $internal = Internal::findOrFail($id);
 
-        return \view('Staff.internals.edit', ['internal' => $internal]);
+        return view('Staff.internals.edit', ['internal' => $internal]);
     }
 
     /**
@@ -39,7 +39,7 @@ class InternalController extends Controller
     {
         Internal::where('id', '=', $id)->update($request->validated());
 
-        return \to_route('staff.internals.index')
+        return to_route('staff.internals.index')
             ->withSuccess('Notranja skupina je bila uspešno posodobljena!');
     }
 
@@ -48,7 +48,7 @@ class InternalController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.internals.create');
+        return view('Staff.internals.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class InternalController extends Controller
     {
         Internal::create($request->validated());
 
-        return \to_route('staff.internals.index')
+        return to_route('staff.internals.index')
             ->withSuccess('Dodana je nova notranja skupina!');
     }
 
@@ -70,7 +70,7 @@ class InternalController extends Controller
         $internal = Internal::findOrFail($id);
         $internal->delete();
 
-        return \to_route('staff.internals.index')
+        return to_route('staff.internals.index')
             ->withSuccess('Skupina je bila odstranjena.');
     }
 }

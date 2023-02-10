@@ -34,7 +34,7 @@ class NewRequestClaim extends Notification implements ShouldQueue
         return [
             'title' => $this->sender.' Je prenesel enega od vaših zahtevanih Torrentov',
             'body'  => $this->sender.' je zahteval vaš zahtevani Torrent '.$this->torrentRequest->name,
-            'url'   => \sprintf('/requests/%s', $this->torrentRequest->id),
+            'url'   => sprintf('/requests/%s', $this->torrentRequest->id),
         ];
     }
 }

@@ -32,7 +32,7 @@ class UserBanExpire extends Notification
     {
         return (new MailMessage())
             ->greeting('Izključeni ste bili 🤩')
-            ->line('Prepoved je bila preklicana '.\config('other.title'))
-            ->line('Hvala za uporabo 🚀'.\config('other.title'));
+            ->line('Prepoved je bila preklicana '.config('other.title'))
+            ->line('Hvala za uporabo 🚀'.config('other.title'));
     }
 }

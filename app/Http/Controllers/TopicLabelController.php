@@ -18,8 +18,8 @@ class TopicLabelController extends Controller
         $topic->approved = $topic->approved == 0 ? '1' : '0';
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withInfo(\trans('forum.info-message'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withInfo(trans('forum.info-message'));
     }
 
     /**
@@ -31,8 +31,8 @@ class TopicLabelController extends Controller
         $topic->denied = $topic->denied == 0 ? '1' : '0';
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withInfo(\trans('forum.info-message'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withInfo(trans('forum.info-message'));
     }
 
     /**
@@ -44,8 +44,8 @@ class TopicLabelController extends Controller
         $topic->solved = $topic->solved == 0 ? '1' : '0';
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withInfo(\trans('forum.info-message'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withInfo(trans('forum.info-message'));
     }
 
     /**
@@ -57,8 +57,8 @@ class TopicLabelController extends Controller
         $topic->invalid = $topic->invalid == 0 ? '1' : '0';
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withInfo(\trans('forum.info-message'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withInfo(trans('forum.info-message'));
     }
 
     /**
@@ -70,8 +70,8 @@ class TopicLabelController extends Controller
         $topic->bug = $topic->bug == 0 ? '1' : '0';
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withInfo(\trans('forum.info-message'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withInfo(trans('forum.info-message'));
     }
 
     /**
@@ -83,8 +83,8 @@ class TopicLabelController extends Controller
         $topic->suggestion = $topic->suggestion == 0 ? '1' : '0';
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withInfo(\trans('forum.info-message'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withInfo(trans('forum.info-message'));
     }
 
     /**
@@ -96,7 +96,7 @@ class TopicLabelController extends Controller
         $topic->implemented = $topic->implemented == 0 ? '1' : '0';
         $topic->save();
 
-        return \to_route('forum_topic', ['id' => $topic->id])
-            ->withInfo(\trans('forum.info-message'));
+        return to_route('forum_topic', ['id' => $topic->id])
+            ->withInfo(trans('forum.info-message'));
     }
 }

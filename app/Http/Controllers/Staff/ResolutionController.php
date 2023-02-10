@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Staff\StoreResolutionRequest;
 use App\Http\Requests\Staff\UpdateResolutionRequest;
 use App\Models\Resolution;
+use Exception;
 
 class ResolutionController extends Controller
 {
@@ -16,7 +17,7 @@ class ResolutionController extends Controller
     {
         $resolutions = Resolution::all()->sortBy('position');
 
-        return \view('Staff.resolution.index', ['resolutions' => $resolutions]);
+        return view('Staff.resolution.index', ['resolutions' => $resolutions]);
     }
 
     /**
@@ -24,7 +25,7 @@ class ResolutionController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('Staff.resolution.create');
+        return view('Staff.resolution.create');
     }
 
     /**
@@ -34,8 +35,8 @@ class ResolutionController extends Controller
     {
         Resolution::create($request->validated());
 
-        return \to_route('staff.resolutions.index')
-                ->withSuccess('Resolucija je bila uspešno dodana');
+        return to_route('staff.resolutions.index')
+            ->withSuccess('Resolucija je bila uspešno dodana');
     }
 
     /**
@@ -45,7 +46,7 @@ class ResolutionController extends Controller
     {
         $resolution = Resolution::findOrFail($id);
 
-        return \view('Staff.resolution.edit', ['resolution' => $resolution]);
+        return view('Staff.resolution.edit', ['resolution' => $resolution]);
     }
 
     /**
@@ -55,21 +56,21 @@ class ResolutionController extends Controller
     {
         Resolution::where('id', '=', $id)->update($request->validated());
 
-        return \to_route('staff.resolutions.index')
-                ->withSuccess('Resolucija je bila uspešno spremenjena');
+        return to_route('staff.resolutions.index')
+            ->withSuccess('Resolucija je bila uspešno spremenjena');
     }
 
     /**
      * Delete A Resolution.
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
         $resolution = Resolution::findOrFail($id);
         $resolution->delete();
 
-        return \to_route('staff.resolutions.index')
+        return to_route('staff.resolutions.index')
             ->withSuccess('Resolucija je uspešno izbrisana');
     }
 }

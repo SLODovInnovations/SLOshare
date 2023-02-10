@@ -20,11 +20,11 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'       => 'required|string',
-            'position'   => 'required|numeric',
-            'icon'       => 'required|string',
-            'meta'       => 'required|string|in:movie,cartoon,tv,cartoontv,game,music,no|exclude',
-            'image'      => 'max:10240',
+            'name'     => 'required|string',
+            'position' => 'required|numeric',
+            'icon'     => 'required|string',
+            'meta'     => 'required|string|in:movie,cartoon,tv,cartoontv,game,music,no|exclude',
+            'image'    => 'max:10240',
         ];
     }
 }
