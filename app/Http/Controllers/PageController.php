@@ -77,4 +77,60 @@ class PageController extends Controller
     {
         return view('page.aboutus');
     }
+
+    /**
+     * Show About FAQ.
+     */
+    public function faqs(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        return \view('page.faq');
+    }
+
+    /**
+     * Show About Pravilnik.
+     */
+    public function policys(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        return \view('page.policy');
+    }
+
+    /**
+     * Show About Navodila za nalaganje.
+     */
+    public function instructions(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        return \view('page.instruction');
+    }
+
+    /**
+     * Show About Pravni Pouk.
+     */
+    public function legals(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        return \view('page.legal');
+    }
+
+    /**
+     * Show About Pogoji Uporabe.
+     */
+    public function conditionsofuses(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        return \view('page.conditionsofuse');
+    }
+
+    /**
+     * Show About Donacije.
+     */
+    public function donationslos(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        return \view('page.donationslo');
+    }
+
+    /**
+     * Show About Chat.
+     */
+    public function chat(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    {
+        return \view('page.chat');
+    }
 }
