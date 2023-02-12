@@ -106,11 +106,11 @@
             src="{{ isset($person->still) ? tmdb_image('cast_big', $person->still) : 'https://via.placeholder.com/300x450' }}"
             alt="{{ $person->name }}"
         >
-        <div class="panel__body">{{ $person->biography ?? 'No biography' }}</div>
+        <div class="panel__body">{{ $person->biography ?? 'Ni biografije' }}</div>
         <dl class="key-value">
             <dt>{{ __('mediahub.born') }}</dt>
             <dd>{{ $person->birthday ?? __('common.unknown') }}</dd>
-            <dt>Place of Birth</dt>
+            <dt>Kraj rojstva</dt>
             <dd>{{ $person->place_of_birth ?? __('common.unknown') }}</dd>
             <dt>{{ __('mediahub.movie-credits') }}</dt>
             <dd>{{ $person->movie->count() ?? '0' }}</dd>
@@ -130,14 +130,14 @@
             <dd>{{ $person->tv->count() ?? '0' }}</dd>
             <dt>{{ __('mediahub.first-seen') }}</dt>
             <dd>
-                In
+                Notri
                 <a href="{{ route('mediahub.shows.show', ['id' => $person->tv->first()->id ?? '0']) }}">
                     {{ $person->tv->first()->name ?? 'N/A'}}
                 </a>
             </dd>
             <dt>{{ __('mediahub.latest-project') }}</dt>
             <dd>
-                Last in
+                Zadnji nastop
                 <a href="{{ route('mediahub.shows.show', ['id' => $person->tv->last()->id ?? '0']) }}">
                     {{ $person->tv->last()->name ?? 'N/A' }}
                 </a>

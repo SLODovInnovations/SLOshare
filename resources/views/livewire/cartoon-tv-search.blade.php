@@ -36,7 +36,7 @@
                     </div>
                     <div class="card_body">
                         <div class="body_poster">
-                            <img src="{{ isset($cartoontv->poster) ? tmdb_image('poster_mid', $cartoontv->poster) : '/img/SLOshare/movie_no_image_search.jpg' }}"
+                            <img src="{{ isset($cartoontv->poster) ? tmdb_image('poster_mid', $cartoontv->poster) : '/img/SLOshare/cartoon_no_image_200x300.jpg' }}"
                                 class="show-poster">
                         </div>
                         <div class="body_description">

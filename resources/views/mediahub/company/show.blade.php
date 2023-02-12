@@ -69,7 +69,7 @@
                     </div>
                 </div>
             @empty
-                No {{ __('mediahub.shows') }}
+                Ni {{ __('mediahub.shows') }}
             @endforelse
         </div>
         {{ $movies->links('partials.pagination') }}
@@ -92,7 +92,7 @@
                         </div>
                         <div class="card_body">
                             <div class="body_poster">
-                                <img src="{{ isset($cartoontv->poster) ? tmdb_image('poster_mid', $cartoontv->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
+                                <img src="{{ isset($cartoontv->poster) ? tmdb_image('poster_mid', $cartoontv->poster) : '/img/SLOshare/cartoon_no_image_200x300.jpg' }}"
                                         class="show-poster">
                             </div>
                             <div class="body_description">
@@ -164,7 +164,7 @@
                     </div>
                 </div>
             @empty
-                No {{ __('mediahub.movies') }}
+                Ni {{ __('mediahub.movies') }}
             @endforelse
         </div>
         {{ $shows->links('partials.pagination') }}
@@ -184,7 +184,7 @@
                         </div>
                         <div class="card_body">
                             <div class="body_poster">
-                                <img src="{{ isset($cartoon->poster) ? tmdb_image('poster_mid', $cartoon->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
+                                <img src="{{ isset($cartoon->poster) ? tmdb_image('poster_mid', $cartoon->poster) : '/img/SLOshare/cartoon_no_image_200x300.jpg' }}"
                                         class="show-poster">
                             </div>
                             <div class="body_description">
@@ -209,7 +209,7 @@
                     </div>
                 </div>
             @empty
-                No {{ __('mediahub.cartoons') }}
+                Ni {{ __('mediahub.cartoons') }}
             @endforelse
         </div>
         {{ $shows->links('partials.pagination') }}

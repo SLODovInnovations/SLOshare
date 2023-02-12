@@ -43,7 +43,7 @@
                             </div>
                             <div class="card_body" style="height: 190px;">
                                 <div class="body_poster">
-                                    <img src="{{ isset($season->poster) ? tmdb_image('poster_mid', $season->poster) : 'https://via.placeholder.com/200x300' }}"
+                                    <img src="{{ isset($season->poster) ? tmdb_image('poster_mid', $season->poster) : '/img/SLOshare/cartoon_no_image_200x300.jpg' }}"
                                             class="show-poster" style="height: 190px;">
                                 </div>
                                 <div class="body_description" style=" height: 190px;">
@@ -109,7 +109,7 @@
     <section class="panelV2">
         <h2 class="panel__heading">{{ $cartoontv->name }}</h2>
         <img
-            src="{{ isset($cartoontv->poster) ? tmdb_image('cast_big', $cartoontv->poster) : 'https://via.placeholder.com/300x450' }}"
+            src="{{ isset($cartoontv->poster) ? tmdb_image('cast_big', $cartoontv->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
             alt="{{ $cartoontv->name }}"
         >
         <dl class="key-value">
@@ -124,7 +124,7 @@
                     @if (! $loop->last), @endif
                 @endforeach
             </dd>
-            <dt>Companies</dt>
+            <dt>Produkcija</dt>
             <dd>
                 @foreach($cartoontv->companies as $company)
                     <a href="{{ route('mediahub.companies.show', ['id' => $company->id]) }}">{{ $company->name }}</a>
@@ -135,7 +135,7 @@
             <dd>{{ $cartoontv->episode_run_time }}</dd>
             <dt>Torrents</dt>
             <dd>{{ $cartoontv->torrents_count }}</dd>
-            <dt>Genres</dt>
+            <dt>Žaner</dt>
             <dd>
                 @foreach($cartoontv->genres as $genre)
                     <a href="{{ route('mediahub.genres.show', ['id' => $genre->id]) }}">{{ $genre->name }}</a>
