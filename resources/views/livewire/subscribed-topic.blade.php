@@ -11,7 +11,7 @@
         </ul>
     @else
         <div class="panel__body">
-            No topics.
+            Ni tem.
         </div>
     @endif
     {{ $topics->links('partials.pagination') }}
