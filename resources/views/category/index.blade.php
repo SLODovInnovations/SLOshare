@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('torrent.categories') }} - {{ config('other.title') }}</title>
+    <title>{{ __('torrent.categories') }}</title>
 @endsection
 
 @section('breadcrumbs')

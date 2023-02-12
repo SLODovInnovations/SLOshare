@@ -311,7 +311,8 @@
                                     @endif
                                 @endif
                             </div>
-
+                        </td>
+                        <td style="width: 5%; text-align: center;">
                             <div class="text-center">
                                 <i class="{{ $torrent->category->icon }} torrent-icon"
                                    style="padding-top: 1px; font-size: 20px;"></i>
