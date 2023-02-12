@@ -233,7 +233,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'tmdb'                     => 'TMDB URL:',
-    'imdb'                     => 'IMDb URL:',
+    'imdb'                     => 'IMDB URL:',
     'tvdb'                     => 'TVDB URL:',
     'mal'                      => 'MAL URL:',
     'igdb'                     => 'IGDB URL:',

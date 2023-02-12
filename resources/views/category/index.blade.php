@@ -4,6 +4,10 @@
     <title>{{ __('torrent.categories') }}</title>
 @endsection
 
+@section('meta')
+    <meta name="description" content="Kategorije">
+@endsection
+
 @section('breadcrumbs')
     <li class="breadcrumbV2">
         <a class="breadcrumb__link" href="{{ route('categories.index') }}">
@@ -45,17 +49,13 @@
     </li>
 @endsection
 
-@section('content')
-    <div class="container box">
-        <div class="header gradient green">
-            <div class="inner_content">
-                <h1>{{ __('torrent.categories') }}</h1>
-            </div>
-        </div>
-        <div class="blocks">
+@section('main')
+    <section class="panelV2">
+        <h2 class="panel__heading">{{ __('torrent.categories') }}</h2>
+        <div class="panel__body blocks" style="justify-content: center;">
             @foreach ($categories as $category)
-                <a href="{{ route('categories.show', ['id' => $category->id]) }}">
-                    <div class="general media_blocks">
+                <a href="{{ route('categories.show', ['id' => $category->id]) }}" class="">
+                    <div class="movie media_blocks" style="background-color: rgba(0, 0, 0, 0.33);">
                         <h2>
                             @if ($category->image != null)
                                 <img src="{{ url('files/img/' . $category->image) }}" alt="{{ $category->name }}">
@@ -64,11 +64,11 @@
                             @endif
                             {{ $category->name }}
                         </h2>
-                        <span></span>
-                        <h2>{{ $category->torrents_count }}</h2>
+                        <span style="background-color: #01d277;"></span>
+                        <h2 style="font-size: 20px;">{{ $category->torrents_count }}</h2>
                     </div>
                 </a>
             @endforeach
         </div>
-    </div>
+    </section>
 @endsection
