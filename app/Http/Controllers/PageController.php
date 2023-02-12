@@ -83,7 +83,7 @@ class PageController extends Controller
      */
     public function faqs(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.faq');
+        return view('page.faq');
     }
 
     /**
@@ -91,7 +91,7 @@ class PageController extends Controller
      */
     public function policys(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.policy');
+        return view('page.policy');
     }
 
     /**
@@ -99,7 +99,7 @@ class PageController extends Controller
      */
     public function instructions(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.instruction');
+        return view('page.instruction');
     }
 
     /**
@@ -107,7 +107,7 @@ class PageController extends Controller
      */
     public function legals(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.legal');
+        return view('page.legal');
     }
 
     /**
@@ -115,7 +115,7 @@ class PageController extends Controller
      */
     public function conditionsofuses(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.conditionsofuse');
+        return view('page.conditionsofuse');
     }
 
     /**
@@ -123,7 +123,7 @@ class PageController extends Controller
      */
     public function donationslos(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.donationslo');
+        return view('page.donationslo');
     }
 
     /**
@@ -131,6 +131,6 @@ class PageController extends Controller
      */
     public function chat(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        return \view('page.chat');
+        return view('page.chat');
     }
 }
