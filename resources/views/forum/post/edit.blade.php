@@ -1,8 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ __('common.edit') }} {{ __('forum.post') }} - {{ $topic->name }}
-        - {{ config('other.title') }}</title>
+    <title>{{ __('common.edit') }} {{ __('forum.post') }} - {{ $topic->name }}</title>
 @endsection
 
 @section('meta')

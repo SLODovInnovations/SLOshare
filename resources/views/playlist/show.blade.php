@@ -75,8 +75,8 @@
                         <p class="form__group form__group--horizontal">
                         <button
                             x-on:click.prevent="Swal.fire({
-                                title: 'Are you sure?',
-                                text: 'Are you sure you want to delete this playlist: {{ $playlist->name }}?',
+                                title: 'Ali si prepričan?',
+                                text: 'Ali ste prepričani, da želite izbrisati ta seznam predvajanja: {{ $playlist->name }}?',
                                 icon: 'warning',
                                 showConfirmButton: true,
                                 showCancelButton: true,
@@ -124,7 +124,7 @@
 @section('main')
     <section class="panelV2">
         <h2 class="panel__heading">{{ $playlist->name }}</h2>
-        @php $tmdb_backdrop = isset($meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : 'https://via.placeholder.com/1280x350' @endphp
+        @php $tmdb_backdrop = isset($meta->backdrop) ? tmdb_image('back_big', $meta->backdrop) : '/img/SLOshare/no_image_collection.jpg' @endphp
         <div class="playlist__backdrop" style="background-image: url('{{ $tmdb_backdrop }}')">
             <div class="playlist__backdrop-filter">
                 <a class="playlist__author-link" href="{{ route('users.show', ['username' => $playlist->user->username]) }}">

@@ -138,7 +138,7 @@
                                     @else
                                         <img src="/img/SLOshare/music_no_image_holder_200x300.jpg" class="show-poster"
                                             data-name='<i style="color: #a5a5a5;">N/A</i>'
-                                            data-image='<img src="https://via.placeholder.com/200x300"
+                                            data-image='<img src="/img/SLOshare/music_no_image_holder_200x300.jpg"
 									        alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
                                             class="torrent-poster-img-small show-poster" alt="{{ __('torrent.poster') }}">
                                     @endif
@@ -151,7 +151,7 @@
                                     @else
                                         <img src="/img/SLOshare/meta_no_image_holder_200x300.jpg" class="show-poster"
                                              data-name='<i style="color: #a5a5a5;">N/A</i>'
-                                             data-image='<img src="https://via.placeholder.com/200x300" alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
+                                             data-image='<img src="/img/SLOshare/meta_no_image_holder_200x300.jpg" alt="{{ __('torrent.poster') }}" style="height: 1000px;">'
                                              class="torrent-poster-img-small show-poster"
                                              alt="{{ __('torrent.poster') }}">
                                     @endif

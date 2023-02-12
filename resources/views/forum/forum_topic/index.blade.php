@@ -1,7 +1,7 @@
 @extends('layout.default')
 
 @section('title')
-    <title>{{ $forum->name }} - {{ __('forum.forums') }} - {{ config('other.title') }}</title>
+    <title>{{ $forum->name }} - {{ __('forum.forums') }}</title>
 @endsection
 
 @section('meta')
