@@ -29,7 +29,7 @@
                 @endforeach
             </ul>
         @else
-            No posts.
+            Ni objav.
         @endif
     </div>
     {{ $posts->links('partials.pagination') }}

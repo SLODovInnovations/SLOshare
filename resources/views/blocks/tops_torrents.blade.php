@@ -56,7 +56,7 @@
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');" class="show-poster" alt={{ $seed->name }}>
                                 @else
-    							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+    							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_400x600.jpg' }}"
     							    class="show-poster" alt={{ $seed->name }}>
     					        @endif
                             @endif
@@ -88,7 +88,7 @@
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');" class="show-poster" alt={{ $seed->name }}>
     						    @else
-    							    style="background-image: url('/img/SLOshare/music_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $seed->name }}>
+    							    style="background-image: url('/img/SLOshare/music_no_image_400x600.jpg')" class="show-poster" alt={{ $seed->name }}>
                                 @endif
                             @endif
 
@@ -96,7 +96,7 @@
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$seed->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $seed->id . '.jpg') }}');" class="show-poster" alt={{ $seed->name }}>
                                 @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $seed->name }}>
+                                    style="background-image: url('/img/SLOshare/meta_no_image_400x600.jpg')" class="show-poster" alt={{ $seed->name }}>
                                 @endif
                             @endif
 				            <div class="release-info">
@@ -186,7 +186,7 @@
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');" class="show-poster" alt={{ $leech->name }}>
                                 @else
-    							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+    							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_400x600.jpg' }}"
     							    class="show-poster" alt={{ $leech->name }}>
     					        @endif
                             @endif
@@ -218,7 +218,7 @@
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');" class="show-poster" alt={{ $leech->name }}>
     						    @else
-    							    style="background-image: url('/img/SLOshare/music_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $leech->name }}>
+    							    style="background-image: url('/img/SLOshare/music_no_image_400x600.jpg')" class="show-poster" alt={{ $leech->name }}>
                                 @endif
                             @endif
 
@@ -226,7 +226,7 @@
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$leech->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $leech->id . '.jpg') }}');" class="show-poster" alt={{ $leech->name }}>
                                 @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_holder_400x600.jpg')" class="show-poster" alt={{ $leech->name }}>
+                                    style="background-image: url('/img/SLOshare/meta_no_image_400x600.jpg')" class="show-poster" alt={{ $leech->name }}>
                                 @endif
                             @endif
 				            <div class="release-info">

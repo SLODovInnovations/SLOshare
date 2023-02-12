@@ -603,7 +603,7 @@
                                     @switch($mediaType)
                                     @case ('movie')
                                     @case ('tv')
-                                    src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                    src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_90x135.jpg' }}"
                                     @break
                                     @case ('cartoon')
                                     @case ('cartoontv')
@@ -616,11 +616,11 @@
                                     @if(file_exists(public_path().'/files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg'))
                                     src="{{ url('files/img/torrent-cover_'.$media->torrents->first()->id.'.jpg') }}"
                                     @else
-                                    src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                    src="/img/SLOshare/meta_no_image_90x135.jpg"
                                     @endif
                                     @break
                                     @default
-                                    src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                    src="/img/SLOshare/meta_no_image_90x135.jpg"
                                     @endswitch
                                     alt="{{ __('torrent.poster') }}"
                             >
