@@ -43,7 +43,7 @@
                             </div>
                             <div class="card_body" style="height: 190px;">
                                 <div class="body_poster">
-                                    <img src="{{ isset($season->poster) ? tmdb_image('poster_mid', $season->poster) : '/img/SLOshare/movie_no_image_holder_200x300.jpg' }}"
+                                    <img src="{{ isset($season->poster) ? tmdb_image('poster_mid', $season->poster) : '/img/SLOshare/movie_no_image_200x300.jpg' }}"
                                             class="show-poster" style="height: 190px;">
                                 </div>
                                 <div class="body_description" style=" height: 190px;">
@@ -109,7 +109,7 @@
     <section class="panelV2">
         <h2 class="panel__heading">{{ $show->name }}</h2>
         <img
-            src="{{ isset($show->poster) ? tmdb_image('cast_big', $show->poster) : '/img/SLOshare/movie_no_image_holder_400x600.jpg' }}"
+            src="{{ isset($show->poster) ? tmdb_image('cast_big', $show->poster) : '/img/SLOshare/movie_no_image_400x600.jpg' }}"
             alt="{{ $show->name }}"
         >
         <dl class="key-value">

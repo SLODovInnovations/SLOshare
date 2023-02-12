@@ -256,7 +256,7 @@
                                                 class="torrent-poster-img-small" loading="lazy"
                                                 alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_90x135.jpg' }}"
                                                 class="torrent-poster-img-small" loading="lazy"
                                                 alt="{{ __('torrent.poster') }}">
                                     @endif
@@ -293,7 +293,7 @@
                                                 class="torrent-poster-img-small" loading="lazy"
                                                 alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg"
+                                        <img src="/img/SLOshare/music_no_image_90x135.jpg"
                                                 class="torrent-poster-img-small"
                                                 loading="lazy" alt="{{ __('torrent.poster') }}">
                                     @endif
@@ -305,7 +305,7 @@
                                                 class="torrent-poster-img-small" loading="lazy"
                                                 alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                        <img src="/img/SLOshare/meta_no_image_90x135.jpg"
                                                 class="torrent-poster-img-small" loading="lazy"
                                                 alt="{{ __('torrent.poster') }}">
                                     @endif

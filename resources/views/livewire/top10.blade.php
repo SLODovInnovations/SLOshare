@@ -45,7 +45,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_90x135.jpg' }}"
                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -62,7 +62,7 @@
 
                                 @if ($torrent->category->game_meta)
                                     <img style="height: 80px;"
-                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
                                          class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
 
@@ -71,7 +71,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
+                                        <img src="/img/SLOshare/music_no_image_90x135.jpg" class="torrent-poster-img-small"
                                             alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -81,7 +81,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                        <img src="/img/SLOshare/meta_no_image_90x135.jpg"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -442,7 +442,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_90x135.jpg' }}"
                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -459,7 +459,7 @@
 
                                 @if ($torrent->category->game_meta)
                                     <img style="height: 80px;"
-                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
                                          class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
 
@@ -468,7 +468,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
+                                        <img src="/img/SLOshare/music_no_image_90x135.jpg" class="torrent-poster-img-small"
                                             alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -478,7 +478,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                        <img src="/img/SLOshare/meta_no_image_90x135.jpg"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -837,7 +837,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_90x135.jpg' }}"
                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -854,7 +854,7 @@
 
                                 @if ($torrent->category->game_meta)
                                     <img style="height: 80px;"
-                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
                                          class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
 
@@ -863,7 +863,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
+                                        <img src="/img/SLOshare/music_no_image_90x135.jpg" class="torrent-poster-img-small"
                                             alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -873,7 +873,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                        <img src="/img/SLOshare/meta_no_image_90x135.jpg"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -1232,7 +1232,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_90x135.jpg' }}"
                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -1249,7 +1249,7 @@
 
                                 @if ($torrent->category->game_meta)
                                     <img style="height: 80px;"
-                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
                                          class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
 
@@ -1258,7 +1258,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
+                                        <img src="/img/SLOshare/music_no_image_90x135.jpg" class="torrent-poster-img-small"
                                             alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -1268,7 +1268,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                        <img src="/img/SLOshare/meta_no_image_90x135.jpg"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -1627,7 +1627,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_holder_90x135.jpg' }}"
+                                        <img src="{{ isset($meta->poster) ? tmdb_image('poster_small', $meta->poster) : '/img/SLOshare/movie_no_image_90x135.jpg' }}"
                                             class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -1644,7 +1644,7 @@
 
                                 @if ($torrent->category->game_meta)
                                     <img style="height: 80px;"
-                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_holder_90x135.jpg' }}"
+                                         src="{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_90x135.jpg' }}"
                                          class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                 @endif
 
@@ -1653,7 +1653,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/music_no_image_holder_90x135.jpg" class="torrent-poster-img-small"
+                                        <img src="/img/SLOshare/music_no_image_90x135.jpg" class="torrent-poster-img-small"
                                             alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
@@ -1663,7 +1663,7 @@
                                         <img src="{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @else
-                                        <img src="/img/SLOshare/meta_no_image_holder_90x135.jpg"
+                                        <img src="/img/SLOshare/meta_no_image_90x135.jpg"
                                              class="torrent-poster-img-small" alt="{{ __('torrent.poster') }}">
                                     @endif
                                 @endif
