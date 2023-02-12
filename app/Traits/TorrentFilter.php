@@ -142,7 +142,7 @@ trait TorrentFilter
 
     public function scopeOfCollection(Builder $query, int $collectionId): Builder
     {
-       return $query
+        return $query
             ->where(
                 fn ($query) => $query
                     ->where(
