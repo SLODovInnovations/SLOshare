@@ -25,7 +25,7 @@
                     @forelse($person->movie as $movie)
                         <tr>
                             <td class="col-sm-1">
-                                <img src="{{ isset($movie->poster) ? tmdb_image('poster_small', $movie->poster) : 'https://via.placeholder.com/90x135' }}"
+                                <img src="{{ isset($movie->poster) ? tmdb_image('poster_small', $movie->poster) : '/img/SLOshare/no_image_cast_90x135.jpg' }}"
                                     alt="{{ $movie->name }}" class="img-responsive">
                             </td>
                             <td class="col-sm-5">
@@ -65,7 +65,7 @@
                     @forelse($person->tv as $show)
                         <tr>
                             <td class="col-sm-1">
-                                <img src="{{ isset($show->poster) ? tmdb_image('poster_small', $show->poster) : 'https://via.placeholder.com/90x135' }}"
+                                <img src="{{ isset($show->poster) ? tmdb_image('poster_small', $show->poster) : '/img/SLOshare/no_image_cast_90x135.jpg' }}"
                                     alt="{{ $show->name }}" class="img-responsive">
                             </td>
                             <td class="col-sm-5">
@@ -103,7 +103,7 @@
     <section class="panelV2">
         <h2 class="panel__heading">{{ $person->name }}</h2>
         <img
-            src="{{ isset($person->still) ? tmdb_image('cast_big', $person->still) : 'https://via.placeholder.com/300x450' }}"
+            src="{{ isset($person->still) ? tmdb_image('cast_big', $person->still) : '/img/SLOshare/no_image_cast_300x450.jpg' }}"
             alt="{{ $person->name }}"
         >
         <div class="panel__body">{{ $person->biography ?? 'Ni biografije' }}</div>
