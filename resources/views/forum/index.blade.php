@@ -38,7 +38,7 @@
                 </ul>
             @else
                 <div class="panel__body">
-                    No forums in category.
+                    V kategoriji ni forumov.
                 </div>
             @endif
         </section>
