@@ -22,7 +22,7 @@ class GenreController extends Controller
      */
     public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
-        $genre = Genre::withCount(['tv', 'movie'])->findOrFail($id);
+        $genre = Genre::withCount(['tv', 'cartoontv', 'movie', 'cartoon'])->findOrFail($id);
         $shows = $genre->tv()->has('torrents')->oldest('name')->paginate(25, ['*'], 'showsPage');
         $cartoontvs = $genre->cartoontv()->has('torrents')->oldest('name')->paginate(25, ['*'], 'cartoontvsPage');
         $movies = $genre->movie()->has('torrents')->oldest('title')->paginate(25, ['*'], 'moviesPage');

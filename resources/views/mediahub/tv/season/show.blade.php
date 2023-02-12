@@ -44,7 +44,7 @@
                             </div>
                             <div class="card_body">
                                 <div class="body_poster">
-                                    <img src="{{ isset($episode->still) ? tmdb_image('still_mid', $episode->still) : 'https://via.placeholder.com/400x225' }}"
+                                    <img src="{{ isset($episode->still) ? tmdb_image('still_mid', $episode->still) : '/img/SLOshare/movie_mediahub_no_image_banner.jpg' }}"
                                             class="show-poster">
                                 </div>
                                 <div class="body_description" style=" height: 190px;">
@@ -71,7 +71,7 @@
     <section class="panelV2">
         <h2 class="panel__heading">{{ $season->name }} ({{ $season->air_date }})</h2>
         <img
-            src="{{ isset($season->poster) ? tmdb_image('cast_big', $season->poster) : 'https://via.placeholder.com/300x450' }}"
+            src="{{ isset($season->poster) ? tmdb_image('cast_big', $season->poster) : '/img/SLOshare/movie_no_image_holder_300x450.jpg' }}"
             alt="{{ $show->name }}"
         >
         <div class="panel__body">
