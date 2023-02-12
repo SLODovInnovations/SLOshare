@@ -39,7 +39,7 @@ class PageController extends Controller
     {
         $staff = Group::query()
             ->with('users:id,username,group_id,title')
-            ->where('is_modo', '=', 1)
+            ->where('is_modo', '=', 2)
             ->orWhere('is_admin', '=', 1)
             ->get()
             ->sortByDesc('position');
