@@ -12,11 +12,6 @@
                     {{ __('torrent.torrents') }}
                 </div>
             </a>
-            <a class="top-nav__dropdown--touch" tabindex="0">
-                <div class="top-nav--left__container">
-                    {{ __('torrent.torrents') }}
-                </div>
-            </a>
             <ul>
                 <li>
                     <a href="{{ route('torrents') }}">
@@ -72,11 +67,6 @@
         </li>
         <li class="top-nav--left__list-item top-nav__dropdown">
             <a tabindex="0">
-                <div class="top-nav--left__container">
-                    {{ __('common.sloshare') }}
-                </div>
-            </a>
-            <a class="top-nav__dropdown--touch" tabindex="0">
                 <div class="top-nav--left__container">
                     {{ __('common.sloshare') }}
                 </div>
