@@ -22,7 +22,6 @@
 @section('content')
     <section class="panelV2">
         <h2 class="panel__heading">{{ __('common.genres') }}</h2>
-        {{ $genres->links('partials.pagination') }}
         <div class="panel__body blocks">
             @foreach ($genres as $genre)
                 <a href="{{ route('mediahub.genres.show', ['id' => $genre->id]) }}" style="padding: 0 2px;">
@@ -30,18 +29,17 @@
                         <h2 class="text-bold"> {{ $genre->name }}</h2>
                         <span style="background-color: #317aaf;"></span>
                         <h2 style="font-size: 14px;">
-                            <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ $genre->tv->count() }} {{ __('mediahub.shows') }}
+                            <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ $genre->tv_count() }} {{ __('mediahub.shows') }}
                             |
-                            <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ $genre->cartoontv->count() }} {{ __('mediahub.cartoontvs') }}
+                            <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ $genre->cartoontv_count() }} {{ __('mediahub.cartoontvs') }}
                             |
-                            <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ $genre->movie->count() }} {{ __('mediahub.movies') }}
+                            <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ $genre->movie_count() }} {{ __('mediahub.movies') }}
                             |
-                            <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ $genre->cartoon->count() }} {{ __('mediahub.cartoons') }}
+                            <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ $genre->cartoon_count() }} {{ __('mediahub.cartoons') }}
                         </h2>
                     </div>
                 </a>
             @endforeach
         </div>
-        {{ $genres->links('partials.pagination') }}
     </section>
 @endsection
