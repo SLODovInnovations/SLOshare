@@ -29,13 +29,13 @@
                         <h2 class="text-bold"> {{ $genre->name }}</h2>
                         <span style="background-color: #317aaf;"></span>
                         <h2 style="font-size: 14px;">
-                            <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ $genre->tv_count() }} {{ __('mediahub.shows') }}
+                            <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ $genre->tv_count }} {{ __('mediahub.shows') }}
                             |
-                            <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ $genre->cartoontv_count() }} {{ __('mediahub.cartoontvs') }}
+                            <i class="{{ config('other.font-awesome') }} fa-baby-carriage"></i> {{ $genre->cartoontv_count }} {{ __('mediahub.cartoontvs') }}
                             |
-                            <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ $genre->movie_count() }} {{ __('mediahub.movies') }}
+                            <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ $genre->movie_count }} {{ __('mediahub.movies') }}
                             |
-                            <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ $genre->cartoon_count() }} {{ __('mediahub.cartoons') }}
+                            <i class="{{ config('other.font-awesome') }} fa-baby"></i> {{ $genre->cartoon_count }} {{ __('mediahub.cartoons') }}
                         </h2>
                     </div>
                 </a>

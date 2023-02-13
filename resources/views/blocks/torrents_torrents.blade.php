@@ -457,7 +457,7 @@
 			        @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-    			            @if ($cartoone->category->cartoon_meta)
+    			            @if ($cartoone->category->cartoon_meta || $cartoone->category->cartoontv_meta)
                                 @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoone->id.'.jpg'))
                                     style="background-image: url('{{ url('files/img/torrent-cover_' . $cartoone->id . '.jpg') }}');" class="show-poster" alt={{ $cartoone->name }}>
                                 @else
