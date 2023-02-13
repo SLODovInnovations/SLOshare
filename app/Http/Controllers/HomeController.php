@@ -94,7 +94,7 @@ class HomeController extends Controller
 
         $cartoones = cache()->remember('cartoones_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
-            ->where('category_id', [3, 4])
+            ->whereIn('category_id', [3, 4])
             ->latest()
             ->take(20)
             ->get());
@@ -123,7 +123,7 @@ class HomeController extends Controller
 
         $cartoonrecommended = cache()->remember('cartoonrecommended_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
-            ->where('category_id', '=', [3, 4])
+            ->whereIn('category_id', [3, 4])
             ->where('sticky', '=', 1)
             ->latest()
             ->take(5)
