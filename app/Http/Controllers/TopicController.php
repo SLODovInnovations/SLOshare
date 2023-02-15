@@ -204,11 +204,15 @@ class TopicController extends Controller
         $topic = Topic::findOrFail($id);
 
         abort_unless($user->group->is_modo || $user->id === $topic->first_post_user_id, 403);
-        $name = $request->input('name');
-        $forumId = $request->input('forum_id');
-        $topic->name = $name;
-        $topic->forum_id = $forumId;
-        $topic->save();
+        $topic->name = $request->name;
+        $forum = Forum::findOrFail($request->forum_id);
+
+        if ($forum->getPermission()->start_topic) {
+            $topic->forum_id = $request->forum->id;
+        } else {
+            return to_route('forums.index')
+                ->withErrors('Tukaj ne morete odpreti nove teme!');
+        }
 
         return to_route('forum_topic', ['id' => $topic->id])
             ->withSuccess(trans('forum.success-edit'));

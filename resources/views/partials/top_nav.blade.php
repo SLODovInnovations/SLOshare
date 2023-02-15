@@ -130,9 +130,9 @@
                                         ->where('staff_id', '=', auth()->user()->id)
                                         ->Where('staff_read', '=', '0');
                                 })
-                                ->count()
+                                ->exists()
                         @endphp
-                        @if ($tickets > 0)
+                        @if ($tickets)
                             <x-animation.notification />
                         @endif
                     <!-- Notification for Users -->
@@ -141,9 +141,9 @@
                             $ticket_unread = DB::table('tickets')
                                 ->where('user_id', '=', auth()->user()->id)
                                 ->where('user_read', '=', '0')
-                                ->count()
+                                ->exists()
                         @endphp
-                        @if ($ticket_unread > 0)
+                        @if ($ticket_unread)
                             <x-animation.notification />
                         @endif
                     @endif
@@ -323,9 +323,9 @@
                     <a class="top-nav--right__icon-link" href="{{ route('staff.moderation.index') }}" title="{{ __('staff.torrent-moderation') }}">
                         <i class="{{ config('other.font-awesome') }} fa-tasks"></i>
                         @php
-                            $torrents_unmoderated = DB::table('torrents')->where('status', '=', '0')->count()
+                            $torrents_unmoderated = DB::table('torrents')->where('status', '=', '0')->exists()
                         @endphp
-                        @if ($torrents_unmoderated > 0)
+                        @if ($torrents_unmoderated)
                             <x-animation.notification />
                         @endif
                     </a>
@@ -336,11 +336,11 @@
                     $pm = DB::table('private_messages')
                         ->where('receiver_id', '=', auth()->user()->id)
                         ->where('read', '=', '0')
-                        ->count()
+                        ->exists()
                 @endphp
                 <a class="top-nav--right__icon-link" href="{{ route('inbox') }}" title="{{ __('pm.inbox') }}">
                     <i class="{{ config('other.font-awesome') }} fa-envelope"></i>
-                    @if ($pm > 0)
+                    @if ($pm)
                         <x-animation.notification />
                     @endif
                 </a>
@@ -348,7 +348,7 @@
             <li>
                 <a class="top-nav--right__icon-link" href="{{ route('notifications.index') }}" title="{{ __('user.notifications') }}">
                     <i class="{{ config('other.font-awesome') }} fa-bell"></i>
-                    @if (auth()->user()->unreadNotifications->count() > 0)
+                    @if (auth()->user()->unreadNotifications()->exists())
                         <x-animation.notification />
                     @endif
                 </a>
