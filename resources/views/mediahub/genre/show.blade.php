@@ -126,7 +126,7 @@
     <section class="panelV2">
         <h2 class="panel__heading">{{ __('mediahub.movies') }} ({{ $genre->movie_count }})</h2>
         {{ $shows->links('partials.pagination') }}
-        <div class="panel__body"
+        <div class="panel__body">
             @forelse($movies as $movie)
                 <div class="col-md-12">
                     <div class="card is-torrent">
@@ -171,7 +171,7 @@
     <section class="panelV2">
         <h2 class="panel__heading">{{ __('mediahub.cartoons') }} ({{ $genre->cartoon_count }})</h2>
         {{ $shows->links('partials.pagination') }}
-        <div class="panel__body"
+        <div class="panel__body">
             @forelse($cartoons as $cartoon)
                 <div class="col-md-12">
                     <div class="card is-torrent">

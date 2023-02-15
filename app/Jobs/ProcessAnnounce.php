@@ -13,6 +13,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 
 class ProcessAnnounce implements ShouldQueue
 {
@@ -91,7 +92,7 @@ class ProcessAnnounce implements ShouldQueue
             $downloaded = ($realDownloaded >= $peer->downloaded) ? ($realDownloaded - $peer->downloaded) : 0;
         }
 
-        if ($history->updated_at->timestamp > now()->subHours(2)->timestamp && $history->seeder && $this->queries['left'] == 0) {
+        if ($history->updated_at !== null && $history->updated_at->timestamp > now()->subHours(2)->timestamp && $history->seeder && $this->queries['left'] == 0) {
             $oldUpdate = $history->updated_at->timestamp;
         } else {
             $oldUpdate = now()->timestamp;
@@ -143,7 +144,8 @@ class ProcessAnnounce implements ShouldQueue
         $peer->user_id = $this->user->id;
         $peer->updateConnectableStateIfNeeded();
         $peer->updated_at = now();
-        $peer->save();
+        Redis::connection('peer')->command('LPUSH', [config('cache.prefix').':peers:batch', serialize($peer->toArray())]);
+        //$peer->save();
 
         $history->user_id = $this->user->id;
         $history->torrent_id = $this->torrent->id;
