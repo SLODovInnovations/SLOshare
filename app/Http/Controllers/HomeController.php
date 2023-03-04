@@ -124,7 +124,7 @@ class HomeController extends Controller
                 ->take(20)
                 ->get();
 
-            $movieIds = $newest->where('meta', '=', 'movie')->pluck('tmdb');
+            $movieIds = $video->where('meta', '=', 'movie')->pluck('tmdb');
 
             $movies = Movie::with('genres')->whereIntegerInRaw('id', $movieIds)->get()->keyBy('id');
 
@@ -247,11 +247,11 @@ class HomeController extends Controller
                 ->take(20)
                 ->get();
 
-            $movieIds = $newest->where('meta', '=', 'movie')->pluck('tmdb');
-            $cartoonIds = $newest->where('meta', '=', 'cartoon')->pluck('tmdb');
-            $tvIds = $newest->where('meta', '=', 'tv')->pluck('tmdb');
-            $cartoontvIds = $newest->where('meta', '=', 'cartoontv')->pluck('tmdb');
-            $gameIds = $newest->where('meta', '=', 'game')->pluck('igdb');
+            $movieIds = $seeded->where('meta', '=', 'movie')->pluck('tmdb');
+            $cartoonIds = $seeded->where('meta', '=', 'cartoon')->pluck('tmdb');
+            $tvIds = $seeded->where('meta', '=', 'tv')->pluck('tmdb');
+            $cartoontvIds = $seeded->where('meta', '=', 'cartoontv')->pluck('tmdb');
+            $gameIds = $seeded->where('meta', '=', 'game')->pluck('igdb');
 
             $movies = Movie::with('genres')->whereIntegerInRaw('id', $movieIds)->get()->keyBy('id');
             $cartoons = Cartoon::with('genres')->whereIntegerInRaw('id', $cartoonIds)->get()->keyBy('id');
@@ -299,11 +299,11 @@ class HomeController extends Controller
                 ->take(20)
                 ->get();
 
-            $movieIds = $newest->where('meta', '=', 'movie')->pluck('tmdb');
-            $cartoonIds = $newest->where('meta', '=', 'cartoon')->pluck('tmdb');
-            $tvIds = $newest->where('meta', '=', 'tv')->pluck('tmdb');
-            $cartoontvIds = $newest->where('meta', '=', 'cartoontv')->pluck('tmdb');
-            $gameIds = $newest->where('meta', '=', 'game')->pluck('igdb');
+            $movieIds = $leeched->where('meta', '=', 'movie')->pluck('tmdb');
+            $cartoonIds = $leeched->where('meta', '=', 'cartoon')->pluck('tmdb');
+            $tvIds = $leeched->where('meta', '=', 'tv')->pluck('tmdb');
+            $cartoontvIds = $leeched->where('meta', '=', 'cartoontv')->pluck('tmdb');
+            $gameIds = $leeched->where('meta', '=', 'game')->pluck('igdb');
 
             $movies = Movie::with('genres')->whereIntegerInRaw('id', $movieIds)->get()->keyBy('id');
             $cartoons = Cartoon::with('genres')->whereIntegerInRaw('id', $cartoonIds)->get()->keyBy('id');
@@ -353,11 +353,11 @@ class HomeController extends Controller
                 ->take(5)
                 ->get();
 
-            $movieIds = $newest->where('meta', '=', 'movie')->pluck('tmdb');
-            $cartoonIds = $newest->where('meta', '=', 'cartoon')->pluck('tmdb');
-            $tvIds = $newest->where('meta', '=', 'tv')->pluck('tmdb');
-            $cartoontvIds = $newest->where('meta', '=', 'cartoontv')->pluck('tmdb');
-            $gameIds = $newest->where('meta', '=', 'game')->pluck('igdb');
+            $movieIds = $dying->where('meta', '=', 'movie')->pluck('tmdb');
+            $cartoonIds = $dying->where('meta', '=', 'cartoon')->pluck('tmdb');
+            $tvIds = $dying->where('meta', '=', 'tv')->pluck('tmdb');
+            $cartoontvIds = $dying->where('meta', '=', 'cartoontv')->pluck('tmdb');
+            $gameIds = $dying->where('meta', '=', 'game')->pluck('igdb');
 
             $movies = Movie::with('genres')->whereIntegerInRaw('id', $movieIds)->get()->keyBy('id');
             $cartoons = Cartoon::with('genres')->whereIntegerInRaw('id', $cartoonIds)->get()->keyBy('id');
@@ -406,11 +406,11 @@ class HomeController extends Controller
                 ->take(5)
                 ->get();
 
-            $movieIds = $newest->where('meta', '=', 'movie')->pluck('tmdb');
-            $cartoonIds = $newest->where('meta', '=', 'cartoon')->pluck('tmdb');
-            $tvIds = $newest->where('meta', '=', 'tv')->pluck('tmdb');
-            $cartoontvIds = $newest->where('meta', '=', 'cartoontv')->pluck('tmdb');
-            $gameIds = $newest->where('meta', '=', 'game')->pluck('igdb');
+            $movieIds = $dead->where('meta', '=', 'movie')->pluck('tmdb');
+            $cartoonIds = $dead->where('meta', '=', 'cartoon')->pluck('tmdb');
+            $tvIds = $dead->where('meta', '=', 'tv')->pluck('tmdb');
+            $cartoontvIds = $dead->where('meta', '=', 'cartoontv')->pluck('tmdb');
+            $gameIds = $dead->where('meta', '=', 'game')->pluck('igdb');
 
             $movies = Movie::with('genres')->whereIntegerInRaw('id', $movieIds)->get()->keyBy('id');
             $cartoons = Cartoon::with('genres')->whereIntegerInRaw('id', $cartoonIds)->get()->keyBy('id');
