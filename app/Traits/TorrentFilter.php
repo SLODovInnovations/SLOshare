@@ -204,12 +204,12 @@ trait TorrentFilter
                     ->where(
                         fn ($query) => $query
                             ->whereIn('category_id', Category::select('id')->where('tv_meta', '=', 1))
-                            ->whereIn('tmdb', DB::table('network_tv')->select('tv_id')->where('network_id', '=', $networkId));
+                            ->whereIn('tmdb', DB::table('network_tv')->select('tv_id')->where('network_id', '=', $networkId))
                     )
                     ->orWhere(
                         fn ($query) => $query
                             ->whereIn('category_id', Category::select('id')->where('cartoontv_meta', '=', 1))
-                            ->whereIn('tmdb', DB::table('network_cartoon_tv')->select('cartoon_tv_id')->where('network_id', '=', $networkId));
+                            ->whereIn('tmdb', DB::table('network_cartoon_tv')->select('cartoon_tv_id')->where('network_id', '=', $networkId))
                     )
             );
     }
