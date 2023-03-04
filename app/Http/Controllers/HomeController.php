@@ -93,12 +93,12 @@ class HomeController extends Controller
 
             $newest = $newest->map(function ($torrent) use ($movies, $cartoons, $tv, $cartoontv) {
                 $torrent->meta = match ($torrent->meta) {
-                    'movie' => $movies[$torrent->tmdb] ?? null,
-                    'cartoon' => $cartoons[$torrent->tmdb] ?? null,
-                    'tv'    => $tv[$torrent->tmdb] ?? null,
-                    'cartoontv'    => $cartoontv[$torrent->tmdb] ?? null,
-                    'game'  => $games[$torrent->igdb] ?? null,
-                    default => null,
+                    'movie'     => $movies[$torrent->tmdb] ?? null,
+                    'cartoon'   => $cartoons[$torrent->tmdb] ?? null,
+                    'tv'        => $tv[$torrent->tmdb] ?? null,
+                    'cartoontv' => $cartoontv[$torrent->tmdb] ?? null,
+                    'game'      => $games[$torrent->igdb] ?? null,
+                    default     => null,
                 };
 
                 return $torrent;
@@ -151,11 +151,11 @@ class HomeController extends Controller
                         WHEN category_id IN (SELECT `id` from `categories` where `no_meta` = 1) THEN 'no'
                     END as meta
                 ")
-            ->withCount(['thanks', 'comments'])
-            ->where('category_id', '=', 14)
-            ->latest()
-            ->take(20)
-            ->get();
+                ->withCount(['thanks', 'comments'])
+                ->where('category_id', '=', 14)
+                ->latest()
+                ->take(20)
+                ->get();
 
             return $video;
         });
@@ -263,12 +263,12 @@ class HomeController extends Controller
 
             $seeded = $seeded->map(function ($torrent) use ($movies, $cartoons, $tv, $cartoontv) {
                 $torrent->meta = match ($torrent->meta) {
-                    'movie' => $movies[$torrent->tmdb] ?? null,
-                    'cartoon' => $cartoons[$torrent->tmdb] ?? null,
-                    'tv'    => $tv[$torrent->tmdb] ?? null,
-                    'cartoontv'    => $cartoontv[$torrent->tmdb] ?? null,
-                    'game'  => $games[$torrent->igdb] ?? null,
-                    default => null,
+                    'movie'     => $movies[$torrent->tmdb] ?? null,
+                    'cartoon'   => $cartoons[$torrent->tmdb] ?? null,
+                    'tv'        => $tv[$torrent->tmdb] ?? null,
+                    'cartoontv' => $cartoontv[$torrent->tmdb] ?? null,
+                    'game'      => $games[$torrent->igdb] ?? null,
+                    default     => null,
                 };
 
                 return $torrent;
@@ -315,12 +315,12 @@ class HomeController extends Controller
 
             $leeched = $leeched->map(function ($torrent) use ($movies, $cartoons, $tv, $cartoontv) {
                 $torrent->meta = match ($torrent->meta) {
-                    'movie' => $movies[$torrent->tmdb] ?? null,
-                    'cartoon' => $cartoons[$torrent->tmdb] ?? null,
-                    'tv'    => $tv[$torrent->tmdb] ?? null,
-                    'cartoontv'    => $cartoontv[$torrent->tmdb] ?? null,
-                    'game'  => $games[$torrent->igdb] ?? null,
-                    default => null,
+                    'movie'     => $movies[$torrent->tmdb] ?? null,
+                    'cartoon'   => $cartoons[$torrent->tmdb] ?? null,
+                    'tv'        => $tv[$torrent->tmdb] ?? null,
+                    'cartoontv' => $cartoontv[$torrent->tmdb] ?? null,
+                    'game'      => $games[$torrent->igdb] ?? null,
+                    default     => null,
                 };
 
                 return $torrent;
@@ -369,12 +369,12 @@ class HomeController extends Controller
 
             $dying = $dying->map(function ($torrent) use ($movies, $cartoons, $tv, $cartoontv) {
                 $torrent->meta = match ($torrent->meta) {
-                    'movie' => $movies[$torrent->tmdb] ?? null,
-                    'cartoon' => $cartoons[$torrent->tmdb] ?? null,
-                    'tv'    => $tv[$torrent->tmdb] ?? null,
-                    'cartoontv'    => $cartoontv[$torrent->tmdb] ?? null,
-                    'game'  => $games[$torrent->igdb] ?? null,
-                    default => null,
+                    'movie'     => $movies[$torrent->tmdb] ?? null,
+                    'cartoon'   => $cartoons[$torrent->tmdb] ?? null,
+                    'tv'        => $tv[$torrent->tmdb] ?? null,
+                    'cartoontv' => $cartoontv[$torrent->tmdb] ?? null,
+                    'game'      => $games[$torrent->igdb] ?? null,
+                    default     => null,
                 };
 
                 return $torrent;
@@ -422,12 +422,12 @@ class HomeController extends Controller
 
             $dead = $dead->map(function ($torrent) use ($movies, $cartoons, $tv, $cartoontv) {
                 $torrent->meta = match ($torrent->meta) {
-                    'movie' => $movies[$torrent->tmdb] ?? null,
-                    'cartoon' => $cartoons[$torrent->tmdb] ?? null,
-                    'tv'    => $tv[$torrent->tmdb] ?? null,
-                    'cartoontv'    => $cartoontv[$torrent->tmdb] ?? null,
-                    'game'  => $games[$torrent->igdb] ?? null,
-                    default => null,
+                    'movie'     => $movies[$torrent->tmdb] ?? null,
+                    'cartoon'   => $cartoons[$torrent->tmdb] ?? null,
+                    'tv'        => $tv[$torrent->tmdb] ?? null,
+                    'cartoontv' => $cartoontv[$torrent->tmdb] ?? null,
+                    'game'      => $games[$torrent->igdb] ?? null,
+                    default     => null,
                 };
 
                 return $torrent;
