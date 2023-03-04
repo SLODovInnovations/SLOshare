@@ -160,26 +160,93 @@ class HomeController extends Controller
             return $xxx;
         });
 
-        $tvserie = cache()->remember('tvserie_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
-            ->withCount(['thanks', 'comments'])
-            ->where('category_id', '=', 2)
-            ->latest()
-            ->take(20)
-            ->get());
+        $tvserie = cache()->remember('tvserie_torrents', $expiresAt, function () {
+            $tvserie = Torrent::with(['user', 'category', 'type', 'resolution'])
+                ->withExists([
+                    'bookmarks'       => fn ($query) => $query->where('user_id', '=', auth()->id()),
+                    'freeleechTokens' => fn ($query) => $query->where('user_id', '=', auth()->id()),
+                ])
+                ->selectRaw("
+                    CASE
+                        WHEN category_id IN (SELECT `id` from `categories` where `tv_meta` = 1) THEN 'tv'
+                    END as meta
+                ")
+                ->withCount(['thanks', 'comments'])
+                ->where('category_id', '=', 2)
+                ->latest()
+                ->take(20)
+                ->get();
 
-        $game = cache()->remember('game_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type'])
-            ->withCount(['thanks', 'comments'])
-            ->where('category_id', '=', 9)
-            ->latest()
-            ->take(20)
-            ->get());
+            $tvIds = $tvserie->where('meta', '=', 'tv')->pluck('tmdb');
 
-        $applications = cache()->remember('applications_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type'])
-            ->withCount(['thanks', 'comments'])
-            ->where('category_id', '=', 10)
-            ->latest()
-            ->take(20)
-            ->get());
+            $tv = Tv::with('genres')->whereIntegerInRaw('id', $tvIds)->get()->keyBy('id');
+
+            $tvserie = $tvserie->map(function ($torrent) use ($tv) {
+                $torrent->meta = match ($torrent->meta) {
+                    'tv'    => $tv[$torrent->tmdb] ?? null,
+                    default => null,
+                };
+
+                return $torrent;
+            });
+
+            return $tvserie;
+        });
+
+        $game = cache()->remember('game_torrents', $expiresAt, function () {
+            $game = Torrent::with(['user', 'category', 'type', 'resolution'])
+                ->withExists([
+                    'bookmarks'       => fn ($query) => $query->where('user_id', '=', auth()->id()),
+                    'freeleechTokens' => fn ($query) => $query->where('user_id', '=', auth()->id()),
+                ])
+                ->selectRaw("
+                    CASE
+                        WHEN category_id IN (SELECT `id` from `categories` where `game_meta` = 1) THEN 'game'
+                    END as meta
+                ")
+                ->withCount(['thanks', 'comments'])
+                ->where('category_id', '=', 9)
+                ->latest()
+                ->take(20)
+                ->get();
+
+            $gameIds = $game->where('meta', '=', 'game')->pluck('igdb');
+
+            if ($gameIds->isNotEmpty()) {
+                $games = \MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->whereIntegerInRaw('id', $gameIds);
+            }
+
+            $game = $game->map(function ($torrent) {
+                $torrent->meta = match ($torrent->meta) {
+                    'game'  => $games[$torrent->igdb] ?? null,
+                    default => null,
+                };
+
+                return $torrent;
+            });
+
+            return $game;
+        });
+
+        $applications = cache()->remember('applications_torrents', $expiresAt, function () {
+            $applications = Torrent::with(['user', 'category', 'type', 'resolution'])
+                ->withExists([
+                    'bookmarks'       => fn ($query) => $query->where('user_id', '=', auth()->id()),
+                    'freeleechTokens' => fn ($query) => $query->where('user_id', '=', auth()->id()),
+                ])
+                ->selectRaw("
+                    CASE
+                        WHEN category_id IN (SELECT `id` from `categories` where `no_meta` = 1) THEN 'no'
+                    END as meta
+                ")
+                ->withCount(['thanks', 'comments'])
+                ->where('category_id', '=', 10)
+                ->latest()
+                ->take(20)
+                ->get();
+
+            return $applications;
+        });
 
         $cartoones = cache()->remember('cartoones_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
             ->withCount(['thanks', 'comments'])
