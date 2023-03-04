@@ -157,7 +157,7 @@ class HomeController extends Controller
                 ->take(20)
                 ->get();
 
-            return $video;
+            return $xxx;
         });
 
         $tvserie = cache()->remember('tvserie_torrents', $expiresAt, fn () => Torrent::with(['user', 'category', 'type', 'resolution'])
