@@ -41,6 +41,17 @@ class HomeControllerTest extends TestCase
             ->assertViewHas('groups')
             ->assertViewHas('articles')
             ->assertViewHas('newest')
+            ->assertViewHas('video')
+            ->assertViewHas('xxx')
+            ->assertViewHas('tvserie')
+            ->assertViewHas('game')
+            ->assertViewHas('applications')
+            ->assertViewHas('cartoones')
+            ->assertViewHas('newsloshare')
+            ->assertViewHas('slorecommended')
+            ->assertViewHas('videorecommended')
+            ->assertViewHas('cartoonrecommended')
+            ->assertViewHas('flrecommended')
             ->assertViewHas('seeded')
             ->assertViewHas('dying')
             ->assertViewHas('leeched')
@@ -52,7 +63,14 @@ class HomeControllerTest extends TestCase
             ->assertViewHas('uploaders')
             ->assertViewHas('past_uploaders')
             ->assertViewHas('freeleech_tokens')
-            ->assertViewHas('bookmarks');
+            ->assertViewHas('bookmarks')
+            ->assertViewHas('all_user')
+            ->assertViewHas('num_torrent')
+            ->assertViewHas('num_seeders')
+            ->assertViewHas('num_leechers')
+            ->assertViewHas('credited_upload')
+            ->assertViewHas('credited_download')
+            ->assertViewHas('clients');
     }
 
     /** @test */
