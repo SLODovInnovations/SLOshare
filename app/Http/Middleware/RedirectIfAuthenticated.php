@@ -11,7 +11,7 @@ class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      */
-    public function handle(Request $request, Closure $next, ...$guards): mixed
+    public function handle(Request $request, Closure $next, string ...$guards): mixed
     {
         $guards = empty($guards) ? [null] : $guards;
 

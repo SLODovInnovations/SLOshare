@@ -123,6 +123,8 @@
                     <p class="form__group">
                         <select id="show_poster" class="form__select" name="torrent_layout" required>
                             <option class="form__option" value="0" @selected($user->torrent_layout === 0)>Seznam Torrentov</option>
+                            <option class="form__option" value="1" @selected($user->torrent_layout === 1)>Torrent kartice</option>
+                            <option class="form__option" value="2" @selected($user->torrent_layout === 2)>Torrent skupine</option>
                         </select>
                         <label class="form__label form__label--floating" for="torrent_layout">
                             Privzeta postavitev torrenta

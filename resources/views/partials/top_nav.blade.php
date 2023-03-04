@@ -7,14 +7,32 @@
     </div>
     <ul class="top-nav__main-menus" x-bind:class="expanded && 'mobile'">
         <li class="top-nav--left__list-item top-nav__dropdown">
-            <a tabindex="0">
+            <a
+                class="top-nav__dropdown--nontouch"
+                href="{{ route('torrents', ['view' => match(auth()->user()->torrent_layout) {
+                    1       => 'card',
+                    2       => 'group',
+                    default => 'list'
+                }]) }}"
+            >
+                <div class="top-nav--left__container">
+                    {{ __('torrent.torrents') }}
+                </div>
+            </a>
+            <a class="top-nav__dropdown--touch" tabindex="0">
                 <div class="top-nav--left__container">
                     {{ __('torrent.torrents') }}
                 </div>
             </a>
             <ul>
                 <li>
-                    <a href="{{ route('torrents') }}">
+                    <a
+                        href="{{ route('torrents', ['view' => match(auth()->user()->torrent_layout) {
+                            1       => 'card',
+                            2       => 'group',
+                            default => 'list'
+                        }]) }}"
+                    >
                         <i class="{{ config('other.font-awesome') }} fa-download"></i>
                         {{ __('torrent.torrents') }}
                     </a>

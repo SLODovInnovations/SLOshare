@@ -27,7 +27,7 @@
             @if(isset($meta->companies) && $meta->companies->isNotEmpty())
                 @php $company = $meta->companies->first() @endphp
                 <div class="badge-user">
-                    <a href="{{ route('mediahub.companies.show', ['id' => $company->id]) }}">
+                    <a href="{{ route('torrents', ['view' => 'group', 'companyId' => $company->id]) }}">
                         @if(isset($company->logo))
                             <img class="img-responsive" src="{{ tmdb_image('logo_small', $company->logo) }}"
                                  title="{{ $company->name }}">

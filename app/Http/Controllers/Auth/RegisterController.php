@@ -141,22 +141,24 @@ class RegisterController extends Controller
         $userActivation->user_id = $user->id;
         $userActivation->token = $token;
         $userActivation->save();
-        $this->dispatch(new SendActivationMail($user, $token));
+        dispatch(new SendActivationMail($user, $token));
+
         // Select A Random Welcome Message
         $profileUrl = href_profile($user);
         $welcomeArray = [
-            sprintf('[url=%s]%s[/url], Dobrodošli v ', $profileUrl, $user->username).config('other.title').'! Upam, da uživaš v skupnosti. :rocket:',
-            sprintf("[url=%s]%s[/url], Pričakovali smo vas. :space_invader:", $profileUrl, $user->username),
-            sprintf("[url=%s]%s[/url] je prispela. Zabava je končana.. :cry:", $profileUrl, $user->username),
+            sprintf('[url=%s]%s[/url], Dobrodošli v ', $profileUrl, $user->username).config('other.title').'! Upam, da uživaš v skupnosti :rocket:',
+            sprintf("[url=%s]%s[/url], Pričakovali smo vas :space_invader:", $profileUrl, $user->username),
+            sprintf("[url=%s]%s[/url] je prispela. Zabava je končana. :cry:", $profileUrl, $user->username),
             sprintf("To je ptica! To je letalo! Nevermind, samo [url=%s]%s[/url].", $profileUrl, $user->username),
             sprintf('Pripravljen igralec [url=%s]%s[/url].', $profileUrl, $user->username),
             sprintf('Divje [url=%s]%s[/url] pojavil.', $profileUrl, $user->username),
-            'Dobrodošli v '.config('other.title').sprintf(' [url=%s]%s[/url]. Pričakovali smo vas. ( ͡° ͜ʖ ͡°)', $profileUrl, $user->username),
+            'Dobrodošli v '.config('other.title').sprintf(' [url=%s]%s[/url]. Pričakovali smo vas ( ͡° ͜ʖ ͡°)', $profileUrl, $user->username),
         ];
         $selected = random_int(0, \count($welcomeArray) - 1);
         $this->chatRepository->systemMessage(
             $welcomeArray[$selected]
         );
+
         // Send Welcome PM
         $privateMessage = new PrivateMessage();
         $privateMessage->sender_id = 1;

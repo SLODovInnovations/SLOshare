@@ -168,6 +168,52 @@ trait TorrentFilter
             );
     }
 
+    public function scopeOfCompany(Builder $query, int $companyId): Builder
+    {
+        return $query
+            ->where(
+                fn ($query) => $query
+                    ->where(
+                        fn ($query) => $query
+                            ->whereIn('category_id', Category::select('id')->where('movie_meta', '=', 1))
+                            ->whereIn('tmdb', DB::table('company_movie')->select('movie_id')->where('company_id', '=', $companyId))
+                    )
+                    ->orWhere(
+                        fn ($query) => $query
+                            ->whereIn('category_id', Category::select('id')->where('cartoon_meta', '=', 1))
+                            ->whereIn('tmdb', DB::table('company_cartoon')->select('cartoon_id')->where('company_id', '=', $companyId))
+                    )
+                    ->orWhere(
+                        fn ($query) => $query
+                            ->whereIn('category_id', Category::select('id')->where('tv_meta', '=', 1))
+                            ->whereIn('tmdb', DB::table('company_tv')->select('tv_id')->where('company_id', '=', $companyId))
+                    )
+                    ->orWhere(
+                        fn ($query) => $query
+                            ->whereIn('category_id', Category::select('id')->where('cartoontv_meta', '=', 1))
+                            ->whereIn('tmdb', DB::table('company_cartoon_tv')->select('cartoon_tv_id')->where('company_id', '=', $companyId))
+                    )
+            );
+    }
+
+    public function scopeOfNetwork(Builder $query, int $networkId): Builder
+    {
+        return $query
+            ->where(
+                fn ($query) => $query
+                    ->where(
+                        fn ($query) => $query
+                            ->whereIn('category_id', Category::select('id')->where('tv_meta', '=', 1))
+                            ->whereIn('tmdb', DB::table('network_tv')->select('tv_id')->where('network_id', '=', $networkId))
+                    )
+                    ->orWhere(
+                        fn ($query) => $query
+                            ->whereIn('category_id', Category::select('id')->where('cartoontv_meta', '=', 1))
+                            ->whereIn('tmdb', DB::table('network_cartoon_tv')->select('cartoon_tv_id')->where('network_id', '=', $networkId))
+                    )
+            );
+    }
+
     public function scopeOfFreeleech(Builder $query, string|array $free): Builder
     {
         return $query->whereIntegerInRaw('free', (array) $free);

@@ -16,24 +16,4 @@ class GenreController extends Controller
 
         return view('mediahub.genre.index', ['genres' => $genres]);
     }
-
-    /**
-     * Show A Genre.
-     */
-    public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        $genre = Genre::withCount(['tv', 'cartoontv', 'movie', 'cartoon'])->findOrFail($id);
-        $shows = $genre->tv()->has('torrents')->oldest('name')->paginate(25, ['*'], 'showsPage');
-        $cartoontvs = $genre->cartoontv()->has('torrents')->oldest('name')->paginate(25, ['*'], 'cartoontvsPage');
-        $movies = $genre->movie()->has('torrents')->oldest('title')->paginate(25, ['*'], 'moviesPage');
-        $cartoons = $genre->cartoon()->has('torrents')->oldest('title')->paginate(25, ['*'], 'cartoonsPage');
-
-        return view('mediahub.genre.show', [
-            'genre'      => $genre,
-            'shows'      => $shows,
-            'cartoontvs' => $cartoontvs,
-            'movies'     => $movies,
-            'cartoons'   => $cartoons,
-        ]);
-    }
 }
