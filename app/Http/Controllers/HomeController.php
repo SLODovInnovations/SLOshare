@@ -7,14 +7,10 @@ use App\Models\Bookmark;
 use App\Models\FeaturedTorrent;
 use App\Models\FreeleechToken;
 use App\Models\Group;
-use App\Models\Movie;
-use App\Models\Cartoon;
 use App\Models\Poll;
 use App\Models\Post;
 use App\Models\Topic;
 use App\Models\Torrent;
-use App\Models\Tv;
-use App\Models\CartoonTv;
 use App\Models\User;
 //SLOshare
 use App\Models\Peer;
