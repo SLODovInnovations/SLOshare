@@ -7,10 +7,14 @@ use App\Models\Bookmark;
 use App\Models\FeaturedTorrent;
 use App\Models\FreeleechToken;
 use App\Models\Group;
+use App\Models\Movie;
+use App\Models\Cartoon;
 use App\Models\Poll;
 use App\Models\Post;
 use App\Models\Topic;
 use App\Models\Torrent;
+use App\Models\Tv;
+use App\Models\CartoonTv;
 use App\Models\User;
 //SLOshare
 use App\Models\Peer;
@@ -45,7 +49,7 @@ class HomeController extends Controller
         // Latest Articles/News Block
         $articles = cache()->remember('latest_article', $expiresAt, fn () => Article::latest()->take(5)->get());
         foreach ($articles as $article) {
-            $article->newNews = ($user->updated_at->subDays(3)->getTimestamp() < $article->created_at->getTimestamp()) ? 1 : 0;
+            $article->newNews = ($user->last_login->subDays(3)->getTimestamp() < $article->created_at->getTimestamp()) ? 1 : 0;
         }
 
         // Latest Torrents Block

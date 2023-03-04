@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
+| Here is where you can register all the routes for an application.
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the Closure to execute when that URI is requested.
 |
@@ -192,8 +193,6 @@ Route::group(['middleware' => 'language'], function (): void {
 
         Route::group(['prefix' => 'torrents'], function (): void {
             Route::get('/', [App\Http\Controllers\TorrentController::class, 'index'])->name('torrents');
-            Route::get('/cards', [App\Http\Controllers\TorrentCardController::class, 'index'])->name('cards');
-            Route::get('/grouped', [App\Http\Controllers\TorrentGroupController::class, 'index'])->name('grouped');
             Route::get('/{id}{hash?}', [App\Http\Controllers\TorrentController::class, 'show'])->name('torrent');
             Route::get('/{id}/peers', [App\Http\Controllers\TorrentPeerController::class, 'index'])->name('peers');
             Route::get('/{id}/history', [App\Http\Controllers\TorrentHistoryController::class, 'index'])->name('history');
@@ -298,20 +297,11 @@ Route::group(['middleware' => 'language'], function (): void {
         // Genres
         Route::get('/genres', [App\Http\Controllers\MediaHub\GenreController::class, 'index'])->name('mediahub.genres.index');
 
-        // Genre
-        Route::get('/genre/{id}', [App\Http\Controllers\MediaHub\GenreController::class, 'show'])->name('mediahub.genres.show');
-
         // Networks
         Route::get('/networks', [App\Http\Controllers\MediaHub\NetworkController::class, 'index'])->name('mediahub.networks.index');
 
-        // Network
-        Route::get('/network/{id}', [App\Http\Controllers\MediaHub\NetworkController::class, 'show'])->name('mediahub.networks.show');
-
         // Companies
         Route::get('/companies', [App\Http\Controllers\MediaHub\CompanyController::class, 'index'])->name('mediahub.companies.index');
-
-        // Company
-        Route::get('/company/{id}', [App\Http\Controllers\MediaHub\CompanyController::class, 'show'])->name('mediahub.companies.show');
 
         // TV Shows
         Route::get('/tv-shows', [App\Http\Controllers\MediaHub\TvShowController::class, 'index'])->name('mediahub.shows.index');
@@ -333,18 +323,6 @@ Route::group(['middleware' => 'language'], function (): void {
 
         // Collection
         Route::get('/collections/{id}', [App\Http\Controllers\MediaHub\CollectionController::class, 'show'])->name('mediahub.collections.show');
-
-        // Movies
-        Route::get('/movies', [App\Http\Controllers\MediaHub\MovieController::class, 'index'])->name('mediahub.movies.index');
-
-        // Movie
-        Route::get('/movies/{id}', [App\Http\Controllers\MediaHub\MovieController::class, 'show'])->name('mediahub.movies.show');
-
-        // Cartoons
-        Route::get('/cartoons', [App\Http\Controllers\MediaHub\CartoonController::class, 'index'])->name('mediahub.cartoons.index');
-
-        // Cartoon
-        Route::get('/cartoons/{id}', [App\Http\Controllers\MediaHub\CartoonController::class, 'show'])->name('mediahub.cartoons.show');
 
         // Cartoon TVs
         Route::get('/cartoon-tv', [App\Http\Controllers\MediaHub\CartoonTvController::class, 'index'])->name('mediahub.cartoontvs.index');
@@ -886,6 +864,13 @@ Route::group(['middleware' => 'language'], function (): void {
                 Route::get('/{id}/edit', [App\Http\Controllers\Staff\PageController::class, 'edit'])->name('edit');
                 Route::post('/{id}/update', [App\Http\Controllers\Staff\PageController::class, 'update'])->name('update');
                 Route::delete('/{id}/destroy', [App\Http\Controllers\Staff\PageController::class, 'destroy'])->name('destroy');
+            });
+        });
+
+        // Peers
+        Route::group(['prefix' => 'peers'], function (): void {
+            Route::name('staff.peers.')->group(function (): void {
+                Route::get('/', [App\Http\Controllers\Staff\PeerController::class, 'index'])->name('index');
             });
         });
 

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\MediaHub;
 
 use App\Http\Controllers\Controller;
-use App\Models\Network;
 
 class NetworkController extends Controller
 {
@@ -13,21 +12,5 @@ class NetworkController extends Controller
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     {
         return view('mediahub.network.index');
-    }
-
-    /**
-     * Show A Network.
-     */
-    public function show(int $id): \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    {
-        $network = Network::withCount('tv', 'cartoontv')->findOrFail($id);
-        $shows = $network->tv()->has('torrents')->oldest('name')->paginate(25);
-        $cartoontvs = $network->cartoontv()->has('torrents')->oldest('name')->paginate(25);
-
-        return view('mediahub.network.show', [
-            'network'    => $network,
-            'shows'      => $shows,
-            'cartoontvs' => $cartoontvs,
-        ]);
     }
 }
