@@ -216,7 +216,7 @@ class HomeController extends Controller
                 $games = \MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->whereIntegerInRaw('id', $gameIds);
             }
 
-            $game = $game->map(function ($torrent) use ($game) {
+            $game = $game->map(function ($torrent) {
                 $torrent->meta = match ($torrent->meta) {
                     'game'  => $games[$torrent->igdb] ?? null,
                     default => null,
