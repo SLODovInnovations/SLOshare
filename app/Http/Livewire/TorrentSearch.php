@@ -256,12 +256,12 @@ class TorrentSearch extends Component
 
         $torrents = $torrents->through(function ($torrent) use ($movies, $cartoons, $tv, $cartoontv) {
             $torrent->meta = match ($torrent->meta) {
-                'movie' => $movies[$torrent->tmdb] ?? null,
-                'cartoon' => $cartoons[$torrent->tmdb] ?? null,
-                'tv'    => $tv[$torrent->tmdb] ?? null,
-                'cartoontv'    => $cartoontv[$torrent->tmdb] ?? null,
-                'game'  => $games[$torrent->igdb] ?? null,
-                default => null,
+                'movie'     => $movies[$torrent->tmdb] ?? null,
+                'cartoon'   => $cartoons[$torrent->tmdb] ?? null,
+                'tv'        => $tv[$torrent->tmdb] ?? null,
+                'cartoontv' => $cartoontv[$torrent->tmdb] ?? null,
+                'game'      => $games[$torrent->igdb] ?? null,
+                default     => null,
             };
 
             return $torrent;
