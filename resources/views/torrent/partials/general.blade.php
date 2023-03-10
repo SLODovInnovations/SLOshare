@@ -78,7 +78,7 @@
                     <strong>{{ __('torrent.bookmarks') }}:</strong>
                 </td>
                 <td class="col-sm-9 torrentinforight">
-                    @livewire('bookmark-button', ['torrent' => $torrent->id])
+                    @livewire('bookmark-button', ['torrent' => $torrent, 'isBookmarked' => $torrent->bookmarks_exists, 'user' => auth()->user()])
                 </td>
             </tr>
 

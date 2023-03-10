@@ -4,9 +4,11 @@ namespace App\Http\Livewire;
 
 use App\Models\Category;
 use App\Models\Movie;
+use App\Models\Cartoon;
 use App\Models\Person;
 use App\Models\Torrent;
 use App\Models\Tv;
+use App\Models\CartoonTv;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -189,7 +191,9 @@ class TorrentSearch extends Component
             ->selectRaw("
                 CASE
                     WHEN category_id IN (SELECT `id` from `categories` where `movie_meta` = 1) THEN 'movie'
+                    WHEN category_id IN (SELECT `id` from `categories` where `cartoon_meta` = 1) THEN 'cartoon'
                     WHEN category_id IN (SELECT `id` from `categories` where `tv_meta` = 1) THEN 'tv'
+                    WHEN category_id IN (SELECT `id` from `categories` where `cartoontv_meta` = 1) THEN 'cartoontv'
                     WHEN category_id IN (SELECT `id` from `categories` where `game_meta` = 1) THEN 'game'
                     WHEN category_id IN (SELECT `id` from `categories` where `music_meta` = 1) THEN 'music'
                     WHEN category_id IN (SELECT `id` from `categories` where `no_meta` = 1) THEN 'no'
@@ -237,19 +241,25 @@ class TorrentSearch extends Component
             ->paginate($this->perPage);
 
         $movieIds = $torrents->getCollection()->where('meta', '=', 'movie')->pluck('tmdb');
+        $cartoonIds = $torrents->getCollection()->where('meta', '=', 'cartoon')->pluck('tmdb');
         $tvIds = $torrents->getCollection()->where('meta', '=', 'tv')->pluck('tmdb');
+        $cartoontvIds = $torrents->getCollection()->where('meta', '=', 'cartoontv')->pluck('tmdb');
         $gameIds = $torrents->getCollection()->where('meta', '=', 'game')->pluck('igdb');
 
         $movies = Movie::with('genres')->whereIntegerInRaw('id', $movieIds)->get()->keyBy('id');
+        $cartoons = Cartoon::with('genres')->whereIntegerInRaw('id', $cartoonIds)->get()->keyBy('id');
         $tv = Tv::with('genres')->whereIntegerInRaw('id', $tvIds)->get()->keyBy('id');
+        $cartoontv = CartoonTv::with('genres')->whereIntegerInRaw('id', $cartoontvIds)->get()->keyBy('id');
         if ($gameIds->isNotEmpty()) {
             $games = \MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->whereIntegerInRaw('id', $gameIds);
         }
 
-        $torrents = $torrents->through(function ($torrent) use ($movies, $tv) {
+        $torrents = $torrents->through(function ($torrent) use ($movies, $cartoons, $tv, $cartoontv) {
             $torrent->meta = match ($torrent->meta) {
                 'movie' => $movies[$torrent->tmdb] ?? null,
+                'cartoon' => $cartoons[$torrent->tmdb] ?? null,
                 'tv'    => $tv[$torrent->tmdb] ?? null,
+                'cartoontv'    => $cartoontv[$torrent->tmdb] ?? null,
                 'game'  => $games[$torrent->igdb] ?? null,
                 default => null,
             };
@@ -268,13 +278,13 @@ class TorrentSearch extends Component
             && \strlen($field) > 2
             && $field[0] === '/'
             && $field[-1] === '/'
-            && @preg_match($field, 'Validate regex') !== false;
+            && @preg_match($field, 'Preverjanje veljavnosti regexa') !== false;
 
         $groups = Torrent::query()
             ->select('tmdb')
             ->selectRaw('MAX(sticky) as sticky')
             ->selectRaw('MAX(bumped_at) as bumped_at')
-            ->selectRaw("CASE WHEN category_id IN (SELECT `id` from `categories` where `movie_meta` = 1) THEN 'movie' WHEN category_id IN (SELECT `id` from `categories` where `tv_meta` = 1) THEN 'tv' END as meta")
+            ->selectRaw("CASE WHEN category_id IN (SELECT `id` from `categories` where `movie_meta` = 1) THEN 'movie' WHEN category_id IN (SELECT `id` from `categories` where `cartoon_meta` = 1) THEN 'cartoon' WHEN category_id IN (SELECT `id` from `categories` where `tv_meta` = 1) THEN 'tv' WHEN category_id IN (SELECT `id` from `categories` where `cartoontv_meta` = 1) THEN 'cartoontv' END as meta")
             ->havingNotNull('meta')
             ->where('tmdb', '!=', 0)
             ->when($this->name !== '', fn ($query) => $query->ofName($this->name, $isRegex($this->name)))
@@ -322,10 +332,14 @@ class TorrentSearch extends Component
             ->paginate($this->perPage);
 
         $movieIds = $groups->getCollection()->where('meta', '=', 'movie')->pluck('tmdb');
+        $cartoonIds = $groups->getCollection()->where('meta', '=', 'cartoon')->pluck('tmdb');
         $tvIds = $groups->getCollection()->where('meta', '=', 'tv')->pluck('tmdb');
+        $cartoontvIds = $groups->getCollection()->where('meta', '=', 'cartoontv')->pluck('tmdb');
 
         $movies = Movie::with('genres')->whereIntegerInRaw('id', $movieIds)->get()->keyBy('id');
+        $cartoons = Cartoon::with('genres')->whereIntegerInRaw('id', $cartoonIds)->get()->keyBy('id');
         $tv = Tv::with('genres')->whereIntegerInRaw('id', $tvIds)->get()->keyBy('id');
+        $cartoontv = CartoonTv::with('genres')->whereIntegerInRaw('id', $cartoontvIds)->get()->keyBy('id');
 
         $torrents = Torrent::query()
             ->with('type:id,name,position', 'resolution:id,name,position')
@@ -359,7 +373,7 @@ class TorrentSearch extends Component
                 'resolution_id',
                 'personal_release',
             ])
-            ->selectRaw("CASE WHEN category_id IN (SELECT `id` from `categories` where `movie_meta` = 1) THEN 'movie' WHEN category_id IN (SELECT `id` from `categories` where `tv_meta` = 1) THEN 'tv' END as meta")
+            ->selectRaw("CASE WHEN category_id IN (SELECT `id` from `categories` where `movie_meta` = 1) THEN 'movie' WHEN category_id IN (SELECT `id` from `categories` where `cartoon_meta` = 1) THEN 'cartoon' WHEN category_id IN (SELECT `id` from `categories` where `tv_meta` = 1) THEN 'tv' WHEN category_id IN (SELECT `id` from `categories` where `cartoontv_meta` = 1) THEN 'cartoontv' END as meta")
             ->where(
                 fn ($query) => $query
                     ->where(
@@ -369,8 +383,18 @@ class TorrentSearch extends Component
                     )
                     ->orWhere(
                         fn ($query) => $query
+                            ->whereIn('category_id', Category::select('id')->where('cartoon_meta', '=', 1))
+                            ->whereIntegerInRaw('tmdb', $cartoonIds)
+                    )
+                    ->orWhere(
+                        fn ($query) => $query
                             ->whereIn('category_id', Category::select('id')->where('tv_meta', '=', 1))
                             ->whereIntegerInRaw('tmdb', $tvIds)
+                    )
+                    ->orWhere(
+                        fn ($query) => $query
+                            ->whereIn('category_id', Category::select('id')->where('cartoontv_meta', '=', 1))
+                            ->whereIntegerInRaw('tmdb', $cartoontvIds)
                     )
             )
             ->when($this->name !== '', fn ($query) => $query->ofName($this->name, $isRegex($this->name)))
@@ -436,6 +460,29 @@ class TorrentSearch extends Component
                             $movie->put('category_id', $category_id);
 
                             return $movie;
+                        }
+                    ),
+                'cartoon' => $movieOrTv
+                    ->groupBy('tmdb')
+                    ->map(
+                        function ($cartoon) {
+                            $category_id = $cartoon->first()->category_id;
+                            $cartoon = $movie
+                                ->sortBy('type.position')
+                                ->values()
+                                ->groupBy(fn ($torrent) => $torrent->type->name)
+                                ->map(
+                                    fn ($torrentsByType) => $torrentsByType
+                                        ->sortBy([
+                                            ['resolution.position', 'asc'],
+                                            ['internal', 'desc'],
+                                            ['size', 'desc']
+                                        ])
+                                        ->values()
+                                );
+                            $cartoon->put('category_id', $category_id);
+
+                            return $cartoon;
                         }
                     ),
                 'tv' => $movieOrTv
@@ -524,6 +571,92 @@ class TorrentSearch extends Component
                             return $tv;
                         }
                     ),
+                'cartoontv' => $movieOrTv
+                    ->groupBy([
+                        fn ($torrent) => $torrent->tmdb,
+                    ])
+                    ->map(
+                        function ($cartoontv) {
+                            $category_id = $cartoontv->first()->category_id;
+                            $cartoontv = $cartoontv
+                                ->groupBy(fn ($torrent) => $torrent->season_number === 0 ? ($torrent->episode_number === 0 ? 'Complete Pack' : 'Specials') : 'Seasons')
+                                ->map(fn ($packOrSpecialOrSeasons, $key) => match ($key) {
+                                    'Complete Pack' => $packOrSpecialOrSeasons
+                                        ->sortBy('type.position')
+                                        ->values()
+                                        ->groupBy(fn ($torrent) => $torrent->type->name)
+                                        ->map(
+                                            fn ($torrentsByType) => $torrentsByType
+                                                ->sortBy([
+                                                    ['resolution.position', 'asc'],
+                                                    ['internal', 'desc'],
+                                                    ['size', 'desc']
+                                                ])
+                                                ->values()
+                                        ),
+                                    'Specials' => $packOrSpecialOrSeasons
+                                        ->groupBy(fn ($torrent) => 'Special '.$torrent->episode_number)
+                                        ->map(
+                                            fn ($episode) => $episode
+                                                ->sortBy('type.position')
+                                                ->values()
+                                                ->groupBy(fn ($torrent) => $torrent->type->name)
+                                                ->map(
+                                                    fn ($torrentsByType) => $torrentsByType
+                                                        ->sortBy([
+                                                            ['resolution.position', 'asc'],
+                                                            ['internal', 'desc'],
+                                                            ['size', 'desc']
+                                                        ])
+                                                        ->values()
+                                                )
+                                        ),
+                                    'Seasons' => $packOrSpecialOrSeasons
+                                        ->groupBy(fn ($torrent) => 'Season '.$torrent->season_number)
+                                        ->map(
+                                            fn ($season) => $season
+                                                ->sortKeys(SORT_NATURAL)
+                                                ->groupBy(fn ($torrent) => $torrent->episode_number === 0 ? 'Season Pack' : 'Episodes')
+                                                ->map(fn ($packOrEpisodes, $key) => match ($key) {
+                                                    'Season Pack' => $packOrEpisodes
+                                                        ->sortBy('type.position')
+                                                        ->values()
+                                                        ->groupBy(fn ($torrent) => $torrent->type->name)
+                                                        ->map(
+                                                            fn ($torrentsByType) => $torrentsByType
+                                                                ->sortBy([
+                                                                    ['resolution.position', 'asc'],
+                                                                    ['internal', 'desc'],
+                                                                    ['size', 'desc']
+                                                                ])
+                                                                ->values()
+                                                        ),
+                                                    'Episodes' => $packOrEpisodes
+                                                        ->groupBy(fn ($torrent) => 'Episode '.$torrent->episode_number)
+                                                        ->sortKeys(SORT_NATURAL)
+                                                        ->map(
+                                                            fn ($episode) => $episode
+                                                                ->sortBy('type.position')
+                                                                ->values()
+                                                                ->groupBy(fn ($torrent) => $torrent->type->name)
+                                                                ->map(
+                                                                    fn ($torrentsBytype) => $torrentsBytype
+                                                                        ->sortBy([
+                                                                            ['resolution.position', 'asc'],
+                                                                            ['internal', 'desc'],
+                                                                            ['size', 'desc']
+                                                                        ])
+                                                                        ->values()
+                                                                )
+                                                        ),
+                                                })
+                                        ),
+                                });
+                            $cartoontv->put('category_id', $category_id);
+
+                            return $cartoontv;
+                        }
+                    ),
             });
 
         $movieDirectors = Person::query()
@@ -536,7 +669,7 @@ class TorrentSearch extends Component
             ->map
             ->take(3);
 
-        $medias = $groups->through(function ($group) use ($torrents, $movies, $tv, $movieDirectors) {
+        $medias = $groups->through(function ($group) use ($torrents, $movies, $cartoons, $tv, $cartoontv, $movieDirectors) {
             $media = collect(['meta' => 'no']);
 
             switch ($group->meta) {
@@ -548,10 +681,25 @@ class TorrentSearch extends Component
                     $media->directors = $movieDirectors[$group->tmdb] ?? collect();
                     break;
 
+                case 'cartoon':
+                    $media = $cartoons[$group->tmdb] ?? collect();
+                    $media->meta = 'cartoon';
+                    $media->torrents = $torrents['cartoon'][$group->tmdb] ?? collect();
+                    $media->category_id = $media->torrents->pop();
+                    $media->directors = $movieDirectors[$group->tmdb] ?? collect();
+                    break;
+
                 case 'tv':
                     $media = $tv[$group->tmdb] ?? collect();
                     $media->meta = 'tv';
                     $media->torrents = $torrents['tv'][$group->tmdb] ?? collect();
+                    $media->category_id = $media->torrents->pop();
+                    break;
+
+                case 'cartoontv':
+                    $media = $cartoontv[$group->tmdb] ?? collect();
+                    $media->meta = 'cartoontv';
+                    $media->torrents = $torrents['cartoontv'][$group->tmdb] ?? collect();
                     $media->category_id = $media->torrents->pop();
                     break;
             }
