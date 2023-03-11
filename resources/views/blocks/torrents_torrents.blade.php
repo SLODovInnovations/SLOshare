@@ -1,158 +1,177 @@
 <div>
-	<section class="panelV2 table-responsive">
+	<section class="panelV2 table-responsive" x-data="{ tab: 'new-sloshare'}">
 
     <!-- Buttons -->
-    <ul class="nav nav-tabs-user mb-5-user" role="tablist">
-        <li class="active">
-            <a href="#new-sloshare" role="tab" data-toggle="tab" aria-expanded="false">
+        <menu class="panel__tabs">
+            <li
+                class="panel__tab"
+                role="tab"
+                x-bind:class="tab === 'new-sloshare' && 'panel__tab--active'"
+                x-on:click="tab = 'new-sloshare'"
+            >
                 <img src="{{ url('/icon-torrent.png') }}"> {{ __('sloshare.home-newsloshare-title') }}
-            </a>
-        </li>
-        <li class="">
-            <a href="#video" role="tab" data-toggle="tab" aria-expanded="true">
+            </li>
+            <li
+                class="panel__tab"
+                role="tab"
+                x-bind:class="tab === 'video' && 'panel__tab--active'"
+                x-on:click="tab = 'video'"
+            >
                 <i class="{{ config('other.font-awesome') }} fa-film"></i> {{ __('sloshare.home-movie-title') }}
-            </a>
-        </li>
-        <li class="">
-            <a href="#tvseries" role="tab" data-toggle="tab" aria-expanded="true">
+            </li>
+            <li
+                class="panel__tab"
+                role="tab"
+                x-bind:class="tab === 'tvseries' && 'panel__tab--active'"
+                x-on:click="tab = 'tvseries'"
+            >
                 <i class="{{ config('other.font-awesome') }} fa-tv-retro"></i> {{ __('sloshare.home-tvseries-title') }}
-            </a>
-        </li>
-        <li class="">
-            <a href="#games" role="tab" data-toggle="tab" aria-expanded="true">
+            </li>
+            <li
+                class="panel__tab"
+                role="tab"
+                x-bind:class="tab === 'games' && 'panel__tab--active'"
+                x-on:click="tab = 'games'"
+            >
                 <i class="{{ config('other.font-awesome') }} fa-gamepad"></i> {{ __('sloshare.home-game-title') }}
-            </a>
-        </li>
-        <li class="">
-            <a href="#applications" role="tab" data-toggle="tab" aria-expanded="true">
+            </li>
+            <li
+                class="panel__tab"
+                role="tab"
+                x-bind:class="tab === 'applications' && 'panel__tab--active'"
+                x-on:click="tab = 'applications'"
+            >
                 <i class="{{ config('other.font-awesome') }} fa-compact-disc"></i> {{ __('sloshare.home-applications-title') }}
-            </a>
-        </li>
-        <li class="">
-            <a href="#cartoons" role="tab" data-toggle="tab" aria-expanded="true">
+            </li>
+            <li
+                class="panel__tab"
+                role="tab"
+                x-bind:class="tab === 'cartoons' && 'panel__tab--active'"
+                x-on:click="tab = 'cartoons'"
+            >
                 <i class="{{ config('other.font-awesome') }} fa-baby"></i> {{ __('sloshare.home-cartoons-title') }}
-            </a>
-        </li>
-        <li class="">
-            <a href="#xxx" role="tab" data-toggle="tab" aria-expanded="true">
+            </li>
+            <li
+                class="panel__tab"
+                role="tab"
+                x-bind:class="tab === 'xxx' && 'panel__tab--active'"
+                x-on:click="tab = 'xxx'"
+            >
                 <i class="{{ config('other.font-awesome') }} fa-heart"></i> {{ __('sloshare.home-xxx-title') }}
-            </a>
-        </li>
-    </ul>
+            </li>
+        </menu>
     <!-- Buttons -->
-    <div class="tab-content">
-
-        <div class="panel panel-chat shoutbox tab-pane fade active in" id="new-sloshare">
+        <div class="tab-content" x-cloak x-show="tab === 'new-sloshare'">
             <div x-data>
                 <ul
                     class="featured-carousel"
                     x-ref="featured"
                     x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
                 >
-                @foreach($newsloshare as $newslo)
+                @foreach($newsloshare as $torrent)
                     @php $meta = null @endphp
-                    @if ($newslo->category->tv_meta)
-                        @if ($newslo->tmdb || $newslo->tmdb != 0)
-                            @php $meta = cache()->remember('tvmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Tv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @if ($torrent->category->tv_meta)
+                        @if ($torrent->tmdb || $torrent->tmdb != 0)
+                            @php $meta = cache()->remember('tvmeta:'.$torrent->tmdb.$torrent->category_id, 3_600, fn () => App\Models\Tv::select(['id', 'poster', 'vote_average'])->where('id', '=', $torrent->tmdb)->first()) @endphp
                         @endif
                     @endif
-                    @if ($newslo->category->movie_meta)
-                        @if ($newslo->tmdb || $newslo->tmdb != 0)
-                            @php $meta = cache()->remember('moviemeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Movie::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @if ($torrent->category->movie_meta)
+                        @if ($torrent->tmdb || $torrent->tmdb != 0)
+                            @php $meta = cache()->remember('moviemeta:'.$torrent->tmdb.$torrent->category_id, 3_600, fn () => App\Models\Movie::select(['id', 'poster', 'vote_average'])->where('id', '=', $torrent->tmdb)->first()) @endphp
                         @endif
                     @endif
-                    @if ($newslo->category->cartoon_meta)
-                        @if ($newslo->tmdb || $newslo->tmdb != 0)
-                            @php $meta = cache()->remember('cartoonmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\Cartoon::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @if ($torrent->category->cartoon_meta)
+                        @if ($torrent->tmdb || $torrent->tmdb != 0)
+                            @php $meta = cache()->remember('cartoonmeta:'.$torrent->tmdb.$torrent->category_id, 3_600, fn () => App\Models\Cartoon::select(['id', 'poster', 'vote_average'])->where('id', '=', $torrent->tmdb)->first()) @endphp
                         @endif
                     @endif
-                    @if ($newslo->category->cartoontv_meta)
-                        @if ($newslo->tmdb || $newslo->tmdb != 0)
-                            @php $meta = cache()->remember('tvmeta:'.$newslo->tmdb.$newslo->category_id, 3_600, fn () => App\Models\CartoonTv::select(['id', 'poster', 'vote_average'])->where('id', '=', $newslo->tmdb)->first()) @endphp
+                    @if ($torrent->category->cartoontv_meta)
+                        @if ($torrent->tmdb || $torrent->tmdb != 0)
+                            @php $meta = cache()->remember('tvmeta:'.$torrent->tmdb.$torrent->category_id, 3_600, fn () => App\Models\CartoonTv::select(['id', 'poster', 'vote_average'])->where('id', '=', $torrent->tmdb)->first()) @endphp
                         @endif
                     @endif
-                    @if ($newslo->category->game_meta)
-                        @if ($newslo->igdb || $newslo->igdb != 0)
-                            @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($newslo->igdb) @endphp
+                    @if ($torrent->category->game_meta)
+                        @if ($torrent->igdb || $torrent->igdb != 0)
+                            @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($torrent->igdb) @endphp
                         @endif
                     @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-				            @if ($newslo->category->movie_meta || $newslo->category->tv_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
+				            @if ($torrent->category->movie_meta || $torrent->category->tv_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt={{ $torrent->name }}>
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_400x600.jpg' }}"
-    							    class="show-poster" alt={{ $newslo->name }}>
+    							    class="show-poster" alt={{ $torrent->name }}>
     					        @endif
                             @endif
 
-    			            @if ($newslo->category->cartoon_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
+    			            @if ($torrent->category->cartoon_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt={{ $torrent->name }}>
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
-    							    class="show-poster" alt={{ $newslo->name }}>
+    							    class="show-poster" alt={{ $torrent->name }}>
     						    @endif
                             @endif
 
-    			            @if ($newslo->category->cartoontv_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
+    			            @if ($torrent->category->cartoontv_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt={{ $torrent->name }}>
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
-    							    class="show-poster" alt={{ $newslo->name }}>
+    							    class="show-poster" alt={{ $torrent->name }}>
     						    @endif
                             @endif
 
-                            @if ($newslo->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
+                            @if ($torrent->category->game_meta && isset($meta) && $meta->cover['image_id'] && $meta->name)
                                 style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/SLOshare/games_no_image_400x600.jpg' }}');')
-                                class="show-poster" alt={{ $newslo->name }}>
+                                class="show-poster" alt={{ $torrent->name }}>
                             @endif
 
-                            @if ($newslo->category->music_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
+                            @if ($torrent->category->music_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt={{ $torrent->name }}>
     						    @else
-    							    style="background-image: url('/img/SLOshare/music_no_image_400x600.jpg')" class="show-poster" alt={{ $newslo->name }}>
+    							    style="background-image: url('/img/SLOshare/music_no_image_400x600.jpg')" class="show-poster" alt={{ $torrent->name }}>
                                 @endif
                             @endif
 
-                            @if($newslo->category->no_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$newslo->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $newslo->id . '.jpg') }}');" class="show-poster" alt={{ $newslo->name }}>
+                            @if($torrent->category->no_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt={{ $torrent->name }}>
                                 @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_400x600.jpg')" class="show-poster" alt={{ $newslo->name }}>
+                                    style="background-image: url('/img/SLOshare/meta_no_image_400x600.jpg')" class="show-poster" alt={{ $torrent->name }}>
                                 @endif
                             @endif
 
 				            <div class="release-info">
 
-				            @if ($newslo->free == '1' || $newslo->free >= '90' || $newslo->free < '90' && $newslo->free >= '30' || $newslo->free < '30' && $newslo->free != '0' || config('other.freeleech') == '1')
-					            <a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+				            @if ($torrent->free == '1' || $torrent->free >= '90' || $torrent->free < '90' && $torrent->free >= '30' || $torrent->free < '30' && $torrent->free != '0' || config('other.freeleech') == '1')
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					        @else
-					            <a href="{{ route('categories.show', ['id' => $newslo->category->id]) }}" class="release-info-quality quality-sloshare">{{ $newslo->category->name }}</a>
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }}</a>
                             @endif
 
-					            <a href="{{ route('torrent', ['id' => $newslo->id]) }}"title="{{ $newslo->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($newslo->name, 50))</a>
+					            <a href="{{ route('torrent', ['id' => $torrent->id]) }}"title="{{ $torrent->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($torrent->name, 50))</a>
 					            <div class="release-info-container">
-						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $newslo->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $newslo->comments_count }}</span></div>
+						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $torrent->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $torrent->comments_count }}</span></div>
 
-						            @if ($newslo->category->game_meta)
+						            @if ($torrent->category->game_meta)
 						                <div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
 						            @endif
-                                    @if ($newslo->tmdb != 0 && $newslo->tmdb != null)
+                                    @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $newslo->created_at->getTimestamp()) }} | {{ date('H:m', $newslo->created_at->getTimestamp()) }}</div>
-						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $newslo->user->username }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $torrent->created_at->getTimestamp()) }} | {{ date('H:m', $torrent->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $torrent->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
-						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $newslo->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $newslo->getSize() }}</a>
+						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $torrent->getSize() }}</a>
 						            <div style="float: right;">
-							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $newslo->seeders }}</span>
-							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $newslo->leechers }}</span>
+							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $torrent->seeders }}</span>
+							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $torrent->leechers }}</span>
 						            </div>
 					            </div>
 				            </div>
@@ -172,7 +191,7 @@
             </div>
         </div>
 
-        <div class="panel panel-chat shoutbox tab-pane fade" id="video">
+        <div class="tab-content" x-cloak x-show="tab === 'video'">
             <div x-data>
                 <ul
                     class="featured-carousel"
@@ -180,48 +199,48 @@
                     x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
                 >
 
-                @foreach ($video as $videos)
+                @foreach ($video as $torrent)
                     @php $meta = null; @endphp
-				    @if ($videos->category->movie_meta)
-				        @if ($videos->tmdb || $videos->tmdb != 0)
-					        @php $meta = App\Models\Movie::where('id', '=', $videos->tmdb)->first(); @endphp
+				    @if ($torrent->category->movie_meta)
+				        @if ($torrent->tmdb || $torrent->tmdb != 0)
+					        @php $meta = App\Models\Movie::where('id', '=', $torrent->tmdb)->first(); @endphp
 				        @endif
 			        @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-				            @if ($videos->category->movie_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$videos->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $videos->id . '.jpg') }}');" class="show-poster" alt="{{ $videos->name }}">
+				            @if ($torrent->category->movie_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt="{{ $torrent->name }}">
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_400x600.jpg' }}"
-    							    class="show-poster" alt="{{ $videos->name }}">
+    							    class="show-poster" alt="{{ $torrent->name }}">
     					        @endif
                             @endif
 
 				            <div class="release-info">
 
-				            @if ($videos->free == '1' || $videos->free >= '90' || $videos->free < '90' && $videos->free >= '30' || $videos->free < '30' && $videos->free != '0' || config('other.freeleech') == '1')
-					            <a href="{{ route('categories.show', ['id' => $videos->category->id]) }}" class="release-info-quality quality-sloshare">{{ $videos->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+				            @if ($torrent->free == '1' || $torrent->free >= '90' || $torrent->free < '90' && $torrent->free >= '30' || $torrent->free < '30' && $torrent->free != '0' || config('other.freeleech') == '1')
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					        @else
-					            <a href="{{ route('categories.show', ['id' => $videos->category->id]) }}" class="release-info-quality quality-sloshare">{{ $videos->category->name }}</a>
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }}</a>
                             @endif
 
-					            <a href="{{ route('torrent', ['id' => $videos->id]) }}"title="{{ $videos->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($videos->name, 50))</a>
+					            <a href="{{ route('torrent', ['id' => $torrent->id]) }}"title="{{ $torrent->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($torrent->name, 50))</a>
 					            <div class="release-info-container">
-						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $videos->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $videos->comments_count }}</span></div>
+						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $torrent->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $torrent->comments_count }}</span></div>
 
-                                    @if ($videos->tmdb != 0 && $videos->tmdb != null)
+                                    @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $videos->created_at->getTimestamp()) }} | {{ date('H:m', $videos->created_at->getTimestamp()) }}</div>
-						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $videos->user->username }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $torrent->created_at->getTimestamp()) }} | {{ date('H:m', $torrent->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $torrent->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
-						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $videos->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $videos->getSize() }}</a>
+						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $torrent->getSize() }}</a>
 						            <div style="float: right;">
-							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $videos->seeders }}</span>
-							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $videos->leechers }}</span>
+							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $torrent->seeders }}</span>
+							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $torrent->leechers }}</span>
 						            </div>
 					            </div>
 				            </div>
@@ -241,7 +260,7 @@
             </div>
         </div>
 
-        <div class="panel panel-chat shoutbox tab-pane fade" id="tvseries">
+        <div class="tab-content" x-cloak x-show="tab === 'tvseries'">
             <div x-data>
                 <ul
                     class="featured-carousel"
@@ -249,48 +268,48 @@
                     x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
                 >
 
-                @foreach ($tvserie as $tv)
+                @foreach ($tvserie as $torrent)
                     @php $meta = null; @endphp
-			        @if ($tv->category->tv_meta)
-				        @if ($tv->tmdb || $tv->tmdb != 0)
-					        @php $meta = App\Models\Tv::where('id', '=', $tv->tmdb)->first(); @endphp
+			        @if ($torrent->category->tv_meta)
+				        @if ($torrent->tmdb || $torrent->tmdb != 0)
+					        @php $meta = App\Models\Tv::where('id', '=', $torrent->tmdb)->first(); @endphp
 				        @endif
 			        @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-				            @if ($tv->category->tv_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$tv->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $tv->id . '.jpg') }}');" class="show-poster" alt={{ $tv->name }}>
+				            @if ($torrent->category->tv_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt={{ $torrent->name }}>
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/movie_no_image_400x600.jpg' }}"
-    							    class="show-poster" alt={{ $tv->name }}>
+    							    class="show-poster" alt={{ $torrent->name }}>
     					        @endif
                             @endif
 
 				            <div class="release-info">
 
-				            @if ($tv->free == '1' || $tv->free >= '90' || $tv->free < '90' && $tv->free >= '30' || $tv->free < '30' && $tv->free != '0' || config('other.freeleech') == '1')
-					            <a href="{{ route('categories.show', ['id' => $tv->category->id]) }}" class="release-info-quality quality-sloshare">{{ $tv->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+				            @if ($torrent->free == '1' || $torrent->free >= '90' || $torrent->free < '90' && $torrent->free >= '30' || $torrent->free < '30' && $torrent->free != '0' || config('other.freeleech') == '1')
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					        @else
-					            <a href="{{ route('categories.show', ['id' => $tv->category->id]) }}" class="release-info-quality quality-sloshare">{{ $tv->category->name }}</a>
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }}</a>
                             @endif
 
-					            <a href="{{ route('torrent', ['id' => $tv->id]) }}"title="{{ $tv->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($tv->name, 50))</a>
+					            <a href="{{ route('torrent', ['id' => $torrent->id]) }}"title="{{ $torrent->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($torrent->name, 50))</a>
 					            <div class="release-info-container">
-						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $tv->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $tv->comments_count }}</span></div>
+						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $torrent->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $torrent->comments_count }}</span></div>
 
-                                    @if ($tv->tmdb != 0 && $tv->tmdb != null)
+                                    @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $tv->created_at->getTimestamp()) }} | {{ date('H:m', $tv->created_at->getTimestamp()) }}</div>
-						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $tv->user->username }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $torrent->created_at->getTimestamp()) }} | {{ date('H:m', $torrent->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $torrent->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
-						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $tv->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $tv->getSize() }}</a>
+						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $torrent->getSize() }}</a>
 						            <div style="float: right;">
-							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $tv->seeders }}</span>
-							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $tv->leechers }}</span>
+							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $torrent->seeders }}</span>
+							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $torrent->leechers }}</span>
 						            </div>
 					            </div>
 				            </div>
@@ -310,7 +329,7 @@
             </div>
         </div>
 
-        <div class="panel panel-chat shoutbox tab-pane fade" id="games">
+        <div class="tab-content" x-cloak x-show="tab === 'games'">
             <div x-data>
                 <ul
                     class="featured-carousel"
@@ -318,41 +337,41 @@
                     x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
                 >
 
-                @foreach ($game as $games)
+                @foreach ($game as $torrent)
     			    @php $meta = null; @endphp
-                    @if ($games->category->game_meta)
-				        @if ($games->igdb || $games->igdb != 0)
-					        @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($games->igdb); @endphp
+                    @if ($torrent->category->game_meta)
+				        @if ($torrent->igdb || $torrent->igdb != 0)
+					        @php $meta = MarcReichel\IGDBLaravel\Models\Game::with(['cover' => ['url', 'image_id']])->find($torrent->igdb); @endphp
 				        @endif
 			        @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item" style="background-image: url('{{ isset($meta->cover) ? 'https://images.igdb.com/igdb/image/upload/t_cover_small_2x/'.$meta->cover['image_id'].'.png' : '/img/poster/games_no_image_400x600.jpg' }}');"
-                            alt="{{ $games->name }}">
+                            alt="{{ $torrent->name }}">
 
 				            <div class="release-info">
 
-				            @if ($games->free == '1' || $games->free >= '90' || $games->free < '90' && $games->free >= '30' || $games->free < '30' && $games->free != '0' || config('other.freeleech') == '1')
-					            <a href="{{ route('categories.show', ['id' => $games->category->id]) }}" class="release-info-quality quality-sloshare">{{ $games->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+				            @if ($torrent->free == '1' || $torrent->free >= '90' || $torrent->free < '90' && $torrent->free >= '30' || $torrent->free < '30' && $torrent->free != '0' || config('other.freeleech') == '1')
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					        @else
-					            <a href="{{ route('categories.show', ['id' => $games->category->id]) }}" class="release-info-quality quality-sloshare">{{ $games->category->name }}</a>
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }}</a>
                             @endif
 
-					            <a href="{{ route('torrent', ['id' => $games->id]) }}"title="{{ $games->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($games->name, 50))</a>
+					            <a href="{{ route('torrent', ['id' => $torrent->id]) }}"title="{{ $torrent->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($torrent->name, 50))</a>
 					            <div class="release-info-container">
-						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $games->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $games->comments_count }}</span></div>
+						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $torrent->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $torrent->comments_count }}</span></div>
 
-						            @if ($games->category->game_meta)
+						            @if ($torrent->category->game_meta)
 						                <div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
 						            @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $games->created_at->getTimestamp()) }} | {{ date('H:m', $games->created_at->getTimestamp()) }}</div>
-						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $games->user->username }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $torrent->created_at->getTimestamp()) }} | {{ date('H:m', $torrent->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $torrent->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
-						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $games->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $games->getSize() }}</a>
+						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $torrent->getSize() }}</a>
 						            <div style="float: right;">
-							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $games->seeders }}</span>
-							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $games->leechers }}</span>
+							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $torrent->seeders }}</span>
+							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $torrent->leechers }}</span>
 						            </div>
 					            </div>
 				            </div>
@@ -372,7 +391,7 @@
             </div>
         </div>
 
-        <div class="panel panel-chat shoutbox tab-pane fade" id="applications">
+        <div class="tab-content" x-cloak x-show="tab === 'applications'">
             <div x-data>
                 <ul
                     class="featured-carousel"
@@ -380,41 +399,41 @@
                     x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
                 >
 
-                @foreach ($applications as $application)
+                @foreach ($applications as $torrent)
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-                            @if($application->category->no_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$application->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $application->id . '.jpg') }}');" class="show-poster" alt={{ $application->name }}>
+                            @if($torrent->category->no_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt={{ $torrent->name }}>
                                 @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_400x600.jpg')" class="show-poster" alt={{ $application->name }}>
+                                    style="background-image: url('/img/SLOshare/meta_no_image_400x600.jpg')" class="show-poster" alt={{ $torrent->name }}>
                                 @endif
                             @endif
 
 				            <div class="release-info">
 
-				            @if ($application->free == '1' || $application->free >= '90' || $application->free < '90' && $application->free >= '30' || $application->free < '30' && $application->free != '0' || config('other.freeleech') == '1')
-					            <a href="{{ route('categories.show', ['id' => $application->category->id]) }}" class="release-info-quality quality-sloshare">{{ $application->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+				            @if ($torrent->free == '1' || $torrent->free >= '90' || $torrent->free < '90' && $torrent->free >= '30' || $torrent->free < '30' && $torrent->free != '0' || config('other.freeleech') == '1')
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					        @else
-					            <a href="{{ route('categories.show', ['id' => $application->category->id]) }}" class="release-info-quality quality-sloshare">{{ $application->category->name }}</a>
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }}</a>
                             @endif
 
-					            <a href="{{ route('torrent', ['id' => $application->id]) }}"title="{{ $application->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($application->name, 50))</a>
+					            <a href="{{ route('torrent', ['id' => $torrent->id]) }}"title="{{ $torrent->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($torrent->name, 50))</a>
 					            <div class="release-info-container">
-						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $application->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $application->comments_count }}</span></div>
+						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $torrent->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $torrent->comments_count }}</span></div>
 
-                                    @if ($tv->tmdb != 0 && $tv->tmdb != null)
+                                    @if ($torrent->tmdb != 0 && $torrent->tmdb != null)
                                         <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $application->created_at->getTimestamp()) }} | {{ date('H:m', $application->created_at->getTimestamp()) }}</div>
-						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $application->user->username }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $torrent->created_at->getTimestamp()) }} | {{ date('H:m', $torrent->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $torrent->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
-						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $application->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $application->getSize() }}</a>
+						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $torrent->getSize() }}</a>
 						            <div style="float: right;">
-							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $application->seeders }}</span>
-							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $application->leechers }}</span>
+							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $torrent->seeders }}</span>
+							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $torrent->leechers }}</span>
 						            </div>
 					            </div>
 				            </div>
@@ -434,7 +453,7 @@
             </div>
         </div>
 
-        <div class="panel panel-chat shoutbox tab-pane fade" id="cartoons">
+        <div class="tab-content" x-cloak x-show="tab === 'cartoons'">
             <div x-data>
                 <ul
                     class="featured-carousel"
@@ -442,50 +461,50 @@
                     x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
                 >
 
-                @foreach ($cartoones as $cartoone)
+                @foreach ($cartoones as $torrent)
                     @php $meta = null; @endphp
-			        @if ($cartoone->category->cartoon_meta)
-				        @if ($cartoone->tmdb || $cartoone->tmdb != 0)
-					        @php $meta = App\Models\Cartoon::where('id', '=', $cartoone->tmdb)->first(); @endphp
+			        @if ($torrent->category->cartoon_meta)
+				        @if ($torrent->tmdb || $torrent->tmdb != 0)
+					        @php $meta = App\Models\Cartoon::where('id', '=', $torrent->tmdb)->first(); @endphp
 				        @endif
                     @endif
 
-			        @if ($cartoone->category->cartoontv_meta)
-				        @if ($cartoone->tmdb || $cartoone->tmdb != 0)
-					        @php $meta = App\Models\CartoonTv::where('id', '=', $cartoone->tmdb)->first(); @endphp
+			        @if ($torrent->category->cartoontv_meta)
+				        @if ($torrent->tmdb || $torrent->tmdb != 0)
+					        @php $meta = App\Models\CartoonTv::where('id', '=', $torrent->tmdb)->first(); @endphp
 				        @endif
 			        @endif
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-    			            @if ($cartoone->category->cartoon_meta || $cartoone->category->cartoontv_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$cartoone->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $cartoone->id . '.jpg') }}');" class="show-poster" alt={{ $cartoone->name }}>
+    			            @if ($torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt={{ $torrent->name }}>
                                 @else
     							    style="background-image: url('{{ isset($meta->poster) ? tmdb_image('poster_mid', $meta->poster) : '/img/SLOshare/cartoon_no_image_400x600.jpg' }}"
-    							    class="show-poster" alt={{ $cartoone->name }}>
+    							    class="show-poster" alt={{ $torrent->name }}>
     						    @endif
                             @endif
 
 				            <div class="release-info">
 
-				            @if ($cartoone->free == '1' || $cartoone->free >= '90' || $cartoone->free < '90' && $cartoone->free >= '30' || $cartoone->free < '30' && $cartoone->free != '0' || config('other.freeleech') == '1')
-					            <a href="{{ route('categories.show', ['id' => $cartoone->category->id]) }}" class="release-info-quality quality-sloshare">{{ $cartoone->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+				            @if ($torrent->free == '1' || $torrent->free >= '90' || $torrent->free < '90' && $torrent->free >= '30' || $torrent->free < '30' && $torrent->free != '0' || config('other.freeleech') == '1')
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
 					        @else
-					            <a href="{{ route('categories.show', ['id' => $cartoone->category->id]) }}" class="release-info-quality quality-sloshare">{{ $cartoone->category->name }}</a>
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }}</a>
                             @endif
 
-					            <a href="{{ route('torrent', ['id' => $cartoone->id]) }}"title="{{ $cartoone->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($cartoone->name, 50))</a>
+					            <a href="{{ route('torrent', ['id' => $torrent->id]) }}"title="{{ $torrent->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($torrent->name, 50))</a>
 					            <div class="release-info-container">
-						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $cartoone->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $cartoone->comments_count }}</span></div>
+						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $torrent->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $torrent->comments_count }}</span></div>
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $cartoone->created_at->getTimestamp()) }} | {{ date('H:m', $cartoone->created_at->getTimestamp()) }}</div>
-						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $cartoone->user->username }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $torrent->created_at->getTimestamp()) }} | {{ date('H:m', $torrent->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $torrent->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
-						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $cartoone->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $cartoone->getSize() }}</a>
+						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $torrent->getSize() }}</a>
 						            <div style="float: right;">
-							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $cartoone->seeders }}</span>
-							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $cartoone->leechers }}</span>
+							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $torrent->seeders }}</span>
+							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $torrent->leechers }}</span>
 						            </div>
 					            </div>
 				            </div>
@@ -505,7 +524,7 @@
             </div>
         </div>
 
-        <div class="panel panel-chat shoutbox tab-pane fade" id="xxx">
+        <div class="tab-content" x-cloak x-show="tab === 'xxx'">
             <div x-data>
                 <ul
                     class="featured-carousel"
@@ -513,44 +532,44 @@
                     x-init="setInterval(function () {$el.parentNode.matches(':hover') ? null : (($el.scrollLeft == $el.scrollWidth - $el.offsetWidth - 16) ? $el.scrollLeft = 0 : $el.scrollLeft += (($el.children[0].offsetWidth + 16) / 2 + 1)) }, 5000)"
                 >
 
-                @foreach ($xxx as $x)
+                @foreach ($xxx as $torrent)
                     <div class="item mini backdrop mini_card">
 			            <div class="gallery-item"
-                            @if($x->category->no_meta)
-                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$x->id.'.jpg'))
-                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $x->id . '.jpg') }}');" class="show-poster" alt={{ $x->name }}>
+                            @if($torrent->category->no_meta)
+                                @if(file_exists(public_path().'/files/img/torrent-cover_'.$torrent->id.'.jpg'))
+                                    style="background-image: url('{{ url('files/img/torrent-cover_' . $torrent->id . '.jpg') }}');" class="show-poster" alt={{ $torrent->name }}>
                                 @else
-                                    style="background-image: url('/img/SLOshare/meta_no_image_400x600.jpg')" class="show-poster" alt={{ $x->name }}>
+                                    style="background-image: url('/img/SLOshare/meta_no_image_400x600.jpg')" class="show-poster" alt={{ $torrent->name }}>
                                 @endif
                             @endif
 
 				            <div class="release-info">
 
-                            @if ($x->free == '1' || $x->free >= '90' || $x->free < '90' && $x->free >= '30' || $x->free < '30' && $x->free != '0' || config('other.freeleech') == '1')
-					            <a href="{{ route('categories.show', ['id' => $x->category->id]) }}" class="release-info-quality quality-sloshare">{{ $x->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
+                            @if ($torrent->free == '1' || $torrent->free >= '90' || $torrent->free < '90' && $torrent->free >= '30' || $torrent->free < '30' && $torrent->free != '0' || config('other.freeleech') == '1')
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }} <span class="FL-torrent" title="{{ __('sloshare.freeleech') }}">{{ __('sloshare.fl') }}</span></a>
                             @else
-					            <a href="{{ route('categories.show', ['id' => $x->category->id]) }}" class="release-info-quality quality-sloshare">{{ $x->category->name }}</a>
+					            <a href="{{ route('categories.show', ['id' => $torrent->category->id]) }}" class="release-info-quality quality-sloshare">{{ $torrent->category->name }}</a>
                             @endif
 
-					            <a href="{{ route('torrent', ['id' => $x->id]) }}"title="{{ $x->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($x->name, 50))</a>
+					            <a href="{{ route('torrent', ['id' => $torrent->id]) }}"title="{{ $torrent->name }}" class="release-info-title sloshare-title">@joypixels(Str::limit($torrent->name, 50))</a>
 					            <div class="release-info-container">
-						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $x->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $x->comments_count }}</span></div>
+						            <div class="release-info-meta">{{ __('sloshare.files') }} <span class="badge-sloshare-primary">{{ $torrent->files->count() }}</span> | {{ __('sloshare.comments') }} <span class="badge-sloshare-primary">{{ $torrent->comments_count }}</span></div>
 
-						            @if ($x->category->game_meta)
+						            @if ($torrent->category->game_meta)
 						                <div class="release-info-meta"><a class="badge-status">IGDB: {{ $meta->rating_count ?? 0 }}/100</a></div>
 						            @endif
-                                    @if ($x->category->movie_meta || $x->category->tv_meta || $x->category->cartoon_meta || $x->category->cartoontv_meta)
+                                    @if ($torrent->category->movie_meta || $torrent->category->tv_meta || $torrent->category->cartoon_meta || $torrent->category->cartoontv_meta)
                                     <div class="release-info-meta"><a class="badge-status">TMDB: {{ $meta->vote_average ?? 0 }}/10</a></div>
                                     @endif
 
-						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $x->created_at->getTimestamp()) }} | {{ date('H:m', $x->created_at->getTimestamp()) }}</div>
-						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $x->user->username }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.added') }} {{ date('d.m.Y', $torrent->created_at->getTimestamp()) }} | {{ date('H:m', $torrent->created_at->getTimestamp()) }}</div>
+						            <div class="release-info-meta">{{ __('sloshare.uppedby') }} {{ $torrent->user->username }}</div>
 					            </div>
 					            <div class="release-info-rating">
-						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $x->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $x->getSize() }}</a>
+						            <a class="release-info-rating-likes download-link" href="{{ route('download', ['id' => $torrent->id]) }}" data-title-tooltip title="{{ __('sloshare.download') }}"><i class="fas fa-file-download"></i> {{ $torrent->getSize() }}</a>
 						            <div style="float: right;">
-							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $x->seeders }}</span>
-							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $x->leechers }}</span>
+							            <span title="{{ __('sloshare.seeders') }}" data-title-tooltip class="badge-sloshare-success">{{ $torrent->seeders }}</span>
+							            <span title="{{ __('sloshare.leechers') }}" data-title-tooltip class="badge-sloshare-danger">{{ $torrent->leechers }}</span>
 						            </div>
 					            </div>
 				            </div>
@@ -569,5 +588,4 @@
                 </nav>
             </div>
         </div>
-	</div>
-	</section>
+    </section>

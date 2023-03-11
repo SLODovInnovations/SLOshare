@@ -1,6 +1,8 @@
 @extends('layout.default')
 
 @section('page', 'page__home')
+
+@section('main')
 	<div class="sidebar2 sidebar--inverse">
         @include('blocks.stats')
         @include('blocks.poll')
