@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "edec9447eb063205065c4abbe3d13aac",
+    "content-hash": "a0025fdc027f5220cdd9583e4ccf2bda",
     "packages": [
         {
             "name": "appstract/laravel-opcache",
@@ -1550,225 +1550,6 @@
                 }
             ],
             "time": "2021-10-07T12:57:01+00:00"
-        },
-        {
-            "name": "sloyakuza/laravel-html-purifier",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SLOYakuza/laravel-html-purifier.git",
-                "reference": "78e795644ecea35732363d797d4558dfcdce3060"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SLOYakuza/laravel-html-purifier/zipball/78e795644ecea35732363d797d4558dfcdce3060",
-                "reference": "78e795644ecea35732363d797d4558dfcdce3060",
-                "shasum": ""
-            },
-            "require": {
-                "ezyang/htmlpurifier": "4.13.*",
-                "illuminate/config": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-                "illuminate/filesystem": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-                "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-                "php": "^7.2|^8.0"
-            },
-            "require-dev": {
-                "graham-campbell/testbench": "^3.2|^5.5.1",
-                "mockery/mockery": "^1.3.3",
-                "phpunit/phpunit": "^8.0|^9.0"
-            },
-            "suggest": {
-                "laravel/framework": "To test the Laravel bindings",
-                "laravel/lumen-framework": "To test the Lumen bindings"
-            },
-            "type": "package",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "SLOYakuza\\Purifier\\PurifierServiceProvider"
-                    ],
-                    "aliases": {
-                        "Purifier": "SLOYakuza\\Purifier\\Facades\\Purifier"
-                    }
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "SLOYakuza\\Purifier\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "SLOYakuza",
-                    "email": "yakuza@rm-net.si",
-                    "homepage": "https://github.com/SLOYakuza",
-                    "role": "Developer"
-                }
-            ],
-            "description": "An HTML Purifier for Laravel",
-            "homepage": "https://github.com/SLOYakuza/laravel-html-purifier",
-            "keywords": [
-                "SLOYakuza",
-                "Purifier",
-                "html",
-                "laravel",
-                "security",
-                "xss"
-            ],
-            "support": {
-                "issues": "https://github.com/SLOYakuza/laravel-html-purifier/issues",
-                "source": "https://github.com/SLOYakuza/laravel-html-purifier/tree/v2.0.0"
-            },
-            "time": "2023-03-04T09:12:37+00:00"
-        },
-        {
-            "name": "sloyakuza/laravel-joypixel-emojis",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SLOYakuza/laravel-joypixel-emojis.git",
-                "reference": "82a25867868d00e3be858af20f0c2a727c327ec1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SLOYakuza/laravel-joypixel-emojis/zipball/82a25867868d00e3be858af20f0c2a727c327ec1",
-                "reference": "82a25867868d00e3be858af20f0c2a727c327ec1",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^6|^7|^8|^9|^10",
-                "joypixels/emoji-toolkit": "^6",
-                "php": "^7.4|^8.0"
-            },
-            "suggest": {
-                "joypixels/assets": "If you want to serve the emojione assets yourself"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "sloyakuza\\LaravelJoyPixels\\LaravelJoyPixelsServiceProvider"
-                    ],
-                    "aliases": {
-                        "LaravelJoyPixels": "sloyakuza\\LaravelJoyPixels\\LaravelJoyPixelsFacade"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "sloyakuza\\LaravelJoyPixels\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "SLOYakuza",
-                    "email": "yakuza@rm-net.si",
-                    "homepage": "https://github.com/SLOYakuza",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Laravel helper for Joypixels emojis",
-            "homepage": "https://github.com/SLOYakuza/laravel-joypixel-emojis",
-            "keywords": [
-                "SLOYakuza",
-                "JoyPixels",
-                "emoji",
-                "emojione",
-                "laravel"
-            ],
-            "support": {
-                "issues": "https://github.com/SLOYakuza/laravel-joypixel-emojis/issues",
-                "source": "https://github.com/SLOYakuza/laravel-joypixel-emojis/tree/v2.0.0"
-            },
-            "time": "2023-03-04T09:28:16+00:00"
-        },
-        {
-            "name": "sloyakuza/laravel-security-headers",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SLOYakuza/laravel-security-headers.git",
-                "reference": "047b57f7de2716ca3002ea22e5f963729264f327"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SLOYakuza/laravel-security-headers/zipball/047b57f7de2716ca3002ea22e5f963729264f327",
-                "reference": "047b57f7de2716ca3002ea22e5f963729264f327",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^6|^7|^8|^9|^10",
-                "php": "^7.4|^8.0"
-            },
-            "require-dev": {
-                "ext-json": "*",
-                "ext-xdebug": "*",
-                "orchestra/testbench": "^3.1|^4.0|^5.0|^6.0|^7.0|^8.0"
-            },
-            "suggest": {
-                "friendsofphp/php-cs-fixer": "Coding style fixer",
-                "phpstan/phpstan": "Static analysis tool",
-                "phpunit/phpunit": "PHP unit testing framework"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "SLOYakuza\\SecureHeaders\\SecureHeadersServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
-                "psr-4": {
-                    "SLOYakuza\\SecureHeaders\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "SLOYakuza",
-                    "email": "yakuza@rm-net.si",
-                    "homepage": "https://github.com/SLOYakuza",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Adds security related headers to HTTP response.",
-            "homepage": "https://github.com/SLOYakuza/laravel-security-headers",
-            "keywords": [
-                "SLOYakuza",
-                "clear-site-data",
-                "content-security-policy",
-                "csp",
-                "except-ct",
-                "feature-policy",
-                "header",
-                "hsts",
-                "https",
-                "laravel",
-                "referrer-policy"
-            ],
-            "support": {
-                "issues": "https://github.com/SLOYakuza/laravel-security-headers/issues",
-                "source": "https://github.com/SLOYakuza/laravel-security-headers/tree/v2.0.0"
-            },
-            "time": "2023-03-04T09:52:01+00:00"
         },
         {
             "name": "hootlex/laravel-moderation",
@@ -3692,16 +3473,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "3.0.18",
+            "version": "3.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "f28693d38ba21bb0d9f0c411ee5dae2b178201da"
+                "reference": "cc181005cf548bfd8a4896383bb825d859259f95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/f28693d38ba21bb0d9f0c411ee5dae2b178201da",
-                "reference": "f28693d38ba21bb0d9f0c411ee5dae2b178201da",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/cc181005cf548bfd8a4896383bb825d859259f95",
+                "reference": "cc181005cf548bfd8a4896383bb825d859259f95",
                 "shasum": ""
             },
             "require": {
@@ -3782,7 +3563,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.18"
+                "source": "https://github.com/phpseclib/phpseclib/tree/3.0.19"
             },
             "funding": [
                 {
@@ -3798,7 +3579,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-17T18:26:50+00:00"
+            "time": "2023-03-05T17:13:09+00:00"
         },
         {
             "name": "predis/predis",
@@ -4583,6 +4364,225 @@
                 }
             ],
             "time": "2023-01-12T18:13:24+00:00"
+        },
+        {
+            "name": "sloyakuza/laravel-html-purifier",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SLOYakuza/laravel-html-purifier.git",
+                "reference": "78e795644ecea35732363d797d4558dfcdce3060"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SLOYakuza/laravel-html-purifier/zipball/78e795644ecea35732363d797d4558dfcdce3060",
+                "reference": "78e795644ecea35732363d797d4558dfcdce3060",
+                "shasum": ""
+            },
+            "require": {
+                "ezyang/htmlpurifier": "4.13.*",
+                "illuminate/config": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/filesystem": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "graham-campbell/testbench": "^3.2|^5.5.1",
+                "mockery/mockery": "^1.3.3",
+                "phpunit/phpunit": "^8.0|^9.0"
+            },
+            "suggest": {
+                "laravel/framework": "To test the Laravel bindings",
+                "laravel/lumen-framework": "To test the Lumen bindings"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SLOYakuza\\Purifier\\PurifierServiceProvider"
+                    ],
+                    "aliases": {
+                        "Purifier": "SLOYakuza\\Purifier\\Facades\\Purifier"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "SLOYakuza\\Purifier\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SLOYakuza",
+                    "email": "yakuza@rm-net.si",
+                    "homepage": "https://github.com/SLOYakuza",
+                    "role": "Developer"
+                }
+            ],
+            "description": "An HTML Purifier for Laravel",
+            "homepage": "https://github.com/SLOYakuza/laravel-html-purifier",
+            "keywords": [
+                "Purifier",
+                "SLOYakuza",
+                "html",
+                "laravel",
+                "security",
+                "xss"
+            ],
+            "support": {
+                "issues": "https://github.com/SLOYakuza/laravel-html-purifier/issues",
+                "source": "https://github.com/SLOYakuza/laravel-html-purifier/tree/v2.0.0"
+            },
+            "time": "2023-03-04T09:12:37+00:00"
+        },
+        {
+            "name": "sloyakuza/laravel-joypixel-emojis",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SLOYakuza/laravel-joypixel-emojis.git",
+                "reference": "82a25867868d00e3be858af20f0c2a727c327ec1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SLOYakuza/laravel-joypixel-emojis/zipball/82a25867868d00e3be858af20f0c2a727c327ec1",
+                "reference": "82a25867868d00e3be858af20f0c2a727c327ec1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6|^7|^8|^9|^10",
+                "joypixels/emoji-toolkit": "^6",
+                "php": "^7.4|^8.0"
+            },
+            "suggest": {
+                "joypixels/assets": "If you want to serve the emojione assets yourself"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "sloyakuza\\LaravelJoyPixels\\LaravelJoyPixelsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelJoyPixels": "sloyakuza\\LaravelJoyPixels\\LaravelJoyPixelsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "sloyakuza\\LaravelJoyPixels\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SLOYakuza",
+                    "email": "yakuza@rm-net.si",
+                    "homepage": "https://github.com/SLOYakuza",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel helper for Joypixels emojis",
+            "homepage": "https://github.com/SLOYakuza/laravel-joypixel-emojis",
+            "keywords": [
+                "JoyPixels",
+                "SLOYakuza",
+                "emoji",
+                "emojione",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/SLOYakuza/laravel-joypixel-emojis/issues",
+                "source": "https://github.com/SLOYakuza/laravel-joypixel-emojis/tree/v2.0.0"
+            },
+            "time": "2023-03-04T09:28:16+00:00"
+        },
+        {
+            "name": "sloyakuza/laravel-security-headers",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SLOYakuza/laravel-security-headers.git",
+                "reference": "047b57f7de2716ca3002ea22e5f963729264f327"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SLOYakuza/laravel-security-headers/zipball/047b57f7de2716ca3002ea22e5f963729264f327",
+                "reference": "047b57f7de2716ca3002ea22e5f963729264f327",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^6|^7|^8|^9|^10",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "ext-xdebug": "*",
+                "orchestra/testbench": "^3.1|^4.0|^5.0|^6.0|^7.0|^8.0"
+            },
+            "suggest": {
+                "friendsofphp/php-cs-fixer": "Coding style fixer",
+                "phpstan/phpstan": "Static analysis tool",
+                "phpunit/phpunit": "PHP unit testing framework"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "SLOYakuza\\SecureHeaders\\SecureHeadersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "SLOYakuza\\SecureHeaders\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "SLOYakuza",
+                    "email": "yakuza@rm-net.si",
+                    "homepage": "https://github.com/SLOYakuza",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Adds security related headers to HTTP response.",
+            "homepage": "https://github.com/SLOYakuza/laravel-security-headers",
+            "keywords": [
+                "SLOYakuza",
+                "clear-site-data",
+                "content-security-policy",
+                "csp",
+                "except-ct",
+                "feature-policy",
+                "header",
+                "hsts",
+                "https",
+                "laravel",
+                "referrer-policy"
+            ],
+            "support": {
+                "issues": "https://github.com/SLOYakuza/laravel-security-headers/issues",
+                "source": "https://github.com/SLOYakuza/laravel-security-headers/tree/v2.0.0"
+            },
+            "time": "2023-03-04T09:52:01+00:00"
         },
         {
             "name": "spatie/db-dumper",
